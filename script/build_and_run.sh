@@ -11,6 +11,7 @@ readonly APP_BINARY="${APP_BUNDLE}/Contents/MacOS/${APP_NAME}"
 readonly CLI_BINARY="${BUILD_DIR}/${APP_NAME}_cli"
 readonly DISC_PATH="${ACGC_DISC_PATH:-${ROOT_DIR}/local/roms/Animal Crossing (USA).iso}"
 readonly VERIFY_HOME="${ACGC_VERIFY_HOME:-${ROOT_DIR}/local/runtime/macos-host-verify-home}"
+readonly VERIFY_LOG="${VERIFY_HOME}/metal-frame-verify.log"
 
 usage() {
     cat <<'EOF'
@@ -19,7 +20,7 @@ Usage: ./script/build_and_run.sh [--run|--verify|--headless|--debug|--logs|--tel
 Builds and tests the native AppKit host before the selected action.
 
   --run        Launch a new foreground app instance (default).
-  --verify     Prove process observation and a clean timed app exit.
+  --verify     Prove two completed Metal clear/present frames and a clean exit.
   --headless   Validate the explicit disc without opening a window.
   --debug      Start the app executable under LLDB.
   --logs       Launch the app, then stream its macOS process logs.
@@ -99,36 +100,26 @@ case "${mode}" in
         ;;
     --verify)
         mkdir -p "${VERIFY_HOME}"
+        app_status=0
         CFFIXED_USER_HOME="${VERIFY_HOME}" \
-            /usr/bin/open -n -W "${APP_BUNDLE}" --args \
-                --disc "${DISC_PATH}" --verify-seconds 2 &
-        readonly open_pid=$!
-        process_seen=0
-        for attempt in {1..100}; do
-            if /usr/bin/pgrep -f "${APP_BINARY}" >/dev/null 2>&1; then
-                process_seen=1
-                break
-            fi
-            if ! /bin/kill -0 "${open_pid}" >/dev/null 2>&1; then
-                break
-            fi
-            sleep 0.05
-        done
-
-        open_status=0
-        wait "${open_pid}" || open_status=$?
-        if [[ "${process_seen}" -ne 1 ]]; then
-            printf '%s\n' 'Launch verification failed: app process was not observed.' >&2
-            exit 1
-        fi
-        if [[ "${open_status}" -ne 0 ]]; then
-            printf 'Launch verification failed: open exited %d.\n' "${open_status}" >&2
-            exit "${open_status}"
+            "${APP_BINARY}" --disc "${DISC_PATH}" \
+                --verify-frames 2 --verify-seconds 5 \
+                >"${VERIFY_LOG}" 2>&1 || app_status=$?
+        /bin/cat "${VERIFY_LOG}"
+        if [[ "${app_status}" -ne 0 ]]; then
+            printf 'Metal verification failed: app exited %d.\n' "${app_status}" >&2
+            exit "${app_status}"
         fi
         if /usr/bin/pgrep -f "${APP_BINARY}" >/dev/null 2>&1; then
-            printf '%s\n' 'Launch verification failed: app remained alive after timed exit.' >&2
+            printf '%s\n' 'Metal verification failed: app remained alive after bounded exit.' >&2
             exit 1
         fi
-        printf '%s\n' 'Launch verification passed: process observed and timed exit was clean.'
+        if ! /usr/bin/grep -Fq \
+                'Metal clear/present verification PASSED: 2 completed frames' \
+                "${VERIFY_LOG}"; then
+            printf '%s\n' 'Metal verification failed: completion evidence was not emitted.' >&2
+            exit 1
+        fi
+        printf '%s\n' 'Metal verification passed: two frames completed and the app exited cleanly.'
         ;;
 esac

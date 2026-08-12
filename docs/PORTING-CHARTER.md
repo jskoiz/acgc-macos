@@ -57,10 +57,13 @@ remain under ignored local or build paths and are never committed.
 ## Current gate state
 
 As of 2026-08-11, source/revision proof, the current bounded portable-core
-slice, and the macOS host-launch gate are passed. Native and sanitizer portable
-tests, approved-disc GCM/DOL/FST/REL proof, headless host validation, and an
-observed foreground AppKit process with a clean timed exit are reproducible
-from tracked scripts. The launched target is an honest host shell: it does not
-execute the reconstructed game or render a game frame. The full PC runtime
-remains behind its default ILP32 guard, and rendered-frame, game-frame, input,
-audio, save/load, iOS Simulator, and physical-device gates remain open.
+slice, macOS host launch, and the first deterministic Metal clear/present
+fixture are passed. Native and sanitizer portable tests, approved-disc
+GCM/DOL/FST/REL proof, headless host validation, and a foreground AppKit process
+that exits only after two completed Metal presentations are reproducible from
+tracked scripts. This is not yet representative GX rendering: the launched
+target remains an honest host shell and does not execute the reconstructed game
+or render a game frame. The full PC runtime remains behind its default ILP32
+guard; its opt-in Darwin audit currently stops at legacy CARD `long` prototype
+conflicts. Representative rendered-frame, game-frame, input, audio, save/load,
+iOS Simulator, and physical-device gates remain open.

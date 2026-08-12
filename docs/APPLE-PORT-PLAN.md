@@ -77,11 +77,18 @@ copy EFB, flush, and destroy. Presentation is deliberately a host operation.
   tests and the existing PC disc adapter.**
 - Move current DVD `FILE *` state behind opaque generational host handles and
   assert the documented DVD/CARD wire layouts. **Passed for the current PC
-  adapter; public host-native callback/pointer layouts still need classification
-  before the complete runtime can be 64-bit.**
+  adapter and typed public `DVDFileInfo`/`DVDCommandBlock` callers; host state is
+  keyed by object identity and no longer occupies `cb.addr`.**
 - Make TARGET_PC `s32`/`u32`, `Gwords`, and `TexRect` widths executable arm64
   contracts while preserving non-PC definitions. **Passed in C and C++ syntax
   probes.**
+- Split the Darwin executable-image probe from Linux ELF handling and expose an
+  opt-in arm64 compile audit without weakening the default ILP32 guard.
+  **Passed; the audit is diagnostic only.**
+- Widen `emu64::seg2k0()` and dynamic display-list consumers only at resolved
+  host-pointer boundaries, while keeping GBI words and opaque references
+  32-bit. **Passed for focused live-above-4-GiB and stale/malformed-reference
+  tests; static display-list relocation remains a separate frontier.**
 
 Exit: representative portable libraries compile and test on arm64 without SDL,
 OpenGL, or a 32-bit process. This does not require launching the game.
@@ -95,9 +102,13 @@ OpenGL, or a 32-bit process. This does not require launching the game.
 
 Exit: host-launch evidence, with rendering still allowed to be absent.
 
-### M3: Metal renderer
+### M3: Metal renderer — clear/present fixture passed
 
-- Implement a Metal backend at the GX semantic boundary.
+- Create a native CAMetalLayer, device, queue, command buffer, render pass, and
+  presentation loop with bounded completion/failure evidence. **Passed for a
+  deterministic clear color; this is host plumbing, not the GX backend.**
+- Implement the renderer-neutral contract and Metal backend at the GX semantic
+  boundary.
 - Prove clear/present, then geometry, transforms, vertex formats, indexed draws,
   texture formats/palettes, sampler modes, blending/depth/alpha, representative
   TEV combinations, and EFB copy/readback behavior in small fixtures.
@@ -128,21 +139,21 @@ distribution, and App Store work require fresh authorization.
 
 Continue in separately reviewable ACGC-PC-Port branches:
 
-1. Split Darwin and Linux image-range/platform includes in the legacy host and
-   add an explicit diagnostic-only arm64 compile frontier. Keep the default
-   production ILP32 rejection intact while using each subsequent compiler error
-   as evidence for one narrow ABI migration.
-2. Remove the remaining public `DVDCommandBlock`/`DVDFileInfo` ambiguity on
-   LP64: classify callbacks and owner pointers as host-native state, keep guest
-   words fixed-width, and test real typed callers rather than only a shadow
-   layout.
-3. Define the smallest renderer-neutral frame contract needed by the AppKit
-   host, then prove a Metal clear/present fixture before translating GX state.
+1. Replace the legacy CARD leaf-header and implementation uses of
+   `long`/`unsigned long` with their existing fixed-width `s32`/`u32` public
+   contract, prove C/C++ and ILP32 compatibility, and rerun the Darwin audit to
+   expose the next single blocker.
+2. Classify the remaining static GBI pointer initializers as relocatable guest
+   references or host-owned resources. Do not truncate or use an unsafe
+   LP64-only initializer bypass.
+3. Define the smallest renderer-neutral frame contract needed between GX
+   semantics and the proven AppKit/CAMetalLayer host, then advance fixtures from
+   clear/present to geometry, texture, TEV, and EFB behavior.
 4. Attach bounded disc/FST services and the portable registries to a boot-core
    facade, with explicit failure states, before selecting reconstructed game
    translation units for a first identifiable game-frame attempt.
 
 Do not silently remove the default full-runtime ILP32 guard or add an iOS target.
 The diagnostic arm64 build must remain opt-in until each exposed pointer/layout
-contract is migrated. A Metal clear frame is renderer evidence only; it is not
-a game-frame or playability claim.
+contract is migrated. The completed Metal clear frame is renderer-fixture
+evidence only; it is not a GX, game-frame, or playability claim.

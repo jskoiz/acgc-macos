@@ -28,17 +28,23 @@ redistribute it or extracted proprietary assets.
   reviewed portable foundation now includes fixed-width PC scalars and GX word
   records, checked native-address and arena free-space arithmetic, an opaque
   generational GBI reference registry, checked 64-bit CISO reads, bounded
-  GCM/DOL/FST/REL parsing, and a DVD host-state side table with fixed-layout
-  DVD/CARD probes.
-- The portable targets pass native arm64 and ASan/UBSan CTest (`3/3`). A tracked
+  GCM/DOL/FST/REL parsing, typed LP64 DVD callers backed by an owner-keyed host
+  side table, fixed-layout DVD/CARD wire probes, and width-correct `emu64`
+  pointer resolution with stale-reference rejection.
+- The portable targets pass native arm64 and ASan/UBSan CTest (`6/6`). A tracked
   proof command validates the approved local disc, visits its FST, decodes its
   Yaz0 REL, reproduces the expected SHA-1, and removes all temporary output.
-- A native AppKit host now builds, validates the exact `GAFE01` disc through the
-  portable reader, resolves scoped Application Support and cache paths, opens a
-  normal foreground window, and passes an observed timed-exit launch check. It
-  is a host shell, not the reconstructed game: no rendered game frame, input,
-  audio, or save/load gate has passed. iOS work remains gated behind the shared
-  macOS runtime and renderer.
+- The opt-in Darwin compile audit now passes the platform-image, public DVD,
+  and first GBI pointer barriers. Its next deterministic failure is a set of 12
+  legacy CARD declarations that use host `long` where the public ABI uses
+  32-bit `s32`/`u32`; the default full-runtime ILP32 rejection remains intact.
+- A native AppKit/Metal host now builds, validates the exact `GAFE01` disc,
+  resolves scoped Application Support and cache paths, opens a normal
+  foreground window, and exits 0 only after two requested Metal command buffers
+  complete and present. This passes host launch and a deterministic Metal
+  clear/present fixture, not a reconstructed game frame: input, audio, save/load,
+  and playability remain open. iOS remains gated behind the shared macOS core
+  and renderer.
 
 Re-run the tracked checks from this directory:
 
@@ -50,9 +56,11 @@ Re-run the tracked checks from this directory:
 ./script/build_and_run.sh --verify
 ```
 
-The final command opens the AppKit application for two seconds and proves that
-its process was observed and exited cleanly. It is launch evidence only; it does
-not claim a rendered game frame or playability.
+The final command runs the AppKit executable directly with a five-second
+deadline, requests two Metal clear/present frames, checks the renderer's own
+completion evidence and exit status, and confirms no process remains. It is a
+native renderer-fixture gate, not a reconstructed game frame or playability
+claim.
 
 ## Project record
 

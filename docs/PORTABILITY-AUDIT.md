@@ -19,7 +19,7 @@ look interchangeable:
 - offsets or opaque handles into emulated/resource address spaces;
 - native host pointers, represented by `uintptr_t` only at host boundaries.
 
-## Measured assumptions
+## Measured baseline assumptions
 
 | Area | Current evidence | Required boundary |
 | --- | --- | --- |
@@ -81,8 +81,12 @@ pointers through a generational 8,192-entry reference registry. Status-based
 unpacking rejects stale or malformed handles, and the current synchronous
 interpreter resets the registry after a submitted task is consumed. The finite
 capacity, 15-bit generation wrap, single-thread ownership, and synchronous
-lifetime are explicit current-runtime limits; other pointer/`u32` paths still
-require classification and migration.
+lifetime are explicit current-runtime limits. `emu64::seg2k0()` now returns
+`uintptr_t` on TARGET_PC, dynamic display-list return addresses are native
+pointers, image command words remain `u32` until resolution, and invalid
+reserved references are guarded before the audited pointer consumers. Static
+display-list pointer initializers and other pointer/`u32` paths still require
+classification and migration.
 
 SDL responsibilities must be split rather than globally removed:
 
@@ -102,8 +106,8 @@ touch/controller mapping without forking game logic.
 
 ## Completed portable-foundation slices
 
-The reviewed `pc/portable` C11 target now contains four dependency-light
-boundaries:
+The reviewed `pc/portable` library and focused C/C++ probes now exercise five
+dependency-light boundaries:
 
 - fixed-width endian loads and a bounded Yaz0 decoder;
 - checked `uintptr_t` alignment/range operations used by TwoHeadArena's
@@ -111,9 +115,11 @@ boundaries:
 - a generational 32-bit GBI reference registry plus a status-based runtime
   wrapper that round-trips native pointers above 4 GiB and rejects stale or
   malformed reserved handles;
-- callback-driven, bounded GCM/DOL/FST parsing and raw/Yaz0 REL extraction.
+- callback-driven, bounded GCM/DOL/FST parsing and raw/Yaz0 REL extraction;
+- owner-keyed DVD host state, fixed DVD/CARD wire probes, and typed public DVD
+  ABI behavior on both LP64 and ILP32.
 
-Native arm64 and ASan/UBSan CTest pass both registered test executables. The
+Native arm64 and ASan/UBSan CTest pass all six registered test executables. The
 approved ignored disc also passes the tracked bounded parser and reproduces the
 expected REL SHA-1. FST-declared entry counts no longer cause proportional
 allocation, DOL sections inside the header are rejected, invalid FST types and
@@ -123,15 +129,22 @@ or path truncation rather than reporting an incomplete table as success.
 The real GBI wrapper now distinguishes a normal word, a resolved reference, and
 an invalid reserved reference. Its registry is reset only after the external
 `emu64_taskstart()` call returns, when that synchronous interpreter has consumed
-the submitted command words. This is a bounded current-runtime contract, not a
-future asynchronous renderer lifetime design.
+the submitted command words. A direct `emu64::seg2k0()` test proves a live
+address above 4 GiB and stale/malformed failure. This is a bounded
+current-runtime contract, not a future asynchronous renderer lifetime design.
 
 This evidence still does not make the full runtime 64-bit. The CMake and header
-guards remain intentional, `THA_getFreeBytesAlign()` still performs
-pointer-to-`int` accounting, DVD/CARD structures still mix fixed layouts with
-host objects, and CISO physical seeks still use legacy 32-bit/`long` arithmetic.
-Full adapter translation units also retain the `<malloc.h>` portability blocker.
-No macOS window, Metal frame, input, audio, or save path exists yet.
+guards remain intentional. The opt-in Darwin audit has passed the earlier
+platform-image, TwoHeadArena, checked-CISO, public-DVD, and first GBI
+pointer-width barriers; it now stops at 12 CARD leaf-header declarations that
+use LP64 `long` against fixed-width public signatures. CARD control/save state,
+static display-list relocation, and further pointer domains remain open.
 
-The real-disc proof covers the supported plain ISO/GCM data path, not CISO map
-validation, full-PC linking, launch, or gameplay.
+A separate native AppKit host now validates the supported disc and proves two
+completed CAMetalLayer clear/present frames. It is not connected to GX semantics
+or the reconstructed game loop; input, audio, save/load, and game-frame proof do
+not exist yet.
+
+The real-disc proof covers the supported plain ISO/GCM data path. CISO geometry
+and sparse/physical bounds are synthetic-test evidence; full-PC linking, game
+launch, and gameplay remain unproved.
