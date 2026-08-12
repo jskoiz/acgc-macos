@@ -45,10 +45,12 @@ redistribute it or extracted proprietary assets.
   with the ordinary stdio `SEEK_*` and `EOF` macros.
 - The opt-in Darwin compile audit now passes the platform-image, public DVD,
   first GBI pointer, CARD fixed-width, and POSIX memory-primitive ownership
-  barriers as well as the JSystem stream-enum collision. Its next deterministic
-  failure is step `43/4016` in `pc/lib/fixnes/apu.c`, whose unconditional
-  `<malloc.h>` include is unavailable on Darwin. The default full-runtime ILP32
-  rejection remains intact.
+  barriers as well as the JSystem stream-enum collision. FixNES now uses the
+  standard allocation header, allowing all 58 of its audit objects to compile.
+  The audit then advances through 76 more game translation units and stops at
+  step `77/3974`: `aBridge_player_check` in `src/actor/ac_bridge_a.c` has a bare
+  return in a non-void function. The default full-runtime ILP32 rejection
+  remains intact.
 - A native AppKit/Metal host now builds, validates the exact `GAFE01` disc,
   resolves scoped Application Support and cache paths, opens a normal
   foreground window, and exits 0 only after two requested Metal command buffers

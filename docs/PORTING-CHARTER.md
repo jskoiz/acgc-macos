@@ -69,7 +69,9 @@ representative GX rendering: the launched target remains an honest host shell
 and does not execute the reconstructed game or render a game frame. The full PC
 runtime remains behind its default ILP32 guard; its opt-in Darwin audit now
 passes the corrected fixed-width CARD ABI, POSIX memory-primitive ownership,
-and prefixed JSystem stream-enum boundary. It currently stops at step `43/4016`
-because `pc/lib/fixnes/apu.c` unconditionally includes the unavailable Darwin
-header `<malloc.h>`. Representative rendered-frame, game-frame, input, audio,
-save/load, iOS Simulator, and physical-device gates remain open.
+prefixed JSystem stream-enum boundary, and all 58 FixNES objects after replacing
+its non-portable allocation header with the standard C header. It currently
+stops at step `77/3974` because `aBridge_player_check` in
+`src/actor/ac_bridge_a.c` has a bare return in a non-void function.
+Representative rendered-frame, game-frame, input, audio, save/load, iOS
+Simulator, and physical-device gates remain open.
