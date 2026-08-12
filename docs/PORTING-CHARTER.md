@@ -56,9 +56,11 @@ remain under ignored local or build paths and are never committed.
 
 ## Current gate state
 
-As of 2026-08-11, source/revision proof and the bounded portable-core slice are
-passed. The portable arm64 tests, sanitizer tests, and approved-disc
-GCM/DOL/FST/REL hash proof are reproducible from tracked scripts. The full PC
-runtime remains behind its intentional ILP32 guard; no macOS host launch,
-rendered frame, input, audio, save/load, iOS Simulator, or physical-device gate
-has passed.
+As of 2026-08-11, source/revision proof, the current bounded portable-core
+slice, and the macOS host-launch gate are passed. Native and sanitizer portable
+tests, approved-disc GCM/DOL/FST/REL proof, headless host validation, and an
+observed foreground AppKit process with a clean timed exit are reproducible
+from tracked scripts. The launched target is an honest host shell: it does not
+execute the reconstructed game or render a game frame. The full PC runtime
+remains behind its default ILP32 guard, and rendered-frame, game-frame, input,
+audio, save/load, iOS Simulator, and physical-device gates remain open.

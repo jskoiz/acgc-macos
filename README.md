@@ -10,6 +10,7 @@ and Apple renderer have their own evidence.
 - `upstream/ACGC-PC-Port` - the existing PC port codebase.
 - `upstream/ac-decomp` - the matching decompilation project.
 - `local/roms` - local game-disc input. Its contents are ignored by Git.
+- `script/build_and_run.sh` - the single native macOS build/run/verify entrypoint.
 - `scripts` - reproducible, non-distributing bootstrap checks.
 - `docs` - source audit, measured portability risks, architecture, and gates.
 
@@ -23,15 +24,21 @@ redistribute it or extracted proprietary assets.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
   the first Metrowerks compiler command, where the absent Wine runtime is the
   exact blocker.
-- The complete PC runtime remains intentionally 32-bit and does not configure
-  on arm64 macOS. The reviewed portable foundation now includes fixed-width
-  endian/Yaz0 code, checked native-address arithmetic, an opaque generational
-  GBI reference registry, and bounded GCM/DOL/FST/REL parsing.
-- The portable targets pass native arm64 and ASan/UBSan CTest (`2/2`). A tracked
+- The complete PC runtime remains intentionally guarded as a 32-bit target. The
+  reviewed portable foundation now includes fixed-width PC scalars and GX word
+  records, checked native-address and arena free-space arithmetic, an opaque
+  generational GBI reference registry, checked 64-bit CISO reads, bounded
+  GCM/DOL/FST/REL parsing, and a DVD host-state side table with fixed-layout
+  DVD/CARD probes.
+- The portable targets pass native arm64 and ASan/UBSan CTest (`3/3`). A tracked
   proof command validates the approved local disc, visits its FST, decodes its
   Yaz0 REL, reproduces the expected SHA-1, and removes all temporary output.
-- No macOS host has launched or rendered a frame. Input, audio, save/load, iOS
-  simulator, and physical-device gates are all still open.
+- A native AppKit host now builds, validates the exact `GAFE01` disc through the
+  portable reader, resolves scoped Application Support and cache paths, opens a
+  normal foreground window, and passes an observed timed-exit launch check. It
+  is a host shell, not the reconstructed game: no rendered game frame, input,
+  audio, or save/load gate has passed. iOS work remains gated behind the shared
+  macOS runtime and renderer.
 
 Re-run the tracked checks from this directory:
 
@@ -39,7 +46,13 @@ Re-run the tracked checks from this directory:
 ./scripts/verify-source-input.sh
 ./scripts/verify-portable-core.sh
 ./scripts/verify-disc-core.sh
+./script/build_and_run.sh --headless
+./script/build_and_run.sh --verify
 ```
+
+The final command opens the AppKit application for two seconds and proves that
+its process was observed and exited cleanly. It is launch evidence only; it does
+not claim a rendered game frame or playability.
 
 ## Project record
 

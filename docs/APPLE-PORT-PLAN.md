@@ -62,27 +62,36 @@ copy EFB, flush, and destroy. Presentation is deliberately a host operation.
 - Prove `GAFE01_00` via original DOL/REL hashes.
 - Reproduce `ac-decomp` until the exact missing-Wine blocker.
 
-### M1: 64-bit portable foundation — in progress
+### M1: 64-bit portable foundation — current bounded slice passed
 
 - Land the fixed-width endian/Yaz0 library and its focused tests. **Passed.**
 - Add checked native-address arithmetic at one real allocator boundary.
-  **Passed for TwoHeadArena tail allocation; free-space accounting remains.**
+  **Passed for TwoHeadArena tail allocation and free-space accounting.**
 - Introduce an opaque guest-command reference registry with explicit stale,
   invalid, exhaustion, and post-consumption lifetime behavior. **Passed for the
   current synchronous GBI runtime path.**
 - Move checked GCM/FST/DOL/REL access behind a bounded data-source interface.
   **Passed for synthetic readers and the supported local ISO/GCM input.**
-- Inventory and migrate the remaining pointer/`u32`, DVD/CARD host-object, and
-  fixed-layout boundaries. **Still open.**
+- Add a checked 64-bit CISO map/read path with sparse-block and physical-extent
+  validation while preserving plain ISO/GCM behavior. **Passed in portable
+  tests and the existing PC disc adapter.**
+- Move current DVD `FILE *` state behind opaque generational host handles and
+  assert the documented DVD/CARD wire layouts. **Passed for the current PC
+  adapter; public host-native callback/pointer layouts still need classification
+  before the complete runtime can be 64-bit.**
+- Make TARGET_PC `s32`/`u32`, `Gwords`, and `TexRect` widths executable arm64
+  contracts while preserving non-PC definitions. **Passed in C and C++ syntax
+  probes.**
 
 Exit: representative portable libraries compile and test on arm64 without SDL,
 OpenGL, or a 32-bit process. This does not require launching the game.
 
-### M2: macOS host shell
+### M2: macOS host shell — passed
 
 - Add a normal windowed macOS host with explicit resource/user-data paths,
-  monotonic clock, and clean lifecycle/exit.
+  exact explicit-disc validation, and clean lifecycle/exit. **Passed.**
 - Add the project-local build/run entrypoint only when that host actually exists.
+  **Passed with `script/build_and_run.sh`.**
 
 Exit: host-launch evidence, with rendering still allowed to be absent.
 
@@ -117,22 +126,23 @@ distribution, and App Store work require fresh authorization.
 
 ## Next bounded implementation lanes
 
-Continue M1 in separately reviewable ACGC-PC-Port branches:
+Continue in separately reviewable ACGC-PC-Port branches:
 
-1. Replace `THA_getFreeBytesAlign()` pointer-to-`int` arithmetic with checked
-   `uintptr_t`/`size_t` accounting while preserving its public result contract;
-   add native high-address and ILP32 syntax coverage.
-2. Move `FILE *` and other host-only DVD state out of fixed GameCube overlays
-   into an explicit generational side table; add `sizeof`/`offsetof` assertions
-   for DVD and CARD wire records without changing their serialized layout.
-3. Replace CISO physical-offset and seek arithmetic with a checked 64-bit host
-   reader, validate the physical image extent, and cover sparse, truncated, and
-   overflowed synthetic maps while retaining plain ISO behavior.
-4. Add executable fixed-layout probes for `Gwords`, `TexRect`, `CARDDir`,
-   `CARDFileInfo`, and the documented DVD offsets, then classify the remaining
-   ARAM, label, and resource encodings as guest address, offset, handle, or host
-   pointer.
+1. Split Darwin and Linux image-range/platform includes in the legacy host and
+   add an explicit diagnostic-only arm64 compile frontier. Keep the default
+   production ILP32 rejection intact while using each subsequent compiler error
+   as evidence for one narrow ABI migration.
+2. Remove the remaining public `DVDCommandBlock`/`DVDFileInfo` ambiguity on
+   LP64: classify callbacks and owner pointers as host-native state, keep guest
+   words fixed-width, and test real typed callers rather than only a shadow
+   layout.
+3. Define the smallest renderer-neutral frame contract needed by the AppKit
+   host, then prove a Metal clear/present fixture before translating GX state.
+4. Attach bounded disc/FST services and the portable registries to a boot-core
+   facade, with explicit failure states, before selecting reconstructed game
+   translation units for a first identifiable game-frame attempt.
 
-Do not lift the full-runtime ILP32 guard, begin Metal translation, or add an iOS
-target until these remaining host-pointer and fixed-layout contracts pass on
-native arm64.
+Do not silently remove the default full-runtime ILP32 guard or add an iOS target.
+The diagnostic arm64 build must remain opt-in until each exposed pointer/layout
+contract is migrated. A Metal clear frame is renderer evidence only; it is not
+a game-frame or playability claim.

@@ -48,14 +48,31 @@ cmake -S upstream/ACGC-PC-Port/pc \
 ```
 
 Result: fails deliberately at the 32-bit pointer guard. Modern macOS cannot run
-a 32-bit process, and removing the guard before migrating pointer encodings is
-unsafe. A direct `pc_disc.c` AppleClang syntax probe also reaches the existing
-`include/types.h` dependency on unavailable `<malloc.h>`.
+a 32-bit process, and removing the guard without migrating pointer encodings is
+unsafe. The earlier `include/types.h` dependency on unavailable `<malloc.h>` is
+now resolved narrowly for TARGET_PC, but the default full-runtime guard remains.
+
+A diagnostic-only configure used CMake's project-include hook to override the
+configure-time pointer-size value without changing tracked guards:
+
+```sh
+printf '%s\n' 'set(CMAKE_SIZEOF_VOID_P 4)' > /tmp/acgc-force-pointer-probe.cmake
+cmake -S upstream/ACGC-PC-Port/pc \
+  -B /tmp/codex-acgc-full-runtime-frontier-3 -G Ninja \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DCMAKE_PROJECT_INCLUDE=/tmp/acgc-force-pointer-probe.cmake
+cmake --build /tmp/codex-acgc-full-runtime-frontier-3 --parallel 8
+```
+
+Configure passed with arm64 SDL2 2.32.10 and the macOS OpenGL framework. The
+build then stopped at the still-tracked `pc_platform.h` pointer guard and its
+Linux-only `<elf.h>` include. This is compile-frontier evidence, not authority
+to weaken the default guard and not a runtime result.
 
 ## Portable core
 
-Owning branch: `c1/macos-portable-disc-core`; local commit:
-`c3a27b68e0669f0664e11da7e5e435258e951106`.
+Owning integration branch: `c1/macos-host-launch`; local commit:
+`8cf37f8a94230b0f378c07779e4f2cd031f4aa5e`.
 
 The reviewed source lineage is:
 
@@ -64,13 +81,26 @@ The reviewed source lineage is:
   GBI-reference, and disc-parser lanes;
 - `c3a27b68e0669f0664e11da7e5e435258e951106` - closed the independent
   review findings and added focused integration tests.
+- `dc0899a9f427e0ff52a4ce6913c562feedd39fe8` - hardened TwoHeadArena
+  free-space accounting for high native addresses.
+- `454780cb998d7f1a42fa33c048ac099e8c690c66` - added the native AppKit host and
+  focused host tests.
+- `9984d25186817b9702c7a95acc6502478fca8658` - added checked 64-bit CISO maps,
+  sparse reads, and host seeks.
+- `830e8d9961d8309751ebe1f4b7ffec7de71fe2d1` - made the current TARGET_PC
+  scalar and GX packet widths explicit.
+- `8cf37f8a94230b0f378c07779e4f2cd031f4aa5e` - moved current DVD host state
+  behind generational handles and added
+  executable DVD/CARD layout tests.
 
 ```sh
 ./scripts/verify-portable-core.sh
 ```
 
 Result: AppleClang arm64 configure/build passed with `-Wall -Wextra -Wpedantic`;
-CTest passed 2/2 (`acgc_portable_tests` and `acgc_gbi_runtime_tests`).
+CTest passed 3/3 (`acgc_portable_tests`, `acgc_gbi_runtime_tests`, and
+`acgc_dvd_host_state_tests`). The build also compiled the fixed-width PC ABI
+probe.
 
 The additional sanitizer lane used:
 
@@ -86,7 +116,7 @@ env ASAN_OPTIONS=detect_leaks=0:halt_on_error=1:abort_on_error=1 \
   ctest --test-dir /tmp/codex-acgc-portable-sanitize --output-on-failure
 ```
 
-Result: 2/2 passed under AddressSanitizer and UndefinedBehaviorSanitizer. Apple
+Result: 3/3 passed under AddressSanitizer and UndefinedBehaviorSanitizer. Apple
 ASan does not support `detect_leaks=1`, so the successful run used the explicit
 platform-supported setting above.
 
@@ -101,6 +131,12 @@ The combined synthetic suites now cover:
 - bounded GCM headers, DOL spans, FST traversal/types/parents/subtree bounds,
   callback failure, entry limits, raw/Yaz0 REL extraction, short reads,
   truncated input, and input/output limits.
+- checked CISO block geometry, sparse reads, physical truncation, invalid map
+  flags, arbitrary bounded block sizes, and overflow rejection;
+- DVD host handle allocation/reuse/staleness/exhaustion, checked read ranges,
+  bounded path copies, and fixed DVD/CARD record sizes and offsets;
+- exact TARGET_PC scalar widths and the 8-byte `Gwords`/16-byte `TexRect`
+  contracts on native arm64, plus C/C++ and `-m32` syntax probes.
 
 The first integrated commit was independently reviewed. The review reproduced
 six defects: an above-4-GiB wrapper truncation, missing registry reclamation,
@@ -123,11 +159,35 @@ matched `c59d278ad8542bb05d6cbb632f60a0db05bef203`. The script builds its probe
 and writes the decoded REL only in a private temporary directory, then removes
 both automatically.
 
-Clang and the installed GCC driver also passed `-m32` syntax probes for all
-portable sources, both test files, and `pc_gbi_runtime.c`. A 32-bit executable
-cannot be linked on this arm64 macOS host. Full-PC translation units still reach
-the pre-existing `include/types.h` dependency on unavailable `<malloc.h>`, and
-the full CMake project still stops at the unchanged ILP32 guard.
+Clang and the installed `gcc` driver (Apple Clang on this host) also passed
+`-m32` syntax probes for the portable sources, tests, `pc_gbi_runtime.c`, and
+the revised DVD/CARD shims. A 32-bit executable cannot be linked on this arm64
+macOS host. The full CMake project still stops at the unchanged ILP32 guard by
+default; the diagnostic bypass exposes the separate Darwin/ELF platform-header
+boundary next.
+
+## Native macOS host build and launch
+
+The owning source target is `upstream/ACGC-PC-Port/pc/apple`. It is independent
+of the legacy SDL/OpenGL build graph and links only AppKit/Foundation plus the
+dependency-free portable library. It accepts an explicit ISO/GCM path, opens it
+read-only, accepts exact disc ID `GAFE01`, validates bounded GCM/DOL/FST data,
+and creates only bundle-scoped Application Support and cache directories.
+
+```sh
+./script/build_and_run.sh --headless
+./script/build_and_run.sh --verify
+```
+
+Headless result: host CTest passed 2/2, the approved ignored ISO was accepted,
+the DOL size was 918,720 bytes, and 10 FST files were visited. Foreground result:
+the same build/tests passed, LaunchServices opened a new normal AppKit app, its
+exact executable process was observed, and `--verify-seconds 2` produced a clean
+exit. Generated build/runtime state stayed under ignored `local/` paths.
+
+This passes the host-build and host-launch gates only. The shell explicitly
+reports rendering, game frame, input, audio, and save/load as unimplemented; it
+does not execute reconstructed game logic and is not a playability result.
 
 ## Proof ledger
 
@@ -136,11 +196,13 @@ the full CMake project still stops at the unchanged ILP32 guard.
 | Source/revision | Passed | ISO SHA-256 plus original DOL/REL SHA-1s. |
 | ac-decomp configure/extract | Passed | Configure and DTK extraction completed. |
 | ac-decomp matching build | Blocked | Wine absent before Metrowerks compilation. |
-| Portable arm64 library | Passed | Native + ASan/UBSan CTest, 2/2 in each lane. |
+| Portable arm64 library | Passed | Native + ASan/UBSan CTest, 3/3 in each lane, plus fixed-width ABI probe. |
 | Supported-disc data path | Passed | Bounded GCM/DOL/FST parse and expected real REL hash. |
 | Existing Windows build | Not run | Source-compatible branches and `-m32` syntax passed; no Windows execution lane. |
-| macOS host build | Not reached | 64-bit ABI migration remains. |
-| macOS launch/frame/input/audio/save | Not reached | No host exists yet. |
+| macOS host build | Passed | Native AppKit target and focused CTest, 2/2. |
+| macOS host launch | Passed | Exact app process observed; two-second timed exit was clean. |
+| Rendered/game frame | Not reached | Host shell has no renderer or reconstructed game loop. |
+| Input/audio/save | Not reached | Adapters are not wired to a running game. |
 | iOS simulator/device | Not reached | Begins after shared macOS proof. |
 
 No commit, push, PR, binary publication, deployment, TestFlight upload, or App
