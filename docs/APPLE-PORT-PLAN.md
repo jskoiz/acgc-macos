@@ -64,10 +64,16 @@ copy EFB, flush, and destroy. Presentation is deliberately a host operation.
 
 ### M1: 64-bit portable foundation — in progress
 
-- Land the fixed-width endian/Yaz0 library and its focused tests.
-- Inventory every pointer/`u32` boundary and add executable ABI/layout probes.
-- Introduce the guest-address/resource-handle resolver.
-- Move checked GCM/FST/DOL access behind the data-source interface.
+- Land the fixed-width endian/Yaz0 library and its focused tests. **Passed.**
+- Add checked native-address arithmetic at one real allocator boundary.
+  **Passed for TwoHeadArena tail allocation; free-space accounting remains.**
+- Introduce an opaque guest-command reference registry with explicit stale,
+  invalid, exhaustion, and post-consumption lifetime behavior. **Passed for the
+  current synchronous GBI runtime path.**
+- Move checked GCM/FST/DOL/REL access behind a bounded data-source interface.
+  **Passed for synthetic readers and the supported local ISO/GCM input.**
+- Inventory and migrate the remaining pointer/`u32`, DVD/CARD host-object, and
+  fixed-layout boundaries. **Still open.**
 
 Exit: representative portable libraries compile and test on arm64 without SDL,
 OpenGL, or a 32-bit process. This does not require launching the game.
@@ -109,19 +115,24 @@ frame. Neither is a playability claim.
 Exit: simulator and device evidence remain distinct. Signing, TestFlight,
 distribution, and App Store work require fresh authorization.
 
-## Next bounded implementation lane
+## Next bounded implementation lanes
 
-Create an ABI probe and guest-address classification slice in ACGC-PC-Port:
+Continue M1 in separately reviewable ACGC-PC-Port branches:
 
-- replace ambiguous PC scalar aliases with verified fixed-width types at one
-  isolated boundary;
-- add explicit probes for `Gwords == 8`, `TexRect == 16`, `CARDDir == 0x40`,
-  `CARDFileInfo == 0x14`, and documented DVD offsets;
-- enumerate the display-list, DVD, ARAM, label, and resource-pointer encodings;
-- add compile-time layout assertions and tests that run on both current ILP32
-  and arm64 host compilers where available;
-- implement the smallest opaque handle table needed to remove one real
-  pointer-to-`u32` round trip without changing the OpenGL renderer.
+1. Replace `THA_getFreeBytesAlign()` pointer-to-`int` arithmetic with checked
+   `uintptr_t`/`size_t` accounting while preserving its public result contract;
+   add native high-address and ILP32 syntax coverage.
+2. Move `FILE *` and other host-only DVD state out of fixed GameCube overlays
+   into an explicit generational side table; add `sizeof`/`offsetof` assertions
+   for DVD and CARD wire records without changing their serialized layout.
+3. Replace CISO physical-offset and seek arithmetic with a checked 64-bit host
+   reader, validate the physical image extent, and cover sparse, truncated, and
+   overflowed synthetic maps while retaining plain ISO behavior.
+4. Add executable fixed-layout probes for `Gwords`, `TexRect`, `CARDDir`,
+   `CARDFileInfo`, and the documented DVD offsets, then classify the remaining
+   ARAM, label, and resource encodings as guest address, offset, handle, or host
+   pointer.
 
-Do not begin Metal translation or an iOS target until this lane provides a safe
-64-bit command/address contract.
+Do not lift the full-runtime ILP32 guard, begin Metal translation, or add an iOS
+target until these remaining host-pointer and fixed-layout contracts pass on
+native arm64.

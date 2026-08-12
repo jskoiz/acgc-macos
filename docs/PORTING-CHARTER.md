@@ -53,3 +53,12 @@ Source edits stay on explicit branches in the owning submodule. Umbrella
 documents, scripts, evidence, and verified gitlink updates stay here. Generated
 builds, extraction output, logs, the ISO, and all other proprietary game data
 remain under ignored local or build paths and are never committed.
+
+## Current gate state
+
+As of 2026-08-11, source/revision proof and the bounded portable-core slice are
+passed. The portable arm64 tests, sanitizer tests, and approved-disc
+GCM/DOL/FST/REL hash proof are reproducible from tracked scripts. The full PC
+runtime remains behind its intentional ILP32 guard; no macOS host launch,
+rendered frame, input, audio, save/load, iOS Simulator, or physical-device gate
+has passed.

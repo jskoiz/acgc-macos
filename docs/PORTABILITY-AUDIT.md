@@ -76,10 +76,13 @@ backend constraint, not a portable GX contract. Documentation also claims
 CI14x2 texture support that is not visible in the current decoder dispatch;
 that format remains an explicit fixture gap.
 
-`pc_gbi_runtime.c` already prototypes a 32-bit token table for some pointers.
-Its fixed 8,192-entry namespace is useful evidence for the handle direction,
-but it does not yet define lifetime, collision, reuse, exhaustion, or invalid
-token behavior, and other paths still narrow native addresses directly.
+`pc_gbi_runtime.c` now routes odd, reserved-prefix, and non-32-bit native
+pointers through a generational 8,192-entry reference registry. Status-based
+unpacking rejects stale or malformed handles, and the current synchronous
+interpreter resets the registry after a submitted task is consumed. The finite
+capacity, 15-bit generation wrap, single-thread ownership, and synchronous
+lifetime are explicit current-runtime limits; other pointer/`u32` paths still
+require classification and migration.
 
 SDL responsibilities must be split rather than globally removed:
 
@@ -97,19 +100,38 @@ The shared game core consumes these narrow services. The macOS host supplies
 Apple implementations first; the later iOS host adds UIKit lifecycle and
 touch/controller mapping without forking game logic.
 
-## First completed slice
+## Completed portable-foundation slices
 
-`pc/portable` is a dependency-free C11 library with fixed-width endian loads and
-a bounded, checked Yaz0 decoder. It builds directly on native arm64 macOS, has
-synthetic malformed-input tests, and is linked into the existing PC target. The
-REL caller rejects short/truncated Yaz0 headers, enforces a 64 MiB output bound,
-and rejects an empty REL.
+The reviewed `pc/portable` C11 target now contains four dependency-light
+boundaries:
 
-This proves only a portable library and its data-format behavior. The full
-runtime still fails the intentional 32-bit configure guard, and no macOS window,
-Metal frame, input, audio, or save path exists yet.
+- fixed-width endian loads and a bounded Yaz0 decoder;
+- checked `uintptr_t` alignment/range operations used by TwoHeadArena's
+  downward allocation path;
+- a generational 32-bit GBI reference registry plus a status-based runtime
+  wrapper that round-trips native pointers above 4 GiB and rejects stale or
+  malformed reserved handles;
+- callback-driven, bounded GCM/DOL/FST parsing and raw/Yaz0 REL extraction.
 
-The focused tests do not yet exercise `pc_disc_extract_rel`, synthetic
-FST/CISO/GCM parsing, or the full PC target's link path. Existing FST-declared
-input allocations and raw REL asset offsets also need explicit bounds before the
-disc service can be considered hardened.
+Native arm64 and ASan/UBSan CTest pass both registered test executables. The
+approved ignored disc also passes the tracked bounded parser and reproduces the
+expected REL SHA-1. FST-declared entry counts no longer cause proportional
+allocation, DOL sections inside the header are rejected, invalid FST types and
+parent/subtree relationships fail closed, and the PC adapter rejects capacity
+or path truncation rather than reporting an incomplete table as success.
+
+The real GBI wrapper now distinguishes a normal word, a resolved reference, and
+an invalid reserved reference. Its registry is reset only after the external
+`emu64_taskstart()` call returns, when that synchronous interpreter has consumed
+the submitted command words. This is a bounded current-runtime contract, not a
+future asynchronous renderer lifetime design.
+
+This evidence still does not make the full runtime 64-bit. The CMake and header
+guards remain intentional, `THA_getFreeBytesAlign()` still performs
+pointer-to-`int` accounting, DVD/CARD structures still mix fixed layouts with
+host objects, and CISO physical seeks still use legacy 32-bit/`long` arithmetic.
+Full adapter translation units also retain the `<malloc.h>` portability blocker.
+No macOS window, Metal frame, input, audio, or save path exists yet.
+
+The real-disc proof covers the supported plain ISO/GCM data path, not CISO map
+validation, full-PC linking, launch, or gameplay.

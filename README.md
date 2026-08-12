@@ -24,8 +24,12 @@ redistribute it or extracted proprietary assets.
   the first Metrowerks compiler command, where the absent Wine runtime is the
   exact blocker.
 - The complete PC runtime remains intentionally 32-bit and does not configure
-  on arm64 macOS. A dependency-free endian/Yaz0 library now builds and tests
-  natively as the first narrow portability slice.
+  on arm64 macOS. The reviewed portable foundation now includes fixed-width
+  endian/Yaz0 code, checked native-address arithmetic, an opaque generational
+  GBI reference registry, and bounded GCM/DOL/FST/REL parsing.
+- The portable targets pass native arm64 and ASan/UBSan CTest (`2/2`). A tracked
+  proof command validates the approved local disc, visits its FST, decodes its
+  Yaz0 REL, reproduces the expected SHA-1, and removes all temporary output.
 - No macOS host has launched or rendered a frame. Input, audio, save/load, iOS
   simulator, and physical-device gates are all still open.
 
@@ -34,6 +38,7 @@ Re-run the tracked checks from this directory:
 ```sh
 ./scripts/verify-source-input.sh
 ./scripts/verify-portable-core.sh
+./scripts/verify-disc-core.sh
 ```
 
 ## Project record

@@ -7,8 +7,8 @@ not legal advice and not permission to redistribute third-party material.
 
 | Repository | Branch at audit | Recorded commit | Origin |
 | --- | --- | --- | --- |
-| Umbrella | `c1/apple-port-bootstrap` | parent `1456933eaa1efc34f91adff0fc1dacfb905b2459` | local project |
-| ACGC-PC-Port | `c1/macos-portable-disc-core` | `e826aca36ba71a1848ebe3c44d40ab506eb2c04d`, based on `4099d246c927e75b4fd342ca13f4ac4395c55af5` (`v0.9.3-playtest`) | `https://github.com/flyngmt/ACGC-PC-Port.git` |
+| Umbrella | `c1/apple-port-bootstrap` | prior evidence commit `e2bc3ae68e4fa647fff973d00b1bd68c2ba2bd81` | local project |
+| ACGC-PC-Port | `c1/macos-portable-disc-core` | `c3a27b68e0669f0664e11da7e5e435258e951106`, based on `4099d246c927e75b4fd342ca13f4ac4395c55af5` (`v0.9.3-playtest`) | `https://github.com/flyngmt/ACGC-PC-Port.git` |
 | ac-decomp | `master` | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` | `https://github.com/ACreTeam/ac-decomp.git` |
 
 The submodules have no nested `.gitmodules` at these commits. The documented
@@ -34,9 +34,11 @@ a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d
 ```
 
 DTK accepted that image. The ignored extracted original `main.dol` and raw REL
-match the two expected SHA-1 values above. The new portable Yaz0 decoder also
-decoded the compressed REL directly from the image to the expected REL SHA-1.
-That compressed temporary verification copy was removed afterward.
+match the two expected SHA-1 values above. The tracked bounded-disc proof also
+parses the image through the current GCM/DOL/FST service, finds the one
+`foresta.rel.szs` entry, decodes it through the portable Yaz0 path, and matches
+the expected REL SHA-1. Its temporary decoded output and probe binary are
+removed automatically.
 
 These checks establish compatibility with the pinned `GAFE01_00` workflows.
 They do not establish a matching reconstructed build or a playable port.
