@@ -55,28 +55,28 @@ The tracked diagnostic-only Darwin audit is explicit and opt-in:
 
 ```sh
 cmake -S upstream/ACGC-PC-Port/pc \
-  -B /tmp/codex-acgc-darwin-audit-689b45e -G Ninja \
+  -B /tmp/codex-acgc-darwin-audit-e64c1be -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug \
   -DPC_DARWIN_COMPILE_AUDIT=ON
-cmake --build /tmp/codex-acgc-darwin-audit-689b45e --parallel 1
+cmake --build /tmp/codex-acgc-darwin-audit-e64c1be --parallel 1
 ```
 
 Configure passed with arm64 SDL2 2.32.10 and the macOS OpenGL framework. The
-Darwin host-image split, typed DVD implementation, first runtime GBI
-pointer-width barrier, fixed-width CARD boundary, POSIX memory ownership,
-prefixed JSystem stream enums, all 58 FixNES objects, Darwin system string
-declarations, and the bridge actor's floating return contract compile. The
-fresh one-job build stops deterministically at step `134/4016` in
-`src/actor/ac_field_draw.c`: `gsSPVertex(&aFD_culling_vtx[0], 8, 0)` and
-`gsSPDisplayList(aFD_cull_set_gfx)` reach the fail-closed `_GBI_STATIC_PTR`
-guard because a native LP64 pointer cannot be stored directly in a static
-32-bit `Gfx` word. This is compile-frontier evidence, not authority to truncate
-the pointers, weaken the guard, or claim a runtime result.
+Darwin host-image split, typed DVD implementation, runtime GBI pointer-width
+barrier, fixed-width CARD boundary, POSIX memory ownership, prefixed JSystem
+stream enums, all 58 FixNES objects, Darwin system string declarations, bridge
+actor return contract, runtime-built field culling and Haniwa TLUT lists, and
+the JKR native ARAM transport compile. The fresh one-job build stops
+deterministically at step `178/4021` in `src/actor/ac_mailbox.c`: the two
+`gsSPDisplayList(post_flag_saki_common_DL)` initializers reach the fail-closed
+`_GBI_STATIC_PTR` guard because a native LP64 pointer cannot be stored directly
+in a static 32-bit `Gfx` word. This is compile-frontier evidence, not authority
+to truncate the pointers, weaken the guard, or claim a runtime result.
 
 ## Portable core
 
 Owning integration branch: `c1/macos-host-launch`; current local commit:
-`689b45e90df6d1181bba719e5f50714f0e1993ef`.
+`e64c1be1ed15bbc903c6d68733ea016b5e07dc99`.
 
 The reviewed source lineage is:
 
@@ -122,16 +122,26 @@ The reviewed source lineage is:
   animation residual proven by the original assembly and matching decomp.
 - `689b45e90df6d1181bba719e5f50714f0e1993ef` - routed the native macOS
   host through the boot-source preparation facade.
+- `250ab874037d68a2cadc1268710a27d225346942` - rebuilt source-local field
+  culling display lists at runtime while preserving eight-byte `Gfx` words.
+- `d36189c76733efde5f8e397bbb351a7e5a464ca2` - made the JKR stream/resource
+  contracts fixed-width and added their ABI probe.
+- `63e728a6c8e4030f0ccd921a0e2f9a61d0758ac3` - separated native PC MRAM
+  addresses from fixed-width ARAM offsets and added a high-address round trip.
+- `5be3a30f04827ab65bcc70f213ad8534c5d142dd` - rebuilt the Haniwa TLUT list
+  immediately before PC submission and tested reset/rebuild behavior.
+- `e64c1be1ed15bbc903c6d68733ea016b5e07dc99` - exercised the real `emu64`
+  nested-list traversal and reset boundary for 32 consecutive rebuild cycles.
 
 ```sh
 ./scripts/verify-portable-core.sh
 ```
 
 Result: AppleClang arm64 configure/build passed with `-Wall -Wextra -Wpedantic`;
-CTest passed 11/11, including the portable parser, boot-source C/C++ tests, GBI
-registry, `emu64`, DVD state and C/C++ ABI, C/C++ libc-memory contract, and
-JSystem enum probes. The build also compiled the fixed-width PC and CARD C/C++
-ABI probes.
+CTest passed 13/13, including the portable parser, boot-source C/C++ tests, GBI
+registry, real nested `emu64` traversal, DVD state and C/C++ ABI, C/C++
+libc-memory contract, JKR stream ABI, and JSystem enum probes. The build also
+compiled the fixed-width PC and CARD C/C++ ABI probes.
 
 The additional sanitizer lane used:
 
@@ -148,7 +158,7 @@ env ASAN_OPTIONS=detect_leaks=0:halt_on_error=1:abort_on_error=1 \
   ctest --test-dir /tmp/codex-acgc-portable-sanitize --output-on-failure
 ```
 
-Result: 11/11 passed under AddressSanitizer and UndefinedBehaviorSanitizer. Apple
+Result: 13/13 passed under AddressSanitizer and UndefinedBehaviorSanitizer. Apple
 ASan does not support `detect_leaks=1`, so the successful run used the explicit
 platform-supported setting above.
 
@@ -175,6 +185,12 @@ The combined synthetic suites now cover:
 - direct `emu64::seg2k0()` resolution of a live native address above 4 GiB,
   stale/malformed-handle rejection, width-correct dynamic display-list stacks,
   and null guards at resolved pointer consumers;
+- runtime construction of the field culling and Haniwa TLUT lists, exact
+  command words, stale-handle invalidation, and 32 reset/rebuild cycles through
+  the real nested `emu64_taskstart` interpreter without registry exhaustion;
+- fixed-width JKR stream/resource signatures plus real high-address PC
+  MRAM-to-ARAM and ARAM-to-MRAM byte round trips while ARAM offsets remain
+  guest `u32` values;
 - public and internal CARD signatures expressed as `s32`/`u32`/`BOOL` plus
   `CARDCallback`, with the fixed CARD records unchanged and C/C++ native and
   ILP32 syntax probes passing;
@@ -214,8 +230,9 @@ the revised DVD/CARD shims. A 32-bit executable cannot be linked on this arm64
 macOS host. The full CMake project still stops at the unchanged ILP32 guard by
 default. The tracked opt-in Darwin audit now passes the earlier platform-header,
 DVD, runtime GBI, CARD, libc-memory, JSystem, FixNES, Darwin string-header, and
-bridge-return barriers. Its next measured blocker is the source-local static GBI
-pointer encoding in `ac_field_draw.c`.
+bridge-return barriers, runtime-built field/Haniwa GBI lists, and the JKR native
+ARAM path. Its next measured blocker is the nested source-local static GBI
+pointer encoding in `ac_mailbox.c`.
 
 ## Native macOS host build and launch
 
@@ -259,10 +276,10 @@ could not create the image; no visual-capture claim is made.
 | Source/revision | Passed | ISO SHA-256 plus original DOL/REL SHA-1s. |
 | ac-decomp configure/extract | Passed | Configure and DTK extraction completed. |
 | ac-decomp matching build | Blocked | Wine absent before Metrowerks compilation. |
-| Portable arm64 library | Passed | Native + ASan/UBSan CTest, 11/11 in each lane, plus fixed-width ABI probes. |
+| Portable arm64 library | Passed | Native + ASan/UBSan CTest, 13/13 in each lane, plus fixed-width ABI and native ARAM transport probes. |
 | Supported-disc data path | Passed | Bounded GCM/DOL/FST parse and expected real REL hash. |
 | Existing Windows build | Not run | Source-compatible branches and `-m32` syntax passed; no Windows execution lane. |
-| Full runtime arm64 compile | In progress | Fresh opt-in audit reaches `134/4016` and stops at two source-local static GBI pointers in `ac_field_draw.c`; the fail-closed guard and default ILP32 guard remain. |
+| Full runtime arm64 compile | In progress | Fresh opt-in audit at `e64c1be` reaches `178/4021` and stops at two nested static GBI pointers in `ac_mailbox.c`; the fail-closed guard and default ILP32 guard remain. |
 | macOS host build | Passed | Native AppKit target and focused host/geometry CTest, 4/4. |
 | macOS host launch | Passed | Direct app process prepared exact GAFE01_00 DOL/REL input, returned 0, and left no surviving process. |
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |

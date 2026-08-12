@@ -61,7 +61,8 @@ slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The portable boot-source facade accepts only exact
 `GAFE01_00`, requires one `foresta.rel.szs`, and prepares bounded DOL and REL
 images without writing them to tracked storage. Native and sanitizer portable
-tests (`11/11`), boot-source-backed approved-disc proof, headless host
+tests (`13/13`), including native-width PC ARAM transport and real nested
+`emu64` display-list traversal, boot-source-backed approved-disc proof, headless host
 preparation, native and sanitizer host tests (`4/4`), and a foreground AppKit
 process that exits only after two geometry-bearing command buffers complete are
 reproducible. The host now invokes the same facade and reports the real DOL and
@@ -70,9 +71,11 @@ command-buffer evidence without pixel readback: the launched target remains an
 honest host shell and does not execute the reconstructed game or render a game
 frame. The full PC runtime remains behind its default ILP32 guard; its opt-in
 Darwin audit now passes the corrected CARD ABI, POSIX and Darwin string-memory
-boundaries, prefixed JSystem stream enums, all 58 FixNES objects, and the bridge
-return contract. A fresh one-job audit stops at step `134/4016` because two
-source-local display-list pointers in `src/actor/ac_field_draw.c` cannot be
-represented in a static 32-bit `Gfx` word on LP64. The fail-closed guard remains
-enabled. Representative GX rendering, game frame, input, audio, save/load, iOS
-Simulator, and physical-device gates remain open.
+boundaries, prefixed JSystem stream enums, all 58 FixNES objects, the bridge
+return contract, runtime-built field culling and Haniwa TLUT lists, and the JKR
+native ARAM transport. A fresh one-job audit at `e64c1be` stops at step
+`178/4021` because the two nested `post_flag_saki_common_DL` references in
+`src/actor/ac_mailbox.c` cannot be represented in a static 32-bit `Gfx` word on
+LP64. The fail-closed guard remains enabled. Representative GX rendering, game
+frame, input, audio, save/load, iOS Simulator, and physical-device gates remain
+open.

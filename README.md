@@ -36,21 +36,25 @@ redistribute it or extracted proprietary assets.
   source facade now accepts only the exact eight-byte `GAFE01_00` revision,
   requires one `foresta.rel.szs`, enforces DOL/REL allocation ceilings, and
   prepares the DOL plus raw or Yaz0 REL entirely in memory.
-- The portable targets pass native arm64 and ASan/UBSan CTest (`11/11`). A
+- The portable targets pass native arm64 and ASan/UBSan CTest (`13/13`). The
+  suite now includes fixed-width JKR stream contracts, a native-width PC MRAM
+  to fixed-width ARAM transport round trip using real arm64 heap addresses,
+  runtime-built source-local GBI lists, and repeated nested traversal through
+  the real `emu64_taskstart` interpreter and registry-reset boundary. A
   tracked proof command drives the boot-source facade against the approved
   local disc, validates its exact revision and bounded DOL/FST/REL metadata,
   reproduces the expected decoded REL SHA-1, and removes all temporary output.
   C and C++ CARD ABI probes also compile natively and with explicit `-m32`
   syntax checks; a JSystem probe proves that its prefixed stream enums coexist
   with the ordinary stdio `SEEK_*` and `EOF` macros.
-- The opt-in Darwin compile audit now passes the platform-image, public DVD,
-  first runtime GBI pointer, CARD fixed-width, POSIX memory-primitive ownership,
-  JSystem stream-enum, FixNES allocation-header, Darwin fortified-string-header,
-  and bridge return-contract barriers. A fresh one-job audit reaches step
-  `134/4016` and stops at the fail-closed `_GBI_STATIC_PTR` guard for the
-  source-local culling display list in `src/actor/ac_field_draw.c`. No pointer is
-  truncated or replaced with a dummy value; the default full-runtime ILP32
-  rejection remains intact.
+- The opt-in Darwin compile audit now also passes the source-local field culling
+  lists, the Haniwa palette list, and the JKR native ARAM transport. A fresh
+  one-job audit at source commit `e64c1be` reaches step `178/4021` and stops at
+  the fail-closed `_GBI_STATIC_PTR` guard for the two nested
+  `post_flag_saki_common_DL` references in `src/actor/ac_mailbox.c`. The
+  source-local lists already converted for PC are rebuilt at submission time;
+  no pointer is truncated or replaced with a dummy value, and the default
+  full-runtime ILP32 rejection remains intact.
 - A native AppKit/Metal host now builds, routes its explicit read-only disc
   through the same bounded boot-source facade, accepts exact `GAFE01_00`, and
   reports the prepared 918,720-byte DOL and 6,137,393-to-15,640,056-byte Yaz0
