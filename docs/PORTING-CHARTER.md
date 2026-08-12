@@ -72,10 +72,12 @@ honest host shell and does not execute the reconstructed game or render a game
 frame. The full PC runtime remains behind its default ILP32 guard; its opt-in
 Darwin audit now passes the corrected CARD ABI, POSIX and Darwin string-memory
 boundaries, prefixed JSystem stream enums, all 58 FixNES objects, the bridge
-return contract, runtime-built field culling and Haniwa TLUT lists, and the JKR
-native ARAM transport. A fresh one-job audit at `e64c1be` stops at step
-`178/4021` because the two nested `post_flag_saki_common_DL` references in
-`src/actor/ac_mailbox.c` cannot be represented in a static 32-bit `Gfx` word on
-LP64. The fail-closed guard remains enabled. Representative GX rendering, game
-frame, input, audio, save/load, iOS Simulator, and physical-device gates remain
-open.
+return contract, runtime-built field culling, Haniwa TLUT, and mailbox flag
+lists, and the JKR native ARAM transport. A fresh one-job audit at `0c915d9`
+compiles `ac_mailbox.c` at step `178/4021` and stops at step `179/4021` because
+the `gsSPVertex(&mbg_v[0], 8, 0)` command in `src/actor/ac_mbg.c` cannot encode
+a native pointer in a static 32-bit `Gfx` word on LP64. A bounded keep-going
+inventory at the preceding commit observed 500 static-GBI translation-unit
+failures and three independent C/layout blockers. The fail-closed guard remains
+enabled. Representative GX rendering, game frame, input, audio, save/load, iOS
+Simulator, and physical-device gates remain open.

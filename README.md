@@ -47,14 +47,18 @@ redistribute it or extracted proprietary assets.
   C and C++ CARD ABI probes also compile natively and with explicit `-m32`
   syntax checks; a JSystem probe proves that its prefixed stream enums coexist
   with the ordinary stdio `SEEK_*` and `EOF` macros.
-- The opt-in Darwin compile audit now also passes the source-local field culling
-  lists, the Haniwa palette list, and the JKR native ARAM transport. A fresh
-  one-job audit at source commit `e64c1be` reaches step `178/4021` and stops at
-  the fail-closed `_GBI_STATIC_PTR` guard for the two nested
-  `post_flag_saki_common_DL` references in `src/actor/ac_mailbox.c`. The
-  source-local lists already converted for PC are rebuilt at submission time;
-  no pointer is truncated or replaced with a dummy value, and the default
-  full-runtime ILP32 rejection remains intact.
+- The opt-in Darwin compile audit now also passes the source-local field
+  culling, Haniwa palette, mailbox flag, and JKR native ARAM paths. Source
+  commit `0c915d9` rebuilds both pointer-bearing mailbox variants immediately
+  before submission and verifies their exact words, nested resolution, reset
+  invalidation, and rebuild behavior. A fresh one-job audit advances through
+  `ac_mailbox.c` at step `178/4021` and stops at `src/actor/ac_mbg.c:22` at
+  step `179/4021`, where `gsSPVertex(&mbg_v[0], 8, 0)` reaches the same
+  fail-closed `_GBI_STATIC_PTR` guard. A separate bounded keep-going inventory
+  at the preceding `e64c1be` snapshot observed 500 static-GBI translation-unit
+  failures (269 field, 229 model, and two actor files) plus three independent
+  C/layout blockers. No pointer is truncated or replaced with a dummy value,
+  and the default full-runtime ILP32 rejection remains intact.
 - A native AppKit/Metal host now builds, routes its explicit read-only disc
   through the same bounded boot-source facade, accepts exact `GAFE01_00`, and
   reports the prepared 918,720-byte DOL and 6,137,393-to-15,640,056-byte Yaz0

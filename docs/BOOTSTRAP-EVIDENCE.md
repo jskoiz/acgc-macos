@@ -55,28 +55,39 @@ The tracked diagnostic-only Darwin audit is explicit and opt-in:
 
 ```sh
 cmake -S upstream/ACGC-PC-Port/pc \
-  -B /tmp/codex-acgc-darwin-audit-e64c1be -G Ninja \
+  -B /tmp/codex-acgc-darwin-mailbox-audit -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug \
   -DPC_DARWIN_COMPILE_AUDIT=ON
-cmake --build /tmp/codex-acgc-darwin-audit-e64c1be --parallel 1
+cmake --build /tmp/codex-acgc-darwin-mailbox-audit --parallel 1
 ```
 
 Configure passed with arm64 SDL2 2.32.10 and the macOS OpenGL framework. The
 Darwin host-image split, typed DVD implementation, runtime GBI pointer-width
 barrier, fixed-width CARD boundary, POSIX memory ownership, prefixed JSystem
 stream enums, all 58 FixNES objects, Darwin system string declarations, bridge
-actor return contract, runtime-built field culling and Haniwa TLUT lists, and
-the JKR native ARAM transport compile. The fresh one-job build stops
-deterministically at step `178/4021` in `src/actor/ac_mailbox.c`: the two
-`gsSPDisplayList(post_flag_saki_common_DL)` initializers reach the fail-closed
+actor return contract, runtime-built field culling, Haniwa TLUT, and mailbox
+flag lists, and the JKR native ARAM transport compile. At source commit
+`0c915d9`, the fresh one-job build compiles `src/actor/ac_mailbox.c` at step
+`178/4021` and stops deterministically at step `179/4021` in
+`src/actor/ac_mbg.c`: `gsSPVertex(&mbg_v[0], 8, 0)` reaches the fail-closed
 `_GBI_STATIC_PTR` guard because a native LP64 pointer cannot be stored directly
 in a static 32-bit `Gfx` word. This is compile-frontier evidence, not authority
-to truncate the pointers, weaken the guard, or claim a runtime result.
+to truncate the pointer, weaken the guard, or claim a runtime result.
+
+A separate bounded keep-going audit at `e64c1be` observed 503 failing
+translation units before Ninja's configured failure boundary: 500 static-GBI
+failures (269 under `src/data/field`, 229 under `src/data/model`, and the
+mailbox/MBG actor files) and three non-static failures. The latter are the
+implicit-return declaration in `ac_museum_insect_tonbo.c_inc`, the missing
+array element type in `ac_npc_police2_move.c_inc`, and the intentional PC NPC
+actor-slot backing-size sentinel in `ac_npc_ctrl.c_inc`. The mailbox portion of
+that inventory is superseded by `0c915d9`; the remainder is a bounded observed
+inventory, not proof that every later translation unit has compiled.
 
 ## Portable core
 
 Owning integration branch: `c1/macos-host-launch`; current local commit:
-`e64c1be1ed15bbc903c6d68733ea016b5e07dc99`.
+`0c915d90777dc28c1b4b0b480005d526cdd38f89`.
 
 The reviewed source lineage is:
 
@@ -132,6 +143,9 @@ The reviewed source lineage is:
   immediately before PC submission and tested reset/rebuild behavior.
 - `e64c1be1ed15bbc903c6d68733ea016b5e07dc99` - exercised the real `emu64`
   nested-list traversal and reset boundary for 32 consecutive rebuild cycles.
+- `0c915d90777dc28c1b4b0b480005d526cdd38f89` - rebuilt the two mailbox flag
+  lists at submission time and tested exact commands, nested references, reset
+  invalidation, and rebuild behavior.
 
 ```sh
 ./scripts/verify-portable-core.sh
@@ -185,9 +199,10 @@ The combined synthetic suites now cover:
 - direct `emu64::seg2k0()` resolution of a live native address above 4 GiB,
   stale/malformed-handle rejection, width-correct dynamic display-list stacks,
   and null guards at resolved pointer consumers;
-- runtime construction of the field culling and Haniwa TLUT lists, exact
-  command words, stale-handle invalidation, and 32 reset/rebuild cycles through
-  the real nested `emu64_taskstart` interpreter without registry exhaustion;
+- runtime construction of the field culling, Haniwa TLUT, and both mailbox flag
+  lists, exact command words, stale-handle invalidation, and 32 reset/rebuild
+  cycles through the real nested `emu64_taskstart` interpreter without registry
+  exhaustion;
 - fixed-width JKR stream/resource signatures plus real high-address PC
   MRAM-to-ARAM and ARAM-to-MRAM byte round trips while ARAM offsets remain
   guest `u32` values;
@@ -230,9 +245,9 @@ the revised DVD/CARD shims. A 32-bit executable cannot be linked on this arm64
 macOS host. The full CMake project still stops at the unchanged ILP32 guard by
 default. The tracked opt-in Darwin audit now passes the earlier platform-header,
 DVD, runtime GBI, CARD, libc-memory, JSystem, FixNES, Darwin string-header, and
-bridge-return barriers, runtime-built field/Haniwa GBI lists, and the JKR native
-ARAM path. Its next measured blocker is the nested source-local static GBI
-pointer encoding in `ac_mailbox.c`.
+bridge-return barriers, runtime-built field/Haniwa/mailbox GBI lists, and the
+JKR native ARAM path. Its next measured blocker is the static vertex reference
+in `ac_mbg.c`.
 
 ## Native macOS host build and launch
 
@@ -279,7 +294,7 @@ could not create the image; no visual-capture claim is made.
 | Portable arm64 library | Passed | Native + ASan/UBSan CTest, 13/13 in each lane, plus fixed-width ABI and native ARAM transport probes. |
 | Supported-disc data path | Passed | Bounded GCM/DOL/FST parse and expected real REL hash. |
 | Existing Windows build | Not run | Source-compatible branches and `-m32` syntax passed; no Windows execution lane. |
-| Full runtime arm64 compile | In progress | Fresh opt-in audit at `e64c1be` reaches `178/4021` and stops at two nested static GBI pointers in `ac_mailbox.c`; the fail-closed guard and default ILP32 guard remain. |
+| Full runtime arm64 compile | In progress | Fresh opt-in audit at `0c915d9` compiles `ac_mailbox.c` at `178/4021` and stops at the static vertex pointer in `ac_mbg.c` at `179/4021`; the fail-closed guard and default ILP32 guard remain. |
 | macOS host build | Passed | Native AppKit target and focused host/geometry CTest, 4/4. |
 | macOS host launch | Passed | Direct app process prepared exact GAFE01_00 DOL/REL input, returned 0, and left no surviving process. |
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |
