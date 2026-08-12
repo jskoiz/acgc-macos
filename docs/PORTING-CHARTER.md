@@ -16,18 +16,29 @@ after shared portability work is proven, iOS.
 
 ## Evidence gates
 
-1. Confirm the local image identifies as supported revision `GAFE01_00` and is
-   accepted by each relevant extraction/runtime tool.
-2. Reproduce the decomp configuration/build on macOS without changing source.
-3. Inventory all Windows, x86, OpenGL, SDL, filesystem, timing, and endian
-   assumptions in the PC port.
-4. Define shared portable interfaces and a macOS host; prove launch, rendering,
-   input, audio, and save/load independently.
-5. Add an Apple renderer suitable for Metal and prove frame correctness on
-   current macOS hardware.
-6. Create the iOS host only after the shared layer is stable; verify simulator
-   and physical-device lifecycle, touch/controller input, sandboxed files, audio,
-   performance, and memory.
+Each gate requires its own recorded command or observable proof. Passing a later
+compile step does not imply an earlier runtime behavior, and simulator evidence
+does not imply physical-device evidence.
+
+1. **Source/revision:** local input is ignored, has the approved SHA-256, is
+   accepted as `GAFE01_00`, and yields the expected original DOL/REL hashes.
+2. **Portable core:** shared libraries compile and pass focused tests on native
+   arm64 macOS without depending on SDL, OpenGL, or a 32-bit pointer ABI.
+3. **Host launch:** a macOS process starts, resolves its user-data directories,
+   and exits cleanly without asserting renderer success.
+4. **Rendered frame:** Metal presents a known clear frame, then representative
+   GX geometry, texture, TEV, and EFB behavior with captured evidence.
+5. **Game frame:** the supported revision reaches an identifiable game frame;
+   this is distinct from general playability.
+6. **Input:** keyboard and controller mappings are observed in the running game.
+7. **Audio:** the game mixer reaches an Apple audio sink with stable timing.
+8. **Save/load:** a sandboxed save survives process restart and round-trips
+   without changing the GameCube wire format.
+9. **macOS acceptance:** a human validates a bounded play path on current macOS.
+10. **iOS simulator:** lifecycle, touch/controller input, files, and audio work
+    in Simulator through the same shared core and Metal backend.
+11. **Physical device:** signing-authorized hardware proves rendering,
+    lifecycle, input, audio, save/load, performance, thermal, and memory gates.
 
 ## Non-goals for bootstrap
 
@@ -35,3 +46,10 @@ after shared portability work is proven, iOS.
 - No App Store submission or public binary release.
 - No claim that compilation equals playable compatibility.
 - No broad rewrite before the platform-assumption audit is complete.
+
+## Repository and data boundary
+
+Source edits stay on explicit branches in the owning submodule. Umbrella
+documents, scripts, evidence, and verified gitlink updates stay here. Generated
+builds, extraction output, logs, the ISO, and all other proprietary game data
+remain under ignored local or build paths and are never committed.
