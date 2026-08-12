@@ -92,6 +92,9 @@ copy EFB, flush, and destroy. Presentation is deliberately a host operation.
 - Replace legacy CARD public/internal `long` scalars and callback spellings with
   the existing fixed-width contract. **Passed in native C/C++ probes, explicit
   ILP32 syntax probes, and the opt-in Darwin compile audit.**
+- Assign legacy memory primitives to one platform owner. **Passed for native
+  POSIX libc plus signature-compatible Windows PC declarations/definitions; no
+  Windows execution claim.**
 
 Exit: representative portable libraries compile and test on arm64 without SDL,
 OpenGL, or a 32-bit process. This does not require launching the game.
@@ -145,15 +148,14 @@ distribution, and App Store work require fresh authorization.
 
 Continue in separately reviewable ACGC-PC-Port branches:
 
-1. Resolve `libultra.h` and PC-stub ownership for `bcmp`, `bcopy`, and `bzero`
-   so Apple/POSIX hosts use their system contract, Windows retains one correct
-   owner, and the original non-PC definitions remain unchanged.
-2. Advance the renderer-neutral fixture from clear/present to deterministic
-   geometry with command-buffer completion evidence, without claiming pixel
-   readback or a game frame.
-3. Add an exact-`GAFE01_00`, bounded boot-source facade that prepares DOL/REL
+1. Replace collision-prone JSystem `SEEK_*`/`EOF` enum spellings with a
+   project-prefixed contract, preserving numeric values and ordinary stdio
+   macro behavior, then rerun the single-job Darwin audit.
+2. Add an exact-`GAFE01_00`, bounded boot-source facade that prepares DOL/REL
    images in memory without persisting proprietary output, then connect it to
    host-owned runtime state.
+3. Advance renderer fixtures from the completed non-indexed triangle to
+   transforms, vertex formats, indexed draws, textures, TEV, and EFB behavior.
 4. Classify the remaining static GBI pointer initializers as relocatable guest
    references or host-owned resources. Do not truncate or use an unsafe
    LP64-only initializer bypass.

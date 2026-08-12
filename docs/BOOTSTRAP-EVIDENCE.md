@@ -55,26 +55,27 @@ The tracked diagnostic-only Darwin audit is explicit and opt-in:
 
 ```sh
 cmake -S upstream/ACGC-PC-Port/pc \
-  -B /tmp/codex-acgc-darwin-audit-card-745a3c2 -G Ninja \
+  -B /tmp/codex-acgc-darwin-audit-libc-46ac497 -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug \
   -DPC_DARWIN_COMPILE_AUDIT=ON
-cmake --build /tmp/codex-acgc-darwin-audit-card-745a3c2 --parallel 1
+cmake --build /tmp/codex-acgc-darwin-audit-libc-46ac497 --parallel 1
 ```
 
 Configure passed with arm64 SDL2 2.32.10 and the macOS OpenGL framework. The
 Darwin host-image split, typed DVD implementation, and first GBI pointer-width
 barrier compiled. `Padclamp.c` and the CARD boundary now compile after the 12
-public/owning signatures were made fixed-width. The single-job build then
-stopped deterministically at step 20 of 4,009 in `pc_audio.c`, through
-`libultra.h`: `bcmp` conflicts with Darwin's const/`size_t` declaration, while
-`bcopy` and `bzero` collide with Darwin fortified macros. This is compile-
-frontier evidence, not authority to weaken the default guard and not a runtime
-result.
+public/owning signatures were made fixed-width. `pc_audio.c`, `pc_misc.c`, and
+the C stubs now compile after POSIX PC builds were assigned to system
+`bcmp`/`bcopy`/`bzero` and Windows retained one project-owned definition of
+each. The single-job build then stopped deterministically at step 37 of 4,013
+in `pc_stubs_cpp.cpp`: restored stdio `SEEK_CUR` has type `int`, which cannot be
+passed as `JSUStreamSeekFrom`. This is compile-frontier evidence, not authority
+to weaken the default guard and not a runtime result.
 
 ## Portable core
 
 Owning integration branch: `c1/macos-host-launch`; local commit:
-`4b08f6709ad8ec72cc996f5aae6f7db4b31a99e3`.
+`46ac4972e4c1defbda5001ceed4ca000afd99242`.
 
 The reviewed source lineage is:
 
@@ -106,16 +107,18 @@ The reviewed source lineage is:
   scalar/callback declarations fixed-width and added C/C++ ABI probes.
 - `4b08f6709ad8ec72cc996f5aae6f7db4b31a99e3` - added a fixed-width,
   pointer-free geometry packet and native Metal triangle fixture.
+- `46ac4972e4c1defbda5001ceed4ca000afd99242` - assigned POSIX PC memory
+  primitives to libc and retained one signature-compatible Windows owner.
 
 ```sh
 ./scripts/verify-portable-core.sh
 ```
 
 Result: AppleClang arm64 configure/build passed with `-Wall -Wextra -Wpedantic`;
-CTest passed 6/6 (`acgc_portable_tests`, `acgc_gbi_runtime_tests`,
+CTest passed 8/8 (`acgc_portable_tests`, `acgc_gbi_runtime_tests`,
 `acgc_emu64_seg2k0_tests`, `acgc_dvd_host_state_tests`, and the C/C++ typed DVD
-public-ABI tests). The build also compiled the fixed-width PC and CARD C/C++
-ABI probes.
+public-ABI tests, plus the C/C++ libc-memory contract probes). The build also
+compiled the fixed-width PC and CARD C/C++ ABI probes.
 
 The additional sanitizer lane used:
 
@@ -132,7 +135,7 @@ env ASAN_OPTIONS=detect_leaks=0:halt_on_error=1:abort_on_error=1 \
   ctest --test-dir /tmp/codex-acgc-portable-sanitize --output-on-failure
 ```
 
-Result: 6/6 passed under AddressSanitizer and UndefinedBehaviorSanitizer. Apple
+Result: 8/8 passed under AddressSanitizer and UndefinedBehaviorSanitizer. Apple
 ASan does not support `detect_leaks=1`, so the successful run used the explicit
 platform-supported setting above.
 
@@ -161,7 +164,10 @@ The combined synthetic suites now cover:
   and null guards at resolved pointer consumers;
 - public and internal CARD signatures expressed as `s32`/`u32`/`BOOL` plus
   `CARDCallback`, with the fixed CARD records unchanged and C/C++ native and
-  ILP32 syntax probes passing.
+  ILP32 syntax probes passing;
+- POSIX PC `bcmp`/`bcopy`/`bzero` declarations and calls supplied by system
+  libc, with signature-compatible Windows declarations/definitions and C/C++
+  contract probes.
 
 The first integrated commit was independently reviewed. The review reproduced
 six defects: an above-4-GiB wrapper truncation, missing registry reclamation,
@@ -189,8 +195,8 @@ Clang and the installed `gcc` driver (Apple Clang on this host) also passed
 the revised DVD/CARD shims. A 32-bit executable cannot be linked on this arm64
 macOS host. The full CMake project still stops at the unchanged ILP32 guard by
 default. The tracked opt-in Darwin audit now passes the earlier platform-header,
-DVD, GBI, and CARD barriers and exposes the Darwin `bcmp`/`bcopy`/`bzero`
-declaration and ownership collision next.
+DVD, GBI, CARD, and libc-memory barriers and exposes the JSystem stream-enum
+versus restored stdio-macro collision next.
 
 ## Native macOS host build and launch
 
@@ -231,10 +237,10 @@ could not create the image; no visual-capture claim is made.
 | Source/revision | Passed | ISO SHA-256 plus original DOL/REL SHA-1s. |
 | ac-decomp configure/extract | Passed | Configure and DTK extraction completed. |
 | ac-decomp matching build | Blocked | Wine absent before Metrowerks compilation. |
-| Portable arm64 library | Passed | Native + ASan/UBSan CTest, 6/6 in each lane, plus fixed-width ABI probe. |
+| Portable arm64 library | Passed | Native + ASan/UBSan CTest, 8/8 in each lane, plus fixed-width ABI probes. |
 | Supported-disc data path | Passed | Bounded GCM/DOL/FST parse and expected real REL hash. |
 | Existing Windows build | Not run | Source-compatible branches and `-m32` syntax passed; no Windows execution lane. |
-| Full runtime arm64 compile | In progress | Opt-in audit passes Darwin/DVD/GBI/CARD barriers and stops at the libultra/Darwin libc memory-primitive collision in `pc_audio.c`; default ILP32 guard remains. |
+| Full runtime arm64 compile | In progress | Opt-in audit passes Darwin/DVD/GBI/CARD/libc-memory barriers and stops at the JSystem `SEEK_CUR` enum collision in `pc_stubs_cpp.cpp`; default ILP32 guard remains. |
 | macOS host build | Passed | Native AppKit target and focused host/geometry CTest, 4/4. |
 | macOS host launch | Passed | Direct app process accepted GAFE01, returned 0, and left no surviving process. |
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |

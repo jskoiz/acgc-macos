@@ -106,7 +106,7 @@ touch/controller mapping without forking game logic.
 
 ## Completed portable-foundation slices
 
-The reviewed `pc/portable` library and focused C/C++ probes now exercise six
+The reviewed `pc/portable` library and focused C/C++ probes now exercise seven
 dependency-light boundaries:
 
 - fixed-width endian loads and a bounded Yaz0 decoder;
@@ -119,9 +119,11 @@ dependency-light boundaries:
 - owner-keyed DVD host state, fixed DVD/CARD wire probes, and typed public DVD
   ABI behavior on both LP64 and ILP32;
 - fixed-width public/internal CARD signatures and callbacks without changing
-  the fixed CARD file/directory layouts.
+  the fixed CARD file/directory layouts;
+- explicit memory-primitive ownership: POSIX PC builds use system libc while
+  Windows retains signature-compatible project definitions.
 
-Native arm64 and ASan/UBSan CTest pass all six registered test executables. The
+Native arm64 and ASan/UBSan CTest pass all eight registered test executables. The
 approved ignored disc also passes the tracked bounded parser and reproduces the
 expected REL SHA-1. FST-declared entry counts no longer cause proportional
 allocation, DOL sections inside the header are rejected, invalid FST types and
@@ -139,9 +141,10 @@ This evidence still does not make the full runtime 64-bit. The CMake and header
 guards remain intentional. The opt-in Darwin audit has passed the earlier
 platform-image, TwoHeadArena, checked-CISO, public-DVD, and first GBI
 pointer-width barriers. It now also compiles the corrected CARD leaf/owning ABI
-and stops in `pc_audio.c`, where project `bcmp`/`bcopy`/`bzero` declarations
-conflict with Darwin libc declarations and fortified macros. CARD host state,
-static display-list relocation, and further pointer domains remain open.
+and the corrected POSIX memory-primitive ownership boundary. It now stops in
+`pc_stubs_cpp.cpp`, where restored stdio `SEEK_CUR` is not the JSystem
+`JSUStreamSeekFrom` enum. CARD host state, static display-list relocation, and
+further pointer domains remain open.
 
 A separate native AppKit host now validates the supported disc and proves two
 completed command buffers containing CAMetalLayer clear, a deterministic

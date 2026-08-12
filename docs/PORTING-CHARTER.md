@@ -66,6 +66,7 @@ readback and is not yet representative GX rendering: the launched target remains
 an honest host shell and does not execute the reconstructed game or render a
 game frame. The full PC runtime remains behind its default ILP32
 guard; its opt-in Darwin audit now passes the corrected fixed-width CARD ABI and
-currently stops at `libultra` memory-primitive declarations that conflict with
-Darwin libc. Representative rendered-frame, game-frame, input, audio,
-save/load, iOS Simulator, and physical-device gates remain open.
+the corrected POSIX memory-primitive ownership boundary, and currently stops at
+a JSystem stream enum versus stdio macro collision in `pc_stubs_cpp.cpp`.
+Representative rendered-frame, game-frame, input, audio, save/load, iOS
+Simulator, and physical-device gates remain open.
