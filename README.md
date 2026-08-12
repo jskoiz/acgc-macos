@@ -44,22 +44,26 @@ redistribute it or extracted proprietary assets.
   syntax checks; a JSystem probe proves that its prefixed stream enums coexist
   with the ordinary stdio `SEEK_*` and `EOF` macros.
 - The opt-in Darwin compile audit now passes the platform-image, public DVD,
-  first GBI pointer, CARD fixed-width, and POSIX memory-primitive ownership
-  barriers as well as the JSystem stream-enum collision. FixNES now uses the
-  standard allocation header, allowing all 58 of its audit objects to compile.
-  The audit then advances through 76 more game translation units and stops at
-  step `77/3974`: `aBridge_player_check` in `src/actor/ac_bridge_a.c` has a bare
-  return in a non-void function. The default full-runtime ILP32 rejection
-  remains intact.
-- A native AppKit/Metal host now builds, validates the exact `GAFE01` disc,
-  resolves scoped Application Support and cache paths, opens a normal
-  foreground window, and exits 0 only after two requested Metal command buffers
-  containing clear/triangle/present work complete. The triangle comes from a
-  fixed-width, pointer-free geometry packet consumed by an Apple-owned Metal
-  pipeline. This passes host launch and a deterministic command-buffer-completed
-  geometry fixture, not pixel readback, representative GX, or a reconstructed
-  game frame: input, audio, save/load, and playability remain open. iOS remains
-  gated behind the shared macOS core and renderer.
+  first runtime GBI pointer, CARD fixed-width, POSIX memory-primitive ownership,
+  JSystem stream-enum, FixNES allocation-header, Darwin fortified-string-header,
+  and bridge return-contract barriers. A fresh one-job audit reaches step
+  `134/4016` and stops at the fail-closed `_GBI_STATIC_PTR` guard for the
+  source-local culling display list in `src/actor/ac_field_draw.c`. No pointer is
+  truncated or replaced with a dummy value; the default full-runtime ILP32
+  rejection remains intact.
+- A native AppKit/Metal host now builds, routes its explicit read-only disc
+  through the same bounded boot-source facade, accepts exact `GAFE01_00`, and
+  reports the prepared 918,720-byte DOL and 6,137,393-to-15,640,056-byte Yaz0
+  REL before disposing both buffers. It resolves scoped Application Support and
+  cache paths, opens a normal foreground window, and exits 0 only after two
+  requested Metal command buffers containing clear/triangle/present work
+  complete. Native host CTest and its ASan/UBSan lane pass `4/4`. The triangle
+  comes from a fixed-width, pointer-free geometry packet consumed by an
+  Apple-owned Metal pipeline. This passes boot-source preflight, host launch,
+  and a deterministic command-buffer-completed geometry fixture—not game
+  execution, pixel readback, representative GX, or a reconstructed game frame.
+  Input, audio, save/load, and playability remain open; iOS remains gated behind
+  the shared macOS core and renderer.
 
 Re-run the tracked checks from this directory:
 

@@ -55,27 +55,28 @@ The tracked diagnostic-only Darwin audit is explicit and opt-in:
 
 ```sh
 cmake -S upstream/ACGC-PC-Port/pc \
-  -B /tmp/codex-acgc-darwin-audit-libc-46ac497 -G Ninja \
+  -B /tmp/codex-acgc-darwin-audit-689b45e -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug \
   -DPC_DARWIN_COMPILE_AUDIT=ON
-cmake --build /tmp/codex-acgc-darwin-audit-libc-46ac497 --parallel 1
+cmake --build /tmp/codex-acgc-darwin-audit-689b45e --parallel 1
 ```
 
 Configure passed with arm64 SDL2 2.32.10 and the macOS OpenGL framework. The
-Darwin host-image split, typed DVD implementation, and first GBI pointer-width
-barrier compiled. `Padclamp.c` and the CARD boundary now compile after the 12
-public/owning signatures were made fixed-width. `pc_audio.c`, `pc_misc.c`, and
-the C stubs now compile after POSIX PC builds were assigned to system
-`bcmp`/`bcopy`/`bzero` and Windows retained one project-owned definition of
-each. The single-job build then stopped deterministically at step 37 of 4,013
-in `pc_stubs_cpp.cpp`: restored stdio `SEEK_CUR` has type `int`, which cannot be
-passed as `JSUStreamSeekFrom`. This is compile-frontier evidence, not authority
-to weaken the default guard and not a runtime result.
+Darwin host-image split, typed DVD implementation, first runtime GBI
+pointer-width barrier, fixed-width CARD boundary, POSIX memory ownership,
+prefixed JSystem stream enums, all 58 FixNES objects, Darwin system string
+declarations, and the bridge actor's floating return contract compile. The
+fresh one-job build stops deterministically at step `134/4016` in
+`src/actor/ac_field_draw.c`: `gsSPVertex(&aFD_culling_vtx[0], 8, 0)` and
+`gsSPDisplayList(aFD_cull_set_gfx)` reach the fail-closed `_GBI_STATIC_PTR`
+guard because a native LP64 pointer cannot be stored directly in a static
+32-bit `Gfx` word. This is compile-frontier evidence, not authority to truncate
+the pointers, weaken the guard, or claim a runtime result.
 
 ## Portable core
 
-Owning integration branch: `c1/macos-host-launch`; local commit:
-`46ac4972e4c1defbda5001ceed4ca000afd99242`.
+Owning integration branch: `c1/macos-host-launch`; current local commit:
+`689b45e90df6d1181bba719e5f50714f0e1993ef`.
 
 The reviewed source lineage is:
 
@@ -109,16 +110,28 @@ The reviewed source lineage is:
   pointer-free geometry packet and native Metal triangle fixture.
 - `46ac4972e4c1defbda5001ceed4ca000afd99242` - assigned POSIX PC memory
   primitives to libc and retained one signature-compatible Windows owner.
+- `028ff985cda9dde652bdb85a0a2aa8f4dbb2de44` - added the exact
+  `GAFE01_00` bounded in-memory boot-source facade.
+- `20c9ed230a604d174c3112de3604f9e4351594c9` - prefixed JSystem stream and
+  I/O enum constants so ordinary libc macros remain intact.
+- `4907f61a572aca6bd1936b12966aaab255150eda` - replaced FixNES's
+  non-portable allocation include with the standard C library header.
+- `90562ebf4cc5782d41712d2028546d5351014891` - assigned PC `_mem.h` string
+  declarations to the system header while preserving non-PC declarations.
+- `46f33f639ff0090f20d35f3dbd85334ea1574804` - returned the bridge
+  animation residual proven by the original assembly and matching decomp.
+- `689b45e90df6d1181bba719e5f50714f0e1993ef` - routed the native macOS
+  host through the boot-source preparation facade.
 
 ```sh
 ./scripts/verify-portable-core.sh
 ```
 
 Result: AppleClang arm64 configure/build passed with `-Wall -Wextra -Wpedantic`;
-CTest passed 8/8 (`acgc_portable_tests`, `acgc_gbi_runtime_tests`,
-`acgc_emu64_seg2k0_tests`, `acgc_dvd_host_state_tests`, and the C/C++ typed DVD
-public-ABI tests, plus the C/C++ libc-memory contract probes). The build also
-compiled the fixed-width PC and CARD C/C++ ABI probes.
+CTest passed 11/11, including the portable parser, boot-source C/C++ tests, GBI
+registry, `emu64`, DVD state and C/C++ ABI, C/C++ libc-memory contract, and
+JSystem enum probes. The build also compiled the fixed-width PC and CARD C/C++
+ABI probes.
 
 The additional sanitizer lane used:
 
@@ -135,7 +148,7 @@ env ASAN_OPTIONS=detect_leaks=0:halt_on_error=1:abort_on_error=1 \
   ctest --test-dir /tmp/codex-acgc-portable-sanitize --output-on-failure
 ```
 
-Result: 8/8 passed under AddressSanitizer and UndefinedBehaviorSanitizer. Apple
+Result: 11/11 passed under AddressSanitizer and UndefinedBehaviorSanitizer. Apple
 ASan does not support `detect_leaks=1`, so the successful run used the explicit
 platform-supported setting above.
 
@@ -167,7 +180,11 @@ The combined synthetic suites now cover:
   ILP32 syntax probes passing;
 - POSIX PC `bcmp`/`bcopy`/`bzero` declarations and calls supplied by system
   libc, with signature-compatible Windows declarations/definitions and C/C++
-  contract probes.
+  contract probes;
+- exact eight-byte `GAFE01_00` acceptance, bounded DOL/REL allocation, exactly
+  one `foresta.rel.szs`, raw and Yaz0 preparation, disposal, and failure paths;
+- prefixed JSystem stream/I/O enums coexisting with ordinary libc `SEEK_*` and
+  `EOF`, plus PC `_mem.h` calls through the host string declarations.
 
 The first integrated commit was independently reviewed. The review reproduced
 six defects: an above-4-GiB wrapper truncation, missing registry reclamation,
@@ -177,7 +194,8 @@ second independent pass found no new actionable defect; focused harnesses also
 proved stale/malformed references fail closed and the 1,025th adapter file and
 overlong adapter paths are rejected.
 
-The current tracked real-input command is:
+The current tracked real-input command, after staging or committing the exact
+submodule gitlink under test, is:
 
 ```sh
 ./scripts/verify-disc-core.sh
@@ -195,34 +213,38 @@ Clang and the installed `gcc` driver (Apple Clang on this host) also passed
 the revised DVD/CARD shims. A 32-bit executable cannot be linked on this arm64
 macOS host. The full CMake project still stops at the unchanged ILP32 guard by
 default. The tracked opt-in Darwin audit now passes the earlier platform-header,
-DVD, GBI, CARD, and libc-memory barriers and exposes the JSystem stream-enum
-versus restored stdio-macro collision next.
+DVD, runtime GBI, CARD, libc-memory, JSystem, FixNES, Darwin string-header, and
+bridge-return barriers. Its next measured blocker is the source-local static GBI
+pointer encoding in `ac_field_draw.c`.
 
 ## Native macOS host build and launch
 
 The owning source target is `upstream/ACGC-PC-Port/pc/apple`. It is independent
 of the legacy SDL/OpenGL build graph and links AppKit, Foundation, Metal, and
 QuartzCore plus the dependency-free portable library. It accepts an explicit
-ISO/GCM path, opens it read-only, accepts exact disc ID `GAFE01`, validates
-bounded GCM/DOL/FST data, and creates only bundle-scoped Application Support and
-cache directories.
+ISO/GCM path, opens it read-only, and invokes `acgc_boot_source_prepare` as the
+single authoritative input path. That facade accepts only exact `GAFE01_00`,
+prepares bounded DOL plus raw/Yaz0 REL images, and requires exactly one
+`foresta.rel.szs`. The host reports fixed-width metadata, disposes both buffers,
+and creates only bundle-scoped Application Support and cache directories.
 
 ```sh
 ./script/build_and_run.sh --headless
 ./script/build_and_run.sh --verify
 ```
 
-Headless result: host CTest passed 4/4, including C and C++ geometry-contract
-tests; the approved ignored ISO was accepted,
-the DOL size was 918,720 bytes, and 10 FST files were visited. Foreground result:
-the same build/tests passed; the app executable opened a normal AppKit window,
-created a CAMetalLayer and native Metal device/queue/render pass, compiled its
-local shader, encoded a deterministic colored triangle from a 76-byte semantic
-packet, and completed two requested command buffers containing
-clear/triangle/present before the five-second deadline. It emitted the exact
-completion record, returned exit 0, and left no process behind. Generated
-build/runtime state stayed under ignored `local/` paths; `/local/runtime/` is
-explicitly ignored.
+Headless result: host CTest passed 4/4; the approved ignored ISO was accepted as
+revision bytes `47 41 46 45 30 31 00 00`, the DOL was prepared as 918,720 bytes,
+10 FST files were inspected, and the 6,137,393-byte Yaz0 REL was prepared as
+15,640,056 bytes. A fresh Apple host ASan/UBSan build also passed 4/4. Foreground
+result: the same build/tests and boot-source preparation passed; the app
+executable opened a normal AppKit window, created a CAMetalLayer and native
+Metal device/queue/render pass, compiled its local shader, encoded a
+deterministic colored triangle from a 76-byte semantic packet, and completed
+two requested command buffers containing clear/triangle/present before the
+five-second deadline. It emitted the exact completion record, returned exit 0,
+and left no process behind. Generated build/runtime state stayed under ignored
+`local/` paths; `/local/runtime/` is explicitly ignored.
 
 This passes host build, host launch, and a command-buffer-completed Metal
 geometry fixture. It does not prove pixel readback, representative GX semantics,
@@ -237,12 +259,12 @@ could not create the image; no visual-capture claim is made.
 | Source/revision | Passed | ISO SHA-256 plus original DOL/REL SHA-1s. |
 | ac-decomp configure/extract | Passed | Configure and DTK extraction completed. |
 | ac-decomp matching build | Blocked | Wine absent before Metrowerks compilation. |
-| Portable arm64 library | Passed | Native + ASan/UBSan CTest, 8/8 in each lane, plus fixed-width ABI probes. |
+| Portable arm64 library | Passed | Native + ASan/UBSan CTest, 11/11 in each lane, plus fixed-width ABI probes. |
 | Supported-disc data path | Passed | Bounded GCM/DOL/FST parse and expected real REL hash. |
 | Existing Windows build | Not run | Source-compatible branches and `-m32` syntax passed; no Windows execution lane. |
-| Full runtime arm64 compile | In progress | Opt-in audit passes Darwin/DVD/GBI/CARD/libc-memory barriers and stops at the JSystem `SEEK_CUR` enum collision in `pc_stubs_cpp.cpp`; default ILP32 guard remains. |
+| Full runtime arm64 compile | In progress | Fresh opt-in audit reaches `134/4016` and stops at two source-local static GBI pointers in `ac_field_draw.c`; the fail-closed guard and default ILP32 guard remain. |
 | macOS host build | Passed | Native AppKit target and focused host/geometry CTest, 4/4. |
-| macOS host launch | Passed | Direct app process accepted GAFE01, returned 0, and left no surviving process. |
+| macOS host launch | Passed | Direct app process prepared exact GAFE01_00 DOL/REL input, returned 0, and left no surviving process. |
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |
 | Metal geometry fixture | Passed | Two command buffers containing a fixed-width colored triangle completed before the deadline; no pixel-readback or visual claim. |
 | Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop. |

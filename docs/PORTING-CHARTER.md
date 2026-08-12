@@ -62,16 +62,17 @@ fixture are passed. The portable boot-source facade accepts only exact
 `GAFE01_00`, requires one `foresta.rel.szs`, and prepares bounded DOL and REL
 images without writing them to tracked storage. Native and sanitizer portable
 tests (`11/11`), boot-source-backed approved-disc proof, headless host
-validation, and a foreground AppKit process that exits only after two
-geometry-bearing command buffers complete are reproducible from tracked
-scripts. This is command-buffer evidence without pixel readback and is not yet
-representative GX rendering: the launched target remains an honest host shell
-and does not execute the reconstructed game or render a game frame. The full PC
-runtime remains behind its default ILP32 guard; its opt-in Darwin audit now
-passes the corrected fixed-width CARD ABI, POSIX memory-primitive ownership,
-prefixed JSystem stream-enum boundary, and all 58 FixNES objects after replacing
-its non-portable allocation header with the standard C header. It currently
-stops at step `77/3974` because `aBridge_player_check` in
-`src/actor/ac_bridge_a.c` has a bare return in a non-void function.
-Representative rendered-frame, game-frame, input, audio, save/load, iOS
+preparation, native and sanitizer host tests (`4/4`), and a foreground AppKit
+process that exits only after two geometry-bearing command buffers complete are
+reproducible. The host now invokes the same facade and reports the real DOL and
+Yaz0 REL preparation before disposing the buffers. This is preflight and
+command-buffer evidence without pixel readback: the launched target remains an
+honest host shell and does not execute the reconstructed game or render a game
+frame. The full PC runtime remains behind its default ILP32 guard; its opt-in
+Darwin audit now passes the corrected CARD ABI, POSIX and Darwin string-memory
+boundaries, prefixed JSystem stream enums, all 58 FixNES objects, and the bridge
+return contract. A fresh one-job audit stops at step `134/4016` because two
+source-local display-list pointers in `src/actor/ac_field_draw.c` cannot be
+represented in a static 32-bit `Gfx` word on LP64. The fail-closed guard remains
+enabled. Representative GX rendering, game frame, input, audio, save/load, iOS
 Simulator, and physical-device gates remain open.
