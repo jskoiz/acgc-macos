@@ -11,6 +11,7 @@ and Apple renderer have their own evidence.
 - `upstream/ac-decomp` - the matching decompilation project.
 - `local/roms` - local game-disc input. Its contents are ignored by Git.
 - `script/build_and_run.sh` - the single native macOS build/run/verify entrypoint.
+- `script/build_and_run_game.sh` - the actual reconstructed `ac_pc` arm64 build/run/verify entrypoint.
 - `scripts` - reproducible, non-distributing bootstrap checks.
 - `docs` - source audit, measured portability risks, architecture, and gates.
 
@@ -72,6 +73,20 @@ redistribute it or extracted proprietary assets.
   execution, pixel readback, representative GX, or a reconstructed game frame.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
+- The actual reconstructed `ac_pc` target now builds from the owning
+  `c1/macos-host-launch` source branch at `fd91fc7` (`Resolve native pointers in
+  PC audio commands`). The fresh `4008/4008` arm64 link produces a Mach-O
+  `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
+  while TARGET_PC keeps high native pointers in a command-address side table;
+  focused native and ASan/UBSan probes pass.
+- The exact game launcher passes its bounded process gate with
+  `ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof
+  ./script/build_and_run_game.sh --verify`: the actual process remains alive for
+  five seconds, enters `initial_menu_init`, `dvderr_init`, and `sound_initial2`,
+  and emits `[NEOS_OUT]` through at least frame `1861`. The earlier conditional
+  low-pointer `Jac_bcopy` breakpoint does not fire. This is real process-launch
+  evidence only—not a rendered game frame, input, audible-output, save/load, or
+  playability claim.
 
 Re-run the tracked checks from this directory:
 
@@ -81,6 +96,8 @@ Re-run the tracked checks from this directory:
 ./scripts/verify-disc-core.sh
 ./script/build_and_run.sh --headless
 ./script/build_and_run.sh --verify
+ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof ./script/build_and_run_game.sh --build
+ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof ACGC_GAME_VERIFY_SECONDS=5 ./script/build_and_run_game.sh --verify
 ```
 
 The final command runs the AppKit executable directly with a five-second
@@ -88,6 +105,12 @@ deadline, requests two Metal clear/triangle/present command buffers, checks the
 renderer fixture's own completion evidence and exit status, and confirms no
 process remains. It is a native geometry-fixture gate without pixel readback,
 not a representative GX, reconstructed game-frame, or playability claim.
+
+The actual-game `--verify` command is a separate gate. It builds the full
+`ac_pc` target, validates the ignored local disc by SHA-256, symlinks that input
+under the ignored build directory, and proves only that the reconstructed
+process stays alive for the requested interval. Its runtime log remains under
+`local/build/`; it never copies disc bytes into tracked paths.
 
 ## Project record
 

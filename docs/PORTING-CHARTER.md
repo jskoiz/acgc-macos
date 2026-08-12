@@ -58,7 +58,9 @@ remain under ignored local or build paths and are never committed.
 
 As of 2026-08-11, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
-fixture are passed. The portable boot-source facade accepts only exact
+fixture are passed. The actual reconstructed `ac_pc` target also links as a
+native arm64 Mach-O from source branch `c1/macos-host-launch` at `fd91fc7` and
+passes the separate five-second process-launch gate. The portable boot-source facade accepts only exact
 `GAFE01_00`, requires one `foresta.rel.szs`, and prepares bounded DOL and REL
 images without writing them to tracked storage. Native and sanitizer portable
 tests (`13/13`), including native-width PC ARAM transport and real nested
@@ -67,9 +69,11 @@ preparation, native and sanitizer host tests (`4/4`), and a foreground AppKit
 process that exits only after two geometry-bearing command buffers complete are
 reproducible. The host now invokes the same facade and reports the real DOL and
 Yaz0 REL preparation before disposing the buffers. This is preflight and
-command-buffer evidence without pixel readback: the launched target remains an
-honest host shell and does not execute the reconstructed game or render a game
-frame. The full PC runtime remains behind its default ILP32 guard; its opt-in
+command-buffer evidence without pixel readback: the host fixture remains
+separate from the actual game launch, which now reaches `initial_menu_init`,
+`dvderr_init`, `sound_initial2`, and `[NEOS_OUT]` beyond frame `1861` during
+the bounded process gate. That proves process progress, not a game-owned frame
+or playability. The full PC runtime remains behind its default ILP32 guard; its opt-in
 Darwin audit now passes the corrected CARD ABI, POSIX and Darwin string-memory
 boundaries, prefixed JSystem stream enums, all 58 FixNES objects, the bridge
 return contract, runtime-built field culling, Haniwa TLUT, and mailbox flag
@@ -79,5 +83,5 @@ the `gsSPVertex(&mbg_v[0], 8, 0)` command in `src/actor/ac_mbg.c` cannot encode
 a native pointer in a static 32-bit `Gfx` word on LP64. A bounded keep-going
 inventory at the preceding commit observed 500 static-GBI translation-unit
 failures and three independent C/layout blockers. The fail-closed guard remains
-enabled. Representative GX rendering, game frame, input, audio, save/load, iOS
-Simulator, and physical-device gates remain open.
+enabled. Representative GX rendering, game frame, input, audio-output,
+save/load, iOS Simulator, and physical-device gates remain open.
