@@ -30,14 +30,20 @@ redistribute it or extracted proprietary assets.
   generational GBI reference registry, checked 64-bit CISO reads, bounded
   GCM/DOL/FST/REL parsing, typed LP64 DVD callers backed by an owner-keyed host
   side table, fixed-layout DVD/CARD wire probes, and width-correct `emu64`
-  pointer resolution with stale-reference rejection.
+  pointer resolution with stale-reference rejection. The public CARD leaf ABI
+  and its owning implementations now use the existing fixed-width `s32`/`u32`
+  and `CARDCallback` contracts instead of LP64 host `long`.
 - The portable targets pass native arm64 and ASan/UBSan CTest (`6/6`). A tracked
   proof command validates the approved local disc, visits its FST, decodes its
   Yaz0 REL, reproduces the expected SHA-1, and removes all temporary output.
+  C and C++ CARD ABI probes also compile natively and with explicit `-m32`
+  syntax checks.
 - The opt-in Darwin compile audit now passes the platform-image, public DVD,
-  and first GBI pointer barriers. Its next deterministic failure is a set of 12
-  legacy CARD declarations that use host `long` where the public ABI uses
-  32-bit `s32`/`u32`; the default full-runtime ILP32 rejection remains intact.
+  first GBI pointer, and CARD fixed-width barriers. Its next deterministic
+  failure is the `libultra.h` ownership boundary reached from `pc_audio.c`:
+  project declarations of `bcmp`, `bcopy`, and `bzero` conflict with Darwin
+  libc declarations and fortified macros. The default full-runtime ILP32
+  rejection remains intact.
 - A native AppKit/Metal host now builds, validates the exact `GAFE01` disc,
   resolves scoped Application Support and cache paths, opens a normal
   foreground window, and exits 0 only after two requested Metal command buffers

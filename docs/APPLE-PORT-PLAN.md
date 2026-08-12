@@ -89,6 +89,9 @@ copy EFB, flush, and destroy. Presentation is deliberately a host operation.
   host-pointer boundaries, while keeping GBI words and opaque references
   32-bit. **Passed for focused live-above-4-GiB and stale/malformed-reference
   tests; static display-list relocation remains a separate frontier.**
+- Replace legacy CARD public/internal `long` scalars and callback spellings with
+  the existing fixed-width contract. **Passed in native C/C++ probes, explicit
+  ILP32 syntax probes, and the opt-in Darwin compile audit.**
 
 Exit: representative portable libraries compile and test on arm64 without SDL,
 OpenGL, or a 32-bit process. This does not require launching the game.
@@ -139,19 +142,18 @@ distribution, and App Store work require fresh authorization.
 
 Continue in separately reviewable ACGC-PC-Port branches:
 
-1. Replace the legacy CARD leaf-header and implementation uses of
-   `long`/`unsigned long` with their existing fixed-width `s32`/`u32` public
-   contract, prove C/C++ and ILP32 compatibility, and rerun the Darwin audit to
-   expose the next single blocker.
-2. Classify the remaining static GBI pointer initializers as relocatable guest
+1. Resolve `libultra.h` and PC-stub ownership for `bcmp`, `bcopy`, and `bzero`
+   so Apple/POSIX hosts use their system contract, Windows retains one correct
+   owner, and the original non-PC definitions remain unchanged.
+2. Advance the renderer-neutral fixture from clear/present to deterministic
+   geometry with command-buffer completion evidence, without claiming pixel
+   readback or a game frame.
+3. Add an exact-`GAFE01_00`, bounded boot-source facade that prepares DOL/REL
+   images in memory without persisting proprietary output, then connect it to
+   host-owned runtime state.
+4. Classify the remaining static GBI pointer initializers as relocatable guest
    references or host-owned resources. Do not truncate or use an unsafe
    LP64-only initializer bypass.
-3. Define the smallest renderer-neutral frame contract needed between GX
-   semantics and the proven AppKit/CAMetalLayer host, then advance fixtures from
-   clear/present to geometry, texture, TEV, and EFB behavior.
-4. Attach bounded disc/FST services and the portable registries to a boot-core
-   facade, with explicit failure states, before selecting reconstructed game
-   translation units for a first identifiable game-frame attempt.
 
 Do not silently remove the default full-runtime ILP32 guard or add an iOS target.
 The diagnostic arm64 build must remain opt-in until each exposed pointer/layout

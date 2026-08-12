@@ -106,7 +106,7 @@ touch/controller mapping without forking game logic.
 
 ## Completed portable-foundation slices
 
-The reviewed `pc/portable` library and focused C/C++ probes now exercise five
+The reviewed `pc/portable` library and focused C/C++ probes now exercise six
 dependency-light boundaries:
 
 - fixed-width endian loads and a bounded Yaz0 decoder;
@@ -117,7 +117,9 @@ dependency-light boundaries:
   malformed reserved handles;
 - callback-driven, bounded GCM/DOL/FST parsing and raw/Yaz0 REL extraction;
 - owner-keyed DVD host state, fixed DVD/CARD wire probes, and typed public DVD
-  ABI behavior on both LP64 and ILP32.
+  ABI behavior on both LP64 and ILP32;
+- fixed-width public/internal CARD signatures and callbacks without changing
+  the fixed CARD file/directory layouts.
 
 Native arm64 and ASan/UBSan CTest pass all six registered test executables. The
 approved ignored disc also passes the tracked bounded parser and reproduces the
@@ -136,8 +138,9 @@ current-runtime contract, not a future asynchronous renderer lifetime design.
 This evidence still does not make the full runtime 64-bit. The CMake and header
 guards remain intentional. The opt-in Darwin audit has passed the earlier
 platform-image, TwoHeadArena, checked-CISO, public-DVD, and first GBI
-pointer-width barriers; it now stops at 12 CARD leaf-header declarations that
-use LP64 `long` against fixed-width public signatures. CARD control/save state,
+pointer-width barriers. It now also compiles the corrected CARD leaf/owning ABI
+and stops in `pc_audio.c`, where project `bcmp`/`bcopy`/`bzero` declarations
+conflict with Darwin libc declarations and fortified macros. CARD host state,
 static display-list relocation, and further pointer domains remain open.
 
 A separate native AppKit host now validates the supported disc and proves two

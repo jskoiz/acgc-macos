@@ -55,24 +55,26 @@ The tracked diagnostic-only Darwin audit is explicit and opt-in:
 
 ```sh
 cmake -S upstream/ACGC-PC-Port/pc \
-  -B /tmp/codex-acgc-darwin-audit-f9d1 -G Ninja \
+  -B /tmp/codex-acgc-darwin-audit-card-745a3c2 -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug \
   -DPC_DARWIN_COMPILE_AUDIT=ON
-cmake --build /tmp/codex-acgc-darwin-audit-f9d1 --parallel 8
+cmake --build /tmp/codex-acgc-darwin-audit-card-745a3c2 --parallel 1
 ```
 
 Configure passed with arm64 SDL2 2.32.10 and the macOS OpenGL framework. The
 Darwin host-image split, typed DVD implementation, and first GBI pointer-width
-barrier compiled. The build then stopped in `Padclamp.c`, through `dolphin.h`,
-at 12 CARD declaration conflicts: public `s32`/`u32` signatures disagree with
-legacy leaf-header `long`/`unsigned long` signatures on LP64. This is
-compile-frontier evidence, not authority to weaken the default guard and not a
-runtime result.
+barrier compiled. `Padclamp.c` and the CARD boundary now compile after the 12
+public/owning signatures were made fixed-width. The single-job build then
+stopped deterministically at step 20 of 4,009 in `pc_audio.c`, through
+`libultra.h`: `bcmp` conflicts with Darwin's const/`size_t` declaration, while
+`bcopy` and `bzero` collide with Darwin fortified macros. This is compile-
+frontier evidence, not authority to weaken the default guard and not a runtime
+result.
 
 ## Portable core
 
 Owning integration branch: `c1/macos-host-launch`; local commit:
-`f9d1a26d5f19e05a17e4236b3dfabaf5e087409e`.
+`745a3c2f10c58f81ed14a979f6943719ce533826`.
 
 The reviewed source lineage is:
 
@@ -100,6 +102,8 @@ The reviewed source lineage is:
   clear/present fixture with bounded completion and failure evidence.
 - `f9d1a26d5f19e05a17e4236b3dfabaf5e087409e` - widened resolved `emu64` host
   pointers, guarded pointer consumers, and retained 32-bit GBI command words.
+- `745a3c2f10c58f81ed14a979f6943719ce533826` - made the public and owning CARD
+  scalar/callback declarations fixed-width and added C/C++ ABI probes.
 
 ```sh
 ./scripts/verify-portable-core.sh
@@ -108,7 +112,8 @@ The reviewed source lineage is:
 Result: AppleClang arm64 configure/build passed with `-Wall -Wextra -Wpedantic`;
 CTest passed 6/6 (`acgc_portable_tests`, `acgc_gbi_runtime_tests`,
 `acgc_emu64_seg2k0_tests`, `acgc_dvd_host_state_tests`, and the C/C++ typed DVD
-public-ABI tests). The build also compiled the fixed-width PC ABI probe.
+public-ABI tests). The build also compiled the fixed-width PC and CARD C/C++
+ABI probes.
 
 The additional sanitizer lane used:
 
@@ -151,7 +156,10 @@ The combined synthetic suites now cover:
   contracts on native arm64, plus C/C++ and `-m32` syntax probes;
 - direct `emu64::seg2k0()` resolution of a live native address above 4 GiB,
   stale/malformed-handle rejection, width-correct dynamic display-list stacks,
-  and null guards at resolved pointer consumers.
+  and null guards at resolved pointer consumers;
+- public and internal CARD signatures expressed as `s32`/`u32`/`BOOL` plus
+  `CARDCallback`, with the fixed CARD records unchanged and C/C++ native and
+  ILP32 syntax probes passing.
 
 The first integrated commit was independently reviewed. The review reproduced
 six defects: an above-4-GiB wrapper truncation, missing registry reclamation,
@@ -179,8 +187,8 @@ Clang and the installed `gcc` driver (Apple Clang on this host) also passed
 the revised DVD/CARD shims. A 32-bit executable cannot be linked on this arm64
 macOS host. The full CMake project still stops at the unchanged ILP32 guard by
 default. The tracked opt-in Darwin audit now passes the earlier platform-header,
-DVD, and GBI barriers and exposes the 12 fixed-width CARD declaration conflicts
-next.
+DVD, GBI, and CARD barriers and exposes the Darwin `bcmp`/`bcopy`/`bzero`
+declaration and ownership collision next.
 
 ## Native macOS host build and launch
 
@@ -221,7 +229,7 @@ attempted, but macOS `screencapture` returned the error
 | Portable arm64 library | Passed | Native + ASan/UBSan CTest, 6/6 in each lane, plus fixed-width ABI probe. |
 | Supported-disc data path | Passed | Bounded GCM/DOL/FST parse and expected real REL hash. |
 | Existing Windows build | Not run | Source-compatible branches and `-m32` syntax passed; no Windows execution lane. |
-| Full runtime arm64 compile | In progress | Opt-in audit passes Darwin/DVD/GBI barriers and stops at 12 CARD fixed-width declaration conflicts; default ILP32 guard remains. |
+| Full runtime arm64 compile | In progress | Opt-in audit passes Darwin/DVD/GBI/CARD barriers and stops at the libultra/Darwin libc memory-primitive collision in `pc_audio.c`; default ILP32 guard remains. |
 | macOS host build | Passed | Native AppKit target and focused CTest, 2/2. |
 | macOS host launch | Passed | Direct app process accepted GAFE01, returned 0, and left no surviving process. |
 | Metal clear/present | Passed | Two requested command buffers completed and presented before the bounded deadline; screenshot capture was unavailable. |
