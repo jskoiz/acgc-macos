@@ -1,0 +1,10 @@
+.DS_Store
+
+# Copyrighted/local game inputs must never enter Git history.
+/local/roms/*
+!/local/roms/.gitkeep
+
+# Local build and analysis outputs.
+/local/build/
+/local/cache/
+/local/logs/
