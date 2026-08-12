@@ -1,18 +1,9 @@
-#include "acgc/disc.h"
+#include "acgc/boot_source.h"
 
 #include <inttypes.h>
 #include <stdint.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <sys/types.h>
-
-typedef struct DiscEvidence {
-    uint32_t file_count;
-    uint32_t rel_count;
-    uint32_t rel_offset;
-    uint32_t rel_size;
-} DiscEvidence;
 
 static int read_disc(
     void* context,
@@ -24,23 +15,6 @@ static int read_disc(
 
     return fseeko(disc, (off_t)offset, SEEK_SET) == 0 &&
            fread(destination, 1, size, disc) == size;
-}
-
-static int visit_file(
-    void* context,
-    const char* path,
-    uint32_t offset,
-    uint32_t size
-) {
-    DiscEvidence* evidence = (DiscEvidence*)context;
-
-    evidence->file_count++;
-    if (strcmp(path, "foresta.rel.szs") == 0) {
-        evidence->rel_count++;
-        evidence->rel_offset = offset;
-        evidence->rel_size = size;
-    }
-    return 1;
 }
 
 static int write_file(const char* path, const uint8_t* data, uint32_t size) {
@@ -61,13 +35,8 @@ int main(int argc, char** argv) {
     FILE* disc;
     off_t disc_size;
     AcgcDiscReader reader;
-    AcgcGcmInfo info;
-    AcgcDiscStatus status;
-    DiscEvidence evidence = {0};
-    uint32_t dol_size = 0;
-    uint8_t* rel_data = NULL;
-    uint32_t rel_size = 0;
-    AcgcRelFormat rel_format = ACGC_REL_RAW;
+    AcgcBootSourceImages images = {0};
+    AcgcBootSourceStatus status;
 
     if (argc != 3) {
         fprintf(stderr, "usage: verify_disc_core DISC OUTPUT_REL\n");
@@ -94,53 +63,35 @@ int main(int argc, char** argv) {
     reader.size = (uint32_t)disc_size;
     reader.read = read_disc;
 
-    status = acgc_gcm_parse(&reader, &info);
-    if (status == ACGC_DISC_OK) {
-        status = acgc_dol_get_size(&reader, info.dol_offset, &dol_size);
-    }
-    if (status == ACGC_DISC_OK) {
-        status = acgc_fst_visit(&reader, &info, visit_file, &evidence);
-    }
-    if (status == ACGC_DISC_OK && evidence.rel_count == 1) {
-        status = acgc_rel_extract(
-            &reader,
-            evidence.rel_offset,
-            evidence.rel_size,
-            NULL,
-            &rel_data,
-            &rel_size,
-            &rel_format
-        );
-    }
+    status = acgc_boot_source_prepare(&reader, NULL, &images);
     fclose(disc);
 
-    if (status != ACGC_DISC_OK || evidence.rel_count != 1) {
+    if (status != ACGC_BOOT_SOURCE_OK) {
         fprintf(
             stderr,
-            "disc verification failed: %s; REL entries=%" PRIu32 "\n",
-            acgc_disc_status_string(status),
-            evidence.rel_count
+            "boot-source verification failed: %s\n",
+            acgc_boot_source_status_string(status)
         );
-        free(rel_data);
+        acgc_boot_source_dispose(&images);
         return 1;
     }
-    if (!write_file(argv[2], rel_data, rel_size)) {
+    if (!write_file(argv[2], images.rel_data, images.rel_size)) {
         fprintf(stderr, "unable to write temporary REL evidence\n");
-        free(rel_data);
+        acgc_boot_source_dispose(&images);
         return 1;
     }
-    free(rel_data);
 
     printf(
         "gcm=ok dol_size=%" PRIu32 " fst_files=%" PRIu32
         " rel_entries=%" PRIu32 " rel_input=%" PRIu32
         " rel_output=%" PRIu32 " rel_format=%s\n",
-        dol_size,
-        evidence.file_count,
-        evidence.rel_count,
-        evidence.rel_size,
-        rel_size,
-        rel_format == ACGC_REL_YAZ0 ? "yaz0" : "raw"
+        images.manifest.dol_size,
+        images.manifest.fst_file_count,
+        UINT32_C(1),
+        images.manifest.rel_input_size,
+        images.rel_size,
+        images.rel_format == ACGC_REL_YAZ0 ? "yaz0" : "raw"
     );
+    acgc_boot_source_dispose(&images);
     return 0;
 }

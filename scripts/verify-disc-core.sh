@@ -46,6 +46,7 @@ xcrun clang \
     -Wall -Wextra -Wpedantic -Werror \
     -I "$portable_root/include" \
     "$probe_source" \
+    "$portable_root/src/boot_source.c" \
     "$portable_root/src/disc.c" \
     "$portable_root/src/yaz0.c" \
     -o "$probe_binary"

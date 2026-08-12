@@ -32,18 +32,23 @@ redistribute it or extracted proprietary assets.
   side table, fixed-layout DVD/CARD wire probes, and width-correct `emu64`
   pointer resolution with stale-reference rejection. The public CARD leaf ABI
   and its owning implementations now use the existing fixed-width `s32`/`u32`
-  and `CARDCallback` contracts instead of LP64 host `long`.
-- The portable targets pass native arm64 and ASan/UBSan CTest (`8/8`). A tracked
-  proof command validates the approved local disc, visits its FST, decodes its
-  Yaz0 REL, reproduces the expected SHA-1, and removes all temporary output.
+  and `CARDCallback` contracts instead of LP64 host `long`. A host-owned boot
+  source facade now accepts only the exact eight-byte `GAFE01_00` revision,
+  requires one `foresta.rel.szs`, enforces DOL/REL allocation ceilings, and
+  prepares the DOL plus raw or Yaz0 REL entirely in memory.
+- The portable targets pass native arm64 and ASan/UBSan CTest (`11/11`). A
+  tracked proof command drives the boot-source facade against the approved
+  local disc, validates its exact revision and bounded DOL/FST/REL metadata,
+  reproduces the expected decoded REL SHA-1, and removes all temporary output.
   C and C++ CARD ABI probes also compile natively and with explicit `-m32`
-  syntax checks.
+  syntax checks; a JSystem probe proves that its prefixed stream enums coexist
+  with the ordinary stdio `SEEK_*` and `EOF` macros.
 - The opt-in Darwin compile audit now passes the platform-image, public DVD,
   first GBI pointer, CARD fixed-width, and POSIX memory-primitive ownership
-  barriers. Its next deterministic failure is in `pc_stubs_cpp.cpp`, where a
-  restored stdio `SEEK_CUR` macro is an `int` rather than the JSystem
-  `JSUStreamSeekFrom` enum. The default full-runtime ILP32 rejection remains
-  intact.
+  barriers as well as the JSystem stream-enum collision. Its next deterministic
+  failure is step `43/4016` in `pc/lib/fixnes/apu.c`, whose unconditional
+  `<malloc.h>` include is unavailable on Darwin. The default full-runtime ILP32
+  rejection remains intact.
 - A native AppKit/Metal host now builds, validates the exact `GAFE01` disc,
   resolves scoped Application Support and cache paths, opens a normal
   foreground window, and exits 0 only after two requested Metal command buffers

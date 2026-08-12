@@ -58,15 +58,18 @@ remain under ignored local or build paths and are never committed.
 
 As of 2026-08-11, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
-fixture are passed. Native and sanitizer portable tests, approved-disc
-GCM/DOL/FST/REL proof, headless host validation, and a foreground AppKit process
-that exits only after two geometry-bearing command buffers complete are
-reproducible from tracked scripts. This is command-buffer evidence without pixel
-readback and is not yet representative GX rendering: the launched target remains
-an honest host shell and does not execute the reconstructed game or render a
-game frame. The full PC runtime remains behind its default ILP32
-guard; its opt-in Darwin audit now passes the corrected fixed-width CARD ABI and
-the corrected POSIX memory-primitive ownership boundary, and currently stops at
-a JSystem stream enum versus stdio macro collision in `pc_stubs_cpp.cpp`.
-Representative rendered-frame, game-frame, input, audio, save/load, iOS
-Simulator, and physical-device gates remain open.
+fixture are passed. The portable boot-source facade accepts only exact
+`GAFE01_00`, requires one `foresta.rel.szs`, and prepares bounded DOL and REL
+images without writing them to tracked storage. Native and sanitizer portable
+tests (`11/11`), boot-source-backed approved-disc proof, headless host
+validation, and a foreground AppKit process that exits only after two
+geometry-bearing command buffers complete are reproducible from tracked
+scripts. This is command-buffer evidence without pixel readback and is not yet
+representative GX rendering: the launched target remains an honest host shell
+and does not execute the reconstructed game or render a game frame. The full PC
+runtime remains behind its default ILP32 guard; its opt-in Darwin audit now
+passes the corrected fixed-width CARD ABI, POSIX memory-primitive ownership,
+and prefixed JSystem stream-enum boundary. It currently stops at step `43/4016`
+because `pc/lib/fixnes/apu.c` unconditionally includes the unavailable Darwin
+header `<malloc.h>`. Representative rendered-frame, game-frame, input, audio,
+save/load, iOS Simulator, and physical-device gates remain open.
