@@ -11,7 +11,7 @@ readonly APP_BINARY="${APP_BUNDLE}/Contents/MacOS/${APP_NAME}"
 readonly CLI_BINARY="${BUILD_DIR}/${APP_NAME}_cli"
 readonly DISC_PATH="${ACGC_DISC_PATH:-${ROOT_DIR}/local/roms/Animal Crossing (USA).iso}"
 readonly VERIFY_HOME="${ACGC_VERIFY_HOME:-${ROOT_DIR}/local/runtime/macos-host-verify-home}"
-readonly VERIFY_LOG="${VERIFY_HOME}/metal-frame-verify.log"
+readonly VERIFY_LOG="${VERIFY_HOME}/metal-geometry-verify.log"
 
 usage() {
     cat <<'EOF'
@@ -20,7 +20,8 @@ Usage: ./script/build_and_run.sh [--run|--verify|--headless|--debug|--logs|--tel
 Builds and tests the native AppKit host before the selected action.
 
   --run        Launch a new foreground app instance (default).
-  --verify     Prove two completed Metal clear/present frames and a clean exit.
+  --verify     Prove two command-buffer-completed Metal triangle fixture frames
+               and a clean exit.
   --headless   Validate the explicit disc without opening a window.
   --debug      Start the app executable under LLDB.
   --logs       Launch the app, then stream its macOS process logs.
@@ -115,11 +116,11 @@ case "${mode}" in
             exit 1
         fi
         if ! /usr/bin/grep -Fq \
-                'Metal clear/present verification PASSED: 2 completed frames' \
+                'Metal geometry fixture command-buffer verification PASSED: 2 completed command buffers containing clear/triangle/present' \
                 "${VERIFY_LOG}"; then
             printf '%s\n' 'Metal verification failed: completion evidence was not emitted.' >&2
             exit 1
         fi
-        printf '%s\n' 'Metal verification passed: two frames completed and the app exited cleanly.'
+        printf '%s\n' 'Metal geometry verification passed: two command buffers containing clear/triangle/present completed and the app exited cleanly.'
         ;;
 esac

@@ -105,7 +105,7 @@ OpenGL, or a 32-bit process. This does not require launching the game.
 
 Exit: host-launch evidence, with rendering still allowed to be absent.
 
-### M3: Metal renderer — clear/present fixture passed
+### M3: Metal renderer — clear/present and geometry fixtures passed
 
 - Create a native CAMetalLayer, device, queue, command buffer, render pass, and
   presentation loop with bounded completion/failure evidence. **Passed for a
@@ -115,6 +115,9 @@ Exit: host-launch evidence, with rendering still allowed to be absent.
 - Prove clear/present, then geometry, transforms, vertex formats, indexed draws,
   texture formats/palettes, sampler modes, blending/depth/alpha, representative
   TEV combinations, and EFB copy/readback behavior in small fixtures.
+  **Clear/present and one fixed-width non-indexed colored-triangle packet now
+  have command-buffer completion evidence. Pixel readback, GX-derived geometry,
+  transforms, and all later fixture classes remain open.**
 - Prove deferred-batch drain and frame presentation separately, and add a
   directed CI14x2 fixture before claiming complete documented texture coverage.
 - Retain the current OpenGL backend as the Windows regression oracle.

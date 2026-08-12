@@ -74,7 +74,7 @@ result.
 ## Portable core
 
 Owning integration branch: `c1/macos-host-launch`; local commit:
-`745a3c2f10c58f81ed14a979f6943719ce533826`.
+`4b08f6709ad8ec72cc996f5aae6f7db4b31a99e3`.
 
 The reviewed source lineage is:
 
@@ -104,6 +104,8 @@ The reviewed source lineage is:
   pointers, guarded pointer consumers, and retained 32-bit GBI command words.
 - `745a3c2f10c58f81ed14a979f6943719ce533826` - made the public and owning CARD
   scalar/callback declarations fixed-width and added C/C++ ABI probes.
+- `4b08f6709ad8ec72cc996f5aae6f7db4b31a99e3` - added a fixed-width,
+  pointer-free geometry packet and native Metal triangle fixture.
 
 ```sh
 ./scripts/verify-portable-core.sh
@@ -204,20 +206,23 @@ cache directories.
 ./script/build_and_run.sh --verify
 ```
 
-Headless result: host CTest passed 2/2, the approved ignored ISO was accepted,
+Headless result: host CTest passed 4/4, including C and C++ geometry-contract
+tests; the approved ignored ISO was accepted,
 the DOL size was 918,720 bytes, and 10 FST files were visited. Foreground result:
 the same build/tests passed; the app executable opened a normal AppKit window,
-created a CAMetalLayer and native Metal device/queue/render pass, completed and
-presented two requested deterministic clear frames before the five-second
-deadline, emitted the exact completion record, returned exit 0, and left no
-process behind. Generated build/runtime state stayed under ignored `local/`
-paths; `/local/runtime/` is explicitly ignored.
+created a CAMetalLayer and native Metal device/queue/render pass, compiled its
+local shader, encoded a deterministic colored triangle from a 76-byte semantic
+packet, and completed two requested command buffers containing
+clear/triangle/present before the five-second deadline. It emitted the exact
+completion record, returned exit 0, and left no process behind. Generated
+build/runtime state stayed under ignored `local/` paths; `/local/runtime/` is
+explicitly ignored.
 
-This passes host build, host launch, and the first Metal clear/present fixture.
-It does not yet prove representative GX semantics, an identifiable game frame,
-input, audio, save/load, or playability. A targeted window-only screenshot was
-attempted, but macOS `screencapture` returned the error
-`could not create image from window`; no visual-capture claim is made.
+This passes host build, host launch, and a command-buffer-completed Metal
+geometry fixture. It does not prove pixel readback, representative GX semantics,
+an identifiable game frame, input, audio, save/load, or playability. The earlier
+targeted window-only screenshot attempt failed because macOS `screencapture`
+could not create the image; no visual-capture claim is made.
 
 ## Proof ledger
 
@@ -230,9 +235,10 @@ attempted, but macOS `screencapture` returned the error
 | Supported-disc data path | Passed | Bounded GCM/DOL/FST parse and expected real REL hash. |
 | Existing Windows build | Not run | Source-compatible branches and `-m32` syntax passed; no Windows execution lane. |
 | Full runtime arm64 compile | In progress | Opt-in audit passes Darwin/DVD/GBI/CARD barriers and stops at the libultra/Darwin libc memory-primitive collision in `pc_audio.c`; default ILP32 guard remains. |
-| macOS host build | Passed | Native AppKit target and focused CTest, 2/2. |
+| macOS host build | Passed | Native AppKit target and focused host/geometry CTest, 4/4. |
 | macOS host launch | Passed | Direct app process accepted GAFE01, returned 0, and left no surviving process. |
-| Metal clear/present | Passed | Two requested command buffers completed and presented before the bounded deadline; screenshot capture was unavailable. |
+| Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |
+| Metal geometry fixture | Passed | Two command buffers containing a fixed-width colored triangle completed before the deadline; no pixel-readback or visual claim. |
 | Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop. |
 | Input/audio/save | Not reached | Adapters are not wired to a running game. |
 | iOS simulator/device | Not reached | Begins after shared macOS proof. |

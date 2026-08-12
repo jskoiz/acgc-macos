@@ -47,10 +47,12 @@ redistribute it or extracted proprietary assets.
 - A native AppKit/Metal host now builds, validates the exact `GAFE01` disc,
   resolves scoped Application Support and cache paths, opens a normal
   foreground window, and exits 0 only after two requested Metal command buffers
-  complete and present. This passes host launch and a deterministic Metal
-  clear/present fixture, not a reconstructed game frame: input, audio, save/load,
-  and playability remain open. iOS remains gated behind the shared macOS core
-  and renderer.
+  containing clear/triangle/present work complete. The triangle comes from a
+  fixed-width, pointer-free geometry packet consumed by an Apple-owned Metal
+  pipeline. This passes host launch and a deterministic command-buffer-completed
+  geometry fixture, not pixel readback, representative GX, or a reconstructed
+  game frame: input, audio, save/load, and playability remain open. iOS remains
+  gated behind the shared macOS core and renderer.
 
 Re-run the tracked checks from this directory:
 
@@ -63,10 +65,10 @@ Re-run the tracked checks from this directory:
 ```
 
 The final command runs the AppKit executable directly with a five-second
-deadline, requests two Metal clear/present frames, checks the renderer's own
-completion evidence and exit status, and confirms no process remains. It is a
-native renderer-fixture gate, not a reconstructed game frame or playability
-claim.
+deadline, requests two Metal clear/triangle/present command buffers, checks the
+renderer fixture's own completion evidence and exit status, and confirms no
+process remains. It is a native geometry-fixture gate without pixel readback,
+not a representative GX, reconstructed game-frame, or playability claim.
 
 ## Project record
 

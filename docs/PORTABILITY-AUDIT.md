@@ -144,9 +144,12 @@ conflict with Darwin libc declarations and fortified macros. CARD host state,
 static display-list relocation, and further pointer domains remain open.
 
 A separate native AppKit host now validates the supported disc and proves two
-completed CAMetalLayer clear/present frames. It is not connected to GX semantics
-or the reconstructed game loop; input, audio, save/load, and game-frame proof do
-not exist yet.
+completed command buffers containing CAMetalLayer clear, a deterministic
+fixed-width colored-triangle packet, and presentation submission. Metal objects
+remain Apple-owned and no native pointer enters the packet. This is not pixel
+readback and is not connected to representative GX semantics or the
+reconstructed game loop; input, audio, save/load, and game-frame proof do not
+exist yet.
 
 The real-disc proof covers the supported plain ISO/GCM data path. CISO geometry
 and sparse/physical bounds are synthetic-test evidence; full-PC linking, game
