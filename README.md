@@ -21,8 +21,9 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `a8f3a8f` (`Rename reserved Metal shader local`), on
-  top of `59aa655` (`Test PC padmgr frame guard`) and `54b840c`
+  `c1/macos-host-launch` at `26da235` (`Add bounded GX v2 semantic packet
+  fixture`), on top of `a8f3a8f` (`Rename reserved Metal shader local`),
+  `59aa655` (`Test PC padmgr frame guard`) and `54b840c`
   (`Add bounded Apple Metal packet sink`),
   on top of `f4cb491` (`Register Apple GX packet consumer bridge`),
   on top of `aea3515` (`Capture live graph target spans in emu64`),
@@ -77,6 +78,11 @@ redistribute it or extracted proprietary assets.
   channel, texture-generator, two-stage TEV, texture/TLUT, sampler, and
   versioned-state fields with pointer-free handles. It remains a design map,
   not a renderer rewrite or live-frame proof. See [GX v2 packet map](docs/evidence/GX-V2-PACKET-CONTRACT-MAP-2026-08-13.md).
+- The bounded GX v2 packet implementation is integrated at `26da235`. Its
+  fixed-width builder, validator, and fail-closed CPU fixtures pass native and
+  ASan/UBSan focused CTest `3/3` each. The existing Apple callback remains
+  v1-only, so this is not live callback, Metal encode/readback/pixel, or
+  playability proof. See [GX v2 implementation evidence](docs/evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
@@ -141,9 +147,9 @@ redistribute it or extracted proprietary assets.
   cleanup`) and the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
   same source history. That fresh arm64 link produced a Mach-O
-  `AnimalCrossing` executable. The current source tip is `a8f3a8f`; its Apple
-  sink shader fix and input-fixture changes have focused verification but have not yet had another full
-  `ac_pc` link. Its native audio command records remain 8 bytes,
+  `AnimalCrossing` executable. The current source tip is `26da235`; its GX v2
+  packet fixture, Apple sink shader fix, and input-fixture changes have focused
+  verification but have not yet had another full `ac_pc` link. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   the compact bank-28 tail and MEDIUM_CART-to-native-ARAM mapping have focused
   wire fixtures, and native plus ASan/UBSan probes pass.
