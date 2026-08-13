@@ -145,7 +145,10 @@ frame. Neither is a playability claim.
   boundary and synthetic mixer-to-callback PCM probe now pass focused tests;
   running-game input, device/audible output, and NEOS-generated nonzero PCM
   remain open. The SDL/CoreAudio device boundary is measured (32 kHz S16
-  stereo, 512-sample callbacks, zero underruns/overruns). The umbrella-owned
+  stereo, 512-sample callbacks, zero underruns/overruns) in the earlier
+  boundary probe; the follow-up real-device open is blocked by the current
+  CoreAudio environment (`kAudioDevicePropertyDeviceIsAlive`, error
+  `560947818`, declared skip `77`). The umbrella-owned
   filesystem adapter has a standalone macOS role-root and atomic opaque-payload
   fixture, including durability fences and corruption rejection. The Save_t/GCI
   codec probe passes canonical-padding checks but exposes a two-byte allocation

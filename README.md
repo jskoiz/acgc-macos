@@ -115,7 +115,10 @@ redistribute it or extracted proprietary assets.
 - The NEOS/RSP provenance probe (`2736838`) drives four real `A_INTERLEAVE`
   batches through the resampler, triple buffer, DAC handoff, and callback; it
   observes 1,118 nonzero samples natively and under ASan. Asset-driven
-  `NEOS_OUT`, CoreAudio output, and human-audible game audio remain open.
+  `NEOS_OUT`, CoreAudio output, and human-audible game audio remain open. The
+  follow-up real SDL/CoreAudio probe returns its declared skip `77` because
+  `kAudioDevicePropertyDeviceIsAlive` reports error `560947818`; no device
+  callback or audible-output claim is made.
 - The renderer-neutral GX packet contract has native, Apple-entrypoint, and
   ASan/UBSan focused passes, while the Metal geometry/state fixture passes its
   CPU contract and existing geometry tests. The offscreen Metal test is skipped
