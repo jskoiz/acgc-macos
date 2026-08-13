@@ -200,6 +200,15 @@ redistribute it or extracted proprietary assets.
   to emit a fresh game-owned target record; it does not claim a complete list,
   Metal/pixel output, input, audio, save/load, device, or playability. See
   [opt-in live target observer evidence](docs/evidence/LIVE-TARGET-OBSERVER-2026-08-13.md).
+- One fresh correctly rooted runtime at the integrated source emitted the new
+  game-owned `[GRAPH_TARGET_CAPTURE]` record: `F0002000`, capacity `1024`,
+  classification `INDIRECT`, and bounded words containing `F0002001`. The run
+  reached LOGO action 3 and NEOS, then was ended by the planned TERM/grace
+  boundary without KILL. The full link exited 0 with a terminal `[4012/4013]`
+  progress line (no literal 4013/4013 line), and GX was not instrumented in
+  this launch. This is target-continuation evidence only; complete-list,
+  GX/Metal, pixels, input, audio, save/load, device, clean-exit, and playability
+  gates remain open. See [live target observer runtime evidence](docs/evidence/LIVE-TARGET-OBSERVER-RUNTIME-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

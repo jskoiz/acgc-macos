@@ -185,3 +185,12 @@ combined ASan/UBSan (`1/1` each). This is still source/fixture evidence; a fresh
 serialized full link and LLDB launch are required before claiming a live target
 record, complete continuation, Metal output, pixels, or playability. See
 [opt-in live target observer evidence](evidence/LIVE-TARGET-OBSERVER-2026-08-13.md).
+One fresh correctly rooted runtime at the integrated source then emitted the
+new game-owned target record for `F0002000`: capacity `1024`, classification
+`INDIRECT`, no local terminator, and bounded words containing `F0002001`. The
+run reached LOGO action 3 and NEOS before the planned TERM/grace boundary. Its
+full link exited `0` with a terminal `[4012/4013]` progress line rather than a
+literal `[4013/4013]` line; GX was not instrumented and remains unobserved.
+This closes the target-observer reachability gate only. Complete continuation,
+GX/Metal, pixel, input, audio, save/load, device, clean-exit, and playability
+gates remain open; see [live target observer runtime evidence](evidence/LIVE-TARGET-OBSERVER-RUNTIME-2026-08-13.md).

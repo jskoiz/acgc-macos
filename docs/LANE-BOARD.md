@@ -35,9 +35,8 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: one durable Luna Max/max verification worker is
-active alongside this integration owner. The authoritative PC source is
-`36910c8` on
+Current maintenance state: no durable production worker is active alongside
+this integration owner. The authoritative PC source is `36910c8` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
 `.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
@@ -51,9 +50,11 @@ command-setting blocker. Lane 65 is complete/archived with live target and GX
 boundary evidence. Lane 66 is complete/archived with its source crosswalk and
 focused reruns recorded below. Lane 67 is complete/archived with the integrated
 opt-in target observer and focused native/ASan/UBSan evidence; its duplicate
-setup was stopped before edits. Lane 68 is the sole active runtime successor,
-running one serialized full link and one correctly rooted LLDB launch to seek a
-fresh game-owned target record. No other filler lane is being opened.
+setup was stopped before edits. Lane 68 is complete/archived with the first
+fresh game-owned target-continuation record; its full link exited 0 with the
+terminal `[4012/4013]` progress caveat and one LLDB launch reached LOGO/NEOS
+before TERM/grace. GX was not instrumented. No other filler lane is being
+opened.
 Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
@@ -163,7 +164,7 @@ from compilation alone.
 | 65 | Valid-LLDB current-tip runtime successor — `019ffb25-df74-7811-88ef-ed54f688841f` | One serialized current-tip arm64 build-or-reuse check and exactly one LLDB launch using independently verified `target.launch-working-dir`; target/terminator/termination evidence only | Canonical source only; build `/private/tmp/acgc-lane-valid-lldb-runtime-build`; logs `/private/tmp/acgc-lane-valid-lldb-runtime-logs`; no source branch | Complete/archived; `4,013/4,013` link passed; live `F0002000` target call (`capacity=1024`) and GX/PC boundaries reached, but no `DF000000,00000000` terminator appeared and TERM ended the run; no complete frame/pixel/playability claim; evidence `docs/evidence/VALID-LLDB-LIVE-TARGET-RUNTIME-2026-08-13.md` |
 | 66 | Live target terminator forensic — `019ffb3a-b7e3-73e1-80e5-0891c749daba` | Read-only crosswalk of live `F0002000` pointer/capacity versus `sys_dynamic.new0` fixture span; optional focused probe only, no full link/launch | Canonical source audit; worktree `/Users/jk/.codex/worktrees/431d/acgc-modern-port`; focused root `/private/tmp/acgc-lane-live-target-terminator-forensic`; owns `emu64.c`, `graph.c`, `graph_submission.c`, and graph-target fixtures only | Complete/archived; live capacity `1024` proves `new0[0]`; `new0` is a continuation arena whose local bytes branch to `F0002001`, while the fixture’s terminator is synthetic; live target callback is unset; focused native/ASan/UBSan reruns pass; evidence `docs/evidence/LIVE-TARGET-TERMINATOR-FORENSIC-2026-08-13.md` |
 | 67 | Opt-in live target observer — `019ffb49-326e-78e2-8ec8-eb0cadb94fbe` | Source/test owner for installing the existing target-capture callback under `ACGC_GRAPH_CAPTURE=1`, with off-by-default coverage; no full link/launch | Isolated worktree `/Users/jk/.codex/worktrees/cd32/acgc-modern-port/upstream/ACGC-PC-Port` (retire after review); branch `c1/lane-live-target-observer` at `f25d717`; integrated PC `36910c8`; focused root `/private/tmp/acgc-integrate-live-target-observer` | Complete/archived; only `pc/src/pc_main.c` changed; host object compile and existing live-target fixture pass native and combined ASan/UBSan `1/1` each; no full link, live target record, complete-list, Metal, pixel, input, audio, save/load, device, or playability claim; evidence `docs/evidence/LIVE-TARGET-OBSERVER-2026-08-13.md` |
-| 68 | Live target observer runtime trace — `019ffb59-b04f-7322-a8ca-0a46c67321a0` | One serialized `4,013/4,013` arm64 `ac_pc` link and exactly one LLDB launch at integrated PC `36910c8`; seek game-owned `[GRAPH_TARGET_CAPTURE]` and `F0002001` continuation evidence only | Isolated worktree `/Users/jk/.codex/worktrees/0378/acgc-modern-port`; read-only source worktree to be created at integrated `36910c8`; build `/private/tmp/acgc-lane-live-target-observer-runtime-build`; logs `/private/tmp/acgc-lane-live-target-observer-runtime-logs`; no source edits | Active; no second launch, no full-list/Metal/pixel/input/audio/save/device/playability claim |
+| 68 | Live target observer runtime trace — `019ffb59-b04f-7322-a8ca-0a46c67321a0` | One serialized arm64 `ac_pc` link and exactly one LLDB launch at integrated PC `36910c8`; seek game-owned `[GRAPH_TARGET_CAPTURE]` and `F0002001` continuation evidence only | Isolated worktree `/Users/jk/.codex/worktrees/0378/acgc-modern-port`; detached source worktree at integrated `36910c8`; build `/private/tmp/acgc-lane-live-target-observer-runtime-build`; logs `/private/tmp/acgc-lane-live-target-observer-runtime-logs`; no source edits | Complete/archived; configure/build exit `0`, terminal `[4012/4013]` progress caveat; fresh target record `F0002000`, capacity `1024`, `INDIRECT`, no local terminator, words contain `F0002001`; LOGO/NEOS reached, TERM/grace no KILL; GX unobserved; no full-list/Metal/pixel/input/audio/save/device/playability claim; evidence `docs/evidence/LIVE-TARGET-OBSERVER-RUNTIME-2026-08-13.md` |
 
 ## Parked intake (not active)
 
