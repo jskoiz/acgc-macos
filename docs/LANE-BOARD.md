@@ -71,8 +71,9 @@ complete, and the alpha-update V3 rejection reason is now source-backed. The
 next dependency-ready gate is the real Metal state encoder or a separately
 authorized current-tip runtime trace, after the focused builder-to-consumer
 fixture and Apple consumer boundary have passed their CPU gates. Lanes 104–108
-are now complete/integrated/archived; no production or verification worker is
-active and no filler lane is open. The current portable verification tip is
+are now complete/integrated/archived. Lane 109 is the sole active source-edit
+worker in setup/crosswalk; no duplicate or filler lane is open. The current
+portable verification tip is
 `f18e7cd`: native and combined ASan/UBSan focused matrices are `7/7`, while the
 real i686 Windows/PE boundary remains blocked by the absent toolchain/sysroot.
 Lane 108's one current-tip link reached `[4018/4019]` and its one unprivileged
@@ -84,9 +85,11 @@ captured `64/64` `alpha_update_disabled` records (the source cap), with no
 other predicate records. This is live builder-rejection evidence, not a
 successful packet/callback, Metal, pixel, or playability claim. See
 `docs/evidence/CURRENT-V3-REJECTION-RUNTIME-F18E7CD-2026-08-13.md`.
-The next dependency-ready gate is a separately owned V3 state/consumer or
-Metal state-encoder implementation, CPU/contract scoped until a fresh
-serialized runtime/device run is authorized.
+Lane 109 owns the next dependency-ready CPU/contract gate: a separately
+versioned alpha-state packet/builder representation that preserves the existing
+V3 ABI and fail-closed behavior. The lane is CPU/contract scoped until a fresh
+serialized runtime/device run is authorized; Apple consumer files remain a
+separate successor.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -141,8 +144,9 @@ one unprivileged launch created an inferior and reached boot, GX, and V3
 builder entries, while no V3 consumer or Apple runtime-observer hit. Lane 104's source-backed reason is
 `g_gx.alpha_update_enable == 0`; the focused builder-to-consumer fixture is now
 integrated and the Apple boundary audit is complete. Lane 107 has completed its
-current-tip verification handoff; lanes 107 and 108 are complete/archived, no
-worker is active, and full links and LLDB launches remain serialized.
+current-tip verification handoff; lanes 107 and 108 are complete/archived, and
+lane 109 is the only active worker. Full links and LLDB launches remain
+serialized.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
@@ -327,6 +331,7 @@ from compilation alone.
 | 106 | Focused V3 builder-to-consumer fixture — `019ffd51-9466-75e3-b9f9-c29b09289e91` | Synthetic live-like V3 builder/typed-handoff fixture that distinguishes builder rejection from consumer acceptance/rejection and records the alpha-update/write-mask reason; no full link, LLDB, or device work | Source branch `c1/lane-gx-v3-consumer-fixture` at `51ef7e4`; integrated canonical PC `c1/macos-host-launch` at `f18e7cd`; exact integrated roots `/private/tmp/acgc-integrate-v3-consumer-f18e7cd-native` and `/private/tmp/acgc-integrate-v3-consumer-f18e7cd-asan`; worker roots `/private/tmp/acgc-lane-gx-v3-consumer-fixture-native` and `/private/tmp/acgc-lane-gx-v3-consumer-fixture-asan` retained for review; decomp `09ca8e8b` | Complete/integrated; native and ASan/UBSan focused CTest `2/2` each on the integrated snapshot; disabled alpha writes reject before V3 callback, enabled writes build/consume with `V3_EXTENSION_NOT_RENDERED`, malformed packet rejection and V1 seam remain separate; no live callback, Metal encode/readback/pixel, or playability claim; evidence `docs/evidence/GX-V3-BUILDER-CONSUMER-FIXTURE-F18E7CD-2026-08-13.md` |
 | 107 | Integrated sanitizer and Windows compatibility matrix — `019ffd51-94de-78a3-b583-89cd9d008e40` | Verification-only native/ASan/UBSan and available `_WIN32`/host probes on current PC `f18e7cd`; record unavailable i686 MinGW/sysroot toolchains exactly; no source edits or full link | Canonical PC `c1/macos-host-launch` at `f18e7cd`; decomp `09ca8e8b`; lane roots and visible worktree retired by cleanup; exact stale source metadata `/Users/jk/Documents/Projects/acgc-modern-port/.git/modules/upstream/ACGC-PC-Port/worktrees/ACGC-PC-Port` remains due `Operation not permitted`; dirty failed clones `/private/tmp/acgc-lane-gx-v3-sanitizer-windows-failed-pc` and `...-failed-decomp` are preserved | Complete/archived; focused native CTest `7/7` and combined ASan/UBSan `7/7` with no diagnostics; packet/adapter and C/static-GBI `_WIN32`/ILP32 probes pass, C++ host macro caveat, `pc_gx.c` stops at missing `process.h`, real GNU/MSVC probes stop at missing `string.h`; no i686/PE/runtime/Metal/pixel/playability claim; evidence `docs/evidence/SANITIZER-WINDOWS-CURRENT-F18E7CD-2026-08-13.md` |
 | 108 | Current-tip V3 rejection runtime trace — `019ffd6d-46b9-7aa1-97d9-9e66a19ef45c` | Read-only one serialized `ac_pc` link and one bounded LLDB launch at PC `f18e7cd`; enable `ACGC_METAL_V3_REJECTION_TRACE=1` and count graph/GX/V3 builder, Apple consumer, runtime observer, and alpha-update rejection records | Visible task worktree `/Users/jk/.codex/worktrees/1d58/acgc-modern-port`; canonical populated PC `/Users/jk/Documents/Projects/acgc-modern-port/upstream/ACGC-PC-Port` at `c1/macos-host-launch` `f18e7cd`; decomp `09ca8e8b`; unique roots `/private/tmp/acgc-lane-current-v3-rejection-runtime-build` and `/private/tmp/acgc-lane-current-v3-rejection-runtime-logs` retained for exact cleanup after review | Complete/archived; link `[4018/4019]` passed and the real inferior reached boot/graph/GX; counts were graph/emu64 `29`, GX/flush `532`, V2/V3 builder `531`, Apple consumer/observer `0`; diagnostic cap recorded `64/64` `alpha_update_disabled`; no callback, Metal encode/readback/pixel, input/audio/save/device, simulator, natural-shutdown, or playability claim; evidence `docs/evidence/CURRENT-V3-REJECTION-RUNTIME-F18E7CD-2026-08-13.md` |
+| 109 | V3 alpha-state packet contract — `019ffd84-42ae-72b2-8be3-d3d18d29577c` | Source-edit lane for the smallest reference-faithful versioned packet/builder representation of live `alpha_update_enable == 0`; preserve existing V1/V2/V3 ABI and fail-closed behavior; focused CPU tests only | Visible task worktree `/Users/jk/.codex/worktrees/9941/acgc-modern-port`; dedicated PC branch/worktree `c1/lane-gx-alpha-state` to be created from `f18e7cd`; planned roots `/private/tmp/acgc-lane-gx-alpha-state/source`, `-native`, `-asan`; no Apple consumer/runtime ownership | Active/setup; crosswalk and source-worktree creation in progress, no source edit/build/runtime result; owns `pc/src/pc_gx.c`, `include/acgc/gx_semantic_packet.h`, `src/gx_semantic_packet.c`, one new alpha-state fixture, and its CMake registration; no full link, LLDB, Metal, pixel, input/audio/save/device, or playability claim |
 
 ## Parked intake (not active)
 
