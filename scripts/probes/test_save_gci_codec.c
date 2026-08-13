@@ -19,6 +19,7 @@ enum {
     GCI_SECTOR_SIZE_EXPECTED = 0x2000,
     GCI_TOTAL_SIZE_EXPECTED = GCI_HEADER_SIZE_EXPECTED + GCI_DATA_SIZE_EXPECTED,
     NONCANONICAL_PADDING_OFFSET = 0x0000B6,
+    NONCANONICAL_PADDING_SIZE = 2,
 };
 
 _Static_assert(sizeof(Save_t) == SAVE_T_SIZE_EXPECTED, "Save_t size changed");
@@ -37,9 +38,14 @@ _Static_assert(offsetof(Save_t, _tmp7) == 0x022500, "_tmp7 offset changed");
 _Static_assert(offsetof(Save_t, _241A8) == 0x0241A8, "_241A8 offset changed");
 _Static_assert(offsetof(Save_t, _241A8) + sizeof(((Save_t*)0)->_241A8) == SAVE_T_SIZE_EXPECTED,
                "Save_t tail size changed");
+_Static_assert(offsetof(mQst_base_c, time_limit) == 0x000002,
+               "quest time_limit offset changed");
 _Static_assert(offsetof(Save_t, private_data) + offsetof(Private_c, deliveries) +
-                   offsetof(mQst_delivery_c, base) + 2 == NONCANONICAL_PADDING_OFFSET,
-               "quest bitfield padding offset changed");
+                   offsetof(mQst_delivery_c, base) + offsetof(mQst_base_c, time_limit) ==
+                       NONCANONICAL_PADDING_OFFSET,
+               "quest lost-range offset changed");
+_Static_assert(NONCANONICAL_PADDING_OFFSET + NONCANONICAL_PADDING_SIZE <= SAVE_T_SIZE_EXPECTED,
+               "quest lost range is outside Save_t");
 
 /* pc_save_bswap.c references the decomp diagnostic symbol even though this
  * probe does not call its logging verification helpers. */
@@ -231,6 +237,8 @@ static int run_parent(const char* executable, const char* directory) {
     uint32_t scene_value;
     uint16_t copy_protect_value;
     uint16_t checksum;
+    uint16_t noncanonical_padding_wire;
+    uint16_t noncanonical_padding_roundtrip;
     int result = 1;
 
     if (!path_for(input_path, sizeof(input_path), directory, "save-gci.be") ||
@@ -265,13 +273,16 @@ static int run_parent(const char* executable, const char* directory) {
         fprintf(stderr, "noncanonical padding child process failed\n");
         goto cleanup;
     }
+    noncanonical_padding_wire = read_be16(original + NONCANONICAL_PADDING_OFFSET);
+    noncanonical_padding_roundtrip = read_be16(roundtripped + NONCANONICAL_PADDING_OFFSET);
     if (memcmp(original, roundtripped, SAVE_T_SIZE_EXPECTED) == 0 ||
-        roundtripped[NONCANONICAL_PADDING_OFFSET] != 0) {
+        noncanonical_padding_wire == 0 || noncanonical_padding_roundtrip != 0) {
         fprintf(stderr, "noncanonical padding unexpectedly round-tripped\n");
         goto cleanup;
     }
-    printf("save_gci_noncanonical_padding_preservation: BLOCKED offset=0x%X canonical=0x00\n",
-           NONCANONICAL_PADDING_OFFSET);
+    printf("save_gci_noncanonical_padding_preservation: BLOCKED offset=0x%X size=%u wire=0x%04X roundtrip=0x%04X canonical=0x0000\n",
+           NONCANONICAL_PADDING_OFFSET, NONCANONICAL_PADDING_SIZE,
+           noncanonical_padding_wire, noncanonical_padding_roundtrip);
 
     if (!make_fixture(original, 1)) {
         fprintf(stderr, "canonical checksum fixture did not close over BE words\n");

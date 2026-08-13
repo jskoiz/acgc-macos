@@ -4,7 +4,7 @@ set -eu
 repo_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 pc_root=${ACGC_PC_PORT_ROOT:-"$repo_root/upstream/ACGC-PC-Port"}
 decomp_root=${ACGC_DECOMP_ROOT:-"$repo_root/upstream/ac-decomp"}
-build_dir=/private/tmp/acgc-lane-save-gci-build
+build_dir=${ACGC_SAVE_GCI_BUILD_DIR:-/private/tmp/acgc-lane-save-gci-build}
 expected_pc_commit=4f77dab413e4fe29264cfc68b0f7fac1ade74d01
 expected_decomp_commit=09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c
 codec_source="$pc_root/pc/src/pc_save_bswap.c"
@@ -54,4 +54,5 @@ trap 'rmdir "$run_dir" 2>/dev/null || true' EXIT
 "$probe_binary" "$run_dir"
 
 printf 'PC source commit: %s (4f77dab codec/GCI paths unchanged)\n' "$(git -C "$pc_root" rev-parse HEAD)"
+printf 'Save_t probe build directory: %s\n' "$build_dir"
 printf '%s\n' 'Source-backed bounded Save_t/GCI codec probe completed; noncanonical padding remains blocked.'

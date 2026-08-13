@@ -27,13 +27,24 @@ ACGC_DECOMP_ROOT=/Users/jk/Documents/Projects/acgc-modern-port/upstream/ac-decom
 ./scripts/verify-save-gci.sh
 ```
 
+The follow-up used the same source roots with a fresh ignored build root:
+
+```sh
+ACGC_PC_PORT_ROOT=/Users/jk/Documents/Projects/acgc-modern-port/upstream/ACGC-PC-Port \
+ACGC_DECOMP_ROOT=/Users/jk/Documents/Projects/acgc-modern-port/upstream/ac-decomp \
+ACGC_SAVE_GCI_BUILD_DIR=/private/tmp/acgc-lane-save-gci-followup-build \
+./scripts/verify-save-gci.sh
+```
+
 The populated PC source checkout advanced while this lane was running, but
 each probe run verified that `pc_save_bswap.c`, its header, the GCI manager, and
 the dependent save headers were byte-for-byte unchanged from `4f77dab` before
 the probe ran; the script prints the exact source `HEAD` used for each run.
 
-All generated objects, logs, and temporary save bytes are under
-`/private/tmp/acgc-lane-save-gci-build`; no ISO or proprietary asset is read.
+All generated objects, logs, and temporary save bytes are under the selected
+ignored build root; the follow-up uses
+`/private/tmp/acgc-lane-save-gci-followup-build`. No ISO or proprietary asset
+is read.
 
 ## Format contract established by the source
 
@@ -51,6 +62,38 @@ assertions against the inspected PC-port headers. It also checks the save-tail
 padding ends exactly at `0x242A0`; this prevents silently treating the aligned
 `0x26000` union padding as part of the typed `Save_t` codec.
 
+## `0xB6` allocation-unit boundary
+
+The decompilation declares `mQst_base_c` as a `u32` bitfield allocation unit
+and places `lbRTC_time_c time_limit` at offset `0x02`. It names 16 bits before
+that field:
+`quest_type[1:0]`, `quest_kind[7:2]`, `time_limit_enabled[8]`,
+`progress[12:9]`, `give_reward[13]`, and `unused[15:14]`. The first delivery
+base is at `Save_t` offset `0xB4`, so the raw range at the blocker offset is
+exactly `0xB6..0xB7`.
+
+The current `swap_mQst_base` implementation treats `b[0..3]` as a four-byte
+raw bitfield unit, extracts the named BE bits from its high half, and rebuilds
+the native word from those fields; its low 16 BE bits are not carried into the
+native buffer. The reverse path rebuilds the BE word from the named native
+fields and likewise emits zero in those two bytes. In the active PC record
+layout, those bytes overlap `time_limit.sec` and `time_limit.min`, so the
+source does not justify calling them compiler padding. The follow-up probe
+asserts that the high-entropy fixture's two-byte value is nonzero before
+conversion and exactly `0x0000` after the fresh-process BE-to-LE-to-BE
+roundtrip.
+
+The original decomp code clears a whole `mQst_base_c` with `bzero` when making
+a free quest, and the save manager clears work areas before constructing save
+buffers. That is evidence for zero bytes in newly constructed runtime data,
+not a wire-format rule for arbitrary bytes already present in a GCI. The
+source inspection found no serializer/oracle that requires this raw range to
+be zero. Consequently this lane does not treat the loss as harmless
+canonicalization: arbitrary-byte `Save_t` preservation remains blocked. A
+source-owner repair would need to preserve the lost range with the correct
+semantic mapping, or establish and validate an explicit canonicalization
+contract; neither is claimed by this umbrella-only evidence lane.
+
 ## Codec proof
 
 `pc_save_bswap.c` is compiled as one isolated object and linked to the focused
@@ -58,8 +101,8 @@ probe. The probe supplies only the diagnostic `OSReport` symbol; it does not
 link `pc_m_card.c`, `pc_card.c`, SDL, or the game.
 
 The probe uses two complete `Save_t`-sized BE byte buffers: a high-entropy
-noncanonical fixture to expose reserved-padding loss, and a canonical fixture
-with zeroed compiler allocation padding plus nonzero documented opaque ranges.
+noncanonical fixture to expose raw-range loss, and a canonical fixture with
+zeroed bytes in that range plus nonzero documented opaque ranges.
 The canonical fixture then:
 
 1. encodes a known BE `scene_no` (`0x11223344`) and `copy_protect` (`0xA1B2`);
@@ -81,29 +124,41 @@ The observed output contains four passing bounded checks plus one explicit
 blocker:
 
 ```text
-save_gci_noncanonical_padding_preservation: BLOCKED offset=0xB6 canonical=0x00
+save_gci_noncanonical_padding_preservation: BLOCKED offset=0xB6 size=2 wire=0xF10E roundtrip=0x0000 canonical=0x0000
 save_gci_geometry: PASS ...
 save_gci_checksum: PASS ...
 save_gci_endian_unknown_bytes: PASS ...
 save_gci_process_restart_roundtrip: PASS ...
 ```
 
-The canonical fixture deliberately zeros compiler allocation-unit padding while
-putting nonzero data into documented opaque byte ranges. For that fixture, the
+The canonical fixture deliberately zeros the lost two-byte range while putting
+nonzero data into documented opaque byte ranges. For that fixture, the
 process boundary proves that the typed codec's byte result can be written,
 closed, reopened by a new process, and reconstructed without changing the
 fixture bytes. A separate high-entropy fixture demonstrates that the current
-codec canonicalizes the two-byte padding at `0xB6` to zero. Therefore the
-roundtrip proof is conditional on canonical reserved/padding bytes; it is not
-an arbitrary-byte or whole-GCI losslessness claim.
+codec canonicalizes the two-byte raw range at `0xB6` to zero.
+The noncanonical assertion remains intentionally failing-as-evidence rather
+than being converted into a pass. Therefore the roundtrip proof is conditional
+on canonical bytes in the lost range; it is not an arbitrary-byte or whole-GCI
+losslessness claim.
+
+The claims are separate:
+
+| Claim | Result | Scope |
+| --- | --- | --- |
+| Canonical `Save_t` fixture | PASS | Zero bytes at the lost range, nonzero explicitly opaque ranges, known scalar endian fields, and checksum closure. |
+| Arbitrary-byte `Save_t` fixture | BLOCKED | The two input bytes at `0xB6..0xB7` become `0x0000`; the assertion is retained. |
+| Exact GCI file length | NOT TESTED | The probe checks exact temporary `Save_t` file lengths only; it does not exercise a `CARDDir` envelope reader. The current PC reader reads the fixed data size but does not reject trailing bytes. |
+| Process restart | PASS, codec-only | Two fresh child processes perform the typed `Save_t` conversions; this is not a runtime save-manager restart. |
+| Main/backup behavior | NOT TESTED | Geometry is asserted, but main/backup construction, checksum-based selection, and recovery are outside this probe. |
 
 ## Preservation and adapter boundary
 
 The codec preserves the documented opaque bytes it does not visit because it
 swaps known fields in an existing byte buffer; the probe verifies those gaps
-and the canonical full roundtrip. Compiler allocation-unit padding is a
-separate precondition, as the explicit blocker above shows. This assumption
-applies only to the `Save_t`-sized buffer. It does not yet establish lossless
+and the canonical full roundtrip. The two-byte lost range is a separate
+precondition, as the explicit blocker above shows. This assumption applies
+only to the `Save_t`-sized buffer. It does not yet establish lossless
 preservation of an entire GCI file:
 
 - `pc_save_write_gci_to` starts a fresh zeroed `0x72000` file-data buffer and
@@ -114,8 +169,9 @@ preservation of an entire GCI file:
   constants; malformed/trailing GCI acceptance remains a reader-validation
   gap.
 - The Card-B fallback currently validates the main/backup land ID after
-  conversion, but this probe does not claim checksum-validated main/backup
-  selection or game-level recovery behavior.
+  conversion, while the original decomp save manager also checks save identity,
+  checksum, and version during its card load path. This probe claims none of
+  those main/backup runtime behaviors.
 - The existing `pc_card.c` temporary-directory transfer test proves host file
   create/read/write/reopen behavior only. It remains separate from this codec
   proof and is not rerun by this script.
