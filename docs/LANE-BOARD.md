@@ -8,9 +8,11 @@ does not mean its gate passed.
 
 Current scheduler target: up to ten useful visible ACGC lanes, with no filler.
 The texture remediation (17) is now complete/integrated at source `578c8b7`.
-The root-owned audio-bank ABI lane is the current launch-critical source lane;
-its fresh run crosses `second_game.c`, clears the DMA pointer fault, and reaches
-the remaining raw-bank/LP64 layout boundary.
+The root-owned audio-bank ABI lane is integrated at source `671171c`; its fresh
+run crosses `second_game.c`, clears the DMA and matrix/segment pointer faults,
+reaches `LOGO draw` and frame 1021, then fails closed for an unsupported bank 28
+instead of crashing. A bounded post-guard run survives to frame 1741; no
+rendered-frame, audible-audio, or playability claim is made.
 Graph capture (16) and integrated verification (22) are complete/parked. The
 post-fix game-frame runtime and the successor requests listed below are
 setup-pending: the app has returned client IDs but not durable task IDs or
@@ -50,7 +52,7 @@ docs.
 | 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; source `/private/tmp/acgc-lane-texture-fault-fixture` / `c1/lane-texture-fault-fixture` | Complete/integrated as `07a5447`; native arm64 fixture records full pointer → opaque handle → low-word truncation and intentional `EXPECTED_FAILURE`; remediation remains lane 17 |
 | 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Parked/archived under four-lane cap; prior lifecycle evidence remains integrated |
 | 26 | Post-fix game frame runtime — client `client-new-thread:1b48103c-9b76-4caf-8598-686e392653c3` | Fresh actual-game arm64 run after texture remediation, packet/frame boundary | Worktree setup pending; planned source `/private/tmp/acgc-lane-postfix-frame` / `c1/lane-postfix-frame`; build `/private/tmp/acgc-lane-postfix-frame-build` | Queued; do not start a competing full link before texture integration |
-| 27 | Audio-bank ABI repair — root-owned continuation | `src/static/jaudio_NES/internal/system.c` LP64 DMA/table boundary | `/private/tmp/acgc-lane-audio-lp64` / `c1/lane-audio-lp64`; build `/private/tmp/acgc-lane-audio-lp64-build` | Active diagnostic source lane; arm64 `ac_pc` build passes; uncommitted DMA-width fix clears `system.c:1300`, native `BANK_ENTRY` moves the next stop to `system.c:1167`; raw 32-bit bank records still require a native decoder |
+| 27 | Audio-bank ABI repair — root-owned continuation | `src/static/jaudio_NES/internal/system.c`, `channel.c`, fixed-width bank decoder and focused fixtures | `/private/tmp/acgc-lane-audio-lp64` / `c1/lane-audio-lp64`; integrated on `c1/macos-host-launch` as source `671171c`; builds `/private/tmp/acgc-lane-audio-lp64-build` and `/private/tmp/acgc-emu64-sanitize-build` | Integrated bounded fix; arm64 `ac_pc` links, native audio fixture 1/1, emu64 native 3/3, ASan/UBSan 3/3; fresh game run reaches `LOGO draw`/frame 1021, then bank 28 decode rejects and now fails closed; 60-second post-guard run survives to frame 1741; bank 28 schema/audio and rendered/audible gates remain open |
 
 ## Rolling-refill intake (setup pending)
 
@@ -178,15 +180,23 @@ submodules blindly or edit a detached source checkout.
   completion, `JW_Init2`, `HotStartEntry`, both forest archives, and Famicom
   archive loading, then stops at `EXC_BAD_ACCESS` in `game.c:154` while entering
   `graph_proc`. This is not a rendered-frame proof.
-- The current root-owned audio diagnostic lane builds `ac_pc` successfully at
-  `/private/tmp/acgc-lane-audio-lp64-build`. With the ignored ISO symlink and
-  an escalated local LLDB run, the uncommitted `ARNativeAddress` DMA cast
-  removes the prior `system.c:1300` audio `memmove` fault. A second uncommitted
-  `BANK_ENTRY` native-address adjustment then moves the next stop to
-  `system.c:1167` while reading a widened `voicetable` through a fixed-width
-  GameCube bank blob. The remaining boundary is therefore a wire-to-native
-  audio-bank decoder, not a build failure; no audible-audio or rendered-frame
-  claim is made.
+- Source commit `671171c` adds the bounded LP64 audio-bank decoder and fixture,
+  widens the remaining launch-critical pointer arithmetic, preserves static
+  segmented matrix words, widens the train engineer actor field, and guards
+  audio lookup when a bank is marked loaded before its native table exists.
+  The authoritative branch builds `ac_pc` successfully at
+  `/private/tmp/acgc-lane-audio-lp64-build`; the focused native audio fixture
+  passes 1/1, emu64 native tests pass 3/3, and the ASan/UBSan emu64 matrix passes
+  3/3 at `/private/tmp/acgc-emu64-sanitize-build`.
+- Fresh ignored-ISO arm64 runs now load all ten FST entries, both forest
+  archives, Famicom data, the audio banks 2/155/154/153, and the game-owned
+  `LOGO draw` path. The pre-guard run stopped in `ProgToVp` at
+  `channel.c:406` because bank 28 was marked loaded while its LP64 decode was
+  rejected (`3376` bytes); the guard changes this to bounded audio-error logs
+  (`instrument_table_null`/`percussion_table_null`). A post-guard bounded run
+  survives to `NEOS_OUT frame=1741` before the harness terminates it. This proves
+  launch survival through that boundary only; it does not prove a visible frame,
+  asset-driven audio, input, save/load, or playability.
 - The completed boot trace resolves the failing arm64 store as
   `strb w8, [x22,#0x474]` for `GRAPH_SET_DOING_POINT(graph, GAME_BGM)` with
   computed bad base `0x100000000`; `graph_task_set00` is never hit. Its next
