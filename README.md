@@ -209,6 +209,13 @@ redistribute it or extracted proprietary assets.
   this launch. This is target-continuation evidence only; complete-list,
   GX/Metal, pixels, input, audio, save/load, device, clean-exit, and playability
   gates remain open. See [live target observer runtime evidence](docs/evidence/LIVE-TARGET-OBSERVER-RUNTIME-2026-08-13.md).
+- The next bounded GX-boundary attempt built the same integrated source once
+  (`ac_pc` exit `0`, terminal `[4012/4013]`) and verified `GXBegin` plus
+  `pc_gx_flush_vertices` in LLDB before `run`. LLDB then failed before creating
+  an inferior with `status -1`; the supervisor also recorded unprivileged
+  `nice(5) failed: operation not permitted`. No boot, breakpoint, GX, Metal,
+  pixel, or playability claim follows, and the lane made no retry. See [live
+  GX-boundary runtime evidence](docs/evidence/LIVE-GX-BOUNDARY-RUNTIME-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

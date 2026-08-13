@@ -194,3 +194,9 @@ literal `[4013/4013]` line; GX was not instrumented and remains unobserved.
 This closes the target-observer reachability gate only. Complete continuation,
 GX/Metal, pixel, input, audio, save/load, device, clean-exit, and playability
 gates remain open; see [live target observer runtime evidence](evidence/LIVE-TARGET-OBSERVER-RUNTIME-2026-08-13.md).
+The subsequent bounded GX-boundary attempt built that same source once and
+verified both `GXBegin` and `pc_gx_flush_vertices` in LLDB before `run`, but
+failed before inferior creation with `status -1` and
+`nice(5) failed: operation not permitted`. It made no retry and adds no boot,
+breakpoint, GX, Metal, pixel, or playability proof. See [live GX-boundary
+runtime evidence](evidence/LIVE-GX-BOUNDARY-RUNTIME-2026-08-13.md).
