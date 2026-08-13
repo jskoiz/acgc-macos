@@ -35,7 +35,7 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: the scheduler has three active durable Luna Max/max
+Current maintenance state: the scheduler has two active durable Luna Max/max
 worker tasks plus this integration owner. The authoritative PC source is
 `09dd182` on `c1/macos-host-launch`; the umbrella is `e993944` plus only the
 pre-existing `.codex`/settings edits. Mixer/CoreAudio, Metal, GX-prefix,
@@ -47,8 +47,9 @@ workers are CARD Save_t
 reload recovery (`019ffa49-4f44-7b73-a4ab-8c45dc211f14`) and the post-fix
 GX submission trace (`019ffa49-4f9c-7da2-a288-5791e5cf5c93`), plus this
 integration owner. The exact-tip sanitizer refresh
-(`019ffa4c-8734-7ac2-99d1-f67a0682be31`) is the third active worker. No other
-dependency-ready lane is being refilled: live
+(`019ffa4c-8734-7ac2-99d1-f67a0682be31`) is complete and archived; its
+evidence is recorded in `docs/evidence/SANITIZER-REFRESH-2026-08-12.md`. No
+other dependency-ready lane is being refilled: live
 CoreAudio/Metal devices and the complete game-owned graph capture remain
 unavailable, while Windows and iOS are gated by their stated proofs. The
 post-audio, arm64 post-texture, WaveTouch, and audio-DMA handoffs remain
@@ -124,7 +125,7 @@ from compilation alone.
 | 46 | Game cleanup invalid-free successor — `019ffa28-3ef7-7280-923c-5a01bf2eb4c2` | `src/game/m_field_make.c`, `src/game/m_play.c`, `src/graph.c`, `src/static/libc64/__osMalloc.c`; exact TERM/allocator fault | `/private/tmp/acgc-lane-game-cleanup-invalid-free/source` (retired); `c1/lane-game-cleanup-invalid-free` | Complete/integrated at source `09dd182`; `mFM_MakeField` now uses `zelda_malloc_align` without a `u32` round-trip; native, ASan/UBSan, and UBSan fixture passes; exact integrated 4,011/4,011 arm64 build passes; 10-second LOGO/NEOS run and TERM grace return status `0`; no Metal/pixel/input/audio/save/playability claim |
 | 47 | Production CARD Save_t reload recovery — `019ffa49-4f44-7b73-a4ab-8c45dc211f14` | `pc/src/pc_m_card.c` plus focused `pc/tests/` restart/corruption fixture only; production atomic write/restart/reload gate | `/Users/jk/.codex/worktrees/b7a4/acgc-modern-port`; planned source `/private/tmp/acgc-lane-card-save-recovery/source` / `c1/lane-card-save-recovery`; unique build root `/private/tmp/acgc-lane-card-save-recovery` | Active; Luna Max/max; base source `09dd182`; current codec `d1575f0` preserves raw `Save_t` `0xB6..0xB7`; no umbrella edits, ISO/assets, renderer, audio, input, or game-frame claim |
 | 48 | Post-fix game-owned GX submission trace — `019ffa49-4f9c-7da2-a288-5791e5cf5c93` | Read-only `graph_task_set00` → emu64/GX → `pc_gx` handoff and packet/terminator boundary | `/Users/jk/.codex/worktrees/1a7c/acgc-modern-port`; isolated logs/builds `/private/tmp/acgc-lane-postfix-gx-submission` | Active; Luna Max/max; exact source `09dd182`, decomp `09ca8e8b`; full link/LLDB serialized; no source edits and no Metal-device/pixel, input, audio, save, simulator, device, or playability claim |
-| 49 | Exact-tip native + ASan/UBSan refresh — `019ffa4c-8734-7ac2-99d1-f67a0682be31` | Read-only focused matrix at source `09dd182`, including field-cleanup fixture and portable/Apple contracts | `/Users/jk/.codex/worktrees/b872/acgc-modern-port`; unique build/log root `/private/tmp/acgc-lane-sanitizer-refresh-20260812` | Active; Luna Max/max; no source or umbrella edits; device-gated Metal/CoreAudio skips remain explicit; no frame, input, audio, save, simulator, device, or playability claim |
+| 49 | Exact-tip native + ASan/UBSan refresh — `019ffa4c-8734-7ac2-99d1-f67a0682be31` | Read-only focused matrix at source `09dd182`, including field-cleanup fixture and portable/Apple contracts | `/Users/jk/.codex/worktrees/b872/acgc-modern-port` (retired); build/log root `/private/tmp/acgc-lane-sanitizer-refresh-20260812` (retired) | Complete/archived; Luna Max/max; native 36/3/0 and ASan 36/3/0; UBSan 35/3/1 with the unchanged 11-site `aflags_c` issue; no frame, input, audio, save, simulator, device, or playability claim |
 
 ## Parked intake (not active)
 
