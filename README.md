@@ -125,6 +125,11 @@ redistribute it or extracted proprietary assets.
   checksum corruption and truncation. Its synthetic ISO-sentinel proof does
   not copy bytes outside Resources. This is host-adapter evidence, not
   GameCube `Save_t`/GCI or game-level save/reload proof.
+- The Save_t/GCI probe records the supported layout and passes checksum,
+  scalar-endian, canonical-padding, and codec-only sanitizer checks. It also
+  exposes a real losslessness blocker: a high-entropy fixture loses two bytes
+  of allocation padding at Save_t offset `0xB6`. Runtime save-manager restart,
+  main/backup recovery, exact-file-length, and whole-GCI proof remain open.
 - The new CARD host-transfer test creates, writes, reads, closes, reopens, and
   rejects invalid ranges in a temporary card directory. It passes natively and
   under ASan/UBSan, but it is not GameCube `Save_t`/GCI serialization or a
@@ -188,6 +193,7 @@ process stays alive for the requested interval. Its runtime log remains under
 - [Apple architecture and evidence-gated milestones](docs/APPLE-PORT-PLAN.md)
 - [macOS filesystem roles and atomic-save proof](docs/FILESYSTEM-SAVE-EVIDENCE.md)
 - [macOS lifecycle contract evidence](docs/LIFECYCLE-EVIDENCE.md)
+- [Save_t/GCI codec evidence](docs/SAVE-GCI-EVIDENCE.md)
 - [arm64 native and sanitizer matrix](docs/LANE-VERIFICATION-MATRIX-2026-08-12.md)
 - [Exact bootstrap commands, results, and blockers](docs/BOOTSTRAP-EVIDENCE.md)
 - [Porting charter](docs/PORTING-CHARTER.md)

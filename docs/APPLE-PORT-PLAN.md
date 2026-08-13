@@ -144,8 +144,10 @@ frame. Neither is a playability claim.
   remain open. The SDL/CoreAudio device boundary is measured (32 kHz S16
   stereo, 512-sample callbacks, zero underruns/overruns). The umbrella-owned
   filesystem adapter has a standalone macOS role-root and atomic opaque-payload
-  fixture, including durability fences and corruption rejection; this does not
-  yet connect Save_t/GCI bytes to the game.
+  fixture, including durability fences and corruption rejection. The Save_t/GCI
+  codec probe passes canonical-padding checks but exposes a two-byte allocation
+  padding loss for arbitrary bytes at offset `0xB6`; runtime restart and
+  whole-GCI losslessness therefore remain blocked.
 - Prove input, audio, and save/load in separate runs before a bounded human play
   path and performance/memory measurements.
 

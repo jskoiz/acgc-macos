@@ -324,6 +324,10 @@ passed 1/1. The integrated texture/TLUT/TEV fixture also passed 1/1. The
 umbrella lifecycle, filesystem/atomic-save, and verification
 evidence are recorded in commits `15a081f`, `ee7b814`, and `fe21878`.
 
+The Save_t/GCI evidence is recorded in umbrella commit `3b8ed21`; it passes
+canonical-padding and checksum fixtures but intentionally keeps the arbitrary
+padding mismatch visible rather than treating canonicalization as lossless.
+
 The fresh arm64 game run now loads COPYDATE, the string table, `JW_Init2`, both
 forest archives, and the Famicom archive, then faults at `game.c:154`. The boot
 trace identifies the failing `GRAPH_SET_DOING_POINT(..., GAME_BGM)` destination
@@ -349,6 +353,7 @@ frame, input, audible output, Save_t/GCI restart, or playability gate is claimed
 | Input | Boundary passed, running game not reached | `e5442de` provides a fixed-width injectable snapshot boundary and focused tests; the successor runtime handoff gate is still open. |
 | Audio device boundary | Passed, limited | Real SDL/CoreAudio callback probe: 32 kHz S16 stereo, 512 samples, zero underruns/overruns; no reconstructed mixer or audible-output claim. |
 | Save/CARD host boundary | Passed, limited | Native and sanitizer temporary-directory CARD roundtrip; no GameCube Save_t/GCI or process-restart proof. |
+| Save_t/GCI codec | Blocked, informative | `3b8ed21` passes canonical-padding/checksum fixtures and codec-only sanitizers, but a high-entropy fixture loses two bytes at Save_t offset `0xB6`; runtime restart, recovery, and whole-GCI losslessness remain open. |
 | iOS simulator/device | Not reached | Begins after shared macOS proof. |
 
 No commit, push, PR, binary publication, deployment, TestFlight upload, or App
