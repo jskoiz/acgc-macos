@@ -122,10 +122,17 @@ redistribute it or extracted proprietary assets.
   the claim. This is no-draw interpreter evidence, not a frame or Metal result.
   See [emu64 continuation evidence](docs/evidence/EMU64-CONTINUATION-NO-DRAW-2026-08-13.md).
 - A second bounded task trace confirms later graph progression: graph submission
-  and `emu64_taskstart_r` each occur twice, while the second task reaches only
-  `G_DL_NOPUSH`/`G_MOVEWORD` continuation commands before exact-PID timeout.
-  No draw handler or `GXBegin` fires, and the second task does not reach a
-  proven return. See [subsequent graph-task evidence](docs/evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md).
+  and `emu64_taskstart_r` each occur twice, while lane 97's second task reaches
+  only the `G_DL_NOPUSH`/`G_MOVEWORD` prefix before its exact-PID timeout. See
+  [subsequent graph-task evidence](docs/evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md).
+- A single longer lane-98 trace completes that second task's continuation:
+  eight `G_DL` handlers reach `DE010000 F0004007`, then
+  `DF000000 00000000` returns with `return_err=0`, `cmds=12`, and
+  `end_dl=1`. Task 2 has zero draw handlers, `GXBegin`, and
+  `pc_gx_flush_vertices`; later-task draw/GX hits are not attributed to it.
+  The bounded run ends by exact-PID `SIGKILL` after 30 seconds, so no natural
+  shutdown or playability claim follows. See [second graph-task completion
+  evidence](docs/evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
@@ -190,10 +197,10 @@ redistribute it or extracted proprietary assets.
   cleanup`) and the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
   same source history. That fresh arm64 link produced a Mach-O
-  `AnimalCrossing` executable. The current source tip is `d1e812c`; its GX v2
-  packet and version-aware consumer paths, Apple sink shader fix, and
-  input-fixture changes have focused verification but have not yet had another
-  full `ac_pc` link. Its native audio command records remain 8 bytes,
+  `AnimalCrossing` executable. A later serialized lane-98 link from the
+  current source tip `d1e812c` also returned `[4018/4019]` and produced an
+  arm64 Mach-O; its bounded second-task runtime evidence is recorded
+  separately. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   the compact bank-28 tail and MEDIUM_CART-to-native-ARAM mapping have focused
   wire fixtures, and native plus ASan/UBSan probes pass.

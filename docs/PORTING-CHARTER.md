@@ -58,16 +58,18 @@ remain under ignored local or build paths and are never committed.
 
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
-fixture are passed. The last full reconstructed `ac_pc` link was a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `f4cb491` (on top of
-`9cf9b3f`, `6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`). The current source
-tip `d1e812c` adds the version-aware GX v2 consumer boundary on top of the
+fixture are passed. The latest serialized full reconstructed `ac_pc` link was
+a native arm64 Mach-O from source branch `c1/macos-host-launch` at `d1e812c`,
+returning `[4018/4019]` in lane 98's one-link run. The source tip adds the
+version-aware GX v2 consumer boundary on top of the
 bounded packet builder at `26da235`, the narrow Metal sink shader fix at
 `a8f3a8f`, the `59aa655` input frame-guard fixture, and `54b840c` offscreen
 Metal sink. The consumer preserves v1 dispatch, validates v2, and reports
 `V2_EXTENSION_NOT_RENDERED`; its focused native and ASan/UBSan tests pass
-`4/4` each. These current-tip changes have focused verification, but have not
-yet had another full `ac_pc` link. See [GX v2 consumer evidence](evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md).
+`4/4` each. The lane-98 link is build evidence only; its separate runtime
+trace completes the second graph task's interpreter continuation but does not
+prove task-2 drawing or Metal output. See [GX v2 consumer evidence](evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md)
+and [second graph-task completion evidence](evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md).
 The DVD/CARD,
 input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
 commits reviewed in the same source history remain the current evidence, and
@@ -279,6 +281,10 @@ and no error/cancellation. Misaligned pointer-field diagnostics are excluded;
 the result is no-draw interpreter evidence, not a frame or Metal proof. See
 [emu64 continuation evidence](evidence/EMU64-CONTINUATION-NO-DRAW-2026-08-13.md).
 A subsequent bounded trace confirms a second graph submission and interpreter
-entry. Its observed prefix contains only `G_DL_NOPUSH`/`G_MOVEWORD` continuation
-commands before exact-PID timeout; no draw handler or `GXBegin` is observed and
-the second task's completion is unproven. See [subsequent graph-task evidence](evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md).
+entry. Lane 97's observed prefix contained only `G_DL_NOPUSH`/`G_MOVEWORD`
+continuation commands before exact-PID timeout; its second-task completion was
+unproven at that snapshot. Lane 98's one longer trace then records eight task-2
+`G_DL` handlers, `G_ENDDL`, and a clean return (`return_err=0`, `cmds=12`,
+`end_dl=1`) with no task-2 draw handler, `GXBegin`, or flush. Later-task draw/GX
+hits are excluded from the task-2 claim. See [subsequent graph-task evidence](evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md)
+and [second graph-task completion evidence](evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md).
