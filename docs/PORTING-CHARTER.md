@@ -200,3 +200,11 @@ failed before inferior creation with `status -1` and
 `nice(5) failed: operation not permitted`. It made no retry and adds no boot,
 breakpoint, GX, Metal, pixel, or playability proof. See [live GX-boundary
 runtime evidence](evidence/LIVE-GX-BOUNDARY-RUNTIME-2026-08-13.md).
+The direct no-`nice` successor then proved both game-owned GX submission
+boundaries: `GXBegin` and `pc_gx_flush_vertices` were reached through
+`emu64::dl_G_TRIN` and `graph_task_set00` after the `F0002000`/`F0002001`
+target capture. This is still an OpenGL/GX boundary, not Metal encode/present,
+pixel readback, input, audio, save/reload, clean shutdown, or playability
+proof. The next lane must register a real Apple Metal consumer at the
+production runtime seam while preserving the Windows/OpenGL path; see
+[game-owned GX boundary runtime evidence](evidence/GAME-OWNED-GX-BOUNDARY-RUNTIME-2026-08-13.md).

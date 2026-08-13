@@ -216,6 +216,14 @@ redistribute it or extracted proprietary assets.
   `nice(5) failed: operation not permitted`. No boot, breakpoint, GX, Metal,
   pixel, or playability claim follows, and the lane made no retry. See [live
   GX-boundary runtime evidence](docs/evidence/LIVE-GX-BOUNDARY-RUNTIME-2026-08-13.md).
+- A direct no-`nice` LLDB trace now reaches the real game-owned render path:
+  `GXBegin` and `pc_gx_flush_vertices` both hit through
+  `emu64::dl_G_TRIN`/`graph_task_set00` after the root and target captures
+  (`F0002000`, capacity `1024`, `F0002001`). The trace reaches LOGO/NEOS and
+  intentionally stops at the second breakpoint. This is launch and GX/OpenGL
+  submission evidence only; the production `ac_pc` runtime still has no
+  registered Apple Metal consumer, so no Metal/pixel/playability claim follows.
+  See [game-owned GX boundary runtime evidence](docs/evidence/GAME-OWNED-GX-BOUNDARY-RUNTIME-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized
