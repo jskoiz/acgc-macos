@@ -171,6 +171,11 @@ redistribute it or extracted proprietary assets.
   Relative shader lookup failed before graph boot, so no target callback or
   frame claim follows; the lane made no retry. See [current-tip runtime
   evidence](docs/evidence/CURRENT-TIP-LIVE-TARGET-RUNTIME-2026-08-13.md).
+- The correctly rooted successor rebuilt `aea3515` successfully (`4,013/4,013`)
+  but its one LLDB command file used unsupported `target.process.working-dir`,
+  so LLDB stopped before `run`. This is a debugger-command blocker, not a game
+  runtime result; no inferior, graph capture, target callback, or frame claim
+  exists. See [the corrected-root runtime evidence](docs/evidence/CORRECT-ROOTED-RUNTIME-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

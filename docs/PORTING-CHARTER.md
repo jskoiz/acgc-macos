@@ -157,3 +157,9 @@ One serialized current-tip runtime attempt then completed the full
 worktree rather than the generated `bin` directory. Relative shader lookup
 failed before graph boot, so the live target callback remains unobserved and no
 retry or frame claim follows; see [current-tip runtime evidence](evidence/CURRENT-TIP-LIVE-TARGET-RUNTIME-2026-08-13.md).
+The correctly rooted successor rebuilt the same source tip (`4,013/4,013`) but
+its single LLDB command file used unsupported `target.process.working-dir`, so
+LLDB stopped before `run`. This is a debugger-command blocker rather than game
+runtime evidence; no inferior, graph target, or frame claim follows. A future
+successor must syntax-check the local LLDB settings surface first; see
+[corrected-root runtime evidence](evidence/CORRECT-ROOTED-RUNTIME-2026-08-13.md).
