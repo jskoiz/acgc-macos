@@ -21,7 +21,8 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `aea3515` (`Capture live graph target spans in emu64`),
+  `c1/macos-host-launch` at `f4cb491` (`Register Apple GX packet consumer bridge`),
+  on top of `aea3515` (`Capture live graph target spans in emu64`),
   on top of `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
   `6e4aded` (bounded graph classification), `e22cbc5`
   (optional GX packet handoff), `a7b9dff` (`Exercise mCD_SaveHome_bg in CARD fixture`),
@@ -224,6 +225,14 @@ redistribute it or extracted proprietary assets.
   submission evidence only; the production `ac_pc` runtime still has no
   registered Apple Metal consumer, so no Metal/pixel/playability claim follows.
   See [game-owned GX boundary runtime evidence](docs/evidence/GAME-OWNED-GX-BOUNDARY-RUNTIME-2026-08-13.md).
+- The integrated Apple source `f4cb491` now registers the existing borrowed
+  packet consumer from the production `ac_pc` lifecycle, records bounded
+  handoff/status counters, and allows resident-but-inactive texture objects
+  while still rejecting active texture/TEV/lighting/fog state. The focused
+  Darwin test and an exact-tip ASan/UBSan rerun pass; the OpenGL path remains
+  unconditional. This is a CPU registration seam only: no live game callback,
+  Metal encode/present, pixels, input, audio, save/load, device, or playability
+  claim follows. See [Darwin GX handoff registration evidence](docs/evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

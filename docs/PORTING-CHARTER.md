@@ -59,7 +59,7 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `aea3515` (on top of
+arm64 Mach-O from source branch `c1/macos-host-launch` at `f4cb491` (on top of
 `9cf9b3f`, `6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`), with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
@@ -205,6 +205,12 @@ boundaries: `GXBegin` and `pc_gx_flush_vertices` were reached through
 `emu64::dl_G_TRIN` and `graph_task_set00` after the `F0002000`/`F0002001`
 target capture. This is still an OpenGL/GX boundary, not Metal encode/present,
 pixel readback, input, audio, save/reload, clean shutdown, or playability
-proof. The next lane must register a real Apple Metal consumer at the
-production runtime seam while preserving the Windows/OpenGL path; see
-[game-owned GX boundary runtime evidence](evidence/GAME-OWNED-GX-BOUNDARY-RUNTIME-2026-08-13.md).
+proof. The integrated PC source `f4cb491` now registers the existing Apple CPU
+packet consumer from the production `ac_pc` lifecycle, reports bounded
+handoff/status counters, and keeps OpenGL unconditional. Its resident-texture
+gate correction remains fail-closed for active texture/TEV/lighting/fog state.
+Focused Darwin and ASan/UBSan tests pass, but this still does not prove a live
+game callback, Metal encode/present, pixels, input, audio, save/reload,
+device, clean shutdown, or playability. See [Darwin GX handoff registration
+evidence](evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md); the next lane
+must observe one current-tip game callback before adding a Metal encoder.

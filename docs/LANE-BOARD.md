@@ -35,11 +35,12 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: one durable Luna Max/max source worker is active
-alongside this integration owner. The read-only Metal bridge audit is complete
-and awaiting cleanup; its exact findings now constrain the source lane. The
-authoritative PC source is
-`36910c8` on
+Current maintenance state: no worker is active while the integration owner
+reviews the completed Darwin registration handoff and opens the next bounded
+runtime-observation lane. The read-only Metal bridge audit and Apple
+registration source lane are complete; their exact findings constrain the
+next gate. The authoritative PC source is
+`f4cb491` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
 `.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
@@ -65,15 +66,18 @@ The root-owned direct no-`nice` LLDB trace now proves the next GX boundary:
 `GXBegin` and `pc_gx_flush_vertices` both hit through `emu64::dl_G_TRIN` and
 `graph_task_set00`, while the target observer emitted `F0002000` capacity 1024
 with `F0002001`. This remains OpenGL/GX boundary evidence; Metal encode/present
-and pixel proof are still open. Lane 70 owns the isolated Metal bridge audit.
+and pixel proof are still open. Lane 70's isolated Metal bridge audit is now
+complete and archived.
 The completed lane-70 audit found that `ac_pc` never registers or links the
 Apple consumer, while the current state gate rejects resident bootstrap
-textures and the existing consumer remains a CPU fixture adapter. Lane 71 is
-the dependency-ready Apple-only registration successor: it owns the borrowed
-packet-consumer bind, the narrow resident-versus-active texture gate correction,
-and bounded callback/status telemetry, while leaving the legacy OpenGL
-submission path unchanged. It cannot claim Metal encoding, presentation,
-pixels, or playability.
+textures and the existing consumer remains a CPU fixture adapter. The
+integrated lane-71 source handoff now owns the borrowed packet-consumer bind,
+the narrow resident-versus-active texture gate correction, and bounded
+callback/status telemetry, while leaving the legacy OpenGL submission path
+unchanged. It cannot claim Metal encoding, presentation, pixels, or playability.
+The handoff evidence is
+`docs/evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md`; the next useful
+lane is one serialized current-tip callback observation before encoder work.
 Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
@@ -185,8 +189,8 @@ from compilation alone.
 | 67 | Opt-in live target observer — `019ffb49-326e-78e2-8ec8-eb0cadb94fbe` | Source/test owner for installing the existing target-capture callback under `ACGC_GRAPH_CAPTURE=1`, with off-by-default coverage; no full link/launch | Isolated worktree `/Users/jk/.codex/worktrees/cd32/acgc-modern-port/upstream/ACGC-PC-Port` (retire after review); branch `c1/lane-live-target-observer` at `f25d717`; integrated PC `36910c8`; focused root `/private/tmp/acgc-integrate-live-target-observer` | Complete/archived; only `pc/src/pc_main.c` changed; host object compile and existing live-target fixture pass native and combined ASan/UBSan `1/1` each; no full link, live target record, complete-list, Metal, pixel, input, audio, save/load, device, or playability claim; evidence `docs/evidence/LIVE-TARGET-OBSERVER-2026-08-13.md` |
 | 68 | Live target observer runtime trace — `019ffb59-b04f-7322-a8ca-0a46c67321a0` | One serialized arm64 `ac_pc` link and exactly one LLDB launch at integrated PC `36910c8`; seek game-owned `[GRAPH_TARGET_CAPTURE]` and `F0002001` continuation evidence only | Isolated worktree `/Users/jk/.codex/worktrees/0378/acgc-modern-port`; detached source worktree at integrated `36910c8`; build `/private/tmp/acgc-lane-live-target-observer-runtime-build`; logs `/private/tmp/acgc-lane-live-target-observer-runtime-logs`; no source edits | Complete/archived; configure/build exit `0`, terminal `[4012/4013]` progress caveat; fresh target record `F0002000`, capacity `1024`, `INDIRECT`, no local terminator, words contain `F0002001`; LOGO/NEOS reached, TERM/grace no KILL; GX unobserved; no full-list/Metal/pixel/input/audio/save/device/playability claim; evidence `docs/evidence/LIVE-TARGET-OBSERVER-RUNTIME-2026-08-13.md` |
 | 69 | Live GX boundary runtime trace — `019ffb68-3324-7a80-a69d-fc9359687355` | One read-only LLDB launch with pre-run breakpoints at GXBegin and pc_gx_flush_vertices, retaining the target observer record; no source edits | Isolated worktree `/Users/jk/.codex/worktrees/8197/acgc-modern-port` (retire); source `/private/tmp/acgc-lane-live-gx-boundary-runtime-source` (retire); build `/private/tmp/acgc-lane-live-gx-boundary-runtime-build` (retire); logs `/private/tmp/acgc-lane-live-gx-boundary-runtime-logs` (retire); no source branch | Complete/archived; build exit 0 with terminal `[4012/4013]`, LLDB setup accepted both symbols but launch failed before an inferior with `status -1` plus unprivileged `nice(5)`; no boot, breakpoint, GX, Metal, pixel, or playability claim; evidence `docs/evidence/LIVE-GX-BOUNDARY-RUNTIME-2026-08-13.md` |
-| 70 | Metal bridge architecture audit — `019ffb8b-728b-7c93-9d3a-fc9222eb26fe` | Read-only crosswalk from game-owned `pc_gx_flush_vertices` to existing Apple semantic packet/Metal consumer; no source edits, builds, or launches | Isolated worktree `/Users/jk/.codex/worktrees/4513/acgc-modern-port`; no build/log root | Complete/awaiting cleanup; proves the registration/build gap, resident-texture gate issue, and CPU-only consumer boundary; no frame or playability claim |
-| 71 | Darwin GX handoff registration — `019ffb94-738f-70c3-9344-a194b74022af` | Apple-only `AcgcMetalPacketConsumerHandoffContext` registration, narrow resident-versus-active texture gate correction in `pc_gx.c`, bounded callback/status telemetry, and focused fixture; no shader, decomp, or Windows changes | Isolated worktree `/Users/jk/.codex/worktrees/e0ac/acgc-modern-port`; source branch `c1/lane-darwin-gx-registration` to be created from PC `36910c8`; unique focused build root owned by lane | Active; must register before boot, unregister at shutdown, fail closed to OpenGL, and return exact focused evidence; stop before packet-v1 expansion or Metal encode/present/pixel/playability claims |
+| 70 | Metal bridge architecture audit — `019ffb8b-728b-7c93-9d3a-fc9222eb26fe` | Read-only crosswalk from game-owned `pc_gx_flush_vertices` to existing Apple semantic packet/Metal consumer; no source edits, builds, or launches | Worktree `/Users/jk/.codex/worktrees/4513/acgc-modern-port` already absent; no build/log root | Complete/archived; proves the registration/build gap, resident-texture gate issue, and CPU-only consumer boundary; no frame or playability claim |
+| 71 | Darwin GX handoff registration — `019ffb94-738f-70c3-9344-a194b74022af` | Apple-only `AcgcMetalPacketConsumerHandoffContext` registration, narrow resident-versus-active texture gate correction in `pc_gx.c`, bounded callback/status telemetry, and focused fixture; no shader, decomp, or Windows changes | Worker `/Users/jk/.codex/worktrees/e0ac/acgc-modern-port`; source branch `c1/lane-darwin-gx-registration` at `9174404b`; integrated canonical source `f4cb491`; focused roots `/private/tmp/acgc-integrated-darwin-gx-registration-f4cb491` and `-asan` | Complete/integrated; native and ASan/UBSan focused CTest `1/1` each; no full link, live callback, Metal encode/present/pixel, or playability claim |
 
 ## Parked intake (not active)
 
