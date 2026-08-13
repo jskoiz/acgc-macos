@@ -59,7 +59,7 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-12, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `8b6849f`, with the
+arm64 Mach-O from source branch `c1/macos-host-launch` at `2736838`, with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
 prior DVD wait. The portable boot-source facade accepts only exact
@@ -95,6 +95,7 @@ audit and native arm64 link are diagnostic milestones, not a claim of complete
 runtime portability. The fail-closed static GBI pointer guard remains enabled.
 Representative GX rendering, game frame, running-game input, game-mixer audio
 output, game-level Save_t/GCI load/restart, iOS Simulator, and physical-device
-gates remain open. The current highest-priority blocker is the bad
-`GRAPH_SET_DOING_POINT(..., GAME_BGM)` destination write at `game.c:154`, before
-`graph_task_set00` and before any live game-owned submission can be captured.
+gates remain open. Source `5086f1d` now crosses the former bad
+`GRAPH_SET_DOING_POINT(..., GAME_BGM)` destination at `game.c:154` and reaches
+the first `graph_task_set00` call. The next critical gate is capturing a real
+game-owned submission; no live packet or frame has yet been proven.

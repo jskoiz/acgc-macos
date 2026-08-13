@@ -291,16 +291,19 @@ could not create the image; no visual-capture claim is made.
 ## Rolling lane update (2026-08-12)
 
 The authoritative `upstream/ACGC-PC-Port` branch is
-`c1/macos-host-launch` at `8b6849f`. Reviewed source commits now include:
+`c1/macos-host-launch` at `2736838`. Reviewed source commits now include:
 
 - `e5442de` / `858d802` / `8b6849f` — injectable fixed-width PC input snapshots,
   the final PADRead handoff, and SDL virtual-controller/event smoke;
 - `e03ffed` — pointer-free graph submission capture immediately before the
   existing PC/emu64 submit path;
+- `5086f1d` — reload `GAME.graph` after the LP64-corrupting callback; the
+  patched run reaches the first `graph_task_set00` call;
 - `83fa889` — 4,800-byte renderer-neutral GX semantic packet contract;
 - `866dd94` — Metal geometry/state fixtures; and
 - `ddbb498` — texture/TLUT/sampler/TEV fixtures; and
-- `766ad96` — synthetic mixer-to-SDL-callback PCM probe.
+- `766ad96` — synthetic mixer-to-SDL-callback PCM probe; and
+- `2736838` — RSP/Neos-style PCM provenance through the DAC callback.
 
 The integrated focused checks were run from the authoritative source checkout
 with unique ignored build directories:
@@ -342,11 +345,12 @@ The Save_t/GCI evidence is recorded in umbrella commits `3b8ed21` and
 fixtures but intentionally keeps the raw-range mismatch visible rather than
 treating canonicalization as lossless.
 
-The fresh arm64 game run now loads COPYDATE, the string table, `JW_Init2`, both
-forest archives, and the Famicom archive, then faults at `game.c:154`. The boot
-trace identifies the failing `GRAPH_SET_DOING_POINT(..., GAME_BGM)` destination
-write before `graph_task_set00`; therefore no live graph packet, game-owned
-frame, input, audible output, Save_t/GCI restart, or playability gate is claimed.
+The original fresh arm64 game run loaded COPYDATE, the string table, `JW_Init2`,
+both forest archives, and the Famicom archive, then faulted at `game.c:154`.
+The patched run for `5086f1d` crosses that store and reaches the first
+`graph_task_set00` call. The capture callback has not yet recorded a live
+game-owned packet, so no rendered frame, input, audible output, Save_t/GCI
+restart, or playability gate is claimed.
 
 ## Proof ledger
 

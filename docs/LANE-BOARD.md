@@ -12,13 +12,13 @@ does not mean its gate passed.
 | --- | --- | --- | --- | --- |
 | 1 | DVD aligned-read semantics — `019ff8aa-6e31-7723-bb32-095c7158148b` | `pc_dvd.c`, focused DVD probe | `/private/tmp/acgc-lane-dvd-loader` / `c1/lane-dvd-loader`; source `dfb3f7f`, integrated as `4f77dab` | Complete; fresh run passes `COPYDATE` and reaches `game.c:154` |
 | 2 | Launch supervisor — `019ff8d2-a527-7c90-b7c0-f95aef4f5a0e` | Umbrella `script/build_and_run_game.sh` only | `/Users/jk/.codex/worktrees/f2c7/acgc-modern-port`; `c1/lane-launch-supervisor` | Complete; umbrella `e96776d`; TERM grace/KILL fixture passed |
-| 3 | Boot trace → graph fault repair — `019ff8d3-06e4-71d3-8708-120d84fa270f` → `019ff8e7-402d-7a31-844a-0afd32918cc1` | Completed LLDB evidence, then source-owned `GAME`/`GRAPH` LP64 callback path | Trace `/Users/jk/.codex/worktrees/6bed/acgc-modern-port`; repair `/private/tmp/acgc-lane-graph-fault` / `c1/lane-graph-fault` | Successor active; trace isolates bad `GAME_BGM` store at `game.c:154`, repair lane owns next bounded experiment |
-| 4 | First game-owned render submission — `019ff8aa-6e31-7723-bb32-097e85bb2293` | Graph/emu64 submission capture | `/private/tmp/acgc-lane-render-capture-v2` / `c1/lane-render-capture` | Complete; source `e03ffed`; seam/test passed, no live packet yet |
+| 3 | Boot trace → graph fault repair — `019ff8d3-06e4-71d3-8708-120d84fa270f` → `019ff8e7-402d-7a31-844a-0afd32918cc1` | Completed LLDB evidence, then source-owned `GAME`/`GRAPH` LP64 callback path | Trace `/Users/jk/.codex/worktrees/6bed/acgc-modern-port`; repair `/private/tmp/acgc-lane-graph-fault` / `c1/lane-graph-fault` | Complete/integrated; source `5086f1d`; one-line graph reload crosses `game.c:154` to first `graph_task_set00`, live packet capture still open |
+| 4 | First game-owned render submission — `019ff8aa-6e31-7723-bb32-097e85bb2293` → `019ff8ff-51e1-74b0-ad13-1539b72e8937` | Graph/emu64 submission capture | `/private/tmp/acgc-lane-render-capture-v2` / `c1/lane-capture`; live `/Users/jk/.codex/worktrees/5f6a/acgc-modern-port` | Successor active; seam `e03ffed`, repair `5086f1d`; fresh live words/callback evidence in progress |
 | 5 | GX semantic packet — `019ff8d3-0887-7472-a53a-84c5d7ad105c` | Fixed-width renderer-neutral packet + tests | `/private/tmp/acgc-lane-gx-packet` / `c1/lane-gx-packet` | Complete; source `83fa889`; native/Apple/ASan focused tests passed |
 | 6 | Metal geometry/state — `019ff8d3-0c2e-7463-b918-af75f7cb6208` | Apple geometry/state fixtures | `/private/tmp/acgc-lane-metal-state` / `c1/lane-metal-state` | Complete; source `866dd94`; CPU/geometry passed, Metal skipped (no device) |
 | 7 | Texture/TLUT/TEV fixtures — `019ff8d3-150c-77f0-b99c-dcbf38645977` | Synthetic texture/palette/combiner fixtures | `/private/tmp/acgc-lane-tev-fixtures` / `c1/lane-tev-fixtures` | Complete; source `ddbb498`; focused native + ASan/UBSan fixture passed |
 | 8 | Input snapshot + SDL event smoke — `019ff8aa-743f-7923-8d9b-276421802fa8` | SDL-to-logical keyboard/controller snapshot, PADRead handoff, and event-path tests | `/private/tmp/acgc-lane-input-snapshot` / `c1/lane-input-snapshot` | Complete/parked; source `8b6849f`; native + ASan/UBSan SDL/controller smoke 2/2, keyboard requires OS/human event |
-| 9 | Mixer/CoreAudio correctness — `019ff8aa-7959-7342-af84-187dfb2e0a89` | Reconstructed PCM/mixer output proof and NEOS provenance | `/private/tmp/acgc-lane-audio-mixer` / `c1/lane-audio-mixer` | Successor active; source `766ad96`; synthetic mixer/callback proof passed, NEOS nonzero PCM provenance open |
+| 9 | Mixer/CoreAudio correctness — `019ff8aa-7959-7342-af84-187dfb2e0a89` | Reconstructed PCM/mixer output proof and NEOS provenance | `/private/tmp/acgc-lane-audio-mixer` / `c1/lane-audio-mixer` | Complete/parked; source `2736838`; RSP/Neos-style provenance to callback passes 1,118 nonzero samples native + ASan, device/audible output open |
 | 10 | Save_t/GCI roundtrip — `019ff8d3-0fe5-7883-8ebb-74eeac6efcb6` | Byte codec and process-restart persistence evidence | `/Users/jk/.codex/worktrees/35f6/acgc-modern-port` / `c1/lane-save-gci` | Complete/parked; umbrella `aeefc15`; canonical/checksum/codec restart pass, arbitrary raw range `0xB6..0xB7` remains blocked |
 | 11 | Sandboxed filesystem/atomic saves — `019ff8d3-1b80-7ab0-89b5-28afcf680cef` | Application Support/cache/log/temp-file adapter | `/Users/jk/.codex/worktrees/10c5/acgc-modern-port`; `c1/lane-filesystem-saves` | Complete; umbrella `ee7b814`; synthetic atomic/corruption/isolation probes passed |
 | 12 | Timing/retrace/lifecycle — `019ff8d3-1f89-7c23-82fb-150b2f39e37c` | Monotonic time, workers, shutdown/resume | `/Users/jk/.codex/worktrees/cf91/acgc-modern-port`; `c1/lane-timing-lifecycle` | Complete; umbrella `15a081f`; strict + ASan/UBSan repeated trace passed |
@@ -46,6 +46,9 @@ submodules blindly or edit a detached source checkout.
 - `e03ffed` adds a pointer-free graph submission capture seam; its focused
   legacy test and Darwin graph syntax check pass, but the current run reaches
   neither the hook nor a live packet.
+- `5086f1d` reloads `GAME.graph` after the callback that corrupts the local
+  callee-saved register. The patched arm64 run reaches the first
+  `graph_task_set00` call; no game-owned packet or frame is claimed yet.
 - `83fa889` is the integrated renderer-neutral GX packet contract. It is a
   4,800-byte fixed-width packet with strict malformed-input rejection; native,
   Apple-entrypoint, and ASan/UBSan focused tests pass. It is not live-game
@@ -60,6 +63,10 @@ submodules blindly or edit a detached source checkout.
 - `766ad96` adds a synthetic probe through `Jac_VframeWork`,
   `MixInterleaveTrack`, `AIInitDMA`, and the SDL callback. Exact PCM and ring
   drain pass natively and under ASan; no device/audible proof is claimed.
+- `2736838` adds the next audio provenance boundary: four real `A_INTERLEAVE`
+  command batches pass through the RSP/Neos-style path, triple buffer, DAC
+  handoff, and callback with 1,118 nonzero samples in native and ASan runs.
+  It does not prove asset-driven `NEOS_OUT`, CoreAudio output, or human audio.
 - Umbrella evidence commits `15a081f`, `ee7b814`, and `fe21878` record
   synthetic lifecycle, sandboxed atomic-save, and arm64/sanitizer matrix gates.
 - Umbrella commits `3b8ed21` and `aeefc15` record Save_t/GCI layout and codec
@@ -87,14 +94,15 @@ submodules blindly or edit a detached source checkout.
   `strb w8, [x22,#0x474]` for `GRAPH_SET_DOING_POINT(graph, GAME_BGM)` with
   computed bad base `0x100000000`; `graph_task_set00` is never hit. Its next
   source successor owns only `src/game.c`, `include/graph.h`, and directly
-  necessary ABI/callback tests on `c1/lane-graph-fault`.
+  necessary ABI/callback tests on `c1/lane-graph-fault`; `5086f1d` is the
+  reviewed one-line reload repair.
 
 ## Integration order
 
-1. Keep the graph-fault successor on the post-loader fault. Inspect the bad
-   `GRAPH_SET_DOING_POINT` destination/object lifetime at `game.c:154`; do not
-   claim a frame until the run reaches `graph_task_set00` and the capture
-   callback records one packet.
+1. Open the live-capture successor now that `5086f1d` reaches
+   `graph_task_set00`; record the first pointer-free game-owned submission via
+   `e03ffed` before attempting renderer translation. Do not claim a frame until
+   the capture callback records real game words.
 2. When a lane completes, inspect its final evidence immediately, mark it
    integrated/rejected/parked here, and refill only with a useful dependency-ready
    successor. The input lane is parked because its remaining gate requires an

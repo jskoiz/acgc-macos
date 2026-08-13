@@ -74,8 +74,8 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `8b6849f` (`Add SDL input path smoke
-  harness`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
+  `c1/macos-host-launch` source branch at `2736838` (`Add NEOS RSP PCM
+  provenance probe`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
   Metal-fixture, and audio-boundary commits reviewed in the same source
   history. The fresh arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
@@ -85,8 +85,9 @@ redistribute it or extracted proprietary assets.
   fixed-width input snapshots and the final PADRead handoff), `e03ffed`
   (pointer-free graph-submission capture), `83fa889` (4,800-byte
   renderer-neutral GX semantic packets), `866dd94` (Metal geometry/state
-  fixtures), `ddbb498` (texture/TLUT/TEV fixtures), and `766ad96`
-  (mixer-to-callback PCM fixture).
+  fixtures), `ddbb498` (texture/TLUT/TEV fixtures), `766ad96`
+  (mixer-to-callback PCM fixture), `5086f1d` (post-callback graph reload), and
+  `2736838` (RSP/Neos-style PCM provenance).
   These are separate boundaries: the graph capture has not yet observed a live
   packet because the reconstructed process stops at `game.c:154`.
 - The input path now adds `8b6849f`, a focused SDL virtual-controller smoke
@@ -102,6 +103,10 @@ redistribute it or extracted proprietary assets.
   `AIInitDMA`, and the real SDL callback with distinct synthetic S16 stereo
   samples; exact PCM values and ring drain pass natively and under ASan. It
   does not claim CoreAudio device output or human-audible game audio.
+- The NEOS/RSP provenance probe (`2736838`) drives four real `A_INTERLEAVE`
+  batches through the resampler, triple buffer, DAC handoff, and callback; it
+  observes 1,118 nonzero samples natively and under ASan. Asset-driven
+  `NEOS_OUT`, CoreAudio output, and human-audible game audio remain open.
 - The renderer-neutral GX packet contract has native, Apple-entrypoint, and
   ASan/UBSan focused passes, while the Metal geometry/state fixture passes its
   CPU contract and existing geometry tests. The offscreen Metal test is skipped
@@ -165,10 +170,13 @@ redistribute it or extracted proprietary assets.
   completes `COPYDATE`, string-table loading, `JW_Init2`, `HotStartEntry`, both
   forest archives, and Famicom archive loading before an `EXC_BAD_ACCESS` at
   `game.c:154` while entering `graph_proc`. This moves the runtime frontier
-  beyond the loader; it is still not a game-owned frame. The boot trace
-  identifies the failing operation as the `GRAPH_SET_DOING_POINT(...,
+  beyond the loader; it is still not a game-owned frame. The original boot
+  trace identifies the failing operation as the `GRAPH_SET_DOING_POINT(...,
   GAME_BGM)` write at that line, before `graph_task_set00` and before the
-  capture hook.
+  capture hook. Source `5086f1d` reloads `GAME.graph` after the corrupting
+  callback; a fresh patched arm64 run crosses `game.c:154` and reaches the
+  first `graph_task_set00` call. It has not yet captured a live game-owned
+  packet or frame.
 
 Re-run the tracked checks from this directory:
 
