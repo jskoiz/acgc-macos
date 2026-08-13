@@ -21,7 +21,8 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `042cbf7` (`Add bounded GX v3 state handoff`),
+  `c1/macos-host-launch` at `add2d6f` (`Trace GX V3 rejection state`), on top
+  of `042cbf7` (`Add bounded GX v3 state handoff`),
   on top of `d1e812c` (`Add versioned GX v2 consumer handoff`),
   on top of `26da235` (`Add bounded GX v2 semantic packet fixture`),
   `a8f3a8f` (`Rename reserved Metal shader local`),
@@ -106,6 +107,13 @@ redistribute it or extracted proprietary assets.
   game-owned GX/V3 reachability boundary only; it is not a successful callback,
   Metal encode/readback, pixel, or playability claim. See [GX V3 current-tip
   runtime evidence](docs/evidence/GX-V3-CURRENT-TIP-RUNTIME-042CBF7-2026-08-13.md).
+- The integrated `add2d6f` source snapshot proves the next fail-closed reason:
+  `g_gx.alpha_update_enable == 0` rejects V3 before its typed callback, matching
+  the decomp initializer's `GXSetAlphaUpdate(GX_FALSE)`. Its opt-in Darwin
+  diagnostic is capped at 64 records and leaves Windows/default behavior
+  unchanged. Native and ASan/UBSan focused handoff tests pass `3/3` each; this
+  remains builder-rejection evidence only, with no live callback, Metal,
+  pixel, or playability claim. See [V3 rejection evidence](docs/evidence/GX-V3-REJECTION-ALPHA-UPDATE-ADD2D6F-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.

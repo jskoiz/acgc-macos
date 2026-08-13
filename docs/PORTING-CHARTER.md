@@ -85,6 +85,13 @@ unprivileged predecessor still fails before inferior creation with status
 `-1`. This is game-owned GX/V3 reachability evidence only; Metal encode,
 readback, pixels, clean shutdown, and playability remain open. See [GX V3
 current-tip runtime evidence](evidence/GX-V3-CURRENT-TIP-RUNTIME-042CBF7-2026-08-13.md).
+The integrated PC source has since advanced to `add2d6f` with an opt-in,
+Darwin-only rejection trace. It identifies `g_gx.alpha_update_enable == 0` as
+the V3 fail-closed reason for the observed state, matching
+`emu64.c:619`'s `GXSetAlphaUpdate(GX_FALSE)`, before the typed callback or Apple
+runtime observer. Native and ASan/UBSan focused handoff tests remain `3/3`
+each; this is builder-predicate evidence only, not live callback, Metal,
+pixel, or playability proof. See [V3 rejection evidence](evidence/GX-V3-REJECTION-ALPHA-UPDATE-ADD2D6F-2026-08-13.md).
 The DVD/CARD,
 input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
 commits reviewed in the same source history remain the current evidence, and

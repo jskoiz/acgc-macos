@@ -67,15 +67,17 @@ through a separate typed callback, passes the combined V1/V2/V3 focused native
 and ASan/UBSan tests `3/3` each, and marks V3 `V3_EXTENSION_NOT_RENDERED`.
 No full link, live callback count, Metal encode/readback, pixel, input, audio,
 save, device, or playability claim follows; the current-tip runtime count is
-complete, and the next gate is a V3 rejection-reason diagnostic followed by a
-real Metal state encoder.
+complete, and the alpha-update V3 rejection reason is now source-backed. The
+next gate is the focused builder-to-consumer alpha-toggle fixture and Apple
+consumer boundary, followed by a real Metal state encoder.
 That root-owned runtime count is now recorded: the current-tip link produced
 an arm64 Mach-O, and one permitted elevated trace reached GAFE01 boot,
 LOGO/NEOS, `GXBegin`, and `pc_gx_flush_vertices`. V3 builder entry was
 attempted `549` times, but the typed V3 Apple consumer and
 `pc_metal_runtime_observe` were both `0`; the entry count is not a successful
-packet/callback claim. The next bounded implementation step is a diagnostic
-V3 rejection reason, not a Metal or pixel claim.
+packet/callback claim. The diagnostic source now records
+`g_gx.alpha_update_enable == 0` as the V3 fail-closed reason; this remains a
+builder predicate, not a Metal or pixel claim.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -118,19 +120,21 @@ encode/readback/pixel, device, input, audio, save, or playability gate. See
 `docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md`.
 
 The Windows, sanitizer, iOS, and input frame-guard handoffs are complete and
-queued for exact-root cleanup. The authoritative PC source is `042cbf7` on
+queued for exact-root cleanup. The authoritative PC source is `add2d6f` on
 `c1/macos-host-launch`; the umbrella branch is `main` (the local
 `c1/apple-port-bootstrap` alias is fast-forwarded to the same tip) plus only
 the pre-existing `.codex`/settings edits. The current-tip V3 runtime count is
 complete and remains separate from Metal encode/readback/pixel proof: the
 unprivileged launch failed before inferior creation with status `-1`, while
 one permitted elevated retry reached boot, GX, and V3 builder entries but no
-V3 consumer or Apple runtime-observer hit. The next bounded implementation
-lane is the V3 fail-closed rejection reason, followed by a Metal state encoder.
-Lanes 104–107 are the four active workers in the current dependency-aware set:
-the V3 builder predicate, Apple consumer/runtime boundary, focused
-builder-to-consumer fixture, and sanitizer/Windows verification. No filler lane
-is open; full links and LLDB launches remain serialized.
+V3 consumer or Apple runtime-observer hit. Lane 104's source-backed reason is
+`g_gx.alpha_update_enable == 0`; the next bounded implementation lane is the
+alpha-toggle builder-to-consumer fixture, followed by the Apple boundary and a
+Metal state encoder.
+Lanes 105–107 are the three active workers in the current dependency-aware set:
+the Apple consumer/runtime boundary, focused builder-to-consumer fixture, and
+sanitizer/Windows verification. Lane 104's builder predicate is integrated;
+no filler lane is open, and full links and LLDB launches remain serialized.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
@@ -310,7 +314,7 @@ from compilation alone.
 | 101 | Live blend/texture-matrix GX packet extension — `019ffd19-3a91-7ba2-b6db-c7535d5143ce` | Source-edit lane for the smallest versioned packet/Apple consumer extension covering the observed `GX_BM_BLEND` + `GX_TEXMTX0` state; preserve v1 and legacy OpenGL | Worktree `/Users/jk/.codex/worktrees/fb3c/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source`; branch `c1/lane-gx-live-blend-texmatrix` returned clean to base `8a19f23`; decomp `09ca8e8b` | Rejected/archived after two remote compaction `404` failures; one uncommitted header-only draft was reverted; no source commit, build, test, full link, LLDB, callback, Metal, pixel, or playability result |
 | 102 | Live blend/texture-matrix GX packet extension retry — `019ffd20-e35d-7121-84b0-1589246e8e3c` | Fresh source-edit retry for the smallest versioned packet/Apple consumer extension covering `GX_BM_BLEND`, source-alpha factors, raw `GX_LO_NOOP=5`, and `GX_TEXMTX0`; preserve v1/OpenGL | Worktree `/Users/jk/.codex/worktrees/7c0b/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source`; branch `c1/lane-gx-live-blend-texmatrix` clean at `8a19f23`; decomp `09ca8e8b` | Rejected/archived after remote compaction `404` before source edit; no build, test, full link, LLDB, runtime, or claim |
 | 103 | Root-owned GX v3 state handoff and current-tip runtime — root continuation | Integrated source extension for the observed blend/source-alpha/`GX_LO_NOOP`/`GX_TEXMTX0` state; preserve V1/OpenGL and keep V3 non-rendering; one serialized current-tip link and bounded callback-entry trace | Source branch `c1/lane-gx-v3-direct` at `141a746`; integrated canonical PC `042cbf7`; source and runtime roots retired/absent after review (`/private/tmp/acgc-lane-gx-v3-direct-source`, `/private/tmp/acgc-current-v3-runtime-build`, `/private/tmp/acgc-current-v3-runtime-logs`); native/ASan roots also retired; | Complete/integrated; combined V1/V2/V3 focused CTest `3/3` native and `3/3` ASan/UBSan with no diagnostics; current arm64 `ac_pc` link completed and elevated trace reached graph/GX/V3 builder entries (`549`), but V3 consumer and `pc_metal_runtime_observe` were `0`; V3 remains `V3_EXTENSION_NOT_RENDERED`; no successful callback, Metal encode/readback/pixel, or playability claim; evidence `docs/evidence/GX-V3-STATE-HANDOFF-042CBF7-2026-08-13.md` and `docs/evidence/GX-V3-CURRENT-TIP-RUNTIME-042CBF7-2026-08-13.md` |
-| 104 | V3 fail-closed rejection reason — `019ffd46-3012-7460-b435-2afff25993c0` | Source-edit diagnostic for the exact predicate(s) rejecting live V3 state after builder entry; native plus ASan/UBSan focused checks only; no full link, LLDB, or Metal work | Visible task worktree `/Users/jk/.codex/worktrees/d3d7/acgc-modern-port` (umbrella detached at `21d9608`); owning PC worktree `/private/tmp/acgc-lane-gx-v3-rejection/pc` on `c1/lane-gx-v3-rejection-reason` at `042cbf7`; unique roots `/private/tmp/acgc-lane-gx-v3-rejection` (active) and `/private/tmp/acgc-lane-gx-v3-rejection-asan` (not yet created); decomp `09ca8e8b` | Active; exact production ownership `pc/src/pc_gx.c` only if a minimal opt-in diagnostic is proven necessary; no tests/CMake, Apple files, headers, decomp, callback, Metal encode/readback, pixel, input, audio, save, device, or playability claim |
+| 104 | V3 fail-closed rejection reason — `019ffd46-3012-7460-b435-2afff25993c0` | Source-edit diagnostic for the exact predicate(s) rejecting live V3 state after builder entry; native plus ASan/UBSan focused checks only; no full link, LLDB, or Metal work | Source branch `c1/lane-gx-v3-rejection-reason` at `c689a731`; integrated canonical PC `c1/macos-host-launch` at `add2d6f`; lane roots `/private/tmp/acgc-lane-gx-v3-rejection/native` and `/private/tmp/acgc-lane-gx-v3-rejection-asan` retained for review; decomp `09ca8e8b`; visible task worktree `/Users/jk/.codex/worktrees/d3d7/acgc-modern-port` is stale detached and protected until cleanup | Complete/integrated; `g_gx.alpha_update_enable == 0` is the source-backed V3 fail-closed reason; opt-in `ACGC_METAL_V3_REJECTION_TRACE=1` Darwin diagnostic capped at 64 records; integrated native and ASan/UBSan focused CTest `3/3` each with no diagnostics (leak detection disabled); no fixture/CMake, full link, LLDB, callback, Metal encode/readback/pixel, input, audio, save, device, or playability claim; evidence `docs/evidence/GX-V3-REJECTION-ALPHA-UPDATE-ADD2D6F-2026-08-13.md` |
 | 105 | V3 Apple consumer/runtime boundary audit — `019ffd51-9466-75e3-b9f9-c27b43bda87f` | Crosswalk and, only if proven necessary, narrow diagnostic/fix for why the typed V3 handoff does not reach the Apple consumer or runtime observer; no full link, LLDB, or device work | Visible task worktree `/Users/jk/.codex/worktrees/0fba/acgc-modern-port` (umbrella detached at `73c0178`); owning PC branch/worktree `c1/lane-gx-v3-apple-consumer-audit` to be created; unique roots `/private/tmp/acgc-lane-gx-v3-apple-consumer-native` and `/private/tmp/acgc-lane-gx-v3-apple-consumer-asan` absent at setup; decomp `09ca8e8b` | Active/setup; exact production ownership `pc/apple/src/metal_packet_consumer.c` and `pc/apple/src/pc_metal_runtime.c`; no `pc/src/pc_gx.c`, header, test/CMake, decomp, umbrella, Metal encode/readback/pixel, or playability scope |
 | 106 | Focused V3 builder-to-consumer fixture — `019ffd51-9466-75e3-b9f9-c29b09289e91` | Synthetic live-like V3 builder/typed-handoff fixture that distinguishes builder rejection from consumer acceptance/rejection and records the alpha-update/write-mask reason; no full link, LLDB, or device work | Visible task worktree `/Users/jk/.codex/worktrees/dc5e/acgc-modern-port` (umbrella detached at `73c0178`); owning PC branch/worktree `c1/lane-gx-v3-consumer-fixture` to be created; unique roots `/private/tmp/acgc-lane-gx-v3-consumer-fixture-native` and `/private/tmp/acgc-lane-gx-v3-consumer-fixture-asan` absent at setup; decomp `09ca8e8b` | Active/setup; exact ownership `pc/tests/pc_gx_semantic_v3_consumer_fixture.c` and narrow `pc/CMakeLists.txt` registration; no production GX/Apple/header, decomp, umbrella, live callback, Metal encode/readback/pixel, or playability scope |
 | 107 | Integrated sanitizer and Windows compatibility matrix — `019ffd51-94de-78a3-b583-89cd9d008e40` | Verification-only native/ASan/UBSan and available `_WIN32`/host probes on PC `042cbf7`; record unavailable i686 MinGW/sysroot toolchains exactly; no source edits or full link | Visible task worktree `/Users/jk/.codex/worktrees/ae99/acgc-modern-port` (umbrella detached at `73c0178`); read-only canonical refs `042cbf7`/`09ca8e8b`; unique roots `/private/tmp/acgc-lane-gx-v3-sanitizer-windows`, `/private/tmp/acgc-lane-gx-v3-sanitizer-windows-native`, `/private/tmp/acgc-lane-gx-v3-sanitizer-windows-asan`, and `/private/tmp/acgc-lane-gx-v3-sanitizer-windows-win` absent at setup | Active/setup verification lane; no source branch/commit, no umbrella/docs/ISO/assets mutation, no Metal encode/readback/pixel, device, input/audio/save, or playability claim |
