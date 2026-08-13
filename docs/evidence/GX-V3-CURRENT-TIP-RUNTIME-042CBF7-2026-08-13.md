@@ -32,7 +32,9 @@ The generated `bin/rom/Animal Crossing (USA).iso` symlink pointed at the
 ignored ISO. The LLDB setup used explicit-return Python callbacks for the
 graph task, interpreter, GX begin/flush, V2/V3 builder entry, V3 Apple
 consumer, and runtime observer symbols. The setup and supervisor artifacts
-remain under `/private/tmp/acgc-current-v3-runtime-logs/` until cleanup.
+were retained under `/private/tmp/acgc-current-v3-runtime-logs/` during review;
+the exact runtime build and log roots were retired by cleanup after this
+evidence was committed. The source branch and commits remain preserved.
 
 The first direct launch was unprivileged and failed before inferior creation:
 
