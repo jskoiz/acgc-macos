@@ -35,7 +35,7 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: three durable Luna Max/max worker tasks are active
+Current maintenance state: two durable Luna Max/max worker tasks are active
 alongside this integration owner. The authoritative PC source is `d0e64f5` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
@@ -141,7 +141,7 @@ from compilation alone.
 | 53 | Post-link complete graph runtime trace — `019ffa9b-2ac8-7332-ab68-8ba731696cd8` | Read-only arm64 launch/LLDB; complete-list or indirect-resolution classification after `6e4aded` | `/Users/jk/.codex/worktrees/7224/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-runtime-post-link-graph` (retire after evidence); no source branch | Complete/parked; bounded trace reaches `GXBegin` and boot markers, but capture is not observed and live shape remains `PREFIX_ONLY`; no complete packet/frame claim |
 | 54 | Live GX-to-Metal callback wiring — `019ffa9b-2ac8-7332-ab68-8b8a6a71bda9` | `pc/src/pc_gx.c`, Apple packet-consumer header/source, focused callback tests; optional handoff reachability | `/Users/jk/.codex/worktrees/4732/acgc-modern-port`; source `/private/tmp/acgc-lane-live-gx-metal/source` / `c1/lane-live-gx-metal`; build `/private/tmp/acgc-lane-live-gx-metal-build` | Active source-edit; base `9cf9b3f`; Windows/OpenGL and graph/save/audio/input/umbrella/ISO out of scope |
 | 55 | Save_t raw-wire losslessness — `019ffa9b-2dde-7d83-9b26-55dc271cac37` | `pc/src/pc_save_bswap.c` plus focused wire fixtures; preserve exact GCI semantics or stop test-only | `/private/tmp/acgc-lane-save-wire-lossless/source` (retire after review); `c1/lane-save-wire-lossless` preserved at `315f040`; build `/private/tmp/acgc-lane-save-wire-lossless-build` | Complete/integrated at source `d0e64f5`; test-only forensic coverage proves pre-fix `0xF10E→0x0000` and current native/ASan/UBSan roundtrip PASS; no full game persistence claim |
-| 56 | Running-game input trace — `019ffa9b-2ea7-7741-87eb-9fd0c3e88557` | Read-only current-tip SDL/PADRead snapshot observation with one bounded OS-event attempt | `/Users/jk/.codex/worktrees/f19d/acgc-modern-port`; logs `/private/tmp/acgc-lane-runtime-input`; no source branch | Active verification; synthetic fixture results do not count as running-game input |
+| 56 | Running-game input trace — `019ffa9b-2ea7-7741-87eb-9fd0c3e88557` | Read-only current-tip SDL/PADRead snapshot observation with one bounded OS-event attempt | `/Users/jk/.codex/worktrees/f19d/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-runtime-input` (retire after evidence); no source branch | Complete/parked; live SDL/PADRead boundary observed, OS event unavailable and no state transition; no running-game input claim |
 | 57 | Current Windows regression audit — `019ffa9b-34a6-7813-a48c-2e8c43dcccdc` | Read-only `_WIN32`/x86/OpenGL/SDL audit for graph/GX changes at `9cf9b3f` | `/Users/jk/.codex/worktrees/18c7/acgc-modern-port`; logs `/private/tmp/acgc-lane-windows-current`; no source branch | Active verification; no native Windows sign-off without MinGW/i686/sysroot |
 
 ## Parked intake (not active)

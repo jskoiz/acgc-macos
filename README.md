@@ -137,6 +137,10 @@ redistribute it or extracted proprietary assets.
   F0002000` observer remains `PREFIX_ONLY` (`8/256`). No complete packet,
   Metal encode/present, pixel readback, or playability claim follows; see
   [post-link graph runtime evidence](docs/evidence/POST-LINK-GRAPH-RUNTIME-2026-08-13.md).
+- A separate bounded run reaches the live SDL `PollEvent` and `PADRead` /
+  `PCInputSnapshot` boundaries, but its single OS-event attempt posts no
+  keydown or keyup and observes no state change. This is a running-game input
+  boundary, not input proof; see [runtime input evidence](docs/evidence/RUNTIME-INPUT-BOUNDARY-2026-08-13.md).
 - The first live graph snapshot is pointer-free and records version `1`, frame
   `0`, source capacity `256`, count `8`, and words
   `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.
