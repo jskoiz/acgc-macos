@@ -67,6 +67,12 @@ redistribute it or extracted proprietary assets.
   `pc_gx_flush_vertices`; `pc_metal_runtime_observe` remains unhit, so there
   is still no game-owned Metal encode/readback/pixel or playability proof. See
   [current post-fix runtime evidence](docs/evidence/CURRENT-METAL-SINK-RUNTIME-A8F3A8F-2026-08-13.md).
+- A focused observer-rejection audit proves the zero callback is the intended
+  v1 fail-closed semantic-packet boundary: the game’s richer TEV/texture/channel
+  state is rejected before `pc_metal_runtime_observe`, while supported synthetic
+  triangles reach the callback. Native and ASan/UBSan focused tests pass; the
+  next step is a deliberate packet-contract extension, not an unconditional
+  callback. See [observer rejection evidence](docs/evidence/GX-OBSERVER-REJECTION-AUDIT-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
