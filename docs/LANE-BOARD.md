@@ -17,7 +17,7 @@ does not mean its gate passed.
 | 5 | GX semantic packet — `019ff8d3-0887-7472-a53a-84c5d7ad105c` | Fixed-width renderer-neutral packet + tests | `/private/tmp/acgc-lane-gx-packet` / `c1/lane-gx-packet` | Complete; source `83fa889`; native/Apple/ASan focused tests passed |
 | 6 | Metal geometry/state — `019ff8d3-0c2e-7463-b918-af75f7cb6208` | Apple geometry/state fixtures | `/private/tmp/acgc-lane-metal-state` / `c1/lane-metal-state` | Complete; source `866dd94`; CPU/geometry passed, Metal skipped (no device) |
 | 7 | Texture/TLUT/TEV fixtures — `019ff8d3-150c-77f0-b99c-dcbf38645977` | Synthetic texture/palette/combiner fixtures | `/private/tmp/acgc-lane-tev-fixtures` / `c1/lane-tev-fixtures` | Complete; source `ddbb498`; focused native + ASan/UBSan fixture passed |
-| 8 | Input snapshot + SDL event smoke — `019ff8aa-743f-7923-8d9b-276421802fa8` | SDL-to-logical keyboard/controller snapshot, PADRead handoff, and event-path tests | `/private/tmp/acgc-lane-input-snapshot` / `c1/lane-input-snapshot` | Successor active; source `858d802`; snapshot/ASan gate passed, SDL event smoke in progress |
+| 8 | Input snapshot + SDL event smoke — `019ff8aa-743f-7923-8d9b-276421802fa8` | SDL-to-logical keyboard/controller snapshot, PADRead handoff, and event-path tests | `/private/tmp/acgc-lane-input-snapshot` / `c1/lane-input-snapshot` | Complete/parked; source `8b6849f`; native + ASan/UBSan SDL/controller smoke 2/2, keyboard requires OS/human event |
 | 9 | Mixer/CoreAudio correctness — `019ff8aa-7959-7342-af84-187dfb2e0a89` | Reconstructed PCM/mixer output proof and NEOS provenance | `/private/tmp/acgc-lane-audio-mixer` / `c1/lane-audio-mixer` | Successor active; source `766ad96`; synthetic mixer/callback proof passed, NEOS nonzero PCM provenance open |
 | 10 | Save_t/GCI roundtrip — `019ff8d3-0fe5-7883-8ebb-74eeac6efcb6` | Byte codec and process-restart persistence evidence | `/Users/jk/.codex/worktrees/35f6/acgc-modern-port` / `c1/lane-save-gci` | Successor active; umbrella `3b8ed21`; canonical fixture passes, arbitrary-byte padding loss under diagnosis |
 | 11 | Sandboxed filesystem/atomic saves — `019ff8d3-1b80-7ab0-89b5-28afcf680cef` | Application Support/cache/log/temp-file adapter | `/Users/jk/.codex/worktrees/10c5/acgc-modern-port`; `c1/lane-filesystem-saves` | Complete; umbrella `ee7b814`; synthetic atomic/corruption/isolation probes passed |
@@ -38,9 +38,11 @@ submodules blindly or edit a detached source checkout.
   mixer output or GameCube Save_t/GCI persistence.
 - `e5442de` adds the injectable, fixed-width PC input snapshot boundary; its
   focused source test passed. `858d802` now routes the exact final `PADRead`
-  handoff through that snapshot and passes native plus ASan/UBSan tests. The
-  same visible task is now running a separate SDL event-path smoke successor;
-  no live keyboard/controller or game interaction is claimed.
+  handoff through that snapshot and passes native plus ASan/UBSan tests.
+- `8b6849f` adds the SDL virtual-controller/event smoke harness. The real
+  `PADInit`/`PADRead` controller path passes 2/2 natively and under ASan/UBSan;
+  queued keyboard events are delivered but do not alter SDL keyboard state, so
+  the input lane is parked pending OS/human keyboard and physical-device proof.
 - `e03ffed` adds a pointer-free graph submission capture seam; its focused
   legacy test and Darwin graph syntax check pass, but the current run reaches
   neither the hook nor a live packet.
@@ -88,7 +90,8 @@ submodules blindly or edit a detached source checkout.
    callback records one packet.
 2. When a lane completes, inspect its final evidence immediately, mark it
    integrated/rejected/parked here, and refill only with a useful dependency-ready
-   successor. Current successor: input snapshot runtime gate on the same branch.
+   successor. The input lane is parked because its remaining gate requires an
+   OS/human event or physical controller; no synthetic filler replaces it.
 3. After the graph fault is repaired, run the capture seam (`e03ffed`) and feed
    the first live packet into `83fa889`; only then advance Metal/TEV toward a
    game-owned frame. The `866dd94` and `ddbb498` fixture passes remain separate

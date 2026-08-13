@@ -291,10 +291,10 @@ could not create the image; no visual-capture claim is made.
 ## Rolling lane update (2026-08-12)
 
 The authoritative `upstream/ACGC-PC-Port` branch is
-`c1/macos-host-launch` at `858d802`. Reviewed source commits now include:
+`c1/macos-host-launch` at `8b6849f`. Reviewed source commits now include:
 
-- `e5442de` / `858d802` — injectable fixed-width PC input snapshots and the
-  final PADRead handoff;
+- `e5442de` / `858d802` / `8b6849f` — injectable fixed-width PC input snapshots,
+  the final PADRead handoff, and SDL virtual-controller/event smoke;
 - `e03ffed` — pointer-free graph submission capture immediately before the
   existing PC/emu64 submit path;
 - `83fa889` — 4,800-byte renderer-neutral GX semantic packet contract;
@@ -325,6 +325,11 @@ passed 1/1. The integrated texture/TLUT/TEV fixture also passed 1/1. The
 umbrella lifecycle, filesystem/atomic-save, and verification
 evidence are recorded in commits `15a081f`, `ee7b814`, and `fe21878`.
 
+The integrated input targets at source `8b6849f` also pass 2/2: fixed-width
+snapshot/PADRead handoff plus a virtual SDL controller path. The keyboard half
+is intentionally limited because `SDL_PushEvent` does not update
+`SDL_GetKeyboardState`; an OS/human event is still required.
+
 The Save_t/GCI evidence is recorded in umbrella commit `3b8ed21`; it passes
 canonical-padding and checksum fixtures but intentionally keeps the arbitrary
 padding mismatch visible rather than treating canonicalization as lossless.
@@ -351,7 +356,7 @@ frame, input, audible output, Save_t/GCI restart, or playability gate is claimed
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |
 | Metal geometry fixture | Passed | Two command buffers containing a fixed-width colored triangle completed before the deadline; no pixel-readback or visual claim. |
 | Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop; the DVD-tail fix now reaches `graph_proc` before `game.c:154` `EXC_BAD_ACCESS`. |
-| Input | Boundary passed, running game not reached | `e5442de` provides a fixed-width injectable snapshot boundary and focused tests; the successor runtime handoff gate is still open. |
+| Input | Synthetic controller boundary passed, human keyboard open | `8b6849f` passes the fixed-width snapshot/PADRead and SDL virtual-controller smoke tests natively and under ASan/UBSan; OS/human keyboard, physical controller, running game, and playability remain unproven. |
 | Audio device boundary | Passed, limited | Real SDL/CoreAudio callback probe: 32 kHz S16 stereo, 512 samples, zero underruns/overruns; no reconstructed mixer or audible-output claim. |
 | Save/CARD host boundary | Passed, limited | Native and sanitizer temporary-directory CARD roundtrip; no GameCube Save_t/GCI or process-restart proof. |
 | Save_t/GCI codec | Blocked, informative | `3b8ed21` passes canonical-padding/checksum fixtures and codec-only sanitizers, but a high-entropy fixture loses two bytes at Save_t offset `0xB6`; runtime restart, recovery, and whole-GCI losslessness remain open. |

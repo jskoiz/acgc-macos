@@ -74,8 +74,8 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `858d802` (`Test PCInputSnapshot
-  PADRead handoff`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
+  `c1/macos-host-launch` source branch at `8b6849f` (`Add SDL input path smoke
+  harness`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
   Metal-fixture, and audio-boundary commits reviewed in the same source
   history. The fresh arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
@@ -89,6 +89,11 @@ redistribute it or extracted proprietary assets.
   (mixer-to-callback PCM fixture).
   These are separate boundaries: the graph capture has not yet observed a live
   packet because the reconstructed process stops at `game.c:154`.
+- The input path now adds `8b6849f`, a focused SDL virtual-controller smoke
+  harness. Real `PADInit`/`PADRead` button and axis handoff passes natively and
+  under ASan/UBSan 2/2. SDL-queued keyboard events do not mutate
+  `SDL_GetKeyboardState`, so OS/human keyboard and physical-controller proof
+  remain separate gates.
 - The new silent SDL/CoreAudio boundary probe opened 32 kHz, S16 stereo audio at
   512 samples, observed 62 callbacks and zero underruns/overruns on the host;
   the dummy-device CTest also passes. This is device and ring timing evidence,
