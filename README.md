@@ -100,6 +100,10 @@ redistribute it or extracted proprietary assets.
   CPU contract and existing geometry tests. The offscreen Metal test is skipped
   on this host because no Metal device is available; no game-owned frame is
   claimed.
+- The texture/TLUT/TEV fixture now covers fixed-width I4/I8/IA/RGB/RGBA/CI/CMPR
+  cases, explicit palette endianness, sampler modes, and signed Q8.8 TEV
+  arithmetic. Its integrated native test passes; this is not live texture
+  upload/readback or game-renderer proof.
 - The launcher supervisor now sends TERM, waits through a configurable grace
   period, falls back to KILL, and always reaps the child. Controlled TERM-aware
   and TERM-ignoring fixtures pass; this is process-supervision evidence, not a

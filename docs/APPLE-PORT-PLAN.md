@@ -125,8 +125,9 @@ Exit: host-launch evidence, with rendering still allowed to be absent.
   have command-buffer completion evidence. The renderer-neutral GX packet and
   Metal state fixtures also pass focused CPU/Apple tests, but this host skipped
   the live Metal-device path and no game-owned packet has reached it. Pixel
-  readback, GX-derived geometry, transforms, textures/TLUT/TEV, and all later
-  fixture classes remain open.**
+  readback, GX-derived geometry, transforms, live texture upload/readback, and
+  all later fixture classes remain open. Synthetic texture/TLUT/TEV reference
+  fixtures now pass separately.**
 - Prove deferred-batch drain and frame presentation separately, and add a
   directed CI14x2 fixture before claiming complete documented texture coverage.
 - Retain the current OpenGL backend as the Windows regression oracle.

@@ -298,6 +298,7 @@ The authoritative `upstream/ACGC-PC-Port` branch is
   existing PC/emu64 submit path;
 - `83fa889` — 4,800-byte renderer-neutral GX semantic packet contract;
 - `866dd94` — Metal geometry/state fixtures; and
+- `ddbb498` — texture/TLUT/sampler/TEV fixtures; and
 - `766ad96` — synthetic mixer-to-SDL-callback PCM probe.
 
 The integrated focused checks were run from the authoritative source checkout
@@ -319,7 +320,8 @@ ctest --test-dir /private/tmp/acgc-integrated-audio-build --output-on-failure -R
 
 Results: GX C/C++ tests passed 2/2; geometry passed and the Metal-device test
 was skipped because this host reports no Metal device; the mixer PCM probe
-passed 1/1. The umbrella lifecycle, filesystem/atomic-save, and verification
+passed 1/1. The integrated texture/TLUT/TEV fixture also passed 1/1. The
+umbrella lifecycle, filesystem/atomic-save, and verification
 evidence are recorded in commits `15a081f`, `ee7b814`, and `fe21878`.
 
 The fresh arm64 game run now loads COPYDATE, the string table, `JW_Init2`, both

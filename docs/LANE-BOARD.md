@@ -12,11 +12,11 @@ does not mean its gate passed.
 | --- | --- | --- | --- | --- |
 | 1 | DVD aligned-read semantics — `019ff8aa-6e31-7723-bb32-095c7158148b` | `pc_dvd.c`, focused DVD probe | `/private/tmp/acgc-lane-dvd-loader` / `c1/lane-dvd-loader`; source `dfb3f7f`, integrated as `4f77dab` | Complete; fresh run passes `COPYDATE` and reaches `game.c:154` |
 | 2 | Launch supervisor — `019ff8d2-a527-7c90-b7c0-f95aef4f5a0e` | Umbrella `script/build_and_run_game.sh` only | `/Users/jk/.codex/worktrees/f2c7/acgc-modern-port`; `c1/lane-launch-supervisor` | Complete; umbrella `e96776d`; TERM grace/KILL fixture passed |
-| 3 | Boot progression trace — `019ff8d3-06e4-71d3-8708-120d84fa270f` | Read-only post-loader LLDB/runtime evidence | `/Users/jk/.codex/worktrees/6bed/acgc-modern-port`; `/private/tmp/acgc-lane-boot-trace-build` | Active; `game.c:154` bad `GRAPH_SET_DOING_POINT` write, before `graph_task_set00` |
+| 3 | Boot trace → graph fault repair — `019ff8d3-06e4-71d3-8708-120d84fa270f` → `019ff8e7-402d-7a31-844a-0afd32918cc1` | Completed LLDB evidence, then source-owned `GAME`/`GRAPH` LP64 callback path | Trace `/Users/jk/.codex/worktrees/6bed/acgc-modern-port`; repair `/private/tmp/acgc-lane-graph-fault` / `c1/lane-graph-fault` | Successor active; trace isolates bad `GAME_BGM` store at `game.c:154`, repair lane owns next bounded experiment |
 | 4 | First game-owned render submission — `019ff8aa-6e31-7723-bb32-097e85bb2293` | Graph/emu64 submission capture | `/private/tmp/acgc-lane-render-capture-v2` / `c1/lane-render-capture` | Complete; source `e03ffed`; seam/test passed, no live packet yet |
 | 5 | GX semantic packet — `019ff8d3-0887-7472-a53a-84c5d7ad105c` | Fixed-width renderer-neutral packet + tests | `/private/tmp/acgc-lane-gx-packet` / `c1/lane-gx-packet` | Complete; source `83fa889`; native/Apple/ASan focused tests passed |
 | 6 | Metal geometry/state — `019ff8d3-0c2e-7463-b918-af75f7cb6208` | Apple geometry/state fixtures | `/private/tmp/acgc-lane-metal-state` / `c1/lane-metal-state` | Complete; source `866dd94`; CPU/geometry passed, Metal skipped (no device) |
-| 7 | Texture/TLUT/TEV fixtures — `019ff8d3-150c-77f0-b99c-dcbf38645977` | Synthetic texture/palette/combiner fixtures | `/private/tmp/acgc-lane-tev-fixtures` / `c1/lane-tev-fixtures` | Active fixture lane |
+| 7 | Texture/TLUT/TEV fixtures — `019ff8d3-150c-77f0-b99c-dcbf38645977` | Synthetic texture/palette/combiner fixtures | `/private/tmp/acgc-lane-tev-fixtures` / `c1/lane-tev-fixtures` | Complete; source `ddbb498`; focused native + ASan/UBSan fixture passed |
 | 8 | Input snapshot boundary + runtime gate — `019ff8aa-743f-7923-8d9b-276421802fa8` | SDL-to-logical keyboard/controller snapshot and focused handoff tests | `/private/tmp/acgc-lane-input-snapshot` / `c1/lane-input-snapshot` | Successor active; boundary source `e5442de`, runtime focused gate in progress |
 | 9 | Mixer/CoreAudio correctness — `019ff8aa-7959-7342-af84-187dfb2e0a89` | Reconstructed PCM/mixer output proof | `/private/tmp/acgc-lane-audio-mixer` / `c1/lane-audio-mixer` | Complete; source `766ad96`; mixer/callback CTest + ASan passed, audible/device output open |
 | 10 | Save_t/GCI roundtrip — `019ff8d3-0fe5-7883-8ebb-74eeac6efcb6` | Byte codec and process-restart persistence evidence | `/Users/jk/.codex/worktrees/35f6/acgc-modern-port`; create `c1/lane-save-gci` before edits | Active evidence lane |
@@ -49,6 +49,10 @@ submodules blindly or edit a detached source checkout.
 - `866dd94` adds Metal geometry/state fixtures. CPU and existing geometry tests
   pass; the offscreen Metal test is skipped because this host reports no Metal
   device.
+- `ddbb498` adds fixed-width texture/TLUT/sampler/TEV fixtures, including
+  CI14x2 and CMPR reference cases. The integrated Apple fixture test passes;
+  no texture upload/readback, shader wiring, or game-renderer evidence is
+  claimed.
 - `766ad96` adds a synthetic probe through `Jac_VframeWork`,
   `MixInterleaveTrack`, `AIInitDMA`, and the SDL callback. Exact PCM and ring
   drain pass natively and under ASan; no device/audible proof is claimed.
@@ -64,18 +68,25 @@ submodules blindly or edit a detached source checkout.
   completion, `JW_Init2`, `HotStartEntry`, both forest archives, and Famicom
   archive loading, then stops at `EXC_BAD_ACCESS` in `game.c:154` while entering
   `graph_proc`. This is not a rendered-frame proof.
+- The completed boot trace resolves the failing arm64 store as
+  `strb w8, [x22,#0x474]` for `GRAPH_SET_DOING_POINT(graph, GAME_BGM)` with
+  computed bad base `0x100000000`; `graph_task_set00` is never hit. Its next
+  source successor owns only `src/game.c`, `include/graph.h`, and directly
+  necessary ABI/callback tests on `c1/lane-graph-fault`.
 
 ## Integration order
 
-1. Keep the boot trace on the post-loader fault. Inspect the bad `GRAPH_SET_DOING_POINT`
-   destination/object lifetime at `game.c:154`; do not claim a frame until the
-   run reaches `graph_task_set00` and the capture callback records one packet.
+1. Keep the graph-fault successor on the post-loader fault. Inspect the bad
+   `GRAPH_SET_DOING_POINT` destination/object lifetime at `game.c:154`; do not
+   claim a frame until the run reaches `graph_task_set00` and the capture
+   callback records one packet.
 2. When a lane completes, inspect its final evidence immediately, mark it
    integrated/rejected/parked here, and refill only with a useful dependency-ready
    successor. Current successor: input snapshot runtime gate on the same branch.
 3. After the graph fault is repaired, run the capture seam (`e03ffed`) and feed
    the first live packet into `83fa889`; only then advance Metal/TEV toward a
-   game-owned frame. Fixture passes remain separate gates.
+   game-owned frame. The `866dd94` and `ddbb498` fixture passes remain separate
+   gates.
 4. Finish Save_t/GCI only if the lane can explain the deterministic
    BE->LE->BE mismatch; do not weaken a roundtrip test. Filesystem adapter,
    lifecycle, and verification evidence remain synthetic/portable boundaries.
