@@ -278,3 +278,7 @@ That trace now shows the first live graph task traversing eight inline
 and no error/cancellation. Misaligned pointer-field diagnostics are excluded;
 the result is no-draw interpreter evidence, not a frame or Metal proof. See
 [emu64 continuation evidence](evidence/EMU64-CONTINUATION-NO-DRAW-2026-08-13.md).
+A subsequent bounded trace confirms a second graph submission and interpreter
+entry. Its observed prefix contains only `G_DL_NOPUSH`/`G_MOVEWORD` continuation
+commands before exact-PID timeout; no draw handler or `GXBegin` is observed and
+the second task's completion is unproven. See [subsequent graph-task evidence](evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md).

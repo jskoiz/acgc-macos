@@ -121,6 +121,11 @@ redistribute it or extracted proprietary assets.
   Pointer-sized diagnostic fields read with 32-bit offsets are excluded from
   the claim. This is no-draw interpreter evidence, not a frame or Metal result.
   See [emu64 continuation evidence](docs/evidence/EMU64-CONTINUATION-NO-DRAW-2026-08-13.md).
+- A second bounded task trace confirms later graph progression: graph submission
+  and `emu64_taskstart_r` each occur twice, while the second task reaches only
+  `G_DL_NOPUSH`/`G_MOVEWORD` continuation commands before exact-PID timeout.
+  No draw handler or `GXBegin` fires, and the second task does not reach a
+  proven return. See [subsequent graph-task evidence](docs/evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
