@@ -21,8 +21,9 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `26da235` (`Add bounded GX v2 semantic packet
-  fixture`), on top of `a8f3a8f` (`Rename reserved Metal shader local`),
+  `c1/macos-host-launch` at `d1e812c` (`Add versioned GX v2 consumer handoff`),
+  on top of `26da235` (`Add bounded GX v2 semantic packet fixture`),
+  `a8f3a8f` (`Rename reserved Metal shader local`),
   `59aa655` (`Test PC padmgr frame guard`) and `54b840c`
   (`Add bounded Apple Metal packet sink`),
   on top of `f4cb491` (`Register Apple GX packet consumer bridge`),
@@ -80,9 +81,13 @@ redistribute it or extracted proprietary assets.
   not a renderer rewrite or live-frame proof. See [GX v2 packet map](docs/evidence/GX-V2-PACKET-CONTRACT-MAP-2026-08-13.md).
 - The bounded GX v2 packet implementation is integrated at `26da235`. Its
   fixed-width builder, validator, and fail-closed CPU fixtures pass native and
-  ASan/UBSan focused CTest `3/3` each. The existing Apple callback remains
-  v1-only, so this is not live callback, Metal encode/readback/pixel, or
-  playability proof. See [GX v2 implementation evidence](docs/evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md).
+  ASan/UBSan focused CTest `3/3` each. A follow-up at `d1e812c` adds a
+  separately typed v2 consumer boundary, preserves v1 dispatch, and reports
+  `V2_EXTENSION_NOT_RENDERED` rather than fabricating richer rendering state;
+  its native and ASan/UBSan focused CTest runs pass `4/4` each. Neither lane
+  proves a live game callback, Metal encode/readback/pixel, or playability.
+  See [GX v2 implementation evidence](docs/evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md)
+  and [GX v2 consumer evidence](docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
@@ -147,9 +152,10 @@ redistribute it or extracted proprietary assets.
   cleanup`) and the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
   same source history. That fresh arm64 link produced a Mach-O
-  `AnimalCrossing` executable. The current source tip is `26da235`; its GX v2
-  packet fixture, Apple sink shader fix, and input-fixture changes have focused
-  verification but have not yet had another full `ac_pc` link. Its native audio command records remain 8 bytes,
+  `AnimalCrossing` executable. The current source tip is `d1e812c`; its GX v2
+  packet and version-aware consumer paths, Apple sink shader fix, and
+  input-fixture changes have focused verification but have not yet had another
+  full `ac_pc` link. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   the compact bank-28 tail and MEDIUM_CART-to-native-ARAM mapping have focused
   wire fixtures, and native plus ASan/UBSan probes pass.

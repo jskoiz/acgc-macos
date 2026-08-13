@@ -61,12 +61,13 @@ slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The last full reconstructed `ac_pc` link was a native
 arm64 Mach-O from source branch `c1/macos-host-launch` at `f4cb491` (on top of
 `9cf9b3f`, `6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`). The current source
-tip `26da235` adds the bounded GX v2 packet builder/validator fixture on top of
-`a8f3a8f`, the narrow Metal sink shader fix, the `59aa655` input frame-guard
-fixture, and `54b840c` offscreen Metal sink. These current-tip changes have
-focused verification, but have not yet had another full `ac_pc` link. The
-existing Apple callback remains v1-only until a version-aware consumer is
-implemented; see [GX v2 implementation evidence](evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md).
+tip `d1e812c` adds the version-aware GX v2 consumer boundary on top of the
+bounded packet builder at `26da235`, the narrow Metal sink shader fix at
+`a8f3a8f`, the `59aa655` input frame-guard fixture, and `54b840c` offscreen
+Metal sink. The consumer preserves v1 dispatch, validates v2, and reports
+`V2_EXTENSION_NOT_RENDERED`; its focused native and ASan/UBSan tests pass
+`4/4` each. These current-tip changes have focused verification, but have not
+yet had another full `ac_pc` link. See [GX v2 consumer evidence](evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md).
 The DVD/CARD,
 input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
 commits reviewed in the same source history remain the current evidence, and

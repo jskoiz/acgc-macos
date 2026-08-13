@@ -35,61 +35,34 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: one production worker is active. Callback capture lane
-`019ffbc7-01e9-7b32-b5b1-f0abaada1b09` is complete/archived after its
-one normal-shell launch and one permitted elevated fallback both stopped
-before runtime; evidence is recorded in
-`docs/evidence/LIVE-APPLE-GX-CALLBACK-2026-08-13.md`. The offscreen Metal sink
-lane `019ffbc8-1f2b-7513-9c1c-7ddde5114f97` is complete/integrated at PC
-`54b840c`; its CPU/build contract passes and the device test skips `77`, with
-evidence in `docs/evidence/OFFSCREEN-METAL-SINK-2026-08-13.md`. The earlier
-input, mixer/audio, and lifecycle lanes are complete/archived with their
-separate evidence and claim boundaries. Lane 72 completed its one serialized
-callback-observation attempt and is archived after the pre-inferior `nice(5)`
-permission boundary. A root-owned elevated current-tip launch then created an
-inferior, reached `graph_proc`/NEOS and `pc_gx_flush_vertices`, and returned
-through `graph_proc` with exit status `0` after bounded SIGTERM. That run proves
-launch/boot/GX-boundary/clean-return only; its interactive transcript did not
-retain per-breakpoint hit counts, so the Apple callback gate remains open.
-The callback lane is now complete; its shader blocker was fixed by completed
-lane `019ffbf9-eee6-7e12-bc8c-5b6f68c58c5f`. Current runtime successor lane
-`019ffc03-b830-70f2-bce2-6cc32a436c29` is complete/archived after one
-serialized current-tip launch/LLDB attempt at PC `a8f3a8f`; no source edits were
-made. Observer-rejection lane `019ffc19-bff8-77a3-8c05-9e57d2a04bc2` is also
-complete with no source edit: its focused fixture shows the v1 packet builder
-rejects the game’s richer state before the callback. Read-only GX v2 contract
-lane `019ffc28-3c56-70a2-a0d7-60b8e16dfda2` is complete with no edit or live
-launch; it maps the smallest bounded packet extension. Implementation lane
-`019ffc34-ab7a-74d0-839e-65cd045a2b01` is complete/integrated at PC
-`26da235` from worker commit `06fa74c`: its versioned fixed-width v2
+Current maintenance state: no production worker is active. Callback capture lane
+`019ffbc7-01e9-7b32-b5b1-f0abaada1b09`, the offscreen Metal sink lane
+`019ffbc8-1f2b-7513-9c1c-7ddde5114f97`, the input, mixer/audio, lifecycle,
+observer-rejection, and read-only GX v2 contract lanes are complete/archived
+with their separate evidence and claim boundaries. The root-owned elevated
+current-tip launch reached `graph_proc`/NEOS and `pc_gx_flush_vertices`, then
+returned through `graph_proc` with status `0` after bounded SIGTERM; it proves
+launch/boot/GX-boundary/clean-return only, not callback or renderer output.
+Implementation lane `019ffc34-ab7a-74d0-839e-65cd045a2b01` is
+complete/integrated at PC `26da235` from worker `06fa74c`; its fixed-width v2
 builder/validator and fail-closed fixtures pass native and ASan/UBSan focused
-CTest `3/3` each. Runtime dispatch remains v1-only because the existing Apple
-consumer has no version-aware callback; this is CPU packet proof, not live
-callback, Metal, pixel, or playability proof. Evidence is recorded in
-`docs/evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md`. Windows lane
-The next dependency-ready lane `019ffc5d-392e-75e2-a863-a4b9199b11dd` owns a
-version-aware GX v2 callback/consumer boundary from PC `26da235`. It must keep
-the existing v1 callback path intact and stops at focused CPU callback proof;
-it has no full-link, live-launch, Metal, pixel, device, input, audio, save, or
-playability scope. The Windows lane
-`019ffbd0-b850-74b0-a0fd-cedcbd90db47`, sanitizer lane
-`019ffbd0-ba29-78e2-aad5-93f34b8bdf73`, and iOS shared-boundary lane
-`019ffbd0-bc94-7ff1-baf1-e5689164d53a` have complete read-only handoffs and
-are queued for exact-root cleanup. Game-owned input frame-guard lane
-`019ffbda-8005-7b93-83cf-67549d968677` is integrated at PC `59aa655` and
-queued for cleanup. The read-only Metal bridge audit
-and Apple registration source lane are complete; their exact findings remain
-the current renderer boundary. The authoritative PC source is
-`26da235` on
+CTest `3/3` each. Consumer lane `019ffc5d-392e-75e2-a863-a4b9199b11dd` is
+complete/integrated at PC `d1e812c` from worker `cd881b7`: a separately typed
+v2 callback validates the full packet, preserves v1 dispatch, and reports
+`V2_EXTENSION_NOT_RENDERED`. Its native and ASan/UBSan focused CTest runs pass
+`4/4` each. Neither lane proves a live game-owned callback, Metal
+encode/readback/pixel, device, input, audio, save, or playability gate. See
+`docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md`.
+
+The Windows, sanitizer, iOS, and input frame-guard handoffs are complete and
+queued for exact-root cleanup. The authoritative PC source is `d1e812c` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
-only the pre-existing
-`.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
-queue is complete; the graph activation, exact-tip sanitizer, graph-target
-source/test, and caller-driven save/restart audits are complete/parked with
-their evidence recorded below. The post-link runtime task, live-target resolver,
-and current-tip runtime trace are complete and archived; the current-tip trace
-is blocked before graph boot by a launch working-directory mismatch, with no
-retry performed. Lane 64 is complete/archived with a separate pre-launch LLDB
+only the pre-existing `.codex`/settings edits. The next bounded gate is one
+serialized current-tip runtime trace for v2 callback reachability; it remains
+separate from Metal encode/readback/pixel proof and is not opened as filler.
+The graph-capture, GX-to-Metal, save-manager, post-link runtime,
+live-target-resolver, and current-tip trace history remains recorded below.
+Lane 64 is complete/archived with a separate pre-launch LLDB
 command-setting blocker. Lane 65 is complete/archived with live target and GX
 boundary evidence. Lane 66 is complete/archived with its source crosswalk and
 focused reruns recorded below. Lane 67 is complete/archived with the integrated
@@ -252,7 +225,7 @@ from compilation alone.
 | 87 | GX observer rejection-path audit — `019ffc19-bff8-77a3-8c05-9e57d2a04bc2` | Source/test lane for `pc/src/pc_gx.c` observer invocation and semantic rejection reason; focused fixture/CMake only if a narrow bug is proven | Source worktree `/private/tmp/acgc-lane-gx-observer-rejection` (retire after review); branch `c1/lane-gx-observer-rejection` at `a8f3a8f`; roots `/private/tmp/acgc-lane-gx-observer-rejection-build` and `...-asan` (retire after review); no source commit | Complete/archived; no edit warranted; native and ASan/UBSan focused CTest `1/1` each; callback registration healthy, live zero explained by fail-closed semantic rejection; evidence `docs/evidence/GX-OBSERVER-REJECTION-AUDIT-2026-08-13.md`; no live callback/Metal/pixel/playability claim |
 | 88 | GX v2 packet contract map — `019ffc28-3c56-70a2-a0d7-60b8e16dfda2` | Read-only two-upstream crosswalk for the smallest fixed-width TEV/texture/channel extension beyond v1; focused existing tests only, no production edits or live launch | Worktree `/Users/jk/.codex/worktrees/24b3/acgc-modern-port` (retire after review); scratch `/private/tmp/acgc-lane-gx-v2-contract` (retire after review); no source branch | Complete/archived; no edit or live launch; maps channel/texture-generator/two-stage-TEV state needed for a deliberate packet extension; evidence `docs/evidence/GX-V2-PACKET-CONTRACT-MAP-2026-08-13.md`; no live callback/Metal/pixel/playability claim |
 | 89 | Implement bounded GX v2 packet — `019ffc34-ab7a-74d0-839e-65cd045a2b01` | Source lane for versioned fixed-width channel/texture-generator/two-stage-TEV packet state and narrow `pc_gx` construction; owns only packet headers/source, `pc_gx.c`, focused tests/CMake | Worktree and focused roots retired by cleanup; branch `c1/lane-gx-v2-packet` at `06fa74c`; integrated canonical PC `26da235`; umbrella evidence preserved | Complete/integrated; native and ASan/UBSan focused CTest `3/3` each; v2 remains fixture-only until a version-aware consumer exists; no live callback, Metal encode/readback/pixel, device, input/audio/save, or playability claim; evidence `docs/evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md` |
-| 90 | Version-aware GX v2 consumer boundary — `019ffc5d-392e-75e2-a863-a4b9199b11dd` | Source lane for a separately typed/version-checked v2 callback and Apple consumer boundary; preserve v1 dispatch, consume bounded values only, and prove v2 acceptance/rejection with focused tests | Worktree `/Users/jk/.codex/worktrees/c765/acgc-modern-port`; source branch/worktree `c1/lane-versioned-gx-v2-consumer` / `/private/tmp/acgc-lane-gx-v2-consumer/source` at `26da235`; roots `/private/tmp/acgc-lane-gx-v2-consumer` and `...-asan`; no umbrella edits | Active; no full link, live launch, Metal encode/readback/pixel, device, input/audio/save, or playability claim |
+| 90 | Version-aware GX v2 consumer boundary — `019ffc5d-392e-75e2-a863-a4b9199b11dd` | Source lane for a separately typed/version-checked v2 callback and Apple consumer boundary; preserve v1 dispatch, consume bounded values only, and prove v2 acceptance/rejection with focused tests | Worktree and exact focused roots retired by cleanup; branch `c1/lane-versioned-gx-v2-consumer` at worker `cd881b7`; integrated canonical PC `d1e812c`; umbrella evidence preserved | Complete/integrated; native and ASan/UBSan focused CTest `4/4` each with no diagnostics; v2 reports `V2_EXTENSION_NOT_RENDERED`; no full link, live callback, Metal encode/readback/pixel, device, input/audio/save, or playability claim; evidence `docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md` |
 
 ## Parked intake (not active)
 
