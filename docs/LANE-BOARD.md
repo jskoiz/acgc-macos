@@ -7,14 +7,15 @@ task being active means it is allowed to inspect or run its bounded work; it
 does not mean its gate passed.
 
 Current scheduler target: up to ten useful visible ACGC lanes, with no filler.
-The known active set is texture remediation (17), graph-capture-to-GX (16),
-and current verification (22). The post-fix game-frame runtime lane and six
-additional bounded lanes have been submitted to the Codex project-task queue;
-their client IDs remain setup-pending until the app returns durable task IDs
-and worktrees. Source-editing work remains capped at roughly 5–7 lanes, and
-expensive full links remain serialized. All other ACGC tasks are parked or
-archived; their reviewed commits and evidence remain available in Git and the
-evidence docs.
+The known active source lane is LP64 texture remediation (17); graph capture
+(16) and integrated verification (22) are complete/parked. The post-fix
+game-frame runtime lane, six previously requested bounded lanes, and four new
+successors submitted in this refill are setup-pending: the app has returned
+client IDs but not durable task IDs/worktrees yet. They are not counted as
+active until `list_threads` confirms them. Source-editing work remains capped
+at roughly 5–7 lanes, and expensive full links remain serialized. All other
+ACGC tasks are parked or archived; their reviewed commits and evidence remain
+available in Git and the evidence docs.
 
 ## Ownership and live state
 
@@ -61,6 +62,10 @@ durable task IDs and the app creates their isolated worktrees.
 | Save_t raw-wire preservation follow-up | `client-new-thread:990b558a-7152-4205-949a-3c2215e113d9` | `pc_save_bswap` and focused wire-roundtrip proof only |
 | Windows x86 cross-compile probe | `client-new-thread:1cc25514-49e4-466c-b76a-461c645b8cd4` | Read-only i686/MinGW/strict `_WIN32` availability and compile evidence |
 | iOS shared-boundary readiness audit | `client-new-thread:64b5daf8-a303-4428-870f-9f011774ac9f` | Read-only portable vs AppKit/Metal/CoreAudio boundary map; no iOS source |
+| Post-texture graph-fault continuation | `client-new-thread:6240fbda-a36c-409f-89b3-66a3878fe6bd` | `src/game.c`/graph ABI only after texture integration; next real arm64 stop |
+| Live-prefix decoder contract | `client-new-thread:faa2fa6c-c564-4f4b-9b0b-268c904e9fde` | Fail-closed decoder/packet fixtures for the observed 8-word prefix |
+| Metal frame-evidence harness | `client-new-thread:fb45f25e-4bf5-43ae-afc5-e10117d7620f` | Packet/encode/present/readback gate; record no-device result without pixels claim |
+| Asset-audio runtime gate | `client-new-thread:f0a79adc-ad4d-4350-bdce-38cdd8c8657b` | NEOS_OUT-to-sink evidence separated from synthetic PCM and audibility |
 
 The Codex-created umbrella worktrees begin detached at umbrella commit
 `82732fe` with nested submodules uninitialized. Source-edit lanes therefore use
