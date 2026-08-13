@@ -59,8 +59,8 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `9cf9b3f` (on top of
-`6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`), with the
+arm64 Mach-O from source branch `c1/macos-host-launch` at `d0e64f5` (on top of
+`9cf9b3f`, `6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`), with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
 prior DVD wait. The portable boot-source facade accepts only exact
@@ -108,7 +108,9 @@ physical-device gates remain open. Source `5086f1d` now crosses the former bad
 the first `graph_task_set00` call. Source `10d6ac0` captures the first live
 game-owned prefix (version 1, frame 0, capacity 256, count 8, words
 `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`).
-The bounded graph contract now classifies the observed eight-word capture as
+The Save_t wire fixture now makes the pre-d1575f0 `0xF10E` loss explicit while
+the current production codec preserves those bytes through restart and
+checksum. The bounded graph contract now classifies the observed eight-word capture as
 prefix-only and refuses to submit it as a complete list. The optional GX-to-
 Metal handoff and Apple packet/state fixtures pass their CPU contracts, while
 device tests skip with `77` on this host because no Metal device is available.

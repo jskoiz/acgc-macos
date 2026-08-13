@@ -21,8 +21,9 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
-  on top of `6e4aded` (bounded graph classification), `e22cbc5`
+  `c1/macos-host-launch` at `d0e64f5` (`Document Save_t raw-wire loss fixture`),
+  on top of `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
+  `6e4aded` (bounded graph classification), `e22cbc5`
   (optional GX packet handoff), `a7b9dff` (`Exercise mCD_SaveHome_bg in CARD fixture`),
   `5548570` (`Validate GCI Save_t recovery slots`) and `09dd182`
   (`Fix LP64 field display-list cleanup`). The current
@@ -96,8 +97,9 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `9cf9b3f` (`Fix reserved identifiers
-  in Metal fixture shaders`), on top of `6e4aded` (bounded graph
+  `c1/macos-host-launch` source branch at `d0e64f5` (`Document Save_t raw-wire
+  loss fixture`), on top of `9cf9b3f` (`Fix reserved identifiers in Metal
+  fixture shaders`), `6e4aded` (bounded graph
   classification), `e22cbc5` (optional GX packet handoff), `a7b9dff`
   (`Exercise mCD_SaveHome_bg in CARD fixture`), and `5548570` (`Validate GCI Save_t recovery slots`)
   and `09dd182` (`Fix LP64 field display-list
@@ -121,7 +123,8 @@ redistribute it or extracted proprietary assets.
   relocation) plus `304f055`/`724a18d` (LP64 audio-DMA address preservation),
   `1d1cd8f`/`6e4aded` (bounded complete-list graph classification), and
   `19d5f4e`/`26bcc02`/`e22cbc5`/`9cf9b3f` (optional GX-to-Metal handoff and
-  host-compiler-safe Metal fixtures).
+  host-compiler-safe Metal fixtures), and `315f040`/`d0e64f5` (test-only
+  Save_t raw-wire loss forensic coverage).
   These remain separate boundaries: the first live game-owned prefix is
   captured; the identifiable screenshot belongs to the separately named
   `909f3ca` run; and the newer authoritative `09dd182` runtime reaches the
