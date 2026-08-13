@@ -76,6 +76,15 @@ trace completes the second graph task's interpreter continuation but does not
 prove task-2 drawing or Metal output. See [GX v2 consumer evidence](evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md)
 and [second graph-task completion evidence](evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md)
 and [GX V3 state-handoff evidence](evidence/GX-V3-STATE-HANDOFF-042CBF7-2026-08-13.md).
+One current-tip `042cbf7` link now completes as a native arm64 Mach-O, and a
+permitted elevated bounded LLDB launch reaches real GAFE01 boot, LOGO/NEOS,
+`GXBegin`, `pc_gx_flush_vertices`, and repeated V3 builder-entry attempts.
+The V3 Apple consumer and `pc_metal_runtime_observe` remain unobserved (`0`),
+so the entry counts do not establish a successful packet or callback. The
+unprivileged predecessor still fails before inferior creation with status
+`-1`. This is game-owned GX/V3 reachability evidence only; Metal encode,
+readback, pixels, clean shutdown, and playability remain open. See [GX V3
+current-tip runtime evidence](evidence/GX-V3-CURRENT-TIP-RUNTIME-042CBF7-2026-08-13.md).
 The DVD/CARD,
 input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
 commits reviewed in the same source history remain the current evidence, and

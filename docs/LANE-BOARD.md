@@ -68,6 +68,13 @@ and ASan/UBSan tests `3/3` each, and marks V3 `V3_EXTENSION_NOT_RENDERED`.
 No full link, live callback count, Metal encode/readback, pixel, input, audio,
 save, device, or playability claim follows; the next gate is a serialized
 current-tip runtime count followed by a real Metal state encoder.
+That root-owned runtime count is now recorded: the current-tip link produced
+an arm64 Mach-O, and one permitted elevated trace reached GAFE01 boot,
+LOGO/NEOS, `GXBegin`, and `pc_gx_flush_vertices`. V3 builder entry was
+attempted `549` times, but the typed V3 Apple consumer and
+`pc_metal_runtime_observe` were both `0`; the entry count is not a successful
+packet/callback claim. The next bounded implementation step is a diagnostic
+V3 rejection reason, not a Metal or pixel claim.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -113,10 +120,13 @@ The Windows, sanitizer, iOS, and input frame-guard handoffs are complete and
 queued for exact-root cleanup. The authoritative PC source is `042cbf7` on
 `c1/macos-host-launch`; the umbrella branch is `main` (the local
 `c1/apple-port-bootstrap` alias is fast-forwarded to the same tip) plus only
-the pre-existing `.codex`/settings edits. The next bounded gate is a
-current-tip runtime count for the V3 state-forwarding callback, followed by a
-Metal state encoder; V3 remains separate from Metal encode/readback/pixel proof
-and is not opened as filler.
+the pre-existing `.codex`/settings edits. The current-tip V3 runtime count is
+complete and remains separate from Metal encode/readback/pixel proof: the
+unprivileged launch failed before inferior creation with status `-1`, while
+one permitted elevated retry reached boot, GX, and V3 builder entries but no
+V3 consumer or Apple runtime-observer hit. The next bounded implementation
+lane is the V3 fail-closed rejection reason, followed by a Metal state encoder;
+no filler lane is opened.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
@@ -295,7 +305,7 @@ from compilation alone.
 | 100 | Metal packet rejection predicate audit — `019ffd08-10ff-77b1-8bc4-bd91a84902e9` | Test-only/read-only reproduction of fail-closed packet-builder behavior for textured/TEV/active state; native plus ASan/UBSan focused tests; no worker full link/LLDB; root continuation owns only opt-in diagnostic instrumentation | Worker task retired after remote compaction failure; diagnostic branch `c1/lane-metal-rejection-diagnostic` fast-forwarded into canonical `c1/macos-host-launch` at `8a19f23`; decomp `09ca8e8b`; exact roots `/private/tmp/acgc-metal-rejection-trace-build` and `/private/tmp/acgc-metal-rejection-trace-logs` | Complete/archived; focused native and ASan/UBSan v2 handoff tests `1/1` each; one elevated launch emitted 32 preflight + 32 fail records; live alpha-blend/TEXMTX0 state is outside current v2 contract; no callback/Metal/pixel/playability claim; evidence `docs/evidence/METAL-REJECTION-DIAGNOSTIC-8A19F23-2026-08-13.md` |
 | 101 | Live blend/texture-matrix GX packet extension — `019ffd19-3a91-7ba2-b6db-c7535d5143ce` | Source-edit lane for the smallest versioned packet/Apple consumer extension covering the observed `GX_BM_BLEND` + `GX_TEXMTX0` state; preserve v1 and legacy OpenGL | Worktree `/Users/jk/.codex/worktrees/fb3c/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source`; branch `c1/lane-gx-live-blend-texmatrix` returned clean to base `8a19f23`; decomp `09ca8e8b` | Rejected/archived after two remote compaction `404` failures; one uncommitted header-only draft was reverted; no source commit, build, test, full link, LLDB, callback, Metal, pixel, or playability result |
 | 102 | Live blend/texture-matrix GX packet extension retry — `019ffd20-e35d-7121-84b0-1589246e8e3c` | Fresh source-edit retry for the smallest versioned packet/Apple consumer extension covering `GX_BM_BLEND`, source-alpha factors, raw `GX_LO_NOOP=5`, and `GX_TEXMTX0`; preserve v1/OpenGL | Worktree `/Users/jk/.codex/worktrees/7c0b/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source`; branch `c1/lane-gx-live-blend-texmatrix` clean at `8a19f23`; decomp `09ca8e8b` | Rejected/archived after remote compaction `404` before source edit; no build, test, full link, LLDB, runtime, or claim |
-| 103 | Root-owned GX v3 state handoff — root continuation | Integrated source extension for the observed blend/source-alpha/`GX_LO_NOOP`/`GX_TEXMTX0` state; preserve V1/OpenGL and keep V3 non-rendering | Source branch `c1/lane-gx-v3-direct` at `141a746`; integrated canonical PC `042cbf7`; source `/private/tmp/acgc-lane-gx-v3-direct-source` held for cleanup; native/ASan roots `/private/tmp/acgc-integrate-gx-v3-042cbf7-native` and `...-asan` | Complete/integrated; combined V1/V2/V3 focused CTest `3/3` native and `3/3` ASan/UBSan with no diagnostics; V3 is state-forwarding only and marked `V3_EXTENSION_NOT_RENDERED`; no full link, LLDB, live callback count, Metal encode/readback/pixel, or playability claim; evidence `docs/evidence/GX-V3-STATE-HANDOFF-042CBF7-2026-08-13.md` |
+| 103 | Root-owned GX v3 state handoff and current-tip runtime — root continuation | Integrated source extension for the observed blend/source-alpha/`GX_LO_NOOP`/`GX_TEXMTX0` state; preserve V1/OpenGL and keep V3 non-rendering; one serialized current-tip link and bounded callback-entry trace | Source branch `c1/lane-gx-v3-direct` at `141a746`; integrated canonical PC `042cbf7`; source `/private/tmp/acgc-lane-gx-v3-direct-source` and runtime roots `/private/tmp/acgc-current-v3-runtime-{build,logs}` held for cleanup; native/ASan roots `/private/tmp/acgc-integrate-gx-v3-042cbf7-native` and `...-asan` | Complete/integrated; combined V1/V2/V3 focused CTest `3/3` native and `3/3` ASan/UBSan with no diagnostics; current arm64 `ac_pc` link completed and elevated trace reached graph/GX/V3 builder entries (`549`), but V3 consumer and `pc_metal_runtime_observe` were `0`; V3 remains `V3_EXTENSION_NOT_RENDERED`; no successful callback, Metal encode/readback/pixel, or playability claim; evidence `docs/evidence/GX-V3-STATE-HANDOFF-042CBF7-2026-08-13.md` and `docs/evidence/GX-V3-CURRENT-TIP-RUNTIME-042CBF7-2026-08-13.md` |
 
 ## Parked intake (not active)
 

@@ -96,6 +96,16 @@ redistribute it or extracted proprietary assets.
   `V3_EXTENSION_NOT_RENDERED` and is not submitted to the Metal sink; this is
   callback-contract evidence only, not live callback, Metal encode/readback,
   pixel, or playability proof. See [GX V3 state-handoff evidence](docs/evidence/GX-V3-STATE-HANDOFF-042CBF7-2026-08-13.md).
+- A current-tip `042cbf7` `ac_pc` link completed as an arm64 Mach-O, and one
+  permitted elevated bounded LLDB trace reached real GAFE01 boot, LOGO/NEOS,
+  `GXBegin`, `pc_gx_flush_vertices`, and repeated V3 builder-entry attempts
+  (`549`). The typed V3 Apple consumer and `pc_metal_runtime_observe` were
+  both `0`; the V3 counts are entry attempts, not successful packet
+  construction or callback acceptance. The preceding unprivileged launch
+  failed before inferior creation with status `-1`. This advances the
+  game-owned GX/V3 reachability boundary only; it is not a successful callback,
+  Metal encode/readback, pixel, or playability claim. See [GX V3 current-tip
+  runtime evidence](docs/evidence/GX-V3-CURRENT-TIP-RUNTIME-042CBF7-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.
