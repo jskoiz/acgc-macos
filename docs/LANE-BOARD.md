@@ -35,7 +35,7 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: six workers are active. Callback capture lane
+Current maintenance state: five workers are active. Callback capture lane
 `019ffbc7-01e9-7b32-b5b1-f0abaada1b09` is complete/archived after its
 one normal-shell launch and one permitted elevated fallback both stopped
 before runtime; evidence is recorded in
@@ -51,7 +51,7 @@ inferior, reached `graph_proc`/NEOS and `pc_gx_flush_vertices`, and returned
 through `graph_proc` with exit status `0` after bounded SIGTERM. That run proves
 launch/boot/GX-boundary/clean-return only; its interactive transcript did not
 retain per-breakpoint hit counts, so the Apple callback gate remains open.
-These six lanes are the current dependency-ready work; no additional filler
+These five lanes are the current dependency-ready work; no additional filler
 lane is being opened. Windows lane
 `019ffbd0-b850-74b0-a0fd-cedcbd90db47`, sanitizer lane
 `019ffbd0-ba29-78e2-aad5-93f34b8bdf73`, and iOS shared-boundary lane
@@ -228,7 +228,7 @@ from compilation alone.
 | 79 | Windows compatibility audit — `019ffbd0-b850-74b0-a0fd-cedcbd90db47` | Read-only `_WIN32`/x86/OpenGL/SDL regression audit against current Apple changes; no source edits, ISO access, or full link | Worktree `/Users/jk/.codex/worktrees/628f/acgc-modern-port`; focused root `/private/tmp/acgc-lane-windows-audit`; no branch | Active; no Windows sign-off yet |
 | 80 | Native + ASan/UBSan verification matrix — `019ffbd0-ba29-78e2-aad5-93f34b8bdf73` | Read-only focused sanitizer matrix for graph/GX/Save_t/cleanup/audio/portable/Apple packet contracts; no source edits, ISO access, or full link | Worktree `/Users/jk/.codex/worktrees/ea1e/acgc-modern-port`; roots `/private/tmp/acgc-lane-sanitizer-matrix-native` and `/private/tmp/acgc-lane-sanitizer-matrix-asan`; no branch | Active; no refreshed matrix claim yet |
 | 81 | iOS shared-boundary readiness audit — `019ffbd0-bc94-7ff1-baf1-e5689164d53a` | Read-only audit of portable/core, Apple bridge, lifecycle, and existing iOS evidence; iOS source remains gated until macOS shared core/renderer proof | Worktree `/Users/jk/.codex/worktrees/b820/acgc-modern-port`; focused root `/private/tmp/acgc-lane-ios-readiness`; no branch | Active; no simulator/device/playability claim yet |
-| 82 | Direct Apple callback hit capture successor — `019ffbd5-53a3-7371-b1a6-19859c9bbf35` | Read-only current-tip direct LLDB launch using explicit hit counters; non-duplicate follow-up to lane 73's stop-at-entry failure | Worktree `/Users/jk/.codex/worktrees/a688/acgc-modern-port`; build `/private/tmp/acgc-lane-apple-callback-direct-build`; logs `/private/tmp/acgc-lane-apple-callback-direct-logs`; no source branch | Active; no runtime hit/frame/Metal claim yet |
+| 82 | Direct Apple callback hit capture successor — `019ffbd5-53a3-7371-b1a6-19859c9bbf35` | Read-only direct LLDB launch using explicit hit counters; non-duplicate follow-up to lane 73's stop-at-entry failure | Worktree `/Users/jk/.codex/worktrees/a688/acgc-modern-port` (retire); build/log roots retired; no source branch | Complete/archived at pre-sink PC `f4cb491`; graph/target/GX each hit once, Apple callback hit `0`; evidence `docs/evidence/DIRECT-APPLE-GX-CALLBACK-2026-08-13.md`; no Metal/pixel claim |
 | 83 | Game-owned input frame-guard fixture — `019ffbda-8005-7b93-83cf-67549d968677` | Source/test successor for `padmgr_RequestPadData()` once-per-frame state preservation; owns `pc/tests/pc_padmgr_frame_guard_fixture.c` and narrow CMake registration only | Worktree `/Users/jk/.codex/worktrees/7dfc/acgc-modern-port`; branch to be declared by worker; roots `/private/tmp/acgc-lane-input-frame-guard` and `...-asan`; no umbrella edits | Active; source/test lane, no physical input/playability claim yet |
 
 ## Parked intake (not active)
