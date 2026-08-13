@@ -66,7 +66,7 @@ are queued for exact-root cleanup. Game-owned input frame-guard lane
 queued for cleanup. The read-only Metal bridge audit
 and Apple registration source lane are complete; their exact findings remain
 the current renderer boundary. The authoritative PC source is
-`59aa655` on
+`a8f3a8f` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
 `.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
