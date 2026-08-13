@@ -156,6 +156,13 @@ redistribute it or extracted proprietary assets.
   fixture: three passes and two declared Metal-device skips per matrix, with no
   sanitizer diagnostics. This remains fixture-only; see
   [the ac39d04 sanitizer evidence](docs/evidence/SANITIZER-REFRESH-AC39D04-2026-08-13.md).
+- The game-owned save caller audit maps persistence to the restart NPC
+  (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
+  `Save_Get`/`Save_Set` are direct in-memory field access with no centralized
+  dirty flag. The existing host fixture does not reach those callers. A future
+  gate must drive a real restart save, assert a changed GCI marker, then start
+  a fresh process and verify reload. See
+  [game Save_t/CARD caller evidence](docs/evidence/GAME-SAVE-CALLER-AUDIT-2026-08-13.md).
 - A separate bounded run reaches the live SDL `PollEvent` and `PADRead` /
   `PCInputSnapshot` boundaries, but its single OS-event attempt posts no
   keydown or keyup and observes no state change. This is a running-game input

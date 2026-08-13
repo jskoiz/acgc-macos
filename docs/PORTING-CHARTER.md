@@ -129,3 +129,8 @@ the F-handle is a live PC registry capability, so flat-copying the 256-word
 root cannot resolve it. A successor may resolve only a retained target identity
 with explicit capacity and the exact `DF000000,0` terminator, failing closed
 otherwise; see [GBI indirect-target evidence](evidence/GBI-INDIRECT-TARGET-AUDIT-2026-08-13.md).
+The game-owned save audit separately identifies the restart NPC
+`aNRST_save` → `mCD_SaveHome_bg(0, ...)` path as the smallest real persistence
+gate; the host recovery fixture primes `Save_t` directly and cannot substitute
+for a caller-driven save/restart/reload proof. See
+[game Save_t/CARD caller evidence](evidence/GAME-SAVE-CALLER-AUDIT-2026-08-13.md).
