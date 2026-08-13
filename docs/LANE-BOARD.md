@@ -1,6 +1,6 @@
 # ACGC visible lane board
 
-Updated 2026-08-12 under the rolling-refill scheduler. The board records the
+Updated 2026-08-12 under the resumed rolling-refill scheduler. The board records the
 visible Codex tasks, their ownership, and the order in which evidence may be
 integrated. All new and successor tasks are Luna Max with max reasoning. A
 task being active means it is allowed to inspect or run its bounded work; it
@@ -34,17 +34,29 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: no ACGC worker is currently active and no refill is
-useful until a later dependency-ready gate appears. The post-audio,
-arm64 post-texture, WaveTouch, and audio-DMA handoffs are complete/archived; the authoritative source is now
-`724a18d`. Pinned task `019ff9bd-7f15-7513-8b22-61af13c8a6fe` (`ACGC Worktree
-and Thread Cleanup`) owns the separate 30-minute cleanup heartbeat. Its first
-pass retired five clean source worktrees and pruned their stale Git metadata,
-preserving every branch and commit. It also retired five clean orphaned
-umbrella worktrees; the remaining `a828` checkout is dirty and is explicitly
-preserved. It archives completed worker tasks but does not touch active or
-dirty state. The dated manifest is
+Current maintenance state: the scheduler has resumed with fourteen durable
+Luna Max/max worker tasks plus this integration owner (fifteen active ACGC
+lanes total). Six workers may edit production source; the remaining eight own
+fixtures, audits, or verification. The post-audio, arm64 post-texture,
+WaveTouch, and audio-DMA handoffs remain complete/archived; the authoritative
+source is `724a18d`. Pinned task `019ff9bd-7f15-7513-8b22-61af13c8a6fe`
+(`ACGC Worktree and Thread Cleanup`) owns the separate 30-minute cleanup
+heartbeat. Its first pass retired five clean source worktrees and pruned their
+stale Git metadata, preserving every branch and commit. It also retired five
+clean orphaned umbrella worktrees; the remaining `a828` checkout is dirty and
+is explicitly preserved. It archives completed worker tasks but does not touch
+active or dirty state. The dated manifest is
 `/Users/jk/Desktop/Automations/cleanup-records/2026-08-12-acgc-first-pass.md`.
+
+The resumed workers below have durable task IDs and isolated umbrella
+worktrees. Source-edit workers must create the named owning-submodule branch
+before editing; read-only/test workers must stay within their declared scope.
+The integration owner reviews one handoff at a time, locally merges reviewed
+commits into `c1/macos-host-launch` or the umbrella as appropriate, reruns the
+smallest focused gate, and updates the gitlink/docs. Only after that review does
+the cleanup heartbeat archive the task and retire its worktree/build artifacts.
+No worker may self-merge, update the umbrella gitlink, or claim a later gate
+from compilation alone.
 
 ## Ownership and live state
 
@@ -81,6 +93,20 @@ dirty state. The dated manifest is
 | 29 | Frame evidence harness — `019ff9a0-e9ed-78d3-8d4e-b7c617270b16` | Umbrella `scripts/probes/` only; bounded launch/boot/packet/present/frame classifier | `/Users/jk/.codex/worktrees/5e48/acgc-modern-port` / `c1/lane-frame-evidence` | Complete/integrated as umbrella `1d4d44b`; `bash -n`, ShellCheck, classifier tests, and fail-closed dry-run pass; no source, ISO, or frame claim |
 | 30 | Audio-DMA LP64 fix — `019ff9a1-00c9-7fa3-815f-e282eb7ad2e9` | `src/static/jaudio_NES/internal/system.c` only; preserve native audio pointers at the DMA boundary | `/private/tmp/acgc-lane-audio-lp64` / `c1/lane-audio-lp64`; lane `304f055`, authoritative `724a18d` | Complete/integrated; serialized `ac_pc` link passes; fresh LLDB reaches `Nas_FastCopy` with native `DestAdd=0x10084c5e0`, avoids `_platform_memmove`/`EXC_BAD_ACCESS`, and stops intentionally at the first breakpoint |
 | 31 | Fresh integrated post-frame run/trace — root-owned evidence continuation | Exact `724a18d` runtime, LOGO/NEOS markers, and bounded LLDB submission-entry trace; no source edits | `/private/tmp/acgc-integrated-audio-wave-build`; logs `/private/tmp/acgc-integrated-audio-724-run.log` and `/private/tmp/acgc-integrated-audio-724-lldb.log` | Complete bounded check; ten-second run reaches LOGO action 3 and NEOS frame 541; LLDB stops at `GXBegin`/`pc_gx_commit_pending_and_flush` (`pc_gx.c:253`); TERM wait status `139`; no Metal/pixel claim and no worker refill |
+| 32 | Post-GXBegin termination — `019ffa0f-2a8d-7c43-9295-2389e7c2a02b` | Source edit only if the status-139 boundary is isolated; `host.c`, `game_runtime.c`, `pc_main.c` | `/Users/jk/.codex/worktrees/b94a/acgc-modern-port`; planned source `/private/tmp/acgc-lane-post-gx-termination` / `c1/lane-post-gx-termination` | Active; serialized bounded launch and TERM/KILL proof; source edit capped lane |
+| 33 | Texture pointer runtime boundary — `019ffa11-aad0-7383-90f3-a6caedbf2a8f` | `pc_gx_texture.c` plus one focused fixture; native pointer/opaque-reference width contract | `/Users/jk/.codex/worktrees/93b0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-texture-pointer-runtime` / `c1/lane-texture-pointer-runtime` | Active; source edit capped lane |
+| 34 | Metal live-frame consumer — `019ffa11-c6ee-7ef2-86fa-6bbe53e64b2d` | Apple packet consumer and geometry encoder only; device/present/readback gate | `/Users/jk/.codex/worktrees/60e4/acgc-modern-port`; planned source `/private/tmp/acgc-lane-metal-live-consumer` / `c1/lane-metal-live-consumer` | Active; source edit capped lane |
+| 35 | Live GX prefix decoder — `019ffa12-60bf-71d3-9531-ed47364e6ff7` | `pc_gbi_runtime.c` and focused decoder fixture; fail closed on incomplete 8-word capture | `/Users/jk/.codex/worktrees/81c4/acgc-modern-port`; planned source `/private/tmp/acgc-lane-gx-prefix-decoder` / `c1/lane-gx-prefix-decoder` | Active; test/fixture lane |
+| 36 | Live texture/TLUT/TEV evidence — `019ffa12-66ef-7d81-89a8-3ddae2063b97` | Apple texture/TEV fixtures and classifier only; no live-readback claim | `/Users/jk/.codex/worktrees/5c10/acgc-modern-port`; planned source `/private/tmp/acgc-lane-live-tev` / `c1/lane-live-tev` | Active; test/verification lane |
+| 37 | Runtime input proof — `019ffa12-6965-7a30-acc8-3f9123337a2e` | `pc_pad.c`, `pc_keybindings.c`, focused OS/controller event proof | `/Users/jk/.codex/worktrees/ecaf/acgc-modern-port`; planned source `/private/tmp/acgc-lane-runtime-input` / `c1/lane-runtime-input` | Active; source edit capped lane |
+| 38 | Mixer/CoreAudio sink — `019ffa12-7330-7820-b006-0b7058cf8af9` | `pc_audio.c`, `pc_audio_bank.c`; mixer-to-sink and exact device skip boundary | `/Users/jk/.codex/worktrees/a058/acgc-modern-port`; planned source `/private/tmp/acgc-lane-mixer-coreaudio` / `c1/lane-mixer-coreaudio` | Active; source edit capped lane |
+| 39 | Save_t/GCI restart — `019ffa12-775d-7593-9b68-702d9e0501b0` | `pc_save_bswap.c`, `pc_card.c`; wire/checksum/restart roundtrip only | `/Users/jk/.codex/worktrees/7492/acgc-modern-port`; planned source `/private/tmp/acgc-lane-save-gci` / `c1/lane-save-gci` | Active; source edit capped lane |
+| 40 | Sandboxed filesystem/atomic-save evidence — `019ffa12-7f97-7113-8934-617a264394af` | Umbrella probes/evidence only; Application Support/temp/atomic replacement | `/Users/jk/.codex/worktrees/7f63/acgc-modern-port`; planned umbrella branch `c1/lane-filesystem-save-evidence` | Active; umbrella test/evidence lane |
+| 41 | Timing/retrace/lifecycle audit — `019ffa12-8092-7cd0-a5d9-9ff1904d821b` | Read-only `pc_os.c`, `pc_vi.c`, `game_runtime.c`; ranked status-139 handoff | `/Users/jk/.codex/worktrees/bb46/acgc-modern-port` | Active; read-only verification lane |
+| 42 | Windows compatibility audit — `019ffa12-87a8-78b0-924a-feab35389797` | Read-only `_WIN32`/x86/OpenGL/SDL conditionals and toolchain probe | `/Users/jk/.codex/worktrees/3266/acgc-modern-port` | Active; read-only verification lane |
+| 43 | Current native + ASan/UBSan matrix — `019ffa12-8a7e-76b0-9503-2f4394249e43` | Exact-tip focused test matrix; unique sanitizer build roots | `/Users/jk/.codex/worktrees/dc19/acgc-modern-port` | Active; read-only verification lane |
+| 44 | ac-decomp GAFE01 toolchain audit — `019ffa12-929c-73e3-b706-a4f76c78a270` | Read-only configure/build/extraction boundary and Wine/Metrowerks blocker | `/Users/jk/.codex/worktrees/90c1/acgc-modern-port` | Active; read-only upstream audit lane |
+| 45 | iOS shared-boundary readiness — `019ffa12-9809-7c21-b1e2-67f4f7bd52c5` | Read-only portable/Apple boundary map; iOS remains gated by macOS proof | `/Users/jk/.codex/worktrees/b09c/acgc-modern-port` | Active; read-only architecture lane |
 
 ## Parked intake (not active)
 
