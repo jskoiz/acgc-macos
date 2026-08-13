@@ -35,7 +35,12 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: no production worker is active. Callback capture lane
+Current maintenance state: one read-only verification worker is active. Lane 91
+(`019ffc73-d5c6-78f1-94bb-91ad0d277d1d`) owns one serialized current-tip
+arm64 link and one bounded LLDB trace from canonical PC `d1e812c` to measure
+whether the game-owned `pc_gx_flush_vertices` path reaches the version-aware
+GX v2 callback. It owns no source edits, no umbrella changes, and no Metal
+encode/readback/pixel scope. All prior callback capture lane
 `019ffbc7-01e9-7b32-b5b1-f0abaada1b09`, the offscreen Metal sink lane
 `019ffbc8-1f2b-7513-9c1c-7ddde5114f97`, the input, mixer/audio, lifecycle,
 observer-rejection, and read-only GX v2 contract lanes are complete/archived
@@ -226,6 +231,7 @@ from compilation alone.
 | 88 | GX v2 packet contract map — `019ffc28-3c56-70a2-a0d7-60b8e16dfda2` | Read-only two-upstream crosswalk for the smallest fixed-width TEV/texture/channel extension beyond v1; focused existing tests only, no production edits or live launch | Worktree `/Users/jk/.codex/worktrees/24b3/acgc-modern-port` (retire after review); scratch `/private/tmp/acgc-lane-gx-v2-contract` (retire after review); no source branch | Complete/archived; no edit or live launch; maps channel/texture-generator/two-stage-TEV state needed for a deliberate packet extension; evidence `docs/evidence/GX-V2-PACKET-CONTRACT-MAP-2026-08-13.md`; no live callback/Metal/pixel/playability claim |
 | 89 | Implement bounded GX v2 packet — `019ffc34-ab7a-74d0-839e-65cd045a2b01` | Source lane for versioned fixed-width channel/texture-generator/two-stage-TEV packet state and narrow `pc_gx` construction; owns only packet headers/source, `pc_gx.c`, focused tests/CMake | Worktree and focused roots retired by cleanup; branch `c1/lane-gx-v2-packet` at `06fa74c`; integrated canonical PC `26da235`; umbrella evidence preserved | Complete/integrated; native and ASan/UBSan focused CTest `3/3` each; v2 remains fixture-only until a version-aware consumer exists; no live callback, Metal encode/readback/pixel, device, input/audio/save, or playability claim; evidence `docs/evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md` |
 | 90 | Version-aware GX v2 consumer boundary — `019ffc5d-392e-75e2-a863-a4b9199b11dd` | Source lane for a separately typed/version-checked v2 callback and Apple consumer boundary; preserve v1 dispatch, consume bounded values only, and prove v2 acceptance/rejection with focused tests | Worktree and exact focused roots retired by cleanup; branch `c1/lane-versioned-gx-v2-consumer` at worker `cd881b7`; integrated canonical PC `d1e812c`; umbrella evidence preserved | Complete/integrated; native and ASan/UBSan focused CTest `4/4` each with no diagnostics; v2 reports `V2_EXTENSION_NOT_RENDERED`; no full link, live callback, Metal encode/readback/pixel, device, input/audio/save, or playability claim; evidence `docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md` |
+| 91 | Live GX v2 callback reachability trace — `019ffc73-d5c6-78f1-94bb-91ad0d277d1d` | Read-only one-link/one-LLDB current-tip trace at canonical PC `d1e812c`; measure `pc_gx_flush_vertices` → v2 callback reachability and keep callback, Metal, pixel, and playability claims separate | Visible worktree `/Users/jk/.codex/worktrees/a92a/acgc-modern-port`; source snapshot is canonical `c1/macos-host-launch` at `d1e812c`; unique roots `/private/tmp/acgc-lane-gx-v2-runtime-d1e812c-build` and `...-logs`; no source branch or edits | Active; serialized full link and one bounded launch only; no source/docs edits, no Metal encode/readback/pixel, device, input/audio/save, or playability claim |
 
 ## Parked intake (not active)
 
