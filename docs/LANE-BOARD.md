@@ -11,13 +11,13 @@ The texture remediation (17) is now complete/integrated at source `578c8b7`.
 The root-owned second-game ABI lane is the current launch-critical source lane;
 its fresh run crosses `second_game.c` and reaches the next audio-thread fault.
 Graph capture (16) and integrated verification (22) are complete/parked. The
-post-fix game-frame runtime, six earlier successors, four prior successors, and
-the six lanes submitted in this refill are setup-pending: the app has returned
-client IDs but not durable task IDs/worktrees yet. They are not counted as
-active until `list_threads` confirms them. Source-editing work remains capped
-at roughly 5–7 lanes, and expensive full links remain serialized. All other
-ACGC tasks are parked or archived; their reviewed commits and evidence remain
-available in Git and the evidence docs.
+post-fix game-frame runtime and the successor requests listed below are
+setup-pending: the app has returned client IDs but not durable task IDs or
+worktrees yet. They are not counted as active until `list_threads` confirms
+them. Source-editing work remains capped at roughly 5–7 lanes, and expensive
+full links remain serialized. All other ACGC tasks are parked or archived;
+their reviewed commits and evidence remain available in Git and the evidence
+docs.
 
 ## Ownership and live state
 
@@ -75,6 +75,10 @@ durable task IDs and the app creates their isolated worktrees.
 | Current sanitizer refresh | `client-new-thread:018acc6f-fec7-4f3b-8795-03627ad5c09b` | Read-only native plus ASan/UBSan at current source tip; unique build roots and serialized full links |
 | Runtime save restart gate | `client-new-thread:c00febc3-0362-4c72-a99d-cac119c7e0a2` | Umbrella probe/evidence only for save request → atomic write → restart → reload; preserves raw-wire mismatch |
 | Frame evidence packaging | `client-new-thread:890ae77b-685a-4c69-ab22-429c7ddad9a2` | Umbrella `scripts/probes/` and `docs/evidence/` only; fail-closed submit/encode/present/readback labels |
+| Raw audio-bank ABI design audit | `client-new-thread:8c52eb22-8ce9-4952-b695-7f7568855f5c` | Read-only wire/native layout map for `Nas_BankOfsToAddr_Inner`; no source edits or full link |
+| Audio-bank wire fixture | `client-new-thread:be5c06e2-5d95-4758-b9ba-c607bb5679d6` | Test-only `pc/tests/pc_audio_bank_wire_fixture.c`; synthetic high-address/fail-closed offset cases |
+| WaveTouch LP64 wire audit | `client-new-thread:f9c69af2-66c4-4d32-a142-c6b62b79345b` | Read-only `__WaveTouch`/`smzwavetable` width and relocation audit; separate from `system.c` edits |
+| ac-decomp audio-bank cross-reference | `client-new-thread:944f3f31-ffe6-456c-8445-412dbfb9df59` | Read-only GAFE01_00 cross-repo schema/build comparison; no upstream edits or asset output |
 
 The Codex-created umbrella worktrees begin detached at umbrella commit
 `82732fe` with nested submodules uninitialized. Source-edit lanes therefore use
