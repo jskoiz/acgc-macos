@@ -115,6 +115,12 @@ redistribute it or extracted proprietary assets.
   command/continuation trace to distinguish a no-draw `G_ENDDL`, target or
   command validation failure, cancellation, and a sentinel that fired before
   later work. See [graph-task to GX gap evidence](docs/evidence/GRAPH-TASK-TO-GX-GAP-2026-08-13.md).
+- The follow-up current-tip trace resolves that gate for the first graph task:
+  one launch traverses eight inline `G_DL_NOPUSH` continuations, reaches a
+  clean `G_ENDDL`, returns `0`, and records no `GXBegin` or error/cancellation.
+  Pointer-sized diagnostic fields read with 32-bit offsets are excluded from
+  the claim. This is no-draw interpreter evidence, not a frame or Metal result.
+  See [emu64 continuation evidence](docs/evidence/EMU64-CONTINUATION-NO-DRAW-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until

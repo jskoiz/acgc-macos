@@ -273,3 +273,8 @@ one synchronous callback/fallback and `G_DL_NOPUSH` traverses inline, so no
 missing task queue is indicated. One serialized command/continuation trace is
 still needed to distinguish no-draw `G_ENDDL`, target/command validation,
 cancellation, and early sentinel timing; see [graph-task to GX gap evidence](evidence/GRAPH-TASK-TO-GX-GAP-2026-08-13.md).
+That trace now shows the first live graph task traversing eight inline
+`G_DL_NOPUSH` continuations to a clean `G_ENDDL` with return `0`, no `GXBegin`,
+and no error/cancellation. Misaligned pointer-field diagnostics are excluded;
+the result is no-draw interpreter evidence, not a frame or Metal proof. See
+[emu64 continuation evidence](evidence/EMU64-CONTINUATION-NO-DRAW-2026-08-13.md).

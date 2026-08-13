@@ -35,12 +35,12 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: lane 95 is complete and archived after a read-only
-source crosswalk. It confirms that `graph_submit_task` is synchronous and
-`G_DL_NOPUSH` is inline traversal. Lane 96
-(`019ffcc1-d77b-7a42-b0ec-54ac72f1a30e`) is the sole active worker for one
-serialized command/continuation trace at `d1e812c`; it has no source edit scope
-and no frame or Metal claim follows. Lane 94
+Current maintenance state: lane 96 is complete and archived after one
+serialized current-tip build/launch. Its first graph task traversed eight
+inline `G_DL_NOPUSH` continuations to a clean `G_ENDDL`, returned `0`, and did
+not reach `GXBegin`; this is no-draw interpreter evidence only. The next useful
+gate is a separately scoped trace of subsequent graph-task/frame progression.
+Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
 through `graph_task_set00` and `emu64_taskstart`; the debugger-owned sentinel
@@ -258,7 +258,7 @@ from compilation alone.
 | 93 | Durable GX v2 breakpoint-count trace — `019ffc93-5d85-7d53-a6bf-67a5b13305da` | Read-only one elevated LLDB trace at canonical PC `d1e812c`; persist per-symbol graph/GX/v2/Apple breakpoint counts while keeping the debugger alive through bounded inferior cleanup | Worktree and exact build/log roots retired after review; canonical source `c1/macos-host-launch` at `d1e812c`; evidence `docs/evidence/DURABLE-GX-V2-BREAKPOINT-COUNTS-2026-08-13.md`; no source branch or edits | Complete/archived; `graph_task_set00=1`, all downstream counts `0` only because the temporary Python callback omitted an explicit return and stopped at the prefix; no downstream callback/GX/frame/Metal/pixel/playability claim; exact inferior SIGKILL status `9`, wrapper `0` |
 | 94 | Correct GX v2 trace callback control — `019ffca1-c92a-7363-9687-a503d2f2851d` | Read-only one elevated LLDB trace from canonical PC `d1e812c`; correct the temporary Python breakpoint callbacks to explicitly return `False`, preserve durable hit lines, and capture downstream graph/GX/v2/Apple counts | Worktree and exact build/log roots retired after review; canonical source `c1/macos-host-launch` at `d1e812c`; evidence `docs/evidence/CORRECTED-GX-V2-CALLBACK-TRACE-2026-08-13.md`; no source branch or edits | Complete/archived; `graph_task_set00=1`, `emu64_taskstart=1`, and GX/v2/Apple counts `0`; sentinel stopped after the graph task; no GX callback, frame, Metal, pixel, device, input/audio/save, or playability claim |
 | 95 | Audit graph task to GX submission gap — `019ffcb0-760c-7b43-a690-f190dd5352f7` | Read-only two-upstream crosswalk for `graph_task_set00` → `emu64_taskstart` → `GXBegin`/`pc_gx_flush_vertices`; explain lane-94’s bounded zero GX counts and identify the smallest next gate | Worktree `/Users/jk/.codex/worktrees/680c/acgc-modern-port` (retire after review); canonical source `c1/macos-host-launch` at `d1e812c`; no build/log roots, ISO, launch, or source branch | Complete/archived; no queue is indicated by source; command/continuation condition remains open; evidence `docs/evidence/GRAPH-TASK-TO-GX-GAP-2026-08-13.md`; no source, launch, Metal encode/readback/pixel, device, input/audio/save, or playability claim |
-| 96 | Trace emu64 continuation to GX draw — `019ffcc1-d77b-7a42-b0ec-54ac72f1a30e` | Read-only one-link/one-LLDB current-tip trace; instrument `emu64_taskstart_r`, command dispatch, `dl_G_DL`, `dl_G_ENDDL`, and `GXBegin` to classify the zero-GX boundary | `/Users/jk/.codex/worktrees/9474/acgc-modern-port`; current source snapshot `c1/apple-port-bootstrap` at `656446d`; unique roots `/private/tmp/acgc-lane-emu64-continuation-trace-build` and `/private/tmp/acgc-lane-emu64-continuation-trace-logs`; no source branch | Active; setup complete, full link/launch pending; read-only runtime scope only, no source/docs edits, no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
+| 96 | Trace emu64 continuation to GX draw — `019ffcc1-d77b-7a42-b0ec-54ac72f1a30e` | Read-only one-link/one-LLDB current-tip trace; instrument `emu64_taskstart_r`, command dispatch, `dl_G_DL`, `dl_G_ENDDL`, and `GXBegin` to classify the zero-GX boundary | Worktree `/Users/jk/.codex/worktrees/9474/acgc-modern-port` and roots `/private/tmp/acgc-lane-emu64-continuation-trace-build` / `/private/tmp/acgc-lane-emu64-continuation-trace-logs` (retire after review); canonical source `c1/macos-host-launch` at `d1e812c`; no source branch | Complete/archived; link `[4018/4019]` passed; first task had 8 `G_DL_NOPUSH`, 1 `G_ENDDL`, return `0`, `GXBegin=0`, `FrameCansel=0`, `err_count=0`; pointer-field diagnostics excluded; evidence `docs/evidence/EMU64-CONTINUATION-NO-DRAW-2026-08-13.md`; no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
 
 ## Parked intake (not active)
 
