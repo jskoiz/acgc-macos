@@ -34,12 +34,15 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: the scheduler has resumed with fourteen durable
-Luna Max/max worker tasks plus this integration owner (fifteen active ACGC
-lanes total). Six workers may edit production source; the remaining eight own
-fixtures, audits, or verification. The post-audio, arm64 post-texture,
-WaveTouch, and audio-DMA handoffs remain complete/archived; the authoritative
-source is `724a18d`. Pinned task `019ff9bd-7f15-7513-8b22-61af13c8a6fe`
+Current maintenance state: the scheduler resumed with fourteen durable
+Luna Max/max worker tasks plus this integration owner. The mixer/CoreAudio
+worker (`019ffa12-7330-7820-b006-0b7058cf8af9`) is now complete/parked after
+its software-path and sanitizer handoff, leaving thirteen active workers plus
+this owner (fourteen active ACGC lanes) while no dependency-ready live-device
+audio successor exists. Six workers may edit production source; the remaining
+workers own fixtures, audits, or verification. The post-audio, arm64
+post-texture, WaveTouch, and audio-DMA handoffs remain complete/archived; the
+authoritative source is `724a18d`. Pinned task `019ff9bd-7f15-7513-8b22-61af13c8a6fe`
 (`ACGC Worktree and Thread Cleanup`) owns the separate 30-minute cleanup
 heartbeat. Its first pass retired five clean source worktrees and pruned their
 stale Git metadata, preserving every branch and commit. It also retired five
@@ -99,7 +102,7 @@ from compilation alone.
 | 35 | Live GX prefix decoder — `019ffa12-60bf-71d3-9531-ed47364e6ff7` | `pc_gbi_runtime.c` and focused decoder fixture; fail closed on incomplete 8-word capture | `/Users/jk/.codex/worktrees/81c4/acgc-modern-port`; planned source `/private/tmp/acgc-lane-gx-prefix-decoder` / `c1/lane-gx-prefix-decoder` | Active; test/fixture lane |
 | 36 | Live texture/TLUT/TEV evidence — `019ffa12-66ef-7d81-89a8-3ddae2063b97` | Apple texture/TEV fixtures and classifier only; no live-readback claim | `/Users/jk/.codex/worktrees/5c10/acgc-modern-port`; planned source `/private/tmp/acgc-lane-live-tev` / `c1/lane-live-tev` | Active; test/verification lane |
 | 37 | Runtime input proof — `019ffa12-6965-7a30-acc8-3f9123337a2e` | `pc_pad.c`, `pc_keybindings.c`, focused OS/controller event proof | `/Users/jk/.codex/worktrees/ecaf/acgc-modern-port`; planned source `/private/tmp/acgc-lane-runtime-input` / `c1/lane-runtime-input` | Active; source edit capped lane |
-| 38 | Mixer/CoreAudio sink — `019ffa12-7330-7820-b006-0b7058cf8af9` | `pc_audio.c`, `pc_audio_bank.c`; mixer-to-sink and exact device skip boundary | `/Users/jk/.codex/worktrees/a058/acgc-modern-port`; planned source `/private/tmp/acgc-lane-mixer-coreaudio` / `c1/lane-mixer-coreaudio` | Active; source edit capped lane |
+| 38 | Mixer/CoreAudio sink — `019ffa12-7330-7820-b006-0b7058cf8af9` | `pc_audio.c`, `pc_audio_bank.c`; mixer-to-sink and exact device skip boundary | `/Users/jk/.codex/worktrees/a058/acgc-modern-port`; source `/private/tmp/acgc-lane-mixer-coreaudio/worktree` / `c1/lane-mixer-coreaudio` | Complete/parked; native 3/3 and ASan/UBSan software mixer/NEOS/bank fixtures pass; CoreAudio probe preserves skip `77` (`AudioDeviceGetProperty…560947818`), so device cadence/audibility remain unproven; no source changes |
 | 39 | Save_t/GCI restart — `019ffa12-775d-7593-9b68-702d9e0501b0` | `pc_save_bswap.c`, `pc_card.c`; wire/checksum/restart roundtrip only | `/Users/jk/.codex/worktrees/7492/acgc-modern-port`; planned source `/private/tmp/acgc-lane-save-gci` / `c1/lane-save-gci` | Active; source edit capped lane |
 | 40 | Sandboxed filesystem/atomic-save evidence — `019ffa12-7f97-7113-8934-617a264394af` | Umbrella probes/evidence only; Application Support/temp/atomic replacement | `/Users/jk/.codex/worktrees/7f63/acgc-modern-port`; planned umbrella branch `c1/lane-filesystem-save-evidence` | Active; umbrella test/evidence lane |
 | 41 | Timing/retrace/lifecycle audit — `019ffa12-8092-7cd0-a5d9-9ff1904d821b` | Read-only `pc_os.c`, `pc_vi.c`, `game_runtime.c`; ranked status-139 handoff | `/Users/jk/.codex/worktrees/bb46/acgc-modern-port` | Active; read-only verification lane |
