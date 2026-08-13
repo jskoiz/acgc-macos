@@ -114,7 +114,9 @@ checksum. The bounded graph contract now classifies the observed eight-word capt
 prefix-only and refuses to submit it as a complete list. The optional GX-to-
 Metal handoff and Apple packet/state fixtures pass their CPU contracts, while
 device tests skip with `77` on this host because no Metal device is available.
-The next critical gate is a clean post-link runtime trace that captures a
-complete game-owned submission and binds it to Metal encode, present, and
-pixel-readback evidence; the identifiable game-frame pass does not imply
+The post-link trace now reaches the intentional GXBegin boundary but still
+does not capture a complete game-owned packet or resolve the opaque indirect
+target. The next critical gate is a runtime trace that captures a complete
+game-owned submission and binds it to Metal encode, present, and pixel-
+readback evidence; the identifiable game-frame pass does not imply
 input, audio, save/load, or playability.

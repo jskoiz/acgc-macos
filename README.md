@@ -131,6 +131,12 @@ redistribute it or extracted proprietary assets.
   logo/NEOS path and returns status `0` after TERM cleanup without a
   current-snapshot pixel/readback claim. Representative GX-to-Metal readback
   and playability are still open.
+- A bounded post-link LLDB trace from the exact `9cf9b3f` arm64 binary reaches
+  real boot markers and the intentional `GXBegin` → `pc_gx_commit_pending_and_flush`
+  boundary, but the capture callback does not fire and the known `DE010000
+  F0002000` observer remains `PREFIX_ONLY` (`8/256`). No complete packet,
+  Metal encode/present, pixel readback, or playability claim follows; see
+  [post-link graph runtime evidence](docs/evidence/POST-LINK-GRAPH-RUNTIME-2026-08-13.md).
 - The first live graph snapshot is pointer-free and records version `1`, frame
   `0`, source capacity `256`, count `8`, and words
   `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.
