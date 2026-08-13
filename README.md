@@ -168,6 +168,12 @@ redistribute it or extracted proprietary assets.
   gate must drive a real restart save, assert a changed GCI marker, then start
   a fresh process and verify reload. See
   [game Save_t/CARD caller evidence](docs/evidence/GAME-SAVE-CALLER-AUDIT-2026-08-13.md).
+- The caller-driven successor is integrated at PC source `02a003e`: production
+  `aNRST_save` → `mCD_SaveHome_bg` writes a changed GCI marker, and a fresh
+  fork/exec reload restores it. Native and combined ASan/UBSan runs pass with
+  no sanitizer diagnostics; this remains a focused persistence gate, not full
+  device or playability proof. See
+  [game Save_t runtime evidence](docs/evidence/GAME-SAVE-RUNTIME-GATE-2026-08-13.md).
 - A separate bounded run reaches the live SDL `PollEvent` and `PADRead` /
   `PCInputSnapshot` boundaries, but its single OS-event attempt posts no
   keydown or keyup and observes no state change. This is a running-game input

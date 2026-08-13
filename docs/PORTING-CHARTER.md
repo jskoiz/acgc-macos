@@ -134,6 +134,11 @@ The game-owned save audit separately identifies the restart NPC
 gate; the host recovery fixture primes `Save_t` directly and cannot substitute
 for a caller-driven save/restart/reload proof. See
 [game Save_t/CARD caller evidence](evidence/GAME-SAVE-CALLER-AUDIT-2026-08-13.md).
+The caller-driven successor is integrated at PC source `02a003e`: production
+`aNRST_save` → `mCD_SaveHome_bg` writes a changed GCI marker and a fresh
+fork/exec reload restores it; native and combined ASan/UBSan runs pass. This is
+still a focused persistence gate, not device or playability proof; see
+[game Save_t runtime evidence](evidence/GAME-SAVE-RUNTIME-GATE-2026-08-13.md).
 The graph-target successor is integrated at PC source `71a7012`: it retains
 only pointer-free target identity/capacity and requires `DF000000,0`, with
 native and ASan/UBSan focused tests passing `3/3` each. This remains a contract
