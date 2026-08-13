@@ -58,11 +58,14 @@ remain under ignored local or build paths and are never committed.
 
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
-fixture are passed. The actual reconstructed `ac_pc` target links as a native
+fixture are passed. The last full reconstructed `ac_pc` link was a native
 arm64 Mach-O from source branch `c1/macos-host-launch` at `f4cb491` (on top of
-`9cf9b3f`, `6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`), with the
-DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
-boundary commits reviewed in the same source history, and now moves past the
+`9cf9b3f`, `6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`). The current source
+tip `54b840c` adds the offscreen Metal sink and has focused Apple sink/object
+verification, but has not yet had another full `ac_pc` link. The DVD/CARD,
+input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
+commits reviewed in the same source history remain the current evidence, and
+the runtime now moves past the
 prior DVD wait. The portable boot-source facade accepts only exact
 `GAFE01_00`, requires
 one `foresta.rel.szs`, and prepares bounded DOL and REL images without writing
@@ -212,7 +215,13 @@ gate correction remains fail-closed for active texture/TEV/lighting/fog state.
 Focused Darwin and ASan/UBSan tests pass, but this still does not prove a live
 game callback, Metal encode/present, pixels, input, audio, save/reload,
 device, clean shutdown, or playability. See [Darwin GX handoff registration
-evidence](evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md). The first
+evidence](evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md). The integrated
+`54b840c` sink adds a value-only offscreen Metal consumer with synchronous
+completion/readback logic and bounded status counters; its CPU contract and
+Apple object compile pass, while the device test skips `77` because this host
+has no Metal device. This remains implementation/device-gate evidence, not
+live game callback, pixel, or playability proof. See [offscreen Metal sink
+evidence](evidence/OFFSCREEN-METAL-SINK-2026-08-13.md). The first
 delegated callback attempt linked the current source but hit the environment's
 pre-inferior `nice(5)` permission boundary; see [delegated live Darwin GX
 callback runtime evidence](evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md).

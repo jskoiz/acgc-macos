@@ -21,7 +21,8 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `f4cb491` (`Register Apple GX packet consumer bridge`),
+  `c1/macos-host-launch` at `54b840c` (`Add bounded Apple Metal packet sink`),
+  on top of `f4cb491` (`Register Apple GX packet consumer bridge`),
   on top of `aea3515` (`Capture live graph target spans in emu64`),
   on top of `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
   `6e4aded` (bounded graph classification), `e22cbc5`
@@ -97,9 +98,9 @@ redistribute it or extracted proprietary assets.
   execution, pixel readback, representative GX, or a reconstructed game frame.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
-- The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `aea3515` (`Capture live graph target
-  spans in emu64`), on top of `02a003e` (`Add game-owned restart save/reload
+- The last full arm64 `ac_pc` link before the offscreen Metal sink integration
+  was from the owning `c1/macos-host-launch` source history at `aea3515`
+  (`Capture live graph target spans in emu64`), on top of `02a003e` (`Add game-owned restart save/reload
   fixture`), `9cf9b3f` (`Fix reserved identifiers in Metal
   fixture shaders`), `6e4aded` (bounded graph
   classification), `e22cbc5` (optional GX packet handoff), `a7b9dff`
@@ -107,8 +108,10 @@ redistribute it or extracted proprietary assets.
   and `09dd182` (`Fix LP64 field display-list
   cleanup`) and the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
-  same source history. The fresh arm64 link produces a Mach-O
-  `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
+  same source history. That fresh arm64 link produced a Mach-O
+  `AnimalCrossing` executable. The current source tip is `54b840c`; it has
+  focused Apple sink/object verification but has not yet had another full
+  `ac_pc` link. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   the compact bank-28 tail and MEDIUM_CART-to-native-ARAM mapping have focused
   wire fixtures, and native plus ASan/UBSan probes pass.
@@ -233,6 +236,13 @@ redistribute it or extracted proprietary assets.
   unconditional. This is a CPU registration seam only: no live game callback,
   Metal encode/present, pixels, input, audio, save/load, device, or playability
   claim follows. See [Darwin GX handoff registration evidence](docs/evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md).
+- The integrated Apple source `54b840c` adds a value-only offscreen Metal sink
+  for the existing semantic packet, with synchronous command-buffer/readback
+  logic, bounded counters, and teardown-safe runtime wiring. Its CPU contract
+  and production Apple object compile pass; the device-backed sink test skips
+  `77` because this host has no Metal device. This is implementation and
+  device-gate evidence only, not a live game callback, game-owned pixel, or
+  playability claim. See [offscreen Metal sink evidence](docs/evidence/OFFSCREEN-METAL-SINK-2026-08-13.md).
 - One serialized current-tip `ac_pc` link at `f4cb491` passed (`4017/4018`,
   arm64 Mach-O). The delegated no-`nice` LLDB attempt still failed before
   creating an inferior with `nice(5) failed: operation not permitted` and
