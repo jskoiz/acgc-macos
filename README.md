@@ -103,6 +103,12 @@ redistribute it or extracted proprietary assets.
   temporary Python callback omitted an explicit return and stopped at the
   prefix. No downstream callback, GX, frame, Metal, pixel, or playability
   claim follows. See [durable GX v2 breakpoint evidence](docs/evidence/DURABLE-GX-V2-BREAKPOINT-COUNTS-2026-08-13.md).
+- The corrected trace-control retry explicitly returned `False` from every
+  Python breakpoint callback. It recorded `graph_task_set00=1` and
+  `emu64_taskstart=1`, then stopped at a debugger-owned return sentinel;
+  `GXBegin`, `pc_gx_flush_vertices`, the v2 handoff, Apple consumer, and
+  runtime observer were all `0`. This closes the LLDB-control blocker but
+  leaves the game-to-GX submission boundary open. See [corrected GX v2 trace evidence](docs/evidence/CORRECTED-GX-V2-CALLBACK-TRACE-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until

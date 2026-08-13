@@ -262,3 +262,9 @@ explicit return, so downstream counts remained zero at the prefix stop. No
 downstream callback, GX, frame, Metal, pixel, input, audio, save/device,
 simulator/device, clean-shutdown, or playability claim follows; see [durable
 GX v2 breakpoint evidence](evidence/DURABLE-GX-V2-BREAKPOINT-COUNTS-2026-08-13.md).
+The corrected trace-control retry explicitly returned `False` from every
+Python breakpoint callback. It recorded `graph_task_set00=1` and
+`emu64_taskstart=1`, then stopped at a debugger-owned return sentinel;
+`GXBegin`, `pc_gx_flush_vertices`, the v2 handoff, Apple consumer, and runtime
+observer were all `0`. This closes the LLDB-control blocker but leaves the
+game-to-GX submission boundary open; see [corrected GX v2 trace evidence](evidence/CORRECTED-GX-V2-CALLBACK-TRACE-2026-08-13.md).
