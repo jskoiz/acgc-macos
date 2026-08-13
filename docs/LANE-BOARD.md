@@ -35,11 +35,12 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: the graph-capture, GX-to-Metal, and save-manager
-review queue is complete; no unreviewed ACGC worker task is active while the
-next runtime lanes are being opened. The authoritative PC source is `9cf9b3f`
-on `c1/macos-host-launch`; the umbrella pointer/docs sync is in this review and
-the only unrelated dirt remains the pre-existing `.codex`/settings edits.
+Current maintenance state: five durable Luna Max/max worker tasks are active
+alongside this integration owner. The authoritative PC source is `9cf9b3f` on
+`c1/macos-host-launch`; the umbrella is `129ff78` plus only the pre-existing
+`.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
+queue is complete; the active rows below are the next runtime, losslessness,
+input, and regression gates.
 Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
@@ -136,6 +137,11 @@ from compilation alone.
 | 50 | Complete game-owned graph capture contract — `019ffa71-2a81-7821-b333-7072a7cfb941` | `include/acgc/graph_submission.h`, `src/graph_submission.c`, `src/graph.c`, focused capture tests; complete-list/terminator gate | `/private/tmp/acgc-lane-complete-graph-capture/source` (retired); `c1/lane-complete-graph-capture` preserved at `1d1cd8f`; build roots retired after review | Complete/integrated at source `6e4aded` (current tip `9cf9b3f`); native and ASan/UBSan focused tests pass; observed live prefix is `PREFIX_ONLY`, so no draw/frame claim |
 | 51 | Game GX-to-Metal handoff seam — `019ffa71-2a81-7821-b333-70541a9193f4` | `pc/src/pc_gx.c`, `pc/apple/src/metal_packet_consumer.c`, focused Apple/PC tests; fail-closed optional Metal handoff | `/private/tmp/acgc-lane-gx-metal-handoff/source` (retired); `c1/lane-gx-metal-handoff` preserved at `26bcc02`; build roots retired after review | Complete/integrated at source `e22cbc5` plus `9cf9b3f`; native and ASan/UBSan handoff pass, Apple CPU contracts pass, Metal device checks skip `77`; no live encode/present/pixel claim |
 | 52 | Full game save-manager restart gate — `019ffa71-2b0b-7170-9364-d468ea35c57b` | `pc/src/pc_m_card.c` plus focused mCD_SaveHome_bg request/restart tests; connect production slot recovery to game-owned orchestration | `/private/tmp/acgc-lane-full-save-manager/source` (retired); `c1/lane-full-save-manager` preserved at `0465f54`; build root retired | Complete/integrated at source `a7b9dff`; native and ASan/UBSan restart/recovery PASS; proves one game-owned request seam, not full CARD state/device/playability |
+| 53 | Post-link complete graph runtime trace — `019ffa9b-2ac8-7332-ab68-8ba731696cd8` | Read-only arm64 launch/LLDB; complete-list or indirect-resolution classification after `6e4aded` | `/Users/jk/.codex/worktrees/7224/acgc-modern-port`; logs `/private/tmp/acgc-lane-runtime-post-link-graph`; no source branch | Active; one bounded trace against `9cf9b3f`; exact markers and TERM/KILL result only; no frame claim |
+| 54 | Live GX-to-Metal callback wiring — `019ffa9b-2ac8-7332-ab68-8b8a6a71bda9` | `pc/src/pc_gx.c`, Apple packet-consumer header/source, focused callback tests; optional handoff reachability | `/Users/jk/.codex/worktrees/4732/acgc-modern-port`; source `/private/tmp/acgc-lane-live-gx-metal/source` / `c1/lane-live-gx-metal`; build `/private/tmp/acgc-lane-live-gx-metal-build` | Active source-edit; base `9cf9b3f`; Windows/OpenGL and graph/save/audio/input/umbrella/ISO out of scope |
+| 55 | Save_t raw-wire losslessness — `019ffa9b-2dde-7d83-9b26-55dc271cac37` | `pc/src/pc_save_bswap.c` plus focused wire fixtures; preserve exact GCI semantics or stop test-only | `/Users/jk/.codex/worktrees/a6a1/acgc-modern-port`; source `/private/tmp/acgc-lane-save-wire-lossless/source` / `c1/lane-save-wire-lossless`; build `/private/tmp/acgc-lane-save-wire-lossless-build` | Active source-edit; base `9cf9b3f`; no speculative format or CARD/renderer edits |
+| 56 | Running-game input trace — `019ffa9b-2ea7-7741-87eb-9fd0c3e88557` | Read-only current-tip SDL/PADRead snapshot observation with one bounded OS-event attempt | `/Users/jk/.codex/worktrees/f19d/acgc-modern-port`; logs `/private/tmp/acgc-lane-runtime-input`; no source branch | Active verification; synthetic fixture results do not count as running-game input |
+| 57 | Current Windows regression audit — `019ffa9b-34a6-7813-a48c-2e8c43dcccdc` | Read-only `_WIN32`/x86/OpenGL/SDL audit for graph/GX changes at `9cf9b3f` | `/Users/jk/.codex/worktrees/18c7/acgc-modern-port`; logs `/private/tmp/acgc-lane-windows-current`; no source branch | Active verification; no native Windows sign-off without MinGW/i686/sysroot |
 
 ## Parked intake (not active)
 
