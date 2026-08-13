@@ -191,6 +191,15 @@ redistribute it or extracted proprietary assets.
   callback. The next implementation gate is an opt-in target observer that
   follows child arenas with bounded cycle/span rules. See [live-target
   terminator forensic evidence](docs/evidence/LIVE-TARGET-TERMINATOR-FORENSIC-2026-08-13.md).
+- The opt-in target observer is now integrated at PC source `36910c8`. On
+  Apple hosts, the existing `ACGC_GRAPH_CAPTURE` gate installs the bounded
+  target-capture callback beside the root callback; the default and Windows
+  paths are unchanged. The integrated `pc_main.c` object compile and the
+  existing `F0002000` resolver fixture pass natively and under combined
+  ASan/UBSan (`1/1` each). This still needs one serialized full link/LLDB run
+  to emit a fresh game-owned target record; it does not claim a complete list,
+  Metal/pixel output, input, audio, save/load, device, or playability. See
+  [opt-in live target observer evidence](docs/evidence/LIVE-TARGET-OBSERVER-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

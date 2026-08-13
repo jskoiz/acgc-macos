@@ -177,3 +177,11 @@ and the live target callback is not installed by the root capture path. The
 next implementation gate is a bounded opt-in observer that follows child
 arenas under registry-lifetime and cycle/span limits; see [live-target
 terminator forensic evidence](evidence/LIVE-TARGET-TERMINATOR-FORENSIC-2026-08-13.md).
+That observer is now integrated at PC source `36910c8`: the existing Apple
+`ACGC_GRAPH_CAPTURE` gate installs the pointer-free target callback beside the
+root callback, while Windows/default behavior remains unchanged. The integrated
+host object compile and the bounded live-target fixture pass natively and under
+combined ASan/UBSan (`1/1` each). This is still source/fixture evidence; a fresh
+serialized full link and LLDB launch are required before claiming a live target
+record, complete continuation, Metal output, pixels, or playability. See
+[opt-in live target observer evidence](evidence/LIVE-TARGET-OBSERVER-2026-08-13.md).
