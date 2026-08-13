@@ -35,18 +35,23 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: two workers are active. Callback capture lane
+Current maintenance state: six workers are active. Callback capture lane
 `019ffbc7-01e9-7b32-b5b1-f0abaada1b09` is read-only in
 `/Users/jk/.codex/worktrees/7842/acgc-modern-port`; offscreen Metal sink lane
 `019ffbc8-1f2b-7513-9c1c-7ddde5114f97` is the only source-edit lane in
-`/Users/jk/.codex/worktrees/002a/acgc-modern-port`. Lane 72 completed its one
+`/Users/jk/.codex/worktrees/002a/acgc-modern-port`. Input lane
+`019ffbcc-904f-7673-bc6a-1b137c550997`, audio lane
+`019ffbcc-904f-7673-bc6a-1b309e9dd560`, Save_t lane
+`019ffbcc-9406-7a23-9847-2f19196bdad0`, and lifecycle lane
+`019ffbcc-9477-7333-9214-73b6f08f344b` are read-only focused-proof workers
+on their isolated worktrees. Lane 72 completed its one
 serialized callback-observation attempt and is archived after the pre-inferior
 `nice(5)` permission boundary. A root-owned elevated current-tip launch then
 created an inferior, reached `graph_proc`/NEOS and `pc_gx_flush_vertices`, and
 returned through `graph_proc` with exit status `0` after bounded SIGTERM. That
 run proves launch/boot/GX-boundary/clean-return only; its interactive
 transcript did not retain per-breakpoint hit counts, so the Apple callback gate
-remains open. These two lanes are the only current dependency-ready work; no
+remains open. These six lanes are the current dependency-ready work; no
 additional filler lane is being opened. The read-only Metal bridge audit
 and Apple registration source lane are complete; their exact findings remain
 the current renderer boundary. The authoritative PC source is
@@ -207,6 +212,10 @@ from compilation alone.
 | 72 | Live Apple GX callback observation — `019ffba9-3c9b-7713-82a4-ae102ad4715b` | Read-only current-tip full link plus exactly one no-`nice` LLDB launch; breakpoint on `pc_metal_runtime_observe` and `pc_gx_flush_vertices`; no source edits | Worktree `/Users/jk/.codex/worktrees/a240/acgc-modern-port` already absent; build/log roots retired after review | Complete/archived; link `0`, arm64 Mach-O, LLDB pre-inferior `nice(5)` failure with zero breakpoint hits; callback reachability inconclusive; no Metal encode/present/pixel/playability claim; evidence `docs/evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md` |
 | 73 | Current Apple GX callback hit capture — `019ffbc7-01e9-7b32-b5b1-f0abaada1b09` | Read-only current-tip full link and exactly one generated-bin LLDB launch with one-shot explicit hit logging for `pc_metal_runtime_observe`, GXBegin, flush, target, and graph symbols | Worktree `/Users/jk/.codex/worktrees/7842/acgc-modern-port`; build `/private/tmp/acgc-lane-current-apple-callback-build`; logs `/private/tmp/acgc-lane-current-apple-callback-logs`; no source branch | Active; no result or frame/Metal claim yet |
 | 74 | Offscreen Metal packet sink — `019ffbc8-1f2b-7513-9c1c-7ddde5114f97` | Source-edit lane for an Apple-only offscreen MTLDevice/command-buffer/readback consumer of the existing semantic packet; focused CPU/device-gated tests only | Worktree `/Users/jk/.codex/worktrees/002a/acgc-modern-port`; owning PC branch `c1/lane-offscreen-metal-sink`; unique build roots to be declared by worker; no umbrella edits | Active; source-edit lane, no full link/live callback/frame claim yet |
+| 75 | Input snapshot boundary — `019ffbcc-904f-7673-bc6a-1b137c550997` | Read-only crosswalk and focused probe for SDL/keyboard/controller to a stable game-owned PAD snapshot; no source edits or full link | Worktree `/Users/jk/.codex/worktrees/3f1d/acgc-modern-port`; focused root `/private/tmp/acgc-lane-input-boundary`; no branch | Active; no device/input/playability claim yet |
+| 76 | Mixer/CoreAudio boundary — `019ffbcc-904f-7673-bc6a-1b309e9dd560` | Read-only native + ASan/UBSan mixer/bank probes and smallest CoreAudio/device gate; no source edits or full link | Worktree `/Users/jk/.codex/worktrees/7d30/acgc-modern-port`; roots `/private/tmp/acgc-lane-audio-proof` and `...-asan`; no branch | Active; device result pending; no audible-audio claim yet |
+| 77 | Save_t restart gate — `019ffbcc-9406-7a23-9847-2f19196bdad0` | Read-only focused codec, atomic recovery, production caller, and fresh-process reload verification; no source edits or full link | Worktree `/Users/jk/.codex/worktrees/7419/acgc-modern-port`; roots `/private/tmp/acgc-lane-save-proof` and `...-asan`; no branch | Active; no physical CARD/device/playability claim yet |
+| 78 | Timing/lifecycle/shutdown audit — `019ffbcc-9477-7333-9214-73b6f08f344b` | Read-only focused retrace/thread/TERM/KILL audit; no source edits, ISO access, or full link | Worktree `/Users/jk/.codex/worktrees/e1e5/acgc-modern-port`; root `/private/tmp/acgc-lane-lifecycle-proof`; no branch | Active; no normal user-shutdown/playability claim yet |
 
 ## Parked intake (not active)
 
