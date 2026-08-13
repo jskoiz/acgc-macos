@@ -249,3 +249,10 @@ v2 callback remains unverified, and no frame, Metal encode/readback/pixel,
 input, audio, save/device, simulator/device, or playability claim follows;
 see [GX v2 consumer evidence](evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md)
 and [live GX v2 callback reachability evidence](evidence/LIVE-GX-V2-CALLBACK-REACHABILITY-2026-08-13.md).
+One permitted elevated retry resolved the pre-inferior launch blocker and
+created a real arm64 game inferior that reached boot/runtime. The bounded
+interrupt occurred before LLDB emitted its per-symbol breakpoint list, so no
+callback/GX/frame hit is inferred; TERM to the exact PID returned `0`, and no
+KILL was needed. This is launch/runtime evidence only, not callback, Metal,
+pixel, input, audio, save/device, clean-shutdown, simulator/device, or
+playability proof; see [elevated GX v2 launch evidence](evidence/ELEVATED-GX-V2-LAUNCH-2026-08-13.md).
