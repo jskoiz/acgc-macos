@@ -183,6 +183,14 @@ redistribute it or extracted proprietary assets.
   `DF000000,00000000` terminator, so the target callback emitted no complete
   classification and no complete-list, Metal, pixel, or playability claim
   follows. See [valid-LLDB live-target runtime evidence](docs/evidence/VALID-LLDB-LIVE-TARGET-RUNTIME-2026-08-13.md).
+- A read-only forensic crosswalk explains the missing live terminator: the
+  `F0002000` target is `new0[0]` with the full 1,024-word arena, but live `new0`
+  is a continuation segment whose local bytes branch to `F0002001`; its
+  `G_ENDDL` is emitted in the overlay arena. The fixture’s terminator at word
+  index 10 is synthetic, and the live app installs only the root capture
+  callback. The next implementation gate is an opt-in target observer that
+  follows child arenas with bounded cycle/span rules. See [live-target
+  terminator forensic evidence](docs/evidence/LIVE-TARGET-TERMINATOR-FORENSIC-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

@@ -170,3 +170,10 @@ exact `DF000000,00000000` terminator appeared in the observed target extent, so
 this is live target/GX-boundary evidence only; complete-list, Metal, pixel,
 and playability gates remain open. See [valid-LLDB live-target runtime
 evidence](evidence/VALID-LLDB-LIVE-TARGET-RUNTIME-2026-08-13.md).
+The subsequent read-only forensic crosswalk shows that the live `F0002000`
+target is `new0[0]` with capacity `1024`, but `new0` is a continuation arena
+whose bytes branch to `F0002001`; the fixture’s word-10 terminator is synthetic,
+and the live target callback is not installed by the root capture path. The
+next implementation gate is a bounded opt-in observer that follows child
+arenas under registry-lifetime and cycle/span limits; see [live-target
+terminator forensic evidence](evidence/LIVE-TARGET-TERMINATOR-FORENSIC-2026-08-13.md).

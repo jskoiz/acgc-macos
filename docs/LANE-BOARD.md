@@ -35,8 +35,8 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: one durable Luna Max/max forensic worker is active
-alongside this integration owner. The authoritative PC source is `aea3515` on
+Current maintenance state: no durable production worker is active alongside
+this integration owner. The authoritative PC source is `aea3515` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
 `.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
@@ -47,8 +47,9 @@ and current-tip runtime trace are complete and archived; the current-tip trace
 is blocked before graph boot by a launch working-directory mismatch, with no
 retry performed. Lane 64 is complete/archived with a separate pre-launch LLDB
 command-setting blocker. Lane 65 is complete/archived with live target and GX
-boundary evidence. Lane 66 is the only active forensic successor; no filler lane
-is being opened.
+boundary evidence. Lane 66 is complete/archived with its source crosswalk and
+focused reruns recorded below; no active worker remains and no filler lane is
+being opened.
 Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
@@ -156,7 +157,7 @@ from compilation alone.
 | 63 | Current-tip live target runtime trace — `019ffafc-8480-7ba0-a1a7-497f9db415ef` | One serialized full `ac_pc` link and bounded arm64 LLDB launch at PC `aea3515`; target capture/terminator/termination evidence only | Canonical source only; build `/private/tmp/acgc-lane-current-target-runtime-build`; logs `/private/tmp/acgc-lane-current-target-runtime-logs`; no source branch | Complete/archived; `4,013/4,013` link passed, but launch ran from the delegated worktree and exited before graph boot on missing relative shaders; no retry, target/frame/pixel/playability claim; evidence `docs/evidence/CURRENT-TIP-LIVE-TARGET-RUNTIME-2026-08-13.md` |
 | 64 | Correctly rooted current-tip runtime successor — `019ffb13-9e1b-7441-ade3-04b6cbfd9508` | One serialized current-tip arm64 build-or-reuse check and exactly one LLDB launch from generated `bin` so relative shaders resolve; target/terminator/termination evidence only | Canonical source only; build `/private/tmp/acgc-lane-correct-rooted-runtime-build`; logs `/private/tmp/acgc-lane-correct-rooted-runtime-logs`; no source branch | Complete/archived; `4,013/4,013` link passed, but LLDB rejected unsupported `target.process.working-dir` before `run`; no inferior, no graph/target/frame/pixel/playability claim; evidence `docs/evidence/CORRECT-ROOTED-RUNTIME-2026-08-13.md` |
 | 65 | Valid-LLDB current-tip runtime successor — `019ffb25-df74-7811-88ef-ed54f688841f` | One serialized current-tip arm64 build-or-reuse check and exactly one LLDB launch using independently verified `target.launch-working-dir`; target/terminator/termination evidence only | Canonical source only; build `/private/tmp/acgc-lane-valid-lldb-runtime-build`; logs `/private/tmp/acgc-lane-valid-lldb-runtime-logs`; no source branch | Complete/archived; `4,013/4,013` link passed; live `F0002000` target call (`capacity=1024`) and GX/PC boundaries reached, but no `DF000000,00000000` terminator appeared and TERM ended the run; no complete frame/pixel/playability claim; evidence `docs/evidence/VALID-LLDB-LIVE-TARGET-RUNTIME-2026-08-13.md` |
-| 66 | Live target terminator forensic — `019ffb3a-b7e3-73e1-80e5-0891c749daba` | Read-only crosswalk of live `F0002000` pointer/capacity versus `sys_dynamic.new0` fixture span; optional focused probe only, no full link/launch | Canonical source audit; worktree `/Users/jk/.codex/worktrees/431d/acgc-modern-port`; focused root `/private/tmp/acgc-lane-live-target-terminator-forensic`; owns `emu64.c`, `graph.c`, `graph_submission.c`, and graph-target fixtures only | Active; no renderer/audio/input/save/lifecycle/ISO edits; no frame/pixel/playability claim |
+| 66 | Live target terminator forensic — `019ffb3a-b7e3-73e1-80e5-0891c749daba` | Read-only crosswalk of live `F0002000` pointer/capacity versus `sys_dynamic.new0` fixture span; optional focused probe only, no full link/launch | Canonical source audit; worktree `/Users/jk/.codex/worktrees/431d/acgc-modern-port`; focused root `/private/tmp/acgc-lane-live-target-terminator-forensic`; owns `emu64.c`, `graph.c`, `graph_submission.c`, and graph-target fixtures only | Complete/archived; live capacity `1024` proves `new0[0]`; `new0` is a continuation arena whose local bytes branch to `F0002001`, while the fixture’s terminator is synthetic; live target callback is unset; focused native/ASan/UBSan reruns pass; evidence `docs/evidence/LIVE-TARGET-TERMINATOR-FORENSIC-2026-08-13.md` |
 
 ## Parked intake (not active)
 
