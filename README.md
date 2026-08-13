@@ -73,6 +73,10 @@ redistribute it or extracted proprietary assets.
   triangles reach the callback. Native and ASan/UBSan focused tests pass; the
   next step is a deliberate packet-contract extension, not an unconditional
   callback. See [observer rejection evidence](docs/evidence/GX-OBSERVER-REJECTION-AUDIT-2026-08-13.md).
+- The follow-up GX v2 map identifies the smallest safe next contract: bounded
+  channel, texture-generator, two-stage TEV, texture/TLUT, sampler, and
+  versioned-state fields with pointer-free handles. It remains a design map,
+  not a renderer rewrite or live-frame proof. See [GX v2 packet map](docs/evidence/GX-V2-PACKET-CONTRACT-MAP-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
