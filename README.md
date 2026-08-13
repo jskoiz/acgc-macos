@@ -115,6 +115,13 @@ redistribute it or extracted proprietary assets.
   Nintendo`. This passes the identifiable game-frame gate. The same run later
   exits with `139` before graceful cleanup, so stable post-frame execution,
   input, audible audio, save/load, and playability remain unproven.
+- Umbrella commit `adc1d6e` adds the parser-only
+  `scripts/probes/frame_evidence.py` gate and its handoff report. Against the
+  exact clean `909f3ca` source and current runtime/fixture logs it returns
+  `NOT_CLAIMED`: the historical graph prefix, synthetic renderer fixtures,
+  and standalone screenshot are not joined into a game-owned submit → encode →
+  present → visible-window → readback chain. This is evidence hygiene, not a
+  regression of the separately recorded identifiable-frame screenshot.
 - The forensic target from `07a5447` reproduces the same contract in isolation:
   the opaque GBI handle resolves to the full arm64 pointer, while
   `GXInitTexObj` stores only the low 32 bits and `GXGetTexObjData` recovers the
@@ -254,6 +261,7 @@ process stays alive for the requested interval. Its runtime log remains under
 - [macOS filesystem roles and atomic-save proof](docs/FILESYSTEM-SAVE-EVIDENCE.md)
 - [macOS lifecycle contract evidence](docs/LIFECYCLE-EVIDENCE.md)
 - [Save_t/GCI codec evidence](docs/SAVE-GCI-EVIDENCE.md)
+- [Frame evidence gate handoff](docs/evidence/FRAME-EVIDENCE-2026-08-12.md)
 - [arm64 native and sanitizer matrix](docs/LANE-VERIFICATION-MATRIX-2026-08-12.md)
 - [current integrated verification matrix](docs/LANE-VERIFICATION-CURRENT-858D802-2026-08-12.md)
 - [Exact bootstrap commands, results, and blockers](docs/BOOTSTRAP-EVIDENCE.md)

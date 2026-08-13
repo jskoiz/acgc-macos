@@ -61,6 +61,7 @@ docs.
 | 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Parked/archived under four-lane cap; prior lifecycle evidence remains integrated |
 | 26 | Post-fix game frame runtime — client `client-new-thread:1b48103c-9b76-4caf-8598-686e392653c3` | Fresh actual-game arm64 run after texture remediation, packet/frame boundary | No separate worktree activated; root integration owner used `/private/tmp/acgc-integrated-audio-wave-build` | Superseded by root-owned integrated run; first identifiable game-owned frame captured, later `rc=139`; no duplicate full link |
 | 27 | Audio-bank ABI repair — root-owned continuation | `src/static/jaudio_NES/internal/system.c`, `channel.c`, fixed-width bank decoder and focused fixtures | `/private/tmp/acgc-lane-audio-lp64` / `c1/lane-audio-lp64`; lane commit `5974764`, integrated on `c1/macos-host-launch` as source `909f3ca`; build `/private/tmp/acgc-integrated-audio-wave-build` | Integrated bounded fix; `ac_pc` full link `rc=0`, audio fixture 1/1, emu64 native 3/3, ASan/UBSan 3/3; bank 28 decodes (`3376` bytes), `[LOGO] draw` appears, and the integrated screenshot passes the game-frame gate; later `rc=139` keeps clean shutdown and post-frame stability open |
+| 28 | Frame evidence packaging — `019ff9a0-f9be-73a0-a452-02a309e5baa5` | Umbrella parser/report only; current-source binding and fail-closed submit/encode/present/readback labels | `/Users/jk/.codex/worktrees/4efd/acgc-modern-port` / `c1/lane-frame-evidence`; integrated umbrella `adc1d6e` | Complete/integrated; self-test passes; exact clean `909f3ca` rerun returns `NOT_CLAIMED`, explicitly rejecting historical graph prefixes, fixture output, and a standalone screenshot as a full frame chain |
 
 ## Rolling-refill intake (setup pending)
 
@@ -221,6 +222,13 @@ submodules blindly or edit a detached source checkout.
   acgc_pc_audio_bank_wire_fixture --parallel 4`, and
   `ctest --test-dir /private/tmp/acgc-integrated-audio-wave-build
   --output-on-failure -R '^acgc_pc_audio_bank_wire_fixture$'`.
+- Umbrella commit `adc1d6e` integrates the frame-evidence parser and report from
+  lane `019ff9a0-f9be-73a0-a452-02a309e5baa5`. `PYTHONDONTWRITEBYTECODE=1
+  python3 -B scripts/probes/frame_evidence.py --self-test` passes. A rerun
+  bound to clean source `909f3ca` returns `NOT_CLAIMED` with explicit missing
+  `game_owned_submit`, `game_encode`, `game_present`, `visible_window`, and
+  `game_readback` prerequisites; it does not override the separately recorded
+  screenshot-based identifiable-frame evidence.
 - The completed boot trace resolves the failing arm64 store as
   `strb w8, [x22,#0x474]` for `GRAPH_SET_DOING_POINT(graph, GAME_BGM)` with
   computed bad base `0x100000000`; `graph_task_set00` is never hit. Its next
