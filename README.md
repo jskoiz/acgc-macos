@@ -88,6 +88,11 @@ redistribute it or extracted proprietary assets.
   proves a live game callback, Metal encode/readback/pixel, or playability.
   See [GX v2 implementation evidence](docs/evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md)
   and [GX v2 consumer evidence](docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md).
+- A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
+  its one LLDB launch failed before creating an inferior with status `-1 (no
+  such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.
+  Callback reachability therefore remains unverified, with no frame, Metal,
+  pixel, or playability claim. See [live GX v2 callback reachability evidence](docs/evidence/LIVE-GX-V2-CALLBACK-REACHABILITY-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until

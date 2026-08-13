@@ -238,3 +238,14 @@ did not retain per-breakpoint hit counts, callback registration remains
 unclaimed; Metal encoding, presentation, pixels, input, audio, save/reload,
 device, and playability remain separate open gates. See [root-owned live launch
 evidence](evidence/ROOT-LIVE-LAUNCH-2026-08-13.md).
+The bounded GX v2 packet builder/validator is integrated at `26da235`, and
+the version-aware consumer boundary is integrated at `d1e812c`. The consumer
+keeps v1 dispatch separate, validates v2, and reports
+`V2_EXTENSION_NOT_RENDERED`; focused native and ASan/UBSan tests pass `4/4`
+each. A single current-tip `d1e812c` runtime attempt then linked `4019/4019`,
+but its only LLDB launch failed before creating an inferior with status `-1`
+(`no such process`) and every graph/GX/v2/Apple breakpoint was zero-hit. The
+v2 callback remains unverified, and no frame, Metal encode/readback/pixel,
+input, audio, save/device, simulator/device, or playability claim follows;
+see [GX v2 consumer evidence](evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md)
+and [live GX v2 callback reachability evidence](evidence/LIVE-GX-V2-CALLBACK-REACHABILITY-2026-08-13.md).
