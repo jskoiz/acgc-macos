@@ -151,6 +151,11 @@ redistribute it or extracted proprietary assets.
   target identity/capacity while the registry is live and require
   `DF000000,0`, otherwise it must remain `INDIRECT`/`PREFIX_ONLY`. See
   [GBI indirect-target evidence](docs/evidence/GBI-INDIRECT-TARGET-AUDIT-2026-08-13.md).
+- The exact-tip focused native plus ASan/UBSan refresh passes the GX callback,
+  graph seam, Apple CPU contracts, and standalone Save_t codec/checksum/restart
+  fixture: three passes and two declared Metal-device skips per matrix, with no
+  sanitizer diagnostics. This remains fixture-only; see
+  [the ac39d04 sanitizer evidence](docs/evidence/SANITIZER-REFRESH-AC39D04-2026-08-13.md).
 - A separate bounded run reaches the live SDL `PollEvent` and `PADRead` /
   `PCInputSnapshot` boundaries, but its single OS-event attempt posts no
   keydown or keyup and observes no state change. This is a running-game input
