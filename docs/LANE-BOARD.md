@@ -112,6 +112,14 @@ submodules blindly or edit a detached source checkout.
   texture/TEV fixture colors, and rejects unsupported topology without
   truncation. The CPU contract passes; the offscreen encoder path skips on this
   host with no Metal device. It is not live-game frame or pixel evidence.
+- `d0ae08d` adds the reviewed graph-capture-to-GX handoff adapter. It validates
+  capture bounds, refuses empty/incomplete snapshots, invokes only an explicit
+  decoder for a complete capture, and re-validates the resulting packet. The
+  observed live shape (`de010000,f0002000` plus zero words, count 8/capacity
+  256) returns `INCOMPLETE_CAPTURE` without invoking a decoder. From the
+  authoritative source checkout, the focused adapter/C/C++ packet suite passed
+  `3/3` under `/private/tmp/acgc-integrated-gx-adapter-build`; this is a
+  fail-closed seam, not a draw or frame claim.
 - `ddbb498` adds fixed-width texture/TLUT/sampler/TEV fixtures, including
   CI14x2 and CMPR reference cases. The integrated Apple fixture test passes;
   no texture upload/readback, shader wiring, or game-renderer evidence is
