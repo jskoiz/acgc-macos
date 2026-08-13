@@ -92,6 +92,13 @@ the V3 fail-closed reason for the observed state, matching
 runtime observer. Native and ASan/UBSan focused handoff tests remain `3/3`
 each; this is builder-predicate evidence only, not live callback, Metal,
 pixel, or playability proof. See [V3 rejection evidence](evidence/GX-V3-REJECTION-ALPHA-UPDATE-ADD2D6F-2026-08-13.md).
+The integrated `f18e7cd` fixture now exercises the same boundary in a synthetic
+CPU path: disabled alpha writes reject before callback, enabled writes build a
+valid V3 packet, the typed consumer reports `V3_EXTENSION_NOT_RENDERED`, and a
+malformed packet is rejected without entering the V1 seam. Native and
+ASan/UBSan focused CTest pass `2/2` each. This remains contract evidence only;
+it does not establish a live callback, Metal encode/readback, pixel, or
+playability gate. See [V3 builder-consumer fixture evidence](evidence/GX-V3-BUILDER-CONSUMER-FIXTURE-F18E7CD-2026-08-13.md).
 The DVD/CARD,
 input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
 commits reviewed in the same source history remain the current evidence, and
