@@ -35,13 +35,14 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: three durable Luna Max/max worker tasks are active
+Current maintenance state: two durable Luna Max/max worker tasks are active
 alongside this integration owner. The authoritative PC source is `ac39d04` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
 `.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
-queue is complete; the active rows below are the next runtime, losslessness,
-input, and regression gates.
+queue is complete; the active rows below are the game-owned save-caller and
+exact-tip sanitizer gates. The graph activation and GBI indirect-target audits
+are now complete/parked with their evidence recorded below.
 Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
