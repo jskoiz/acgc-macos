@@ -27,11 +27,11 @@ does not mean its gate passed.
 | 15 | Integration/evidence owner — `019ff398-2520-7191-ac5c-f3007c49163f` | Umbrella docs, roadmap, reviewed commits, source gitlink, launch proof | `/Users/jk/Documents/Projects/acgc-modern-port` / `c1/apple-port-bootstrap` | Active; only lane allowed to update the umbrella submodule pointer |
 | 16 | Graph capture → GX packet — `019ff914-44fc-7801-88f4-ee513fc8e728` | New adapter/test from captured prefix into existing GX contract | `/Users/jk/.codex/worktrees/4a27/acgc-modern-port`; source `/private/tmp/acgc-lane-graph-gx-adapter` / `c1/lane-graph-gx-adapter` | Resumed after setup blocker; source-edit lane |
 | 17 | LP64 texture handle remediation — `019ff914-9bd9-77f3-8d8b-d72f5c00d587` | `pc_gx_texture.c` and opaque-reference width/lifetime | `/Users/jk/.codex/worktrees/fc81/acgc-modern-port`; planned source `/private/tmp/acgc-lane-lp64-texture` / `c1/lane-lp64-texture` | Active; source-edit lane; owns `0x83bdc0` fault |
-| 18 | Metal semantic packet consumer — `019ff914-9e34-7181-8903-f8022c82cacf` | Packet-to-state/encoder validation and device-gated fixture | `/Users/jk/.codex/worktrees/da16/acgc-modern-port`; planned source `/private/tmp/acgc-lane-metal-packet-consumer` / `c1/lane-metal-packet-consumer` | Active; source/fixture lane; no live device claim |
-| 19 | Live graph capture reproducibility — `019ff914-ad3f-7721-82f2-d8985d601ba1` | Two cold-run snapshots and exact fault boundary | `/Users/jk/.codex/worktrees/5edb/acgc-modern-port`; build `/private/tmp/acgc-lane-live-capture-repro-build` | Active; runtime evidence only |
+| 18 | Metal semantic packet consumer — `019ff914-9e34-7181-8903-f8022c82cacf` | Packet-to-state/encoder validation and device-gated fixture | `/Users/jk/.codex/worktrees/da16/acgc-modern-port`; source `/private/tmp/acgc-lane-metal-packet-consumer` / `c1/lane-metal-packet-consumer` | Complete/integrated as `12b4f6e` (lane commit `209e95f`); 9 Apple tests pass and 2 Metal tests skip without a device; no live frame claim |
+| 19 | Live graph capture reproducibility — `019ff914-ad3f-7721-82f2-d8985d601ba1` | Two cold-run snapshots and exact fault boundary | `/Users/jk/.codex/worktrees/5edb/acgc-modern-port`; build `/private/tmp/acgc-lane-live-capture-repro-build` | Complete/parked; two cold runs are byte-identical (version 1, frame 0, capacity 256, count 8, same words) and both stop at `pc_gx_texture.c:62` `data=0x83bdc0` before legacy submission; no frame claim |
 | 20 | CoreAudio/device and asset-audio successor — `019ff914-a32b-7363-a619-f79e21c75db3` | Real sink gate, then asset-driven NEOS_OUT runtime trace | `/Users/jk/.codex/worktrees/fdc9/acgc-modern-port`; builds `/private/tmp/acgc-lane-coreaudio-device-build` and `/private/tmp/acgc-lane-audio-asset-runtime-build` | Device subgate complete/parked: synthetic NEOS/RSP 1,118 nonzero samples passes; real SDL/CoreAudio open returns `77` with `kAudioDevicePropertyDeviceIsAlive` error `560947818`; asset-audio successor active; no audible claim |
-| 21 | Save_t raw-wire forensic — `019ff914-a86e-7793-b0f0-6ce23e8d97a0` | `time_limit` width/endianness/range evidence across both upstreams | `/Users/jk/.codex/worktrees/e9ef/acgc-modern-port`; build `/private/tmp/acgc-lane-save-wire-forensic-build` | Active; read-only/fixture lane; codec remains frozen |
-| 22 | Integrated sanitizer matrix — `019ff914-b322-7e10-876e-c942a45aef4a` | Native and ASan/UBSan at integrated source `07a5447` | `/Users/jk/.codex/worktrees/44e8/acgc-modern-port`; builds `/private/tmp/acgc-lane-integrated-native-build` and `/private/tmp/acgc-lane-integrated-sanitizer-build` | Active; verification only; serialize full links |
+| 21 | Save_t raw-wire forensic → codec fix — `019ff914-a86e-7793-b0f0-6ce23e8d97a0` | `time_limit` width/endianness evidence, then `pc_save_bswap.c` repair | `/Users/jk/.codex/worktrees/e9ef/acgc-modern-port`; builds `/private/tmp/acgc-lane-save-wire-forensic-build` and `/private/tmp/acgc-lane-save-wire-fix-build`; source successor `/private/tmp/acgc-lane-save-wire-fix` / `c1/lane-save-wire-fix` | Forensic subgate complete; successor active. Confirmed effective 16-bit bitfield at `+0x02`, lost `Save_t +0xB6..+0xB7`, `wire=0xF10E` → `roundtrip=0x0000`; no codec edit integrated yet |
+| 22 | Integrated sanitizer matrix — `019ff914-b322-7e10-876e-c942a45aef4a` | Native and ASan/UBSan at current source HEAD, including texture fixture | `/Users/jk/.codex/worktrees/44e8/acgc-modern-port`; builds `/private/tmp/acgc-lane-integrated-native-07a5447` and `/private/tmp/acgc-lane-integrated-sanitizer-07a5447` | Current-HEAD successor active; prior `10d6ac0` matrix had 17/17 portable and 11 recoverable UBSan `aflags_c` findings under sanitizer traversal |
 | 23 | Windows compatibility post-capture audit — `019ff914-b7c7-75d2-ad4c-d94032e35b12` | `_WIN32`/x86/OpenGL/SDL conditional audit after `10d6ac0` | `/Users/jk/.codex/worktrees/d9c5/acgc-modern-port`; build `/private/tmp/acgc-lane-windows-audit-build` | Complete/parked; strict `_WIN32` graph seam compile/test passes; no source regression found; native Windows/x86 toolchain remains unavailable |
 | 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; source `/private/tmp/acgc-lane-texture-fault-fixture` / `c1/lane-texture-fault-fixture` | Complete/integrated as `07a5447`; native arm64 fixture records full pointer → opaque handle → low-word truncation and intentional `EXPECTED_FAILURE`; remediation remains lane 17 |
 | 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Active; source/test lane |
@@ -63,6 +63,9 @@ submodules blindly or edit a detached source checkout.
 - After the capture, the same run stops at `pc_gx_texture.c:62` while
   `tex_content_hash` follows `data=0x83bdc0` from a truncated 32-bit texture
   object. That is the next source-fix gate; no rendered frame is claimed.
+- Two cold runs through the ignored ISO symlink reproduce the exact same
+  version/frame/capacity/count/word prefix and the same texture fault. This
+  makes the capture deterministic evidence, not a one-run debugger artifact.
 - The integrated forensic fixture `07a5447` reproduces the same width loss
   without a game launch: `GXInitTexObj` stores only the low 32 bits after the
   opaque GBI handle resolves, and `GXGetTexObjData` returns that truncated
@@ -78,6 +81,11 @@ submodules blindly or edit a detached source checkout.
 - `866dd94` adds Metal geometry/state fixtures. CPU and existing geometry tests
   pass; the offscreen Metal test is skipped because this host reports no Metal
   device.
+- `12b4f6e` adds a bounded GX-packet-to-Metal consumer fixture. It validates
+  the existing fixed-width packet, composes transforms, routes material and
+  texture/TEV fixture colors, and rejects unsupported topology without
+  truncation. The CPU contract passes; the offscreen encoder path skips on this
+  host with no Metal device. It is not live-game frame or pixel evidence.
 - `ddbb498` adds fixed-width texture/TLUT/sampler/TEV fixtures, including
   CI14x2 and CMPR reference cases. The integrated Apple fixture test passes;
   no texture upload/readback, shader wiring, or game-renderer evidence is

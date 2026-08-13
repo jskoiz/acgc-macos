@@ -74,9 +74,10 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `07a5447` (`Add arm64 texture pointer
-  fault fixture`), on top of `10d6ac0` (`Capture graph work list before emu64
-  setup`) and `2736838` (`Add NEOS RSP PCM provenance probe`), with the DVD/CARD,
+  `c1/macos-host-launch` source branch at `12b4f6e` (`Add Metal GX packet
+  consumer fixture`), on top of `07a5447` (`Add arm64 texture pointer fault
+  fixture`), `10d6ac0` (`Capture graph work list before emu64 setup`), and
+  `2736838` (`Add NEOS RSP PCM provenance probe`), with the DVD/CARD,
   input snapshot, graph-capture, GX packet,
   Metal-fixture, and audio-boundary commits reviewed in the same source
   history. The fresh arm64 link produces a Mach-O
@@ -90,8 +91,9 @@ redistribute it or extracted proprietary assets.
   fixtures), `ddbb498` (texture/TLUT/TEV fixtures), `766ad96`
   (mixer-to-callback PCM fixture), `5086f1d` (post-callback graph reload),
   `2736838` (RSP/Neos-style PCM provenance), `10d6ac0` (opt-in Darwin live
-  graph capture before emu64 setup), and `07a5447` (arm64 texture-pointer
-  forensic fixture). These are separate boundaries: the first
+  graph capture before emu64 setup), `07a5447` (arm64 texture-pointer forensic
+  fixture), and `12b4f6e` (bounded GX packet-to-Metal consumer fixture). These
+  are separate boundaries: the first
   live game-owned prefix is now captured, but the reconstructed process still
   stops in the legacy texture path before any renderer frame.
 - The first live graph snapshot is pointer-free and records version `1`, frame
@@ -106,6 +108,11 @@ redistribute it or extracted proprietary assets.
   `GXInitTexObj` stores only the low 32 bits and `GXGetTexObjData` recovers the
   truncated value. It reports `EXPECTED_FAILURE` by design and does not alter
   the runtime texture path.
+- The Apple packet-consumer fixture (`12b4f6e`) validates one supported GX
+  triangle against the existing Metal state/geometry/texture/TEV seams and
+  rejects larger topology without truncation. Its CPU contract passes; both
+  Metal-device tests skip on this host, so no command-buffer, pixel, or game
+  frame claim follows.
 - The input path now adds `8b6849f`, a focused SDL virtual-controller smoke
   harness. Real `PADInit`/`PADRead` button and axis handoff passes natively and
   under ASan/UBSan 2/2. SDL-queued keyboard events do not mutate

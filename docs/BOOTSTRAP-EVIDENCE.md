@@ -291,7 +291,7 @@ could not create the image; no visual-capture claim is made.
 ## Rolling lane update (2026-08-12)
 
 The authoritative `upstream/ACGC-PC-Port` branch is
-`c1/macos-host-launch` at `07a5447`. Reviewed source commits now include:
+`c1/macos-host-launch` at `12b4f6e`. Reviewed source commits now include:
 
 - `e5442de` / `858d802` / `8b6849f` — injectable fixed-width PC input snapshots,
   the final PADRead handoff, and SDL virtual-controller/event smoke;
@@ -304,6 +304,9 @@ The authoritative `upstream/ACGC-PC-Port` branch is
   game-owned prefix is recorded;
 - `07a5447` — arm64 texture-pointer forensic fixture showing the full opaque
   handle resolves correctly before `GXInitTexObj` truncates it to 32 bits;
+- `12b4f6e` — bounded GX packet-to-Metal consumer fixture; CPU packet/state
+  validation passes and the device-backed tests skip when no Metal device is
+  available;
 - `83fa889` — 4,800-byte renderer-neutral GX semantic packet contract;
 - `866dd94` — Metal geometry/state fixtures; and
 - `ddbb498` — texture/TLUT/sampler/TEV fixtures; and
@@ -360,6 +363,11 @@ The same run subsequently stops at `pc_gx_texture.c:62` following the
 truncated `0x83bdc0` texture object. This proves a game-owned submission prefix
 only; no rendered frame, input, audible output, Save_t/GCI restart, or
 playability gate is claimed.
+
+Two cold runs through the ignored ISO symlink produced byte-identical capture
+fields and words and the same `pc_gx_texture.c:62` boundary before the legacy
+submission. The prefix is therefore repeatable runtime evidence, still not a
+rendered-frame claim.
 
 The focused `07a5447` forensic executable reproduces that arm64 contract
 without launching the game: the opaque GBI handle resolves to the full native
