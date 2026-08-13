@@ -145,6 +145,11 @@ redistribute it or extracted proprietary assets.
   focused C and syntax probes; real i686 Windows targets remain blocked by the
   absent sysroot and MinGW tools, so this is not Windows sign-off. See
   [Windows regression evidence](docs/evidence/WINDOWS-REGRESSION-AUDIT-2026-08-13.md).
+- The Apple renderer seam now has one borrowed, synchronous callback for a
+  validated GX packet, with explicit unregister-on-shutdown and fail-closed
+  unsupported-topology handling. Native and ASan/UBSan CPU tests pass; Metal
+  device portions still skip `77`, and no full `ac_pc` link or live game frame
+  is claimed. See [GX-to-Metal callback evidence](docs/evidence/LIVE-GX-METAL-CALLBACK-2026-08-13.md).
 - The first live graph snapshot is pointer-free and records version `1`, frame
   `0`, source capacity `256`, count `8`, and words
   `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.
