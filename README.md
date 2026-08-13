@@ -156,6 +156,11 @@ redistribute it or extracted proprietary assets.
   fixture: three passes and two declared Metal-device skips per matrix, with no
   sanitizer diagnostics. This remains fixture-only; see
   [the ac39d04 sanitizer evidence](docs/evidence/SANITIZER-REFRESH-AC39D04-2026-08-13.md).
+- The graph-target successor is now integrated at PC source `71a7012`. Its
+  pointer-free target contract resolves only a caller-declared `new0` span and
+  requires `DF000000,0`; native and ASan/UBSan focused tests pass `3/3` each.
+  This is a bounded source/test contract, not live complete-list or frame proof.
+  See [graph indirect-target evidence](docs/evidence/GRAPH-INDIRECT-TARGET-CONTRACT-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

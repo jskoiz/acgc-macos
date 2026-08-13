@@ -134,3 +134,8 @@ The game-owned save audit separately identifies the restart NPC
 gate; the host recovery fixture primes `Save_t` directly and cannot substitute
 for a caller-driven save/restart/reload proof. See
 [game Save_t/CARD caller evidence](evidence/GAME-SAVE-CALLER-AUDIT-2026-08-13.md).
+The graph-target successor is integrated at PC source `71a7012`: it retains
+only pointer-free target identity/capacity and requires `DF000000,0`, with
+native and ASan/UBSan focused tests passing `3/3` each. This remains a contract
+fixture, not live complete-list, GX/Metal, pixel, or playability evidence; see
+[graph indirect-target contract](evidence/GRAPH-INDIRECT-TARGET-CONTRACT-2026-08-13.md).
