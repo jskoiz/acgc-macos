@@ -23,7 +23,7 @@ does not mean its gate passed.
 | 11 | Sandboxed filesystem/atomic saves — `019ff8d3-1b80-7ab0-89b5-28afcf680cef` | Application Support/cache/log/temp-file adapter | `/Users/jk/.codex/worktrees/10c5/acgc-modern-port`; `c1/lane-filesystem-saves` | Complete; umbrella `ee7b814`; synthetic atomic/corruption/isolation probes passed |
 | 12 | Timing/retrace/lifecycle — `019ff8d3-1f89-7c23-82fb-150b2f39e37c` | Monotonic time, workers, shutdown/resume | `/Users/jk/.codex/worktrees/cf91/acgc-modern-port`; `c1/lane-timing-lifecycle` | Complete; umbrella `15a081f`; strict + ASan/UBSan repeated trace passed |
 | 13 | Windows compatibility audit — `019ff8d3-23c5-75a2-beac-7f7e70c72c08` | Read-only x86/Windows/OpenGL/SDL conditional audit | `/Users/jk/.codex/worktrees/8231/acgc-modern-port` | Complete read-only; scoped to `4f77dab`, no MinGW compiler sign-off |
-| 14 | Native + ASan/UBSan matrix — `019ff8d3-2a6f-7610-a9f1-53f237353454` | Focused verification and sanitizer evidence | `/Users/jk/.codex/worktrees/2232/acgc-modern-port`; `c1/lane-verification-matrix` | Successor active; prior umbrella `fe21878` was 12/12 native and 12/12 ASan at `4f77dab`; current `858d802` rerun in progress |
+| 14 | Native + ASan/UBSan matrix — `019ff8d3-2a6f-7610-a9f1-53f237353454` | Focused verification and sanitizer evidence | `/Users/jk/.codex/worktrees/2232/acgc-modern-port`; `c1/lane-verification-matrix` | Complete/parked; umbrella `38f85da`; 32 native + 32 ASan/UBSan targets at exact `858d802`, CoreAudio/Metal skipped as expected |
 | 15 | Integration/evidence owner — `019ff398-2520-7191-ac5c-f3007c49163f` | Umbrella docs, roadmap, reviewed commits, source gitlink, launch proof | `/Users/jk/Documents/Projects/acgc-modern-port` / `c1/apple-port-bootstrap` | Active; only lane allowed to update the umbrella submodule pointer |
 
 The Codex-created umbrella worktrees begin detached at umbrella commit
@@ -68,6 +68,11 @@ submodules blindly or edit a detached source checkout.
   of the raw unit (`wire=0xF10E -> roundtrip=0x0000`). No canonical wire-zero
   rule is justified; exact GCI envelope length, runtime save-manager restart,
   main/backup recovery, and whole-GCI losslessness remain open.
+- Umbrella commit `38f85da` records the current focused matrix at exact
+  `858d802`: 32 native and 32 ASan/UBSan targets built; portable 14/14, PC 4
+  passed with CoreAudio skipped, Apple 6 passed with Metal skipped, and no
+  sanitizer/runtime-error findings. This is snapshot evidence, not full
+  `ac_pc` or game-frame proof; the source checkout later advanced to `8b6849f`.
 - The Windows audit found no regression in `4f77dab` and preserves the x86
   guards, but no MinGW/i686 compiler is installed. Two pre-existing POSIX
   include assumptions remain follow-up checks.

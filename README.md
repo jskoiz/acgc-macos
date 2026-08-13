@@ -121,10 +121,12 @@ redistribute it or extracted proprietary assets.
   durable atomic rename, and corruption detection. Both are synthetic adapter
   gates until connected to game state.
 - The arm64 verification lane passes 12/12 selected native tests and 12/12
-  ASan/UBSan tests at source snapshot `4f77dab`; it must be rerun at the current
-  integrated source HEAD before claiming a current full matrix. The Windows
-  audit found no regression at that snapshot but had no MinGW/i686 compiler, so
-  it is not a Windows compiler sign-off.
+  ASan/UBSan tests at source snapshot `4f77dab`. A newer exact-snapshot matrix
+  at `858d802` built 32 native and the same 32 under ASan/UBSan; portable 14/14,
+  PC 4 passed with CoreAudio skipped, and Apple 6 passed with Metal skipped.
+  This remains focused evidence, not a full `ac_pc` or game-frame proof. The
+  Windows audit found no regression at the older snapshot but had no MinGW/i686
+  compiler, so it is not a Windows compiler sign-off.
 - The umbrella-owned macOS filesystem/save adapter now resolves distinct bundle
   Resources, Application Support, Caches, and Logs roots; rejects resource
   writes and traversal; commits opaque save payloads with same-directory
@@ -203,5 +205,6 @@ process stays alive for the requested interval. Its runtime log remains under
 - [macOS lifecycle contract evidence](docs/LIFECYCLE-EVIDENCE.md)
 - [Save_t/GCI codec evidence](docs/SAVE-GCI-EVIDENCE.md)
 - [arm64 native and sanitizer matrix](docs/LANE-VERIFICATION-MATRIX-2026-08-12.md)
+- [current integrated verification matrix](docs/LANE-VERIFICATION-CURRENT-858D802-2026-08-12.md)
 - [Exact bootstrap commands, results, and blockers](docs/BOOTSTRAP-EVIDENCE.md)
 - [Porting charter](docs/PORTING-CHARTER.md)

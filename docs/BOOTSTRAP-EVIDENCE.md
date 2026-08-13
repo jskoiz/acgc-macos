@@ -330,6 +330,13 @@ snapshot/PADRead handoff plus a virtual SDL controller path. The keyboard half
 is intentionally limited because `SDL_PushEvent` does not update
 `SDL_GetKeyboardState`; an OS/human event is still required.
 
+The current focused matrix is recorded in
+`docs/LANE-VERIFICATION-CURRENT-858D802-2026-08-12.md`: exact source
+`858d802`, 32 native arm64 and 32 ASan/UBSan targets built, portable 14/14,
+PC 4 passed with CoreAudio skipped, and Apple 6 passed with Metal skipped. The
+authoritative source later advanced to `8b6849f`, so this report is not a
+current-HEAD claim.
+
 The Save_t/GCI evidence is recorded in umbrella commits `3b8ed21` and
 `aeefc15`; it passes canonical-padding, checksum, and codec-only process-restart
 fixtures but intentionally keeps the raw-range mismatch visible rather than
