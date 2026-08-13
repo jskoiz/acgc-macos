@@ -35,7 +35,7 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: one production worker is active. Callback capture lane
+Current maintenance state: no production worker is active. Callback capture lane
 `019ffbc7-01e9-7b32-b5b1-f0abaada1b09` is complete/archived after its
 one normal-shell launch and one permitted elevated fallback both stopped
 before runtime; evidence is recorded in
@@ -53,8 +53,9 @@ launch/boot/GX-boundary/clean-return only; its interactive transcript did not
 retain per-breakpoint hit counts, so the Apple callback gate remains open.
 The callback lane is now complete; its shader blocker was fixed by completed
 lane `019ffbf9-eee6-7e12-bc8c-5b6f68c58c5f`. Current runtime successor lane
-`019ffc03-b830-70f2-bce2-6cc32a436c29` owns one serialized current-tip
-launch/LLDB attempt at PC `a8f3a8f`; no source edits are allowed. Windows lane
+`019ffc03-b830-70f2-bce2-6cc32a436c29` is complete/archived after one
+serialized current-tip launch/LLDB attempt at PC `a8f3a8f`; no source edits were
+made. Windows lane
 `019ffbd0-b850-74b0-a0fd-cedcbd90db47`, sanitizer lane
 `019ffbd0-ba29-78e2-aad5-93f34b8bdf73`, and iOS shared-boundary lane
 `019ffbd0-bc94-7ff1-baf1-e5689164d53a` have complete read-only handoffs and
@@ -231,7 +232,7 @@ from compilation alone.
 | 83 | Game-owned input frame-guard fixture — `019ffbda-8005-7b93-83cf-67549d968677` | Source/test successor for `padmgr_RequestPadData()` once-per-frame state preservation; owns `pc/tests/pc_padmgr_frame_guard_fixture.c` and narrow CMake registration only | Source worktree `/private/tmp/acgc-lane-input-frame-guard/source` (retire after review); branch `c1/input-frame-guard` at `799a016`; integrated canonical PC `59aa655`; focused roots `/private/tmp/acgc-integrate-input-frame-guard-59aa655-native` and `...-asan` | Complete/integrated; native and ASan/UBSan CTest `1/1` each with no diagnostics; no physical input/playability claim; evidence `docs/evidence/INPUT-FRAME-GUARD-2026-08-13.md` |
 | 84 | Current integrated Metal callback capture — `019ffbe2-0d6d-74a0-9750-7f5e1e8b4d2e` | Read-only current-tip `59aa655` full link and exactly one direct LLDB launch; capture game-owned callback/sink status separately from GX/OpenGL | Worktree `/Users/jk/.codex/worktrees/73d6/acgc-modern-port` (retire after review); build `/private/tmp/acgc-lane-current-sink-callback-build`; logs `/private/tmp/acgc-lane-current-sink-callback-logs`; no source branch | Complete/archived; graph target and `GXBegin` each hit once, `pc_gx_flush_vertices` and `pc_metal_runtime_observe` hit zero; sink shader compile failed before encode/readback; evidence `docs/evidence/CURRENT-INTEGRATED-METAL-CALLBACK-2026-08-13.md`; no Metal/pixel/playability claim |
 | 85 | Metal sink shader compile fix — `019ffbf9-eee6-7e12-bc8c-5b6f68c58c5f` | Source-edit lane owning only `pc/apple/src/metal_sink.m` and narrowly necessary sink regression coverage; reproduce/fix the MSL reserved-identifier failure without a full link | Source worktree `/private/tmp/acgc-lane-metal-sink-shader-fix-source` (retire after review); branch `c1/lane-metal-sink-shader-fix` at `5db1d28`; integrated canonical PC `a8f3a8f`; roots `/private/tmp/acgc-lane-metal-sink-shader-fix` and `...-asan` (retire after review) | Complete/integrated; pre-fix parser failure reproduced, post-fix offline MSL produces AIR, focused sink CTest/device gate passes with skip `77`; evidence `docs/evidence/METAL-SINK-SHADER-FIX-2026-08-13.md`; no live callback/pixel/playability claim |
-| 86 | Current Metal sink runtime after shader fix — `019ffc03-b830-70f2-bce2-6cc32a436c29` | Read-only current-tip `a8f3a8f` full link and exactly one bounded direct LLDB launch; capture callback/encode/readback separately from GX/OpenGL | Worktree `/Users/jk/.codex/worktrees/cf4f/acgc-modern-port`; build `/private/tmp/acgc-lane-current-sink-runtime-a8f3a8f`; logs `/private/tmp/acgc-lane-current-sink-runtime-a8f3a8f-logs`; no source branch | Active; no current-tip callback/Metal encode/readback/pixel/playability claim yet |
+| 86 | Current Metal sink runtime after shader fix — `019ffc03-b830-70f2-bce2-6cc32a436c29` | Read-only current-tip `a8f3a8f` full link and exactly one bounded direct LLDB launch; capture callback/encode/readback separately from GX/OpenGL | Worktree `/Users/jk/.codex/worktrees/cf4f/acgc-modern-port` (retire after review); build `/private/tmp/acgc-lane-current-sink-runtime-a8f3a8f`; logs `/private/tmp/acgc-lane-current-sink-runtime-a8f3a8f-logs`; no source branch | Complete/archived; graph target, `GXBegin`, and `pc_gx_flush_vertices` each hit once; `pc_metal_runtime_observe` hit zero; no Metal encode/readback/pixel/playability claim; evidence `docs/evidence/CURRENT-METAL-SINK-RUNTIME-A8F3A8F-2026-08-13.md` |
 
 ## Parked intake (not active)
 

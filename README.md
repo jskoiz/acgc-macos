@@ -63,6 +63,10 @@ redistribute it or extracted proprietary assets.
 - The embedded Metal sink shader blocker is fixed at `a8f3a8f`: offline MSL
   compilation now succeeds, while the focused device-backed test remains skip
   `77` on this host. See [shader-fix evidence](docs/evidence/METAL-SINK-SHADER-FIX-2026-08-13.md).
+- The exact post-fix runtime reaches graph target capture, `GXBegin`, and
+  `pc_gx_flush_vertices`; `pc_metal_runtime_observe` remains unhit, so there
+  is still no game-owned Metal encode/readback/pixel or playability proof. See
+  [current post-fix runtime evidence](docs/evidence/CURRENT-METAL-SINK-RUNTIME-A8F3A8F-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
