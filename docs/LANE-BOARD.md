@@ -45,11 +45,12 @@ current-tip LLDB launch. It created an inferior and reached boot/runtime,
 resolving lane 91's pre-inferior `-1` blocker, but the bounded interruption
 occurred before LLDB emitted per-symbol counts; no callback hit is inferred.
 It owned no source edits and no Metal encode/readback/pixel scope. Lane 91
-91 (`019ffc73-d5c6-78f1-94bb-91ad0d277d1d`) completed one serialized current-tip
+(`019ffc73-d5c6-78f1-94bb-91ad0d277d1d`) completed one serialized current-tip
 arm64 link and one bounded LLDB trace from canonical PC `d1e812c`; the link
 passed `4019/4019`, but LLDB failed before creating an inferior with status
 `-1 (no such process)` and all breakpoints were zero-hit. It owns no source
-edits, no umbrella changes, and no Metal encode/readback/pixel scope. The prior callback capture lane
+edits, no umbrella changes, and no Metal encode/readback/pixel scope. The prior
+callback capture lane
 `019ffbc7-01e9-7b32-b5b1-f0abaada1b09`, the offscreen Metal sink lane
 `019ffbc8-1f2b-7513-9c1c-7ddde5114f97`, the input, mixer/audio, lifecycle,
 observer-rejection, and read-only GX v2 contract lanes are complete/archived
