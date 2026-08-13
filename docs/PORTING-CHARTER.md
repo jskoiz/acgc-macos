@@ -268,3 +268,8 @@ Python breakpoint callback. It recorded `graph_task_set00=1` and
 `GXBegin`, `pc_gx_flush_vertices`, the v2 handoff, Apple consumer, and runtime
 observer were all `0`. This closes the LLDB-control blocker but leaves the
 game-to-GX submission boundary open; see [corrected GX v2 trace evidence](evidence/CORRECTED-GX-V2-CALLBACK-TRACE-2026-08-13.md).
+The follow-up two-upstream crosswalk confirms that `graph_submit_task` selects
+one synchronous callback/fallback and `G_DL_NOPUSH` traverses inline, so no
+missing task queue is indicated. One serialized command/continuation trace is
+still needed to distinguish no-draw `G_ENDDL`, target/command validation,
+cancellation, and early sentinel timing; see [graph-task to GX gap evidence](evidence/GRAPH-TASK-TO-GX-GAP-2026-08-13.md).

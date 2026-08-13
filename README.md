@@ -109,6 +109,12 @@ redistribute it or extracted proprietary assets.
   `GXBegin`, `pc_gx_flush_vertices`, the v2 handoff, Apple consumer, and
   runtime observer were all `0`. This closes the LLDB-control blocker but
   leaves the game-to-GX submission boundary open. See [corrected GX v2 trace evidence](docs/evidence/CORRECTED-GX-V2-CALLBACK-TRACE-2026-08-13.md).
+- A two-upstream graph-task crosswalk confirms `graph_submit_task` is a
+  synchronous selector and `G_DL_NOPUSH` is inline traversal, not a missing
+  task queue. The lane-94 zero-GX result therefore still needs one bounded
+  command/continuation trace to distinguish a no-draw `G_ENDDL`, target or
+  command validation failure, cancellation, and a sentinel that fired before
+  later work. See [graph-task to GX gap evidence](docs/evidence/GRAPH-TASK-TO-GX-GAP-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
