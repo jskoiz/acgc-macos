@@ -7,10 +7,12 @@ task being active means it is allowed to inspect or run its bounded work; it
 does not mean its gate passed.
 
 Current scheduler target: up to ten useful visible ACGC lanes, with no filler.
-The known active source lane is LP64 texture remediation (17); graph capture
-(16) and integrated verification (22) are complete/parked. The post-fix
-game-frame runtime lane, six previously requested bounded lanes, and four new
-successors submitted in this refill are setup-pending: the app has returned
+The texture remediation (17) is now complete/integrated at source `578c8b7`.
+The root-owned second-game ABI lane is the current launch-critical source lane;
+its fresh run crosses `second_game.c` and reaches the next audio-thread fault.
+Graph capture (16) and integrated verification (22) are complete/parked. The
+post-fix game-frame runtime, six earlier successors, four prior successors, and
+the six lanes submitted in this refill are setup-pending: the app has returned
 client IDs but not durable task IDs/worktrees yet. They are not counted as
 active until `list_threads` confirms them. Source-editing work remains capped
 at roughly 5–7 lanes, and expensive full links remain serialized. All other
@@ -37,7 +39,7 @@ available in Git and the evidence docs.
 | 14 | Native + ASan/UBSan matrix — `019ff8d3-2a6f-7610-a9f1-53f237353454` | Focused verification and sanitizer evidence | `/Users/jk/.codex/worktrees/2232/acgc-modern-port`; `c1/lane-verification-matrix` | Complete/parked; umbrella `38f85da`; 32 native + 32 ASan/UBSan targets at exact `858d802`, CoreAudio/Metal skipped as expected |
 | 15 | Integration/evidence owner — `019ff398-2520-7191-ac5c-f3007c49163f` | Umbrella docs, roadmap, reviewed commits, source gitlink, launch proof | `/Users/jk/Documents/Projects/acgc-modern-port` / `c1/apple-port-bootstrap` | Active; only lane allowed to update the umbrella submodule pointer |
 | 16 | Graph capture → GX packet — `019ff914-44fc-7801-88f4-ee513fc8e728` | New adapter/test from captured prefix into existing GX contract | `/Users/jk/.codex/worktrees/4a27/acgc-modern-port`; source `/private/tmp/acgc-lane-graph-gx-adapter` / `c1/lane-graph-gx-adapter` | Complete; reviewed `4d2fa4f` and integrated as source `d0ae08d`; 3/3 focused tests passed; observed live prefix still fails closed |
-| 17 | LP64 texture handle remediation — `019ff914-9bd9-77f3-8d8b-d72f5c00d587` | `pc_gx_texture.c` and opaque-reference width/lifetime | `/Users/jk/.codex/worktrees/fc81/acgc-modern-port`; source `/private/tmp/acgc-lane-lp64-texture` / `c1/lane-lp64-texture` based on `12b4f6e` | Active; source-edit lane; owns `0x83bdc0` fault |
+| 17 | LP64 texture handle remediation — `019ff914-9bd9-77f3-8d8b-d72f5c00d587` | `pc_gx_texture.c` and opaque-reference width/lifetime | `/Users/jk/.codex/worktrees/fc81/acgc-modern-port`; source `/private/tmp/acgc-lane-lp64-texture` / `c1/lane-lp64-texture` | Complete/integrated as source `578c8b7`; focused native/ASan/UBSan fixture passes; actual game crosses the texture fault but no frame is claimed |
 | 18 | Metal semantic packet consumer — `019ff914-9e34-7181-8903-f8022c82cacf` | Packet-to-state/encoder validation and device-gated fixture | `/Users/jk/.codex/worktrees/da16/acgc-modern-port`; source `/private/tmp/acgc-lane-metal-packet-consumer` / `c1/lane-metal-packet-consumer` | Complete/integrated as `12b4f6e` (lane commit `209e95f`); 9 Apple tests pass and 2 Metal tests skip without a device; no live frame claim |
 | 19 | Live graph capture reproducibility — `019ff914-ad3f-7721-82f2-d8985d601ba1` | Two cold-run snapshots and exact fault boundary | `/Users/jk/.codex/worktrees/5edb/acgc-modern-port`; build `/private/tmp/acgc-lane-live-capture-repro-build` | Complete/parked; two cold runs are byte-identical (version 1, frame 0, capacity 256, count 8, same words) and both stop at `pc_gx_texture.c:62` `data=0x83bdc0` before legacy submission; no frame claim |
 | 20 | CoreAudio/device and asset-audio successor — `019ff914-a32b-7363-a619-f79e21c75db3` | Real sink gate, then asset-driven NEOS_OUT runtime trace | `/Users/jk/.codex/worktrees/fdc9/acgc-modern-port`; builds `/private/tmp/acgc-lane-coreaudio-device-build` and `/private/tmp/acgc-lane-audio-asset-runtime-build` | Parked/archived under four-lane cap: device subgate complete with declared skip `77` (`kAudioDevicePropertyDeviceIsAlive`, `560947818`); no audible claim |
@@ -47,6 +49,7 @@ available in Git and the evidence docs.
 | 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; source `/private/tmp/acgc-lane-texture-fault-fixture` / `c1/lane-texture-fault-fixture` | Complete/integrated as `07a5447`; native arm64 fixture records full pointer → opaque handle → low-word truncation and intentional `EXPECTED_FAILURE`; remediation remains lane 17 |
 | 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Parked/archived under four-lane cap; prior lifecycle evidence remains integrated |
 | 26 | Post-fix game frame runtime — client `client-new-thread:1b48103c-9b76-4caf-8598-686e392653c3` | Fresh actual-game arm64 run after texture remediation, packet/frame boundary | Worktree setup pending; planned source `/private/tmp/acgc-lane-postfix-frame` / `c1/lane-postfix-frame`; build `/private/tmp/acgc-lane-postfix-frame-build` | Queued; do not start a competing full link before texture integration |
+| 27 | Second-game ABI repair — root-owned continuation | `src/second_game.c` sound-state access across restart callbacks | `/private/tmp/acgc-lane-second-game` / `c1/lane-second-game-abi`; build `/private/tmp/acgc-lane-second-game-abi-build` | Active source lane; arm64 `ac_pc` build passes; fresh LLDB crosses `second_game.c` into `trademark_init`, then stops in `Nas_StartDma` audio `memmove` at `system.c:1300` |
 
 ## Rolling-refill intake (setup pending)
 
@@ -66,6 +69,12 @@ durable task IDs and the app creates their isolated worktrees.
 | Live-prefix decoder contract | `client-new-thread:faa2fa6c-c564-4f4b-9b0b-268c904e9fde` | Fail-closed decoder/packet fixtures for the observed 8-word prefix |
 | Metal frame-evidence harness | `client-new-thread:fb45f25e-4bf5-43ae-afc5-e10117d7620f` | Packet/encode/present/readback gate; record no-device result without pixels claim |
 | Asset-audio runtime gate | `client-new-thread:f0a79adc-ad4d-4350-bdce-38cdd8c8657b` | NEOS_OUT-to-sink evidence separated from synthetic PCM and audibility |
+| Audio DMA LP64 source fix | `client-new-thread:370c3642-5817-47e5-9ec1-6334af650c40` | `system.c` only; reproduce and fix the `0x84c5e0` truncated audio pointer, with one serialized build and runtime trace |
+| Audio DMA pointer fixture | `client-new-thread:151827fb-3aa0-476c-ac93-f3ab807b8fb7` | Test-only `pc/tests/pc_audio_dma_pointer_fixture.c`; no production audio edits; native/ASan width regression |
+| Post-audio boot trace | `client-new-thread:c1e4496c-1d1a-47f0-8ae3-fadfb3cc1770` | Read-only LLDB evidence after the audio fault boundary; unique logs, no source edits |
+| Current sanitizer refresh | `client-new-thread:018acc6f-fec7-4f3b-8795-03627ad5c09b` | Read-only native plus ASan/UBSan at current source tip; unique build roots and serialized full links |
+| Runtime save restart gate | `client-new-thread:c00febc3-0362-4c72-a99d-cac119c7e0a2` | Umbrella probe/evidence only for save request → atomic write → restart → reload; preserves raw-wire mismatch |
+| Frame evidence packaging | `client-new-thread:890ae77b-685a-4c69-ab22-429c7ddad9a2` | Umbrella `scripts/probes/` and `docs/evidence/` only; fail-closed submit/encode/present/readback labels |
 
 The Codex-created umbrella worktrees begin detached at umbrella commit
 `82732fe` with nested submodules uninitialized. Source-edit lanes therefore use
@@ -173,23 +182,25 @@ submodules blindly or edit a detached source checkout.
 
 ## Integration order
 
-1. Review and integrate the first live capture (`10d6ac0`) as the fixed-width
-   input to the GX adapter lane. Preserve the exact snapshot and keep renderer
-   translation separate from frame proof.
+1. Preserve the first live capture (`10d6ac0`) as the fixed-width input to the
+   GX adapter lane. Keep renderer translation separate from frame proof, and
+   retain the exact observed prefix even though it currently fails closed.
 2. When a lane completes, inspect its final evidence immediately, mark it
    integrated/rejected/parked here, and refill only with a useful dependency-ready
    successor. The input lane is parked because its remaining gate requires an
    OS/human event or physical controller; no synthetic filler replaces it.
-3. Repair the LP64 texture-object fault at `pc_gx_texture.c:62`, then feed the
-   captured prefix into `83fa889` and advance Metal/TEV toward a game-owned
-   frame. The `866dd94` and `ddbb498` fixture passes remain separate gates.
+3. The LP64 texture-object fault is repaired at source `578c8b7`; the next
+   launch-critical boundary is the audio DMA pointer fault reached after the
+   `02edf9c` second-game ABI repair. Prove that fix, then feed the captured
+   prefix into `83fa889` and advance Metal/TEV toward a game-owned frame. The
+   `866dd94` and `ddbb498` fixture passes remain separate gates.
 4. Keep Save_t/GCI parked on the explicit raw-range mismatch until the codec
    preserves arbitrary bytes or a proven wire-format boundary is established;
    do not weaken the roundtrip test. Filesystem adapter, lifecycle, and
    verification evidence remain synthetic/portable boundaries.
 5. Re-run the native and sanitizer matrix at the integrated `c1/macos-host-launch`
-   source HEAD, then separately prove input, audio device/audibility, save/load,
-   simulator, physical device, and playability.
+   source HEAD after the audio fix, then separately prove input, audio
+   device/audibility, save/load, simulator, physical device, and playability.
 6. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
