@@ -74,11 +74,20 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `fd91fc7` (`Resolve native pointers in
-  PC audio commands`). The fresh `4008/4008` arm64 link produces a Mach-O
+  `c1/macos-host-launch` source branch at `3a6582d` (`Harden PC CARD host
+  transfers`), with `9b1c48f` (`Add SDL audio boundary probe`) immediately
+  before it. The fresh `4008/4008` arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   focused native and ASan/UBSan probes pass.
+- The new silent SDL/CoreAudio boundary probe opened 32 kHz, S16 stereo audio at
+  512 samples, observed 62 callbacks and zero underruns/overruns on the host;
+  the dummy-device CTest also passes. This is device and ring timing evidence,
+  not proof that the reconstructed mixer produces correct audible output.
+- The new CARD host-transfer test creates, writes, reads, closes, reopens, and
+  rejects invalid ranges in a temporary card directory. It passes natively and
+  under ASan/UBSan, but it is not GameCube `Save_t`/GCI serialization or a
+  game-level save/reload proof.
 - The exact game launcher passes its bounded process gate with
   `ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof
   ./script/build_and_run_game.sh --verify`: the actual process remains alive for
@@ -87,6 +96,13 @@ redistribute it or extracted proprietary assets.
   low-pointer `Jac_bcopy` breakpoint does not fire. This is real process-launch
   evidence only—not a rendered game frame, input, audible-output, save/load, or
   playability claim.
+- A fresh host-context run against `local/build/macos-lanes-integrated` rebuilt
+  the same arm64 target, reached `COPYDATE`, and emitted `[NEOS_OUT]` through at
+  least frame `841`. The runner printed its five-second launch gate, but the
+  process did not honor the cleanup `SIGTERM` while waiting in the DVD/file
+  loader path; the single process required an explicit `SIGKILL`. This leaves
+  clean supervision and the transition past `COPYDATE` as the next runtime
+  blocker, not evidence of a game-owned frame.
 
 Re-run the tracked checks from this directory:
 

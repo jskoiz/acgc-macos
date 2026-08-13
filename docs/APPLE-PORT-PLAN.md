@@ -78,7 +78,10 @@ copy EFB, flush, and destroy. Presentation is deliberately a host operation.
 - Move current DVD `FILE *` state behind opaque generational host handles and
   assert the documented DVD/CARD wire layouts. **Passed for the current PC
   adapter and typed public `DVDFileInfo`/`DVDCommandBlock` callers; host state is
-  keyed by object identity and no longer occupies `cb.addr`.**
+  keyed by object identity and no longer occupies `cb.addr`.** The host CARD
+  transfer boundary now has a temporary-directory roundtrip test covering
+  create, offset read/write, reopen, invalid ranges, and path safety; this is
+  not yet game-level Save_t/GCI persistence.
 - Make TARGET_PC `s32`/`u32`, `Gwords`, and `TexRect` widths executable arm64
   contracts while preserving non-PC definitions. **Passed in C and C++ syntax
   probes.**
@@ -130,8 +133,10 @@ frame. Neither is a playability claim.
 
 ### M4: macOS interaction and persistence
 
-- Wire logical keyboard/controller actions, Apple audio delivery, and sandboxed
-  atomic saves.
+- Wire logical keyboard/controller actions, the reconstructed mixer to Apple
+  audio delivery, and sandboxed atomic saves. The SDL/CoreAudio device boundary
+  is already measured (32 kHz S16 stereo, 512-sample callbacks, zero
+  underruns/overruns), but audible game-mixer correctness is still open.
 - Prove input, audio, and save/load in separate runs before a bounded human play
   path and performance/memory measurements.
 
@@ -148,17 +153,18 @@ distribution, and App Store work require fresh authorization.
 
 Continue in separately reviewable ACGC-PC-Port branches:
 
-1. Replace collision-prone JSystem `SEEK_*`/`EOF` enum spellings with a
-   project-prefixed contract, preserving numeric values and ordinary stdio
-   macro behavior, then rerun the single-job Darwin audit.
-2. Add an exact-`GAFE01_00`, bounded boot-source facade that prepares DOL/REL
-   images in memory without persisting proprietary output, then connect it to
-   host-owned runtime state.
-3. Advance renderer fixtures from the completed non-indexed triangle to
-   transforms, vertex formats, indexed draws, textures, TEV, and EFB behavior.
-4. Classify the remaining static GBI pointer initializers as relocatable guest
-   references or host-owned resources. Do not truncate or use an unsafe
-   LP64-only initializer bypass.
+1. Trace and repair the `COPYDATE`/`static.str` DVD/file-loader wait so the
+   reconstructed boot path can pass `JW_Init2` without hiding a blocked I/O
+   completion or leaving the bounded runner unable to reap the process.
+2. Capture the first renderer-neutral game submission after `emu64` has
+   produced GX semantic state. Carry fixed-width geometry, transforms, and
+   material/texture state; do not substitute the existing triangle fixture for
+   a game frame.
+3. Introduce an injectable macOS input snapshot at the SDL pad boundary and
+   prove keyboard/controller state changes without claiming game interaction.
+4. Connect the real mixer and Save_t/GCI serialization to the already-proven
+   audio/CARD host boundaries, with separate audible-output and restart
+   roundtrip evidence.
 
 Do not silently remove the default full-runtime ILP32 guard or add an iOS target.
 The diagnostic arm64 build must remain opt-in until each exposed pointer/layout

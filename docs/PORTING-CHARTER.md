@@ -56,32 +56,36 @@ remain under ignored local or build paths and are never committed.
 
 ## Current gate state
 
-As of 2026-08-11, source/revision proof, the current bounded portable-core
+As of 2026-08-12, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
-fixture are passed. The actual reconstructed `ac_pc` target also links as a
-native arm64 Mach-O from source branch `c1/macos-host-launch` at `fd91fc7` and
-passes the separate five-second process-launch gate. The portable boot-source facade accepts only exact
-`GAFE01_00`, requires one `foresta.rel.szs`, and prepares bounded DOL and REL
-images without writing them to tracked storage. Native and sanitizer portable
-tests (`13/13`), including native-width PC ARAM transport and real nested
-`emu64` display-list traversal, boot-source-backed approved-disc proof, headless host
-preparation, native and sanitizer host tests (`4/4`), and a foreground AppKit
-process that exits only after two geometry-bearing command buffers complete are
-reproducible. The host now invokes the same facade and reports the real DOL and
-Yaz0 REL preparation before disposing the buffers. This is preflight and
-command-buffer evidence without pixel readback: the host fixture remains
-separate from the actual game launch, which now reaches `initial_menu_init`,
-`dvderr_init`, `sound_initial2`, and `[NEOS_OUT]` beyond frame `1861` during
-the bounded process gate. That proves process progress, not a game-owned frame
-or playability. The full PC runtime remains behind its default ILP32 guard; its opt-in
-Darwin audit now passes the corrected CARD ABI, POSIX and Darwin string-memory
-boundaries, prefixed JSystem stream enums, all 58 FixNES objects, the bridge
-return contract, runtime-built field culling, Haniwa TLUT, and mailbox flag
-lists, and the JKR native ARAM transport. A fresh one-job audit at `0c915d9`
-compiles `ac_mailbox.c` at step `178/4021` and stops at step `179/4021` because
-the `gsSPVertex(&mbg_v[0], 8, 0)` command in `src/actor/ac_mbg.c` cannot encode
-a native pointer in a static 32-bit `Gfx` word on LP64. A bounded keep-going
-inventory at the preceding commit observed 500 static-GBI translation-unit
-failures and three independent C/layout blockers. The fail-closed guard remains
-enabled. Representative GX rendering, game frame, input, audio-output,
-save/load, iOS Simulator, and physical-device gates remain open.
+fixture are passed. The actual reconstructed `ac_pc` target links as a native
+arm64 Mach-O from source branch `c1/macos-host-launch` at `3a6582d`, with the
+audio-sidecar fix at `9b1c48f`, and still reaches the separate process-launch
+gate. The portable boot-source facade accepts only exact `GAFE01_00`, requires
+one `foresta.rel.szs`, and prepares bounded DOL and REL images without writing
+them to tracked storage. Native and sanitizer portable tests (`13/13`), the
+new SDL/CoreAudio device-and-ring probe, the CARD temporary-directory roundtrip
+test, native-width PC ARAM transport, real nested `emu64` display-list
+traversal, boot-source-backed approved-disc proof, headless host preparation,
+native and sanitizer host tests (`4/4`), and a foreground AppKit process that
+completes two geometry-bearing command buffers are reproducible. The audio
+probe proves 32 kHz S16 stereo callback cadence with zero underruns/overruns;
+it does not prove audible game-mixer correctness. The CARD probe proves bounded
+host transfers; it does not prove GameCube Save_t/GCI serialization or a
+game-level save/reload.
+
+The host invokes the same facade and reports the real DOL and Yaz0 REL
+preparation before disposing the buffers. This is preflight and command-buffer
+evidence without pixel readback: the host fixture remains separate from the
+actual game launch, which reaches `initial_menu_init`, `dvderr_init`,
+`sound_initial2`, and `[NEOS_OUT]` during bounded runs. A fresh host-context
+run against the integrated lane build reached `COPYDATE` and at least frame
+`841`, but the process did not honor the runner's cleanup `SIGTERM` while
+waiting in the DVD/file-loader path and required a single-process `SIGKILL`.
+That is an explicit supervision/runtime blocker, not a game-owned frame.
+
+The full PC runtime remains behind its default ILP32 guard; the opt-in Darwin
+audit and native arm64 link are diagnostic milestones, not a claim of complete
+runtime portability. The fail-closed static GBI pointer guard remains enabled.
+Representative GX rendering, game frame, input, game-mixer audio output,
+game-level save/load, iOS Simulator, and physical-device gates remain open.

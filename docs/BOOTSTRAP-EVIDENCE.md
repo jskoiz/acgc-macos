@@ -280,7 +280,11 @@ and left no process behind. Generated build/runtime state stayed under ignored
 
 This passes host build, host launch, and a command-buffer-completed Metal
 geometry fixture. It does not prove pixel readback, representative GX semantics,
-an identifiable game frame, input, audio, save/load, or playability. The earlier
+an identifiable game frame, input, game-mixer audio, save/load, or playability.
+The new Darwin audio boundary probe opened a real 32 kHz S16 stereo device and
+observed 62 callbacks with zero underruns/overruns; the CARD boundary test
+round-tripped a temporary card file and rejected invalid ranges. Neither is
+end-to-end game audio or Save_t/GCI persistence. The earlier
 targeted window-only screenshot attempt failed because macOS `screencapture`
 could not create the image; no visual-capture claim is made.
 
@@ -294,13 +298,15 @@ could not create the image; no visual-capture claim is made.
 | Portable arm64 library | Passed | Native + ASan/UBSan CTest, 13/13 in each lane, plus fixed-width ABI and native ARAM transport probes. |
 | Supported-disc data path | Passed | Bounded GCM/DOL/FST parse and expected real REL hash. |
 | Existing Windows build | Not run | Source-compatible branches and `-m32` syntax passed; no Windows execution lane. |
-| Full runtime arm64 compile | In progress | Fresh opt-in audit at `0c915d9` compiles `ac_mailbox.c` at `178/4021` and stops at the static vertex pointer in `ac_mbg.c` at `179/4021`; the fail-closed guard and default ILP32 guard remain. |
+| Full runtime arm64 compile/link | Passed as diagnostic target | The opt-in Darwin audit and fresh `4008/4008` `ac_pc` build produce a native arm64 Mach-O; the default full-runtime ILP32 guard and fail-closed static-GBI guard remain. |
 | macOS host build | Passed | Native AppKit target and focused host/geometry CTest, 4/4. |
 | macOS host launch | Passed | Direct app process prepared exact GAFE01_00 DOL/REL input, returned 0, and left no surviving process. |
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |
 | Metal geometry fixture | Passed | Two command buffers containing a fixed-width colored triangle completed before the deadline; no pixel-readback or visual claim. |
-| Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop. |
-| Input/audio/save | Not reached | Adapters are not wired to a running game. |
+| Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop; the fresh run waits in the `COPYDATE`/DVD path. |
+| Input | Not reached | `pc_pad.c` still samples SDL globals directly; no injectable running-game input proof. |
+| Audio device boundary | Passed, limited | Real SDL/CoreAudio callback probe: 32 kHz S16 stereo, 512 samples, zero underruns/overruns; no reconstructed mixer or audible-output claim. |
+| Save/CARD host boundary | Passed, limited | Native and sanitizer temporary-directory CARD roundtrip; no GameCube Save_t/GCI or process-restart proof. |
 | iOS simulator/device | Not reached | Begins after shared macOS proof. |
 
 No commit, push, PR, binary publication, deployment, TestFlight upload, or App
