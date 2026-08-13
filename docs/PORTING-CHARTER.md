@@ -163,3 +163,10 @@ LLDB stopped before `run`. This is a debugger-command blocker rather than game
 runtime evidence; no inferior, graph target, or frame claim follows. A future
 successor must syntax-check the local LLDB settings surface first; see
 [corrected-root runtime evidence](evidence/CORRECT-ROOTED-RUNTIME-2026-08-13.md).
+The syntax-checked successor then reached the live game path through
+`graph_proc`, `graph_task_set00`, the `F0002000` target call (`capacity=1024`),
+`GXBegin`, and `pc_gx_flush_vertices`, with logo rendering before TERM. No
+exact `DF000000,00000000` terminator appeared in the observed target extent, so
+this is live target/GX-boundary evidence only; complete-list, Metal, pixel,
+and playability gates remain open. See [valid-LLDB live-target runtime
+evidence](evidence/VALID-LLDB-LIVE-TARGET-RUNTIME-2026-08-13.md).

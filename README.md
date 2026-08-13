@@ -176,6 +176,13 @@ redistribute it or extracted proprietary assets.
   so LLDB stopped before `run`. This is a debugger-command blocker, not a game
   runtime result; no inferior, graph capture, target callback, or frame claim
   exists. See [the corrected-root runtime evidence](docs/evidence/CORRECT-ROOTED-RUNTIME-2026-08-13.md).
+- The syntax-checked successor then completed one correctly rooted current-tip
+  launch. It reached `graph_proc`, `graph_task_set00`, the live `F0002000`
+  target call with capacity `1024`, `GXBegin`, and `pc_gx_flush_vertices`, and
+  reached logo rendering before TERM. The observed target extent had no exact
+  `DF000000,00000000` terminator, so the target callback emitted no complete
+  classification and no complete-list, Metal, pixel, or playability claim
+  follows. See [valid-LLDB live-target runtime evidence](docs/evidence/VALID-LLDB-LIVE-TARGET-RUNTIME-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized
