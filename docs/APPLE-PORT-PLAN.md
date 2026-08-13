@@ -136,7 +136,10 @@ frame. Neither is a playability claim.
 - Wire logical keyboard/controller actions, the reconstructed mixer to Apple
   audio delivery, and sandboxed atomic saves. The SDL/CoreAudio device boundary
   is already measured (32 kHz S16 stereo, 512-sample callbacks, zero
-  underruns/overruns), but audible game-mixer correctness is still open.
+  underruns/overruns), but audible game-mixer correctness is still open. The
+  umbrella-owned filesystem adapter now has a standalone macOS role-root and
+  atomic opaque-payload fixture, including durability fences and corruption
+  rejection; this does not yet connect Save_t/GCI bytes to the game.
 - Prove input, audio, and save/load in separate runs before a bounded human play
   path and performance/memory measurements.
 

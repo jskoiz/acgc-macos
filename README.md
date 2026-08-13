@@ -85,6 +85,13 @@ redistribute it or extracted proprietary assets.
   512 samples, observed 62 callbacks and zero underruns/overruns on the host;
   the dummy-device CTest also passes. This is device and ring timing evidence,
   not proof that the reconstructed mixer produces correct audible output.
+- The umbrella-owned macOS filesystem/save adapter now resolves distinct bundle
+  Resources, Application Support, Caches, and Logs roots; rejects resource
+  writes and traversal; commits opaque save payloads with same-directory
+  temp-file plus `fsync`/`F_FULLFSYNC`/rename/directory-`fsync`; and rejects
+  checksum corruption and truncation. Its synthetic ISO-sentinel proof does
+  not copy bytes outside Resources. This is host-adapter evidence, not
+  GameCube `Save_t`/GCI or game-level save/reload proof.
 - The new CARD host-transfer test creates, writes, reads, closes, reopens, and
   rejects invalid ranges in a temporary card directory. It passes natively and
   under ASan/UBSan, but it is not GameCube `Save_t`/GCI serialization or a
@@ -141,5 +148,6 @@ process stays alive for the requested interval. Its runtime log remains under
 - [Source, revision, licensing, and toolchain audit](docs/SOURCE-AUDIT.md)
 - [Measured PC portability audit](docs/PORTABILITY-AUDIT.md)
 - [Apple architecture and evidence-gated milestones](docs/APPLE-PORT-PLAN.md)
+- [macOS filesystem roles and atomic-save proof](docs/FILESYSTEM-SAVE-EVIDENCE.md)
 - [Exact bootstrap commands, results, and blockers](docs/BOOTSTRAP-EVIDENCE.md)
 - [Porting charter](docs/PORTING-CHARTER.md)
