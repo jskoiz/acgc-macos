@@ -21,7 +21,8 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `54b840c` (`Add bounded Apple Metal packet sink`),
+  `c1/macos-host-launch` at `59aa655` (`Test PC padmgr frame guard`), on top of
+  `54b840c` (`Add bounded Apple Metal packet sink`),
   on top of `f4cb491` (`Register Apple GX packet consumer bridge`),
   on top of `aea3515` (`Capture live graph target spans in emu64`),
   on top of `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
@@ -45,6 +46,15 @@ redistribute it or extracted proprietary assets.
   and [CARD recovery evidence](docs/evidence/CARD-SAVE-RECOVERY-2026-08-12.md)
   and [save-manager restart evidence](docs/evidence/SAVE-MANAGER-RESTART-2026-08-12.md)
   and [the lane board](docs/LANE-BOARD.md) for exact commands and ownership.
+  The integrated input frame-guard fixture proves once-per-frame `PADRead`
+  state preservation in native and ASan/UBSan focused runs; it is not
+  OS/human input or playability proof. See [input frame-guard evidence](docs/evidence/INPUT-FRAME-GUARD-2026-08-13.md).
+- The latest read-only Windows audit passes portable and `_WIN32`/ILP32 compile
+  probes but remains blocked on a real i686 MinGW/sysroot. The iOS readiness
+  audit passes the dependency-free portable slice (`20/20`) but found no iOS
+  target, simulator/device proof, or game-owned Metal frame. See
+  [Windows evidence](docs/evidence/WINDOWS-X86-AUDIT-2026-08-13.md) and
+  [iOS boundary evidence](docs/evidence/IOS-SHARED-BOUNDARY-READINESS-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
@@ -109,8 +119,8 @@ redistribute it or extracted proprietary assets.
   cleanup`) and the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
   same source history. That fresh arm64 link produced a Mach-O
-  `AnimalCrossing` executable. The current source tip is `54b840c`; it has
-  focused Apple sink/object verification but has not yet had another full
+  `AnimalCrossing` executable. The current source tip is `59aa655`; its Apple
+  sink and input-fixture changes have focused verification but have not yet had another full
   `ac_pc` link. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   the compact bank-28 tail and MEDIUM_CART-to-native-ARAM mapping have focused
