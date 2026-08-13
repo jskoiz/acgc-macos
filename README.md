@@ -21,7 +21,8 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `d1e812c` (`Add versioned GX v2 consumer handoff`),
+  `c1/macos-host-launch` at `042cbf7` (`Add bounded GX v3 state handoff`),
+  on top of `d1e812c` (`Add versioned GX v2 consumer handoff`),
   on top of `26da235` (`Add bounded GX v2 semantic packet fixture`),
   `a8f3a8f` (`Rename reserved Metal shader local`),
   `59aa655` (`Test PC padmgr frame guard`) and `54b840c`
@@ -88,6 +89,13 @@ redistribute it or extracted proprietary assets.
   proves a live game callback, Metal encode/readback/pixel, or playability.
   See [GX v2 implementation evidence](docs/evidence/GX-V2-PACKET-IMPLEMENTATION-2026-08-13.md)
   and [GX v2 consumer evidence](docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md).
+- The integrated V3 state-forwarding slice at `042cbf7` carries the observed
+  blend/source-alpha/`GX_LO_NOOP` and `GX_TEXMTX0` state through a separate
+  typed callback while preserving V1/OpenGL behavior. Native and ASan/UBSan
+  focused V1/V2/V3 tests pass `3/3` in each matrix. V3 is explicitly marked
+  `V3_EXTENSION_NOT_RENDERED` and is not submitted to the Metal sink; this is
+  callback-contract evidence only, not live callback, Metal encode/readback,
+  pixel, or playability proof. See [GX V3 state-handoff evidence](docs/evidence/GX-V3-STATE-HANDOFF-042CBF7-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.

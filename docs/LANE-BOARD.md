@@ -61,8 +61,13 @@ No callback, Metal encode/readback, pixel, input, audio, save, device, or
 playability claim follows. Lanes 101 and 102 both failed at the remote
 compaction `404` boundary before producing a handoff; lane 101's one-file
 uncommitted V3 header draft was rejected and reverted, while lane 102 left no
-source edit. No worker lane is active; the root is taking the next bounded
-implementation directly from the corrected `GX_LO_NOOP` evidence.
+source edit. The root-owned V3 continuation is now integrated at PC `042cbf7`:
+it forwards the observed blend/source-alpha/`GX_LO_NOOP`/`GX_TEXMTX0` state
+through a separate typed callback, passes the combined V1/V2/V3 focused native
+and ASan/UBSan tests `3/3` each, and marks V3 `V3_EXTENSION_NOT_RENDERED`.
+No full link, live callback count, Metal encode/readback, pixel, input, audio,
+save, device, or playability claim follows; the next gate is a serialized
+current-tip runtime count followed by a real Metal state encoder.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -70,7 +75,7 @@ through `graph_task_set00` and `emu64_taskstart`; the debugger-owned sentinel
 then stopped cleanly, with `GXBegin`, `pc_gx_flush_vertices`, v2 handoff, Apple
 consumer, and runtime-observer counts all `0`. It owned no source edits and no
 Metal encode/readback/pixel scope. Lane 93
-93 (`019ffc93-5d85-7d53-a6bf-67a5b13305da`) completed one elevated runtime
+(`019ffc93-5d85-7d53-a6bf-67a5b13305da`) completed one elevated runtime
 trace with a durable final breakpoint list. It recorded one
 `graph_task_set00` hit, then stopped because the temporary Python callback
 omitted an explicit `return`; all downstream zeros are prefix-only. It owned no
@@ -105,13 +110,13 @@ encode/readback/pixel, device, input, audio, save, or playability gate. See
 `docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md`.
 
 The Windows, sanitizer, iOS, and input frame-guard handoffs are complete and
-queued for exact-root cleanup. The authoritative PC source is `8a19f23` on
+queued for exact-root cleanup. The authoritative PC source is `042cbf7` on
 `c1/macos-host-launch`; the umbrella branch is `main` (the local
 `c1/apple-port-bootstrap` alias is fast-forwarded to the same tip) plus only
 the pre-existing `.codex`/settings edits. The next bounded gate is a
-dependency-ready versioned packet/consumer extension for the observed
-alpha-blend and texture-matrix state; it remains separate from Metal
-encode/readback/pixel proof and is not opened as filler.
+current-tip runtime count for the V3 state-forwarding callback, followed by a
+Metal state encoder; V3 remains separate from Metal encode/readback/pixel proof
+and is not opened as filler.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
@@ -290,6 +295,7 @@ from compilation alone.
 | 100 | Metal packet rejection predicate audit — `019ffd08-10ff-77b1-8bc4-bd91a84902e9` | Test-only/read-only reproduction of fail-closed packet-builder behavior for textured/TEV/active state; native plus ASan/UBSan focused tests; no worker full link/LLDB; root continuation owns only opt-in diagnostic instrumentation | Worker task retired after remote compaction failure; diagnostic branch `c1/lane-metal-rejection-diagnostic` fast-forwarded into canonical `c1/macos-host-launch` at `8a19f23`; decomp `09ca8e8b`; exact roots `/private/tmp/acgc-metal-rejection-trace-build` and `/private/tmp/acgc-metal-rejection-trace-logs` | Complete/archived; focused native and ASan/UBSan v2 handoff tests `1/1` each; one elevated launch emitted 32 preflight + 32 fail records; live alpha-blend/TEXMTX0 state is outside current v2 contract; no callback/Metal/pixel/playability claim; evidence `docs/evidence/METAL-REJECTION-DIAGNOSTIC-8A19F23-2026-08-13.md` |
 | 101 | Live blend/texture-matrix GX packet extension — `019ffd19-3a91-7ba2-b6db-c7535d5143ce` | Source-edit lane for the smallest versioned packet/Apple consumer extension covering the observed `GX_BM_BLEND` + `GX_TEXMTX0` state; preserve v1 and legacy OpenGL | Worktree `/Users/jk/.codex/worktrees/fb3c/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source`; branch `c1/lane-gx-live-blend-texmatrix` returned clean to base `8a19f23`; decomp `09ca8e8b` | Rejected/archived after two remote compaction `404` failures; one uncommitted header-only draft was reverted; no source commit, build, test, full link, LLDB, callback, Metal, pixel, or playability result |
 | 102 | Live blend/texture-matrix GX packet extension retry — `019ffd20-e35d-7121-84b0-1589246e8e3c` | Fresh source-edit retry for the smallest versioned packet/Apple consumer extension covering `GX_BM_BLEND`, source-alpha factors, raw `GX_LO_NOOP=5`, and `GX_TEXMTX0`; preserve v1/OpenGL | Worktree `/Users/jk/.codex/worktrees/7c0b/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source`; branch `c1/lane-gx-live-blend-texmatrix` clean at `8a19f23`; decomp `09ca8e8b` | Rejected/archived after remote compaction `404` before source edit; no build, test, full link, LLDB, runtime, or claim |
+| 103 | Root-owned GX v3 state handoff — root continuation | Integrated source extension for the observed blend/source-alpha/`GX_LO_NOOP`/`GX_TEXMTX0` state; preserve V1/OpenGL and keep V3 non-rendering | Source branch `c1/lane-gx-v3-direct` at `141a746`; integrated canonical PC `042cbf7`; source `/private/tmp/acgc-lane-gx-v3-direct-source` held for cleanup; native/ASan roots `/private/tmp/acgc-integrate-gx-v3-042cbf7-native` and `...-asan` | Complete/integrated; combined V1/V2/V3 focused CTest `3/3` native and `3/3` ASan/UBSan with no diagnostics; V3 is state-forwarding only and marked `V3_EXTENSION_NOT_RENDERED`; no full link, LLDB, live callback count, Metal encode/readback/pixel, or playability claim; evidence `docs/evidence/GX-V3-STATE-HANDOFF-042CBF7-2026-08-13.md` |
 
 ## Parked intake (not active)
 

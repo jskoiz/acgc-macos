@@ -59,17 +59,23 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The latest serialized full reconstructed `ac_pc` link was
-a native arm64 Mach-O from source branch `c1/macos-host-launch` at `d1e812c`,
-returning `[4018/4019]` in lane 98's one-link run. The source tip adds the
+a native arm64 Mach-O from source branch `c1/macos-host-launch` at `042cbf7`,
+returning `[4018/4019]` in lane 98's one-link run before the V3 slice. The
+source tip adds the
 version-aware GX v2 consumer boundary on top of the
 bounded packet builder at `26da235`, the narrow Metal sink shader fix at
 `a8f3a8f`, the `59aa655` input frame-guard fixture, and `54b840c` offscreen
 Metal sink. The consumer preserves v1 dispatch, validates v2, and reports
 `V2_EXTENSION_NOT_RENDERED`; its focused native and ASan/UBSan tests pass
-`4/4` each. The lane-98 link is build evidence only; its separate runtime
+`4/4` each. The V3 state-forwarding slice at `042cbf7` carries the observed
+blend/source-alpha/`GX_LO_NOOP` and `GX_TEXMTX0` state through a separate typed
+callback, preserves V1/OpenGL, and passes the combined V1/V2/V3 focused native
+and ASan/UBSan tests `3/3` each. V3 is explicitly `V3_EXTENSION_NOT_RENDERED`
+and is not submitted to the Metal sink. The lane-98 link is build evidence only; its separate runtime
 trace completes the second graph task's interpreter continuation but does not
 prove task-2 drawing or Metal output. See [GX v2 consumer evidence](evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md)
-and [second graph-task completion evidence](evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md).
+and [second graph-task completion evidence](evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md)
+and [GX V3 state-handoff evidence](evidence/GX-V3-STATE-HANDOFF-042CBF7-2026-08-13.md).
 The DVD/CARD,
 input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
 commits reviewed in the same source history remain the current evidence, and
