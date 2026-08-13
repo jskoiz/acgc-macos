@@ -36,11 +36,11 @@ docs.
 
 Current maintenance state: the scheduler has fourteen durable Luna Max/max
 worker tasks plus this integration owner. The authoritative PC source is
-`d1575f0` on `c1/macos-host-launch`; the umbrella is `bb9aa02` plus only the
+`d1575f0` on `c1/macos-host-launch`; the umbrella is `ae3220c` plus only the
 pre-existing `.codex`/settings edits. Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
-The game-cleanup invalid-free successor
+game-cleanup invalid-free successor
 (`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is the only active worker plus this
 owner (two active ACGC lanes). No other dependency-ready lane is being
 refilled: live CoreAudio/Metal devices and the complete game-owned graph
