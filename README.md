@@ -165,6 +165,12 @@ redistribute it or extracted proprietary assets.
   source/fixture evidence, not live complete-list, GX/Metal, pixel, or frame
   proof. See [graph indirect-target evidence](docs/evidence/GRAPH-INDIRECT-TARGET-CONTRACT-2026-08-13.md)
   and [live resolver evidence](docs/evidence/LIVE-GRAPH-TARGET-RESOLVER-2026-08-13.md).
+- A single current-tip runtime attempt at `aea3515` completed the full
+  `4,013/4,013` arm64 link, but its one LLDB launch used the delegated umbrella
+  worktree as the working directory instead of the generated `bin` directory.
+  Relative shader lookup failed before graph boot, so no target callback or
+  frame claim follows; the lane made no retry. See [current-tip runtime
+  evidence](docs/evidence/CURRENT-TIP-LIVE-TARGET-RUNTIME-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

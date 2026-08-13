@@ -152,3 +152,8 @@ ASan/UBSan focused tests passing `3/3` each. This remains source/fixture
 evidence, not live complete-list, GX/Metal, pixel, or playability evidence;
 see [graph indirect-target contract](evidence/GRAPH-INDIRECT-TARGET-CONTRACT-2026-08-13.md)
 and [live resolver evidence](evidence/LIVE-GRAPH-TARGET-RESOLVER-2026-08-13.md).
+One serialized current-tip runtime attempt then completed the full
+`4,013/4,013` arm64 link but launched LLDB from the delegated umbrella
+worktree rather than the generated `bin` directory. Relative shader lookup
+failed before graph boot, so the live target callback remains unobserved and no
+retry or frame claim follows; see [current-tip runtime evidence](evidence/CURRENT-TIP-LIVE-TARGET-RUNTIME-2026-08-13.md).
