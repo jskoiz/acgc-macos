@@ -13,14 +13,16 @@ The requested anchors were verified as Git commits:
 | Repository | Requested reference | Verified working reference | State used by this lane |
 | --- | --- | --- | --- |
 | Umbrella | `04d21b8` (`Correct cleanup worktree count`) | `1456933eaa1efc34f91adff0fc1dacfb905b2459` (`Initialize modern Animal Crossing port workspace`) | This isolated worktree, branch `c1/ios-shared-boundary-readiness`; the requested umbrella anchor is an object but is not an ancestor of this detached-base snapshot. |
-| ACGC-PC-Port | `724a18d` | `724a18ddcebec039ec393b98e4f0c37fda879d66` | `c1/macos-host-launch`, clean, read-only source checkout. |
+| ACGC-PC-Port | `724a18d` | `724a18ddcebec039ec393b98e4f0c37fda879d66` | Stable detached read-only worktree `/private/tmp/acgc-lane-ios-boundary/pc-source-724`, clean. The shared integration checkout advanced cleanly on `c1/macos-host-launch` during the run (final observation `d1575f0`, a descendant); it was not used for the pinned final probes. |
 | ac-decomp | `09ca8e8b` | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` | `master`, clean and equal to `origin/master`, read-only source checkout. |
 
-The umbrella worktree was clean before this lane and both source checkouts were
-clean before and after the probes.  No source file in either upstream was
-edited.  No umbrella submodule pointer was changed.  User-owned ISO or
-extracted game assets were not accessed, copied, printed, committed, uploaded,
-published, or deleted.
+The umbrella worktree was clean before and after this lane. The pinned PC
+worktree and the decomp checkout were clean before and after the probes. The
+shared PC integration checkout also remained clean while its branch advanced
+externally through descendant commits; no source file in either upstream was
+edited by this lane. No umbrella submodule pointer was changed. User-owned ISO
+or extracted game assets were not accessed, copied, printed, committed,
+uploaded, published, or deleted.
 
 ## Boundary map
 
@@ -125,11 +127,11 @@ No command below reads user-owned game assets.
 ### Portable and Apple configuration/build/test
 
 ```sh
-cmake -S /Users/jk/Documents/Projects/acgc-modern-port/upstream/ACGC-PC-Port/pc/portable \
-  -B /private/tmp/acgc-lane-ios-boundary/portable-build -G Ninja \
+cmake -S /private/tmp/acgc-lane-ios-boundary/pc-source-724/pc/portable \
+  -B /private/tmp/acgc-lane-ios-boundary/portable-724-build -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug
-cmake --build /private/tmp/acgc-lane-ios-boundary/portable-build --parallel 2
-ctest --test-dir /private/tmp/acgc-lane-ios-boundary/portable-build \
+cmake --build /private/tmp/acgc-lane-ios-boundary/portable-724-build --parallel 2
+ctest --test-dir /private/tmp/acgc-lane-ios-boundary/portable-724-build \
   --output-on-failure -j2
 ```
 
@@ -137,13 +139,13 @@ Result: AppleClang 21 configured and built successfully; **18/18 tests passed**.
 The produced test binary is a Mach-O 64-bit arm64 executable.
 
 ```sh
-cmake -S /Users/jk/Documents/Projects/acgc-modern-port/upstream/ACGC-PC-Port/pc/apple \
-  -B /private/tmp/acgc-lane-ios-boundary/apple-build -G Ninja \
+cmake -S /private/tmp/acgc-lane-ios-boundary/pc-source-724/pc/apple \
+  -B /private/tmp/acgc-lane-ios-boundary/apple-724-build -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug
-cmake --build /private/tmp/acgc-lane-ios-boundary/apple-build --parallel 2
-ctest --test-dir /private/tmp/acgc-lane-ios-boundary/apple-build \
+cmake --build /private/tmp/acgc-lane-ios-boundary/apple-724-build --parallel 2
+ctest --test-dir /private/tmp/acgc-lane-ios-boundary/apple-724-build \
   --output-on-failure -j2
-/private/tmp/acgc-lane-ios-boundary/apple-build/acgc_macos_native_host_cli --self-test
+/private/tmp/acgc-lane-ios-boundary/apple-724-build/acgc_macos_native_host_cli --self-test
 ```
 
 Result: configuration/build succeeded; **10/12 Apple tests passed**, with the
@@ -162,27 +164,49 @@ device, rendered-pixel, input, audio, save, or game-playability result.
 
 The portable and Apple focused suites were configured with
 `-fsanitize=address,undefined -fno-omit-frame-pointer` for C, C++, and (where
-applicable) Objective-C, with matching executable linker flags. The commands
-were the corresponding `cmake -S/-B`, `cmake --build`, and `ctest` invocations
-using these isolated build directories:
+applicable) Objective-C, with matching executable linker flags:
+
+```sh
+cmake -S /private/tmp/acgc-lane-ios-boundary/pc-source-724/pc/portable \
+  -B /private/tmp/acgc-lane-ios-boundary/portable-724-asan-build -G Ninja \
+  -DCMAKE_BUILD_TYPE=Debug \
+  "-DCMAKE_C_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer" \
+  "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer" \
+  "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+cmake --build /private/tmp/acgc-lane-ios-boundary/portable-724-asan-build --parallel 2
+ctest --test-dir /private/tmp/acgc-lane-ios-boundary/portable-724-asan-build \
+  --output-on-failure -j2
+
+cmake -S /private/tmp/acgc-lane-ios-boundary/pc-source-724/pc/apple \
+  -B /private/tmp/acgc-lane-ios-boundary/apple-724-asan-build -G Ninja \
+  -DCMAKE_BUILD_TYPE=Debug \
+  "-DCMAKE_C_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer" \
+  "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer" \
+  "-DCMAKE_OBJC_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer" \
+  "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+cmake --build /private/tmp/acgc-lane-ios-boundary/apple-724-asan-build --parallel 2
+ctest --test-dir /private/tmp/acgc-lane-ios-boundary/apple-724-asan-build \
+  --output-on-failure -j2
+```
 
 ```text
-/private/tmp/acgc-lane-ios-boundary/portable-asan-build
-/private/tmp/acgc-lane-ios-boundary/apple-asan-build
+/private/tmp/acgc-lane-ios-boundary/portable-724-asan-build
+/private/tmp/acgc-lane-ios-boundary/apple-724-asan-build
 ```
 
 Result: **portable 18/18 passed; Apple 10/12 passed with the same two declared
 Metal-device skips; no ASan or UBSan report**. Build logs are retained only in
-the ignored lane root, including `logs/portable-asan-build.log` and
-`logs/apple-asan-build.log`.
+the ignored lane root, including `logs-724/portable-asan-build.log` and
+`logs-724/apple-asan-build.log`. Earlier non-pinned probe directories in the
+same temporary root are superseded by these `724`-pinned results.
 
 ### Full-runtime guard, serialized compile-audit link, and static LLDB
 
 Default full-runtime configuration was intentionally probed:
 
 ```sh
-cmake -S /Users/jk/Documents/Projects/acgc-modern-port/upstream/ACGC-PC-Port/pc \
-  -B /private/tmp/acgc-lane-ios-boundary/full-default-build -G Ninja \
+cmake -S /private/tmp/acgc-lane-ios-boundary/pc-source-724/pc \
+  -B /private/tmp/acgc-lane-ios-boundary/full-724-default-build -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug
 ```
 
@@ -192,13 +216,13 @@ pointer-to-`u32` 32-bit-process guard.
 The opt-in diagnostic configuration and serialized full link were then run:
 
 ```sh
-cmake -S /Users/jk/Documents/Projects/acgc-modern-port/upstream/ACGC-PC-Port/pc \
-  -B /private/tmp/acgc-lane-ios-boundary/full-darwin-audit-build -G Ninja \
+cmake -S /private/tmp/acgc-lane-ios-boundary/pc-source-724/pc \
+  -B /private/tmp/acgc-lane-ios-boundary/full-724-darwin-audit-build -G Ninja \
   -DCMAKE_BUILD_TYPE=Debug -DPC_DARWIN_COMPILE_AUDIT=ON
-cmake --build /private/tmp/acgc-lane-ios-boundary/full-darwin-audit-build \
+cmake --build /private/tmp/acgc-lane-ios-boundary/full-724-darwin-audit-build \
   --target ac_pc --parallel 1 \
-  > /private/tmp/acgc-lane-ios-boundary/logs/full-ac_pc-darwin-audit.log 2>&1
-file /private/tmp/acgc-lane-ios-boundary/full-darwin-audit-build/bin/AnimalCrossing
+  > /private/tmp/acgc-lane-ios-boundary/logs-724/full-ac_pc-darwin-audit.log 2>&1
+file /private/tmp/acgc-lane-ios-boundary/full-724-darwin-audit-build/bin/AnimalCrossing
 ```
 
 Result: configuration succeeded with the explicit compile-frontier warning;
@@ -213,7 +237,7 @@ Static symbol loading was checked without launching a process:
 ```sh
 lldb --batch \
   -o 'settings set target.load-script-from-symbol-file false' \
-  -o 'target create /private/tmp/acgc-lane-ios-boundary/full-darwin-audit-build/bin/AnimalCrossing' \
+  -o 'target create /private/tmp/acgc-lane-ios-boundary/full-724-darwin-audit-build/bin/AnimalCrossing' \
   -o 'image lookup -n main' \
   -o 'image lookup -n ac_entry' \
   -o 'quit'
