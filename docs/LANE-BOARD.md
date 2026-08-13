@@ -35,9 +35,9 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: the scheduler has no active worker tasks
-worker tasks plus this integration owner. The authoritative PC source is
-`5548570` on `c1/macos-host-launch`; the umbrella is `f25e600` plus only the
+Current maintenance state: the scheduler has no active worker tasks, only
+this integration owner. The authoritative PC source is
+`5548570` on `c1/macos-host-launch`; the umbrella is `f27c246` plus only the
 pre-existing `.codex`/settings edits. Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
