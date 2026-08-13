@@ -21,7 +21,7 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `d0e64f5` (`Document Save_t raw-wire loss fixture`),
+  `c1/macos-host-launch` at `02a003e` (`Add game-owned restart save/reload fixture`),
   on top of `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
   `6e4aded` (bounded graph classification), `e22cbc5`
   (optional GX packet handoff), `a7b9dff` (`Exercise mCD_SaveHome_bg in CARD fixture`),
@@ -131,12 +131,11 @@ redistribute it or extracted proprietary assets.
   logo/NEOS path and returns status `0` after TERM cleanup without a
   current-snapshot pixel/readback claim. Representative GX-to-Metal readback
   and playability are still open.
-- A bounded post-link LLDB trace from the exact `9cf9b3f` arm64 binary reaches
-  real boot markers and the intentional `GXBegin` → `pc_gx_commit_pending_and_flush`
-  boundary, but the capture callback does not fire and the known `DE010000
-  F0002000` observer remains `PREFIX_ONLY` (`8/256`). No complete packet,
-  Metal encode/present, pixel readback, or playability claim follows; see
-  [post-link graph runtime evidence](docs/evidence/POST-LINK-GRAPH-RUNTIME-2026-08-13.md).
+- The current-tip post-link LLDB trace from exact `02a003e` reaches real boot,
+  `graph_proc`, and the enabled capture callback. It records the same `8/256`
+  root `DE010000 F0002000 ...`, which is classified `INDIRECT`; no target list
+  is resolved and no complete packet, Metal encode/present, pixel readback, or
+  playability claim follows. See [exact-tip post-link graph runtime evidence](docs/evidence/POST-LINK-GRAPH-RUNTIME-02A003E-2026-08-13.md).
 - A separate single-attempt activation run with the source-supported
   `ACGC_GRAPH_CAPTURE=1` switch proves the observer is enabled and emits one
   live game-owned record, but it is still only the deterministic `8/256`

@@ -59,7 +59,7 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `d0e64f5` (on top of
+arm64 Mach-O from source branch `c1/macos-host-launch` at `02a003e` (on top of
 `9cf9b3f`, `6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`), with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
@@ -114,12 +114,13 @@ checksum. The bounded graph contract now classifies the observed eight-word capt
 prefix-only and refuses to submit it as a complete list. The optional GX-to-
 Metal handoff and Apple packet/state fixtures pass their CPU contracts, while
 device tests skip with `77` on this host because no Metal device is available.
-The post-link trace now reaches the intentional GXBegin boundary but still
-does not capture a complete game-owned packet or resolve the opaque indirect
-target. A subsequent bounded activation run with `ACGC_GRAPH_CAPTURE=1`
+The current-tip post-link trace at `02a003e` reaches boot, `graph_proc`, and the
+enabled capture callback, but still records only an `8/256` root classified
+`INDIRECT`; it does not resolve the opaque target. A subsequent bounded activation run with `ACGC_GRAPH_CAPTURE=1`
 confirms the hook is enabled and emits one cleanly terminated `8/256`
 game-owned prefix, but still does not resolve the `F0002000` indirect target
-or establish a terminator. The next critical gate is a runtime trace that
+or establish a terminator. The next critical gate is a resolver observer that
+captures the live target list and exact terminator, followed by a runtime trace that
 captures a complete game-owned submission and binds it to Metal encode,
 present, and pixel-readback evidence; the identifiable game-frame pass does
 not imply input, audio, save/load, or playability.
