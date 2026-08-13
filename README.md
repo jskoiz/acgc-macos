@@ -141,6 +141,10 @@ redistribute it or extracted proprietary assets.
   `PCInputSnapshot` boundaries, but its single OS-event attempt posts no
   keydown or keyup and observes no state change. This is a running-game input
   boundary, not input proof; see [runtime input evidence](docs/evidence/RUNTIME-INPUT-BOUNDARY-2026-08-13.md).
+- The post-graph/GX Windows audit finds no `_WIN32`/OpenGL/SDL regression in
+  focused C and syntax probes; real i686 Windows targets remain blocked by the
+  absent sysroot and MinGW tools, so this is not Windows sign-off. See
+  [Windows regression evidence](docs/evidence/WINDOWS-REGRESSION-AUDIT-2026-08-13.md).
 - The first live graph snapshot is pointer-free and records version `1`, frame
   `0`, source capacity `256`, count `8`, and words
   `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.
