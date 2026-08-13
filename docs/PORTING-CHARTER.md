@@ -59,7 +59,7 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-12, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `766ad96`, with the
+arm64 Mach-O from source branch `c1/macos-host-launch` at `858d802`, with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
 prior DVD wait. The portable boot-source facade accepts only exact

@@ -291,7 +291,7 @@ could not create the image; no visual-capture claim is made.
 ## Rolling lane update (2026-08-12)
 
 The authoritative `upstream/ACGC-PC-Port` branch is
-`c1/macos-host-launch` at `766ad96`. Reviewed source commits now include:
+`c1/macos-host-launch` at `858d802`. Reviewed source commits now include:
 
 - `e5442de` / `858d802` — injectable fixed-width PC input snapshots and the
   final PADRead handoff;

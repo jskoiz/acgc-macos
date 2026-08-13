@@ -74,8 +74,8 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `766ad96` (`Add synthetic audio mixer
-  PCM probe`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
+  `c1/macos-host-launch` source branch at `858d802` (`Test PCInputSnapshot
+  PADRead handoff`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
   Metal-fixture, and audio-boundary commits reviewed in the same source
   history. The fresh arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
