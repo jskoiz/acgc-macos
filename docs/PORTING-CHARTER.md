@@ -59,7 +59,7 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `02a003e` (on top of
+arm64 Mach-O from source branch `c1/macos-host-launch` at `aea3515` (on top of
 `9cf9b3f`, `6e4aded`, `e22cbc5`, `a7b9dff`, and `09dd182`), with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
@@ -119,9 +119,13 @@ enabled capture callback, but still records only an `8/256` root classified
 `INDIRECT`; it does not resolve the opaque target. A subsequent bounded activation run with `ACGC_GRAPH_CAPTURE=1`
 confirms the hook is enabled and emits one cleanly terminated `8/256`
 game-owned prefix, but still does not resolve the `F0002000` indirect target
-or establish a terminator. The next critical gate is a resolver observer that
-captures the live target list and exact terminator, followed by a runtime trace that
-captures a complete game-owned submission and binds it to Metal encode,
+or establish a terminator. The integrated `aea3515` resolver now proves the real
+`emu64::dl_G_DL` path can
+resolve the live `F0002000` capability to the bounded `new0` span and exact
+terminator, with native and ASan/UBSan focused tests passing `3/3` each. This is
+still fixture evidence; the next critical gate is an actual current-tip runtime
+trace that captures the target in the game process, then binds a complete
+game-owned submission to Metal encode,
 present, and pixel-readback evidence; the identifiable game-frame pass does
 not imply input, audio, save/load, or playability.
 The reference audit confirms that `DE010000 F0002000` branches from the
@@ -140,8 +144,11 @@ The caller-driven successor is integrated at PC source `02a003e`: production
 fork/exec reload restores it; native and combined ASan/UBSan runs pass. This is
 still a focused persistence gate, not device or playability proof; see
 [game Save_t runtime evidence](evidence/GAME-SAVE-RUNTIME-GATE-2026-08-13.md).
-The graph-target successor is integrated at PC source `71a7012`: it retains
-only pointer-free target identity/capacity and requires `DF000000,0`, with
-native and ASan/UBSan focused tests passing `3/3` each. This remains a contract
-fixture, not live complete-list, GX/Metal, pixel, or playability evidence; see
-[graph indirect-target contract](evidence/GRAPH-INDIRECT-TARGET-CONTRACT-2026-08-13.md).
+The graph-target successor and live resolver are integrated at PC source
+`aea3515`: the production `emu64::dl_G_DL` path retains only pointer-free
+target identity/capacity, resolves the live `F0002000` capability to the
+bounded 1024-word `new0` span, and requires `DF000000,0`, with native and
+ASan/UBSan focused tests passing `3/3` each. This remains source/fixture
+evidence, not live complete-list, GX/Metal, pixel, or playability evidence;
+see [graph indirect-target contract](evidence/GRAPH-INDIRECT-TARGET-CONTRACT-2026-08-13.md)
+and [live resolver evidence](evidence/LIVE-GRAPH-TARGET-RESOLVER-2026-08-13.md).

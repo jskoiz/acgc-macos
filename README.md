@@ -21,7 +21,7 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `02a003e` (`Add game-owned restart save/reload fixture`),
+  `c1/macos-host-launch` at `aea3515` (`Capture live graph target spans in emu64`),
   on top of `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
   `6e4aded` (bounded graph classification), `e22cbc5`
   (optional GX packet handoff), `a7b9dff` (`Exercise mCD_SaveHome_bg in CARD fixture`),
@@ -97,8 +97,9 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `d0e64f5` (`Document Save_t raw-wire
-  loss fixture`), on top of `9cf9b3f` (`Fix reserved identifiers in Metal
+  `c1/macos-host-launch` source branch at `aea3515` (`Capture live graph target
+  spans in emu64`), on top of `02a003e` (`Add game-owned restart save/reload
+  fixture`), `9cf9b3f` (`Fix reserved identifiers in Metal
   fixture shaders`), `6e4aded` (bounded graph
   classification), `e22cbc5` (optional GX packet handoff), `a7b9dff`
   (`Exercise mCD_SaveHome_bg in CARD fixture`), and `5548570` (`Validate GCI Save_t recovery slots`)
@@ -155,11 +156,15 @@ redistribute it or extracted proprietary assets.
   fixture: three passes and two declared Metal-device skips per matrix, with no
   sanitizer diagnostics. This remains fixture-only; see
   [the ac39d04 sanitizer evidence](docs/evidence/SANITIZER-REFRESH-AC39D04-2026-08-13.md).
-- The graph-target successor is now integrated at PC source `71a7012`. Its
-  pointer-free target contract resolves only a caller-declared `new0` span and
-  requires `DF000000,0`; native and ASan/UBSan focused tests pass `3/3` each.
-  This is a bounded source/test contract, not live complete-list or frame proof.
-  See [graph indirect-target evidence](docs/evidence/GRAPH-INDIRECT-TARGET-CONTRACT-2026-08-13.md).
+- The graph-target contract and live resolver are integrated at PC source
+  `aea3515`. The production `emu64::dl_G_DL` path resolves the opaque
+  `F0002000` capability only while its registry is live, passes the bounded
+  1024-word `new0` span to the pointer-free observer, and requires the exact
+  `DF000000,0` terminator. Native and ASan/UBSan focused CTest each pass `3/3`,
+  including the real traversal fixture and stale-handle failure. This remains
+  source/fixture evidence, not live complete-list, GX/Metal, pixel, or frame
+  proof. See [graph indirect-target evidence](docs/evidence/GRAPH-INDIRECT-TARGET-CONTRACT-2026-08-13.md)
+  and [live resolver evidence](docs/evidence/LIVE-GRAPH-TARGET-RESOLVER-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

@@ -20,8 +20,8 @@ produces the first identifiable game-owned frame. The captured screen is retaine
 `ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`). The
 process later exits `139` before clean shutdown, so representative GX/Metal
 readback, input, audible audio, save/load, and playability remain open. The
-authoritative source has since advanced to `09dd182`: the LP64 field-cleanup
-fix preserves the allocator-owned pointer, and a fresh exact-tip ten-second run
+authoritative source has since advanced through `09dd182` to `aea3515`: the
+LP64 field-cleanup fix preserves the allocator-owned pointer, and a fresh exact-tip ten-second run
 reaches logo action 3 and `[NEOS_OUT]` frame 541; TERM then returns status `0`
 within the two-second grace period. This closes the previously reproduced
 post-GX invalid-free boundary, but it still has no current-snapshot
@@ -35,16 +35,16 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: one durable Luna Max/max source worker is active
-alongside this integration owner. The authoritative PC source is `02a003e` on
+Current maintenance state: no durable production worker is active alongside
+this integration owner. The authoritative PC source is `aea3515` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
 `.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
 queue is complete; the graph activation, exact-tip sanitizer, graph-target
 source/test, and caller-driven save/restart audits are complete/parked with
-their evidence recorded below. The post-link runtime task is complete and
-archived; the live-target resolver is the only active source lane and owns the
-next bounded graph gate. No filler lane is being opened.
+their evidence recorded below. The post-link runtime task and live-target
+resolver are complete and archived; the next bounded graph gate is a new
+serialized current-tip runtime trace. No filler lane is being opened.
 Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
@@ -148,7 +148,7 @@ from compilation alone.
 | 59 | GBI indirect target audit → graph-target source/test successor — `019ffaad-ca28-7c62-bd0f-0176ceb55e52` | Source/test owner for live F-handle resolution, target-capacity traversal, and exact terminator proof; prior audit remains in evidence | `/private/tmp/acgc-lane-graph-indirect-target/source` (retire after review); branch `c1/lane-graph-indirect-target` preserved at `e501d4b`; integrated PC `71a7012`; build roots `/private/tmp/acgc-integrate-graph-target-71a7012-native` and `-asan` | Complete/integrated; focused native and ASan/UBSan tests pass `3/3` each; no live complete-list or frame claim |
 | 60 | Game-owned save caller audit → runtime save/restart successor — `019ffaad-cd2e-7ec3-8848-f0d409c6969c` | Source/test owner for restart caller → GCI marker → fresh-process reload gate; prior audit remains in evidence | `/private/tmp/acgc-lane-game-save-runtime/source` (retire after review); branch `c1/lane-game-save-runtime` preserved at `fcc3e7d`; integrated PC `02a003e`; build `/private/tmp/acgc-integrate-save-runtime-02a003e`; no umbrella edits | Complete/integrated; production caller-driven native and combined ASan/UBSan fixture PASS; no full device/playability claim |
 | 61 | Sanitizer refresh ac39d04 — `019ffaad-cd4e-75d1-9e66-fdba9881de79` | Focused native + ASan/UBSan callback/save/graph matrix; unique build roots | `/Users/jk/.codex/worktrees/4ce5/acgc-modern-port` (retire after review); builds `/private/tmp/acgc-lane-sanitizer-ac39d04-native` and `/private/tmp/acgc-lane-sanitizer-ac39d04-asan`; no source branch | Complete/parked; 3 passes + 2 declared Metal-device skips per matrix, 0 failures; no sanitizer diagnostics or runtime-gate claim |
-| 62 | Live indirect graph target resolver — `019ffae5-a0c2-7140-b30a-2c33c2eeba89` | `src/static/libforest/emu64/emu64.c` `dl_G_DL` observer plus focused target-capture fixture; explicit capacity/terminator and stale-handle gate | `/private/tmp/acgc-lane-live-target-resolver/source` / `c1/lane-live-target-resolver`; builds `/private/tmp/acgc-lane-live-target-resolver-build` and logs `/private/tmp/acgc-lane-live-target-resolver-logs` | Active; source/test lane only, no game launch; no frame/pixel/playability claim |
+| 62 | Live indirect graph target resolver — `019ffae5-a0c2-7140-b30a-2c33c2eeba89` | `src/static/libforest/emu64/emu64.c` `dl_G_DL` observer plus focused target-capture fixture; explicit capacity/terminator and stale-handle gate | `/private/tmp/acgc-lane-live-target-resolver/source` / `c1/lane-live-target-resolver`; builds `/private/tmp/acgc-lane-live-target-resolver-build` and logs `/private/tmp/acgc-lane-live-target-resolver-logs` (retire after review) | Complete/integrated at source `aea3515`; native and ASan/UBSan focused CTest `3/3` each; live fixture resolves `F0002000` to 1024-word `new0`, terminator index 10, stale-handle fail-closed; no game launch/frame claim; evidence `docs/evidence/LIVE-GRAPH-TARGET-RESOLVER-2026-08-13.md` |
 
 ## Parked intake (not active)
 
