@@ -256,3 +256,9 @@ callback/GX/frame hit is inferred; TERM to the exact PID returned `0`, and no
 KILL was needed. This is launch/runtime evidence only, not callback, Metal,
 pixel, input, audio, save/device, clean-shutdown, simulator/device, or
 playability proof; see [elevated GX v2 launch evidence](evidence/ELEVATED-GX-V2-LAUNCH-2026-08-13.md).
+The durable-count retry kept LLDB alive through its final breakpoint list and
+recorded `graph_task_set00=1`, but its temporary Python callback omitted an
+explicit return, so downstream counts remained zero at the prefix stop. No
+downstream callback, GX, frame, Metal, pixel, input, audio, save/device,
+simulator/device, clean-shutdown, or playability claim follows; see [durable
+GX v2 breakpoint evidence](evidence/DURABLE-GX-V2-BREAKPOINT-COUNTS-2026-08-13.md).

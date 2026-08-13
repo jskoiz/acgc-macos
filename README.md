@@ -98,6 +98,11 @@ redistribute it or extracted proprietary assets.
   interrupt happened before LLDB emitted its per-symbol breakpoint list, so
   no callback/GX/frame hit is inferred; exact-PID TERM returned `0` and KILL
   was unnecessary. See [elevated GX v2 launch evidence](docs/evidence/ELEVATED-GX-V2-LAUNCH-2026-08-13.md).
+- A durable-count retry kept LLDB alive through its final breakpoint list and
+  recorded `graph_task_set00=1`; downstream counts were `0` only because the
+  temporary Python callback omitted an explicit return and stopped at the
+  prefix. No downstream callback, GX, frame, Metal, pixel, or playability
+  claim follows. See [durable GX v2 breakpoint evidence](docs/evidence/DURABLE-GX-V2-BREAKPOINT-COUNTS-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
