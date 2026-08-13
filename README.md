@@ -130,6 +130,16 @@ redistribute it or extracted proprietary assets.
   real i686 GNU/MSVC probes stop at missing `string.h`/sysroot. No i686 PE,
   Windows runtime, full-link, Metal, pixel, or playability claim follows. See
   [current sanitizer/Windows evidence](docs/evidence/SANITIZER-WINDOWS-CURRENT-F18E7CD-2026-08-13.md).
+- One current-tip `f18e7cd` link reached `[4018/4019]`, and one unprivileged
+  LLDB launch created a real inferior and reached boot, graph, and repeated
+  GX/V3 builder work. Counts were `graph_task_set00=29`,
+  `emu64_taskstart=29`, `GXBegin=532`, `pc_gx_flush_vertices=532`, and V2/V3
+  builder entries `531` each; the V3 Apple consumer and
+  `pc_metal_runtime_observe` were `0`. The opt-in diagnostic captured its cap
+  of `64/64` `alpha_update_disabled` records and no other predicate. This is
+  live V3 builder-rejection evidence only: no successful callback, Metal
+  encode/present/readback, pixel, natural shutdown, or playability claim.
+  See [current V3 rejection runtime evidence](docs/evidence/CURRENT-V3-REJECTION-RUNTIME-F18E7CD-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.

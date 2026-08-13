@@ -108,6 +108,15 @@ the C++ host probe retains an artificial Apple-libc++ locale-macro caveat;
 missing `string.h` and the absent sysroot/toolchain. No PE/runtime or Windows
 sign-off follows, and no full-link, game-owned callback, Metal, pixel, or
 playability claim follows. See [current sanitizer/Windows evidence](evidence/SANITIZER-WINDOWS-CURRENT-F18E7CD-2026-08-13.md).
+One current-tip `f18e7cd` link reached `[4018/4019]`, and one unprivileged
+LLDB launch created a real inferior and reached boot, graph, and repeated
+GX/V3 builder work. The live counts were graph/emu64 `29`, GX/flush `532`,
+V2/V3 builder `531` each, with the V3 Apple consumer and
+`pc_metal_runtime_observe` at `0`. The opt-in diagnostic captured its hard cap
+of `64/64` `alpha_update_disabled` records. This closes the source/fixture-to-
+live rejection boundary only; no successful callback, Metal encode/present/
+readback, pixel, natural-shutdown, or playability claim follows. See [current
+V3 rejection runtime evidence](evidence/CURRENT-V3-REJECTION-RUNTIME-F18E7CD-2026-08-13.md).
 The DVD/CARD,
 input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
 commits reviewed in the same source history remain the current evidence, and
