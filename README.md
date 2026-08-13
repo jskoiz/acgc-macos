@@ -142,8 +142,10 @@ redistribute it or extracted proprietary assets.
   at `858d802` built 32 native and the same 32 under ASan/UBSan; portable 14/14,
   PC 4 passed with CoreAudio skipped, and Apple 6 passed with Metal skipped.
   This remains focused evidence, not a full `ac_pc` or game-frame proof. The
-  Windows audit found no regression at the older snapshot but had no MinGW/i686
-  compiler, so it is not a Windows compiler sign-off.
+  Windows audits found no source regression in the graph-capture change; strict
+  `_WIN32` graph seam compile/test probes pass. The host still has no
+  MinGW/i686 compiler or Windows sysroot, so this is not a native Windows
+  compiler sign-off.
 - The umbrella-owned macOS filesystem/save adapter now resolves distinct bundle
   Resources, Application Support, Caches, and Logs roots; rejects resource
   writes and traversal; commits opaque save payloads with same-directory

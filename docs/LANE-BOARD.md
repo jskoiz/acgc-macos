@@ -25,14 +25,14 @@ does not mean its gate passed.
 | 13 | Windows compatibility audit — `019ff8d3-23c5-75a2-beac-7f7e70c72c08` | Read-only x86/Windows/OpenGL/SDL conditional audit | `/Users/jk/.codex/worktrees/8231/acgc-modern-port` | Complete read-only; scoped to `4f77dab`, no MinGW compiler sign-off |
 | 14 | Native + ASan/UBSan matrix — `019ff8d3-2a6f-7610-a9f1-53f237353454` | Focused verification and sanitizer evidence | `/Users/jk/.codex/worktrees/2232/acgc-modern-port`; `c1/lane-verification-matrix` | Complete/parked; umbrella `38f85da`; 32 native + 32 ASan/UBSan targets at exact `858d802`, CoreAudio/Metal skipped as expected |
 | 15 | Integration/evidence owner — `019ff398-2520-7191-ac5c-f3007c49163f` | Umbrella docs, roadmap, reviewed commits, source gitlink, launch proof | `/Users/jk/Documents/Projects/acgc-modern-port` / `c1/apple-port-bootstrap` | Active; only lane allowed to update the umbrella submodule pointer |
-| 16 | Graph capture → GX packet — `019ff914-44fc-7801-88f4-ee513fc8e728` | New adapter/test from captured prefix into existing GX contract | `/Users/jk/.codex/worktrees/4a27/acgc-modern-port`; planned source `/private/tmp/acgc-lane-graph-gx-adapter` / `c1/lane-graph-gx-adapter` | Active; source-edit lane |
+| 16 | Graph capture → GX packet — `019ff914-44fc-7801-88f4-ee513fc8e728` | New adapter/test from captured prefix into existing GX contract | `/Users/jk/.codex/worktrees/4a27/acgc-modern-port`; source `/private/tmp/acgc-lane-graph-gx-adapter` / `c1/lane-graph-gx-adapter` | Resumed after setup blocker; source-edit lane |
 | 17 | LP64 texture handle remediation — `019ff914-9bd9-77f3-8d8b-d72f5c00d587` | `pc_gx_texture.c` and opaque-reference width/lifetime | `/Users/jk/.codex/worktrees/fc81/acgc-modern-port`; planned source `/private/tmp/acgc-lane-lp64-texture` / `c1/lane-lp64-texture` | Active; source-edit lane; owns `0x83bdc0` fault |
 | 18 | Metal semantic packet consumer — `019ff914-9e34-7181-8903-f8022c82cacf` | Packet-to-state/encoder validation and device-gated fixture | `/Users/jk/.codex/worktrees/da16/acgc-modern-port`; planned source `/private/tmp/acgc-lane-metal-packet-consumer` / `c1/lane-metal-packet-consumer` | Active; source/fixture lane; no live device claim |
 | 19 | Live graph capture reproducibility — `019ff914-ad3f-7721-82f2-d8985d601ba1` | Two cold-run snapshots and exact fault boundary | `/Users/jk/.codex/worktrees/5edb/acgc-modern-port`; build `/private/tmp/acgc-lane-live-capture-repro-build` | Active; runtime evidence only |
 | 20 | CoreAudio/device and asset-audio successor — `019ff914-a32b-7363-a619-f79e21c75db3` | Real sink gate, then asset-driven NEOS_OUT runtime trace | `/Users/jk/.codex/worktrees/fdc9/acgc-modern-port`; builds `/private/tmp/acgc-lane-coreaudio-device-build` and `/private/tmp/acgc-lane-audio-asset-runtime-build` | Device subgate complete/parked: synthetic NEOS/RSP 1,118 nonzero samples passes; real SDL/CoreAudio open returns `77` with `kAudioDevicePropertyDeviceIsAlive` error `560947818`; asset-audio successor active; no audible claim |
 | 21 | Save_t raw-wire forensic — `019ff914-a86e-7793-b0f0-6ce23e8d97a0` | `time_limit` width/endianness/range evidence across both upstreams | `/Users/jk/.codex/worktrees/e9ef/acgc-modern-port`; build `/private/tmp/acgc-lane-save-wire-forensic-build` | Active; read-only/fixture lane; codec remains frozen |
 | 22 | Integrated sanitizer matrix — `019ff914-b322-7e10-876e-c942a45aef4a` | Native and ASan/UBSan at integrated source `10d6ac0` | `/Users/jk/.codex/worktrees/44e8/acgc-modern-port`; builds `/private/tmp/acgc-lane-integrated-native-build` and `/private/tmp/acgc-lane-integrated-sanitizer-build` | Active; verification only; serialize full links |
-| 23 | Windows compatibility post-capture audit — `019ff914-b7c7-75d2-ad4c-d94032e35b12` | `_WIN32`/x86/OpenGL/SDL conditional audit after `10d6ac0` | `/Users/jk/.codex/worktrees/d9c5/acgc-modern-port`; build `/private/tmp/acgc-lane-windows-audit-build` | Active; read-only audit |
+| 23 | Windows compatibility post-capture audit — `019ff914-b7c7-75d2-ad4c-d94032e35b12` | `_WIN32`/x86/OpenGL/SDL conditional audit after `10d6ac0` | `/Users/jk/.codex/worktrees/d9c5/acgc-modern-port`; build `/private/tmp/acgc-lane-windows-audit-build` | Complete/parked; strict `_WIN32` graph seam compile/test passes; no source regression found; native Windows/x86 toolchain remains unavailable |
 | 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; planned source `/private/tmp/acgc-lane-texture-fault-fixture` | Active; fixture/audit only; does not implement remediation |
 | 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Active; source/test lane |
 
@@ -101,8 +101,11 @@ submodules blindly or edit a detached source checkout.
   sanitizer/runtime-error findings. This is snapshot evidence, not full
   `ac_pc` or game-frame proof; the source checkout later advanced to `8b6849f`.
 - The Windows audit found no regression in `4f77dab` and preserves the x86
-  guards, but no MinGW/i686 compiler is installed. Two pre-existing POSIX
-  include assumptions remain follow-up checks.
+  guards, and the post-capture audit at `10d6ac0` also passes strict `_WIN32`
+  graph seam compile/test probes. No MinGW/i686 compiler or Windows sysroot is
+  installed, so native Windows/x86 translation and link remain unproven. The
+  Apple-only capture logger is redirected unless verbose/profile output is
+  enabled; this does not affect Windows behavior.
 - `dfb3f7f` is integrated as `4f77dab`: the PC disc-backed DVD host accepts the
   GameCube 32-byte sector-tail transfer for 19-byte `COPYDATE` while rejecting
   malformed ranges. Native and ASan/UBSan focused probes pass.
