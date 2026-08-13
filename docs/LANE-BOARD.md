@@ -35,7 +35,10 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: no production or verification worker is active. Lane
+Current maintenance state: one read-only verification worker is active. Lane 95
+(`019ffcb0-760c-7b43-a690-f190dd5352f7`) owns a source crosswalk explaining
+why lane 94 reached `emu64_taskstart` but not `GXBegin`/`pc_gx_flush_vertices`;
+it performs no build or launch and owns no source edits. Lane 94
 94 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
 through `graph_task_set00` and `emu64_taskstart`; the debugger-owned sentinel
@@ -252,6 +255,7 @@ from compilation alone.
 | 92 | Elevated GX v2 callback launch retry — `019ffc83-96c2-7ce1-97d9-848fb308a41d` | Read-only one permitted elevated LLDB launch against canonical PC `d1e812c`; resolve the lane-91 pre-inferior status `-1` blocker and capture explicit v2 callback hit counts only if an inferior exists | Worktree and exact build/log roots retired after review; canonical source `c1/macos-host-launch` at `d1e812c`; evidence `docs/evidence/ELEVATED-GX-V2-LAUNCH-2026-08-13.md`; no source branch or edits | Complete/archived; elevated launch created an inferior and reached boot/runtime; outer interrupt preceded per-symbol breakpoint list, so counts are not emitted and no callback/GX/frame/Metal/pixel/playability claim follows; exact-PID TERM `rc=0`, KILL not needed |
 | 93 | Durable GX v2 breakpoint-count trace — `019ffc93-5d85-7d53-a6bf-67a5b13305da` | Read-only one elevated LLDB trace at canonical PC `d1e812c`; persist per-symbol graph/GX/v2/Apple breakpoint counts while keeping the debugger alive through bounded inferior cleanup | Worktree and exact build/log roots retired after review; canonical source `c1/macos-host-launch` at `d1e812c`; evidence `docs/evidence/DURABLE-GX-V2-BREAKPOINT-COUNTS-2026-08-13.md`; no source branch or edits | Complete/archived; `graph_task_set00=1`, all downstream counts `0` only because the temporary Python callback omitted an explicit return and stopped at the prefix; no downstream callback/GX/frame/Metal/pixel/playability claim; exact inferior SIGKILL status `9`, wrapper `0` |
 | 94 | Correct GX v2 trace callback control — `019ffca1-c92a-7363-9687-a503d2f2851d` | Read-only one elevated LLDB trace from canonical PC `d1e812c`; correct the temporary Python breakpoint callbacks to explicitly return `False`, preserve durable hit lines, and capture downstream graph/GX/v2/Apple counts | Worktree and exact build/log roots retired after review; canonical source `c1/macos-host-launch` at `d1e812c`; evidence `docs/evidence/CORRECTED-GX-V2-CALLBACK-TRACE-2026-08-13.md`; no source branch or edits | Complete/archived; `graph_task_set00=1`, `emu64_taskstart=1`, and GX/v2/Apple counts `0`; sentinel stopped after the graph task; no GX callback, frame, Metal, pixel, device, input/audio/save, or playability claim |
+| 95 | Audit graph task to GX submission gap — `019ffcb0-760c-7b43-a690-f190dd5352f7` | Read-only two-upstream crosswalk for `graph_task_set00` → `emu64_taskstart` → `GXBegin`/`pc_gx_flush_vertices`; explain lane-94’s bounded zero GX counts and identify the smallest next gate | Visible worktree `/Users/jk/.codex/worktrees/680c/acgc-modern-port`; canonical source `c1/macos-host-launch` at `d1e812c`; no build/log roots, ISO, launch, or source branch | Active; analysis only, no source/docs edits, no build/launch, no Metal encode/readback/pixel, device, input/audio/save, or playability claim |
 
 ## Parked intake (not active)
 
