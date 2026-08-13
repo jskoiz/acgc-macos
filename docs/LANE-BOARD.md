@@ -8,8 +8,9 @@ does not mean its gate passed.
 
 Current scheduler target: up to ten useful visible ACGC lanes, with no filler.
 The texture remediation (17) is now complete/integrated at source `578c8b7`.
-The root-owned second-game ABI lane is the current launch-critical source lane;
-its fresh run crosses `second_game.c` and reaches the next audio-thread fault.
+The root-owned audio-bank ABI lane is the current launch-critical source lane;
+its fresh run crosses `second_game.c`, clears the DMA pointer fault, and reaches
+the remaining raw-bank/LP64 layout boundary.
 Graph capture (16) and integrated verification (22) are complete/parked. The
 post-fix game-frame runtime and the successor requests listed below are
 setup-pending: the app has returned client IDs but not durable task IDs or
@@ -49,7 +50,7 @@ docs.
 | 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; source `/private/tmp/acgc-lane-texture-fault-fixture` / `c1/lane-texture-fault-fixture` | Complete/integrated as `07a5447`; native arm64 fixture records full pointer → opaque handle → low-word truncation and intentional `EXPECTED_FAILURE`; remediation remains lane 17 |
 | 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Parked/archived under four-lane cap; prior lifecycle evidence remains integrated |
 | 26 | Post-fix game frame runtime — client `client-new-thread:1b48103c-9b76-4caf-8598-686e392653c3` | Fresh actual-game arm64 run after texture remediation, packet/frame boundary | Worktree setup pending; planned source `/private/tmp/acgc-lane-postfix-frame` / `c1/lane-postfix-frame`; build `/private/tmp/acgc-lane-postfix-frame-build` | Queued; do not start a competing full link before texture integration |
-| 27 | Second-game ABI repair — root-owned continuation | `src/second_game.c` sound-state access across restart callbacks | `/private/tmp/acgc-lane-second-game` / `c1/lane-second-game-abi`; build `/private/tmp/acgc-lane-second-game-abi-build` | Active source lane; arm64 `ac_pc` build passes; fresh LLDB crosses `second_game.c` into `trademark_init`, then stops in `Nas_StartDma` audio `memmove` at `system.c:1300` |
+| 27 | Audio-bank ABI repair — root-owned continuation | `src/static/jaudio_NES/internal/system.c` LP64 DMA/table boundary | `/private/tmp/acgc-lane-audio-lp64` / `c1/lane-audio-lp64`; build `/private/tmp/acgc-lane-audio-lp64-build` | Active diagnostic source lane; arm64 `ac_pc` build passes; uncommitted DMA-width fix clears `system.c:1300`, native `BANK_ENTRY` moves the next stop to `system.c:1167`; raw 32-bit bank records still require a native decoder |
 
 ## Rolling-refill intake (setup pending)
 
@@ -177,6 +178,15 @@ submodules blindly or edit a detached source checkout.
   completion, `JW_Init2`, `HotStartEntry`, both forest archives, and Famicom
   archive loading, then stops at `EXC_BAD_ACCESS` in `game.c:154` while entering
   `graph_proc`. This is not a rendered-frame proof.
+- The current root-owned audio diagnostic lane builds `ac_pc` successfully at
+  `/private/tmp/acgc-lane-audio-lp64-build`. With the ignored ISO symlink and
+  an escalated local LLDB run, the uncommitted `ARNativeAddress` DMA cast
+  removes the prior `system.c:1300` audio `memmove` fault. A second uncommitted
+  `BANK_ENTRY` native-address adjustment then moves the next stop to
+  `system.c:1167` while reading a widened `voicetable` through a fixed-width
+  GameCube bank blob. The remaining boundary is therefore a wire-to-native
+  audio-bank decoder, not a build failure; no audible-audio or rendered-frame
+  claim is made.
 - The completed boot trace resolves the failing arm64 store as
   `strb w8, [x22,#0x474]` for `GRAPH_SET_DOING_POINT(graph, GAME_BGM)` with
   computed bad base `0x100000000`; `graph_task_set00` is never hit. Its next
@@ -193,11 +203,14 @@ submodules blindly or edit a detached source checkout.
    integrated/rejected/parked here, and refill only with a useful dependency-ready
    successor. The input lane is parked because its remaining gate requires an
    OS/human event or physical controller; no synthetic filler replaces it.
-3. The LP64 texture-object fault is repaired at source `578c8b7`; the next
-   launch-critical boundary is the audio DMA pointer fault reached after the
-   `02edf9c` second-game ABI repair. Prove that fix, then feed the captured
-   prefix into `83fa889` and advance Metal/TEV toward a game-owned frame. The
-   `866dd94` and `ddbb498` fixture passes remain separate gates.
+3. The LP64 texture-object fault is repaired at source `578c8b7`; the
+   `02edf9c` second-game ABI repair is integrated. The current launch-critical
+   boundary is the audio-bank wire/native mismatch: the uncommitted DMA-width
+   fix clears `system.c:1300`, and the uncommitted native `BANK_ENTRY` fix
+   reaches `system.c:1167`. Prove a bounded native decoder with wire fixtures,
+   then feed the captured prefix into `83fa889` and advance Metal/TEV toward a
+   game-owned frame. The `866dd94` and `ddbb498` fixture passes remain separate
+   gates.
 4. Keep Save_t/GCI parked on the explicit raw-range mismatch until the codec
    preserves arbitrary bytes or a proven wire-format boundary is established;
    do not weaken the roundtrip test. Filesystem adapter, lifecycle, and
