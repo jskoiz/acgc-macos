@@ -37,7 +37,7 @@ docs.
 
 Current maintenance state: five durable Luna Max/max worker tasks are active
 alongside this integration owner. The authoritative PC source is `9cf9b3f` on
-`c1/macos-host-launch`; the umbrella is `129ff78` plus only the pre-existing
+`c1/macos-host-launch`; the umbrella is `20b1520` plus only the pre-existing
 `.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
 queue is complete; the active rows below are the next runtime, losslessness,
 input, and regression gates.
