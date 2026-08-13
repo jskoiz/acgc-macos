@@ -58,11 +58,11 @@ state is standard source-alpha blending plus `GX_TEXMTX0`, both outside the
 current v2 contract; this explains the rejection without proving a defect.
 The evidence is `docs/evidence/METAL-REJECTION-DIAGNOSTIC-8A19F23-2026-08-13.md`.
 No callback, Metal encode/readback, pixel, input, audio, save, device, or
-playability claim follows. Lane 101 then failed twice at the remote compaction
-`404` boundary before producing a handoff; its one-file uncommitted V3 header
-draft was rejected and reverted. Lane 102 is now the sole active worker on a
-fresh visible worktree, with the same contract reissued from the corrected
-`GX_LO_NOOP` evidence.
+playability claim follows. Lanes 101 and 102 both failed at the remote
+compaction `404` boundary before producing a handoff; lane 101's one-file
+uncommitted V3 header draft was rejected and reverted, while lane 102 left no
+source edit. No worker lane is active; the root is taking the next bounded
+implementation directly from the corrected `GX_LO_NOOP` evidence.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -289,7 +289,7 @@ from compilation alone.
 | 99 | Current Metal-frame bridge audit/implementation — `019ffd05-6144-77a0-8a55-f1bb4092654d` | Bounded crosswalk for why live textured/TEV state is rejected before `pc_metal_runtime_observe`; source edit only if a concrete defect is proven | Worktree retired with the task; base umbrella `05c7ce8`, PC `d1e812c`, decomp `09ca8e8b`; no build/runtime roots created | Complete/archived with infrastructure failure after setup; read-only finding only, no source/build/runtime/Metal/pixel claim; no defect proven |
 | 100 | Metal packet rejection predicate audit — `019ffd08-10ff-77b1-8bc4-bd91a84902e9` | Test-only/read-only reproduction of fail-closed packet-builder behavior for textured/TEV/active state; native plus ASan/UBSan focused tests; no worker full link/LLDB; root continuation owns only opt-in diagnostic instrumentation | Worker task retired after remote compaction failure; diagnostic branch `c1/lane-metal-rejection-diagnostic` fast-forwarded into canonical `c1/macos-host-launch` at `8a19f23`; decomp `09ca8e8b`; exact roots `/private/tmp/acgc-metal-rejection-trace-build` and `/private/tmp/acgc-metal-rejection-trace-logs` | Complete/archived; focused native and ASan/UBSan v2 handoff tests `1/1` each; one elevated launch emitted 32 preflight + 32 fail records; live alpha-blend/TEXMTX0 state is outside current v2 contract; no callback/Metal/pixel/playability claim; evidence `docs/evidence/METAL-REJECTION-DIAGNOSTIC-8A19F23-2026-08-13.md` |
 | 101 | Live blend/texture-matrix GX packet extension — `019ffd19-3a91-7ba2-b6db-c7535d5143ce` | Source-edit lane for the smallest versioned packet/Apple consumer extension covering the observed `GX_BM_BLEND` + `GX_TEXMTX0` state; preserve v1 and legacy OpenGL | Worktree `/Users/jk/.codex/worktrees/fb3c/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source`; branch `c1/lane-gx-live-blend-texmatrix` returned clean to base `8a19f23`; decomp `09ca8e8b` | Rejected/archived after two remote compaction `404` failures; one uncommitted header-only draft was reverted; no source commit, build, test, full link, LLDB, callback, Metal, pixel, or playability result |
-| 102 | Live blend/texture-matrix GX packet extension retry — `019ffd20-e35d-7121-84b0-1589246e8e3c` | Fresh source-edit retry for the smallest versioned packet/Apple consumer extension covering `GX_BM_BLEND`, source-alpha factors, raw `GX_LO_NOOP=5`, and `GX_TEXMTX0`; preserve v1/OpenGL | Visible task worktree `/Users/jk/.codex/worktrees/7c0b/acgc-modern-port`; source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source` on `c1/lane-gx-live-blend-texmatrix`; focused roots `/private/tmp/acgc-lane-gx-live-blend-texmatrix-build[-asan]`; base umbrella `d320bc3`, PC `8a19f23`, decomp `09ca8e8b` | Active/setup; no source/build/test/full-link/LLDB/runtime result yet |
+| 102 | Live blend/texture-matrix GX packet extension retry — `019ffd20-e35d-7121-84b0-1589246e8e3c` | Fresh source-edit retry for the smallest versioned packet/Apple consumer extension covering `GX_BM_BLEND`, source-alpha factors, raw `GX_LO_NOOP=5`, and `GX_TEXMTX0`; preserve v1/OpenGL | Worktree `/Users/jk/.codex/worktrees/7c0b/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-live-blend-texmatrix-source`; branch `c1/lane-gx-live-blend-texmatrix` clean at `8a19f23`; decomp `09ca8e8b` | Rejected/archived after remote compaction `404` before source edit; no build, test, full link, LLDB, runtime, or claim |
 
 ## Parked intake (not active)
 
