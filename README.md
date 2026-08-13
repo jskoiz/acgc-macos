@@ -74,7 +74,7 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `909f3ca` (`Resolve compact audio
+  `c1/macos-host-launch` source branch at `724a18d` (`Preserve LP64 audio DMA
   wave addresses`), on top of the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
   same source history. The fresh arm64 link produces a Mach-O
@@ -92,7 +92,8 @@ redistribute it or extracted proprietary assets.
   graph capture before emu64 setup), `07a5447` (arm64 texture-pointer forensic
   fixture), `12b4f6e` (bounded GX packet-to-Metal consumer fixture), and
   `5974764`/`909f3ca` (compact audio-bank tails and native wave-address
-  relocation). These remain separate boundaries: the first live game-owned
+  relocation) plus `304f055`/`724a18d` (LP64 audio-DMA address preservation).
+  These remain separate boundaries: the first live game-owned
   prefix is captured, and the integrated runtime now reaches a visible
   game-owned frame, but representative GX-to-Metal readback and playability
   are still open.
@@ -122,6 +123,17 @@ redistribute it or extracted proprietary assets.
   and standalone screenshot are not joined into a game-owned submit → encode →
   present → visible-window → readback chain. This is evidence hygiene, not a
   regression of the separately recorded identifiable-frame screenshot.
+- Umbrella commit `1d4d44b` adds the bounded
+  `scripts/probes/acgc_game_frame_evidence.sh` harness and classifier tests.
+  Syntax, ShellCheck, classifier, and fail-closed dry-run checks pass; the
+  isolated dry-run stops before a build when its source submodule is
+  uninitialized. It makes no rendered-frame claim.
+- The reviewed audio-DMA handoff `304f055` is integrated on the authoritative
+  branch as `724a18d`. The exact integrated `ac_pc` target rebuilds and links
+  successfully (`cmake --build /private/tmp/acgc-integrated-audio-wave-build
+  --target ac_pc -- -j2`, exit 0). A fresh game launch has not been rerun at
+  this newer tip, so the identifiable-frame screenshot remains evidence for
+  the separately named `909f3ca` snapshot.
 - The forensic target from `07a5447` reproduces the same contract in isolation:
   the opaque GBI handle resolves to the full arm64 pointer, while
   `GXInitTexObj` stores only the low 32 bits and `GXGetTexObjData` recovers the
