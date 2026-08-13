@@ -133,10 +133,11 @@ redistribute it or extracted proprietary assets.
   not copy bytes outside Resources. This is host-adapter evidence, not
   GameCube `Save_t`/GCI or game-level save/reload proof.
 - The Save_t/GCI probe records the supported layout and passes checksum,
-  scalar-endian, canonical-padding, and codec-only sanitizer checks. It also
-  exposes a real losslessness blocker: a high-entropy fixture loses two bytes
-  of allocation padding at Save_t offset `0xB6`. Runtime save-manager restart,
-  main/backup recovery, exact-file-length, and whole-GCI proof remain open.
+  scalar-endian, canonical-padding, and codec-only process-restart/sanitizer
+  checks. It also exposes a real losslessness blocker: the active layout places
+  `time_limit` at `+0x02`, while the repacker drops the low 16 bits of the raw
+  unit (`wire=0xF10E -> roundtrip=0x0000`). Runtime save-manager restart, main/
+  backup recovery, exact GCI-envelope length, and whole-GCI proof remain open.
 - The new CARD host-transfer test creates, writes, reads, closes, reopens, and
   rejects invalid ranges in a temporary card directory. It passes natively and
   under ASan/UBSan, but it is not GameCube `Save_t`/GCI serialization or a

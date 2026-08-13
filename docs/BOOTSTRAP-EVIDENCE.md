@@ -330,9 +330,10 @@ snapshot/PADRead handoff plus a virtual SDL controller path. The keyboard half
 is intentionally limited because `SDL_PushEvent` does not update
 `SDL_GetKeyboardState`; an OS/human event is still required.
 
-The Save_t/GCI evidence is recorded in umbrella commit `3b8ed21`; it passes
-canonical-padding and checksum fixtures but intentionally keeps the arbitrary
-padding mismatch visible rather than treating canonicalization as lossless.
+The Save_t/GCI evidence is recorded in umbrella commits `3b8ed21` and
+`aeefc15`; it passes canonical-padding, checksum, and codec-only process-restart
+fixtures but intentionally keeps the raw-range mismatch visible rather than
+treating canonicalization as lossless.
 
 The fresh arm64 game run now loads COPYDATE, the string table, `JW_Init2`, both
 forest archives, and the Famicom archive, then faults at `game.c:154`. The boot
