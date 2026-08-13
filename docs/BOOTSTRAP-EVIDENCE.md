@@ -293,7 +293,8 @@ could not create the image; no visual-capture claim is made.
 The authoritative `upstream/ACGC-PC-Port` branch is
 `c1/macos-host-launch` at `766ad96`. Reviewed source commits now include:
 
-- `e5442de` — injectable fixed-width PC input snapshots;
+- `e5442de` / `858d802` — injectable fixed-width PC input snapshots and the
+  final PADRead handoff;
 - `e03ffed` — pointer-free graph submission capture immediately before the
   existing PC/emu64 submit path;
 - `83fa889` — 4,800-byte renderer-neutral GX semantic packet contract;

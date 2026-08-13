@@ -81,10 +81,12 @@ redistribute it or extracted proprietary assets.
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   focused native and ASan/UBSan probes pass.
-- The source branch now contains `e5442de` (injectable fixed-width input
-  snapshots), `e03ffed` (pointer-free graph-submission capture), `83fa889`
-  (4,800-byte renderer-neutral GX semantic packets), `866dd94` (Metal
-  geometry/state fixtures), and `766ad96` (mixer-to-callback PCM fixture).
+- The source branch now contains `e5442de` and `858d802` (injectable
+  fixed-width input snapshots and the final PADRead handoff), `e03ffed`
+  (pointer-free graph-submission capture), `83fa889` (4,800-byte
+  renderer-neutral GX semantic packets), `866dd94` (Metal geometry/state
+  fixtures), `ddbb498` (texture/TLUT/TEV fixtures), and `766ad96`
+  (mixer-to-callback PCM fixture).
   These are separate boundaries: the graph capture has not yet observed a live
   packet because the reconstructed process stops at `game.c:154`.
 - The new silent SDL/CoreAudio boundary probe opened 32 kHz, S16 stereo audio at
