@@ -28,6 +28,9 @@ and its explicitly labelled game-systems stub.
              a bounded interval, record its PID/architecture, then terminate it.
   --debug    Build, then start the real executable under LLDB.
 
+  ACGC_GAME_TERM_GRACE_SECONDS controls the --verify SIGTERM grace period
+  (positive integer, default 2); an unresponsive process receives SIGKILL.
+
 The user-owned disc remains at local/roms by default. The executable's legacy
 relative disc lookup is satisfied by a generated symlink below the ignored
 build directory; no disc bytes are copied into source or tracked paths.
@@ -116,29 +119,74 @@ case "${mode}" in
         exec /usr/bin/lldb -- "${GAME_BINARY}" --verbose
         ;;
     --verify)
-        : >"${VERIFY_LOG}"
-        cd "${BIN_DIR}"
-        "${GAME_BINARY}" --verbose >"${VERIFY_LOG}" 2>&1 &
-        game_pid=$!
-
-        cleanup_game() {
-            if [[ -n "${game_pid:-}" ]] && /bin/kill -0 "${game_pid}" 2>/dev/null; then
-                /bin/kill -TERM "${game_pid}" 2>/dev/null || true
-                wait "${game_pid}" 2>/dev/null || true
-            fi
-        }
-        trap cleanup_game EXIT INT TERM
-
         verify_seconds="${ACGC_GAME_VERIFY_SECONDS:-5}"
+        term_grace_seconds="${ACGC_GAME_TERM_GRACE_SECONDS:-2}"
         if [[ ! "${verify_seconds}" =~ ^[1-9][0-9]*$ ]]; then
             printf 'ACGC_GAME_VERIFY_SECONDS must be a positive integer, got: %s\n' \
                 "${verify_seconds}" >&2
             exit 2
         fi
+        if [[ ! "${term_grace_seconds}" =~ ^[1-9][0-9]*$ ]]; then
+            printf 'ACGC_GAME_TERM_GRACE_SECONDS must be a positive integer, got: %s\n' \
+                "${term_grace_seconds}" >&2
+            exit 2
+        fi
+
+        : >"${VERIFY_LOG}"
+        cd "${BIN_DIR}"
+        "${GAME_BINARY}" --verbose >"${VERIFY_LOG}" 2>&1 &
+        game_pid=$!
+        game_status=0
+        game_cleanup_complete=0
+
+        cleanup_game() {
+            if [[ "${game_cleanup_complete}" -eq 1 || -z "${game_pid:-}" ]]; then
+                return 0
+            fi
+
+            local cleanup_pid="${game_pid}"
+            local cleanup_signal="already-exited"
+            local elapsed
+            game_cleanup_complete=1
+
+            if /bin/kill -0 "${cleanup_pid}" 2>/dev/null; then
+                /bin/kill -TERM "${cleanup_pid}" 2>/dev/null || true
+                cleanup_signal="TERM"
+                for ((elapsed = 0; elapsed < term_grace_seconds * 10; elapsed++)); do
+                    if ! /bin/kill -0 "${cleanup_pid}" 2>/dev/null; then
+                        break
+                    fi
+                    sleep 0.1 || true
+                done
+                if /bin/kill -0 "${cleanup_pid}" 2>/dev/null; then
+                    /bin/kill -KILL "${cleanup_pid}" 2>/dev/null || true
+                    cleanup_signal="KILL"
+                fi
+            fi
+
+            game_status=0
+            wait "${cleanup_pid}" 2>/dev/null || game_status=$?
+            game_pid=""
+            case "${cleanup_signal}" in
+                KILL)
+                    printf 'Bounded verification cleanup: SIGTERM grace expired; SIGKILL fallback reaped pid=%s (status %s).\n' \
+                        "${cleanup_pid}" "${game_status}"
+                    ;;
+                TERM)
+                    printf 'Bounded verification cleanup: SIGTERM reaped pid=%s (status %s).\n' \
+                        "${cleanup_pid}" "${game_status}"
+                    ;;
+                *)
+                    printf 'Bounded verification cleanup: process already exited; reaped pid=%s (status %s).\n' \
+                        "${cleanup_pid}" "${game_status}"
+                    ;;
+            esac
+        }
+        trap cleanup_game EXIT INT TERM
+
         for ((elapsed = 0; elapsed < verify_seconds * 10; elapsed++)); do
             if ! /bin/kill -0 "${game_pid}" 2>/dev/null; then
-                wait "${game_pid}" || game_status=$?
-                game_status="${game_status:-0}"
+                cleanup_game
                 /bin/cat "${VERIFY_LOG}"
                 printf 'Actual game process exited before the %ss launch gate (status %s).\n' \
                     "${verify_seconds}" "${game_status}" >&2
@@ -150,12 +198,9 @@ case "${mode}" in
         process_command="$(/bin/ps -p "${game_pid}" -o command=)"
         printf 'Actual game process launch gate passed: pid=%s command=%s\n' \
             "${game_pid}" "${process_command}"
-        /bin/kill -TERM "${game_pid}"
-        wait "${game_pid}" || game_status=$?
-        game_pid=""
+        cleanup_game
         trap - EXIT INT TERM
-        game_status="${game_status:-0}"
-        if [[ "${game_status}" -ne 0 && "${game_status}" -ne 143 ]]; then
+        if [[ "${game_status}" -ne 0 && "${game_status}" -ne 143 && "${game_status}" -ne 137 ]]; then
             /bin/cat "${VERIFY_LOG}"
             printf 'Actual game process exited unexpectedly after verification (status %s).\n' \
                 "${game_status}" >&2
