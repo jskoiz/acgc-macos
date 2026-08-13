@@ -37,7 +37,7 @@ docs.
 
 Current maintenance state: the scheduler has three active durable Luna Max/max
 worker tasks plus this integration owner. The authoritative PC source is
-`5548570` on `c1/macos-host-launch`; the umbrella is `dd6594e` plus only the
+`5548570` on `c1/macos-host-launch`; the umbrella is `a82b797` plus only the
 pre-existing `.codex`/settings edits. Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
