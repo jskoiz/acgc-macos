@@ -122,8 +122,11 @@ Exit: host-launch evidence, with rendering still allowed to be absent.
   texture formats/palettes, sampler modes, blending/depth/alpha, representative
   TEV combinations, and EFB copy/readback behavior in small fixtures.
   **Clear/present and one fixed-width non-indexed colored-triangle packet now
-  have command-buffer completion evidence. Pixel readback, GX-derived geometry,
-  transforms, and all later fixture classes remain open.**
+  have command-buffer completion evidence. The renderer-neutral GX packet and
+  Metal state fixtures also pass focused CPU/Apple tests, but this host skipped
+  the live Metal-device path and no game-owned packet has reached it. Pixel
+  readback, GX-derived geometry, transforms, textures/TLUT/TEV, and all later
+  fixture classes remain open.**
 - Prove deferred-batch drain and frame presentation separately, and add a
   directed CI14x2 fixture before claiming complete documented texture coverage.
 - Retain the current OpenGL backend as the Windows regression oracle.
@@ -134,12 +137,14 @@ frame. Neither is a playability claim.
 ### M4: macOS interaction and persistence
 
 - Wire logical keyboard/controller actions, the reconstructed mixer to Apple
-  audio delivery, and sandboxed atomic saves. The SDL/CoreAudio device boundary
-  is already measured (32 kHz S16 stereo, 512-sample callbacks, zero
-  underruns/overruns), but audible game-mixer correctness is still open. The
-  umbrella-owned filesystem adapter now has a standalone macOS role-root and
-  atomic opaque-payload fixture, including durability fences and corruption
-  rejection; this does not yet connect Save_t/GCI bytes to the game.
+  audio delivery, and sandboxed atomic saves. The fixed-width input snapshot
+  boundary and synthetic mixer-to-callback PCM probe now pass focused tests;
+  running-game input, device/audible output, and NEOS-generated nonzero PCM
+  remain open. The SDL/CoreAudio device boundary is measured (32 kHz S16
+  stereo, 512-sample callbacks, zero underruns/overruns). The umbrella-owned
+  filesystem adapter has a standalone macOS role-root and atomic opaque-payload
+  fixture, including durability fences and corruption rejection; this does not
+  yet connect Save_t/GCI bytes to the game.
 - Prove input, audio, and save/load in separate runs before a bounded human play
   path and performance/memory measurements.
 
@@ -164,8 +169,9 @@ Continue in separately reviewable ACGC-PC-Port branches:
    produced GX semantic state. Carry fixed-width geometry, transforms, and
    material/texture state; do not substitute the existing triangle fixture for
    a game frame.
-3. Introduce an injectable macOS input snapshot at the SDL pad boundary and
-   prove keyboard/controller state changes without claiming game interaction.
+3. Prove the injectable macOS input snapshot at the SDL pad boundary with a
+   deterministic handoff test; then prove keyboard/controller state changes
+   without claiming game interaction until the game-owned frame exists.
 4. Connect the real mixer and Save_t/GCI serialization to the already-proven
    audio/CARD host boundaries, with separate audible-output and restart
    roundtrip evidence.

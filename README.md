@@ -74,17 +74,46 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `4f77dab` (`Allow sector-tail reads
-  for PC DVD files`), with `3a6582d` (`Harden PC CARD host transfers`) and
-  `9b1c48f` (`Add SDL audio boundary probe`) immediately before it. The fresh
-  arm64 link produces a Mach-O
+  `c1/macos-host-launch` source branch at `766ad96` (`Add synthetic audio mixer
+  PCM probe`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
+  Metal-fixture, and audio-boundary commits reviewed in the same source
+  history. The fresh arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   focused native and ASan/UBSan probes pass.
+- The source branch now contains `e5442de` (injectable fixed-width input
+  snapshots), `e03ffed` (pointer-free graph-submission capture), `83fa889`
+  (4,800-byte renderer-neutral GX semantic packets), `866dd94` (Metal
+  geometry/state fixtures), and `766ad96` (mixer-to-callback PCM fixture).
+  These are separate boundaries: the graph capture has not yet observed a live
+  packet because the reconstructed process stops at `game.c:154`.
 - The new silent SDL/CoreAudio boundary probe opened 32 kHz, S16 stereo audio at
   512 samples, observed 62 callbacks and zero underruns/overruns on the host;
   the dummy-device CTest also passes. This is device and ring timing evidence,
   not proof that the reconstructed mixer produces correct audible output.
+- The integrated mixer probe drives `Jac_VframeWork`, `MixInterleaveTrack`,
+  `AIInitDMA`, and the real SDL callback with distinct synthetic S16 stereo
+  samples; exact PCM values and ring drain pass natively and under ASan. It
+  does not claim CoreAudio device output or human-audible game audio.
+- The renderer-neutral GX packet contract has native, Apple-entrypoint, and
+  ASan/UBSan focused passes, while the Metal geometry/state fixture passes its
+  CPU contract and existing geometry tests. The offscreen Metal test is skipped
+  on this host because no Metal device is available; no game-owned frame is
+  claimed.
+- The launcher supervisor now sends TERM, waits through a configurable grace
+  period, falls back to KILL, and always reaps the child. Controlled TERM-aware
+  and TERM-ignoring fixtures pass; this is process-supervision evidence, not a
+  claim that the current game path exits cleanly.
+- The umbrella lifecycle probe records deterministic monotonic/retrace,
+  focus-resume, worker-join, and idempotent-termination behavior. The
+  filesystem/save adapter records sandbox role roots, traversal rejection,
+  durable atomic rename, and corruption detection. Both are synthetic adapter
+  gates until connected to game state.
+- The arm64 verification lane passes 12/12 selected native tests and 12/12
+  ASan/UBSan tests at source snapshot `4f77dab`; it must be rerun at the current
+  integrated source HEAD before claiming a current full matrix. The Windows
+  audit found no regression at that snapshot but had no MinGW/i686 compiler, so
+  it is not a Windows compiler sign-off.
 - The umbrella-owned macOS filesystem/save adapter now resolves distinct bundle
   Resources, Application Support, Caches, and Logs roots; rejects resource
   writes and traversal; commits opaque save payloads with same-directory
@@ -117,7 +146,10 @@ redistribute it or extracted proprietary assets.
   completes `COPYDATE`, string-table loading, `JW_Init2`, `HotStartEntry`, both
   forest archives, and Famicom archive loading before an `EXC_BAD_ACCESS` at
   `game.c:154` while entering `graph_proc`. This moves the runtime frontier
-  beyond the loader; it is still not a game-owned frame.
+  beyond the loader; it is still not a game-owned frame. The boot trace
+  identifies the failing operation as the `GRAPH_SET_DOING_POINT(...,
+  GAME_BGM)` write at that line, before `graph_task_set00` and before the
+  capture hook.
 
 Re-run the tracked checks from this directory:
 
@@ -125,6 +157,8 @@ Re-run the tracked checks from this directory:
 ./scripts/verify-source-input.sh
 ./scripts/verify-portable-core.sh
 ./scripts/verify-disc-core.sh
+./scripts/verify-lifecycle.sh
+./scripts/verify-filesystem-save.sh
 ./script/build_and_run.sh --headless
 ./script/build_and_run.sh --verify
 ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof ./script/build_and_run_game.sh --build
@@ -149,5 +183,7 @@ process stays alive for the requested interval. Its runtime log remains under
 - [Measured PC portability audit](docs/PORTABILITY-AUDIT.md)
 - [Apple architecture and evidence-gated milestones](docs/APPLE-PORT-PLAN.md)
 - [macOS filesystem roles and atomic-save proof](docs/FILESYSTEM-SAVE-EVIDENCE.md)
+- [macOS lifecycle contract evidence](docs/LIFECYCLE-EVIDENCE.md)
+- [arm64 native and sanitizer matrix](docs/LANE-VERIFICATION-MATRIX-2026-08-12.md)
 - [Exact bootstrap commands, results, and blockers](docs/BOOTSTRAP-EVIDENCE.md)
 - [Porting charter](docs/PORTING-CHARTER.md)

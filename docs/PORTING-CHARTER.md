@@ -59,9 +59,10 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-12, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `4f77dab`, with the
-audio-sidecar and CARD boundary fixes at `9b1c48f` and `3a6582d`, and now moves
-past the prior DVD wait. The portable boot-source facade accepts only exact
+arm64 Mach-O from source branch `c1/macos-host-launch` at `766ad96`, with the
+DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
+boundary commits reviewed in the same source history, and now moves past the
+prior DVD wait. The portable boot-source facade accepts only exact
 `GAFE01_00`, requires
 one `foresta.rel.szs`, and prepares bounded DOL and REL images without writing
 them to tracked storage. Native and sanitizer portable tests (`13/13`), the
@@ -92,5 +93,8 @@ the blocker past DVD loading but is not a game-owned frame.
 The full PC runtime remains behind its default ILP32 guard; the opt-in Darwin
 audit and native arm64 link are diagnostic milestones, not a claim of complete
 runtime portability. The fail-closed static GBI pointer guard remains enabled.
-Representative GX rendering, game frame, input, game-mixer audio output,
-game-level save/load, iOS Simulator, and physical-device gates remain open.
+Representative GX rendering, game frame, running-game input, game-mixer audio
+output, game-level Save_t/GCI load/restart, iOS Simulator, and physical-device
+gates remain open. The current highest-priority blocker is the bad
+`GRAPH_SET_DOING_POINT(..., GAME_BGM)` destination write at `game.c:154`, before
+`graph_task_set00` and before any live game-owned submission can be captured.

@@ -288,6 +288,46 @@ end-to-end game audio or Save_t/GCI persistence. The earlier
 targeted window-only screenshot attempt failed because macOS `screencapture`
 could not create the image; no visual-capture claim is made.
 
+## Rolling lane update (2026-08-12)
+
+The authoritative `upstream/ACGC-PC-Port` branch is
+`c1/macos-host-launch` at `766ad96`. Reviewed source commits now include:
+
+- `e5442de` — injectable fixed-width PC input snapshots;
+- `e03ffed` — pointer-free graph submission capture immediately before the
+  existing PC/emu64 submit path;
+- `83fa889` — 4,800-byte renderer-neutral GX semantic packet contract;
+- `866dd94` — Metal geometry/state fixtures; and
+- `766ad96` — synthetic mixer-to-SDL-callback PCM probe.
+
+The integrated focused checks were run from the authoritative source checkout
+with unique ignored build directories:
+
+```sh
+cmake -S pc/portable -B /private/tmp/acgc-integrated-gx-build -G Ninja -DBUILD_TESTING=ON
+cmake --build /private/tmp/acgc-integrated-gx-build --target acgc_gx_semantic_packet_tests acgc_gx_semantic_packet_cpp_tests -j2
+ctest --test-dir /private/tmp/acgc-integrated-gx-build --output-on-failure -R '^acgc_gx_semantic_packet(_cpp)?_tests$'
+
+cmake -S pc/apple -B /private/tmp/acgc-integrated-metal-build -G Ninja -DBUILD_TESTING=ON
+cmake --build /private/tmp/acgc-integrated-metal-build --target acgc_metal_state_fixture_tests acgc_renderer_geometry_tests -j2
+ctest --test-dir /private/tmp/acgc-integrated-metal-build --output-on-failure -R 'acgc_(metal_state_fixture|renderer_geometry)_tests'
+
+cmake -S pc -B /private/tmp/acgc-integrated-audio-build -G Ninja -DPC_DARWIN_COMPILE_AUDIT=ON -DBUILD_TESTING=ON
+cmake --build /private/tmp/acgc-integrated-audio-build --target acgc_pc_audio_mixer_pcm_probe -j2
+ctest --test-dir /private/tmp/acgc-integrated-audio-build --output-on-failure -R '^acgc_pc_audio_mixer_pcm_probe$'
+```
+
+Results: GX C/C++ tests passed 2/2; geometry passed and the Metal-device test
+was skipped because this host reports no Metal device; the mixer PCM probe
+passed 1/1. The umbrella lifecycle, filesystem/atomic-save, and verification
+evidence are recorded in commits `15a081f`, `ee7b814`, and `fe21878`.
+
+The fresh arm64 game run now loads COPYDATE, the string table, `JW_Init2`, both
+forest archives, and the Famicom archive, then faults at `game.c:154`. The boot
+trace identifies the failing `GRAPH_SET_DOING_POINT(..., GAME_BGM)` destination
+write before `graph_task_set00`; therefore no live graph packet, game-owned
+frame, input, audible output, Save_t/GCI restart, or playability gate is claimed.
+
 ## Proof ledger
 
 | Gate | State | Evidence/limitation |
@@ -304,7 +344,7 @@ could not create the image; no visual-capture claim is made.
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |
 | Metal geometry fixture | Passed | Two command buffers containing a fixed-width colored triangle completed before the deadline; no pixel-readback or visual claim. |
 | Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop; the DVD-tail fix now reaches `graph_proc` before `game.c:154` `EXC_BAD_ACCESS`. |
-| Input | Not reached | `pc_pad.c` still samples SDL globals directly; no injectable running-game input proof. |
+| Input | Boundary passed, running game not reached | `e5442de` provides a fixed-width injectable snapshot boundary and focused tests; the successor runtime handoff gate is still open. |
 | Audio device boundary | Passed, limited | Real SDL/CoreAudio callback probe: 32 kHz S16 stereo, 512 samples, zero underruns/overruns; no reconstructed mixer or audible-output claim. |
 | Save/CARD host boundary | Passed, limited | Native and sanitizer temporary-directory CARD roundtrip; no GameCube Save_t/GCI or process-restart proof. |
 | iOS simulator/device | Not reached | Begins after shared macOS proof. |

@@ -1,28 +1,29 @@
 # ACGC visible lane board
 
-Updated 2026-08-12 after the DVD-tail fix. The board records the visible Codex
-tasks, their ownership, and the order in which evidence may be integrated. All
-new tasks are Luna Max with max reasoning. A task being active means it is
-allowed to inspect or run its bounded work; it does not mean its gate passed.
+Updated 2026-08-12 under the rolling-refill scheduler. The board records the
+visible Codex tasks, their ownership, and the order in which evidence may be
+integrated. All new and successor tasks are Luna Max with max reasoning. A
+task being active means it is allowed to inspect or run its bounded work; it
+does not mean its gate passed.
 
 ## Ownership and live state
 
 | # | Lane / visible task ID | Ownership | Worktree / branch | State |
 | --- | --- | --- | --- | --- |
 | 1 | DVD aligned-read semantics — `019ff8aa-6e31-7723-bb32-095c7158148b` | `pc_dvd.c`, focused DVD probe | `/private/tmp/acgc-lane-dvd-loader` / `c1/lane-dvd-loader`; source `dfb3f7f`, integrated as `4f77dab` | Complete; fresh run passes `COPYDATE` and reaches `game.c:154` |
-| 2 | Launch supervisor — `019ff8d2-a527-7c90-b7c0-f95aef4f5a0e` | Umbrella `script/build_and_run_game.sh` only | `/Users/jk/.codex/worktrees/f2c7/acgc-modern-port`; create `c1/lane-launch-supervisor` before edits | Active |
-| 3 | Boot progression trace — `019ff8d3-06e4-71d3-8708-120d84fa270f` | Read-only post-loader LLDB/runtime evidence | `/Users/jk/.codex/worktrees/6bed/acgc-modern-port`; `/private/tmp/acgc-lane-boot-trace-build` | Active; no source edits |
-| 4 | First game-owned render submission — `019ff8aa-6e31-7723-bb32-097e85bb2293` | Graph/emu64 submission capture | `/private/tmp/acgc-lane-render-capture-v2` / `c1/lane-render-capture` | Active |
-| 5 | GX semantic packet — `019ff8d3-0887-7472-a53a-84c5d7ad105c` | Fixed-width renderer-neutral packet + tests | `/private/tmp/acgc-lane-gx-packet` / `c1/lane-gx-packet` | Active; depends on graph capture |
-| 6 | Metal geometry/state — `019ff8d3-0c2e-7463-b918-af75f7cb6208` | Apple geometry/state fixtures | `/private/tmp/acgc-lane-metal-state` / `c1/lane-metal-state` | Active fixture lane |
+| 2 | Launch supervisor — `019ff8d2-a527-7c90-b7c0-f95aef4f5a0e` | Umbrella `script/build_and_run_game.sh` only | `/Users/jk/.codex/worktrees/f2c7/acgc-modern-port`; `c1/lane-launch-supervisor` | Complete; umbrella `e96776d`; TERM grace/KILL fixture passed |
+| 3 | Boot progression trace — `019ff8d3-06e4-71d3-8708-120d84fa270f` | Read-only post-loader LLDB/runtime evidence | `/Users/jk/.codex/worktrees/6bed/acgc-modern-port`; `/private/tmp/acgc-lane-boot-trace-build` | Active; `game.c:154` bad `GRAPH_SET_DOING_POINT` write, before `graph_task_set00` |
+| 4 | First game-owned render submission — `019ff8aa-6e31-7723-bb32-097e85bb2293` | Graph/emu64 submission capture | `/private/tmp/acgc-lane-render-capture-v2` / `c1/lane-render-capture` | Complete; source `e03ffed`; seam/test passed, no live packet yet |
+| 5 | GX semantic packet — `019ff8d3-0887-7472-a53a-84c5d7ad105c` | Fixed-width renderer-neutral packet + tests | `/private/tmp/acgc-lane-gx-packet` / `c1/lane-gx-packet` | Complete; source `83fa889`; native/Apple/ASan focused tests passed |
+| 6 | Metal geometry/state — `019ff8d3-0c2e-7463-b918-af75f7cb6208` | Apple geometry/state fixtures | `/private/tmp/acgc-lane-metal-state` / `c1/lane-metal-state` | Complete; source `866dd94`; CPU/geometry passed, Metal skipped (no device) |
 | 7 | Texture/TLUT/TEV fixtures — `019ff8d3-150c-77f0-b99c-dcbf38645977` | Synthetic texture/palette/combiner fixtures | `/private/tmp/acgc-lane-tev-fixtures` / `c1/lane-tev-fixtures` | Active fixture lane |
-| 8 | Input snapshot boundary — `019ff8aa-743f-7923-8d9b-276421802fa8` | SDL-to-logical keyboard/controller snapshot | `/private/tmp/acgc-lane-input-snapshot` / `c1/lane-input-snapshot` | Active |
-| 9 | Mixer/CoreAudio correctness — `019ff8aa-7959-7342-af84-187dfb2e0a89` | Reconstructed PCM/mixer output proof | `/private/tmp/acgc-lane-audio-mixer` / `c1/lane-audio-mixer` | Active; boundary probe already passed, audible output open |
+| 8 | Input snapshot boundary + runtime gate — `019ff8aa-743f-7923-8d9b-276421802fa8` | SDL-to-logical keyboard/controller snapshot and focused handoff tests | `/private/tmp/acgc-lane-input-snapshot` / `c1/lane-input-snapshot` | Successor active; boundary source `e5442de`, runtime focused gate in progress |
+| 9 | Mixer/CoreAudio correctness — `019ff8aa-7959-7342-af84-187dfb2e0a89` | Reconstructed PCM/mixer output proof | `/private/tmp/acgc-lane-audio-mixer` / `c1/lane-audio-mixer` | Complete; source `766ad96`; mixer/callback CTest + ASan passed, audible/device output open |
 | 10 | Save_t/GCI roundtrip — `019ff8d3-0fe5-7883-8ebb-74eeac6efcb6` | Byte codec and process-restart persistence evidence | `/Users/jk/.codex/worktrees/35f6/acgc-modern-port`; create `c1/lane-save-gci` before edits | Active evidence lane |
-| 11 | Sandboxed filesystem/atomic saves — `019ff8d3-1b80-7ab0-89b5-28afcf680cef` | Application Support/cache/log/temp-file adapter | `/Users/jk/.codex/worktrees/10c5/acgc-modern-port`; create `c1/lane-filesystem-saves` before edits | Active evidence lane |
-| 12 | Timing/retrace/lifecycle — `019ff8d3-1f89-7c23-82fb-150b2f39e37c` | Monotonic time, workers, shutdown/resume | `/Users/jk/.codex/worktrees/cf91/acgc-modern-port`; create `c1/lane-timing-lifecycle` before edits | Active evidence lane |
-| 13 | Windows compatibility audit — `019ff8d3-23c5-75a2-beac-7f7e70c72c08` | Read-only x86/Windows/OpenGL/SDL conditional audit | `/Users/jk/.codex/worktrees/8231/acgc-modern-port` | Active read-only lane |
-| 14 | Native + ASan/UBSan matrix — `019ff8d3-2a6f-7610-a9f1-53f237353454` | Focused verification and sanitizer evidence | `/Users/jk/.codex/worktrees/2232/acgc-modern-port`; create `c1/lane-verification-matrix` before edits | Active; expensive links serialized |
+| 11 | Sandboxed filesystem/atomic saves — `019ff8d3-1b80-7ab0-89b5-28afcf680cef` | Application Support/cache/log/temp-file adapter | `/Users/jk/.codex/worktrees/10c5/acgc-modern-port`; `c1/lane-filesystem-saves` | Complete; umbrella `ee7b814`; synthetic atomic/corruption/isolation probes passed |
+| 12 | Timing/retrace/lifecycle — `019ff8d3-1f89-7c23-82fb-150b2f39e37c` | Monotonic time, workers, shutdown/resume | `/Users/jk/.codex/worktrees/cf91/acgc-modern-port`; `c1/lane-timing-lifecycle` | Complete; umbrella `15a081f`; strict + ASan/UBSan repeated trace passed |
+| 13 | Windows compatibility audit — `019ff8d3-23c5-75a2-beac-7f7e70c72c08` | Read-only x86/Windows/OpenGL/SDL conditional audit | `/Users/jk/.codex/worktrees/8231/acgc-modern-port` | Complete read-only; scoped to `4f77dab`, no MinGW compiler sign-off |
+| 14 | Native + ASan/UBSan matrix — `019ff8d3-2a6f-7610-a9f1-53f237353454` | Focused verification and sanitizer evidence | `/Users/jk/.codex/worktrees/2232/acgc-modern-port`; `c1/lane-verification-matrix` | Complete; umbrella `fe21878`; 12/12 native and 12/12 ASan at `4f77dab` |
 | 15 | Integration/evidence owner — `019ff398-2520-7191-ac5c-f3007c49163f` | Umbrella docs, roadmap, reviewed commits, source gitlink, launch proof | `/Users/jk/Documents/Projects/acgc-modern-port` / `c1/apple-port-bootstrap` | Active; only lane allowed to update the umbrella submodule pointer |
 
 The Codex-created umbrella worktrees begin detached at umbrella commit
@@ -35,6 +36,27 @@ submodules blindly or edit a detached source checkout.
 - `9b1c48f` / `3a6582d` are integrated on `c1/macos-host-launch`; the SDL/CoreAudio
   boundary and CARD host-transfer probes pass, but they do not prove audible
   mixer output or GameCube Save_t/GCI persistence.
+- `e5442de` adds the injectable, fixed-width PC input snapshot boundary; its
+  focused source test passed. The same visible task is now running the
+  successor runtime handoff gate.
+- `e03ffed` adds a pointer-free graph submission capture seam; its focused
+  legacy test and Darwin graph syntax check pass, but the current run reaches
+  neither the hook nor a live packet.
+- `83fa889` is the integrated renderer-neutral GX packet contract. It is a
+  4,800-byte fixed-width packet with strict malformed-input rejection; native,
+  Apple-entrypoint, and ASan/UBSan focused tests pass. It is not live-game
+  evidence.
+- `866dd94` adds Metal geometry/state fixtures. CPU and existing geometry tests
+  pass; the offscreen Metal test is skipped because this host reports no Metal
+  device.
+- `766ad96` adds a synthetic probe through `Jac_VframeWork`,
+  `MixInterleaveTrack`, `AIInitDMA`, and the SDL callback. Exact PCM and ring
+  drain pass natively and under ASan; no device/audible proof is claimed.
+- Umbrella evidence commits `15a081f`, `ee7b814`, and `fe21878` record
+  synthetic lifecycle, sandboxed atomic-save, and arm64/sanitizer matrix gates.
+- The Windows audit found no regression in `4f77dab` and preserves the x86
+  guards, but no MinGW/i686 compiler is installed. Two pre-existing POSIX
+  include assumptions remain follow-up checks.
 - `dfb3f7f` is integrated as `4f77dab`: the PC disc-backed DVD host accepts the
   GameCube 32-byte sector-tail transfer for 19-byte `COPYDATE` while rejecting
   malformed ranges. Native and ASan/UBSan focused probes pass.
@@ -45,16 +67,21 @@ submodules blindly or edit a detached source checkout.
 
 ## Integration order
 
-1. Review `4f77dab` and update the umbrella gitlink only after the authoritative
-   focused DVD tests and fresh arm64 runtime log are reproduced.
-2. Resolve the post-loader `game.c:154` fault and capture graph submission
-   (`3`, then `4`) before treating GX packet work (`5`) as live-game evidence.
-3. Integrate packet/state/TEV fixtures (`5`–`7`) as separate renderer gates;
-   synthetic Metal completion never substitutes for a game-owned frame.
-4. Integrate input, mixer, Save_t/GCI, filesystem, and lifecycle (`8`–`12`) as
-   independent macOS gates.
-5. Run the Windows audit and serialized native/sanitizer matrix (`13`–`14`),
-   then let lane `15` update the roadmap and acceptance ledger.
+1. Keep the boot trace on the post-loader fault. Inspect the bad `GRAPH_SET_DOING_POINT`
+   destination/object lifetime at `game.c:154`; do not claim a frame until the
+   run reaches `graph_task_set00` and the capture callback records one packet.
+2. When a lane completes, inspect its final evidence immediately, mark it
+   integrated/rejected/parked here, and refill only with a useful dependency-ready
+   successor. Current successor: input snapshot runtime gate on the same branch.
+3. After the graph fault is repaired, run the capture seam (`e03ffed`) and feed
+   the first live packet into `83fa889`; only then advance Metal/TEV toward a
+   game-owned frame. Fixture passes remain separate gates.
+4. Finish Save_t/GCI only if the lane can explain the deterministic
+   BE->LE->BE mismatch; do not weaken a roundtrip test. Filesystem adapter,
+   lifecycle, and verification evidence remain synthetic/portable boundaries.
+5. Re-run the native and sanitizer matrix at the integrated `c1/macos-host-launch`
+   source HEAD, then separately prove input, audio device/audibility, save/load,
+   simulator, physical device, and playability.
 6. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
