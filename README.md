@@ -21,8 +21,9 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `5548570` (`Validate GCI Save_t recovery slots`),
-  on top of `09dd182` (`Fix LP64 field display-list cleanup`). The current
+  `c1/macos-host-launch` at `a7b9dff` (`Exercise mCD_SaveHome_bg in CARD fixture`),
+  on top of `5548570` (`Validate GCI Save_t recovery slots`) and `09dd182`
+  (`Fix LP64 field display-list cleanup`). The current
   source removes the guest-width `u32` round-trip from
   `mFM_MakeField`, adds a focused allocator/ownership fixture, and passes
   native, ASan/UBSan, and UBSan checks. An exact integrated 4,011-object
@@ -32,9 +33,12 @@ redistribute it or extracted proprietary assets.
   reproduced post-GX invalid-free boundary, but it is not a Metal pixel,
   input, audible-audio, or playability claim. Production CARD/Save_t recovery
   now validates both embedded slots and the prior atomic `.bak1` generation;
-  full game save orchestration remains a separate gate. See
+  a focused follow-up routes one generation through `mCD_SaveHome_bg` and
+  verifies process-restart reload, while full game save orchestration remains
+  a separate gate. See
   [game-cleanup evidence](docs/evidence/GAME-CLEANUP-INVALID-FREE-2026-08-12.md)
   and [CARD recovery evidence](docs/evidence/CARD-SAVE-RECOVERY-2026-08-12.md)
+  and [save-manager restart evidence](docs/evidence/SAVE-MANAGER-RESTART-2026-08-12.md)
   and [the lane board](docs/LANE-BOARD.md) for exact commands and ownership.
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
@@ -90,8 +94,9 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `5548570` (`Validate GCI Save_t
-  recovery slots`), on top of `09dd182` (`Fix LP64 field display-list
+  `c1/macos-host-launch` source branch at `a7b9dff` (`Exercise mCD_SaveHome_bg
+  in CARD fixture`), on top of `5548570` (`Validate GCI Save_t recovery slots`)
+  and `09dd182` (`Fix LP64 field display-list
   cleanup`) and the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
   same source history. The fresh arm64 link produces a Mach-O
@@ -234,9 +239,10 @@ redistribute it or extracted proprietary assets.
   `time_limit` at `+0x02`, while the repacker drops the low 16 bits of the raw
   unit (`wire=0xF10E -> roundtrip=0x0000`). The production CARD lane now
   validates Save_t identity/checksum, recovers the embedded backup slot, and
-  falls back to the prior atomic `.bak1` generation. Runtime save-manager
-  orchestration, exact GCI-envelope length, and whole-GCI losslessness remain
-  open.
+  falls back to the prior atomic `.bak1` generation. A focused follow-up routes
+  one generation through the game-owned `mCD_SaveHome_bg` request boundary and
+  verifies process-restart reload; full game-level save-manager orchestration,
+  exact GCI-envelope length, and whole-GCI losslessness remain open.
 - The new CARD host-transfer test creates, writes, reads, closes, reopens, and
   rejects invalid ranges in a temporary card directory. It passes natively and
   under ASan/UBSan. The production `pc_m_card.c` recovery fixture additionally

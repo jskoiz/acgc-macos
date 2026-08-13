@@ -35,9 +35,9 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: the scheduler has three active durable Luna Max/max
+Current maintenance state: the scheduler has two active durable Luna Max/max
 worker tasks plus this integration owner. The authoritative PC source is
-`5548570` on `c1/macos-host-launch`; the umbrella is `a82b797` plus only the
+`a7b9dff` on `c1/macos-host-launch`; the umbrella is `b32ea21` plus only the
 pre-existing `.codex`/settings edits. Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
@@ -45,8 +45,8 @@ game-cleanup invalid-free successor
 (`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is now complete. The current active
 workers are the complete graph capture contract
 (`019ffa71-2a81-7821-b333-7072a7cfb941`), the game GX-to-Metal handoff seam
-(`019ffa71-2a81-7821-b333-70541a9193f4`), and the full save-manager restart
-gate (`019ffa71-2b0b-7170-9364-d468ea35c57b`). The post-fix GX submission
+(`019ffa71-2a81-7821-b333-70541a9193f4`). The full save-manager restart seam
+is integrated at `a7b9dff` and its task is archived. The post-fix GX submission
 trace (`019ffa49-4f9c-7da2-a288-5791e5cf5c93`) is complete and archived with
 evidence in `docs/evidence/GX-SUBMISSION-TRACE-2026-08-12.md`. The
 CARD Save_t reload recovery (`019ffa49-4f44-7b73-a4ab-8c45dc211f14`) is
@@ -132,7 +132,7 @@ from compilation alone.
 | 49 | Exact-tip native + ASan/UBSan refresh — `019ffa4c-8734-7ac2-99d1-f67a0682be31` | Read-only focused matrix at source `09dd182`, including field-cleanup fixture and portable/Apple contracts | `/Users/jk/.codex/worktrees/b872/acgc-modern-port` (retired); build/log root `/private/tmp/acgc-lane-sanitizer-refresh-20260812` (retired) | Complete/archived; Luna Max/max; native 36/3/0 and ASan 36/3/0; UBSan 35/3/1 with the unchanged 11-site `aflags_c` issue; no frame, input, audio, save, simulator, device, or playability claim |
 | 50 | Complete game-owned graph capture contract — `019ffa71-2a81-7821-b333-7072a7cfb941` | `include/acgc/graph_submission.h`, `src/graph_submission.c`, `src/graph.c`, focused capture tests; complete-list/terminator gate | `/Users/jk/.codex/worktrees/90d4/acgc-modern-port`; planned source `/private/tmp/acgc-lane-complete-graph-capture/source` / `c1/lane-complete-graph-capture`; unique root `/private/tmp/acgc-lane-complete-graph-capture` | Active; Luna Max/max; base source `5548570`; no pc_gx/Metal/save/audio/input/umbrella/ISO edits |
 | 51 | Game GX-to-Metal handoff seam — `019ffa71-2a81-7821-b333-70541a9193f4` | `pc/src/pc_gx.c`, `pc/apple/src/metal_packet_consumer.c`, focused Apple/PC tests; fail-closed optional Metal handoff | `/Users/jk/.codex/worktrees/bec6/acgc-modern-port`; planned source `/private/tmp/acgc-lane-gx-metal-handoff/source` / `c1/lane-gx-metal-handoff`; unique root `/private/tmp/acgc-lane-gx-metal-handoff` | Active; Luna Max/max; base source `5548570`; preserve Windows/OpenGL fallback; no graph-capture/save/audio/input/umbrella/ISO edits |
-| 52 | Full game save-manager restart gate — `019ffa71-2b0b-7170-9364-d468ea35c57b` | `pc/src/pc_m_card.c` plus focused mCD_SaveHome_bg request/restart tests; connect production slot recovery to game-owned orchestration | `/Users/jk/.codex/worktrees/9d32/acgc-modern-port`; planned source `/private/tmp/acgc-lane-full-save-manager/source` / `c1/lane-full-save-manager`; unique root `/private/tmp/acgc-lane-full-save-manager` | Active; Luna Max/max; base source `5548570`; preserve existing checksum/backup fixture; no graph/Metal/audio/input/umbrella/ISO edits |
+| 52 | Full game save-manager restart gate — `019ffa71-2b0b-7170-9364-d468ea35c57b` | `pc/src/pc_m_card.c` plus focused mCD_SaveHome_bg request/restart tests; connect production slot recovery to game-owned orchestration | `/private/tmp/acgc-lane-full-save-manager/source` (retired); `c1/lane-full-save-manager` preserved at `0465f54`; build root retired after review | Complete/integrated at source `a7b9dff`; fixture-only change routes generation 2 through `mCD_SaveHome_bg`, with native and ASan/UBSan restart/recovery PASS; full CARD state machine/device/playability remain open |
 
 ## Parked intake (not active)
 

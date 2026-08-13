@@ -59,7 +59,7 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-12, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `5548570` (on top of
+arm64 Mach-O from source branch `c1/macos-host-launch` at `a7b9dff` (on top of
 `09dd182`), with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
@@ -76,8 +76,10 @@ probe proves 32 kHz S16 stereo callback cadence with zero underruns/overruns;
 it does not prove audible game-mixer correctness. The CARD temporary-directory
 probe proves bounded host transfers. The production CARD recovery fixture now
 validates Save_t identity/checksum, embedded-backup selection, atomic restart
-reload, and prior-generation `.bak1` fallback; full game-level save-manager
-orchestration remains a separate gate.
+reload, and prior-generation `.bak1` fallback. A focused follow-up routes one
+generation through the existing game-owned `mCD_SaveHome_bg` request boundary
+and verifies process-restart reload; full game-level save-manager orchestration
+remains a separate gate.
 
 The host invokes the same facade and reports the real DOL and Yaz0 REL
 preparation before disposing the buffers. This is preflight and command-buffer
