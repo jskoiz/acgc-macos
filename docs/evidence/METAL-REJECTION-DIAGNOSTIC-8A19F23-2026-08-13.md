@@ -43,7 +43,7 @@ alpha=7/7/0 blend=1/4/5/5 texgen0=1/4/30/125 tex0=2/64/64/8 known=1
 Using the Dolphin GX enum values in the same source tree, that is one channel,
 one texture generator, one TEV stage, a resolved 64x64 texture, standard
 source-alpha blending (`GX_BM_BLEND`, `GX_BL_SRCALPHA`,
-`GX_BL_INVSRCALPHA`, `GX_LO_SET`), and `GX_TEXMTX0` (`30`) with
+`GX_BL_INVSRCALPHA`, `GX_LO_NOOP`), and `GX_TEXMTX0` (`30`) with
 `GX_PTIDENTITY` (`125`). The v2 state gate in `pc/src/pc_gx.c` intentionally
 requires `GX_BM_NONE`/`ONE`/`ZERO`/`CLEAR` and `GX_IDENTITY` (`60`) for the
 current packet contract. Therefore the live rejection is explained by
