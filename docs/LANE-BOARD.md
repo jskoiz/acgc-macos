@@ -35,7 +35,7 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: eight workers are active. Callback capture lane
+Current maintenance state: seven workers are active. Callback capture lane
 `019ffbc7-01e9-7b32-b5b1-f0abaada1b09` is complete/archived after its
 one normal-shell launch and one permitted elevated fallback both stopped
 before runtime; evidence is recorded in
@@ -53,7 +53,7 @@ created an inferior, reached `graph_proc`/NEOS and `pc_gx_flush_vertices`, and
 returned through `graph_proc` with exit status `0` after bounded SIGTERM. That
 run proves launch/boot/GX-boundary/clean-return only; its interactive
 transcript did not retain per-breakpoint hit counts, so the Apple callback gate
-remains open. These eight lanes are the current dependency-ready work; no
+remains open. These seven lanes are the current dependency-ready work; no
 additional filler lane is being opened. Windows lane
 `019ffbd0-b850-74b0-a0fd-cedcbd90db47`, sanitizer lane
 `019ffbd0-ba29-78e2-aad5-93f34b8bdf73`, and iOS shared-boundary lane
@@ -224,7 +224,7 @@ from compilation alone.
 | 75 | Input snapshot boundary — `019ffbcc-904f-7673-bc6a-1b137c550997` | Read-only crosswalk and focused probe for SDL/keyboard/controller to a stable game-owned PAD snapshot; no source edits or full link | Worktree `/Users/jk/.codex/worktrees/3f1d/acgc-modern-port` (retire); focused root `/private/tmp/acgc-lane-input-boundary` (retire); no branch | Complete/archived; per-frame guard and virtual-controller stability pass, synthetic keyboard remains inconclusive; evidence `docs/evidence/INPUT-SNAPSHOT-BOUNDARY-2026-08-13.md`; no human-input/playability claim |
 | 76 | Mixer/CoreAudio boundary — `019ffbcc-904f-7673-bc6a-1b309e9dd560` | Read-only native + ASan/UBSan mixer/bank probes and smallest CoreAudio/device gate; no source edits or full link | Worktree `/Users/jk/.codex/worktrees/7d30/acgc-modern-port` (retire); roots `/private/tmp/acgc-lane-audio-proof` and `...-asan` (retire); no branch | Complete/archived; software mixer/NEOS/DMA and direct callback pass, CoreAudio/device skip `77`; evidence `docs/evidence/MIXER-COREAUDIO-BOUNDARY-2026-08-13.md`; no audible-output claim |
 | 77 | Save_t restart gate — `019ffbcc-9406-7a23-9847-2f19196bdad0` | Read-only focused codec, atomic recovery, production caller, and fresh-process reload verification; no source edits or full link | Worktree `/Users/jk/.codex/worktrees/7419/acgc-modern-port`; roots `/private/tmp/acgc-lane-save-proof` and `...-asan`; no branch | Active; no physical CARD/device/playability claim yet |
-| 78 | Timing/lifecycle/shutdown audit — `019ffbcc-9477-7333-9214-73b6f08f344b` | Read-only focused retrace/thread/TERM/KILL audit; no source edits, ISO access, or full link | Worktree `/Users/jk/.codex/worktrees/e1e5/acgc-modern-port`; root `/private/tmp/acgc-lane-lifecycle-proof`; no branch | Active; no normal user-shutdown/playability claim yet |
+| 78 | Timing/lifecycle/shutdown audit — `019ffbcc-9477-7333-9214-73b6f08f344b` | Read-only focused retrace/thread/TERM/KILL audit; no source edits, ISO access, or full link | Worktree `/Users/jk/.codex/worktrees/e1e5/acgc-modern-port` (retire); root `/private/tmp/acgc-lane-lifecycle-proof` (retire); no branch | Complete/archived; synthetic contract and isolated audio worker pass, integrated thread/reset teardown remains open; evidence `docs/evidence/LIFECYCLE-SHUTDOWN-AUDIT-2026-08-13.md`; no playability claim |
 | 79 | Windows compatibility audit — `019ffbd0-b850-74b0-a0fd-cedcbd90db47` | Read-only `_WIN32`/x86/OpenGL/SDL regression audit against current Apple changes; no source edits, ISO access, or full link | Worktree `/Users/jk/.codex/worktrees/628f/acgc-modern-port`; focused root `/private/tmp/acgc-lane-windows-audit`; no branch | Active; no Windows sign-off yet |
 | 80 | Native + ASan/UBSan verification matrix — `019ffbd0-ba29-78e2-aad5-93f34b8bdf73` | Read-only focused sanitizer matrix for graph/GX/Save_t/cleanup/audio/portable/Apple packet contracts; no source edits, ISO access, or full link | Worktree `/Users/jk/.codex/worktrees/ea1e/acgc-modern-port`; roots `/private/tmp/acgc-lane-sanitizer-matrix-native` and `/private/tmp/acgc-lane-sanitizer-matrix-asan`; no branch | Active; no refreshed matrix claim yet |
 | 81 | iOS shared-boundary readiness audit — `019ffbd0-bc94-7ff1-baf1-e5689164d53a` | Read-only audit of portable/core, Apple bridge, lifecycle, and existing iOS evidence; iOS source remains gated until macOS shared core/renderer proof | Worktree `/Users/jk/.codex/worktrees/b820/acgc-modern-port`; focused root `/private/tmp/acgc-lane-ios-readiness`; no branch | Active; no simulator/device/playability claim yet |
