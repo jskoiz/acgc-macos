@@ -35,8 +35,8 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: no durable worker task is active while the next
-dependency-ready runtime lanes are being opened
+Current maintenance state: four durable Luna Max/max worker tasks are active
+alongside this integration owner. The authoritative PC source is `ac39d04` on
 alongside this integration owner. The authoritative PC source is `ac39d04` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
@@ -144,6 +144,10 @@ from compilation alone.
 | 55 | Save_t raw-wire losslessness — `019ffa9b-2dde-7d83-9b26-55dc271cac37` | `pc/src/pc_save_bswap.c` plus focused wire fixtures; preserve exact GCI semantics or stop test-only | `/private/tmp/acgc-lane-save-wire-lossless/source` (retire after review); `c1/lane-save-wire-lossless` preserved at `315f040`; build `/private/tmp/acgc-lane-save-wire-lossless-build` | Complete/integrated at source `d0e64f5`; test-only forensic coverage proves pre-fix `0xF10E→0x0000` and current native/ASan/UBSan roundtrip PASS; no full game persistence claim |
 | 56 | Running-game input trace — `019ffa9b-2ea7-7741-87eb-9fd0c3e88557` | Read-only current-tip SDL/PADRead snapshot observation with one bounded OS-event attempt | `/Users/jk/.codex/worktrees/f19d/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-runtime-input` (retire after evidence); no source branch | Complete/parked; live SDL/PADRead boundary observed, OS event unavailable and no state transition; no running-game input claim |
 | 57 | Current Windows regression audit — `019ffa9b-34a6-7813-a48c-2e8c43dcccdc` | Read-only `_WIN32`/x86/OpenGL/SDL audit for graph/GX changes at `9cf9b3f` | `/Users/jk/.codex/worktrees/18c7/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-windows-current` (retire after evidence); no source branch | Complete/parked; C/syntax probes pass with no regression, real i686 Windows targets blocked by missing sysroot/MinGW; no Windows sign-off |
+| 58 | Activate graph capture runtime hook — `019ffaad-ca28-7c62-bd0f-018d6d82d6d3` | Read-only bounded runtime with exact graph-capture switch; distinguish disabled hook from incomplete live prefix | `/Users/jk/.codex/worktrees/41ac/acgc-modern-port`; logs `/private/tmp/acgc-lane-graph-capture-activation`; no source branch | Active verification; one launch/LLDB attempt, no full link, no frame claim |
+| 59 | GBI indirect target audit — `019ffaad-ca28-7c62-bd0f-0176ceb55e52` | Read-only F0002000/G_DL/G_BRANCH_Z and GRAPH.Gfx_list05 work-arena crosswalk | `/Users/jk/.codex/worktrees/5279/acgc-modern-port`; notes `/private/tmp/acgc-lane-gbi-indirect-audit`; no source branch | Active audit; no launch or frame claim |
+| 60 | Game-owned save caller audit — `019ffaad-cd2e-7ec3-8848-f0d409c6969c` | Read-only decomp CARD state-machine to PC Save_t/GCI caller map | `/Users/jk/.codex/worktrees/f5cd/acgc-modern-port`; notes `/private/tmp/acgc-lane-game-save-callers`; no source branch | Active audit; no game-level persistence claim |
+| 61 | Sanitizer refresh ac39d04 — `019ffaad-cd4e-75d1-9e66-fdba9881de79` | Focused native + ASan/UBSan callback/save/graph matrix; unique build roots | `/Users/jk/.codex/worktrees/4ce5/acgc-modern-port`; builds `/private/tmp/acgc-lane-sanitizer-ac39d04-native` and `/private/tmp/acgc-lane-sanitizer-ac39d04-asan`; no source branch | Active verification; no full link or runtime-gate claim |
 
 ## Parked intake (not active)
 
