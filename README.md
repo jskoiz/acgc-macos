@@ -93,9 +93,11 @@ redistribute it or extracted proprietary assets.
   fixture), `12b4f6e` (bounded GX packet-to-Metal consumer fixture), and
   `5974764`/`909f3ca` (compact audio-bank tails and native wave-address
   relocation) plus `304f055`/`724a18d` (LP64 audio-DMA address preservation).
-  These remain separate boundaries: the first live game-owned
-  prefix is captured, and the integrated runtime now reaches a visible
-  game-owned frame, but representative GX-to-Metal readback and playability
+  These remain separate boundaries: the first live game-owned prefix is
+  captured; the identifiable screenshot belongs to the separately named
+  `909f3ca` run; and the newer authoritative `724a18d` runtime reaches the
+  logo/NEOS path and a game-side `GXBegin` stop without a current-snapshot
+  pixel/readback claim. Representative GX-to-Metal readback and playability
   are still open.
 - The first live graph snapshot is pointer-free and records version `1`, frame
   `0`, source capacity `256`, count `8`, and words
@@ -131,9 +133,18 @@ redistribute it or extracted proprietary assets.
 - The reviewed audio-DMA handoff `304f055` is integrated on the authoritative
   branch as `724a18d`. The exact integrated `ac_pc` target rebuilds and links
   successfully (`cmake --build /private/tmp/acgc-integrated-audio-wave-build
-  --target ac_pc -- -j2`, exit 0). A fresh game launch has not been rerun at
-  this newer tip, so the identifiable-frame screenshot remains evidence for
-  the separately named `909f3ca` snapshot.
+  --target ac_pc -- -j2`, exit 0). A fresh bounded launch from that exact tip
+  (`/private/tmp/acgc-integrated-audio-724-run.log`) stayed alive for ten
+  seconds, reached `[LOGO] draw: action=3`, and emitted `[NEOS_OUT]` through
+  frame `541`; sending `TERM` then produced wait status `139`, so graceful
+  shutdown is not proved. No explicit fatal-signal marker was present in the
+  log. The matching LLDB trace
+  (`/private/tmp/acgc-integrated-audio-724-lldb.log`) stopped at
+  `GXBegin`, inlined through `pc_gx_commit_pending_and_flush` at
+  `pc_gx.c:253`, after the logo path. This is a game-side submission-entry
+  boundary only: it does not prove Metal encode/present, pixel readback, or
+  rebind the identifiable-frame screenshot, which remains evidence for the
+  separately named `909f3ca` snapshot.
 - The forensic target from `07a5447` reproduces the same contract in isolation:
   the opaque GBI handle resolves to the full arm64 pointer, while
   `GXInitTexObj` stores only the low 32 bits and `GXGetTexObjData` recovers the

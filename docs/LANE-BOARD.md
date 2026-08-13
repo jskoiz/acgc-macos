@@ -12,27 +12,31 @@ lanes. Production source editing remains capped at seven simultaneous lanes,
 with the remaining capacity reserved for dependency-ready reference audits,
 focused fixtures, read-only traces, and independent verification.
 The texture remediation (17) is now complete/integrated at source `578c8b7`.
-The root-owned audio-bank ABI lane is integrated at source `909f3ca`; its fresh
-run decodes compact bank 28, reaches `LOGO draw`, and produces the first
-identifiable game-owned frame. The captured screen is retained outside Git at
+The root-owned audio-bank ABI lane is integrated at source `909f3ca`; its
+historical fresh run decodes compact bank 28, reaches `LOGO draw`, and
+produces the first identifiable game-owned frame. The captured screen is retained outside Git at
 `/private/tmp/acgc-integrated-audio-wave-build/integrated-frame-screen.png`
 (SHA-256
 `ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`). The
 process later exits `139` before clean shutdown, so representative GX/Metal
-readback, input, audible audio, save/load, and playability remain open.
+readback, input, audible audio, save/load, and playability remain open. The
+authoritative source has since advanced to `724a18d`: a fresh ten-second run
+reaches logo action 3 and `[NEOS_OUT]` frame 541, while a matching LLDB trace
+stops at `GXBegin`/`pc_gx_commit_pending_and_flush` (`pc_gx.c:253`). That newer
+run still ends with wait status `139` after TERM and has no current-snapshot
+pixel/readback claim.
 Graph capture (16) and integrated verification (22) are complete/parked. The
 post-fix game-frame request is superseded by the root-owned integrated run;
-remaining successor requests listed below are setup-pending because the app has
-returned client IDs but not durable task IDs or worktrees yet. They are not
-counted as active until `list_threads` confirms them. Expensive full links and
-LLDB launch traces remain serialized. All other
+the older client-only successor requests listed below never became durable
+tasks or worktrees and remain parked historical intake, not active lanes.
+Expensive full links and LLDB launch traces remain serialized. All other
 ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: the delegated ACGC worker cap is four, and no ACGC
-worker is currently active. The post-audio, arm64 post-texture, WaveTouch, and
-audio-DMA handoffs are complete/archived; the authoritative source is now
+Current maintenance state: no ACGC worker is currently active and no refill is
+useful until a later dependency-ready gate appears. The post-audio,
+arm64 post-texture, WaveTouch, and audio-DMA handoffs are complete/archived; the authoritative source is now
 `724a18d`. Pinned task `019ff9bd-7f15-7513-8b22-61af13c8a6fe` (`ACGC Worktree
 and Thread Cleanup`) owns the separate 30-minute cleanup heartbeat. Its first
 pass retired four clean source worktrees and pruned their stale Git metadata,
@@ -76,13 +80,16 @@ dirty state. The dated manifest is
 | 28 | Frame evidence packaging — `019ff9a0-f9be-73a0-a452-02a309e5baa5` | Umbrella parser/report only; current-source binding and fail-closed submit/encode/present/readback labels | `/Users/jk/.codex/worktrees/4efd/acgc-modern-port` / `c1/lane-frame-evidence`; integrated umbrella `adc1d6e` | Complete/integrated; self-test passes; exact clean `909f3ca` rerun returns `NOT_CLAIMED`, explicitly rejecting historical graph prefixes, fixture output, and a standalone screenshot as a full frame chain |
 | 29 | Frame evidence harness — `019ff9a0-e9ed-78d3-8d4e-b7c617270b16` | Umbrella `scripts/probes/` only; bounded launch/boot/packet/present/frame classifier | `/Users/jk/.codex/worktrees/5e48/acgc-modern-port` / `c1/lane-frame-evidence` | Complete/integrated as umbrella `1d4d44b`; `bash -n`, ShellCheck, classifier tests, and fail-closed dry-run pass; no source, ISO, or frame claim |
 | 30 | Audio-DMA LP64 fix — `019ff9a1-00c9-7fa3-815f-e282eb7ad2e9` | `src/static/jaudio_NES/internal/system.c` only; preserve native audio pointers at the DMA boundary | `/private/tmp/acgc-lane-audio-lp64` / `c1/lane-audio-lp64`; lane `304f055`, authoritative `724a18d` | Complete/integrated; serialized `ac_pc` link passes; fresh LLDB reaches `Nas_FastCopy` with native `DestAdd=0x10084c5e0`, avoids `_platform_memmove`/`EXC_BAD_ACCESS`, and stops intentionally at the first breakpoint |
+| 31 | Fresh integrated post-frame run/trace — root-owned evidence continuation | Exact `724a18d` runtime, LOGO/NEOS markers, and bounded LLDB submission-entry trace; no source edits | `/private/tmp/acgc-integrated-audio-wave-build`; logs `/private/tmp/acgc-integrated-audio-724-run.log` and `/private/tmp/acgc-integrated-audio-724-lldb.log` | Complete bounded check; ten-second run reaches LOGO action 3 and NEOS frame 541; LLDB stops at `GXBegin`/`pc_gx_commit_pending_and_flush` (`pc_gx.c:253`); TERM wait status `139`; no Metal/pixel claim and no worker refill |
 
-## Rolling-refill intake (setup pending)
+## Parked intake (not active)
 
 These bounded successors were requested with Luna Max/max reasoning and distinct
-ownership. They are not counted as active until `list_threads` returns durable
-task IDs and the app creates their isolated worktrees. Before activation, each
-must also receive the reference-first task contract required by `AGENTS.md`.
+ownership, but their client-only IDs never became durable visible tasks or
+isolated worktrees. They are retained as historical roadmap ideas only and are
+not counted as active or eligible for refill until a later dependency-ready
+request creates a durable task with the full reference-first contract required
+by `AGENTS.md`.
 
 | Planned lane | Client task ID | Ownership / first evidence |
 | --- | --- | --- |
