@@ -123,3 +123,9 @@ or establish a terminator. The next critical gate is a runtime trace that
 captures a complete game-owned submission and binds it to Metal encode,
 present, and pixel-readback evidence; the identifiable game-frame pass does
 not imply input, audio, save/load, or playability.
+The reference audit confirms that `DE010000 F0002000` branches from the
+bounded `sys_dynamic.work` root into the separate `sys_dynamic.new0` arena;
+the F-handle is a live PC registry capability, so flat-copying the 256-word
+root cannot resolve it. A successor may resolve only a retained target identity
+with explicit capacity and the exact `DF000000,0` terminator, failing closed
+otherwise; see [GBI indirect-target evidence](evidence/GBI-INDIRECT-TARGET-AUDIT-2026-08-13.md).

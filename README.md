@@ -144,6 +144,13 @@ redistribute it or extracted proprietary assets.
   grace path; no indirect target, complete terminator, GX/Metal encode,
   present, or pixel readback is established. See
   [graph-capture activation evidence](docs/evidence/GRAPH-CAPTURE-ACTIVATION-2026-08-13.md).
+- The companion GBI audit resolves `DE010000 F0002000` as a `G_DL_NOPUSH`
+  branch from `sys_dynamic.work` into the separate `sys_dynamic.new0` arena;
+  the F-handle is a live PC registry capability, not a guest segmented pointer.
+  The bounded 256-word root cannot contain the target, so a resolver must retain
+  target identity/capacity while the registry is live and require
+  `DF000000,0`, otherwise it must remain `INDIRECT`/`PREFIX_ONLY`. See
+  [GBI indirect-target evidence](docs/evidence/GBI-INDIRECT-TARGET-AUDIT-2026-08-13.md).
 - A separate bounded run reaches the live SDL `PollEvent` and `PADRead` /
   `PCInputSnapshot` boundaries, but its single OS-event attempt posts no
   keydown or keyup and observes no state change. This is a running-game input

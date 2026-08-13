@@ -142,7 +142,7 @@ from compilation alone.
 | 56 | Running-game input trace — `019ffa9b-2ea7-7741-87eb-9fd0c3e88557` | Read-only current-tip SDL/PADRead snapshot observation with one bounded OS-event attempt | `/Users/jk/.codex/worktrees/f19d/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-runtime-input` (retire after evidence); no source branch | Complete/parked; live SDL/PADRead boundary observed, OS event unavailable and no state transition; no running-game input claim |
 | 57 | Current Windows regression audit — `019ffa9b-34a6-7813-a48c-2e8c43dcccdc` | Read-only `_WIN32`/x86/OpenGL/SDL audit for graph/GX changes at `9cf9b3f` | `/Users/jk/.codex/worktrees/18c7/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-windows-current` (retire after evidence); no source branch | Complete/parked; C/syntax probes pass with no regression, real i686 Windows targets blocked by missing sysroot/MinGW; no Windows sign-off |
 | 58 | Activate graph capture runtime hook — `019ffaad-ca28-7c62-bd0f-018d6d82d6d3` | Read-only bounded runtime with exact graph-capture switch; distinguish disabled hook from incomplete live prefix | `/Users/jk/.codex/worktrees/41ac/acgc-modern-port` (retire after review); logs `/private/tmp/acgc-lane-graph-capture-activation`; no source branch | Complete/parked; `ACGC_GRAPH_CAPTURE=1` enabled the hook and emitted one cleanly terminated `8/256` prefix; no resolved indirect target, complete packet, or frame claim |
-| 59 | GBI indirect target audit — `019ffaad-ca28-7c62-bd0f-0176ceb55e52` | Read-only F0002000/G_DL/G_BRANCH_Z and GRAPH.Gfx_list05 work-arena crosswalk | `/Users/jk/.codex/worktrees/5279/acgc-modern-port`; notes `/private/tmp/acgc-lane-gbi-indirect-audit`; no source branch | Active audit; no launch or frame claim |
+| 59 | GBI indirect target audit — `019ffaad-ca28-7c62-bd0f-0176ceb55e52` | Read-only F0002000/G_DL/G_BRANCH_Z and GRAPH.Gfx_list05 work-arena crosswalk | `/Users/jk/.codex/worktrees/5279/acgc-modern-port` (retire after review); notes `/private/tmp/acgc-lane-gbi-indirect-audit`; no source branch | Complete/parked; `DE010000 F0002000` resolves to a live `sys_dynamic.new0` registry target outside the 256-word root; successor must retain target identity/capacity and require `DF000000,0`; no draw/frame claim |
 | 60 | Game-owned save caller audit — `019ffaad-cd2e-7ec3-8848-f0d409c6969c` | Read-only decomp CARD state-machine to PC Save_t/GCI caller map | `/Users/jk/.codex/worktrees/f5cd/acgc-modern-port`; notes `/private/tmp/acgc-lane-game-save-callers`; no source branch | Active audit; no game-level persistence claim |
 | 61 | Sanitizer refresh ac39d04 — `019ffaad-cd4e-75d1-9e66-fdba9881de79` | Focused native + ASan/UBSan callback/save/graph matrix; unique build roots | `/Users/jk/.codex/worktrees/4ce5/acgc-modern-port`; builds `/private/tmp/acgc-lane-sanitizer-ac39d04-native` and `/private/tmp/acgc-lane-sanitizer-ac39d04-asan`; no source branch | Active verification; no full link or runtime-gate claim |
 
@@ -242,6 +242,12 @@ submodules blindly or edit a detached source checkout.
   emits one `8/256` record before a clean TERM exit. The `DE010000 F0002000`
   shape remains an unresolved indirect edge; no complete list,
   encode/present/readback, or frame claim follows.
+- The GBI indirect-target audit in
+  `docs/evidence/GBI-INDIRECT-TARGET-AUDIT-2026-08-13.md` maps that edge from
+  `sys_dynamic.work` into the separate `sys_dynamic.new0` arena through a
+  live PC registry capability. A resolving successor must retain target
+  identity/capacity and require `DF000000,0`; the bounded root cannot supply
+  those bytes by itself.
 - `ddbb498` adds fixed-width texture/TLUT/sampler/TEV fixtures, including
   CI14x2 and CMPR reference cases. The integrated Apple fixture test passes;
   no texture upload/readback, shader wiring, or game-renderer evidence is
