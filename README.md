@@ -233,6 +233,13 @@ redistribute it or extracted proprietary assets.
   unconditional. This is a CPU registration seam only: no live game callback,
   Metal encode/present, pixels, input, audio, save/load, device, or playability
   claim follows. See [Darwin GX handoff registration evidence](docs/evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md).
+- One serialized current-tip `ac_pc` link at `f4cb491` also passed (`4017/4018`,
+  arm64 Mach-O), but the single no-`nice` LLDB launch failed before creating an
+  inferior with `nice(5) failed: operation not permitted` and
+  `status -1 (no such process)`. LLDB resolved the new callback and existing
+  GX symbols but recorded zero breakpoint hits; callback reachability is
+  inconclusive and no retry was made. See [live Darwin GX callback runtime
+  evidence](docs/evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

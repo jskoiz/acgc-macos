@@ -213,4 +213,8 @@ Focused Darwin and ASan/UBSan tests pass, but this still does not prove a live
 game callback, Metal encode/present, pixels, input, audio, save/reload,
 device, clean shutdown, or playability. See [Darwin GX handoff registration
 evidence](evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md); the next lane
-must observe one current-tip game callback before adding a Metal encoder.
+must observe one current-tip game callback before adding a Metal encoder. The
+first such attempt linked the current source but hit the environment's
+pre-inferior `nice(5)` permission boundary, so callback reachability remains
+inconclusive and no retry is claimed; see [live Darwin GX callback runtime
+evidence](evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md).
