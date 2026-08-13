@@ -48,12 +48,10 @@ Codex compaction `404` twice before any source/build/runtime work. Its useful
 finding is that live textured/TEV/active state reaches the fail-closed packet
 builder rejection before `pc_metal_runtime_observe`; no defect was proven and
 no frame or Metal claim follows. The task is archived and no worker is active.
-Lane 100 is now the sole active focused-audit lane: it owns a native plus
-ASan/UBSan reproduction of that packet-builder rejection predicate, with no
-full link or LLDB launch. Its unique roots are
-`/private/tmp/acgc-lane-metal-rejection-audit` and
-`/private/tmp/acgc-lane-metal-rejection-audit-asan`; no source edit is allowed
-unless a concrete defect is first proven.
+Lane 100 was archived after the same remote Codex compaction `404` occurred
+before its focused tests produced a result. No source/build/runtime work or
+Metal claim follows; no worker is active. The packet-builder rejection finding
+from lane 99 remains a hypothesis requiring root-owned focused reproduction.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -277,7 +275,7 @@ from compilation alone.
 | 97 | Trace subsequent graph task progression — `019ffcd6-49fb-7f20-abb7-967008d7fe17` | Read-only one-link/one-LLDB current-tip trace for later `graph_task_set00`/`graph_draw_finish`/`graph_submit_task` activity after the lane-96 clean no-draw task; classify any later GXBegin reachability | Worktree `/Users/jk/.codex/worktrees/7008/acgc-modern-port` and roots `/private/tmp/acgc-lane-subsequent-graph-task-build` / `/private/tmp/acgc-lane-subsequent-graph-task-logs` (retire after review); canonical source `c1/macos-host-launch` at `d1e812c`; no source branch | Complete/archived; link `[4018/4019]` passed; graph submission/task entry each hit twice; task 2 reached 8 dispatches and a `G_DL` prefix but timed out before `G_ENDDL`/return; draw handlers and `GXBegin` 0; evidence `docs/evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md`; no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
 | 98 | Complete second graph task continuation — `019ffcea-aceb-7f10-8aba-7fc61a98896d` | Read-only one-link/one-LLDB current-tip trace with a 30-second bound; extend task-2 `F0004000` continuation to `G_ENDDL` or a draw/GXBegin boundary | Lane worktree already absent; run snapshot `5b89680`; build/log roots retired by the cleanup lane; no source branch | Complete/archived; task 2 reached `F0004000`–`F0004007`, `G_ENDDL`, and return `0` with `cmds=12`, `end_dl=1`; draw handlers, `GXBegin`, and flush were `0` for task 2; later-task hits excluded; evidence `docs/evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md`; no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
 | 99 | Current Metal-frame bridge audit/implementation — `019ffd05-6144-77a0-8a55-f1bb4092654d` | Bounded crosswalk for why live textured/TEV state is rejected before `pc_metal_runtime_observe`; source edit only if a concrete defect is proven | Worktree retired with the task; base umbrella `05c7ce8`, PC `d1e812c`, decomp `09ca8e8b`; no build/runtime roots created | Complete/archived with infrastructure failure after setup; read-only finding only, no source/build/runtime/Metal/pixel claim; no defect proven |
-| 100 | Metal packet rejection predicate audit — `019ffd08-10ff-77b1-8bc4-bd91a84902e9` | Test-only/read-only reproduction of fail-closed packet-builder behavior for textured/TEV/active state; native plus ASan/UBSan focused tests; no full link/LLDB; source edit only if defect proven | Worktree `/Users/jk/.codex/worktrees/93af/acgc-modern-port`; base umbrella `e2ab6f6`, PC `d1e812c`, decomp `09ca8e8b`; unique roots `/private/tmp/acgc-lane-metal-rejection-audit` and `...-asan` | Active/setup; no source/build/runtime result yet; no Metal encode/present/readback/pixel/playability claim |
+| 100 | Metal packet rejection predicate audit — `019ffd08-10ff-77b1-8bc4-bd91a84902e9` | Test-only/read-only reproduction of fail-closed packet-builder behavior for textured/TEV/active state; native plus ASan/UBSan focused tests; no full link/LLDB; source edit only if defect proven | Worktree retired with task; base umbrella `e2ab6f6`, PC `d1e812c`, decomp `09ca8e8b`; no retained build/runtime roots | Complete/archived with infrastructure failure before focused result; no source/build/runtime/Metal/pixel claim; no defect proven |
 
 ## Parked intake (not active)
 
