@@ -35,15 +35,15 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: no durable worker tasks are active
+Current maintenance state: one durable Luna Max/max worker task is active
 alongside this integration owner. The authoritative PC source is `ac39d04` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
 `.codex`/settings edits. The graph-capture, GX-to-Metal, and save-manager review
-queue is complete; the graph activation, GBI indirect-target, exact-tip
-sanitizer, and game-owned save-caller audits are complete/parked with their
-evidence recorded below. No filler lane is being opened while the next
-game-owned save/restart gate awaits a dependency-ready source contract.
+queue is complete; the graph activation, GBI indirect-target, and exact-tip
+sanitizer audits are complete/parked with their evidence recorded below. The
+game-owned save-caller task has been reused for its dependency-ready
+caller-driven save/restart successor; no filler lane is being opened.
 Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
@@ -145,7 +145,7 @@ from compilation alone.
 | 57 | Current Windows regression audit — `019ffa9b-34a6-7813-a48c-2e8c43dcccdc` | Read-only `_WIN32`/x86/OpenGL/SDL audit for graph/GX changes at `9cf9b3f` | `/Users/jk/.codex/worktrees/18c7/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-windows-current` (retire after evidence); no source branch | Complete/parked; C/syntax probes pass with no regression, real i686 Windows targets blocked by missing sysroot/MinGW; no Windows sign-off |
 | 58 | Activate graph capture runtime hook — `019ffaad-ca28-7c62-bd0f-018d6d82d6d3` | Read-only bounded runtime with exact graph-capture switch; distinguish disabled hook from incomplete live prefix | `/Users/jk/.codex/worktrees/41ac/acgc-modern-port` (retire after review); logs `/private/tmp/acgc-lane-graph-capture-activation`; no source branch | Complete/parked; `ACGC_GRAPH_CAPTURE=1` enabled the hook and emitted one cleanly terminated `8/256` prefix; no resolved indirect target, complete packet, or frame claim |
 | 59 | GBI indirect target audit — `019ffaad-ca28-7c62-bd0f-0176ceb55e52` | Read-only F0002000/G_DL/G_BRANCH_Z and GRAPH.Gfx_list05 work-arena crosswalk | `/Users/jk/.codex/worktrees/5279/acgc-modern-port` (retire after review); notes `/private/tmp/acgc-lane-gbi-indirect-audit`; no source branch | Complete/parked; `DE010000 F0002000` resolves to a live `sys_dynamic.new0` registry target outside the 256-word root; successor must retain target identity/capacity and require `DF000000,0`; no draw/frame claim |
-| 60 | Game-owned save caller audit — `019ffaad-cd2e-7ec3-8848-f0d409c6969c` | Read-only decomp CARD state-machine to PC Save_t/GCI caller map | `/Users/jk/.codex/worktrees/f5cd/acgc-modern-port` (retire after review); notes `/private/tmp/acgc-lane-game-save-callers`; no source branch | Complete/parked; restart NPC `aNRST_save` → `mCD_SaveHome_bg(0, ...)` is the smallest real game-owned persistence gate; no game-level persistence claim |
+| 60 | Game-owned save caller audit → runtime save/restart successor — `019ffaad-cd2e-7ec3-8848-f0d409c6969c` | Source/test owner for restart caller → GCI marker → fresh-process reload gate; prior audit remains in evidence | `/private/tmp/acgc-lane-game-save-runtime/source` / `c1/lane-game-save-runtime`; build `/private/tmp/acgc-lane-game-save-runtime-build`; no umbrella edits | Active source/test successor; exact caller-driven persistence gate only; no full launch/device/playability claim |
 | 61 | Sanitizer refresh ac39d04 — `019ffaad-cd4e-75d1-9e66-fdba9881de79` | Focused native + ASan/UBSan callback/save/graph matrix; unique build roots | `/Users/jk/.codex/worktrees/4ce5/acgc-modern-port` (retire after review); builds `/private/tmp/acgc-lane-sanitizer-ac39d04-native` and `/private/tmp/acgc-lane-sanitizer-ac39d04-asan`; no source branch | Complete/parked; 3 passes + 2 declared Metal-device skips per matrix, 0 failures; no sanitizer diagnostics or runtime-gate claim |
 
 ## Parked intake (not active)
