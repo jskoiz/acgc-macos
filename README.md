@@ -137,6 +137,13 @@ redistribute it or extracted proprietary assets.
   F0002000` observer remains `PREFIX_ONLY` (`8/256`). No complete packet,
   Metal encode/present, pixel readback, or playability claim follows; see
   [post-link graph runtime evidence](docs/evidence/POST-LINK-GRAPH-RUNTIME-2026-08-13.md).
+- A separate single-attempt activation run with the source-supported
+  `ACGC_GRAPH_CAPTURE=1` switch proves the observer is enabled and emits one
+  live game-owned record, but it is still only the deterministic `8/256`
+  prefix `de010000,f0002000,...`. The child exits cleanly through the TERM
+  grace path; no indirect target, complete terminator, GX/Metal encode,
+  present, or pixel readback is established. See
+  [graph-capture activation evidence](docs/evidence/GRAPH-CAPTURE-ACTIVATION-2026-08-13.md).
 - A separate bounded run reaches the live SDL `PollEvent` and `PADRead` /
   `PCInputSnapshot` boundaries, but its single OS-event attempt posts no
   keydown or keyup and observes no state change. This is a running-game input

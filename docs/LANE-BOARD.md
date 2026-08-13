@@ -35,8 +35,7 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: four durable Luna Max/max worker tasks are active
-alongside this integration owner. The authoritative PC source is `ac39d04` on
+Current maintenance state: three durable Luna Max/max worker tasks are active
 alongside this integration owner. The authoritative PC source is `ac39d04` on
 `c1/macos-host-launch`; the umbrella branch is `c1/apple-port-bootstrap` plus
 only the pre-existing
@@ -47,11 +46,9 @@ Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
 game-cleanup invalid-free successor
-(`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is now complete. The current active
-workers were the complete graph capture contract
-(`019ffa71-2a81-7821-b333-7072a7cfb941`) and the game GX-to-Metal handoff seam
-(`019ffa71-2a81-7821-b333-70541a9193f4`); both are now complete and ready for
-archive. The full save-manager restart seam
+(`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is now complete. The complete graph
+capture contract and game GX-to-Metal handoff seam are complete and archived.
+The full save-manager restart seam
 is integrated at `a7b9dff` and its task is archived. The post-fix GX submission
 trace (`019ffa49-4f9c-7da2-a288-5791e5cf5c93`) is complete and archived with
 evidence in `docs/evidence/GX-SUBMISSION-TRACE-2026-08-12.md`. The
@@ -144,7 +141,7 @@ from compilation alone.
 | 55 | Save_t raw-wire losslessness — `019ffa9b-2dde-7d83-9b26-55dc271cac37` | `pc/src/pc_save_bswap.c` plus focused wire fixtures; preserve exact GCI semantics or stop test-only | `/private/tmp/acgc-lane-save-wire-lossless/source` (retire after review); `c1/lane-save-wire-lossless` preserved at `315f040`; build `/private/tmp/acgc-lane-save-wire-lossless-build` | Complete/integrated at source `d0e64f5`; test-only forensic coverage proves pre-fix `0xF10E→0x0000` and current native/ASan/UBSan roundtrip PASS; no full game persistence claim |
 | 56 | Running-game input trace — `019ffa9b-2ea7-7741-87eb-9fd0c3e88557` | Read-only current-tip SDL/PADRead snapshot observation with one bounded OS-event attempt | `/Users/jk/.codex/worktrees/f19d/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-runtime-input` (retire after evidence); no source branch | Complete/parked; live SDL/PADRead boundary observed, OS event unavailable and no state transition; no running-game input claim |
 | 57 | Current Windows regression audit — `019ffa9b-34a6-7813-a48c-2e8c43dcccdc` | Read-only `_WIN32`/x86/OpenGL/SDL audit for graph/GX changes at `9cf9b3f` | `/Users/jk/.codex/worktrees/18c7/acgc-modern-port` (archive); logs `/private/tmp/acgc-lane-windows-current` (retire after evidence); no source branch | Complete/parked; C/syntax probes pass with no regression, real i686 Windows targets blocked by missing sysroot/MinGW; no Windows sign-off |
-| 58 | Activate graph capture runtime hook — `019ffaad-ca28-7c62-bd0f-018d6d82d6d3` | Read-only bounded runtime with exact graph-capture switch; distinguish disabled hook from incomplete live prefix | `/Users/jk/.codex/worktrees/41ac/acgc-modern-port`; logs `/private/tmp/acgc-lane-graph-capture-activation`; no source branch | Active verification; one launch/LLDB attempt, no full link, no frame claim |
+| 58 | Activate graph capture runtime hook — `019ffaad-ca28-7c62-bd0f-018d6d82d6d3` | Read-only bounded runtime with exact graph-capture switch; distinguish disabled hook from incomplete live prefix | `/Users/jk/.codex/worktrees/41ac/acgc-modern-port` (retire after review); logs `/private/tmp/acgc-lane-graph-capture-activation`; no source branch | Complete/parked; `ACGC_GRAPH_CAPTURE=1` enabled the hook and emitted one cleanly terminated `8/256` prefix; no resolved indirect target, complete packet, or frame claim |
 | 59 | GBI indirect target audit — `019ffaad-ca28-7c62-bd0f-0176ceb55e52` | Read-only F0002000/G_DL/G_BRANCH_Z and GRAPH.Gfx_list05 work-arena crosswalk | `/Users/jk/.codex/worktrees/5279/acgc-modern-port`; notes `/private/tmp/acgc-lane-gbi-indirect-audit`; no source branch | Active audit; no launch or frame claim |
 | 60 | Game-owned save caller audit — `019ffaad-cd2e-7ec3-8848-f0d409c6969c` | Read-only decomp CARD state-machine to PC Save_t/GCI caller map | `/Users/jk/.codex/worktrees/f5cd/acgc-modern-port`; notes `/private/tmp/acgc-lane-game-save-callers`; no source branch | Active audit; no game-level persistence claim |
 | 61 | Sanitizer refresh ac39d04 — `019ffaad-cd4e-75d1-9e66-fdba9881de79` | Focused native + ASan/UBSan callback/save/graph matrix; unique build roots | `/Users/jk/.codex/worktrees/4ce5/acgc-modern-port`; builds `/private/tmp/acgc-lane-sanitizer-ac39d04-native` and `/private/tmp/acgc-lane-sanitizer-ac39d04-asan`; no source branch | Active verification; no full link or runtime-gate claim |
@@ -239,6 +236,12 @@ submodules blindly or edit a detached source checkout.
   authoritative source checkout, the focused adapter/C/C++ packet suite passed
   `3/3` under `/private/tmp/acgc-integrated-gx-adapter-build`; this is a
   fail-closed seam, not a draw or frame claim.
+- The bounded activation run in
+  `docs/evidence/GRAPH-CAPTURE-ACTIVATION-2026-08-13.md` proves the
+  source-supported `ACGC_GRAPH_CAPTURE=1` switch reaches the live observer and
+  emits one `8/256` record before a clean TERM exit. The `DE010000 F0002000`
+  shape remains an unresolved indirect edge; no complete list,
+  encode/present/readback, or frame claim follows.
 - `ddbb498` adds fixed-width texture/TLUT/sampler/TEV fixtures, including
   CI14x2 and CMPR reference cases. The integrated Apple fixture test passes;
   no texture upload/readback, shader wiring, or game-renderer evidence is

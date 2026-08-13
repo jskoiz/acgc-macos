@@ -116,7 +116,10 @@ Metal handoff and Apple packet/state fixtures pass their CPU contracts, while
 device tests skip with `77` on this host because no Metal device is available.
 The post-link trace now reaches the intentional GXBegin boundary but still
 does not capture a complete game-owned packet or resolve the opaque indirect
-target. The next critical gate is a runtime trace that captures a complete
-game-owned submission and binds it to Metal encode, present, and pixel-
-readback evidence; the identifiable game-frame pass does not imply
-input, audio, save/load, or playability.
+target. A subsequent bounded activation run with `ACGC_GRAPH_CAPTURE=1`
+confirms the hook is enabled and emits one cleanly terminated `8/256`
+game-owned prefix, but still does not resolve the `F0002000` indirect target
+or establish a terminator. The next critical gate is a runtime trace that
+captures a complete game-owned submission and binds it to Metal encode,
+present, and pixel-readback evidence; the identifiable game-frame pass does
+not imply input, audio, save/load, or playability.
