@@ -59,9 +59,10 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-12, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `3a6582d`, with the
-audio-sidecar fix at `9b1c48f`, and still reaches the separate process-launch
-gate. The portable boot-source facade accepts only exact `GAFE01_00`, requires
+arm64 Mach-O from source branch `c1/macos-host-launch` at `4f77dab`, with the
+audio-sidecar and CARD boundary fixes at `9b1c48f` and `3a6582d`, and now moves
+past the prior DVD wait. The portable boot-source facade accepts only exact
+`GAFE01_00`, requires
 one `foresta.rel.szs`, and prepares bounded DOL and REL images without writing
 them to tracked storage. Native and sanitizer portable tests (`13/13`), the
 new SDL/CoreAudio device-and-ring probe, the CARD temporary-directory roundtrip
@@ -81,8 +82,12 @@ actual game launch, which reaches `initial_menu_init`, `dvderr_init`,
 `sound_initial2`, and `[NEOS_OUT]` during bounded runs. A fresh host-context
 run against the integrated lane build reached `COPYDATE` and at least frame
 `841`, but the process did not honor the runner's cleanup `SIGTERM` while
-waiting in the DVD/file-loader path and required a single-process `SIGKILL`.
-That is an explicit supervision/runtime blocker, not a game-owned frame.
+waiting in the old DVD/file-loader path and required a single-process
+`SIGKILL`. The focused DVD-tail fix now allows the 19-byte `COPYDATE` to
+satisfy the GameCube 32-byte transfer rule; a fresh run completes the string
+table, `JW_Init2`, `HotStartEntry`, both forest archives, and Famicom archive
+loading before an `EXC_BAD_ACCESS` at `game.c:154` in `graph_proc`. That moves
+the blocker past DVD loading but is not a game-owned frame.
 
 The full PC runtime remains behind its default ILP32 guard; the opt-in Darwin
 audit and native arm64 link are diagnostic milestones, not a claim of complete

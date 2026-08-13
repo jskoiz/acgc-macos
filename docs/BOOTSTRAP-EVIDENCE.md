@@ -303,7 +303,7 @@ could not create the image; no visual-capture claim is made.
 | macOS host launch | Passed | Direct app process prepared exact GAFE01_00 DOL/REL input, returned 0, and left no surviving process. |
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |
 | Metal geometry fixture | Passed | Two command buffers containing a fixed-width colored triangle completed before the deadline; no pixel-readback or visual claim. |
-| Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop; the fresh run waits in the `COPYDATE`/DVD path. |
+| Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop; the DVD-tail fix now reaches `graph_proc` before `game.c:154` `EXC_BAD_ACCESS`. |
 | Input | Not reached | `pc_pad.c` still samples SDL globals directly; no injectable running-game input proof. |
 | Audio device boundary | Passed, limited | Real SDL/CoreAudio callback probe: 32 kHz S16 stereo, 512 samples, zero underruns/overruns; no reconstructed mixer or audible-output claim. |
 | Save/CARD host boundary | Passed, limited | Native and sanitizer temporary-directory CARD roundtrip; no GameCube Save_t/GCI or process-restart proof. |

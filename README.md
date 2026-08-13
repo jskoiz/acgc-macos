@@ -74,9 +74,10 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `3a6582d` (`Harden PC CARD host
-  transfers`), with `9b1c48f` (`Add SDL audio boundary probe`) immediately
-  before it. The fresh `4008/4008` arm64 link produces a Mach-O
+  `c1/macos-host-launch` source branch at `4f77dab` (`Allow sector-tail reads
+  for PC DVD files`), with `3a6582d` (`Harden PC CARD host transfers`) and
+  `9b1c48f` (`Add SDL audio boundary probe`) immediately before it. The fresh
+  arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   focused native and ASan/UBSan probes pass.
@@ -103,6 +104,13 @@ redistribute it or extracted proprietary assets.
   loader path; the single process required an explicit `SIGKILL`. This leaves
   clean supervision and the transition past `COPYDATE` as the next runtime
   blocker, not evidence of a game-owned frame.
+- The focused DVD-tail lane then reproduced the GameCube sector-tail rule for
+  disc-backed reads: a 19-byte `COPYDATE` can satisfy the required 32-byte
+  transfer while malformed offsets remain rejected. Its fresh arm64 run now
+  completes `COPYDATE`, string-table loading, `JW_Init2`, `HotStartEntry`, both
+  forest archives, and Famicom archive loading before an `EXC_BAD_ACCESS` at
+  `game.c:154` while entering `graph_proc`. This moves the runtime frontier
+  beyond the loader; it is still not a game-owned frame.
 
 Re-run the tracked checks from this directory:
 

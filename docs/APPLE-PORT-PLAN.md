@@ -153,9 +153,10 @@ distribution, and App Store work require fresh authorization.
 
 Continue in separately reviewable ACGC-PC-Port branches:
 
-1. Trace and repair the `COPYDATE`/`static.str` DVD/file-loader wait so the
-   reconstructed boot path can pass `JW_Init2` without hiding a blocked I/O
-   completion or leaving the bounded runner unable to reap the process.
+1. Trace the post-loader `game_main`/`graph_proc` fault now exposed at
+   `game.c:154`; the focused DVD-tail semantics fix already lets the 19-byte
+   `COPYDATE` satisfy the GameCube 32-byte transfer rule and reaches archive
+   loading.
 2. Capture the first renderer-neutral game submission after `emu64` has
    produced GX semantic state. Carry fixed-width geometry, transforms, and
    material/texture state; do not substitute the existing triangle fixture for
