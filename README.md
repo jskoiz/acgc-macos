@@ -233,13 +233,20 @@ redistribute it or extracted proprietary assets.
   unconditional. This is a CPU registration seam only: no live game callback,
   Metal encode/present, pixels, input, audio, save/load, device, or playability
   claim follows. See [Darwin GX handoff registration evidence](docs/evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md).
-- One serialized current-tip `ac_pc` link at `f4cb491` also passed (`4017/4018`,
-  arm64 Mach-O), but the single no-`nice` LLDB launch failed before creating an
-  inferior with `nice(5) failed: operation not permitted` and
-  `status -1 (no such process)`. LLDB resolved the new callback and existing
-  GX symbols but recorded zero breakpoint hits; callback reachability is
-  inconclusive and no retry was made. See [live Darwin GX callback runtime
-  evidence](docs/evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md).
+- One serialized current-tip `ac_pc` link at `f4cb491` passed (`4017/4018`,
+  arm64 Mach-O). The delegated no-`nice` LLDB attempt still failed before
+  creating an inferior with `nice(5) failed: operation not permitted` and
+  `status -1 (no such process)`; that historical attempt recorded zero
+  breakpoint hits. See [delegated Darwin GX callback runtime evidence](docs/evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md).
+- A subsequent root-owned elevated LLDB launch from the generated `bin`
+  directory created an inferior, loaded the GAFE01 FST and shaders, reached
+  `graph_proc`/NEOS, and stopped at game-owned `pc_gx_flush_vertices`. After a
+  bounded SIGTERM, the process returned through `graph_proc` and exited `0`.
+  This proves current-tip launch, boot progression, GX/OpenGL submission
+  reachability, and a bounded clean return; the interactive transcript did not
+  retain per-breakpoint hit counts, so it does not claim a registered Apple
+  callback, Metal encode/present, pixels, input, audio, save/reload, device, or
+  playability. See [root-owned live launch evidence](docs/evidence/ROOT-LIVE-LAUNCH-2026-08-13.md).
 - The game-owned save caller audit maps persistence to the restart NPC
   (`aNRST_save` → `mCD_SaveHome_bg(0, ...)`) and station-travel CARD paths;
   `Save_Get`/`Save_Set` are direct in-memory field access with no centralized

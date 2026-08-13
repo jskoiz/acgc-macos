@@ -212,9 +212,14 @@ gate correction remains fail-closed for active texture/TEV/lighting/fog state.
 Focused Darwin and ASan/UBSan tests pass, but this still does not prove a live
 game callback, Metal encode/present, pixels, input, audio, save/reload,
 device, clean shutdown, or playability. See [Darwin GX handoff registration
-evidence](evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md); the next lane
-must observe one current-tip game callback before adding a Metal encoder. The
-first such attempt linked the current source but hit the environment's
-pre-inferior `nice(5)` permission boundary, so callback reachability remains
-inconclusive and no retry is claimed; see [live Darwin GX callback runtime
-evidence](evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md).
+evidence](evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md). The first
+delegated callback attempt linked the current source but hit the environment's
+pre-inferior `nice(5)` permission boundary; see [delegated live Darwin GX
+callback runtime evidence](evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md).
+A subsequent root-owned elevated launch created an inferior, reached
+`graph_proc`/NEOS and `pc_gx_flush_vertices`, and returned through `graph_proc`
+with exit status `0` after bounded SIGTERM. Because the interactive transcript
+did not retain per-breakpoint hit counts, callback registration remains
+unclaimed; Metal encoding, presentation, pixels, input, audio, save/reload,
+device, and playability remain separate open gates. See [root-owned live launch
+evidence](evidence/ROOT-LIVE-LAUNCH-2026-08-13.md).

@@ -37,8 +37,14 @@ docs.
 
 Current maintenance state: no worker is active. Lane 72 completed its one
 serialized callback-observation attempt and is archived after the pre-inferior
-`nice(5)` permission boundary; no dependency-ready successor is being opened
-until that environment blocker is repaired. The read-only Metal bridge audit
+`nice(5)` permission boundary. A root-owned elevated current-tip launch then
+created an inferior, reached `graph_proc`/NEOS and `pc_gx_flush_vertices`, and
+returned through `graph_proc` with exit status `0` after bounded SIGTERM. That
+run proves launch/boot/GX-boundary/clean-return only; its interactive
+transcript did not retain per-breakpoint hit counts, so the Apple callback gate
+remains open. No dependency-ready worker successor is being opened yet; the
+next bounded action is an explicit callback-hit capture before any Metal
+encoder work. The read-only Metal bridge audit
 and Apple registration source lane are complete; their exact findings remain
 the current renderer boundary. The authoritative PC source is
 `f4cb491` on
@@ -77,9 +83,11 @@ the narrow resident-versus-active texture gate correction, and bounded
 callback/status telemetry, while leaving the legacy OpenGL submission path
 unchanged. It cannot claim Metal encoding, presentation, pixels, or playability.
 The handoff evidence is
-`docs/evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md`; the next useful
-lane is one serialized current-tip callback observation before encoder work;
-lane 72 recorded the environment blocker without claiming a result.
+`docs/evidence/DARWIN-GX-HANDOFF-REGISTRATION-2026-08-13.md`; the delegated
+lane-72 blocker remains historical in
+`docs/evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md`, and the fresh
+root-owned launch is recorded in
+`docs/evidence/ROOT-LIVE-LAUNCH-2026-08-13.md`.
 Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
