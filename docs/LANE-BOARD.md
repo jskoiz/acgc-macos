@@ -20,10 +20,11 @@ produces the first identifiable game-owned frame. The captured screen is retaine
 `ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`). The
 process later exits `139` before clean shutdown, so representative GX/Metal
 readback, input, audible audio, save/load, and playability remain open. The
-authoritative source has since advanced to `724a18d`: a fresh ten-second run
-reaches logo action 3 and `[NEOS_OUT]` frame 541, while a matching LLDB trace
-stops at `GXBegin`/`pc_gx_commit_pending_and_flush` (`pc_gx.c:253`). That newer
-run still ends with wait status `139` after TERM and has no current-snapshot
+authoritative source has since advanced to `09dd182`: the LP64 field-cleanup
+fix preserves the allocator-owned pointer, and a fresh exact-tip ten-second run
+reaches logo action 3 and `[NEOS_OUT]` frame 541; TERM then returns status `0`
+within the two-second grace period. This closes the previously reproduced
+post-GX invalid-free boundary, but it still has no current-snapshot
 pixel/readback claim.
 Graph capture (16) and integrated verification (22) are complete/parked. The
 post-fix game-frame request is superseded by the root-owned integrated run;
@@ -36,13 +37,13 @@ docs.
 
 Current maintenance state: the scheduler has fourteen durable Luna Max/max
 worker tasks plus this integration owner. The authoritative PC source is
-`d1575f0` on `c1/macos-host-launch`; the umbrella is `ae3220c` plus only the
+`09dd182` on `c1/macos-host-launch`; the umbrella is `ae3220c` plus only the
 pre-existing `.codex`/settings edits. Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
 game-cleanup invalid-free successor
-(`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is the only active worker plus this
-owner (two active ACGC lanes). No other dependency-ready lane is being
+(`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is now complete; there are no active
+worker lanes plus this owner. No other dependency-ready lane is being
 refilled: live CoreAudio/Metal devices and the complete game-owned graph
 capture remain unavailable, while Windows and iOS are gated by their stated
 proofs. The post-audio, arm64 post-texture, WaveTouch, and audio-DMA handoffs
@@ -115,7 +116,7 @@ from compilation alone.
 | 43 | Current native + ASan/UBSan matrix — `019ffa12-8a7e-76b0-9503-2f4394249e43` | Exact-tip focused test matrix; unique sanitizer build roots | `/Users/jk/.codex/worktrees/dc19/acgc-modern-port` (retired); provenance `03f1854e` / `c1/lane-sanitizer-724` | Complete/parked; native, ASan, and UBSan each 38 passed/3 expected skips/0 failures; no full link, device, or playability claim |
 | 44 | ac-decomp GAFE01 toolchain audit — `019ffa12-929c-73e3-b706-a4f76c78a270` | Read-only configure/build/extraction boundary and Wine/Metrowerks blocker | `/Users/jk/.codex/worktrees/90c1/acgc-modern-port` (retired); retry logs `/private/tmp/acgc-lane-acdecomp-audit-retry` (retired) | Complete/parked; `python3 configure.py` generates Ninja, but `ninja -j1` stops at missing `orig/GAFE01_00/files/foresta.rel.szs`; no Wine/Metrowerks, extraction, native build, or runtime claim; GAFE01 config/build metadata match both upstreams |
 | 45 | iOS shared-boundary readiness — `019ffa12-9809-7c21-b1e2-67f4f7bd52c5` | Read-only portable/Apple boundary map; iOS remains gated by macOS proof | `/Users/jk/.codex/worktrees/b09c/acgc-modern-port` (retired); branch `c1/ios-shared-boundary-readiness` | Complete/parked; integrated handoff `plans/IOS-SHARED-BOUNDARY-READINESS.md` (`d303b7f`); portable 18/18 and Apple 10 plus 2 Metal skips, ASan/UBSan same, serialized 4,011/4,011 audit link; no game-loop, live Metal pixel, input, audio, save, lifecycle, simulator, device, or playability claim |
-| 46 | Game cleanup invalid-free successor — `019ffa28-3ef7-7280-923c-5a01bf2eb4c2` | `src/game/m_field_make.c`, `src/game/m_play.c`, `src/graph.c`, `src/static/libc64/__osMalloc.c`; exact TERM/allocator fault | `/Users/jk/.codex/worktrees/8594/acgc-modern-port`; planned source `/private/tmp/acgc-lane-game-cleanup-invalid-free/source` / `c1/lane-game-cleanup-invalid-free` | Active; Luna Max/max; reproduce exact current 305b223 supervisor fault before any edit; source-edit cap and full-link serialization apply |
+| 46 | Game cleanup invalid-free successor — `019ffa28-3ef7-7280-923c-5a01bf2eb4c2` | `src/game/m_field_make.c`, `src/game/m_play.c`, `src/graph.c`, `src/static/libc64/__osMalloc.c`; exact TERM/allocator fault | `/private/tmp/acgc-lane-game-cleanup-invalid-free/source` (retire after this handoff); `c1/lane-game-cleanup-invalid-free` | Complete/integrated at source `09dd182`; `mFM_MakeField` now uses `zelda_malloc_align` without a `u32` round-trip; native, ASan/UBSan, and UBSan fixture passes; exact integrated 4,011/4,011 arm64 build passes; 10-second LOGO/NEOS run and TERM grace return status `0`; no Metal/pixel/input/audio/save/playability claim |
 
 ## Parked intake (not active)
 

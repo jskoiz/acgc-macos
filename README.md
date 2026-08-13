@@ -20,6 +20,18 @@ redistribute it or extracted proprietary assets.
 
 ## Current evidence
 
+- Latest integrated source is `upstream/ACGC-PC-Port` branch
+  `c1/macos-host-launch` at `09dd182` (`Fix LP64 field display-list
+  cleanup`). The change removes the guest-width `u32` round-trip from
+  `mFM_MakeField`, adds a focused allocator/ownership fixture, and passes
+  native, ASan/UBSan, and UBSan checks. An exact integrated 4,011-object
+  arm64 `ac_pc` build passes; the resulting game reaches `[LOGO]` action 3
+  and `[NEOS_OUT]` frame 541 for ten seconds and returns status `0` after
+  TERM within the two-second grace period. This closes the previously
+  reproduced post-GX invalid-free boundary, but it is not a Metal pixel,
+  input, audible-audio, save/reload, device, or playability claim. See
+  [game-cleanup evidence](docs/evidence/GAME-CLEANUP-INVALID-FREE-2026-08-12.md)
+  and [the lane board](docs/LANE-BOARD.md) for exact commands and ownership.
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
@@ -74,8 +86,8 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `724a18d` (`Preserve LP64 audio DMA
-  wave addresses`), on top of the DVD/CARD, input snapshot, graph-capture, GX
+  `c1/macos-host-launch` source branch at `09dd182` (`Fix LP64 field display-list
+  cleanup`), on top of the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
   same source history. The fresh arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
@@ -95,10 +107,10 @@ redistribute it or extracted proprietary assets.
   relocation) plus `304f055`/`724a18d` (LP64 audio-DMA address preservation).
   These remain separate boundaries: the first live game-owned prefix is
   captured; the identifiable screenshot belongs to the separately named
-  `909f3ca` run; and the newer authoritative `724a18d` runtime reaches the
-  logo/NEOS path and a game-side `GXBegin` stop without a current-snapshot
-  pixel/readback claim. Representative GX-to-Metal readback and playability
-  are still open.
+  `909f3ca` run; and the newer authoritative `09dd182` runtime reaches the
+  logo/NEOS path and returns status `0` after TERM cleanup without a
+  current-snapshot pixel/readback claim. Representative GX-to-Metal readback
+  and playability are still open.
 - The first live graph snapshot is pointer-free and records version `1`, frame
   `0`, source capacity `256`, count `8`, and words
   `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.

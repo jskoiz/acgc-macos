@@ -59,7 +59,7 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-12, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `909f3ca`, with the
+arm64 Mach-O from source branch `c1/macos-host-launch` at `09dd182`, with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
 prior DVD wait. The portable boot-source facade accepts only exact
@@ -81,14 +81,17 @@ preparation before disposing the buffers. This is preflight and command-buffer
 evidence without pixel readback: the host fixture remains separate from the
 actual game launch, which reaches `initial_menu_init`, `dvderr_init`,
 `sound_initial2`, and `[NEOS_OUT]` during bounded runs. The focused DVD-tail,
-graph, texture, and audio-bank fixes now let an integrated arm64 run decode
-bank 28 and reach `[LOGO] draw`. Its captured screen at
+graph, texture, audio-bank, and LP64 cleanup fixes now let an integrated arm64
+run decode bank 28 and reach `[LOGO] draw`. Its historical captured screen at
 `/private/tmp/acgc-integrated-audio-wave-build/integrated-frame-screen.png`
 contains the Animal Crossing window, character, and `© 2001, 2002 Nintendo`
 (SHA-256
 `ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`). This
-passes the identifiable game-frame gate. The same run later exits `139` before
-graceful cleanup, so it is not a stable-playability or clean-shutdown claim.
+passes the identifiable game-frame gate for that historical snapshot. The
+current `09dd182` run reaches `[LOGO]` action 3 and `[NEOS_OUT]` frame 541,
+then returns status `0` after TERM within the two-second grace period, closing
+the reproduced post-GX invalid-free boundary. Neither run proves stable
+playability, Metal pixel readback, input, audible audio, or save/reload.
 
 The full PC runtime remains behind its default ILP32 guard; the opt-in Darwin
 audit and native arm64 link are diagnostic milestones, not a claim of complete
