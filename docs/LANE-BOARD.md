@@ -35,16 +35,19 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: no worker is active. Lane 72 completed its one
+Current maintenance state: two workers are active. Callback capture lane
+`019ffbc7-01e9-7b32-b5b1-f0abaada1b09` is read-only in
+`/Users/jk/.codex/worktrees/7842/acgc-modern-port`; offscreen Metal sink lane
+`019ffbc8-1f2b-7513-9c1c-7ddde5114f97` is the only source-edit lane in
+`/Users/jk/.codex/worktrees/002a/acgc-modern-port`. Lane 72 completed its one
 serialized callback-observation attempt and is archived after the pre-inferior
 `nice(5)` permission boundary. A root-owned elevated current-tip launch then
 created an inferior, reached `graph_proc`/NEOS and `pc_gx_flush_vertices`, and
 returned through `graph_proc` with exit status `0` after bounded SIGTERM. That
 run proves launch/boot/GX-boundary/clean-return only; its interactive
 transcript did not retain per-breakpoint hit counts, so the Apple callback gate
-remains open. No dependency-ready worker successor is being opened yet; the
-next bounded action is an explicit callback-hit capture before any Metal
-encoder work. The read-only Metal bridge audit
+remains open. These two lanes are the only current dependency-ready work; no
+additional filler lane is being opened. The read-only Metal bridge audit
 and Apple registration source lane are complete; their exact findings remain
 the current renderer boundary. The authoritative PC source is
 `f4cb491` on
@@ -200,8 +203,10 @@ from compilation alone.
 | 68 | Live target observer runtime trace — `019ffb59-b04f-7322-a8ca-0a46c67321a0` | One serialized arm64 `ac_pc` link and exactly one LLDB launch at integrated PC `36910c8`; seek game-owned `[GRAPH_TARGET_CAPTURE]` and `F0002001` continuation evidence only | Isolated worktree `/Users/jk/.codex/worktrees/0378/acgc-modern-port`; detached source worktree at integrated `36910c8`; build `/private/tmp/acgc-lane-live-target-observer-runtime-build`; logs `/private/tmp/acgc-lane-live-target-observer-runtime-logs`; no source edits | Complete/archived; configure/build exit `0`, terminal `[4012/4013]` progress caveat; fresh target record `F0002000`, capacity `1024`, `INDIRECT`, no local terminator, words contain `F0002001`; LOGO/NEOS reached, TERM/grace no KILL; GX unobserved; no full-list/Metal/pixel/input/audio/save/device/playability claim; evidence `docs/evidence/LIVE-TARGET-OBSERVER-RUNTIME-2026-08-13.md` |
 | 69 | Live GX boundary runtime trace — `019ffb68-3324-7a80-a69d-fc9359687355` | One read-only LLDB launch with pre-run breakpoints at GXBegin and pc_gx_flush_vertices, retaining the target observer record; no source edits | Isolated worktree `/Users/jk/.codex/worktrees/8197/acgc-modern-port` (retire); source `/private/tmp/acgc-lane-live-gx-boundary-runtime-source` (retire); build `/private/tmp/acgc-lane-live-gx-boundary-runtime-build` (retire); logs `/private/tmp/acgc-lane-live-gx-boundary-runtime-logs` (retire); no source branch | Complete/archived; build exit 0 with terminal `[4012/4013]`, LLDB setup accepted both symbols but launch failed before an inferior with `status -1` plus unprivileged `nice(5)`; no boot, breakpoint, GX, Metal, pixel, or playability claim; evidence `docs/evidence/LIVE-GX-BOUNDARY-RUNTIME-2026-08-13.md` |
 | 70 | Metal bridge architecture audit — `019ffb8b-728b-7c93-9d3a-fc9222eb26fe` | Read-only crosswalk from game-owned `pc_gx_flush_vertices` to existing Apple semantic packet/Metal consumer; no source edits, builds, or launches | Worktree `/Users/jk/.codex/worktrees/4513/acgc-modern-port` already absent; no build/log root | Complete/archived; proves the registration/build gap, resident-texture gate issue, and CPU-only consumer boundary; no frame or playability claim |
-| 71 | Darwin GX handoff registration — `019ffb94-738f-70c3-9344-a194b74022af` | Apple-only `AcgcMetalPacketConsumerHandoffContext` registration, narrow resident-versus-active texture gate correction in `pc_gx.c`, bounded callback/status telemetry, and focused fixture; no shader, decomp, or Windows changes | Worker `/Users/jk/.codex/worktrees/e0ac/acgc-modern-port` (preserved dirty/held); source branch `c1/lane-darwin-gx-registration` at `9174404b`; integrated canonical source `f4cb491`; focused roots retired after review | Complete/integrated; native and ASan/UBSan focused CTest `1/1` each; no full link, live callback, Metal encode/present/pixel, or playability claim |
+| 71 | Darwin GX handoff registration — `019ffb94-738f-70c3-9344-a194b74022af` | Apple-only `AcgcMetalPacketConsumerHandoffContext` registration, narrow resident-versus-active texture gate correction in `pc_gx.c`, bounded callback/status telemetry, and focused fixture; no shader, decomp, or Windows changes | Worker worktree absent after cleanup; source branch `c1/lane-darwin-gx-registration` at `9174404b`; integrated canonical source `f4cb491`; focused roots retired | Complete/integrated; native and ASan/UBSan focused CTest `1/1` each; no full link, live callback, Metal encode/present/pixel, or playability claim |
 | 72 | Live Apple GX callback observation — `019ffba9-3c9b-7713-82a4-ae102ad4715b` | Read-only current-tip full link plus exactly one no-`nice` LLDB launch; breakpoint on `pc_metal_runtime_observe` and `pc_gx_flush_vertices`; no source edits | Worktree `/Users/jk/.codex/worktrees/a240/acgc-modern-port` already absent; build/log roots retired after review | Complete/archived; link `0`, arm64 Mach-O, LLDB pre-inferior `nice(5)` failure with zero breakpoint hits; callback reachability inconclusive; no Metal encode/present/pixel/playability claim; evidence `docs/evidence/LIVE-DARWIN-GX-CALLBACK-RUNTIME-2026-08-13.md` |
+| 73 | Current Apple GX callback hit capture — `019ffbc7-01e9-7b32-b5b1-f0abaada1b09` | Read-only current-tip full link and exactly one generated-bin LLDB launch with one-shot explicit hit logging for `pc_metal_runtime_observe`, GXBegin, flush, target, and graph symbols | Worktree `/Users/jk/.codex/worktrees/7842/acgc-modern-port`; build `/private/tmp/acgc-lane-current-apple-callback-build`; logs `/private/tmp/acgc-lane-current-apple-callback-logs`; no source branch | Active; no result or frame/Metal claim yet |
+| 74 | Offscreen Metal packet sink — `019ffbc8-1f2b-7513-9c1c-7ddde5114f97` | Source-edit lane for an Apple-only offscreen MTLDevice/command-buffer/readback consumer of the existing semantic packet; focused CPU/device-gated tests only | Worktree `/Users/jk/.codex/worktrees/002a/acgc-modern-port`; owning PC branch `c1/lane-offscreen-metal-sink`; unique build roots to be declared by worker; no umbrella edits | Active; source-edit lane, no full link/live callback/frame claim yet |
 
 ## Parked intake (not active)
 
