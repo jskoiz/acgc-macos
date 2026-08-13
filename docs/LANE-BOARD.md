@@ -35,7 +35,7 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: the scheduler has one active durable Luna Max/max
+Current maintenance state: the scheduler has no active worker tasks
 worker tasks plus this integration owner. The authoritative PC source is
 `5548570` on `c1/macos-host-launch`; the umbrella is `f25e600` plus only the
 pre-existing `.codex`/settings edits. Mixer/CoreAudio, Metal, GX-prefix,
@@ -43,8 +43,10 @@ texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
 game-cleanup invalid-free successor
 (`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is now complete. The current active
-worker: the post-fix GX submission trace
-(`019ffa49-4f9c-7da2-a288-5791e5cf5c93`), plus this integration owner. The
+worker; the post-fix GX submission trace
+(`019ffa49-4f9c-7da2-a288-5791e5cf5c93`) is complete and archived with
+evidence in `docs/evidence/GX-SUBMISSION-TRACE-2026-08-12.md`, leaving only
+this integration owner. The
 CARD Save_t reload recovery (`019ffa49-4f44-7b73-a4ab-8c45dc211f14`) is
 complete and archived with production evidence. The exact-tip sanitizer refresh
 (`019ffa4c-8734-7ac2-99d1-f67a0682be31`) is complete and archived; its
@@ -124,7 +126,7 @@ from compilation alone.
 | 45 | iOS shared-boundary readiness — `019ffa12-9809-7c21-b1e2-67f4f7bd52c5` | Read-only portable/Apple boundary map; iOS remains gated by macOS proof | `/Users/jk/.codex/worktrees/b09c/acgc-modern-port` (retired); branch `c1/ios-shared-boundary-readiness` | Complete/parked; integrated handoff `plans/IOS-SHARED-BOUNDARY-READINESS.md` (`d303b7f`); portable 18/18 and Apple 10 plus 2 Metal skips, ASan/UBSan same, serialized 4,011/4,011 audit link; no game-loop, live Metal pixel, input, audio, save, lifecycle, simulator, device, or playability claim |
 | 46 | Game cleanup invalid-free successor — `019ffa28-3ef7-7280-923c-5a01bf2eb4c2` | `src/game/m_field_make.c`, `src/game/m_play.c`, `src/graph.c`, `src/static/libc64/__osMalloc.c`; exact TERM/allocator fault | `/private/tmp/acgc-lane-game-cleanup-invalid-free/source` (retired); `c1/lane-game-cleanup-invalid-free` | Complete/integrated at source `09dd182`; `mFM_MakeField` now uses `zelda_malloc_align` without a `u32` round-trip; native, ASan/UBSan, and UBSan fixture passes; exact integrated 4,011/4,011 arm64 build passes; 10-second LOGO/NEOS run and TERM grace return status `0`; no Metal/pixel/input/audio/save/playability claim |
 | 47 | Production CARD Save_t reload recovery — `019ffa49-4f44-7b73-a4ab-8c45dc211f14` | `pc/src/pc_m_card.c` plus focused `pc/tests/` restart/corruption fixture only; production atomic write/restart/reload gate | `/private/tmp/acgc-lane-card-save-recovery/source` (retired); `c1/lane-card-save-recovery` preserved at `9e3bb99`; build root retired | Complete/integrated at source `5548570`; native and ASan+UBSan production fixture pass; validates checksum/identity, embedded-backup recovery, restart reload, and prior-generation `.bak1` fallback; full game save-manager/device/playability claims remain open |
-| 48 | Post-fix game-owned GX submission trace — `019ffa49-4f9c-7da2-a288-5791e5cf5c93` | Read-only `graph_task_set00` → emu64/GX → `pc_gx` handoff and packet/terminator boundary | `/Users/jk/.codex/worktrees/1a7c/acgc-modern-port`; isolated logs/builds `/private/tmp/acgc-lane-postfix-gx-submission` | Active; Luna Max/max; exact source `09dd182`, decomp `09ca8e8b`; full link/LLDB serialized; no source edits and no Metal-device/pixel, input, audio, save, simulator, device, or playability claim |
+| 48 | Post-fix game-owned GX submission trace — `019ffa49-4f9c-7da2-a288-5791e5cf5c93` | Read-only `graph_task_set00` → emu64/GX → `pc_gx` handoff and packet/terminator boundary | `/Users/jk/.codex/worktrees/1a7c/acgc-modern-port` (retired); isolated root `/private/tmp/acgc-lane-postfix-gx-submission` (retired) | Complete/archived; evidence is pinned to source `09dd182` and decomp `09ca8e8b`; live prefix remains incomplete (8/256 words, no terminator), stable OpenGL handoff reaches `pc_gx_flush_vertices`; Metal consumer skip `77`; no Metal/pixel/input/audio/save/simulator/device/playability claim |
 | 49 | Exact-tip native + ASan/UBSan refresh — `019ffa4c-8734-7ac2-99d1-f67a0682be31` | Read-only focused matrix at source `09dd182`, including field-cleanup fixture and portable/Apple contracts | `/Users/jk/.codex/worktrees/b872/acgc-modern-port` (retired); build/log root `/private/tmp/acgc-lane-sanitizer-refresh-20260812` (retired) | Complete/archived; Luna Max/max; native 36/3/0 and ASan 36/3/0; UBSan 35/3/1 with the unchanged 11-site `aflags_c` issue; no frame, input, audio, save, simulator, device, or playability claim |
 
 ## Parked intake (not active)

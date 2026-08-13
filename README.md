@@ -122,7 +122,9 @@ redistribute it or extracted proprietary assets.
   LLDB reaches the callback from `graph_task_set00`; after the callback the
   arm64 run faults at `pc_gx_texture.c:62` while following `data=0x83bdc0`, a
   truncated 32-bit texture object. This is a live submission-prefix gate, not
-  a rendered-frame or playability claim.
+  a rendered-frame or playability claim. The post-fix trace reaches the live
+  `GXBegin` → `pc_gx_flush_vertices` OpenGL boundary but remains an incomplete
+  8-of-256-word capture; see [GX submission evidence](docs/evidence/GX-SUBMISSION-TRACE-2026-08-12.md).
 - A fresh run from the integrated source snapshot `909f3ca` was built in
   `/private/tmp/acgc-integrated-audio-wave-build` and launched with the ignored
   local ISO symlinked under its generated `bin/rom/` directory. The log records
