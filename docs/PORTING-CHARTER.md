@@ -58,9 +58,10 @@ remain under ignored local or build paths and are never committed.
 
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
-fixture are passed. The latest serialized full reconstructed `ac_pc` link was
-a native arm64 Mach-O from source branch `c1/macos-host-launch` at `042cbf7`,
-returning `[4018/4019]` in lane 98's one-link run before the V3 slice. The
+fixture are passed. The latest integrated source tip is the clean native arm64
+PC branch `c1/macos-host-launch` at `f18e7cd`. The latest serialized full
+reconstructed `ac_pc` link recorded before the V3 slice was a native arm64
+Mach-O from `042cbf7`, returning `[4018/4019]` in lane 98's one-link run. The
 source tip adds the
 version-aware GX v2 consumer boundary on top of the
 bounded packet builder at `26da235`, the narrow Metal sink shader fix at
@@ -99,6 +100,14 @@ malformed packet is rejected without entering the V1 seam. Native and
 ASan/UBSan focused CTest pass `2/2` each. This remains contract evidence only;
 it does not establish a live callback, Metal encode/readback, pixel, or
 playability gate. See [V3 builder-consumer fixture evidence](evidence/GX-V3-BUILDER-CONSUMER-FIXTURE-F18E7CD-2026-08-13.md).
+The current-tip sanitizer/Windows verification on `f18e7cd` passes the seven
+focused native targets (`7/7`) and the combined ASan/UBSan matrix (`7/7`) with
+no diagnostics. Available `_WIN32`/`-m32` C and static-GBI probes pass, while
+the C++ host probe retains an artificial Apple-libc++ locale-macro caveat;
+`pc_gx.c` stops at missing `process.h`, and real i686 GNU/MSVC probes stop at
+missing `string.h` and the absent sysroot/toolchain. No PE/runtime or Windows
+sign-off follows, and no full-link, game-owned callback, Metal, pixel, or
+playability claim follows. See [current sanitizer/Windows evidence](evidence/SANITIZER-WINDOWS-CURRENT-F18E7CD-2026-08-13.md).
 The DVD/CARD,
 input snapshot, graph-capture, GX packet, Metal fixture, and audio boundary
 commits reviewed in the same source history remain the current evidence, and

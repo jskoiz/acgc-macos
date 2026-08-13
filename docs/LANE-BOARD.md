@@ -68,8 +68,13 @@ and ASan/UBSan tests `3/3` each, and marks V3 `V3_EXTENSION_NOT_RENDERED`.
 No full link, live callback count, Metal encode/readback, pixel, input, audio,
 save, device, or playability claim follows; the current-tip runtime count is
 complete, and the alpha-update V3 rejection reason is now source-backed. The
-next gate is the real Metal state encoder, after the focused builder-to-consumer
-fixture and Apple consumer boundary have passed their CPU gates.
+next dependency-ready gate is the real Metal state encoder or a separately
+authorized current-tip runtime trace, after the focused builder-to-consumer
+fixture and Apple consumer boundary have passed their CPU gates. Lanes 104–107
+are now complete/integrated/archived; no production or verification worker is
+active, and no filler lane is open. The current portable verification tip is
+`f18e7cd`: native and combined ASan/UBSan focused matrices are `7/7`, while the
+real i686 Windows/PE boundary remains blocked by the absent toolchain/sysroot.
 That root-owned runtime count is now recorded: the current-tip link produced
 an arm64 Mach-O, and one permitted elevated trace reached GAFE01 boot,
 LOGO/NEOS, `GXBegin`, and `pc_gx_flush_vertices`. V3 builder entry was
@@ -129,9 +134,9 @@ unprivileged launch failed before inferior creation with status `-1`, while
 one permitted elevated retry reached boot, GX, and V3 builder entries but no
 V3 consumer or Apple runtime-observer hit. Lane 104's source-backed reason is
 `g_gx.alpha_update_enable == 0`; the focused builder-to-consumer fixture is now
-integrated and the Apple boundary audit is complete. Lane 107 is the sole
-active verification worker for the native/ASan/UBSan and Windows matrix; no
-filler lane is open, and full links and LLDB launches remain serialized.
+integrated and the Apple boundary audit is complete. Lane 107 has completed its
+current-tip verification handoff; no worker is active, no filler lane is open,
+and full links and LLDB launches remain serialized.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
@@ -314,7 +319,7 @@ from compilation alone.
 | 104 | V3 fail-closed rejection reason — `019ffd46-3012-7460-b435-2afff25993c0` | Source-edit diagnostic for the exact predicate(s) rejecting live V3 state after builder entry; native plus ASan/UBSan focused checks only; no full link, LLDB, or Metal work | Source branch `c1/lane-gx-v3-rejection-reason` at `c689a731`; integrated canonical PC `c1/macos-host-launch` at `add2d6f`; lane roots `/private/tmp/acgc-lane-gx-v3-rejection/native` and `/private/tmp/acgc-lane-gx-v3-rejection-asan` retained for review; decomp `09ca8e8b`; visible task worktree `/Users/jk/.codex/worktrees/d3d7/acgc-modern-port` is stale detached and protected until cleanup | Complete/integrated; `g_gx.alpha_update_enable == 0` is the source-backed V3 fail-closed reason; opt-in `ACGC_METAL_V3_REJECTION_TRACE=1` Darwin diagnostic capped at 64 records; integrated native and ASan/UBSan focused CTest `3/3` each with no diagnostics (leak detection disabled); no fixture/CMake, full link, LLDB, callback, Metal encode/readback/pixel, input, audio, save, device, or playability claim; evidence `docs/evidence/GX-V3-REJECTION-ALPHA-UPDATE-ADD2D6F-2026-08-13.md` |
 | 105 | V3 Apple consumer/runtime boundary audit — `019ffd51-9466-75e3-b9f9-c27b43bda87f` | Read-only crosswalk for why the typed V3 handoff does not reach the Apple consumer or runtime observer; no full link, LLDB, or device work | Audit source worktree `/private/tmp/acgc-lane-gx-v3-apple-consumer/pc` on `c1/lane-gx-v3-apple-consumer-audit` at `042cbf7`; exact focused roots `/private/tmp/acgc-lane-gx-v3-apple-consumer-native` and `/private/tmp/acgc-lane-gx-v3-apple-consumer-asan`; no source changes; decomp `09ca8e8b` | Complete/archived; native and ASan/UBSan V3 CPU fixture `1/1` each; consumer/runtime registration compiled but was not executed because it initializes the Metal sink; `549 → 0 → 0` localizes upstream of Apple consumer; no callback, Metal encode/readback/pixel, or playability claim; evidence `docs/evidence/GX-V3-APPLE-CONSUMER-AUDIT-2026-08-13.md` |
 | 106 | Focused V3 builder-to-consumer fixture — `019ffd51-9466-75e3-b9f9-c29b09289e91` | Synthetic live-like V3 builder/typed-handoff fixture that distinguishes builder rejection from consumer acceptance/rejection and records the alpha-update/write-mask reason; no full link, LLDB, or device work | Source branch `c1/lane-gx-v3-consumer-fixture` at `51ef7e4`; integrated canonical PC `c1/macos-host-launch` at `f18e7cd`; exact integrated roots `/private/tmp/acgc-integrate-v3-consumer-f18e7cd-native` and `/private/tmp/acgc-integrate-v3-consumer-f18e7cd-asan`; worker roots `/private/tmp/acgc-lane-gx-v3-consumer-fixture-native` and `/private/tmp/acgc-lane-gx-v3-consumer-fixture-asan` retained for review; decomp `09ca8e8b` | Complete/integrated; native and ASan/UBSan focused CTest `2/2` each on the integrated snapshot; disabled alpha writes reject before V3 callback, enabled writes build/consume with `V3_EXTENSION_NOT_RENDERED`, malformed packet rejection and V1 seam remain separate; no live callback, Metal encode/readback/pixel, or playability claim; evidence `docs/evidence/GX-V3-BUILDER-CONSUMER-FIXTURE-F18E7CD-2026-08-13.md` |
-| 107 | Integrated sanitizer and Windows compatibility matrix — `019ffd51-94de-78a3-b583-89cd9d008e40` | Verification-only native/ASan/UBSan and available `_WIN32`/host probes on PC `042cbf7`; record unavailable i686 MinGW/sysroot toolchains exactly; no source edits or full link | Visible task worktree `/Users/jk/.codex/worktrees/ae99/acgc-modern-port` (umbrella detached at `73c0178`); read-only canonical refs `042cbf7`/`09ca8e8b`; unique roots `/private/tmp/acgc-lane-gx-v3-sanitizer-windows`, `/private/tmp/acgc-lane-gx-v3-sanitizer-windows-native`, `/private/tmp/acgc-lane-gx-v3-sanitizer-windows-asan`, and `/private/tmp/acgc-lane-gx-v3-sanitizer-windows-win` absent at setup | Active/setup verification lane; no source branch/commit, no umbrella/docs/ISO/assets mutation, no Metal encode/readback/pixel, device, input/audio/save, or playability claim |
+| 107 | Integrated sanitizer and Windows compatibility matrix — `019ffd51-94de-78a3-b583-89cd9d008e40` | Verification-only native/ASan/UBSan and available `_WIN32`/host probes on current PC `f18e7cd`; record unavailable i686 MinGW/sysroot toolchains exactly; no source edits or full link | Canonical PC `c1/macos-host-launch` at `f18e7cd`; decomp `09ca8e8b`; fresh roots `/private/tmp/acgc-lane-current-sanitizer-windows-native`, `/private/tmp/acgc-lane-current-sanitizer-windows-asan`, `/private/tmp/acgc-lane-current-sanitizer-windows-win`; historical worker root `/private/tmp/acgc-lane-gx-v3-sanitizer-windows` retained for cleanup; visible task worktree `/Users/jk/.codex/worktrees/ae99/acgc-modern-port` is stale detached at `73c0178` and is not current-tip evidence | Complete/archived; focused native CTest `7/7` and combined ASan/UBSan `7/7` with no diagnostics; packet/adapter and C/static-GBI `_WIN32`/ILP32 probes pass, C++ host macro caveat, `pc_gx.c` stops at missing `process.h`, real GNU/MSVC probes stop at missing `string.h`; no i686/PE/runtime/Metal/pixel/playability claim; evidence `docs/evidence/SANITIZER-WINDOWS-CURRENT-F18E7CD-2026-08-13.md` |
 
 ## Parked intake (not active)
 

@@ -122,6 +122,14 @@ redistribute it or extracted proprietary assets.
   separate. Native and ASan/UBSan focused CTest pass `2/2` each. This is not a
   live callback, Metal encode/readback, pixel, or playability claim. See [V3
   builder-consumer fixture evidence](docs/evidence/GX-V3-BUILDER-CONSUMER-FIXTURE-F18E7CD-2026-08-13.md).
+- A current-tip verification matrix at `f18e7cd` passes the seven focused
+  packet/adapter/V1/V2/V3 targets natively (`7/7`) and under combined
+  ASan/UBSan (`7/7`) with no diagnostics. Available `_WIN32`/`-m32` C and
+  static-GBI probes pass, while the C++ host probe retains its artificial
+  Apple-libc++ locale-macro caveat; `pc_gx.c` stops at missing `process.h`, and
+  real i686 GNU/MSVC probes stop at missing `string.h`/sysroot. No i686 PE,
+  Windows runtime, full-link, Metal, pixel, or playability claim follows. See
+  [current sanitizer/Windows evidence](docs/evidence/SANITIZER-WINDOWS-CURRENT-F18E7CD-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.
