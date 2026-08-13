@@ -55,6 +55,10 @@ redistribute it or extracted proprietary assets.
   target, simulator/device proof, or game-owned Metal frame. See
   [Windows evidence](docs/evidence/WINDOWS-X86-AUDIT-2026-08-13.md) and
   [iOS boundary evidence](docs/evidence/IOS-SHARED-BOUNDARY-READINESS-2026-08-13.md).
+- The current integrated runtime trace reaches the game-owned graph target and
+  `GXBegin`, but the Apple sink shader fails compilation before encode/readback;
+  `pc_gx_flush_vertices` and `pc_metal_runtime_observe` were not observed. See
+  [current callback evidence](docs/evidence/CURRENT-INTEGRATED-METAL-CALLBACK-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until

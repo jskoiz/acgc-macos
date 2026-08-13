@@ -35,7 +35,7 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: one worker is active. Callback capture lane
+Current maintenance state: no production worker is active. Callback capture lane
 `019ffbc7-01e9-7b32-b5b1-f0abaada1b09` is complete/archived after its
 one normal-shell launch and one permitted elevated fallback both stopped
 before runtime; evidence is recorded in
@@ -51,17 +51,16 @@ inferior, reached `graph_proc`/NEOS and `pc_gx_flush_vertices`, and returned
 through `graph_proc` with exit status `0` after bounded SIGTERM. That run proves
 launch/boot/GX-boundary/clean-return only; its interactive transcript did not
 retain per-breakpoint hit counts, so the Apple callback gate remains open.
-The callback lane is the only current dependency-ready worker; no additional
-filler lane is being opened. Windows lane
+The callback lane is now complete; no filler lane is being opened while its
+shader blocker is transferred to one bounded successor. Windows lane
 `019ffbd0-b850-74b0-a0fd-cedcbd90db47`, sanitizer lane
 `019ffbd0-ba29-78e2-aad5-93f34b8bdf73`, and iOS shared-boundary lane
 `019ffbd0-bc94-7ff1-baf1-e5689164d53a` have complete read-only handoffs and
 are queued for exact-root cleanup. Game-owned input frame-guard lane
 `019ffbda-8005-7b93-83cf-67549d968677` is integrated at PC `59aa655` and
-queued for cleanup. Current integrated callback successor lane
-`019ffbe2-0d6d-74a0-9750-7f5e1e8b4d2e` is read-only in
-`/Users/jk/.codex/worktrees/73d6/acgc-modern-port` with unique direct-launch
-roots. The read-only Metal bridge audit
+queued for cleanup. The current blocker is the integrated sink shader compile
+failure recorded in lane 84; a successor may own only that shader fix. The
+read-only Metal bridge audit
 and Apple registration source lane are complete; their exact findings remain
 the current renderer boundary. The authoritative PC source is
 `59aa655` on
@@ -230,7 +229,7 @@ from compilation alone.
 | 81 | iOS shared-boundary readiness audit — `019ffbd0-bc94-7ff1-baf1-e5689164d53a` | Read-only audit of portable/core, Apple bridge, lifecycle, and existing iOS evidence; iOS source remains gated until macOS shared core/renderer proof | Worktree `/Users/jk/.codex/worktrees/b820/acgc-modern-port` (retire after review); focused root `/private/tmp/acgc-lane-ios-readiness` (retire after review); no branch | Complete/archived; portable CTest 20/20; no iOS target, simulator, device, game-owned Metal frame, input, audio, save, lifecycle, or playability claim; evidence `docs/evidence/IOS-SHARED-BOUNDARY-READINESS-2026-08-13.md` |
 | 82 | Direct Apple callback hit capture successor — `019ffbd5-53a3-7371-b1a6-19859c9bbf35` | Read-only direct LLDB launch using explicit hit counters; non-duplicate follow-up to lane 73's stop-at-entry failure | Worktree `/Users/jk/.codex/worktrees/a688/acgc-modern-port` (retire); build/log roots retired; no source branch | Complete/archived at pre-sink PC `f4cb491`; graph/target/GX each hit once, Apple callback hit `0`; evidence `docs/evidence/DIRECT-APPLE-GX-CALLBACK-2026-08-13.md`; no Metal/pixel claim |
 | 83 | Game-owned input frame-guard fixture — `019ffbda-8005-7b93-83cf-67549d968677` | Source/test successor for `padmgr_RequestPadData()` once-per-frame state preservation; owns `pc/tests/pc_padmgr_frame_guard_fixture.c` and narrow CMake registration only | Source worktree `/private/tmp/acgc-lane-input-frame-guard/source` (retire after review); branch `c1/input-frame-guard` at `799a016`; integrated canonical PC `59aa655`; focused roots `/private/tmp/acgc-integrate-input-frame-guard-59aa655-native` and `...-asan` | Complete/integrated; native and ASan/UBSan CTest `1/1` each with no diagnostics; no physical input/playability claim; evidence `docs/evidence/INPUT-FRAME-GUARD-2026-08-13.md` |
-| 84 | Current integrated Metal callback capture — `019ffbe2-0d6d-74a0-9750-7f5e1e8b4d2e` | Read-only current-tip `59aa655` full link and exactly one direct LLDB launch; capture game-owned callback/sink status separately from GX/OpenGL | Worktree `/Users/jk/.codex/worktrees/73d6/acgc-modern-port`; build `/private/tmp/acgc-lane-current-sink-callback-build`; logs `/private/tmp/acgc-lane-current-sink-callback-logs`; no source branch | Active; no current-tip callback/Metal encode/readback/pixel claim yet |
+| 84 | Current integrated Metal callback capture — `019ffbe2-0d6d-74a0-9750-7f5e1e8b4d2e` | Read-only current-tip `59aa655` full link and exactly one direct LLDB launch; capture game-owned callback/sink status separately from GX/OpenGL | Worktree `/Users/jk/.codex/worktrees/73d6/acgc-modern-port` (retire after review); build `/private/tmp/acgc-lane-current-sink-callback-build`; logs `/private/tmp/acgc-lane-current-sink-callback-logs`; no source branch | Complete/archived; graph target and `GXBegin` each hit once, `pc_gx_flush_vertices` and `pc_metal_runtime_observe` hit zero; sink shader compile failed before encode/readback; evidence `docs/evidence/CURRENT-INTEGRATED-METAL-CALLBACK-2026-08-13.md`; no Metal/pixel/playability claim |
 
 ## Parked intake (not active)
 
