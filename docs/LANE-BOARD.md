@@ -31,9 +31,9 @@ does not mean its gate passed.
 | 19 | Live graph capture reproducibility — `019ff914-ad3f-7721-82f2-d8985d601ba1` | Two cold-run snapshots and exact fault boundary | `/Users/jk/.codex/worktrees/5edb/acgc-modern-port`; build `/private/tmp/acgc-lane-live-capture-repro-build` | Active; runtime evidence only |
 | 20 | CoreAudio/device and asset-audio successor — `019ff914-a32b-7363-a619-f79e21c75db3` | Real sink gate, then asset-driven NEOS_OUT runtime trace | `/Users/jk/.codex/worktrees/fdc9/acgc-modern-port`; builds `/private/tmp/acgc-lane-coreaudio-device-build` and `/private/tmp/acgc-lane-audio-asset-runtime-build` | Device subgate complete/parked: synthetic NEOS/RSP 1,118 nonzero samples passes; real SDL/CoreAudio open returns `77` with `kAudioDevicePropertyDeviceIsAlive` error `560947818`; asset-audio successor active; no audible claim |
 | 21 | Save_t raw-wire forensic — `019ff914-a86e-7793-b0f0-6ce23e8d97a0` | `time_limit` width/endianness/range evidence across both upstreams | `/Users/jk/.codex/worktrees/e9ef/acgc-modern-port`; build `/private/tmp/acgc-lane-save-wire-forensic-build` | Active; read-only/fixture lane; codec remains frozen |
-| 22 | Integrated sanitizer matrix — `019ff914-b322-7e10-876e-c942a45aef4a` | Native and ASan/UBSan at integrated source `10d6ac0` | `/Users/jk/.codex/worktrees/44e8/acgc-modern-port`; builds `/private/tmp/acgc-lane-integrated-native-build` and `/private/tmp/acgc-lane-integrated-sanitizer-build` | Active; verification only; serialize full links |
+| 22 | Integrated sanitizer matrix — `019ff914-b322-7e10-876e-c942a45aef4a` | Native and ASan/UBSan at integrated source `07a5447` | `/Users/jk/.codex/worktrees/44e8/acgc-modern-port`; builds `/private/tmp/acgc-lane-integrated-native-build` and `/private/tmp/acgc-lane-integrated-sanitizer-build` | Active; verification only; serialize full links |
 | 23 | Windows compatibility post-capture audit — `019ff914-b7c7-75d2-ad4c-d94032e35b12` | `_WIN32`/x86/OpenGL/SDL conditional audit after `10d6ac0` | `/Users/jk/.codex/worktrees/d9c5/acgc-modern-port`; build `/private/tmp/acgc-lane-windows-audit-build` | Complete/parked; strict `_WIN32` graph seam compile/test passes; no source regression found; native Windows/x86 toolchain remains unavailable |
-| 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; planned source `/private/tmp/acgc-lane-texture-fault-fixture` | Active; fixture/audit only; does not implement remediation |
+| 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; source `/private/tmp/acgc-lane-texture-fault-fixture` / `c1/lane-texture-fault-fixture` | Complete/integrated as `07a5447`; native arm64 fixture records full pointer → opaque handle → low-word truncation and intentional `EXPECTED_FAILURE`; remediation remains lane 17 |
 | 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Active; source/test lane |
 
 The Codex-created umbrella worktrees begin detached at umbrella commit
@@ -63,6 +63,10 @@ submodules blindly or edit a detached source checkout.
 - After the capture, the same run stops at `pc_gx_texture.c:62` while
   `tex_content_hash` follows `data=0x83bdc0` from a truncated 32-bit texture
   object. That is the next source-fix gate; no rendered frame is claimed.
+- The integrated forensic fixture `07a5447` reproduces the same width loss
+  without a game launch: `GXInitTexObj` stores only the low 32 bits after the
+  opaque GBI handle resolves, and `GXGetTexObjData` returns that truncated
+  value. It is an intentional `EXPECTED_FAILURE` invariant, not a fix.
 - `5086f1d` reloads `GAME.graph` after the callback that corrupts the local
   callee-saved register. The patched arm64 run reaches the first
   `graph_task_set00` call; it is the prerequisite for the live capture in

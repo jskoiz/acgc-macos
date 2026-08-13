@@ -291,7 +291,7 @@ could not create the image; no visual-capture claim is made.
 ## Rolling lane update (2026-08-12)
 
 The authoritative `upstream/ACGC-PC-Port` branch is
-`c1/macos-host-launch` at `10d6ac0`. Reviewed source commits now include:
+`c1/macos-host-launch` at `07a5447`. Reviewed source commits now include:
 
 - `e5442de` / `858d802` / `8b6849f` — injectable fixed-width PC input snapshots,
   the final PADRead handoff, and SDL virtual-controller/event smoke;
@@ -302,6 +302,8 @@ The authoritative `upstream/ACGC-PC-Port` branch is
 - `10d6ac0` — opt-in Darwin callback and pointer-free capture immediately after
   `JW_BeginFrame`, before legacy emu64 texture setup; the first live
   game-owned prefix is recorded;
+- `07a5447` — arm64 texture-pointer forensic fixture showing the full opaque
+  handle resolves correctly before `GXInitTexObj` truncates it to 32 bits;
 - `83fa889` — 4,800-byte renderer-neutral GX semantic packet contract;
 - `866dd94` — Metal geometry/state fixtures; and
 - `ddbb498` — texture/TLUT/sampler/TEV fixtures; and
@@ -358,6 +360,12 @@ The same run subsequently stops at `pc_gx_texture.c:62` following the
 truncated `0x83bdc0` texture object. This proves a game-owned submission prefix
 only; no rendered frame, input, audible output, Save_t/GCI restart, or
 playability gate is claimed.
+
+The focused `07a5447` forensic executable reproduces that arm64 contract
+without launching the game: the opaque GBI handle resolves to the full native
+pointer, while `GXInitTexObj` stores only its low 32 bits and
+`GXGetTexObjData` returns the truncated value. It is an intentional
+`EXPECTED_FAILURE` fixture for the next source-fix lane, not renderer proof.
 
 ## Proof ledger
 
