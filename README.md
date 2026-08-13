@@ -21,8 +21,9 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `59aa655` (`Test PC padmgr frame guard`), on top of
-  `54b840c` (`Add bounded Apple Metal packet sink`),
+  `c1/macos-host-launch` at `a8f3a8f` (`Rename reserved Metal shader local`), on
+  top of `59aa655` (`Test PC padmgr frame guard`) and `54b840c`
+  (`Add bounded Apple Metal packet sink`),
   on top of `f4cb491` (`Register Apple GX packet consumer bridge`),
   on top of `aea3515` (`Capture live graph target spans in emu64`),
   on top of `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
@@ -59,6 +60,9 @@ redistribute it or extracted proprietary assets.
   `GXBegin`, but the Apple sink shader fails compilation before encode/readback;
   `pc_gx_flush_vertices` and `pc_metal_runtime_observe` were not observed. See
   [current callback evidence](docs/evidence/CURRENT-INTEGRATED-METAL-CALLBACK-2026-08-13.md).
+- The embedded Metal sink shader blocker is fixed at `a8f3a8f`: offline MSL
+  compilation now succeeds, while the focused device-backed test remains skip
+  `77` on this host. See [shader-fix evidence](docs/evidence/METAL-SINK-SHADER-FIX-2026-08-13.md).
 - Both submodules and the local input identify the supported `GAFE01_00`
   revision. The expected original DOL and REL hashes match.
 - The documented `ac-decomp` macOS configuration and extraction path runs until
@@ -123,8 +127,8 @@ redistribute it or extracted proprietary assets.
   cleanup`) and the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
   same source history. That fresh arm64 link produced a Mach-O
-  `AnimalCrossing` executable. The current source tip is `59aa655`; its Apple
-  sink and input-fixture changes have focused verification but have not yet had another full
+  `AnimalCrossing` executable. The current source tip is `a8f3a8f`; its Apple
+  sink shader fix and input-fixture changes have focused verification but have not yet had another full
   `ac_pc` link. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
   the compact bank-28 tail and MEDIUM_CART-to-native-ARAM mapping have focused
