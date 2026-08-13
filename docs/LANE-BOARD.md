@@ -43,13 +43,11 @@ continuation prefix. Lane 98's one longer bounded run completed that second task
 with eight `G_DL` handlers, `G_ENDDL`, and `return_err=0`, `cmds=12`, and
 `end_dl=1`; task 2 still had no draw handler, `GXBegin`, or flush. No frame or
 Metal claim follows.
-Lane 99 is the sole active production lane: it owns a bounded current-tip
-Metal-frame bridge audit/implementation from PC `d1e812c`, with no full link or
-LLDB launch authorized yet. Its unique roots are
-`/private/tmp/acgc-lane-metal-frame` and
-`/private/tmp/acgc-lane-metal-frame-build`; no frame or Metal claim follows
-until the consumer/sink reachability defect is reproduced and a serialized
-runtime gate is completed.
+Lane 99 completed its read-only current-tip crosswalk but then hit a remote
+Codex compaction `404` twice before any source/build/runtime work. Its useful
+finding is that live textured/TEV/active state reaches the fail-closed packet
+builder rejection before `pc_metal_runtime_observe`; no defect was proven and
+no frame or Metal claim follows. The task is archived and no worker is active.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -272,7 +270,7 @@ from compilation alone.
 | 96 | Trace emu64 continuation to GX draw — `019ffcc1-d77b-7a42-b0ec-54ac72f1a30e` | Read-only one-link/one-LLDB current-tip trace; instrument `emu64_taskstart_r`, command dispatch, `dl_G_DL`, `dl_G_ENDDL`, and `GXBegin` to classify the zero-GX boundary | Worktree `/Users/jk/.codex/worktrees/9474/acgc-modern-port` and roots `/private/tmp/acgc-lane-emu64-continuation-trace-build` / `/private/tmp/acgc-lane-emu64-continuation-trace-logs` (retire after review); canonical source `c1/macos-host-launch` at `d1e812c`; no source branch | Complete/archived; link `[4018/4019]` passed; first task had 8 `G_DL_NOPUSH`, 1 `G_ENDDL`, return `0`, `GXBegin=0`, `FrameCansel=0`, `err_count=0`; pointer-field diagnostics excluded; evidence `docs/evidence/EMU64-CONTINUATION-NO-DRAW-2026-08-13.md`; no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
 | 97 | Trace subsequent graph task progression — `019ffcd6-49fb-7f20-abb7-967008d7fe17` | Read-only one-link/one-LLDB current-tip trace for later `graph_task_set00`/`graph_draw_finish`/`graph_submit_task` activity after the lane-96 clean no-draw task; classify any later GXBegin reachability | Worktree `/Users/jk/.codex/worktrees/7008/acgc-modern-port` and roots `/private/tmp/acgc-lane-subsequent-graph-task-build` / `/private/tmp/acgc-lane-subsequent-graph-task-logs` (retire after review); canonical source `c1/macos-host-launch` at `d1e812c`; no source branch | Complete/archived; link `[4018/4019]` passed; graph submission/task entry each hit twice; task 2 reached 8 dispatches and a `G_DL` prefix but timed out before `G_ENDDL`/return; draw handlers and `GXBegin` 0; evidence `docs/evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md`; no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
 | 98 | Complete second graph task continuation — `019ffcea-aceb-7f10-8aba-7fc61a98896d` | Read-only one-link/one-LLDB current-tip trace with a 30-second bound; extend task-2 `F0004000` continuation to `G_ENDDL` or a draw/GXBegin boundary | Lane worktree already absent; run snapshot `5b89680`; build/log roots retired by the cleanup lane; no source branch | Complete/archived; task 2 reached `F0004000`–`F0004007`, `G_ENDDL`, and return `0` with `cmds=12`, `end_dl=1`; draw handlers, `GXBegin`, and flush were `0` for task 2; later-task hits excluded; evidence `docs/evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md`; no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
-| 99 | Current Metal-frame bridge audit/implementation — `019ffd05-6144-77a0-8a55-f1bb4092654d` | Bounded crosswalk and, only if a concrete defect is proven, narrow Apple consumer/sink fix explaining why `pc_metal_runtime_observe` remains zero after game-owned `GXBegin`/`pc_gx_flush_vertices`; preserve v1 and fail-closed behavior; no full link/LLDB until root serialization approval | Worktree `/Users/jk/.codex/worktrees/61d1/acgc-modern-port`; base umbrella `05c7ce8`, PC `d1e812c`, decomp `09ca8e8b`; unique roots `/private/tmp/acgc-lane-metal-frame` and `/private/tmp/acgc-lane-metal-frame-build`; source ownership limited to Apple consumer/sink files and focused tests | Active/setup; no source/build/runtime result yet; no Metal encode/present/readback/pixel/playability claim |
+| 99 | Current Metal-frame bridge audit/implementation — `019ffd05-6144-77a0-8a55-f1bb4092654d` | Bounded crosswalk for why live textured/TEV state is rejected before `pc_metal_runtime_observe`; source edit only if a concrete defect is proven | Worktree retired with the task; base umbrella `05c7ce8`, PC `d1e812c`, decomp `09ca8e8b`; no build/runtime roots created | Complete/archived with infrastructure failure after setup; read-only finding only, no source/build/runtime/Metal/pixel claim; no defect proven |
 
 ## Parked intake (not active)
 
