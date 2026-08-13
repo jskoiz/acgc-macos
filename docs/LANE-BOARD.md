@@ -35,7 +35,11 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: no production or verification worker is active. Lane
+Current maintenance state: one read-only verification worker is active. Lane 93
+(`019ffc93-5d85-7d53-a6bf-67a5b13305da`) owns one elevated runtime trace with
+durable per-symbol breakpoint counts from canonical PC `d1e812c`; it must keep
+LLDB alive through bounded inferior cleanup and emit the final breakpoint list.
+It owns no source edits and no Metal encode/readback/pixel scope. Lane
 92 (`019ffc83-96c2-7ce1-97d9-848fb308a41d`) completed one permitted elevated
 current-tip LLDB launch. It created an inferior and reached boot/runtime,
 resolving lane 91's pre-inferior `-1` blocker, but the bounded interruption
@@ -238,6 +242,7 @@ from compilation alone.
 | 90 | Version-aware GX v2 consumer boundary — `019ffc5d-392e-75e2-a863-a4b9199b11dd` | Source lane for a separately typed/version-checked v2 callback and Apple consumer boundary; preserve v1 dispatch, consume bounded values only, and prove v2 acceptance/rejection with focused tests | Worktree and exact focused roots retired by cleanup; branch `c1/lane-versioned-gx-v2-consumer` at worker `cd881b7`; integrated canonical PC `d1e812c`; umbrella evidence preserved | Complete/integrated; native and ASan/UBSan focused CTest `4/4` each with no diagnostics; v2 reports `V2_EXTENSION_NOT_RENDERED`; no full link, live callback, Metal encode/readback/pixel, device, input/audio/save, or playability claim; evidence `docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md` |
 | 91 | Live GX v2 callback reachability trace — `019ffc73-d5c6-78f1-94bb-91ad0d277d1d` | Read-only one-link/one-LLDB current-tip trace at canonical PC `d1e812c`; measure `pc_gx_flush_vertices` → v2 callback reachability and keep callback, Metal, pixel, and playability claims separate | Worktree and exact build/log roots retired after review; canonical source `c1/macos-host-launch` at `d1e812c`; evidence `docs/evidence/LIVE-GX-V2-CALLBACK-REACHABILITY-2026-08-13.md`; no source branch or edits | Complete/archived; link passed `4019/4019`, but LLDB failed before boot with `status -1 (no such process)` and every requested breakpoint hit `0`; no callback, frame, Metal encode/readback/pixel, device, input/audio/save, or playability claim |
 | 92 | Elevated GX v2 callback launch retry — `019ffc83-96c2-7ce1-97d9-848fb308a41d` | Read-only one permitted elevated LLDB launch against canonical PC `d1e812c`; resolve the lane-91 pre-inferior status `-1` blocker and capture explicit v2 callback hit counts only if an inferior exists | Worktree and exact build/log roots retired after review; canonical source `c1/macos-host-launch` at `d1e812c`; evidence `docs/evidence/ELEVATED-GX-V2-LAUNCH-2026-08-13.md`; no source branch or edits | Complete/archived; elevated launch created an inferior and reached boot/runtime; outer interrupt preceded per-symbol breakpoint list, so counts are not emitted and no callback/GX/frame/Metal/pixel/playability claim follows; exact-PID TERM `rc=0`, KILL not needed |
+| 93 | Durable GX v2 breakpoint-count trace — `019ffc93-5d85-7d53-a6bf-67a5b13305da` | Read-only one elevated LLDB trace at canonical PC `d1e812c`; persist per-symbol graph/GX/v2/Apple breakpoint counts while keeping the debugger alive through bounded inferior cleanup | Visible worktree `/Users/jk/.codex/worktrees/db72/acgc-modern-port`; canonical source `c1/macos-host-launch` at `d1e812c`; unique roots `/private/tmp/acgc-lane-gx-v2-counts-d1e812c-build` and `...-logs`; no source branch or edits | Active; exactly one elevated launch, no duplicate unprivileged retry, no Metal encode/readback/pixel, device, input/audio/save, or playability claim |
 
 ## Parked intake (not active)
 
