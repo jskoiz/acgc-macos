@@ -35,19 +35,22 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
-Current maintenance state: the scheduler has fourteen durable Luna Max/max
+Current maintenance state: the scheduler has two active durable Luna Max/max
 worker tasks plus this integration owner. The authoritative PC source is
-`09dd182` on `c1/macos-host-launch`; the umbrella is `9d72821` plus only the
+`09dd182` on `c1/macos-host-launch`; the umbrella is `112b4c2` plus only the
 pre-existing `.codex`/settings edits. Mixer/CoreAudio, Metal, GX-prefix,
 texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
 game-cleanup invalid-free successor
-(`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is now complete; there are no active
-worker lanes plus this owner. No other dependency-ready lane is being
-refilled: live CoreAudio/Metal devices and the complete game-owned graph
-capture remain unavailable, while Windows and iOS are gated by their stated
-proofs. The post-audio, arm64 post-texture, WaveTouch, and audio-DMA handoffs
-remain complete/archived.
+(`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`) is now complete. The current active
+workers are CARD Save_t
+reload recovery (`019ffa49-4f44-7b73-a4ab-8c45dc211f14`) and the post-fix
+GX submission trace (`019ffa49-4f9c-7da2-a288-5791e5cf5c93`), plus this
+integration owner. No other dependency-ready lane is being refilled: live
+CoreAudio/Metal devices and the complete game-owned graph capture remain
+unavailable, while Windows and iOS are gated by their stated proofs. The
+post-audio, arm64 post-texture, WaveTouch, and audio-DMA handoffs remain
+complete/archived.
 Pinned task `019ff9bd-7f15-7513-8b22-61af13c8a6fe`
 (`ACGC Worktree and Thread Cleanup`) owns the separate 30-minute cleanup
 heartbeat. Its first pass retired five clean source worktrees and pruned their
@@ -117,6 +120,8 @@ from compilation alone.
 | 44 | ac-decomp GAFE01 toolchain audit — `019ffa12-929c-73e3-b706-a4f76c78a270` | Read-only configure/build/extraction boundary and Wine/Metrowerks blocker | `/Users/jk/.codex/worktrees/90c1/acgc-modern-port` (retired); retry logs `/private/tmp/acgc-lane-acdecomp-audit-retry` (retired) | Complete/parked; `python3 configure.py` generates Ninja, but `ninja -j1` stops at missing `orig/GAFE01_00/files/foresta.rel.szs`; no Wine/Metrowerks, extraction, native build, or runtime claim; GAFE01 config/build metadata match both upstreams |
 | 45 | iOS shared-boundary readiness — `019ffa12-9809-7c21-b1e2-67f4f7bd52c5` | Read-only portable/Apple boundary map; iOS remains gated by macOS proof | `/Users/jk/.codex/worktrees/b09c/acgc-modern-port` (retired); branch `c1/ios-shared-boundary-readiness` | Complete/parked; integrated handoff `plans/IOS-SHARED-BOUNDARY-READINESS.md` (`d303b7f`); portable 18/18 and Apple 10 plus 2 Metal skips, ASan/UBSan same, serialized 4,011/4,011 audit link; no game-loop, live Metal pixel, input, audio, save, lifecycle, simulator, device, or playability claim |
 | 46 | Game cleanup invalid-free successor — `019ffa28-3ef7-7280-923c-5a01bf2eb4c2` | `src/game/m_field_make.c`, `src/game/m_play.c`, `src/graph.c`, `src/static/libc64/__osMalloc.c`; exact TERM/allocator fault | `/private/tmp/acgc-lane-game-cleanup-invalid-free/source` (retired); `c1/lane-game-cleanup-invalid-free` | Complete/integrated at source `09dd182`; `mFM_MakeField` now uses `zelda_malloc_align` without a `u32` round-trip; native, ASan/UBSan, and UBSan fixture passes; exact integrated 4,011/4,011 arm64 build passes; 10-second LOGO/NEOS run and TERM grace return status `0`; no Metal/pixel/input/audio/save/playability claim |
+| 47 | Production CARD Save_t reload recovery — `019ffa49-4f44-7b73-a4ab-8c45dc211f14` | `pc/src/pc_m_card.c` plus focused `pc/tests/` restart/corruption fixture only; production atomic write/restart/reload gate | `/Users/jk/.codex/worktrees/b7a4/acgc-modern-port`; planned source `/private/tmp/acgc-lane-card-save-recovery/source` / `c1/lane-card-save-recovery`; unique build root `/private/tmp/acgc-lane-card-save-recovery` | Active; Luna Max/max; base source `09dd182`; current codec `d1575f0` preserves raw `Save_t` `0xB6..0xB7`; no umbrella edits, ISO/assets, renderer, audio, input, or game-frame claim |
+| 48 | Post-fix game-owned GX submission trace — `019ffa49-4f9c-7da2-a288-5791e5cf5c93` | Read-only `graph_task_set00` → emu64/GX → `pc_gx` handoff and packet/terminator boundary | `/Users/jk/.codex/worktrees/1a7c/acgc-modern-port`; isolated logs/builds `/private/tmp/acgc-lane-postfix-gx-submission` | Active; Luna Max/max; exact source `09dd182`, decomp `09ca8e8b`; full link/LLDB serialized; no source edits and no Metal-device/pixel, input, audio, save, simulator, device, or playability claim |
 
 ## Parked intake (not active)
 
