@@ -74,16 +74,14 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `12b4f6e` (`Add Metal GX packet
-  consumer fixture`), on top of `07a5447` (`Add arm64 texture pointer fault
-  fixture`), `10d6ac0` (`Capture graph work list before emu64 setup`), and
-  `2736838` (`Add NEOS RSP PCM provenance probe`), with the DVD/CARD,
-  input snapshot, graph-capture, GX packet,
-  Metal-fixture, and audio-boundary commits reviewed in the same source
-  history. The fresh arm64 link produces a Mach-O
+  `c1/macos-host-launch` source branch at `909f3ca` (`Resolve compact audio
+  wave addresses`), on top of the DVD/CARD, input snapshot, graph-capture, GX
+  packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
+  same source history. The fresh arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
   while TARGET_PC keeps high native pointers in a command-address side table;
-  focused native and ASan/UBSan probes pass.
+  the compact bank-28 tail and MEDIUM_CART-to-native-ARAM mapping have focused
+  wire fixtures, and native plus ASan/UBSan probes pass.
 - The source branch now contains `e5442de` and `858d802` (injectable
   fixed-width input snapshots and the final PADRead handoff), `e03ffed`
   (pointer-free graph-submission capture), `83fa889` (4,800-byte
@@ -92,10 +90,12 @@ redistribute it or extracted proprietary assets.
   (mixer-to-callback PCM fixture), `5086f1d` (post-callback graph reload),
   `2736838` (RSP/Neos-style PCM provenance), `10d6ac0` (opt-in Darwin live
   graph capture before emu64 setup), `07a5447` (arm64 texture-pointer forensic
-  fixture), and `12b4f6e` (bounded GX packet-to-Metal consumer fixture). These
-  are separate boundaries: the first
-  live game-owned prefix is now captured, but the reconstructed process still
-  stops in the legacy texture path before any renderer frame.
+  fixture), `12b4f6e` (bounded GX packet-to-Metal consumer fixture), and
+  `5974764`/`909f3ca` (compact audio-bank tails and native wave-address
+  relocation). These remain separate boundaries: the first live game-owned
+  prefix is captured, and the integrated runtime now reaches a visible
+  game-owned frame, but representative GX-to-Metal readback and playability
+  are still open.
 - The first live graph snapshot is pointer-free and records version `1`, frame
   `0`, source capacity `256`, count `8`, and words
   `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.
@@ -103,6 +103,18 @@ redistribute it or extracted proprietary assets.
   arm64 run faults at `pc_gx_texture.c:62` while following `data=0x83bdc0`, a
   truncated 32-bit texture object. This is a live submission-prefix gate, not
   a rendered-frame or playability claim.
+- A fresh run from the integrated source snapshot `909f3ca` was built in
+  `/private/tmp/acgc-integrated-audio-wave-build` and launched with the ignored
+  local ISO symlinked under its generated `bin/rom/` directory. The log records
+  `[AUDIO] LP64 bank decoded bank=28 bytes=3376 instruments=16 drums=64` and
+  `[LOGO] draw: action=3 ...`; the captured screen at
+  `/private/tmp/acgc-integrated-audio-wave-build/integrated-frame-screen.png`
+  (SHA-256
+  `ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`)
+  visibly contains the Animal Crossing window, character, and `© 2001, 2002
+  Nintendo`. This passes the identifiable game-frame gate. The same run later
+  exits with `139` before graceful cleanup, so stable post-frame execution,
+  input, audible audio, save/load, and playability remain unproven.
 - The forensic target from `07a5447` reproduces the same contract in isolation:
   the opaque GBI handle resolves to the full arm64 pointer, while
   `GXInitTexObj` stores only the low 32 bits and `GXGetTexObjData` recovers the

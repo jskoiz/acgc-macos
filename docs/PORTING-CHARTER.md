@@ -59,7 +59,7 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-12, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The actual reconstructed `ac_pc` target links as a native
-arm64 Mach-O from source branch `c1/macos-host-launch` at `12b4f6e`, with the
+arm64 Mach-O from source branch `c1/macos-host-launch` at `909f3ca`, with the
 DVD/CARD, input snapshot, graph-capture, GX packet, Metal fixture, and audio
 boundary commits reviewed in the same source history, and now moves past the
 prior DVD wait. The portable boot-source facade accepts only exact
@@ -80,25 +80,27 @@ The host invokes the same facade and reports the real DOL and Yaz0 REL
 preparation before disposing the buffers. This is preflight and command-buffer
 evidence without pixel readback: the host fixture remains separate from the
 actual game launch, which reaches `initial_menu_init`, `dvderr_init`,
-`sound_initial2`, and `[NEOS_OUT]` during bounded runs. A fresh host-context
-run against the integrated lane build reached `COPYDATE` and at least frame
-`841`, but the process did not honor the runner's cleanup `SIGTERM` while
-waiting in the old DVD/file-loader path and required a single-process
-`SIGKILL`. The focused DVD-tail fix now allows the 19-byte `COPYDATE` to
-satisfy the GameCube 32-byte transfer rule; a fresh run completes the string
-table, `JW_Init2`, `HotStartEntry`, both forest archives, and Famicom archive
-loading before an `EXC_BAD_ACCESS` at `game.c:154` in `graph_proc`. That moves
-the blocker past DVD loading but is not a game-owned frame.
+`sound_initial2`, and `[NEOS_OUT]` during bounded runs. The focused DVD-tail,
+graph, texture, and audio-bank fixes now let an integrated arm64 run decode
+bank 28 and reach `[LOGO] draw`. Its captured screen at
+`/private/tmp/acgc-integrated-audio-wave-build/integrated-frame-screen.png`
+contains the Animal Crossing window, character, and `© 2001, 2002 Nintendo`
+(SHA-256
+`ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`). This
+passes the identifiable game-frame gate. The same run later exits `139` before
+graceful cleanup, so it is not a stable-playability or clean-shutdown claim.
 
 The full PC runtime remains behind its default ILP32 guard; the opt-in Darwin
 audit and native arm64 link are diagnostic milestones, not a claim of complete
 runtime portability. The fail-closed static GBI pointer guard remains enabled.
-Representative GX rendering, game frame, running-game input, game-mixer audio
-output, game-level Save_t/GCI load/restart, iOS Simulator, and physical-device
-gates remain open. Source `5086f1d` now crosses the former bad
+Representative GX rendering through the Apple renderer, running-game input,
+game-mixer audio output, game-level Save_t/GCI load/restart, iOS Simulator, and
+physical-device gates remain open. Source `5086f1d` now crosses the former bad
 `GRAPH_SET_DOING_POINT(..., GAME_BGM)` destination at `game.c:154` and reaches
 the first `graph_task_set00` call. Source `10d6ac0` captures the first live
 game-owned prefix (version 1, frame 0, capacity 256, count 8, words
 `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`).
-The next critical gate is the LP64 texture-object fault at
-`pc_gx_texture.c:62`; no rendered frame or playability is claimed.
+The next critical gate is a clean post-frame runtime/fault trace followed by
+representative GX-to-Metal encode, present, and pixel-readback evidence; the
+identifiable game-frame pass does not imply input, audio, save/load, or
+playability.

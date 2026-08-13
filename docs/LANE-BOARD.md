@@ -6,19 +6,27 @@ integrated. All new and successor tasks are Luna Max with max reasoning. A
 task being active means it is allowed to inspect or run its bounded work; it
 does not mean its gate passed.
 
-Current scheduler target: up to ten useful visible ACGC lanes, with no filler.
+Current scheduler ceiling: up to fifteen useful visible ACGC lanes, with no
+filler. One lane is the integration/evidence owner; up to fourteen are worker
+lanes. Production source editing remains capped at seven simultaneous lanes,
+with the remaining capacity reserved for dependency-ready reference audits,
+focused fixtures, read-only traces, and independent verification.
 The texture remediation (17) is now complete/integrated at source `578c8b7`.
-The root-owned audio-bank ABI lane is integrated at source `671171c`; its fresh
-run crosses `second_game.c`, clears the DMA and matrix/segment pointer faults,
-reaches `LOGO draw` and frame 1021, then fails closed for an unsupported bank 28
-instead of crashing. A bounded post-guard run survives to frame 1741; no
-rendered-frame, audible-audio, or playability claim is made.
+The root-owned audio-bank ABI lane is integrated at source `909f3ca`; its fresh
+run decodes compact bank 28, reaches `LOGO draw`, and produces the first
+identifiable game-owned frame. The captured screen is retained outside Git at
+`/private/tmp/acgc-integrated-audio-wave-build/integrated-frame-screen.png`
+(SHA-256
+`ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`). The
+process later exits `139` before clean shutdown, so representative GX/Metal
+readback, input, audible audio, save/load, and playability remain open.
 Graph capture (16) and integrated verification (22) are complete/parked. The
-post-fix game-frame runtime and the successor requests listed below are
-setup-pending: the app has returned client IDs but not durable task IDs or
-worktrees yet. They are not counted as active until `list_threads` confirms
-them. Source-editing work remains capped at roughly 5–7 lanes, and expensive
-full links remain serialized. All other ACGC tasks are parked or archived;
+post-fix game-frame request is superseded by the root-owned integrated run;
+remaining successor requests listed below are setup-pending because the app has
+returned client IDs but not durable task IDs or worktrees yet. They are not
+counted as active until `list_threads` confirms them. Expensive full links and
+LLDB launch traces remain serialized. All other
+ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
@@ -51,14 +59,15 @@ docs.
 | 23 | Windows compatibility post-capture audit — `019ff914-b7c7-75d2-ad4c-d94032e35b12` | `_WIN32`/x86/OpenGL/SDL conditional audit after `10d6ac0` | `/Users/jk/.codex/worktrees/d9c5/acgc-modern-port`; build `/private/tmp/acgc-lane-windows-audit-build` | Complete/parked; strict `_WIN32` graph seam compile/test passes; no source regression found; native Windows/x86 toolchain remains unavailable |
 | 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; source `/private/tmp/acgc-lane-texture-fault-fixture` / `c1/lane-texture-fault-fixture` | Complete/integrated as `07a5447`; native arm64 fixture records full pointer → opaque handle → low-word truncation and intentional `EXPECTED_FAILURE`; remediation remains lane 17 |
 | 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Parked/archived under four-lane cap; prior lifecycle evidence remains integrated |
-| 26 | Post-fix game frame runtime — client `client-new-thread:1b48103c-9b76-4caf-8598-686e392653c3` | Fresh actual-game arm64 run after texture remediation, packet/frame boundary | Worktree setup pending; planned source `/private/tmp/acgc-lane-postfix-frame` / `c1/lane-postfix-frame`; build `/private/tmp/acgc-lane-postfix-frame-build` | Queued; do not start a competing full link before texture integration |
-| 27 | Audio-bank ABI repair — root-owned continuation | `src/static/jaudio_NES/internal/system.c`, `channel.c`, fixed-width bank decoder and focused fixtures | `/private/tmp/acgc-lane-audio-lp64` / `c1/lane-audio-lp64`; integrated on `c1/macos-host-launch` as source `671171c`; builds `/private/tmp/acgc-lane-audio-lp64-build` and `/private/tmp/acgc-emu64-sanitize-build` | Integrated bounded fix; arm64 `ac_pc` links, native audio fixture 1/1, emu64 native 3/3, ASan/UBSan 3/3; fresh game run reaches `LOGO draw`/frame 1021, then bank 28 decode rejects and now fails closed; 60-second post-guard run survives to frame 1741; bank 28 schema/audio and rendered/audible gates remain open |
+| 26 | Post-fix game frame runtime — client `client-new-thread:1b48103c-9b76-4caf-8598-686e392653c3` | Fresh actual-game arm64 run after texture remediation, packet/frame boundary | No separate worktree activated; root integration owner used `/private/tmp/acgc-integrated-audio-wave-build` | Superseded by root-owned integrated run; first identifiable game-owned frame captured, later `rc=139`; no duplicate full link |
+| 27 | Audio-bank ABI repair — root-owned continuation | `src/static/jaudio_NES/internal/system.c`, `channel.c`, fixed-width bank decoder and focused fixtures | `/private/tmp/acgc-lane-audio-lp64` / `c1/lane-audio-lp64`; lane commit `5974764`, integrated on `c1/macos-host-launch` as source `909f3ca`; build `/private/tmp/acgc-integrated-audio-wave-build` | Integrated bounded fix; `ac_pc` full link `rc=0`, audio fixture 1/1, emu64 native 3/3, ASan/UBSan 3/3; bank 28 decodes (`3376` bytes), `[LOGO] draw` appears, and the integrated screenshot passes the game-frame gate; later `rc=139` keeps clean shutdown and post-frame stability open |
 
 ## Rolling-refill intake (setup pending)
 
-These six bounded successors were requested with Luna Max/max reasoning and
-distinct ownership. They are not counted as active until `list_threads` returns
-durable task IDs and the app creates their isolated worktrees.
+These bounded successors were requested with Luna Max/max reasoning and distinct
+ownership. They are not counted as active until `list_threads` returns durable
+task IDs and the app creates their isolated worktrees. Before activation, each
+must also receive the reference-first task contract required by `AGENTS.md`.
 
 | Planned lane | Client task ID | Ownership / first evidence |
 | --- | --- | --- |
@@ -197,6 +206,21 @@ submodules blindly or edit a detached source checkout.
   survives to `NEOS_OUT frame=1741` before the harness terminates it. This proves
   launch survival through that boundary only; it does not prove a visible frame,
   asset-driven audio, input, save/load, or playability.
+- Source lane commit `5974764`, integrated as `909f3ca`, accepts only zero-valued
+  truncated percussion tails, maps wire `MEDIUM_CART` wave offsets onto the
+  native ARAM base, and adds focused fixtures for both rules. The authoritative
+  `ac_pc` build returns `0`; the audio fixture passes `1/1`, and the existing
+  native and ASan/UBSan emu64 tests pass `3/3` each. A fresh run from that exact
+  source snapshot logs bank-28 decode and `[LOGO] draw`; its captured screen is
+  the first identifiable game-owned frame. The run then exits `139`, so no
+  clean-shutdown, representative GX/Metal, input, audible-audio, save/load, or
+  playability claim follows. The integrated commands were
+  `cmake -S pc -B /private/tmp/acgc-integrated-audio-wave-build
+  -DPC_DARWIN_COMPILE_AUDIT=ON -DCMAKE_BUILD_TYPE=Debug`,
+  `cmake --build /private/tmp/acgc-integrated-audio-wave-build --target ac_pc
+  acgc_pc_audio_bank_wire_fixture --parallel 4`, and
+  `ctest --test-dir /private/tmp/acgc-integrated-audio-wave-build
+  --output-on-failure -R '^acgc_pc_audio_bank_wire_fixture$'`.
 - The completed boot trace resolves the failing arm64 store as
   `strb w8, [x22,#0x474]` for `GRAPH_SET_DOING_POINT(graph, GAME_BGM)` with
   computed bad base `0x100000000`; `graph_task_set00` is never hit. Its next
@@ -213,20 +237,18 @@ submodules blindly or edit a detached source checkout.
    integrated/rejected/parked here, and refill only with a useful dependency-ready
    successor. The input lane is parked because its remaining gate requires an
    OS/human event or physical controller; no synthetic filler replaces it.
-3. The LP64 texture-object fault is repaired at source `578c8b7`; the
-   `02edf9c` second-game ABI repair is integrated. The current launch-critical
-   boundary is the audio-bank wire/native mismatch: the uncommitted DMA-width
-   fix clears `system.c:1300`, and the uncommitted native `BANK_ENTRY` fix
-   reaches `system.c:1167`. Prove a bounded native decoder with wire fixtures,
-   then feed the captured prefix into `83fa889` and advance Metal/TEV toward a
-   game-owned frame. The `866dd94` and `ddbb498` fixture passes remain separate
-   gates.
+3. The LP64 texture-object fault is repaired at source `578c8b7`, and the
+   audio-bank wire/native mismatch is integrated at `909f3ca`. The first
+   identifiable game-owned frame is now evidenced; the next bounded lane is a
+   post-frame crash/fault trace, followed by representative GX-to-Metal
+   encode/present/readback. Keep the `83fa889`, `866dd94`, and `ddbb498` fixture
+   contracts separate from live-frame proof.
 4. Keep Save_t/GCI parked on the explicit raw-range mismatch until the codec
    preserves arbitrary bytes or a proven wire-format boundary is established;
    do not weaken the roundtrip test. Filesystem adapter, lifecycle, and
    verification evidence remain synthetic/portable boundaries.
-5. Re-run the native and sanitizer matrix at the integrated `c1/macos-host-launch`
-   source HEAD after the audio fix, then separately prove input, audio
+5. Refresh the native and sanitizer matrix at the integrated
+   `c1/macos-host-launch` source HEAD after the audio fix, then separately prove input, audio
    device/audibility, save/load, simulator, physical device, and playability.
 6. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
