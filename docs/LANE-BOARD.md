@@ -39,7 +39,7 @@ useful until a later dependency-ready gate appears. The post-audio,
 arm64 post-texture, WaveTouch, and audio-DMA handoffs are complete/archived; the authoritative source is now
 `724a18d`. Pinned task `019ff9bd-7f15-7513-8b22-61af13c8a6fe` (`ACGC Worktree
 and Thread Cleanup`) owns the separate 30-minute cleanup heartbeat. Its first
-pass retired four clean source worktrees and pruned their stale Git metadata,
+pass retired five clean source worktrees and pruned their stale Git metadata,
 preserving every branch and commit. It also retired five clean orphaned
 umbrella worktrees; the remaining `a828` checkout is dirty and is explicitly
 preserved. It archives completed worker tasks but does not touch active or
