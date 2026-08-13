@@ -42,9 +42,8 @@ texture-pointer, texture/TLUT/TEV, runtime-input, filesystem, timing,
 Windows, and sanitizer lanes are complete/parked or integrated. The current
 active workers are iOS readiness
 (`019ffa12-9809-7c21-b1e2-67f4f7bd52c5`), the game-cleanup invalid-free
-successor (`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`), and the retried ac-decomp
-audit (`019ffa12-929c-73e3-b706-a4f76c78a270`): three active workers plus this
-owner (four active ACGC lanes). No other dependency-ready lane is being
+successor (`019ffa28-3ef7-7280-923c-5a01bf2eb4c2`): two active workers plus
+this owner (three active ACGC lanes). No other dependency-ready lane is being
 refilled: live CoreAudio/Metal devices and the complete game-owned graph
 capture remain unavailable, while Windows and iOS are gated by their stated
 proofs. The post-audio, arm64 post-texture, WaveTouch, and audio-DMA handoffs
@@ -115,7 +114,7 @@ from compilation alone.
 | 41 | Timing/retrace/lifecycle audit — `019ffa12-8092-7cd0-a5d9-9ff1904d821b` | Read-only `pc_os.c`, `pc_vi.c`, `game_runtime.c`; ranked status-139 handoff | `/Users/jk/.codex/worktrees/bb46/acgc-modern-port` (retired) | Complete/parked; game-runtime probe native and ASan/UBSan pass; bounded full-port trace stops at SDL init, so TERM/worker causality and clean shutdown remain unproven |
 | 42 | Windows compatibility audit — `019ffa12-87a8-78b0-924a-feab35389797` | Read-only `_WIN32`/x86/OpenGL/SDL conditionals and toolchain probe | `/Users/jk/.codex/worktrees/3266/acgc-modern-port` (retired) | Complete/parked; portable native and ASan/UBSan 18/18 pass; MinGW i686/PE/Windows SDL toolchain unavailable, so no Windows compile/link/launch sign-off |
 | 43 | Current native + ASan/UBSan matrix — `019ffa12-8a7e-76b0-9503-2f4394249e43` | Exact-tip focused test matrix; unique sanitizer build roots | `/Users/jk/.codex/worktrees/dc19/acgc-modern-port` (retired); provenance `03f1854e` / `c1/lane-sanitizer-724` | Complete/parked; native, ASan, and UBSan each 38 passed/3 expected skips/0 failures; no full link, device, or playability claim |
-| 44 | ac-decomp GAFE01 toolchain audit — `019ffa12-929c-73e3-b706-a4f76c78a270` | Read-only configure/build/extraction boundary and Wine/Metrowerks blocker | `/Users/jk/.codex/worktrees/90c1/acgc-modern-port` (retained for retry) | Retry active after prior systemError/no-final due model capacity; no evidence claim until a final handoff records the exact configure/ninja blocker |
+| 44 | ac-decomp GAFE01 toolchain audit — `019ffa12-929c-73e3-b706-a4f76c78a270` | Read-only configure/build/extraction boundary and Wine/Metrowerks blocker | `/Users/jk/.codex/worktrees/90c1/acgc-modern-port` (retired); retry logs `/private/tmp/acgc-lane-acdecomp-audit-retry` (retired) | Complete/parked; `python3 configure.py` generates Ninja, but `ninja -j1` stops at missing `orig/GAFE01_00/files/foresta.rel.szs`; no Wine/Metrowerks, extraction, native build, or runtime claim; GAFE01 config/build metadata match both upstreams |
 | 45 | iOS shared-boundary readiness — `019ffa12-9809-7c21-b1e2-67f4f7bd52c5` | Read-only portable/Apple boundary map; iOS remains gated by macOS proof | `/Users/jk/.codex/worktrees/b09c/acgc-modern-port` | Active; read-only architecture lane |
 | 46 | Game cleanup invalid-free successor — `019ffa28-3ef7-7280-923c-5a01bf2eb4c2` | `src/game/m_field_make.c`, `src/game/m_play.c`, `src/graph.c`, `src/static/libc64/__osMalloc.c`; exact TERM/allocator fault | `/Users/jk/.codex/worktrees/8594/acgc-modern-port`; planned source `/private/tmp/acgc-lane-game-cleanup-invalid-free/source` / `c1/lane-game-cleanup-invalid-free` | Active; Luna Max/max; reproduce exact current 305b223 supervisor fault before any edit; source-edit cap and full-link serialization apply |
 
