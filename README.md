@@ -21,8 +21,10 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `a7b9dff` (`Exercise mCD_SaveHome_bg in CARD fixture`),
-  on top of `5548570` (`Validate GCI Save_t recovery slots`) and `09dd182`
+  `c1/macos-host-launch` at `9cf9b3f` (`Fix reserved identifiers in Metal fixture shaders`),
+  on top of `6e4aded` (bounded graph classification), `e22cbc5`
+  (optional GX packet handoff), `a7b9dff` (`Exercise mCD_SaveHome_bg in CARD fixture`),
+  `5548570` (`Validate GCI Save_t recovery slots`) and `09dd182`
   (`Fix LP64 field display-list cleanup`). The current
   source removes the guest-width `u32` round-trip from
   `mFM_MakeField`, adds a focused allocator/ownership fixture, and passes
@@ -94,8 +96,10 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `a7b9dff` (`Exercise mCD_SaveHome_bg
-  in CARD fixture`), on top of `5548570` (`Validate GCI Save_t recovery slots`)
+  `c1/macos-host-launch` source branch at `9cf9b3f` (`Fix reserved identifiers
+  in Metal fixture shaders`), on top of `6e4aded` (bounded graph
+  classification), `e22cbc5` (optional GX packet handoff), `a7b9dff`
+  (`Exercise mCD_SaveHome_bg in CARD fixture`), and `5548570` (`Validate GCI Save_t recovery slots`)
   and `09dd182` (`Fix LP64 field display-list
   cleanup`) and the DVD/CARD, input snapshot, graph-capture, GX
   packet, Metal-fixture, texture, and audio-boundary commits reviewed in the
@@ -114,7 +118,10 @@ redistribute it or extracted proprietary assets.
   graph capture before emu64 setup), `07a5447` (arm64 texture-pointer forensic
   fixture), `12b4f6e` (bounded GX packet-to-Metal consumer fixture), and
   `5974764`/`909f3ca` (compact audio-bank tails and native wave-address
-  relocation) plus `304f055`/`724a18d` (LP64 audio-DMA address preservation).
+  relocation) plus `304f055`/`724a18d` (LP64 audio-DMA address preservation),
+  `1d1cd8f`/`6e4aded` (bounded complete-list graph classification), and
+  `19d5f4e`/`26bcc02`/`e22cbc5`/`9cf9b3f` (optional GX-to-Metal handoff and
+  host-compiler-safe Metal fixtures).
   These remain separate boundaries: the first live game-owned prefix is
   captured; the identifiable screenshot belongs to the separately named
   `909f3ca` run; and the newer authoritative `09dd182` runtime reaches the
