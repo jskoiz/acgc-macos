@@ -49,9 +49,16 @@ finding is that live textured/TEV/active state reaches the fail-closed packet
 builder rejection before `pc_metal_runtime_observe`; no defect was proven and
 no frame or Metal claim follows. The task is archived and no worker is active.
 Lane 100 was archived after the same remote Codex compaction `404` occurred
-before its focused tests produced a result. No source/build/runtime work or
-Metal claim follows; no worker is active. The packet-builder rejection finding
-from lane 99 remains a hypothesis requiring root-owned focused reproduction.
+before its worker could produce a handoff. The root-owned continuation then
+committed the opt-in diagnostic on `c1/lane-metal-rejection-diagnostic` and
+fast-forwarded it into `c1/macos-host-launch` at `8a19f23`. One serialized
+arm64 link and one elevated, directly rooted launch produced 64 bounded v2
+records: 32 preflight and 32 fail-closed results, with no success. The live
+state is standard source-alpha blending plus `GX_TEXMTX0`, both outside the
+current v2 contract; this explains the rejection without proving a defect.
+The evidence is `docs/evidence/METAL-REJECTION-DIAGNOSTIC-8A19F23-2026-08-13.md`.
+No callback, Metal encode/readback, pixel, input, audio, save, device, or
+playability claim follows, and no worker lane is active.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -94,12 +101,13 @@ encode/readback/pixel, device, input, audio, save, or playability gate. See
 `docs/evidence/GX-V2-CONSUMER-BOUNDARY-2026-08-13.md`.
 
 The Windows, sanitizer, iOS, and input frame-guard handoffs are complete and
-queued for exact-root cleanup. The authoritative PC source is `d1e812c` on
+queued for exact-root cleanup. The authoritative PC source is `8a19f23` on
 `c1/macos-host-launch`; the umbrella branch is `main` (the local
 `c1/apple-port-bootstrap` alias is fast-forwarded to the same tip) plus only
-the pre-existing `.codex`/settings edits. The next bounded gate is one
-serialized current-tip runtime trace for v2 callback reachability; it remains
-separate from Metal encode/readback/pixel proof and is not opened as filler.
+the pre-existing `.codex`/settings edits. The next bounded gate is a
+dependency-ready versioned packet/consumer extension for the observed
+alpha-blend and texture-matrix state; it remains separate from Metal
+encode/readback/pixel proof and is not opened as filler.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
@@ -275,7 +283,7 @@ from compilation alone.
 | 97 | Trace subsequent graph task progression — `019ffcd6-49fb-7f20-abb7-967008d7fe17` | Read-only one-link/one-LLDB current-tip trace for later `graph_task_set00`/`graph_draw_finish`/`graph_submit_task` activity after the lane-96 clean no-draw task; classify any later GXBegin reachability | Worktree `/Users/jk/.codex/worktrees/7008/acgc-modern-port` and roots `/private/tmp/acgc-lane-subsequent-graph-task-build` / `/private/tmp/acgc-lane-subsequent-graph-task-logs` (retire after review); canonical source `c1/macos-host-launch` at `d1e812c`; no source branch | Complete/archived; link `[4018/4019]` passed; graph submission/task entry each hit twice; task 2 reached 8 dispatches and a `G_DL` prefix but timed out before `G_ENDDL`/return; draw handlers and `GXBegin` 0; evidence `docs/evidence/SUBSEQUENT-GRAPH-TASK-PROGRESSION-2026-08-13.md`; no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
 | 98 | Complete second graph task continuation — `019ffcea-aceb-7f10-8aba-7fc61a98896d` | Read-only one-link/one-LLDB current-tip trace with a 30-second bound; extend task-2 `F0004000` continuation to `G_ENDDL` or a draw/GXBegin boundary | Lane worktree already absent; run snapshot `5b89680`; build/log roots retired by the cleanup lane; no source branch | Complete/archived; task 2 reached `F0004000`–`F0004007`, `G_ENDDL`, and return `0` with `cmds=12`, `end_dl=1`; draw handlers, `GXBegin`, and flush were `0` for task 2; later-task hits excluded; evidence `docs/evidence/SECOND-GRAPH-TASK-COMPLETION-2026-08-13.md`; no Metal encode/readback/pixel, input/audio/save, device, or playability claim |
 | 99 | Current Metal-frame bridge audit/implementation — `019ffd05-6144-77a0-8a55-f1bb4092654d` | Bounded crosswalk for why live textured/TEV state is rejected before `pc_metal_runtime_observe`; source edit only if a concrete defect is proven | Worktree retired with the task; base umbrella `05c7ce8`, PC `d1e812c`, decomp `09ca8e8b`; no build/runtime roots created | Complete/archived with infrastructure failure after setup; read-only finding only, no source/build/runtime/Metal/pixel claim; no defect proven |
-| 100 | Metal packet rejection predicate audit — `019ffd08-10ff-77b1-8bc4-bd91a84902e9` | Test-only/read-only reproduction of fail-closed packet-builder behavior for textured/TEV/active state; native plus ASan/UBSan focused tests; no full link/LLDB; source edit only if defect proven | Worktree retired with task; base umbrella `e2ab6f6`, PC `d1e812c`, decomp `09ca8e8b`; no retained build/runtime roots | Complete/archived with infrastructure failure before focused result; no source/build/runtime/Metal/pixel claim; no defect proven |
+| 100 | Metal packet rejection predicate audit — `019ffd08-10ff-77b1-8bc4-bd91a84902e9` | Test-only/read-only reproduction of fail-closed packet-builder behavior for textured/TEV/active state; native plus ASan/UBSan focused tests; no worker full link/LLDB; root continuation owns only opt-in diagnostic instrumentation | Worker task retired after remote compaction failure; diagnostic branch `c1/lane-metal-rejection-diagnostic` fast-forwarded into canonical `c1/macos-host-launch` at `8a19f23`; decomp `09ca8e8b`; exact roots `/private/tmp/acgc-metal-rejection-trace-build` and `/private/tmp/acgc-metal-rejection-trace-logs` | Complete/archived; focused native and ASan/UBSan v2 handoff tests `1/1` each; one elevated launch emitted 32 preflight + 32 fail records; live alpha-blend/TEXMTX0 state is outside current v2 contract; no callback/Metal/pixel/playability claim; evidence `docs/evidence/METAL-REJECTION-DIAGNOSTIC-8A19F23-2026-08-13.md` |
 
 ## Parked intake (not active)
 
