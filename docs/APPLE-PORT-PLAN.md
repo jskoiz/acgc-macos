@@ -123,11 +123,14 @@ Exit: host-launch evidence, with rendering still allowed to be absent.
   TEV combinations, and EFB copy/readback behavior in small fixtures.
   **Clear/present and one fixed-width non-indexed colored-triangle packet now
   have command-buffer completion evidence. The renderer-neutral GX packet and
-  Metal state fixtures also pass focused CPU/Apple tests, but this host skipped
-  the live Metal-device path and no game-owned packet has reached it. Pixel
-  readback, GX-derived geometry, transforms, live texture upload/readback, and
-  all later fixture classes remain open. Synthetic texture/TLUT/TEV reference
-  fixtures now pass separately.**
+  Metal state fixtures also pass focused CPU/Apple tests. The reconstructed
+  arm64 run now supplies the first live game-owned prefix (version 1, frame 0,
+  capacity 256, count 8), but this host skipped the live Metal-device path and
+  the run still faults in the legacy 32-bit texture-object path before packet
+  translation or pixel readback. Pixel readback, GX-derived geometry,
+  transforms, live texture upload/readback, and all later fixture classes
+  remain open. Synthetic texture/TLUT/TEV reference fixtures now pass
+  separately.**
 - Prove deferred-batch drain and frame presentation separately, and add a
   directed CI14x2 fixture before claiming complete documented texture coverage.
 - Retain the current OpenGL backend as the Windows regression oracle.
@@ -164,12 +167,11 @@ distribution, and App Store work require fresh authorization.
 
 Continue in separately reviewable ACGC-PC-Port branches:
 
-1. Trace the post-loader `game_main`/`graph_proc` fault now exposed at
-   `game.c:154`; the focused DVD-tail semantics fix already lets the 19-byte
-   `COPYDATE` satisfy the GameCube 32-byte transfer rule and reaches archive
-   loading.
-2. Capture the first renderer-neutral game submission after `emu64` has
-   produced GX semantic state. Carry fixed-width geometry, transforms, and
+1. Repair the arm64 LP64 texture-object fault at `pc_gx_texture.c:62`; the
+   focused DVD-tail semantics fix and graph reload now reach the first live
+   game-owned submission prefix before that fault.
+2. Feed the captured fixed-width prefix into the existing renderer-neutral GX
+   semantic packet contract. Carry fixed-width geometry, transforms, and
    material/texture state; do not substitute the existing triangle fixture for
    a game frame.
 3. Prove the injectable macOS input snapshot at the SDL pad boundary with a

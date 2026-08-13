@@ -291,7 +291,7 @@ could not create the image; no visual-capture claim is made.
 ## Rolling lane update (2026-08-12)
 
 The authoritative `upstream/ACGC-PC-Port` branch is
-`c1/macos-host-launch` at `2736838`. Reviewed source commits now include:
+`c1/macos-host-launch` at `10d6ac0`. Reviewed source commits now include:
 
 - `e5442de` / `858d802` / `8b6849f` — injectable fixed-width PC input snapshots,
   the final PADRead handoff, and SDL virtual-controller/event smoke;
@@ -299,6 +299,9 @@ The authoritative `upstream/ACGC-PC-Port` branch is
   existing PC/emu64 submit path;
 - `5086f1d` — reload `GAME.graph` after the LP64-corrupting callback; the
   patched run reaches the first `graph_task_set00` call;
+- `10d6ac0` — opt-in Darwin callback and pointer-free capture immediately after
+  `JW_BeginFrame`, before legacy emu64 texture setup; the first live
+  game-owned prefix is recorded;
 - `83fa889` — 4,800-byte renderer-neutral GX semantic packet contract;
 - `866dd94` — Metal geometry/state fixtures; and
 - `ddbb498` — texture/TLUT/sampler/TEV fixtures; and
@@ -348,9 +351,13 @@ treating canonicalization as lossless.
 The original fresh arm64 game run loaded COPYDATE, the string table, `JW_Init2`,
 both forest archives, and the Famicom archive, then faulted at `game.c:154`.
 The patched run for `5086f1d` crosses that store and reaches the first
-`graph_task_set00` call. The capture callback has not yet recorded a live
-game-owned packet, so no rendered frame, input, audible output, Save_t/GCI
-restart, or playability gate is claimed.
+`graph_task_set00` call. The `10d6ac0` callback then records version `1`, frame
+`0`, source capacity `256`, count `8`, and words
+`de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.
+The same run subsequently stops at `pc_gx_texture.c:62` following the
+truncated `0x83bdc0` texture object. This proves a game-owned submission prefix
+only; no rendered frame, input, audible output, Save_t/GCI restart, or
+playability gate is claimed.
 
 ## Proof ledger
 
@@ -367,7 +374,7 @@ restart, or playability gate is claimed.
 | macOS host launch | Passed | Direct app process prepared exact GAFE01_00 DOL/REL input, returned 0, and left no surviving process. |
 | Metal clear/present | Passed | The geometry fixture retains the deterministic clear and submits presentation before bounded command-buffer completion. |
 | Metal geometry fixture | Passed | Two command buffers containing a fixed-width colored triangle completed before the deadline; no pixel-readback or visual claim. |
-| Representative GX/game frame | Not reached | The Metal fixture is not connected to GX semantics or the reconstructed game loop; the DVD-tail fix now reaches `graph_proc` before `game.c:154` `EXC_BAD_ACCESS`. |
+| Representative GX/game frame | Not reached | The first live game-owned prefix is captured by `10d6ac0`, but the reconstructed run still faults at `pc_gx_texture.c:62` on a truncated 32-bit texture object before renderer translation or pixel readback. |
 | Input | Synthetic controller boundary passed, human keyboard open | `8b6849f` passes the fixed-width snapshot/PADRead and SDL virtual-controller smoke tests natively and under ASan/UBSan; OS/human keyboard, physical controller, running game, and playability remain unproven. |
 | Audio device boundary | Passed, limited | Real SDL/CoreAudio callback probe: 32 kHz S16 stereo, 512 samples, zero underruns/overruns; no reconstructed mixer or audible-output claim. |
 | Save/CARD host boundary | Passed, limited | Native and sanitizer temporary-directory CARD roundtrip; no GameCube Save_t/GCI or process-restart proof. |

@@ -12,8 +12,8 @@ does not mean its gate passed.
 | --- | --- | --- | --- | --- |
 | 1 | DVD aligned-read semantics — `019ff8aa-6e31-7723-bb32-095c7158148b` | `pc_dvd.c`, focused DVD probe | `/private/tmp/acgc-lane-dvd-loader` / `c1/lane-dvd-loader`; source `dfb3f7f`, integrated as `4f77dab` | Complete; fresh run passes `COPYDATE` and reaches `game.c:154` |
 | 2 | Launch supervisor — `019ff8d2-a527-7c90-b7c0-f95aef4f5a0e` | Umbrella `script/build_and_run_game.sh` only | `/Users/jk/.codex/worktrees/f2c7/acgc-modern-port`; `c1/lane-launch-supervisor` | Complete; umbrella `e96776d`; TERM grace/KILL fixture passed |
-| 3 | Boot trace → graph fault repair — `019ff8d3-06e4-71d3-8708-120d84fa270f` → `019ff8e7-402d-7a31-844a-0afd32918cc1` | Completed LLDB evidence, then source-owned `GAME`/`GRAPH` LP64 callback path | Trace `/Users/jk/.codex/worktrees/6bed/acgc-modern-port`; repair `/private/tmp/acgc-lane-graph-fault` / `c1/lane-graph-fault` | Complete/integrated; source `5086f1d`; one-line graph reload crosses `game.c:154` to first `graph_task_set00`, live packet capture still open |
-| 4 | First game-owned render submission — `019ff8aa-6e31-7723-bb32-097e85bb2293` → `019ff8ff-51e1-74b0-ad13-1539b72e8937` | Graph/emu64 submission capture | `/private/tmp/acgc-lane-render-capture-v2` / `c1/lane-capture`; live `/Users/jk/.codex/worktrees/5f6a/acgc-modern-port` | Successor active; seam `e03ffed`, repair `5086f1d`; fresh live words/callback evidence in progress |
+| 3 | Boot trace → graph fault repair — `019ff8d3-06e4-71d3-8708-120d84fa270f` → `019ff8e7-402d-7a31-844a-0afd32918cc1` | Completed LLDB evidence, then source-owned `GAME`/`GRAPH` LP64 callback path | Trace `/Users/jk/.codex/worktrees/6bed/acgc-modern-port`; repair `/private/tmp/acgc-lane-graph-fault` / `c1/lane-graph-fault` | Complete/integrated; source `5086f1d`; reload crosses `game.c:154` to `graph_task_set00`; live packet now captured by lane 4 |
+| 4 | First game-owned render submission — `019ff8aa-6e31-7723-bb32-097e85bb2293` → `019ff8ff-51e1-74b0-ad13-1539b72e8937` | Graph/emu64 submission capture | `/private/tmp/acgc-lane-render-capture-v2` / `c1/lane-capture`; live `/Users/jk/.codex/worktrees/5f6a/acgc-modern-port`; source branch `c1/lane-render-live` | Complete/integrated as `10d6ac0`; LLDB callback captured version 1, frame 0, capacity 256, count 8, words `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`; run then faults at `pc_gx_texture.c:62` on truncated `0x83bdc0`; no frame claim |
 | 5 | GX semantic packet — `019ff8d3-0887-7472-a53a-84c5d7ad105c` | Fixed-width renderer-neutral packet + tests | `/private/tmp/acgc-lane-gx-packet` / `c1/lane-gx-packet` | Complete; source `83fa889`; native/Apple/ASan focused tests passed |
 | 6 | Metal geometry/state — `019ff8d3-0c2e-7463-b918-af75f7cb6208` | Apple geometry/state fixtures | `/private/tmp/acgc-lane-metal-state` / `c1/lane-metal-state` | Complete; source `866dd94`; CPU/geometry passed, Metal skipped (no device) |
 | 7 | Texture/TLUT/TEV fixtures — `019ff8d3-150c-77f0-b99c-dcbf38645977` | Synthetic texture/palette/combiner fixtures | `/private/tmp/acgc-lane-tev-fixtures` / `c1/lane-tev-fixtures` | Complete; source `ddbb498`; focused native + ASan/UBSan fixture passed |
@@ -25,6 +25,16 @@ does not mean its gate passed.
 | 13 | Windows compatibility audit — `019ff8d3-23c5-75a2-beac-7f7e70c72c08` | Read-only x86/Windows/OpenGL/SDL conditional audit | `/Users/jk/.codex/worktrees/8231/acgc-modern-port` | Complete read-only; scoped to `4f77dab`, no MinGW compiler sign-off |
 | 14 | Native + ASan/UBSan matrix — `019ff8d3-2a6f-7610-a9f1-53f237353454` | Focused verification and sanitizer evidence | `/Users/jk/.codex/worktrees/2232/acgc-modern-port`; `c1/lane-verification-matrix` | Complete/parked; umbrella `38f85da`; 32 native + 32 ASan/UBSan targets at exact `858d802`, CoreAudio/Metal skipped as expected |
 | 15 | Integration/evidence owner — `019ff398-2520-7191-ac5c-f3007c49163f` | Umbrella docs, roadmap, reviewed commits, source gitlink, launch proof | `/Users/jk/Documents/Projects/acgc-modern-port` / `c1/apple-port-bootstrap` | Active; only lane allowed to update the umbrella submodule pointer |
+| 16 | Graph capture → GX packet — `019ff914-44fc-7801-88f4-ee513fc8e728` | New adapter/test from captured prefix into existing GX contract | `/Users/jk/.codex/worktrees/4a27/acgc-modern-port`; planned source `/private/tmp/acgc-lane-graph-gx-adapter` / `c1/lane-graph-gx-adapter` | Active; source-edit lane |
+| 17 | LP64 texture handle remediation — `019ff914-9bd9-77f3-8d8b-d72f5c00d587` | `pc_gx_texture.c` and opaque-reference width/lifetime | `/Users/jk/.codex/worktrees/fc81/acgc-modern-port`; planned source `/private/tmp/acgc-lane-lp64-texture` / `c1/lane-lp64-texture` | Active; source-edit lane; owns `0x83bdc0` fault |
+| 18 | Metal semantic packet consumer — `019ff914-9e34-7181-8903-f8022c82cacf` | Packet-to-state/encoder validation and device-gated fixture | `/Users/jk/.codex/worktrees/da16/acgc-modern-port`; planned source `/private/tmp/acgc-lane-metal-packet-consumer` / `c1/lane-metal-packet-consumer` | Active; source/fixture lane; no live device claim |
+| 19 | Live graph capture reproducibility — `019ff914-ad3f-7721-82f2-d8985d601ba1` | Two cold-run snapshots and exact fault boundary | `/Users/jk/.codex/worktrees/5edb/acgc-modern-port`; build `/private/tmp/acgc-lane-live-capture-repro-build` | Active; runtime evidence only |
+| 20 | CoreAudio device and audible gate — `019ff914-a32b-7363-a619-f79e21c75db3` | Real sink open/callback/ring and clean shutdown | `/Users/jk/.codex/worktrees/fdc9/acgc-modern-port`; build `/private/tmp/acgc-lane-coreaudio-device-build` | Active; runtime evidence; device availability may park it |
+| 21 | Save_t raw-wire forensic — `019ff914-a86e-7793-b0f0-6ce23e8d97a0` | `time_limit` width/endianness/range evidence across both upstreams | `/Users/jk/.codex/worktrees/e9ef/acgc-modern-port`; build `/private/tmp/acgc-lane-save-wire-forensic-build` | Active; read-only/fixture lane; codec remains frozen |
+| 22 | Integrated sanitizer matrix — `019ff914-b322-7e10-876e-c942a45aef4a` | Native and ASan/UBSan at integrated source `10d6ac0` | `/Users/jk/.codex/worktrees/44e8/acgc-modern-port`; builds `/private/tmp/acgc-lane-integrated-native-build` and `/private/tmp/acgc-lane-integrated-sanitizer-build` | Active; verification only; serialize full links |
+| 23 | Windows compatibility post-capture audit — `019ff914-b7c7-75d2-ad4c-d94032e35b12` | `_WIN32`/x86/OpenGL/SDL conditional audit after `10d6ac0` | `/Users/jk/.codex/worktrees/d9c5/acgc-modern-port`; build `/private/tmp/acgc-lane-windows-audit-build` | Active; read-only audit |
+| 24 | Pre-render texture fault fixture — `019ff914-bfa0-7d31-8228-247292e5cad1` | Isolated regression fixture for 32-bit texture-object truncation | `/Users/jk/.codex/worktrees/52c7/acgc-modern-port`; planned source `/private/tmp/acgc-lane-texture-fault-fixture` | Active; fixture/audit only; does not implement remediation |
+| 25 | macOS host input/window lifecycle gate — `019ff914-c6fa-7812-bed5-8939ef4fa58e` | Init/poll/focus-resume/termination plus exact input handoff | `/Users/jk/.codex/worktrees/24c0/acgc-modern-port`; planned source `/private/tmp/acgc-lane-macos-host-lifecycle` / `c1/lane-macos-host-lifecycle` | Active; source/test lane |
 
 The Codex-created umbrella worktrees begin detached at umbrella commit
 `82732fe` with nested submodules uninitialized. Source-edit lanes therefore use
@@ -43,12 +53,20 @@ submodules blindly or edit a detached source checkout.
   `PADInit`/`PADRead` controller path passes 2/2 natively and under ASan/UBSan;
   queued keyboard events are delivered but do not alter SDL keyboard state, so
   the input lane is parked pending OS/human keyboard and physical-device proof.
-- `e03ffed` adds a pointer-free graph submission capture seam; its focused
-  legacy test and Darwin graph syntax check pass, but the current run reaches
-  neither the hook nor a live packet.
+- `e03ffed` adds a pointer-free graph submission capture seam. `10d6ac0` adds
+  an opt-in Darwin callback and moves the bounded copy immediately after
+  `JW_BeginFrame`, before the legacy emu64 texture setup. The focused legacy
+  seam test passes. A fresh LLDB run reaches the callback with version `1`,
+  frame `0`, source capacity `256`, count `8`, and the fixed-width words
+  `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.
+  This is the first live game-owned submission prefix, not a synthetic draw.
+- After the capture, the same run stops at `pc_gx_texture.c:62` while
+  `tex_content_hash` follows `data=0x83bdc0` from a truncated 32-bit texture
+  object. That is the next source-fix gate; no rendered frame is claimed.
 - `5086f1d` reloads `GAME.graph` after the callback that corrupts the local
   callee-saved register. The patched arm64 run reaches the first
-  `graph_task_set00` call; no game-owned packet or frame is claimed yet.
+  `graph_task_set00` call; it is the prerequisite for the live capture in
+  `10d6ac0`, not a rendered-frame claim.
 - `83fa889` is the integrated renderer-neutral GX packet contract. It is a
   4,800-byte fixed-width packet with strict malformed-input rejection; native,
   Apple-entrypoint, and ASan/UBSan focused tests pass. It is not live-game
@@ -99,18 +117,16 @@ submodules blindly or edit a detached source checkout.
 
 ## Integration order
 
-1. Open the live-capture successor now that `5086f1d` reaches
-   `graph_task_set00`; record the first pointer-free game-owned submission via
-   `e03ffed` before attempting renderer translation. Do not claim a frame until
-   the capture callback records real game words.
+1. Review and integrate the first live capture (`10d6ac0`) as the fixed-width
+   input to the GX adapter lane. Preserve the exact snapshot and keep renderer
+   translation separate from frame proof.
 2. When a lane completes, inspect its final evidence immediately, mark it
    integrated/rejected/parked here, and refill only with a useful dependency-ready
    successor. The input lane is parked because its remaining gate requires an
    OS/human event or physical controller; no synthetic filler replaces it.
-3. After the graph fault is repaired, run the capture seam (`e03ffed`) and feed
-   the first live packet into `83fa889`; only then advance Metal/TEV toward a
-   game-owned frame. The `866dd94` and `ddbb498` fixture passes remain separate
-   gates.
+3. Repair the LP64 texture-object fault at `pc_gx_texture.c:62`, then feed the
+   captured prefix into `83fa889` and advance Metal/TEV toward a game-owned
+   frame. The `866dd94` and `ddbb498` fixture passes remain separate gates.
 4. Keep Save_t/GCI parked on the explicit raw-range mismatch until the codec
    preserves arbitrary bytes or a proven wire-format boundary is established;
    do not weaken the roundtrip test. Filesystem adapter, lifecycle, and

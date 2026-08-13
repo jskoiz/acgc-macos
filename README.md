@@ -74,8 +74,9 @@ redistribute it or extracted proprietary assets.
   Input, audio, save/load, and playability remain open; iOS remains gated behind
   the shared macOS core and renderer.
 - The actual reconstructed `ac_pc` target now builds from the owning
-  `c1/macos-host-launch` source branch at `2736838` (`Add NEOS RSP PCM
-  provenance probe`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
+  `c1/macos-host-launch` source branch at `10d6ac0` (`Capture graph work list
+  before emu64 setup`), on top of `2736838` (`Add NEOS RSP PCM provenance
+  probe`), with the DVD/CARD, input snapshot, graph-capture, GX packet,
   Metal-fixture, and audio-boundary commits reviewed in the same source
   history. The fresh arm64 link produces a Mach-O
   `AnimalCrossing` executable. Its native audio command records remain 8 bytes,
@@ -86,10 +87,18 @@ redistribute it or extracted proprietary assets.
   (pointer-free graph-submission capture), `83fa889` (4,800-byte
   renderer-neutral GX semantic packets), `866dd94` (Metal geometry/state
   fixtures), `ddbb498` (texture/TLUT/TEV fixtures), `766ad96`
-  (mixer-to-callback PCM fixture), `5086f1d` (post-callback graph reload), and
-  `2736838` (RSP/Neos-style PCM provenance).
-  These are separate boundaries: the graph capture has not yet observed a live
-  packet because the reconstructed process stops at `game.c:154`.
+  (mixer-to-callback PCM fixture), `5086f1d` (post-callback graph reload),
+  `2736838` (RSP/Neos-style PCM provenance), and `10d6ac0` (opt-in Darwin live
+  graph capture before emu64 setup). These are separate boundaries: the first
+  live game-owned prefix is now captured, but the reconstructed process still
+  stops in the legacy texture path before any renderer frame.
+- The first live graph snapshot is pointer-free and records version `1`, frame
+  `0`, source capacity `256`, count `8`, and words
+  `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`.
+  LLDB reaches the callback from `graph_task_set00`; after the callback the
+  arm64 run faults at `pc_gx_texture.c:62` while following `data=0x83bdc0`, a
+  truncated 32-bit texture object. This is a live submission-prefix gate, not
+  a rendered-frame or playability claim.
 - The input path now adds `8b6849f`, a focused SDL virtual-controller smoke
   harness. Real `PADInit`/`PADRead` button and axis handoff passes natively and
   under ASan/UBSan 2/2. SDL-queued keyboard events do not mutate
@@ -174,9 +183,11 @@ redistribute it or extracted proprietary assets.
   trace identifies the failing operation as the `GRAPH_SET_DOING_POINT(...,
   GAME_BGM)` write at that line, before `graph_task_set00` and before the
   capture hook. Source `5086f1d` reloads `GAME.graph` after the corrupting
-  callback; a fresh patched arm64 run crosses `game.c:154` and reaches the
-  first `graph_task_set00` call. It has not yet captured a live game-owned
-  packet or frame.
+  callback; `10d6ac0` then captures the first live game-owned prefix at the
+  callback (version 1, frame 0, capacity 256, count 8, words
+  `de010000,f0002000,00000000,00000000,00000000,00000000,00000000,00000000`).
+  The same arm64 run subsequently faults at `pc_gx_texture.c:62` on truncated
+  texture data `0x83bdc0`; this is not a rendered-frame or playability claim.
 
 Re-run the tracked checks from this directory:
 
