@@ -62,8 +62,17 @@ local verification roots under `/private/tmp/acgc-integrated-texture-tev-08c27de
 Native and combined ASan/UBSan focused tests pass `2/2` each. This is a
 synthetic CPU resolver/typed-consumer contract only; no full link, LLDB, device,
 Metal encode/readback, pixel, input, audio, save, or playability claim exists.
-The next dependency-ready gate is a separately owned runtime-forwarding audit;
-only the root owner may update the umbrella checkout.
+Lane 129 / task `01a000e0-e957-7193-b2f8-23fd0447cdaa` is now the sole active
+remote read-only audit. It is a same-directory fork under the remote
+`acgc-modern-port` project, using the source-only synced PC ref
+`local-sync/macos-host-launch` at `08c27de5`; no ISO or extracted assets were
+transferred. Its exact worktree and ignored `/private/tmp/acgc-lane-runtime-forwarding-m3*`
+roots are not yet reported, and no build, link, launch, or source result exists.
+It owns only the V2 texture/TLUT/sampler forwarding crosswalk and focused CPU
+fixtures if a concrete defect is found. No `pc_gx.c`/packet-builder or decomp
+edits, full link, LLDB, device, Metal encode/readback, pixel, input, audio,
+save, or playability claim is authorized; only the root owner may update the
+umbrella checkout.
 
 - Lane 116 / task `019fff00-d312-73a0-8396-d94c6618e0b8` — complete pending
   root review. Remote PC worktree `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-m3`
@@ -152,9 +161,9 @@ and must exit naturally before stale metadata reconciliation. Lane 112's
 Save_t/CARD fixture is integrated and its four worker/integration roots have
 been retired after holder checks; its preserved worktree still has
   owner-managed holders. The older “no production worker” sentence predates the
-remote M3 Max batch above; lanes 116–128 are now complete/integrated/archived
-and no remote worker is active. No lane may start a competing full link or LLDB
-trace; no duplicate or filler lane is open. The current portable verification
+remote M3 Max batch above; lanes 116–128 are complete/integrated/archived and
+lane 129 is the sole active read-only audit. No lane may start a competing full
+link or LLDB trace; no duplicate or filler lane is open. The current portable verification
 tip is `08c27de5`, which keeps
 resolved V4 texture-map aliases
 safe, permits live unencoded alpha/depth/cull state through the V4-only
@@ -493,6 +502,7 @@ from compilation alone.
 | 126 | Metal state contract audit — `019fff17-38e4-7ed3-a2aa-04e48b823c33` | Remote M3 Max read-only CPU/contract audit of the Metal sink/state encoder seam and GX state mapping; no source/build/link/launch edits | Tested remote base `a53b192`; empty audit root retired after holder-free check | Complete/archived; static crosswalk identifies texture-coordinate/texture-key/TEV state consumption as the next encoder gate; V4 remains `V3_EXTENSION_NOT_RENDERED`; no tests, device/encode/readback/pixel/playability claim; evidence `docs/evidence/REMOTE-M3MAX-AUDIT-BATCH-2026-08-13.md` |
 | 127 | iOS shared-boundary audit — `019fff17-4100-78f1-91c4-0996c40e41b5` | Remote M3 Max read-only portable/Apple boundary readiness audit; no iOS target, simulator/device, or source edits | Tested remote base `a53b192`; exact portable/Apple native+ASan roots retired after holder-free checks | Complete/archived; portable `20/20` and Apple CPU-only `7/7` native plus ASan/UBSan; Metal/device tests skipped; unresolved game-systems stub, synthetic triangle host, and missing iOS target/adapters remain; no iOS playability claim; evidence `docs/evidence/REMOTE-M3MAX-AUDIT-BATCH-2026-08-13.md` |
 | 128 | Apple texture/TLUT/TEV CPU consumer seam — `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` | Remote M3 Max source lane; own only Apple consumer/runtime header/source, one focused CPU fixture, minimal CMake, and no `pc_gx.c`/packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Worker `c1/lane-texture-tev-m3` `a6c5e0c8` based on `894ac5f8`; integrated canonical PC `08c27de5`; focused roots `/private/tmp/acgc-integrated-texture-tev-08c27de5` and `-asan` | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `2/2` each, no diagnostics (`detect_leaks=0`); opt-in CPU-only texture/TLUT/TEV resolver, existing V2 handoff remains `NOT_RENDERED`; evidence `docs/evidence/APPLE-TEXTURE-TEV-CPU-SEAM-A6C5E0C8-2026-08-14.md` |
+| 129 | Runtime texture/TLUT/sampler forwarding audit — `01a000e0-e957-7193-b2f8-23fd0447cdaa` | Remote M3 Max read-only/test-only lane; own only the V2 forwarding crosswalk and focused CPU fixtures if a concrete defect is proven; no `pc_gx.c`/packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Same-directory remote project task; source-only PC ref `local-sync/macos-host-launch` at `08c27de5`; exact worktree and `/private/tmp/acgc-lane-runtime-forwarding-m3*` roots pending setup | Active/setup; no build, source, or runtime result yet; require exact two-upstream crosswalk and native plus combined ASan/UBSan `--parallel 1` handoff before review |
 
 ## Parked intake (not active)
 
