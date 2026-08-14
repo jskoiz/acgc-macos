@@ -45,13 +45,14 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`565f877e` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`c973dbee` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The Codex app still has no matching saved
 remote project for cross-host task handoff, so lanes 138 and 140 use the
-verified remote CLI instead of appearing as project-folder tasks. Lane 140 is
-the sole active source/test worker, running `gpt-5.6-luna` with max reasoning
-from the exact `565f877e` source-only base. Full links and LLDB remain
-serialized, and the remote worker may not update the umbrella checkout.
+verified remote CLI instead of appearing as project-folder tasks. Lane 140 ran
+`gpt-5.6-luna` with max reasoning from the exact `565f877e` source-only base
+and is now complete/integrated pending exact-root cleanup. No production worker
+is active. Full links and LLDB remain serialized, and remote workers may not
+update the umbrella checkout.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
@@ -226,10 +227,11 @@ remote M3 Max batch above; lanes 116–136 are complete/integrated/archived and
 lane 137 is now complete/parked with no source edit because its packet-fit gate
 requires packet-validator and Apple-consumer ownership outside that lane. Lane
 138 is now complete/integrated/archived after its separate CPU/source contract;
-lane 139 has completed the one serialized current-tip runtime trace, no lane
-may start a competing full link or LLDB trace, and no duplicate or filler lane
-is open while its focused source successor is registered. The current portable
-verification tip is `565f877e`, which keeps
+lane 139 completed the serialized runtime trace and lane 140 completed the
+focused triangle-batch source gate. No worker is active while exact-root
+cleanup finishes, and no competing full link, LLDB trace, duplicate, or filler
+lane is open. The current portable
+verification tip is `c973dbee`, which keeps
 resolved V4 texture-map aliases
 safe, permits live unencoded alpha/depth/cull state through the V4-only
 predicate, and wires the V4 builder into a typed Apple consumer callback after
@@ -579,7 +581,7 @@ from compilation alone.
 | 137 | V2 state-extension diagnostic — `01a0017d-d42d-74f0-846c-f4a97c5d6193` | Remote M3 Max Luna Max/max source/test lane; own only `pc/src/pc_gx.c`, one new V2 state-extension fixture, and minimal CMake registration; preserve V1/V2 fail-closed behavior; no existing handoff-fixture, packet-header/ABI, Apple, decomp, full-link, LLDB, device, Metal, pixel, or playability scope | Branch `c1/lane-v2-state-extension-m3` from PC `2b141a753`; dedicated worktree `/private/tmp/acgc-lane-v2-state-extension-m3` preserved because it contains pre-existing `assets/`/`orig/`; focused roots were absent; decomp `09ca8e8b`; crosswalk `GX_SRC_REG/GX_SRC_VTX` versus the exact V2 validator recorded in `docs/evidence/V2-STATE-EXTENSION-DIAGNOSTIC-2B141A753-2026-08-14.md` | Complete/parked; no source edit or commit, no build/test/runtime result; packet header advertises vertex-source state but the exact validator and Apple consumer do not represent it, so the lane stopped before edits; no callback/Metal/pixel/playability claim |
 | 138 | V2 channel-source contract — `01a0018a-cb34-7860-85ac-be8ef4f800cc` | Remote M3 Max Luna Max/max source/test lane launched through the verified remote CLI because the host is not yet registered as a saved Codex project; own only packet header/validator, Apple typed consumer/runtime, one new focused fixture, and minimal CMake; preserve V1/V2 fail-closed behavior; no `pc_gx.c`, existing handoff fixture, decomp, full-link, LLDB, device, Metal, pixel, or playability scope | PC base `2b141a753`; worker branch/worktree `c1/lane-v2-channel-source-contract-m3` / `/private/tmp/acgc-lane-v2-channel-source-contract-m3`; worker commit `112c7cd2`; integrated canonical PC `565f877e`; decomp `09ca8e8b`; exact focused roots retired after review | Complete/integrated/archived; exactly seven owned files; native and combined ASan/UBSan focused CTest `3/3` each with no diagnostics (`detect_leaks=0`); fixed-width V2 ABI unchanged, disabled channel-source contract accepted, unsupported/malformed state fails closed, vertex-source V2 remains `V2_EXTENSION_NOT_RENDERED`; no full link, LLDB, live callback, Metal, pixel, device, or playability claim; evidence `docs/evidence/V2-CHANNEL-SOURCE-CONTRACT-565F877E-2026-08-14.md` |
 | 139 | Current-tip V2 channel-contract runtime — root-owned | One serialized native arm64 `ac_pc` link and one bounded logged-in GUI-session LLDB launch at PC `565f877e`; count registration, graph/GX/V2 builder, Apple consumer/provider/observer, and bounded rejection records; no source edit | Build `/private/tmp/acgc-current-v2-channel-runtime-565f877e`; trace `/private/tmp/acgc-current-v2-channel-runtime-565f877e-logs`; local ignored ISO symlink only; decomp `09ca8e8b` | Complete; link `[4018/4019]`, arm64 SHA-256 `d1b7a32817ae6e3b6f78aa1f2245e887e11eb1d87dd3951124621689222d34e4`; GAFE01/COPYDATE/LOGO/NEOS reached; graph/emu64 `26`, GX/flush `510`, V2 builder `509`, typed consumer/provider/observer `0`; 32 bounded rejections were 31 triangle lists with counts divisible by three plus one four-vertex quad, exposing the exact-three-vertex guard as the first live blocker; TERM used, KILL not needed, game absent at postcheck; no packet/Metal/pixel/input/audio/save/device/natural-shutdown/playability claim; evidence `docs/evidence/CURRENT-V2-CHANNEL-RUNTIME-565F877E-2026-08-14.md` |
-| 140 | V2 triangle-list batch handoff — `01a001ea-3ea3-7c01-903e-b3c10236b73e` | Remote M3 Max Luna Max/max source/test lane; keep the direct V2 handoff exact-three, add a separate all-or-nothing `GX_TRIANGLES` batch path that preflights every slice before any callback, and emit one three-vertex V2 packet per triangle; preserve V1/V3/V4, legacy GL, Windows behavior, and fail-closed quads/nonmultiples/unsupported state | PC base `565f877e`; branch/worktree `c1/lane-v2-triangle-batch-m3` / `/private/tmp/acgc-lane-v2-triangle-batch-m3`; decomp `09ca8e8b`; owns only `pc/src/pc_gx.c`, new `pc/tests/pc_gx_semantic_v2_batch_handoff.c`, and minimal `pc/CMakeLists.txt`; unique roots `/private/tmp/acgc-lane-v2-triangle-batch-m3-native` and `-asan` | Active; focused native plus combined ASan/UBSan CTest only with `--parallel 1`; packet ABI/validator, Apple consumer/runtime/sink, existing handoff fixture, decomp edits, full link, LLDB, ISO/assets, Metal/pixel/device/playability are out of scope; useful success unblocks one separately serialized current-tip builder-to-consumer runtime count |
+| 140 | V2 triangle-list batch handoff — `01a001ea-3ea3-7c01-903e-b3c10236b73e` | Remote M3 Max Luna Max/max source/test lane; keep the direct V2 handoff exact-three, add a separate all-or-nothing `GX_TRIANGLES` batch path that preflights every slice before any callback, and emit one three-vertex V2 packet per triangle; preserve V1/V3/V4, legacy GL, Windows behavior, and fail-closed quads/nonmultiples/unsupported state | PC base `565f877e`; worker commits `c7495259` plus review follow-up `c1dbf9fe`; integrated canonical PC `90cb22154` plus final `c973dbee`; preserved branch/worktree `c1/lane-v2-triangle-batch-m3` / `/private/tmp/acgc-lane-v2-triangle-batch-m3`; decomp `09ca8e8b`; remote roots `/private/tmp/acgc-lane-v2-triangle-batch-m3-native` and `-asan`, local roots `/private/tmp/acgc-integrate-v2-triangle-batch-c973dbee-native` and `-asan` held for exact cleanup | Complete/integrated pending cleanup; exact three owned files; single triangles use the direct path, grouped triangles prebuild every slice before ordered callbacks, and all failure cases produce zero partial callbacks; remote and integrated native plus combined ASan/UBSan focused CTest `2/2` each with no diagnostics (`detect_leaks=0`); no full link, LLDB, live callback, Apple/Metal/pixel/device/playability claim; evidence `docs/evidence/V2-TRIANGLE-BATCH-HANDOFF-C973DBEE-2026-08-14.md`; next gate is one separately serialized current-tip runtime count |
 
 ## Parked intake (not active)
 

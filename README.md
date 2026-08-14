@@ -34,8 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `565f877e` (`Define V2 disabled channel-source
-contract`), on top of the lane-132 source record `80e80df`, the Apple V2
+`c1/macos-host-launch` at `c973dbee` (`Route single triangles through direct V2
+handoff`), on top of the `565f877e` channel-source contract, lane-132 source
+record `80e80df`, the Apple V2
 texture sideband `3c08c7f`, and the reviewed remote binder `08998d0`. The Apple seam now
 synchronously validates the PC-owned per-map image/TLUT metadata, source kind,
 sampler fields, and generation before and after CPU fixture decode, failing
@@ -63,6 +64,15 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   V2 builder accepts exactly three vertices. This proves the next builder
   frontier, not a packet, Metal work, a pixel, or playability. See
   [current V2 channel runtime evidence](docs/evidence/CURRENT-V2-CHANNEL-RUNTIME-565F877E-2026-08-14.md).
+
+- The integrated `c973dbee` source gate keeps direct single-triangle V2
+  behavior, preflights every slice of an eligible grouped `GX_TRIANGLES` run,
+  and invokes the existing callback once per three-vertex slice only after the
+  whole batch passes. Quads, nonmultiples, unsupported state, and a failed late
+  slice produce no partial V2 callback; V3/V4 fallback and legacy OpenGL remain.
+  Native and combined ASan/UBSan focused CTest pass `2/2` each. This is
+  CPU/contract evidence, not a live callback, Metal operation, pixel, or
+  playability claim. See [V2 triangle-batch evidence](docs/evidence/V2-TRIANGLE-BATCH-HANDOFF-C973DBEE-2026-08-14.md).
 
 - The test-only follow-up at `2b141a753` adds focused coverage for the V2 null
   callback guard, non-triangle topology, ordinary emu64 blend state,

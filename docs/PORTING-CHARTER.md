@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `565f877e`, with
-the remote M3 Max lane-132 source record and lane-133 Apple binder integrated
+As of 2026-08-14, the canonical local PC branch is clean at `c973dbee`, with
+the V2 triangle-list batch handoff, remote M3 Max lane-132 source record, and
+lane-133 Apple binder integrated
 on top of the V2 texture sideband. The current five-file CPU source record plus
 four-file Apple seam validates borrowed image/TLUT metadata per map, source
 kind, sampler fields, and generation across cache, replacement, fallback,
@@ -108,6 +109,17 @@ next gate is a focused, all-or-nothing triangle-list splitter that leaves the
 three-vertex Apple consumer and legacy OpenGL path unchanged. This is boot and
 builder-frontier evidence only; it adds no Metal/pixel/device/playability claim.
 See [current V2 channel runtime evidence](evidence/CURRENT-V2-CHANNEL-RUNTIME-565F877E-2026-08-14.md).
+
+The integrated `c973dbee` follow-up closes that CPU/source blocker without
+broadening the three-vertex Apple consumer. A direct single triangle keeps the
+existing V2 path; eligible grouped triangle lists are fully preflighted, then
+delivered as ordered three-vertex packets. A failed later slice produces zero
+callbacks, while quads, nonmultiples, unsupported state, V3/V4 fallback, and
+legacy OpenGL behavior remain unchanged. Native and combined ASan/UBSan focused
+CTest pass `2/2` each on the exact integrated snapshot. This is still a
+CPU/contract gate; one separately serialized current-tip link/trace must now
+measure real callback and Apple-consumer reachability. See
+[V2 triangle-batch evidence](evidence/V2-TRIANGLE-BATCH-HANDOFF-C973DBEE-2026-08-14.md).
 
 The same `354f33884` snapshot links the full arm64 `ac_pc` target through
 `[4018/4019]`. A normal bounded launch from the current shell stops before
