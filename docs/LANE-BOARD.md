@@ -44,8 +44,9 @@ docs.
 ## Remote M3 Max batch (current)
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
-checkout has been independently verified at umbrella `ee31f53`, PC
-`a53b192`, and decomp `09ca8e8b`, all clean. No ISO, extracted assets, keys, or
+checkout has been independently verified at umbrella `ee31f53`, populated PC
+`894ac5f8` (the umbrella pointer remains at `a53b192` until root integration),
+and decomp `09ca8e8b`. The populated PC checkout is clean. No ISO, extracted assets, keys, or
 proprietary data were transferred. The old local lane-115 handoff remains
 parked because the handoff registry could not match the saved remote project;
 the following visible remote Codex tasks were opened from the registered remote
