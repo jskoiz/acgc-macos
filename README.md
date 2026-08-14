@@ -165,6 +165,12 @@ redistribute it or extracted proprietary assets.
   matrix. This is CPU/contract and compile coverage only: no live V4 callback,
   Metal encode/present/readback, device, pixel, or playability claim follows.
   See [V4 live-consumer evidence](docs/evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md).
+- One serialized current-tip `28ebac2` arm64 link reached `[4018/4019]`, and
+  one bounded LLDB launch reached the live game graph/GX path. The V4 builder
+  entry was observed `558` times, while the typed V4 Apple consumer, its
+  prepare path, and `pc_metal_runtime_observe` remained `0`. This is live
+  builder-rejection evidence, not a successful callback, Metal encode/present,
+  pixel, or playability claim. See [current V4 runtime evidence](docs/evidence/CURRENT-V4-LIVE-CONSUMER-RUNTIME-28EBAC2-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.

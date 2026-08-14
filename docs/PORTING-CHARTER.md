@@ -122,6 +122,13 @@ pass `6/6` native and `6/6` combined ASan/UBSan; direct Apple consumer/sink
 fixtures pass `2/2` in each matrix. This remains CPU/contract and compile
 coverage only: no live V4 callback, Metal encode/present/readback, device,
 pixel, or playability claim follows. See [V4 live-consumer evidence](evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md).
+One serialized current-tip `28ebac2` link reached `[4018/4019]`, and one
+bounded LLDB launch reached the game-owned graph/GX path. The V4 builder entry
+counted `558` attempts, but the typed V4 Apple consumer, prepare path, and
+`pc_metal_runtime_observe` each remained at `0`. This confirms a live
+builder-rejection boundary only; it does not establish a callback, Metal
+encode/present/readback, pixel, or playability gate. See [current V4 runtime
+evidence](evidence/CURRENT-V4-LIVE-CONSUMER-RUNTIME-28EBAC2-2026-08-13.md).
 The current-tip sanitizer/Windows verification on `f18e7cd` passes the seven
 focused native targets (`7/7`) and the combined ASan/UBSan matrix (`7/7`) with
 no diagnostics. Available `_WIN32`/`-m32` C and static-GBI probes pass, while

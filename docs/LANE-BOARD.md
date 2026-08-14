@@ -92,6 +92,13 @@ callback, Metal encode/readback, pixel, device, or playability claim follows.
 See `docs/evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md`. The Save_t/CARD
 recovery fixture remains integrated at `f19c73f`, while the real i686 Windows/PE
 boundary remains blocked by the absent toolchain/sysroot.
+One serialized current-tip `28ebac2` link reached `[4018/4019]`; its bounded
+LLDB launch reached the game graph/GX path and counted
+`pc_gx_try_handoff_semantic_packet_v4=558`, but the typed V4 Apple consumer,
+prepare path, and `pc_metal_runtime_observe` were all `0`. This is live V4
+builder-rejection evidence only, with no callback, Metal encode/readback,
+pixel, or playability claim. See
+`docs/evidence/CURRENT-V4-LIVE-CONSUMER-RUNTIME-28EBAC2-2026-08-13.md`.
 Lane 108's one current-tip link reached `[4018/4019]` and its one unprivileged
 LLDB launch created a real inferior, reached boot/graph/GX, and recorded
 `graph_task_set00=29`, `emu64_taskstart=29`, `GXBegin=532`,
