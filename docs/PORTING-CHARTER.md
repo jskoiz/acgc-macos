@@ -77,6 +77,18 @@ callback, Metal encode/readback, pixel, device, or playability claim is made.
 See [V2 base-state rejection evidence](evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md)
 and [current runtime evidence](evidence/CURRENT-V2-REJECTION-RUNTIME-59D13A98-2026-08-14.md).
 
+Three read-only M3 Max follow-ups now classify both cohorts and the independent
+Apple status policy. The alpha references are dead only for the exact
+`GX_ALWAYS/GX_ALWAYS` plus `GX_AOP_AND` form and may be ignored locally by V2;
+the next live rejection remains blend. The `global_count` tuple is valid
+two-texgen/two-TEV state with `GX_FOG_PERSP_LIN`, not a stale count; V2 lacks
+the required fog mode and coefficients. Ordinary V2 marked
+`V2_EXTENSION_NOT_RENDERED` is also conditionally source-reachable to the
+geometry-only Metal sink and must fail closed. See
+[alpha-reference semantics](evidence/V2-ALPHA-REFERENCE-SEMANTICS-59D13A98-2026-08-14.md),
+[fog/global-count crosswalk](evidence/V2-GLOBAL-COUNT-FOG-CROSSWALK-59D13A98-2026-08-14.md),
+and [Apple V2 sink policy](evidence/APPLE-V2-SINK-STATUS-POLICY-59D13A98-2026-08-14.md).
+
 The test-only lane-135 follow-up at `2b141a753` adds rejection coverage for the
 V2 callback guard, fixed triangle topology, ordinary emu64 blend state,
 decomp-compatible `GX_SRC_VTX` channel state, and the downstream texture

@@ -48,6 +48,9 @@ packet, callback, Metal
 encode/readback, pixel, device, or playability claim follows. See
 [V2 rejection-classifier evidence](docs/evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md),
 [current V2 rejection runtime evidence](docs/evidence/CURRENT-V2-REJECTION-RUNTIME-59D13A98-2026-08-14.md),
+[alpha-reference semantics](docs/evidence/V2-ALPHA-REFERENCE-SEMANTICS-59D13A98-2026-08-14.md),
+[fog/global-count crosswalk](docs/evidence/V2-GLOBAL-COUNT-FOG-CROSSWALK-59D13A98-2026-08-14.md),
+[Apple V2 sink policy](docs/evidence/APPLE-V2-SINK-STATUS-POLICY-59D13A98-2026-08-14.md),
 and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 
 - The integrated `565f877e` CPU seam adds a fixed-width V2 validator and typed
@@ -110,6 +113,17 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   reachability and contract decisions, not live callback or Metal proof. See
   [renderer contract consolidation](docs/evidence/RENDERER-CONTRACT-CONSOLIDATION-C973DBEE-2026-08-14.md)
   and [Apple sink reachability](docs/evidence/APPLE-SINK-REACHABILITY-C973DBEE-2026-08-14.md).
+
+- Three follow-on read-only M3 Max crosswalks resolved the two live cohorts
+  and the Apple policy ambiguity. Alpha refs are semantically dead only for
+  `GX_ALWAYS/GX_ALWAYS` plus `GX_AOP_AND`, so a V2-local normalization is safe
+  but the draw then fails at blend. The `global_count` cohort is valid
+  two-texgen/two-TEV state rejected because `fog=2` is
+  `GX_FOG_PERSP_LIN`, whose parameters are absent from V2. Separately,
+  ordinary V2 marked `V2_EXTENSION_NOT_RENDERED` can reach the geometry-only
+  sink and must fail closed. Lanes 149 and 150 now own those two disjoint
+  source fixes; lane 151 owns the read-only cumulative fog contract. No full
+  link, LLDB, Metal, pixel, or playability proof follows.
 
 - The test-only follow-up at `2b141a753` adds focused coverage for the V2 null
   callback guard, non-triangle topology, ordinary emu64 blend state,
