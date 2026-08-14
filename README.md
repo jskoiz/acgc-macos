@@ -106,6 +106,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   `pc_gx_flush_vertices`; `pc_metal_runtime_observe` remains unhit, so there
   is still no game-owned Metal encode/readback/pixel or playability proof. See
   [current post-fix runtime evidence](docs/evidence/CURRENT-METAL-SINK-RUNTIME-A8F3A8F-2026-08-13.md).
+- The integrated binder tip `354f33884` links the full arm64 `ac_pc` target
+  through `[4018/4019]`; a bounded launch from this shell is blocked before
+  boot because SDL reports no displays, and the dummy SDL video driver cannot
+  provide the required OpenGL window. This is an environment launch blocker,
+  not a source or link failure. No runtime, callback, Metal, pixel, input,
+  audio, save, device, or playability claim follows. See [current binder
+  runtime evidence](docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md).
 - A focused observer-rejection audit proves the zero callback is the intended
   v1 fail-closed semantic-packet boundary: the game’s richer TEV/texture/channel
   state is rejected before `pc_metal_runtime_observe`, while supported synthetic

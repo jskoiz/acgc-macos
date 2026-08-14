@@ -71,6 +71,14 @@ tests pass `3/3` each on the integrated binder snapshot. This remains
 CPU/contract evidence only: no live callback, Metal encode/readback, pixel,
 device, or playability claim is made.
 
+The same `354f33884` snapshot links the full arm64 `ac_pc` target through
+`[4018/4019]`. A normal bounded launch from the current shell stops before
+boot because SDL reports no displays; a separate dummy-video diagnostic also
+stops because SDL's dummy driver cannot create the required OpenGL window. This
+is an environment launch blocker, not a source or link failure, and adds no
+runtime, callback, Metal, pixel, device, or playability claim. See
+`evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md`.
+
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The preceding V4 integration snapshot is the clean native arm64
