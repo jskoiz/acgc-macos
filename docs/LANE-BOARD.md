@@ -60,10 +60,11 @@ and lanes 143–144 produced read-only architecture evidence. Root-owned lane
 146–148 completed the read-only alpha, fog/global-count, and Apple status-policy
 crosswalks. Lanes 149 and 150 are complete and integrated as PC `820906439`
 and `5157ac1cb`; lane 151 completed the read-only cumulative fog contract.
-Lane 153 remains the sole active M3 Max renderer audit. Lanes 152 and 155 are
-complete and integrated as PC `b5f550ea0` and `afb1cac3c`; lane 154 completed
-its read-only Apple consumer/encoder audit. No full link or LLDB run is active.
-Remote workers may not update the umbrella checkout.
+Lanes 152 and 155 are complete and integrated as PC `b5f550ea0` and
+`afb1cac3c`; lanes 153 and 154 completed the read-only cumulative-schema and
+Apple consumer/encoder audits. No worker, full link, or LLDB run is active
+while the integration owner records the exact cleanup state and opens the
+strict envelope successor. Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -168,28 +169,35 @@ Remote workers may not update the umbrella checkout.
   source/docs edit, build, test, launch, asset access, callback, Metal, pixel,
   or playability claim occurred in the worker.
 - Lane 152 / task `01a00276-84d7-7cc1-b085-cabe0af93e34` — complete,
-  integrated, and archive-ready. Branch `c1/lane-canonical-fog-state-m3` and
-  worktree
-  `/private/tmp/acgc-lane-canonical-fog-state` start at exact PC
+  integrated, archived, and cleaned. Preserved branch
+  `c1/lane-canonical-fog-state-m3` and retired worktree
+  `/private/tmp/acgc-lane-canonical-fog-state` started at exact PC
   `5157ac1cb`; decomp is `09ca8e8b`. It owns only new renderer-neutral
   canonical-state header/source, one portable fog fixture, and minimal portable
   CMake registration. It must leave V1–V4, `pc_gx`, Apple runtime, live
-  capture, full link, LLDB, Metal, pixels, and playability out of scope. Native
-  Worker `956e0571b` is integrated as canonical PC `b5f550ea0`. Remote and
+  capture, full link, LLDB, Metal, pixels, and playability out of scope. Worker
+  `956e0571b` is integrated as canonical PC `b5f550ea0`. Remote and
   exact integrated native plus combined ASan/UBSan focused CTest pass `1/1`
   each. Evidence is
   `docs/evidence/CANONICAL-FOG-STATE-B5F550EA0-2026-08-14.md`. No live
-  snapshot, callback, Metal, pixel, or playability claim follows.
-- Lane 153 / task `01a00275-9cf6-75b0-9275-f7f7f2338084` — active read-only
-  M3 Max audit at exact PC `5157ac1cb` and decomp `09ca8e8b`. Detached
+  snapshot, callback, Metal, pixel, or playability claim follows. Remote and
+  local generated verification/transfer roots were holder-free and are absent;
+  branch, commits, integration, and evidence remain preserved.
+- Lane 153 / task `01a00275-9cf6-75b0-9275-f7f7f2338084` — complete and
+  archive-ready, read-only M3 Max audit at exact PC `5157ac1cb` and decomp
+  `09ca8e8b`. Detached
   worktree `/private/tmp/acgc-lane-cumulative-state-schema-audit` owns the
   fixed-width cumulative GX state schema, section masks, validation,
   sideband-resource boundaries, byte layout, and an implementation order. It
-  may not edit, build, launch, access assets, or claim Metal/pixel/playability
-  evidence.
-- Lane 154 / task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete and
-  archive-ready, read-only M3 Max audit at exact PC `5157ac1cb` and decomp
-  `09ca8e8b`. Detached
+  produced the two-upstream field crosswalk, ABI risks, validation fixtures,
+  and implementation order. Its provisional layout was reconciled with the
+  newer fog contract into a strict 14-section envelope whose total size remains
+  unfrozen. Evidence is
+  `docs/evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md`. No
+  edit, build, launch, asset access, Metal, pixel, or playability claim.
+- Lane 154 / task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete,
+  archived, and cleaned, read-only M3 Max audit at exact PC `5157ac1cb` and
+  decomp `09ca8e8b`. Detached
   worktree `/private/tmp/acgc-lane-apple-canonical-consumer-audit` owns the
   canonical-state-to-Metal mapping, consumer/encoder boundary, cache
   invalidation rules, first safe CPU source boundary, and later device/pixel
@@ -197,7 +205,9 @@ Remote workers may not update the umbrella checkout.
   selected a cumulative snapshot -> owned sideband -> immutable CPU plan ->
   device encoder architecture. Evidence is
   `docs/evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md`. It
-  made no edit, build, launch, or live Metal/rendered-frame claim.
+  made no edit, build, launch, or live Metal/rendered-frame claim. Its detached
+  worktree and generated prompt/event artifacts were holder-free and are
+  absent; committed evidence remains.
 - Lane 155 / task `01a00276-84d7-7d83-81e6-28aec4c163d3` — complete,
   integrated, archived, and cleaned. Preserved branch
   `c1/lane-input-trigger-parity-m3` and retired worktree

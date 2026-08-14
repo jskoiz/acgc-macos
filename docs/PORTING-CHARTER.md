@@ -122,6 +122,13 @@ encoder. Current V4 sink eligibility is not a rendering proof because V4 does
 not encode all live GX state. See
 [Apple canonical consumer audit](evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md).
 
+The cumulative GX crosswalk selects a strict 14-section canonical envelope and
+rejects a V5 bridge. The full byte size is not frozen: each neutral section
+must first have an exact tested ABI. The next source gate is the envelope
+header/directory validator around the existing fog section, followed by the
+reusable blend/logic section. See
+[canonical GX schema crosswalk](evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md).
+
 Three read-only M3 Max follow-ups now classify both cohorts and the independent
 Apple status policy. The alpha references are dead only for the exact
 `GX_ALWAYS/GX_ALWAYS` plus `GX_AOP_AND` form and may be ignored locally by V2;

@@ -93,6 +93,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   permissive for device proof because V4 omits live GX semantics. See
   [Apple canonical consumer audit](docs/evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md).
 
+- The completed cumulative GX schema crosswalk rejects a V5 bridge and maps
+  the two upstreams into a strict 14-section envelope. Only the standalone fog
+  section is implemented today; total packet size, live producer, and Apple
+  CPU plan remain open. The next bounded source gate is the envelope
+  header/directory validator, followed by the reusable blend/logic section.
+  See [canonical GX schema crosswalk](docs/evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md).
+
 - The integrated `afb1cac3c` input correction makes axis-bound L/R digital
   state follow the same nonzero normalized analog value that reaches
   `PADStatus`, matching the decomp game-input boundary while preserving
