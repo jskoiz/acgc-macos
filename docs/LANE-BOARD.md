@@ -55,10 +55,11 @@ source worktree is deliberately preserved because ignored `assets/` and
 `orig/` are present. Lane 141 completed the sole serialized `c973dbee` runtime
 gate and exposed the initial V2 base-state predicate as the next fail-closed
 tier. Lanes 142–144 are now complete: lane 142 is integrated as PC `59d13a98`,
-and lanes 143–144 produced read-only architecture evidence. No worker, full
-link, or LLDB run is active. The next selected gate is one serialized local
-`59d13a98` runtime trace with the opt-in rejection diagnostic; remote workers
-may not update the umbrella checkout.
+and lanes 143–144 produced read-only architecture evidence. Root-owned lane
+145 is the sole active runtime worker and owns one serialized local
+`59d13a98` link/LLDB trace with the opt-in rejection diagnostic. No other full
+link or LLDB run may overlap it, and remote workers may not update the umbrella
+checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -87,6 +88,20 @@ may not update the umbrella checkout.
   output is deliberately blocked. No live callback, build, launch, device,
   Metal, pixel, or playability proof occurred. Evidence is
   `docs/evidence/APPLE-SINK-REACHABILITY-C973DBEE-2026-08-14.md`.
+- Lane 145 / root task `019ff398-2520-7191-ac5c-f3007c49163f` — active,
+  read-only runtime verification on canonical PC `59d13a98` and decomp
+  `09ca8e8b`. It owns exactly one serial arm64 `ac_pc` link and one bounded
+  logged-in-session LLDB launch using
+  `/private/tmp/acgc-current-v2-rejection-runtime-59d13a98-build` and
+  `/private/tmp/acgc-current-v2-rejection-runtime-59d13a98-logs`. The gate is
+  the first live V2 base-state rejection reason and exact bounded tuple after
+  grouped-triangle entry; source edits, packet relaxation, Apple edits, a
+  second launch, device work, and asset movement are out of scope. It must
+  record link/hash, boot markers, exact per-symbol counts, diagnostic records,
+  PID and TERM/KILL behavior, and stop after the one launch. A confirmed
+  `blend` result may unblock one separately owned test-first canonical
+  renderer-state lane; it cannot prove a callback, Metal encode/present/
+  readback, pixel, input, audio, save, device, or playability gate.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
