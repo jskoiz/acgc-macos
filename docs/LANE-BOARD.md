@@ -77,6 +77,12 @@ LLDB serialized, and do not update the umbrella checkout.
   input, audible audio, save/device persistence, simulator, or playability
   gate without separate evidence.
 
+The integration owner has since reviewed lane 116 and advanced the local
+canonical PC pointer to `c0f048d6` with its focused native and ASan/UBSan gate
+passing `1/1` each. Lanes 117–127 intentionally remain based on the clean
+remote `a53b192` snapshot; their commits will be reviewed and rebased or
+cherry-picked one at a time after their handoffs.
+
 Current maintenance state: lanes 96, 97, and 98 are complete and archived. Lane
 96's first graph task traversed eight inline `G_DL_NOPUSH` continuations to a
 clean `G_ENDDL`, returned `0`, and did not reach `GXBegin`; lane 97 then
@@ -121,10 +127,11 @@ absent after archival, but orphaned holders still name the unlinked worktree
 and must exit naturally before stale metadata reconciliation. Lane 112's
 Save_t/CARD fixture is integrated and its four worker/integration roots have
 been retired after holder checks; its preserved worktree still has
-owner-managed holders. No
-production worker is active; no lane may start a competing full
-link or LLDB trace; no duplicate or filler lane is open. The current portable
-verification tip is `a53b192`, which keeps resolved V4 texture-map aliases
+owner-managed holders. The older “no production worker” sentence predates the
+remote M3 Max batch above; lanes 117–127 are the current active worker set.
+No lane may start a competing full link or LLDB trace; no duplicate or filler
+lane is open. The current portable verification tip is `c0f048d6`, which keeps
+resolved V4 texture-map aliases
 safe, permits live unencoded alpha/depth/cull state through the V4-only
 predicate, and wires the V4 builder into a typed Apple consumer callback after
 V2/V3 fail, maps the supported blend/alpha subset, and
