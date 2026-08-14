@@ -243,7 +243,7 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   Apple code, V1–V4 ABI, full link, LLDB, assets, Metal, pixels, and playability
   are out of scope.
 - Lane 157 / task `01a00297-d95c-7742-8feb-a275b16b4b88` — complete,
-  integrated, and archive-ready. Remote branch
+  integrated, archived, and cleaned. Preserved remote branch
   `c1/lane-v4-sink-failclosed-m3` advanced exact PC `b5f550ea0` to worker
   `0bda49d23`; the integration owner cherry-picked its two-file change as
   canonical PC `62ef6638d`. V1 remains the only legacy packet eligible for the
@@ -253,8 +253,10 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   production syntax compile passes, and `git diff --check` passes. Evidence is
   `docs/evidence/APPLE-V4-SINK-GUARD-62EF6638D-2026-08-14.md`. No live
   callback, full link, Metal encode/present/readback, pixel, device, or
-  playability claim follows. Its exact worktree/build/event/final roots remain
-  protected until archive and holder-free cleanup complete.
+  playability claim follows. Its exact worktree, native/ASan build roots,
+  prompt/event/final artifacts, transfer bundle, and local integration roots
+  were holder-free and are absent; worker/canonical branches, commits, and
+  evidence remain preserved.
 - Lane 158 / task `01a00297-d958-73f2-a850-d79a18e5f763` — active read-only
   M3 Max crosswalk. Detached PC worktree
   `/private/tmp/acgc-lane-canonical-snapshot-audit` is exact `b5f550ea0` and
