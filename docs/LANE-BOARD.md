@@ -60,9 +60,20 @@ LLDB serialized, and do not update the umbrella checkout.
   rejection; native and combined ASan/UBSan focused tests pass `4/4` each with
   no diagnostics (`detect_leaks=0`). No live callback, Metal, pixel, or
   playability claim; preserve the worktree/branch until integration review.
-- Lanes 117–127 are active on the remote M3 Max with non-overlapping contracts:
-  Apple V4 consumer/runtime (`019fff16-cacd-7133-9823-15d529e8bb63`), V4
-  handoff fixture (`019fff16-d72e-7703-8721-c81517ebe538`), sanitizer/Windows
+- Lane 117 / task `019fff16-cacd-7133-9823-15d529e8bb63` is complete with no
+  source change: the Apple crosswalk localized the live rejection upstream of
+  the consumer; native and combined ASan/UBSan typed-consumer tests passed
+  `1/1` each. Its exact remote worktree and focused roots were retired after
+  holder-free checks; no Apple/runtime defect or live callback claim follows.
+- Lane 118 / task `019fff16-d72e-7703-8721-c81517ebe538` is integrated locally
+  as PC `13c0e0cf` from worker `ce06b5b`. Its synthetic V4 handoff fixture and
+  minimal CMake registration pass native and combined ASan/UBSan focused tests
+  `1/1` each (`detect_leaks=0`, no diagnostics); evidence is
+  `docs/evidence/GX-V4-HANDOFF-FIXTURE-13C0E0CF-2026-08-13.md`. The remote
+  worktree and focused roots were retired after holder-free checks; no live
+  callback, Metal, pixel, or playability claim follows.
+- Lanes 119–127 remain active on the remote M3 Max with non-overlapping
+  contracts: sanitizer/Windows
   refresh (`019fff16-e538-7e73-a844-f4e09c18538d`), input trigger audit
   (`019fff16-f4d5-76b1-b3eb-dd7d9bb18512`), mixer/CoreAudio refresh
   (`019fff17-0485-79d1-ab6b-47e1495d97af`), CARD production validation
@@ -77,10 +88,10 @@ LLDB serialized, and do not update the umbrella checkout.
   input, audible audio, save/device persistence, simulator, or playability
   gate without separate evidence.
 
-The integration owner has since reviewed lane 116 and advanced the local
-canonical PC pointer to `c0f048d6` with its focused native and ASan/UBSan gate
-passing `1/1` each. Lanes 117–127 intentionally remain based on the clean
-remote `a53b192` snapshot; their commits will be reviewed and rebased or
+The integration owner has since reviewed lanes 116 and 118 and advanced the
+local canonical PC pointer to `13c0e0cf`; lane 116's and lane 118's focused
+native and ASan/UBSan gates pass `1/1` each. Lanes 119–127 remain based on the
+clean remote `a53b192` snapshot; their commits will be reviewed and rebased or
 cherry-picked one at a time after their handoffs.
 
 Current maintenance state: lanes 96, 97, and 98 are complete and archived. Lane
@@ -450,8 +461,8 @@ from compilation alone.
 | 114 | Mixer/DMA/CoreAudio boundary audit — `019ffdba-e4f1-71d1-82fd-57561a66e50a` | Read-only verification of the JAudio mixer/DMA/NEOS-to-Apple sink boundary; no source edits, full link, LLDB, ISO/assets, or audible-device claim | Visible worktree `/Users/jk/.codex/worktrees/0705/acgc-modern-port`; tested at PC `dbf6986`, current canonical PC `f19c73f`; decomp `09ca8e8b`; exact roots `/private/tmp/acgc-lane-mixer-coreaudio-current-native-VDoxjP` and `/private/tmp/acgc-lane-mixer-coreaudio-current-sanitizer-4WmGA1` | Complete/archived pending exact-path cleanup; native and ASan/UBSan CMake audio sets `4/4` pass, including software mixer/DAC/callback, NEOS/RSP, high-address DMA, and pointer probes; CoreAudio opened 32 kHz stereo/512 with zero underruns/overruns but producer was silent, so no audible-audio claim; evidence `docs/evidence/MIXER-COREAUDIO-AUDIT-DBF6986-2026-08-13.md` |
 | 115 | V4 live channel rejection diagnostic — `019ffe12-2fe1-7ea2-aad2-26736c85fcd6` | Remote-focused source/test lane for `pc_gx_v2_channel_state_is_supported()` and the repeated live one-channel V4 rejection; source edit only if the two-upstream crosswalk proves a defect; no Apple consumer/runtime, packet-header, full-link, LLDB, ISO/assets, Metal, pixel, or playability scope | Visible task worktree `/Users/jk/.codex/worktrees/3526/acgc-modern-port` detached at umbrella `189b7b4`; PC source `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-3526` on `c1/lane-gx-v4-channel-diagnostic` at `a53b192`; decomp `09ca8e8b`; no build roots or source diff | Parked/setup-blocked: Codex could not hand off because no matching saved `acgc-modern-port` project exists on M3 Max; task returned idle without edits/tests. Preserve worktree/branch until the remote project is registered; no local lane is active |
 | 116 | V4 disabled-channel predicate diagnostic — `019fff00-d312-73a0-8396-d94c6618e0b8` | Remote M3 Max source lane for the decomp-compatible disabled `GX_SRC_REG`/`GX_SRC_VTX` material-channel case; own only `pc/src/pc_gx.c` and its focused V4 fixture; no Apple consumer/runtime, full-link, LLDB, ISO/assets, Metal, pixel, or playability scope | Remote branch `c1/lane-gx-v4-channel-diagnostic-m3` at worker `e8155c6`; exact remote worktree and three build roots retired after holder-free checks; local canonical PC `c0f048d6`; decomp `09ca8e8b`; evidence `docs/evidence/GX-V4-CHANNEL-DIAGNOSTIC-C0F048D6-2026-08-13.md` | Complete/integrated/archived; focused native and combined ASan/UBSan gate `1/1` each on the integrated snapshot (worker matrices `4/4` each); no live callback/Metal/pixel/playability claim |
-| 117 | V4 Apple consumer/runtime — `019fff16-cacd-7133-9823-15d529e8bb63` | Remote M3 Max source lane; own only Apple V4 consumer/runtime header/source, one focused consumer test, and minimal registration; no `pc_gx.c`/packet-builder or decomp edits | Remote project `/Users/testtest/Documents/Projects/acgc-modern-port`; worktree `/private/tmp/acgc-lane-gx-v4-consumer-m3`; branch `c1/lane-gx-v4-consumer-m3`; base `a53b192`; unique roots owned by lane | Active/crosswalk and focused CPU tests; no full link, LLDB, live callback, Metal encode/readback, pixel, device, or playability claim |
-| 118 | V4 builder-to-consumer fixture — `019fff16-d72e-7703-8721-c81517ebe538` | Remote M3 Max test/source lane; own only `pc/tests/pc_gx_v4_handoff_fixture.c` and minimal CMake registration; no production `pc_gx.c` or Apple consumer/runtime edits | Worktree `/private/tmp/acgc-lane-gx-v4-fixture-m3`; branch `c1/lane-gx-v4-fixture-m3`; base `a53b192`; unique native/ASan roots | Active; native fixture passes and ASan/UBSan rerun is bounded with LeakSanitizer disabled; synthetic CPU/contract only |
+| 117 | V4 Apple consumer/runtime — `019fff16-cacd-7133-9823-15d529e8bb63` | Remote M3 Max source lane; own only Apple V4 consumer/runtime header/source, one focused consumer test, and minimal registration; no `pc_gx.c`/packet-builder or decomp edits | Remote project `/Users/testtest/Documents/Projects/acgc-modern-port`; worker base/final `a53b192` (no source change); exact remote worktree/roots retired after holder-free checks | Complete/archived, no Apple-side defect proven; native and combined ASan/UBSan typed-consumer tests `1/1` each, no diagnostics; no full link, LLDB, live callback, Metal encode/readback, pixel, device, or playability claim |
+| 118 | V4 builder-to-consumer fixture — `019fff16-d72e-7703-8721-c81517ebe538` | Remote M3 Max test/source lane; own only `pc/tests/pc_gx_v4_handoff_fixture.c` and minimal CMake registration; no production `pc_gx.c` or Apple consumer/runtime edits | Worker branch `c1/lane-gx-v4-fixture-m3` base `a53b192` → `ce06b5b`; integrated canonical PC `13c0e0cf`; exact remote worktree/roots retired after holder-free checks | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `1/1` each (`detect_leaks=0`, no diagnostics); evidence `docs/evidence/GX-V4-HANDOFF-FIXTURE-13C0E0CF-2026-08-13.md`; synthetic CPU/contract only, no live callback/Metal/pixel/playability claim |
 | 119 | Sanitizer and Windows refresh — `019fff16-e538-7e73-a844-f4e09c18538d` | Remote M3 Max read-only verification; own no source; unique native/ASan/Windows roots; record shared `_WIN32`/ILP32 probes separately from missing i686 MinGW/sysroot | Roots `/private/tmp/acgc-lane-current-sanitizer-windows-m3-native`, `-asan`, and `-win`; base `a53b192` | Active; eight bounded C/portable probes pass; libc++/Apple macro and true i686 toolchain blockers remain; no Windows sign-off |
 | 120 | Input trigger audit — `019fff16-f4d5-76b1-b3eb-dd7d9bb18512` | Remote M3 Max read-only/test-only crosswalk of SDL/PAD analog thresholds, decomp button semantics, and double-read stability; no production input edit | Unique roots under `/private/tmp/acgc-lane-input-trigger-m3*`; base `a53b192` | Active/crosswalk; no physical controller, simulator, device, or playability claim |
 | 121 | Mixer/CoreAudio refresh — `019fff17-0485-79d1-ab6b-47e1495d97af` | Remote M3 Max read-only/test-only mixer/DAC/NEOS/RSP/high-address-DMA and CoreAudio boundary verification; no source edit | Roots `/private/tmp/acgc-lane-mixer-coreaudio-m3-native` and `-asan`; base `a53b192` | Active; native mixer/DMA/CoreAudio configuration passes with zero underruns/overruns, but producer is silent and no audibility claim follows |
