@@ -47,10 +47,11 @@ the M3 Max first, then hand off the preserved task.
 ## Remote Codex CLI policy verification (2026-08-14)
 
 The remote M3 Max CLI was updated with `npm install -g @openai/codex@latest`
-and verified as `codex-cli 0.147.0`. Its lane sessions use
-`gpt-5.6-luna` with max reasoning. Only the remote Codex approval policy was
-changed, from `never` to `on-request`; its existing sandbox mode was left
-unchanged. A read-only diagnostic and one source/test lane completed through
+and verified as `codex-cli 0.147.0`. Its default is now
+`gpt-5.6-luna` with max reasoning, and lane sessions also pass that model and
+effort explicitly. Only the remote Codex approval policy was changed, from
+`never` to `on-request`; its existing sandbox mode was left unchanged. A
+read-only diagnostic and one source/test lane completed through
 the direct remote CLI while the app handoff registry was stale. This is an
 execution-path workaround, not permission to copy the ISO or extracted assets:
 those remain local, and full links/LLDB launches remain in the integration
