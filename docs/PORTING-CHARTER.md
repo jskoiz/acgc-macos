@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `59d13a98`, with
-the bounded V2 base-state rejection classifier integrated on top of the
+As of 2026-08-14, the canonical local PC branch is clean at `820906439`, with
+the V2-local alpha-reference normalization integrated on top of the
+`59d13a98` bounded base-state rejection classifier and the
 `c973dbee` triangle-list batch handoff, remote M3 Max lane-132 source record,
 and lane-133 Apple binder. The classifier leaves the original V2 acceptance
 predicate authoritative and names each first fail-closed tier. Native and
@@ -76,6 +77,14 @@ at zero. This remains predicate/runtime evidence only: no live packet,
 callback, Metal encode/readback, pixel, device, or playability claim is made.
 See [V2 base-state rejection evidence](evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md)
 and [current runtime evidence](evidence/CURRENT-V2-REJECTION-RUNTIME-59D13A98-2026-08-14.md).
+
+The exact remote worker change `2dcd69c4a` is integrated as `820906439`.
+Remote and exact integrated native plus combined ASan/UBSan focused CTest each
+pass `1/1`. Nonzero refs are ignored only for the reviewed
+`GX_ALWAYS/GX_ALWAYS` plus `GX_AOP_AND` V2 state; the refs remain stored,
+active comparisons and unsupported operators still fail closed, and the live
+tuple advances to `blend`. See
+[V2 alpha-reference normalization](evidence/V2-ALPHA-REFERENCE-NORMALIZATION-820906439-2026-08-14.md).
 
 Three read-only M3 Max follow-ups now classify both cohorts and the independent
 Apple status policy. The alpha references are dead only for the exact

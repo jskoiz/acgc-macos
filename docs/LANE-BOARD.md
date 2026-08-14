@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`59d13a98` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`820906439` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The Codex app still has no matching saved
 remote project for cross-host task handoff, so remote lanes use the verified
 SSH/Codex runner and are registered here by their durable task IDs. Lane 140 ran
@@ -58,8 +58,9 @@ tier. Lanes 142–144 are complete: lane 142 is integrated as PC `59d13a98`,
 and lanes 143–144 produced read-only architecture evidence. Root-owned lane
 145 has also completed its one serialized `59d13a98` link/LLDB trace. Lanes
 146–148 completed the read-only alpha, fog/global-count, and Apple status-policy
-crosswalks. Three Luna Max/max workers are now active on the M3 Max: lanes 149
-and 150 own disjoint, focused CPU source fixes, while lane 151 specifies the
+crosswalks. Lane 149 is complete and integrated as PC `820906439`. Two Luna
+Max/max workers remain active on the M3 Max: lane 150 owns the focused Apple
+CPU policy fix, while lane 151 specifies the
 canonical cumulative fog contract read-only. No full link or LLDB run is
 active; remote workers may not update the umbrella checkout.
 
@@ -140,13 +141,15 @@ active; remote workers may not update the umbrella checkout.
   `V2_EXTENSION_NOT_RENDERED` can reach the geometry-only sink. Evidence is
   `docs/evidence/APPLE-V2-SINK-STATUS-POLICY-59D13A98-2026-08-14.md`. No build,
   test, launch, asset access, live callback, Metal, pixel, or playability claim.
-- Lane 149 / task `01a0025c-acba-7100-8a2d-c3a5ea3ec708` — active source-edit
-  M3 Max lane. Branch `c1/lane-v2-alpha-ref-normalization-m3`, worktree
-  `/private/tmp/acgc-lane-v2-alpha-ref-normalization`, exact base `59d13a98`.
-  It owns only the V2 predicate/classifier in `pc/src/pc_gx.c` and the focused
-  rejection-reason fixture. It must preserve V1 and active alpha comparisons,
-  pass native plus combined ASan/UBSan focused tests, commit, and stop. No
-  packet ABI, Apple, full-link, LLDB, Metal, pixel, or playability scope.
+- Lane 149 / task `01a0025c-acba-7100-8a2d-c3a5ea3ec708` — complete,
+  integrated, and archived. Remote branch
+  `c1/lane-v2-alpha-ref-normalization-m3` advanced `59d13a98` to reviewed
+  `2dcd69c4a`; the integration owner cherry-picked it as canonical PC
+  `820906439`. Exactly `pc/src/pc_gx.c` and the focused rejection-reason
+  fixture changed. Remote and exact integrated native plus combined ASan/UBSan
+  focused CTest pass `1/1` each (`detect_leaks=0`, no diagnostics). Evidence is
+  `docs/evidence/V2-ALPHA-REFERENCE-NORMALIZATION-820906439-2026-08-14.md`.
+  No full-link, LLDB, callback, Metal, pixel, or playability claim follows.
 - Lane 150 / task `01a0025c-9d0d-71d3-9be3-7b01da10cfa2` — active source-edit
   M3 Max lane. Branch `c1/lane-v2-sink-policy-m3`, worktree
   `/private/tmp/acgc-lane-v2-sink-policy`, exact base `59d13a98`. It owns only

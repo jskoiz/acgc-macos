@@ -34,8 +34,8 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `59d13a98` (`Classify V2 base-state rejection
-reasons`), on top of the `c973dbee` grouped-triangle handoff, the `565f877e`
+`c1/macos-host-launch` at `820906439` (`Normalize dead V2 alpha references`),
+on top of the `59d13a98` rejection classifier, the `c973dbee` grouped-triangle handoff, the `565f877e`
 channel-source contract, lane-132 source record `80e80df`, Apple V2 texture
 sideband `3c08c7f`, and reviewed remote binder `08998d0`. The new bounded
 classifier preserves the original V2 acceptance predicate and names the first
@@ -52,6 +52,15 @@ encode/readback, pixel, device, or playability claim follows. See
 [fog/global-count crosswalk](docs/evidence/V2-GLOBAL-COUNT-FOG-CROSSWALK-59D13A98-2026-08-14.md),
 [Apple V2 sink policy](docs/evidence/APPLE-V2-SINK-STATUS-POLICY-59D13A98-2026-08-14.md),
 and the [lane board](docs/LANE-BOARD.md) for exact provenance.
+
+- The integrated `820906439` correction is deliberately V2-local: references
+  `8/144` no longer reject when both comparisons are `GX_ALWAYS` and the
+  operator is `GX_AOP_AND`; active comparators and OR/XOR still fail closed,
+  and the same live tuple advances to `blend`. Remote and exact integrated
+  native plus combined ASan/UBSan focused CTest each pass `1/1`. This is CPU
+  predicate evidence only, not a live packet, callback, Metal operation,
+  pixel, or playability result. See
+  [V2 alpha-reference normalization](docs/evidence/V2-ALPHA-REFERENCE-NORMALIZATION-820906439-2026-08-14.md).
 
 - The integrated `565f877e` CPU seam adds a fixed-width V2 validator and typed
   Apple consumer contract for decomp-compatible disabled `GX_SRC_REG` /
