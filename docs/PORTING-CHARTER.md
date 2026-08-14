@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `afb1cac3c`, with
-the focused input trigger-parity correction integrated on top of the
+As of 2026-08-14, the canonical local PC branch is clean at `b5f550ea0`, with
+the standalone canonical fog value section integrated on top of the focused
+input trigger-parity correction and the
 `5157ac1cb` Apple V2 sink-status guard and the `820906439` V2-local
 alpha-reference normalization and the
 `59d13a98` bounded base-state rejection classifier and the
@@ -108,6 +109,18 @@ remain unchanged. Exact integrated native and combined ASan/UBSan focused CTest
 pass `1/1` each. This is virtual-controller CPU evidence, not physical input,
 running-game response, device, or playability proof. See
 [input trigger parity](evidence/INPUT-TRIGGER-PARITY-AFB1CAC3C-2026-08-14.md).
+
+The exact remote fog worker `956e0571b` is integrated as `b5f550ea0`. It adds
+an 80-byte, pointer-free, fixed-width fog value section and validator while
+leaving V1-V4, `pc_gx`, and Apple runtime unchanged. Exact integrated native
+and combined ASan/UBSan focused CTest pass `1/1` each. See
+[canonical fog implementation](evidence/CANONICAL-FOG-STATE-B5F550EA0-2026-08-14.md).
+
+The separate read-only Apple audit selected a cumulative snapshot, validated
+owned resource sideband, immutable CPU encode plan, and later device-gated
+encoder. Current V4 sink eligibility is not a rendering proof because V4 does
+not encode all live GX state. See
+[Apple canonical consumer audit](evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md).
 
 Three read-only M3 Max follow-ups now classify both cohorts and the independent
 Apple status policy. The alpha references are dead only for the exact

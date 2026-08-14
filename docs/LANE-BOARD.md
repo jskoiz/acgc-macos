@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`afb1cac3c` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`b5f550ea0` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The Codex app still has no matching saved
 remote project for cross-host task handoff, so remote lanes use the verified
 SSH/Codex runner and are registered here by their durable task IDs. Lane 140 ran
@@ -60,10 +60,10 @@ and lanes 143–144 produced read-only architecture evidence. Root-owned lane
 146–148 completed the read-only alpha, fog/global-count, and Apple status-policy
 crosswalks. Lanes 149 and 150 are complete and integrated as PC `820906439`
 and `5157ac1cb`; lane 151 completed the read-only cumulative fog contract.
-Lanes 152–154 remain the current dependency-ready M3 Max renderer wave. Lane
-155 is complete and integrated as PC `afb1cac3c`; its exact local native and
-combined ASan/UBSan focused CTest pass `1/1` each. No full link or LLDB run is
-active. Remote workers may not update the umbrella checkout.
+Lane 153 remains the sole active M3 Max renderer audit. Lanes 152 and 155 are
+complete and integrated as PC `b5f550ea0` and `afb1cac3c`; lane 154 completed
+its read-only Apple consumer/encoder audit. No full link or LLDB run is active.
+Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -167,15 +167,19 @@ active. Remote workers may not update the umbrella checkout.
   `docs/evidence/CANONICAL-FOG-STATE-CONTRACT-59D13A98-2026-08-14.md`. No
   source/docs edit, build, test, launch, asset access, callback, Metal, pixel,
   or playability claim occurred in the worker.
-- Lane 152 / task `01a00276-84d7-7cc1-b085-cabe0af93e34` — active M3 Max
-  source lane. Branch `c1/lane-canonical-fog-state-m3` and worktree
+- Lane 152 / task `01a00276-84d7-7cc1-b085-cabe0af93e34` — complete,
+  integrated, and archive-ready. Branch `c1/lane-canonical-fog-state-m3` and
+  worktree
   `/private/tmp/acgc-lane-canonical-fog-state` start at exact PC
   `5157ac1cb`; decomp is `09ca8e8b`. It owns only new renderer-neutral
   canonical-state header/source, one portable fog fixture, and minimal portable
   CMake registration. It must leave V1–V4, `pc_gx`, Apple runtime, live
   capture, full link, LLDB, Metal, pixels, and playability out of scope. Native
-  and combined ASan/UBSan focused proof use unique roots under
-  `/private/tmp/acgc-lane-canonical-fog-{native,asan}`.
+  Worker `956e0571b` is integrated as canonical PC `b5f550ea0`. Remote and
+  exact integrated native plus combined ASan/UBSan focused CTest pass `1/1`
+  each. Evidence is
+  `docs/evidence/CANONICAL-FOG-STATE-B5F550EA0-2026-08-14.md`. No live
+  snapshot, callback, Metal, pixel, or playability claim follows.
 - Lane 153 / task `01a00275-9cf6-75b0-9275-f7f7f2338084` — active read-only
   M3 Max audit at exact PC `5157ac1cb` and decomp `09ca8e8b`. Detached
   worktree `/private/tmp/acgc-lane-cumulative-state-schema-audit` owns the
@@ -183,13 +187,17 @@ active. Remote workers may not update the umbrella checkout.
   sideband-resource boundaries, byte layout, and an implementation order. It
   may not edit, build, launch, access assets, or claim Metal/pixel/playability
   evidence.
-- Lane 154 / task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active read-only
-  M3 Max audit at exact PC `5157ac1cb` and decomp `09ca8e8b`. Detached
+- Lane 154 / task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete and
+  archive-ready, read-only M3 Max audit at exact PC `5157ac1cb` and decomp
+  `09ca8e8b`. Detached
   worktree `/private/tmp/acgc-lane-apple-canonical-consumer-audit` owns the
   canonical-state-to-Metal mapping, consumer/encoder boundary, cache
   invalidation rules, first safe CPU source boundary, and later device/pixel
-  fixture contract. It may not edit, build, launch, or claim live Metal or a
-  rendered frame.
+  fixture contract. It found current V4 sink eligibility too permissive and
+  selected a cumulative snapshot -> owned sideband -> immutable CPU plan ->
+  device encoder architecture. Evidence is
+  `docs/evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md`. It
+  made no edit, build, launch, or live Metal/rendered-frame claim.
 - Lane 155 / task `01a00276-84d7-7d83-81e6-28aec4c163d3` — complete,
   integrated, archived, and cleaned. Preserved branch
   `c1/lane-input-trigger-parity-m3` and retired worktree

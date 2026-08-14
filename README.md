@@ -34,9 +34,10 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `afb1cac3c` (`Restore analog trigger digital
-parity`), on top of `5157ac1cb` (`Reject incomplete V2 packets before Metal
-sink`) and `820906439` (`Normalize dead V2 alpha references`),
+`c1/macos-host-launch` at `b5f550ea0` (`Add canonical GX fog state`), on top of
+`afb1cac3c` (`Restore analog trigger digital parity`), `5157ac1cb` (`Reject
+incomplete V2 packets before Metal sink`), and `820906439` (`Normalize dead V2
+alpha references`),
 on top of the `59d13a98` rejection classifier, the `c973dbee` grouped-triangle handoff, the `565f877e`
 channel-source contract, lane-132 source record `80e80df`, Apple V2 texture
 sideband `3c08c7f`, and reviewed remote binder `08998d0`. The new bounded
@@ -78,6 +79,19 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   V2 remains fail-closed for fog, and the borrowed texture/TLUT resource
   sideband remains separate. See
   [canonical fog-state contract](docs/evidence/CANONICAL-FOG-STATE-CONTRACT-59D13A98-2026-08-14.md).
+
+- The integrated `b5f550ea0` implementation adds that standalone, pointer-free
+  80-byte canonical fog value section and validator without changing V1-V4 or
+  wiring `pc_gx`/Apple runtime. Exact integrated native and combined ASan/UBSan
+  focused CTest pass `1/1` each. This is a CPU contract, not a live snapshot,
+  callback, Metal operation, pixel, or frame. See
+  [canonical fog implementation](docs/evidence/CANONICAL-FOG-STATE-B5F550EA0-2026-08-14.md).
+
+- The read-only Apple canonical-consumer audit selected a cumulative value
+  snapshot, owned resource sideband, immutable CPU plan, and separate
+  device-gated encoder. It also found current V4 sink eligibility too
+  permissive for device proof because V4 omits live GX semantics. See
+  [Apple canonical consumer audit](docs/evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md).
 
 - The integrated `afb1cac3c` input correction makes axis-bound L/R digital
   state follow the same nonzero normalized analog value that reaches
