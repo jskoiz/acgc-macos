@@ -52,6 +52,18 @@ the following visible remote Codex tasks were opened from the registered remote
 project instead. They use `gpt-5.6-luna` with max reasoning, keep full links and
 LLDB serialized, and do not update the umbrella checkout.
 
+Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is the sole active remote
+source lane, created as a same-directory fork so it remains under the
+`acgc-modern-port` project on the M3 Max rather than local Recents. Its remote
+PC checkout was fast-forwarded by a tracked source-only bundle to
+`c1/macos-host-launch` `894ac5f8`; the bundle contained no ISO or extracted
+assets. It owns only the Apple texture/TLUT/TEV consumer/encoder CPU seam and
+focused native plus combined ASan/UBSan tests, with unique ignored roots under
+`/private/tmp/acgc-remote-lane-texture-tev-m3*`. No full link, LLDB, device,
+Metal encode/readback, pixel, input, audio, save, or playability claim is
+authorized. The remote umbrella remains an older checkout and is not an
+integration pointer; only the root owner may update this umbrella.
+
 - Lane 116 / task `019fff00-d312-73a0-8396-d94c6618e0b8` — complete pending
   root review. Remote PC worktree `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-m3`
   on `c1/lane-gx-v4-channel-diagnostic-m3`, base `a53b192`, final `e8155c6`.
