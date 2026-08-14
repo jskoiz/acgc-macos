@@ -67,9 +67,10 @@ Lanes 152 and 155 are complete and integrated as PC `b5f550ea0` and
 Apple consumer/encoder audits. Lane 157 is complete and integrated. Lane 156
 is integrated as PC `4dbb71065`, and lane 158 completed its read-only producer
 audit. Lane 159 completed the read-only Blend/logic contract; lane 160 is the
-independent focused verification matrix. Lane 161 is now the sole production
-source lane and owns the exact 16-byte Blend/logic section. No full link or
-LLDB run is active. Remote workers may not update the umbrella checkout.
+independent focused verification matrix. Lane 161 is the sole production
+source lane and owns the exact 16-byte Blend/logic section; lanes 162–163 are
+read-only Alpha/update and TEV contract audits. No full link or LLDB run is
+active. Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -307,8 +308,25 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   `/private/tmp/acgc-lane-canonical-blend-{native,asan,win}` roots. Common
   envelope semantics, V1-V4, `pc_gx`, Apple/Metal, ac-decomp edits, full link,
   LLDB, assets, pixels, devices, and playability are out of scope.
+- Lane 162 / task `01a002b5-525f-7480-81df-8c9bde594295` — active read-only
+  M3 Max Alpha/update contract audit. Detached worktree
+  `/private/tmp/acgc-lane-canonical-alpha-audit` is exact PC `4dbb71065` with
+  decomp oracle `09ca8e8b`. It owns the `0x0100` value-contract decision for
+  alpha comparisons/references/operator, color update, alpha update, and
+  `z_comp_loc`, including exact size/layout/domains/inactive semantics and the
+  boundary that keeps dither/destination alpha in Raster `0x0400`. It may not
+  edit, branch, build, launch, access assets, or claim callback, Metal, pixel,
+  device, or playability proof.
+- Lane 163 / task `01a002b5-525f-7862-aa8c-0e0ccecdf5c2` — active read-only
+  M3 Max TEV contract audit. Detached worktree
+  `/private/tmp/acgc-lane-canonical-tev-audit` is exact PC `4dbb71065` with
+  decomp oracle `09ca8e8b`. It owns the strict `0x0020` stage/register/konst/
+  swap/reference ABI decision, stage capacity, inactive-record rules, signed
+  S10 provenance gap, and non-overlapping future ownership. It may not edit,
+  branch, build, launch, access assets, or claim a live snapshot, callback,
+  Metal, pixel, device, or playability proof.
 
-The remote Codex project assignment records place tasks 156–161 under the
+The remote Codex project assignment records place tasks 156–163 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
