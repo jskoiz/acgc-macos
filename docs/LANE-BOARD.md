@@ -223,8 +223,9 @@ been retired after holder checks; its preserved worktree still has
   owner-managed holders. The older “no production worker” sentence predates the
 remote M3 Max batch above; lanes 116–136 are complete/integrated/archived and
 lane 137 is now complete/parked with no source edit because its packet-fit gate
-requires packet-validator and Apple-consumer ownership outside that lane. No
-worker is active, and no lane may start a competing full link or LLDB trace; no
+requires packet-validator and Apple-consumer ownership outside that lane. Lane
+138 is the sole active remote M3 Max CPU/source lane for that separately owned
+contract; no lane may start a competing full link or LLDB trace, and no
 duplicate or filler lane is open. The current portable verification tip is
 `2b141a753`, which keeps
 resolved V4 texture-map aliases
@@ -360,7 +361,7 @@ native/ASan/UBSan `5/5` results. Lane 110 is complete/integrated/archived;
 its typed V4 Apple consumer validation passes native and combined ASan/UBSan
 focused CTest `6/6` each. Lane 111 and lane 114 are complete/archived pending
 exact-path cleanup; lanes 112–114 are complete/archived pending exact-path
-cleanup, and no worker is active. Full links and LLDB launches remain
+cleanup, and lane 138 is the only active worker. Full links and LLDB launches remain
 serialized.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
@@ -575,6 +576,7 @@ from compilation alone.
 | 135 | V2 handoff rejection fixture — `01a00165-3830-73a0-a783-481af8df9bbe` | Remote M3 Max test-only fixture; own only `pc/tests/pc_gx_semantic_v2_handoff.c`; no production GX/Apple edits, full link, LLDB, device, Metal, pixel, or playability scope | Worker `c1/lane-v2-rejection-fixture-m3` `88724cdb` based on `354f33884`; source worktree `/private/tmp/acgc-lane-v2-rejection-fixture-m3` preserved because it contains pre-existing `assets/`/`orig/`; generated focused roots retired | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `1/1` each on worker and integrated PC `2b141a753`; no diagnostics; evidence `docs/evidence/V2-HANDOFF-REJECTION-FIXTURE-88724CDB-2026-08-14.md`; CPU/contract only, no live callback/Metal/pixel/playability claim |
 | 136 | Current-tip V2 rejection runtime — root-owned | One serialized current-tip `ac_pc` link and one GUI-session LLDB launch at PC `2b141a753`; no source edits; exact local ISO only | Build `/private/tmp/acgc-current-v2-rejection-runtime-2b141a753`; trace `/private/tmp/acgc-current-v2-rejection-runtime-2b141a753-lldb-logs`; generated roots holder-free after review | Complete; link `[4018/4019]` arm64 Mach-O; GUI run reached GAFE01/COPYDATE/forest/Famicom/NEOS/LOGO and graph/GX; `graph_task_set00=26`, `emu64_taskstart=26`, `GXBegin=524`, `pc_gx_flush_vertices=523`, V2 builder `523`, bounded V2 diagnostic `64`; Apple consumer/provider/observer `0`; no TERM/KILL disposition asserted from transient GUI stdout; no Metal/pixel/input/audio/save/device/playability claim; evidence `docs/evidence/CURRENT-V2-REJECTION-RUNTIME-2B141A753-2026-08-14.md` |
 | 137 | V2 state-extension diagnostic — `01a0017d-d42d-74f0-846c-f4a97c5d6193` | Remote M3 Max Luna Max/max source/test lane; own only `pc/src/pc_gx.c`, one new V2 state-extension fixture, and minimal CMake registration; preserve V1/V2 fail-closed behavior; no existing handoff-fixture, packet-header/ABI, Apple, decomp, full-link, LLDB, device, Metal, pixel, or playability scope | Branch `c1/lane-v2-state-extension-m3` from PC `2b141a753`; dedicated worktree `/private/tmp/acgc-lane-v2-state-extension-m3` preserved because it contains pre-existing `assets/`/`orig/`; focused roots were absent; decomp `09ca8e8b`; crosswalk `GX_SRC_REG/GX_SRC_VTX` versus the exact V2 validator recorded in `docs/evidence/V2-STATE-EXTENSION-DIAGNOSTIC-2B141A753-2026-08-14.md` | Complete/parked; no source edit or commit, no build/test/runtime result; packet header advertises vertex-source state but the exact validator and Apple consumer do not represent it, so the lane stopped before edits; no callback/Metal/pixel/playability claim |
+| 138 | V2 channel-source contract — `01a0018a-cb34-7860-85ac-be8ef4f800cc` | Remote M3 Max Luna Max/max source/test lane launched through the verified remote CLI because the host is not yet registered as a saved Codex project; own only packet header/validator, Apple typed consumer/runtime, one new focused fixture, and minimal CMake; preserve V1/V2 fail-closed behavior; no `pc_gx.c`, existing handoff fixture, decomp, full-link, LLDB, device, Metal, pixel, or playability scope | Exact base PC `2b141a753`; planned branch/worktree `c1/lane-v2-channel-source-contract-m3` / `/private/tmp/acgc-lane-v2-channel-source-contract-m3`; planned roots `/private/tmp/acgc-lane-v2-channel-source-contract-m3-native` and `-asan`; decomp `09ca8e8b`; crosswalk/setup in progress | Active/setup; no source/build/runtime result yet; require exact owned-file list, two-upstream crosswalk, focused native and combined ASan/UBSan `--parallel 1` handoff with diagnostics and clean worktree; no live callback/Metal/pixel/playability claim |
 
 ## Parked intake (not active)
 
