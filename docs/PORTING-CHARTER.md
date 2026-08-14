@@ -61,14 +61,15 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `a96f358`, with
-the remote M3 Max lane-132 source commit `d52c6a0f` integrated on top of the
-V2 texture sideband. The new five-file CPU seam records validated borrowed
-image/TLUT metadata per map and invalidates it across cache, replacement,
-fallback, stale, TLUT, and destruction paths. Its native and combined
-ASan/UBSan focused tests pass `2/2` each after the test-only sideband contract
-correction. This is still CPU/contract evidence only: no live source binding,
-Metal encode/readback, pixel, device, or playability claim is made.
+As of 2026-08-14, the canonical local PC branch is clean at `354f33884`, with
+the remote M3 Max lane-132 source record and lane-133 Apple binder integrated
+on top of the V2 texture sideband. The current five-file CPU source record plus
+four-file Apple seam validates borrowed image/TLUT metadata per map, source
+kind, sampler fields, and generation across cache, replacement, fallback,
+stale, TLUT, and destruction paths. Native and combined ASan/UBSan focused
+tests pass `3/3` each on the integrated binder snapshot. This remains
+CPU/contract evidence only: no live callback, Metal encode/readback, pixel,
+device, or playability claim is made.
 
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present

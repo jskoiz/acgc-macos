@@ -34,14 +34,16 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `a96f358` (`Align V2 handoff test with texture
-sideband`), on top of the lane-132 source record `80e80df` and Apple V2
-texture sideband `3c08c7f`. This adds a host-pointer-safe per-map CPU
-image/TLUT metadata record with explicit source kind and generation
-invalidation, plus a focused fixture and deterministic fail-closed V2 test.
-Native and combined ASan/UBSan focused tests pass `2/2` each. No live
-game-owned source binding, Metal encode/readback, pixel, device, or playability
-claim follows. See [texture source record evidence](docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md)
+`c1/macos-host-launch` at `354f33884` (`Bind Apple V2 CPU texture sources`),
+on top of the lane-132 source record `80e80df`, the Apple V2 texture sideband
+`3c08c7f`, and the reviewed remote binder `08998d0`. The Apple seam now
+synchronously validates the PC-owned per-map image/TLUT metadata, source kind,
+sampler fields, and generation before and after CPU fixture decode, failing
+closed on provider or lifetime errors. Native and combined ASan/UBSan focused
+tests pass `3/3` each with no diagnostics. This is CPU/contract evidence only:
+no live game-owned callback, Metal encode/readback, pixel, device, or
+playability claim follows. See [texture source record evidence](docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md),
+[Apple binder evidence](docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md),
 and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 
 - The preceding V4 integration chain is `upstream/ACGC-PC-Port` branch

@@ -1,6 +1,6 @@
 # ACGC visible lane board
 
-Updated 2026-08-13 under the resumed rolling-refill scheduler. The board records the
+Updated 2026-08-14 under the resumed rolling-refill scheduler. The board records the
 visible Codex tasks, their ownership, and the order in which evidence may be
 integrated. All new and successor tasks are Luna Max with max reasoning. A
 task being active means it is allowed to inspect or run its bounded work; it
@@ -44,9 +44,9 @@ docs.
 ## Remote M3 Max batch (current)
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
-checkout has been independently verified at umbrella `ee31f53`, populated PC
-`894ac5f8`, and decomp `09ca8e8b`. No ISO, extracted assets, keys, or proprietary
-data were transferred. The old local lane-115 handoff remains parked because
+checkout is being used for focused lanes; the latest integrated local PC tip is
+`354f33884` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+proprietary data were transferred. The old local lane-115 handoff remains parked because
 the handoff registry could not match the saved remote project; the visible
 remote task was opened from the registered remote project instead. It used
 `gpt-5.6-luna` with max reasoning, kept full links and LLDB serialized, and did
@@ -105,17 +105,17 @@ consumer/runtime binding, full link, LLDB, device, Metal encode/readback,
 pixel, input, audio, save, or playability claim is authorized. Evidence is
 `docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md`.
 
-Lane 133 / task `01a00127-b749-7021-bb08-a8b1485773df` is the sole active
-remote M3 Max source lane. It is running from source-only PC tip `a96f358`
-with the exact isolated scratch root
-`/private/tmp/acgc-lane-gx-texture-binder-m3`; the desktop handoff registry is
-currently reconnecting, so the durable remote Codex task is being monitored by
-its M3 Max task ID. It owns only the Apple V2 texture-source binder/validation
-seam, one focused test, and minimal CMake; no `pc_gx.c`/packet-builder,
-decomp, full-link, LLDB, launch, device, Metal, pixel, input, audio, save,
-ISO, or playability scope. Require native plus combined ASan/UBSan focused
-CTest with `--parallel 1`, exact base/final refs, and a clean CPU/contract-only
-handoff before integration.
+Lane 133 / task `01a00127-b749-7021-bb08-a8b1485773df` is complete/integrated/archived.
+The remote M3 Max worker `c1/lane-v2-texture-source-binder-m3` advanced
+`a96f358` to `08998d0`; the integration owner cherry-picked it as canonical PC
+`354f33884`. Its four-file Apple V2 binder synchronously consumes the
+`pc_gx_get_v2_texture_source` metadata, validates source/lifetime fields, and
+fails closed before any renderer work. Native and combined ASan/UBSan focused
+CTest pass `3/3` each with `--parallel 1` and no diagnostics. The worktree was
+clean at handoff; exact native/sanitized roots remain listed in the evidence
+until holder-free cleanup. No `pc_gx.c`/packet-builder, decomp, full-link, LLDB,
+launch, device, Metal, pixel, input, audio, save, ISO, or playability scope.
+Evidence is `docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md`.
 
 - Lane 116 / task `019fff00-d312-73a0-8396-d94c6618e0b8` — complete pending
   root review. Remote PC worktree `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-m3`
@@ -551,6 +551,7 @@ from compilation alone.
 | 130 | V2 texture runtime sideband — `01a000e5-6aba-7a81-9431-bd22781967f4` | Remote M3 Max source lane; own only Apple consumer/runtime sideband headers/sources, one focused fixture, and minimal CMake; preserve V1/V2 geometry and V3/V4 behavior; no `pc_gx.c`/packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Worker `c1/lane-v2-texture-runtime-m3` `a10fed8e` based on `08c27de5`; integrated canonical PC `3c08c7f71`; exact worker roots pending cleanup review | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `3/3` each with no diagnostics (`detect_leaks=0`); borrowed V2 sideband/fail-closed status proof only; evidence `docs/evidence/V2-TEXTURE-RUNTIME-SIDEBAND-A10FED8E-2026-08-14.md` |
 | 131 | Game-owned texture source availability audit — `01a000f0-da9a-77b3-900a-06d627b43a2b` | Remote M3 Max read-only/test-only crosswalk of `pc_gx_texture.c`, `PCGXState`, V2 builder, current Apple sideband, and decomp GXTexObj/GXTlutObj lifetime; no source edit/build/link/launch | Same-directory remote project task; source tip `a10fed8e`/sideband content; worktree `/private/tmp/acgc-lane-gx-texture-source-audit-m3`; exact logs none | Complete/archived; no source change; static crosswalk proves no safe CPU byte record, sampler state, or generation token reaches V2 handoff; evidence `docs/evidence/GAME-OWNED-TEXTURE-SOURCE-AUDIT-A10FED8E-2026-08-14.md` |
 | 132 | Per-map CPU texture source record — `01a000f5-789c-70a0-851e-e1fdebe391aa` | Remote M3 Max source lane; owned only `pc_gx_internal.h`, `pc_gx_texture.c`, `pc_gx.c` metadata accessor, and one focused portable fixture; invalidated cache/replacement/fallback/stale paths; no Apple/packet ABI/Metal/full-link/LLDB/device/pixel/playability scope | Worker `c1/lane-gx-texture-source-record-m3` `d52c6a0f` based on `a10fed8e`; integrated canonical PC `c1/macos-host-launch` `a96f358` with test-only follow-up `7c9299755`; local roots `/private/tmp/acgc-integrated-v2-source-a96f358-native` and `-asan` | Complete/integrated/archived; focused native and combined ASan/UBSan CTest `2/2` each with no diagnostics (`detect_leaks=0`); sideband-required V2 test is deterministic and green; evidence `docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md`; no live source binding/Metal/pixel/playability claim |
+| 133 | Apple V2 texture-source binder — `01a00127-b749-7021-bb08-a8b1485773df` | Remote M3 Max source lane; own only `pc/apple/include/acgc/metal_packet_consumer.h`, `pc/apple/src/metal_packet_consumer.c`, `pc/apple/src/pc_metal_runtime.c`, one focused Apple test; no packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Worker `c1/lane-v2-texture-source-binder-m3` `08998d0` based on `a96f358`; integrated canonical PC `c1/macos-host-launch` `354f33884`; roots `/private/tmp/acgc-lane-gx-texture-binder-m3/native` and `-asan` | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `3/3` each, serially with no diagnostics (`detect_leaks=0`); borrowed game-owned texture metadata and lifetime checks are CPU-only; evidence `docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md`; no live callback/Metal/pixel/playability claim |
 
 ## Parked intake (not active)
 
