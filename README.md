@@ -21,8 +21,9 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `dbf6986` (`Add V4 Apple consumer validation gate`),
-  on top of `4fc6f00` (`Add GX V4 alpha-state packet builder`), `f18e7cd`
+  `c1/macos-host-launch` at `28ebac2` (`Wire V4 alpha state to Metal consumer`),
+  on top of `dbf6986` (`Add V4 Apple consumer validation gate`), `4fc6f00`
+  (`Add GX V4 alpha-state packet builder`), `f18e7cd`
   (`Add V3 builder consumer fixture`), `add2d6f`
   (`Trace GX V3 rejection state`) and `042cbf7`
   (`Add bounded GX v3 state handoff`),
@@ -156,6 +157,14 @@ redistribute it or extracted proprietary assets.
   focused CTest pass `6/6` each with no sanitizer diagnostics. This is still
   CPU/contract evidence only: no live V4 callback, Metal encode/readback,
   pixel, or playability claim follows. See [V4 Apple consumer evidence](docs/evidence/GX-V4-APPLE-CONSUMER-DBF6986-2026-08-13.md).
+- The integrated `28ebac2` continuation wires the V4 builder into a separate
+  typed flush callback after V2/V3 fail, maps the supported blend factors and
+  alpha-write mask, and keeps V3 texture-matrix state explicitly
+  `NOT_RENDERED`. The six affected PC targets pass `6/6` native and `6/6`
+  combined ASan/UBSan; direct Apple consumer/sink fixtures pass `2/2` in each
+  matrix. This is CPU/contract and compile coverage only: no live V4 callback,
+  Metal encode/present/readback, device, pixel, or playability claim follows.
+  See [V4 live-consumer evidence](docs/evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.

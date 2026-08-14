@@ -59,9 +59,9 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The latest integrated source tip is the clean native arm64
-PC branch `c1/macos-host-launch` at `dbf6986`, which adds the V4 alpha-state
-packet/builder contract and typed Apple consumer validation on top of
-`4fc6f00`. The latest serialized full
+PC branch `c1/macos-host-launch` at `28ebac2`, which wires the V4 builder into
+the typed Apple consumer/runtime seam on top of `dbf6986` and `4fc6f00`. The
+latest serialized full
 reconstructed `ac_pc` link recorded before the V3 slice was a native arm64
 Mach-O from `042cbf7`, returning `[4018/4019]` in lane 98's one-link run. The
 source tip adds the
@@ -115,6 +115,13 @@ extensions `NOT_RENDERED`. Native and combined ASan/UBSan focused CTest pass
 `6/6` each with no sanitizer diagnostics. This remains CPU/contract evidence;
 it does not establish a live V4 callback, Metal encode/readback, pixel, or
 playability gate. See [V4 Apple consumer evidence](evidence/GX-V4-APPLE-CONSUMER-DBF6986-2026-08-13.md).
+The integrated `28ebac2` continuation adds the missing typed V4 flush callback,
+maps the supported blend/alpha subset into the existing Apple sink, and keeps
+V3 texture-matrix state explicitly `NOT_RENDERED`. The six affected PC targets
+pass `6/6` native and `6/6` combined ASan/UBSan; direct Apple consumer/sink
+fixtures pass `2/2` in each matrix. This remains CPU/contract and compile
+coverage only: no live V4 callback, Metal encode/present/readback, device,
+pixel, or playability claim follows. See [V4 live-consumer evidence](evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md).
 The current-tip sanitizer/Windows verification on `f18e7cd` passes the seven
 focused native targets (`7/7`) and the combined ASan/UBSan matrix (`7/7`) with
 no diagnostics. Available `_WIN32`/`-m32` C and static-GBI probes pass, while
