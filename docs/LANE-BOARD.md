@@ -45,10 +45,12 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`b5f550ea0` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
-proprietary data were transferred. The Codex app still has no matching saved
-remote project for cross-host task handoff, so remote lanes use the verified
-SSH/Codex runner and are registered here by their durable task IDs. Lane 140 ran
+`62ef6638d` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+proprietary data were transferred. The remote Codex app has a saved
+`acgc-modern-port` project, but built-in cross-host handoff matching does not
+enumerate it from the local host. Remote lanes therefore use the verified
+SSH/Codex runner, persist their task-to-project assignment on the M3, and are
+registered here by durable task ID. Lane 140 ran
 `gpt-5.6-luna` with max reasoning from the exact `565f877e` source-only base
 and is now complete/integrated. Its generated roots are retired; its clean
 source worktree is deliberately preserved because ignored `assets/` and
@@ -62,10 +64,10 @@ crosswalks. Lanes 149 and 150 are complete and integrated as PC `820906439`
 and `5157ac1cb`; lane 151 completed the read-only cumulative fog contract.
 Lanes 152 and 155 are complete and integrated as PC `b5f550ea0` and
 `afb1cac3c`; lanes 153 and 154 completed the read-only cumulative-schema and
-Apple consumer/encoder audits. Lanes 156–160 are the current dependency-ready
-M3 Max batch: two non-overlapping source lanes, two read-only crosswalks, and
-one focused verification matrix. No full link or LLDB run is active. Remote
-workers may not update the umbrella checkout.
+Apple consumer/encoder audits. Lane 157 is complete and integrated; lanes 156
+and 158–160 remain the current dependency-ready M3 Max batch: one source lane,
+two read-only crosswalks, and one focused verification matrix. No full link or
+LLDB run is active. Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -240,17 +242,19 @@ workers may not update the umbrella checkout.
   only `/private/tmp/acgc-lane-canonical-envelope-{native,asan,win}`. `pc_gx`,
   Apple code, V1–V4 ABI, full link, LLDB, assets, Metal, pixels, and playability
   are out of scope.
-- Lane 157 / task `01a00297-d95c-7742-8feb-a275b16b4b88` — active M3 Max
-  source-edit lane. Explicit PC branch `c1/lane-v4-sink-failclosed-m3` and
-  worktree `/private/tmp/acgc-lane-v4-sink-failclosed` are clean at exact PC
-  `b5f550ea0`; decomp is `09ca8e8b`. It exclusively owns the Apple runtime sink
-  predicate plus its focused runtime-sideband fixture. V1 remains the only
-  legacy packet eligible for the current geometry sink; V2/V3/V4 must fail
-  closed until the canonical CPU render plan exists. Native and combined
-  ASan/UBSan roots are
-  `/private/tmp/acgc-lane-v4-sink-failclosed-{native,asan}`. `pc_gx`, packet
-  ABI/builders, shaders/encoder behavior, full link, LLDB, device, assets,
-  Metal, pixels, and playability are out of scope.
+- Lane 157 / task `01a00297-d95c-7742-8feb-a275b16b4b88` — complete,
+  integrated, and archive-ready. Remote branch
+  `c1/lane-v4-sink-failclosed-m3` advanced exact PC `b5f550ea0` to worker
+  `0bda49d23`; the integration owner cherry-picked its two-file change as
+  canonical PC `62ef6638d`. V1 remains the only legacy packet eligible for the
+  current geometry sink; V2/V3/V4 fail closed until the canonical CPU render
+  plan exists. Remote and exact integrated native plus combined ASan/UBSan
+  focused CTest pass `1/1` each (`detect_leaks=0`, no diagnostics), the
+  production syntax compile passes, and `git diff --check` passes. Evidence is
+  `docs/evidence/APPLE-V4-SINK-GUARD-62EF6638D-2026-08-14.md`. No live
+  callback, full link, Metal encode/present/readback, pixel, device, or
+  playability claim follows. Its exact worktree/build/event/final roots remain
+  protected until archive and holder-free cleanup complete.
 - Lane 158 / task `01a00297-d958-73f2-a850-d79a18e5f763` — active read-only
   M3 Max crosswalk. Detached PC worktree
   `/private/tmp/acgc-lane-canonical-snapshot-audit` is exact `b5f550ea0` and
@@ -283,9 +287,11 @@ The remote Codex project assignment records place tasks 156–160 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
-transferred. The next integration order is lane 157, lane 156, then lane 158's
-read-only implementation contract; the later blend/logic section must wait for
-lane 156 to release canonical header/source ownership.
+transferred. The next integration order is lane 156, then lane 158's snapshot
+contract and lane 159's blend/logic contract; the blend/logic source slice must
+wait for lane 156 to release canonical header/source ownership. Lane 160 is a
+base-snapshot verification matrix and will name the exact post-integration
+rerun subset rather than being treated as current-tip sign-off.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the

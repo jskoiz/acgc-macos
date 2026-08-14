@@ -34,7 +34,8 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `b5f550ea0` (`Add canonical GX fog state`), on top of
+`c1/macos-host-launch` at `62ef6638d` (`Fail closed legacy V4 Apple sink
+eligibility`), on top of `b5f550ea0` (`Add canonical GX fog state`),
 `afb1cac3c` (`Restore analog trigger digital parity`), `5157ac1cb` (`Reject
 incomplete V2 packets before Metal sink`), and `820906439` (`Normalize dead V2
 alpha references`),
@@ -65,14 +66,14 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   pixel, or playability result. See
   [V2 alpha-reference normalization](docs/evidence/V2-ALPHA-REFERENCE-NORMALIZATION-820906439-2026-08-14.md).
 
-- The integrated `5157ac1cb` Apple guard preserves V1 and the bounded V4 sink
-  path while rejecting ordinary `V2_EXTENSION_NOT_RENDERED`, provider-backed
-  `V2_EXTENSION_CPU_RESOLVED`, V3, unknown, malformed, null, and non-`OK`
-  outputs before the geometry-only sink. Remote and exact integrated native
-  plus combined ASan/UBSan focused CTest each pass `1/1`; a production syntax
-  compile also passes. This is CPU policy evidence, not a live callback,
-  Metal operation, pixel, or playability result. See
-  [Apple V2 sink guard](docs/evidence/APPLE-V2-SINK-GUARD-5157AC1CB-2026-08-14.md).
+- The `5157ac1cb` Apple guard first rejected V2/V3 and malformed status tuples.
+  The integrated `62ef6638d` follow-up now also rejects bounded V4: only V1 is
+  eligible for the current geometry-only sink until the cumulative canonical
+  CPU plan exists. Remote and exact integrated native plus combined ASan/UBSan
+  focused CTest each pass `1/1`; a production syntax compile also passes. This
+  is CPU policy evidence, not a live callback, Metal operation, pixel, or
+  playability result. See [Apple V2 sink guard](docs/evidence/APPLE-V2-SINK-GUARD-5157AC1CB-2026-08-14.md)
+  and [legacy V4 sink guard](docs/evidence/APPLE-V4-SINK-GUARD-62EF6638D-2026-08-14.md).
 
 - The read-only fog contract audit keeps V1-V4 unchanged and specifies an
   80-byte value-only fog section for the eventual cumulative canonical packet.
@@ -89,8 +90,8 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 
 - The read-only Apple canonical-consumer audit selected a cumulative value
   snapshot, owned resource sideband, immutable CPU plan, and separate
-  device-gated encoder. It also found current V4 sink eligibility too
-  permissive for device proof because V4 omits live GX semantics. See
+  device-gated encoder. Its V4 sink-safety finding is now closed by
+  `62ef6638d`; V4 remains non-rendering because it omits live GX semantics. See
   [Apple canonical consumer audit](docs/evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md).
 
 - The completed cumulative GX schema crosswalk rejects a V5 bridge and maps

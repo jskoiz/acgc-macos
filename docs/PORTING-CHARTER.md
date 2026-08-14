@@ -61,9 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `b5f550ea0`, with
-the standalone canonical fog value section integrated on top of the focused
-input trigger-parity correction and the
+As of 2026-08-14, the canonical local PC branch is clean at `62ef6638d`, with
+the legacy V4 sink now fail-closed on top of the standalone canonical fog value
+section, focused input trigger-parity correction, and the
 `5157ac1cb` Apple V2 sink-status guard and the `820906439` V2-local
 alpha-reference normalization and the
 `59d13a98` bounded base-state rejection classifier and the
@@ -90,11 +90,13 @@ tuple advances to `blend`. See
 [V2 alpha-reference normalization](evidence/V2-ALPHA-REFERENCE-NORMALIZATION-820906439-2026-08-14.md).
 
 The exact remote Apple policy commit `a4d90512c` is integrated as
-`5157ac1cb`. V1 and the bounded V4 path remain eligible, while ordinary and
-provider-backed V2, V3, malformed, unknown, null, and non-`OK` outputs fail
-closed before the geometry-only sink. Remote and exact integrated native plus
+`5157ac1cb`; it rejects V2/V3 and malformed status tuples. Follow-up worker
+`0bda49d23` is integrated as `62ef6638d` and also rejects V4, leaving V1 as
+the only semantic version eligible for the current geometry-only sink until
+the canonical CPU plan exists. Remote and exact integrated native plus
 combined ASan/UBSan focused CTest pass `1/1`; a production syntax compile
-passes. See [Apple V2 sink guard](evidence/APPLE-V2-SINK-GUARD-5157AC1CB-2026-08-14.md).
+passes. See [Apple V2 sink guard](evidence/APPLE-V2-SINK-GUARD-5157AC1CB-2026-08-14.md)
+and [legacy V4 sink guard](evidence/APPLE-V4-SINK-GUARD-62EF6638D-2026-08-14.md).
 
 The canonical fog audit keeps V1-V4 frozen and defines an end-state reusable
 80-byte value-only fog section, explicit state-mask semantics, and separate
@@ -118,8 +120,8 @@ and combined ASan/UBSan focused CTest pass `1/1` each. See
 
 The separate read-only Apple audit selected a cumulative snapshot, validated
 owned resource sideband, immutable CPU encode plan, and later device-gated
-encoder. Current V4 sink eligibility is not a rendering proof because V4 does
-not encode all live GX state. See
+encoder. Its V4 sink-safety finding is now closed by `62ef6638d`; V4 still is
+not a rendering contract because it does not encode all live GX state. See
 [Apple canonical consumer audit](evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md).
 
 The cumulative GX crosswalk selects a strict 14-section canonical envelope and
