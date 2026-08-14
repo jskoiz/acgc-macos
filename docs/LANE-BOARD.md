@@ -62,10 +62,10 @@ crosswalks. Lanes 149 and 150 are complete and integrated as PC `820906439`
 and `5157ac1cb`; lane 151 completed the read-only cumulative fog contract.
 Lanes 152 and 155 are complete and integrated as PC `b5f550ea0` and
 `afb1cac3c`; lanes 153 and 154 completed the read-only cumulative-schema and
-Apple consumer/encoder audits. Lanes 156–158 are the current dependency-ready
-M3 Max batch: two non-overlapping source lanes and one read-only crosswalk.
-No full link or LLDB run is active. Remote workers may not update the umbrella
-checkout.
+Apple consumer/encoder audits. Lanes 156–160 are the current dependency-ready
+M3 Max batch: two non-overlapping source lanes, two read-only crosswalks, and
+one focused verification matrix. No full link or LLDB run is active. Remote
+workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -259,8 +259,27 @@ checkout.
   lifetime, texture/TLUT owned sideband identity/generation, threading, and the
   focused fixture/ownership map. It may not edit, branch, build, launch, access
   assets, or claim callback, Metal, pixel, or playability proof.
+- Lane 159 / task `01a0029d-475b-7971-aead-39fe8fc4bc8e` — active read-only
+  M3 Max contract audit. Detached PC worktree
+  `/private/tmp/acgc-lane-blend-logic-contract-audit` is exact `b5f550ea0` and
+  decomp is `09ca8e8b`. It owns the fixed-width canonical Blend/logic section
+  contract at mask `0x0080`, including the boundary with Alpha mask `0x0100`,
+  exact enum/field/offset/alignment/reserved rules, inactive semantics,
+  accepted/rejected fixtures, and future non-overlapping source ownership. It
+  may not edit, branch, build, launch, access assets, or claim callback, Metal,
+  pixel, or playability proof. Success prepares the next source slice after
+  lane 156 releases canonical header/source ownership.
+- Lane 160 / task `01a0029d-475c-7a31-a6f9-708e60cb4201` — active M3 Max
+  verification-only lane. Detached PC worktree
+  `/private/tmp/acgc-lane-current-matrix-b5f550` is exact `b5f550ea0` and uses
+  unique native, combined ASan/UBSan, and bounded Windows host-probe roots under
+  `/private/tmp/acgc-lane-current-matrix-b5f550-{native,asan,win}`. It may run
+  only already-registered focused canonical, input, packet, graph, Apple,
+  texture/TEV, mixer, save, and lifecycle targets after checking their
+  dependencies; `ac_pc`, launch, LLDB, source edits, real i686/PE/runtime
+  sign-off, assets, Metal, pixels, and playability are out of scope.
 
-The remote Codex project assignment records place tasks 156–158 under the
+The remote Codex project assignment records place tasks 156–160 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
