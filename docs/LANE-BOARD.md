@@ -91,7 +91,7 @@ run is active; remote workers may not update the umbrella checkout.
   Metal, pixel, or playability proof occurred. Evidence is
   `docs/evidence/APPLE-SINK-REACHABILITY-C973DBEE-2026-08-14.md`.
 - Lane 145 / root task `019ff398-2520-7191-ac5c-f3007c49163f` — complete,
-  integrated, and cleanup-pending. The read-only runtime verification used
+  integrated, archived, and cleaned. The read-only runtime verification used
   canonical PC `59d13a98` and decomp `09ca8e8b`, one resumed serial arm64
   `ac_pc` build, and one logged-in-session LLDB launch under
   `/private/tmp/acgc-current-v2-rejection-runtime-59d13a98-build` and
@@ -105,7 +105,9 @@ run is active; remote workers may not update the umbrella checkout.
   claim follows. Evidence is
   `docs/evidence/CURRENT-V2-REJECTION-RUNTIME-59D13A98-2026-08-14.md`. This does
   not prove a callback, Metal encode/present/readback, pixel, input, audio,
-  save, device, or playability gate.
+  save, device, or playability gate. Its exact build/log and integrated
+  native/sanitizer roots were holder-free and are now absent; source, commits,
+  evidence, ISO/assets, and unrelated dirt were preserved.
 
 - Lane 146 / task `01a00250-5adf-7ae3-b348-437a437a0dfe` — active,
   read-only M3 Max crosswalk at PC `59d13a98` and decomp `09ca8e8b`. It owns
