@@ -61,14 +61,13 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `80e80df`, with
+As of 2026-08-14, the canonical local PC branch is clean at `a96f358`, with
 the remote M3 Max lane-132 source commit `d52c6a0f` integrated on top of the
 V2 texture sideband. The new five-file CPU seam records validated borrowed
 image/TLUT metadata per map and invalidates it across cache, replacement,
 fallback, stale, TLUT, and destruction paths. Its native and combined
-ASan/UBSan focused fixture each pass `1/1`; the existing V2 handoff fixture
-continues to fail at its pre-existing status expectation on both parent and
-current tip. This is still CPU/contract evidence only: no live source binding,
+ASan/UBSan focused tests pass `2/2` each after the test-only sideband contract
+correction. This is still CPU/contract evidence only: no live source binding,
 Metal encode/readback, pixel, device, or playability claim is made.
 
 As of 2026-08-13, source/revision proof, the current bounded portable-core
