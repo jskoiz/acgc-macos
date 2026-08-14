@@ -117,16 +117,22 @@ until holder-free cleanup. No `pc_gx.c`/packet-builder, decomp, full-link, LLDB,
 launch, device, Metal, pixel, input, audio, save, ISO, or playability scope.
 Evidence is `docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md`.
 
-Root-owned lane 134 is now a completed launch-blocker check at the integrated
+Root-owned lane 134 is now a completed launch/trace check at the integrated
 `354f33884` tip. Its one serialized full link reached `[4018/4019]` and
 produced an arm64 Mach-O in `/private/tmp/acgc-current-v2-texture-binder-runtime`.
-The ordinary bounded launch exited before boot because the shell has no SDL
-display; a separate dummy-video diagnostic also stopped before OpenGL window
-creation. No LLDB retry was made, and no runtime/callback/Metal/pixel claim
-follows. Evidence is
-`docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md`. The next
-runtime attempt must run in a GUI session with the exact local input; no ISO or
-assets move to the M3 Max/cloud.
+The headless shell still has no SDL display, but a logged-in GUI Terminal launch
+opened the local GAFE01 disc, mounted COPYDATE/forest archives, reached
+NEOS/LOGO/`graph_proc`, and returned after the bounded TERM window. The one
+return-safe LLDB trace counted `graph_task_set00=24`, `emu64_taskstart=24`,
+`GXBegin=509`, `pc_gx_flush_vertices=509`, and V2 builder entry `508`; the
+Apple consumer/provider/observer each remained `0`. This localizes the live
+boundary to V2 builder fail-closed before the Apple consumer. No Metal
+encode/present, pixel, input, audible audio, save, device, simulator, or
+playability claim follows. Evidence is
+`docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md`. The next gate
+is one separately owned CPU/source diagnosis of that forwarding boundary, then
+a fresh serialized current-tip trace; no ISO or assets may move to the M3 Max
+or cloud.
 
 - Lane 116 / task `019fff00-d312-73a0-8396-d94c6618e0b8` — complete pending
   root review. Remote PC worktree `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-m3`
@@ -563,7 +569,7 @@ from compilation alone.
 | 131 | Game-owned texture source availability audit — `01a000f0-da9a-77b3-900a-06d627b43a2b` | Remote M3 Max read-only/test-only crosswalk of `pc_gx_texture.c`, `PCGXState`, V2 builder, current Apple sideband, and decomp GXTexObj/GXTlutObj lifetime; no source edit/build/link/launch | Same-directory remote project task; source tip `a10fed8e`/sideband content; worktree `/private/tmp/acgc-lane-gx-texture-source-audit-m3`; exact logs none | Complete/archived; no source change; static crosswalk proves no safe CPU byte record, sampler state, or generation token reaches V2 handoff; evidence `docs/evidence/GAME-OWNED-TEXTURE-SOURCE-AUDIT-A10FED8E-2026-08-14.md` |
 | 132 | Per-map CPU texture source record — `01a000f5-789c-70a0-851e-e1fdebe391aa` | Remote M3 Max source lane; owned only `pc_gx_internal.h`, `pc_gx_texture.c`, `pc_gx.c` metadata accessor, and one focused portable fixture; invalidated cache/replacement/fallback/stale paths; no Apple/packet ABI/Metal/full-link/LLDB/device/pixel/playability scope | Worker `c1/lane-gx-texture-source-record-m3` `d52c6a0f` based on `a10fed8e`; integrated canonical PC `c1/macos-host-launch` `a96f358` with test-only follow-up `7c9299755`; local roots `/private/tmp/acgc-integrated-v2-source-a96f358-native` and `-asan` | Complete/integrated/archived; focused native and combined ASan/UBSan CTest `2/2` each with no diagnostics (`detect_leaks=0`); sideband-required V2 test is deterministic and green; evidence `docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md`; no live source binding/Metal/pixel/playability claim |
 | 133 | Apple V2 texture-source binder — `01a00127-b749-7021-bb08-a8b1485773df` | Remote M3 Max source lane; own only `pc/apple/include/acgc/metal_packet_consumer.h`, `pc/apple/src/metal_packet_consumer.c`, `pc/apple/src/pc_metal_runtime.c`, one focused Apple test; no packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Worker `c1/lane-v2-texture-source-binder-m3` `08998d0` based on `a96f358`; integrated canonical PC `c1/macos-host-launch` `354f33884`; roots `/private/tmp/acgc-lane-gx-texture-binder-m3/native` and `-asan` | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `3/3` each, serially with no diagnostics (`detect_leaks=0`); borrowed game-owned texture metadata and lifetime checks are CPU-only; evidence `docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md`; no live callback/Metal/pixel/playability claim |
-| 134 | Current-tip V2 binder runtime check — root-owned | One serialized `ac_pc` link and bounded launch at integrated PC `354f33884`; no source edits; GUI-session/runtime proof only after a display-capable host is available | Build root `/private/tmp/acgc-current-v2-texture-binder-runtime`; local ISO remains ignored and symlink-only | Complete/blocked at environment boundary; link `[4018/4019]` passed, ordinary launch stopped at SDL no-display, dummy-video launch stopped before OpenGL window creation; no LLDB/callback/Metal/pixel/playability claim; evidence `docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md` |
+| 134 | Current-tip V2 binder runtime check — root-owned | One serialized `ac_pc` link and bounded GUI launch/LLDB trace at integrated PC `354f33884`; no source edits; runtime proof only | Build root `/private/tmp/acgc-current-v2-texture-binder-runtime`; local ISO remains ignored and symlink-only | Complete; link `[4018/4019]` passed, GUI launch reached GAFE01/COPYDATE/NEOS/LOGO/`graph_proc`, GX counts recorded, V2 Apple consumer/provider/observer remained `0`; no Metal/pixel/input/audio/save/device/playability claim; evidence `docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md` |
 
 ## Parked intake (not active)
 

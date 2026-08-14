@@ -24,7 +24,7 @@ The command returned `0`, reached `[4018/4019]`, and produced
 emitted the known `PC_DARWIN_COMPILE_AUDIT` warning and the link emitted the
 known section-alignment warning; no link error occurred.
 
-## Launch attempts and blocker
+## Headless launch attempt and blocker
 
 One ordinary bounded verification was attempted:
 
@@ -38,15 +38,61 @@ The process exited before the ten-second gate with status `1` because SDL
 reported `SDL_Init failed: The video driver did not add any displays`. One
 separate diagnostic retry used `SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy`;
 it also exited with status `1` at `SDL_CreateWindow` because the dummy driver
-does not provide OpenGL. No LLDB launch was attempted after this display-session
-blocker, and no source change was made.
+does not provide OpenGL. This is a shell-session limitation, not a source or
+link failure.
+
+## GUI-session launch and bounded trace
+
+The same linked binary was then launched from the logged-in local Terminal GUI
+session, without changing the source checkout or moving the ISO. The wrapper
+started PID `51790`, ran for the planned ten seconds, sent `TERM`, and returned
+without needing `KILL`. The log
+`/private/tmp/acgc-current-v2-texture-binder-runtime/gui-launch-2.log` shows:
+
+- the ignored local `GAFE01` disc opened successfully;
+- FST/COPYDATE and the forest archives were mounted;
+- 139 shader variants compiled;
+- `NEOS_OUT` frames reached at least `841` and the LOGO actor path ran; and
+- `mainproc` reached `graph_proc` and `famicom_mount_archive`.
+
+This proves GUI-session launch, boot progression, and game-owned GX activity,
+not a presented frame or playability.
+
+A single return-safe LLDB trace was run from the same GUI Terminal, using the
+already-linked binary and exact working directory. The transcript recorded
+LLDB PID `52718`, game PID `52736`, `TERM_GAME_PID=52736`, and `TRACE_DONE`; no
+`KILL` fallback was printed. Breakpoint counts from
+`/private/tmp/acgc-current-v2-texture-binder-runtime-lldb-logs/lldb-runtime.log`
+were:
+
+| Boundary | Hits |
+| --- | ---: |
+| `graph_task_set00` | 24 |
+| `emu64_taskstart` | 24 |
+| `GXBegin` | 509 |
+| `pc_gx_flush_vertices` | 509 |
+| `pc_gx_try_handoff_semantic_packet_v2` | 508 |
+| `acgc_metal_packet_consumer_handoff_v2` | 0 |
+| `acgc_metal_packet_consumer_prepare_v2_texture_source_tev` | 0 |
+| `pc_metal_runtime_get_v2_texture_source` | 0 |
+| `pc_metal_runtime_observe` | 0 |
+
+The two Apple consumer breakpoints and provider/observer breakpoints emitted no
+trace records during this bounded run; `pc_metal_runtime_handoff_v2` was a
+pending symbol with no locations and is not counted. Thus the current live
+boundary is `pc_gx_try_handoff_semantic_packet_v2` entry followed by a
+builder-side fail-closed return before the Apple consumer. The LLDB run was
+terminated by the wrapper; no natural shutdown claim follows. CoreAudio
+overload messages in the log are diagnostic noise, not audible-audio proof.
 
 ## Boundary and next action
 
-The current source and full link are proven, but this environment has no usable
-SDL display session. There is no launch, boot, graph/GX callback, V2 texture
-source-binder, Metal encode/present, pixel, input, audio, save/load, simulator,
-device, or playability claim from this attempt. The next authorized runtime
-step is one GUI-session launch/LLDB trace on a host with the exact local input
-available; it must remain serialized and must not transfer the ISO/assets to the
-M3 Max or cloud.
+The source and full link are proven, and the GUI session now proves launch,
+boot progression, and the game-owned GX flush boundary. The live V2 builder still
+does not reach the Apple texture-source binder/provider or runtime observer.
+There is no Metal encode/present, pixel readback, input, audible audio,
+save/load, simulator, device, or playability claim. The next gate is a separate
+CPU/source lane that diagnoses and narrowly repairs the V2 builder-to-consumer
+forwarding boundary, followed by a fresh serialized current-tip runtime trace.
+The ISO/assets must remain local and must not be transferred to the M3 Max or
+cloud.

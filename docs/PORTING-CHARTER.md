@@ -73,10 +73,14 @@ device, or playability claim is made.
 
 The same `354f33884` snapshot links the full arm64 `ac_pc` target through
 `[4018/4019]`. A normal bounded launch from the current shell stops before
-boot because SDL reports no displays; a separate dummy-video diagnostic also
-stops because SDL's dummy driver cannot create the required OpenGL window. This
-is an environment launch blocker, not a source or link failure, and adds no
-runtime, callback, Metal, pixel, device, or playability claim. See
+boot because SDL reports no displays, but a logged-in GUI Terminal launch
+opened the local GAFE01 disc, mounted COPYDATE/forest archives, reached
+NEOS/LOGO/`graph_proc`, and was stopped after the bounded window. The one
+serialized LLDB trace counted `graph_task_set00=24`, `emu64_taskstart=24`,
+`GXBegin=509`, `pc_gx_flush_vertices=509`, and V2 builder entry `508`; the
+Apple V2 consumer/provider/observer remained `0`. This proves launch, boot,
+and the pre-consumer GX boundary only. It adds no Metal encode/present, pixel,
+input, audible audio, save, device, simulator, or playability claim. See
 `evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md`.
 
 As of 2026-08-13, source/revision proof, the current bounded portable-core

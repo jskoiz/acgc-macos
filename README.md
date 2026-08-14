@@ -107,12 +107,16 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   is still no game-owned Metal encode/readback/pixel or playability proof. See
   [current post-fix runtime evidence](docs/evidence/CURRENT-METAL-SINK-RUNTIME-A8F3A8F-2026-08-13.md).
 - The integrated binder tip `354f33884` links the full arm64 `ac_pc` target
-  through `[4018/4019]`; a bounded launch from this shell is blocked before
-  boot because SDL reports no displays, and the dummy SDL video driver cannot
-  provide the required OpenGL window. This is an environment launch blocker,
-  not a source or link failure. No runtime, callback, Metal, pixel, input,
-  audio, save, device, or playability claim follows. See [current binder
-  runtime evidence](docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md).
+  through `[4018/4019]`. The headless shell still reports no SDL displays, but
+  a logged-in GUI Terminal launch opened the local GAFE01 disc, mounted
+  COPYDATE/forest archives, reached NEOS/LOGO/`graph_proc`, and was stopped
+  cleanly after the bounded window. One serialized LLDB trace counted
+  `graph_task_set00=24`, `emu64_taskstart=24`, `GXBegin=509`,
+  `pc_gx_flush_vertices=509`, and V2 builder entry `508`; the Apple V2
+  consumer/provider/observer each remained `0`. This proves launch/boot/GX
+  progression and the pre-consumer boundary only: no Metal encode/present,
+  pixel, input, audible audio, save, device, or playability claim follows. See
+  [current binder runtime evidence](docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md).
 - A focused observer-rejection audit proves the zero callback is the intended
   v1 fail-closed semantic-packet boundary: the game’s richer TEV/texture/channel
   state is rejected before `pc_metal_runtime_observe`, while supported synthetic
