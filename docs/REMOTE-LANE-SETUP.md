@@ -6,10 +6,28 @@ expensive runtime attempts to overlap.
 
 ## Current prerequisite
 
-Codex currently knows the M3 Max host, but it does not have a saved
-`acgc-modern-port` project on that host. A remote handoff cannot begin until
-that project is registered and visible to Codex. Lane 115 is intentionally
-preserved and paused at this boundary:
+The M3 Max is now reachable over key-only SSH through the local alias
+`acgc-m3max` (`testtest@192.168.4.52`) using the dedicated local key
+`~/.ssh/acgc-m3max`. A source-only checkout is present at
+`/Users/testtest/Documents/Projects/acgc-modern-port` with these verified refs:
+
+- umbrella `9b26810`
+- `ACGC-PC-Port` `a53b192`
+- `ac-decomp` `09ca8e8b`
+
+The connection was verified with `ssh -o BatchMode=yes acgc-m3max
+'hostname; uname -m; pwd; git --version'`, returning `macbook`, `arm64`, the
+remote home directory, and Git 2.50.1. The source checkout was transferred as
+three Git bundles containing tracked history only; no ISO, extracted assets,
+keys, or proprietary game data were moved. Temporary remote bundles were
+removed after the ref check.
+
+The remaining prerequisite for a Codex handoff is a matching saved
+`acgc-modern-port` project on the M3 Max that appears in Codex's remote project
+list. The remote Codex CLI is authenticated and the source path is trusted in
+its config, but the desktop project entry has not yet been confirmed. Do not
+start a remote lane until that project identity is visible to Codex. Lane 115
+is intentionally preserved and paused at this boundary:
 
 - umbrella worktree: `/Users/jk/.codex/worktrees/3526/acgc-modern-port`
 - PC worktree: `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-3526`
@@ -54,9 +72,9 @@ The saved remote project must provide:
 
 ## Handoff sequence
 
-1. Register/save the `acgc-modern-port` project on the M3 Max.
+1. Register/save the `acgc-modern-port` project on the M3 Max in Codex.
 2. Verify the project appears in Codex's remote project list; do not proceed
-   from a host-only connection without a matching saved project.
+   from a host-only SSH connection without a matching saved project.
 3. Hand off the preserved lane task and verify its worktree, branch, base refs,
    and empty unique roots before allowing edits.
 4. Run only the lane's declared focused gate. Return the exact evidence to the
@@ -67,4 +85,3 @@ The saved remote project must provide:
    completed worktree and generated roots. Preserve branches, evidence,
    stale-metadata boundaries, failed clones, unrelated dirty files, and the
    local ISO.
-
