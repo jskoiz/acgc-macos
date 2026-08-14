@@ -47,15 +47,39 @@ The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
 `c973dbee` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The Codex app still has no matching saved
-remote project for cross-host task handoff, so lanes 138 and 140 use the
-verified remote CLI instead of appearing as project-folder tasks. Lane 140 ran
+remote project for cross-host task handoff, so remote lanes use the verified
+SSH/Codex runner and are registered here by their durable task IDs. Lane 140 ran
 `gpt-5.6-luna` with max reasoning from the exact `565f877e` source-only base
 and is now complete/integrated. Its generated roots are retired; its clean
 source worktree is deliberately preserved because ignored `assets/` and
 `orig/` are present. Lane 141 completed the sole serialized current-tip runtime
 gate and exposed the initial V2 base-state predicate as the next fail-closed
-tier. No worker is active while its evidence is integrated. Full links and LLDB
-remain serialized, and remote workers may not update the umbrella checkout.
+tier. Three useful, non-overlapping remote workers are now active: lane 142 is
+the only source-edit lane, while lanes 143 and 144 are read-only crosswalks.
+No full link or LLDB run is active; those gates remain serialized, and remote
+workers may not update the umbrella checkout.
+
+- Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — active source-edit
+  worker on M3 Max branch `c1/lane-v2-base-rejection-reason-m3`, exact base
+  `c973dbee`, worktree
+  `/private/tmp/acgc-lane-v2-base-rejection-reason-m3`. It exclusively owns
+  `pc/src/pc_gx.c`, one focused V2 rejection-reason fixture, and minimal CMake
+  registration. It must preserve the V2 acceptance predicate while classifying
+  its exact fail-closed reason, then pass focused native and combined
+  ASan/UBSan tests serially. Packet ABI, Apple files, full link, LLDB, ISO,
+  assets, Metal, pixels, and playability are out of scope.
+- Lane 143 / task `01a00212-fc10-78c0-a39a-70de7beb923a` — active read-only
+  renderer-contract crosswalk at detached `c973dbee`, worktree
+  `/private/tmp/acgc-lane-renderer-contract-audit-m3`. It maps V2/V3/V4 fields
+  against decomp GX producers and the Apple consumers to recommend the smallest
+  coherent end-state packet contract. It may not edit, build, launch, inspect
+  assets, or make renderer/device claims.
+- Lane 144 / task `01a00212-f8b5-7c71-9557-1c5208f87e17` — active read-only
+  Apple-sink reachability crosswalk at detached `c973dbee`, worktree
+  `/private/tmp/acgc-lane-apple-sink-audit-m3`. It maps successful V2 output
+  through callback registration, typed preparation, texture-provider binding,
+  runtime observation, and Metal sink submission. It may not edit, build,
+  launch, inspect assets, or claim callback/Metal/pixel/device/playability proof.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
