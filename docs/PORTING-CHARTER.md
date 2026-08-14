@@ -78,6 +78,16 @@ provider boundary. The integrated focused target passes native `1/1` and
 combined ASan/UBSan `1/1` with no diagnostics; no production V2 predicate was
 relaxed. See [V2 rejection fixture evidence](evidence/V2-HANDOFF-REJECTION-FIXTURE-88724CDB-2026-08-14.md).
 
+The current-tip runtime gate at `2b141a753` then completed one serialized
+`[4018/4019]` arm64 link and one GUI-session LLDB launch. The disc-backed run
+reached COPYDATE, forest/Famicom loading, NEOS/LOGO, and game-owned GX flush;
+the opt-in diagnostic emitted 64 bounded V2 rejection records and the V2
+builder was entered 523 times. The Apple consumer, texture provider, and
+runtime observer remained unobserved. This is live builder-rejection and boot
+progress evidence only, with no Metal encode/present/readback, pixel, input,
+audio, save, device, simulator, or playability claim. See [current V2 rejection
+runtime evidence](evidence/CURRENT-V2-REJECTION-RUNTIME-2B141A753-2026-08-14.md).
+
 The same `354f33884` snapshot links the full arm64 `ac_pc` target through
 `[4018/4019]`. A normal bounded launch from the current shell stops before
 boot because SDL reports no displays, but a logged-in GUI Terminal launch

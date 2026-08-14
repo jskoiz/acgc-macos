@@ -125,6 +125,15 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   progression and the pre-consumer boundary only: no Metal encode/present,
   pixel, input, audible audio, save, device, or playability claim follows. See
   [current binder runtime evidence](docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md).
+- The current-tip rejection follow-up is now recorded at PC `2b141a753`. One
+  serialized link again reached `[4018/4019]`; a single GUI-session LLDB run
+  reached real GAFE01 boot, COPYDATE/forest/Famicom loading, NEOS/LOGO, and
+  `graph_task_set00`/GX activity. It logged 523 V2 builder entries and 64
+  bounded diagnostic records (32 rejected preflight/result pairs), while the
+  Apple V2 consumer, texture provider, and runtime observer remained `0`.
+  This confirms the live builder-side rejection boundary only; it is not a
+  Metal encode/present, pixel, input, audio, save, device, or playability
+  claim. See [current V2 rejection runtime evidence](docs/evidence/CURRENT-V2-REJECTION-RUNTIME-2B141A753-2026-08-14.md).
 - A focused observer-rejection audit proves the zero callback is the intended
   v1 fail-closed semantic-packet boundary: the game’s richer TEV/texture/channel
   state is rejected before `pc_metal_runtime_observe`, while supported synthetic
