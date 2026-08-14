@@ -88,7 +88,7 @@ been retired after holder checks; its preserved worktree still has
 owner-managed holders. No
 production worker is active; no lane may start a competing full
 link or LLDB trace; no duplicate or filler lane is open. The current portable
-verification tip is `46a8ae5`, which keeps resolved V4 texture-map aliases
+verification tip is `a53b192`, which keeps resolved V4 texture-map aliases
 safe, permits live unencoded alpha/depth/cull state through the V4-only
 predicate, and wires the V4 builder into a typed Apple consumer callback after
 V2/V3 fail, maps the supported blend/alpha subset, and
@@ -115,9 +115,17 @@ zero V4 consumer/prepare/observer hits. The diagnostic cap remained 64
 `reason=global_state` records because the classifier still used the old
 predicate. The first correction (`adaddfd`) left a duplicated helper check;
 integrated PC `a53b192` now aligns the classifier with the relaxed V4 predicate.
-One final follow-up serialized trace is required before naming the remaining
-rejection class. See
+The follow-up trace below localizes the repeated game-owned path to the channel
+predicate. See
 `docs/evidence/CURRENT-V4-UNRENDERED-RASTER-RUNTIME-46A8AE5-2026-08-13.md`.
+The corrected current-tip `a53b192` link reached `[4018/4019]`, `[LOGO]`, and
+`[NEOS_OUT]`; its trace counted `graph_task_set00=33`,
+`emu64_taskstart=33`, `GXBegin=601`, `pc_gx_flush_vertices=601`, and
+`pc_gx_try_handoff_semantic_packet_v4=600`. The V4 consumer, prepare path, and
+runtime observer stayed at `0`; 33 capped records classify the repeated
+one-channel textured path as `channel`, while 31 heterogeneous setup records
+remain `global_state`. This is live builder-rejection evidence only. See
+`docs/evidence/CURRENT-V4-REJECTION-RUNTIME-A53B192-2026-08-13.md`.
 Lane 108's one current-tip link reached `[4018/4019]` and its one unprivileged
 LLDB launch created a real inferior, reached boot/graph/GX, and recorded
 `graph_task_set00=29`, `emu64_taskstart=29`, `GXBegin=532`,

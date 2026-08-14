@@ -33,8 +33,10 @@ the local machine.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `46a8ae5` (`Allow V4 unrendered raster state`), on
-  top of `fbb286d` (`Trace V4 packet rejection reasons`), `83fe50c`
+  `c1/macos-host-launch` at `a53b192` (`Align V4 rejection reason classifier`),
+  on top of `adaddfd` (`Align V4 rejection diagnostics`), `46a8ae5`
+  (`Allow V4 unrendered raster state`), `fbb286d`
+  (`Trace V4 packet rejection reasons`), `83fe50c`
   (`Allow V4 texture map aliases`), and `28ebac2`
   (`Wire V4 alpha state to Metal consumer`),
   on top of `dbf6986` (`Add V4 Apple consumer validation gate`), `4fc6f00`
@@ -204,9 +206,17 @@ the local machine.
   `0`. The trace emitted 64 `reason=global_state` records from the old
   classifier. The first correction (`adaddfd`) did not remove the helper's
   duplicated checks; follow-up commit `a53b192` now aligns the classifier with
-  the relaxed predicate. One final serialized trace is required before naming
-  the remaining rejection class. This is link/boot/GX evidence only. See
+  the relaxed predicate. That follow-up trace is recorded below and localizes
+  the repeated game-owned path to `channel`. This remains link/boot/GX evidence
+  only. See
   [current V4 unrendered-raster runtime evidence](docs/evidence/CURRENT-V4-UNRENDERED-RASTER-RUNTIME-46A8AE5-2026-08-13.md).
+- The corrected current-tip `a53b192` link reached `[4018/4019]`, `[LOGO]`,
+  `[NEOS_OUT]`, and 601 GX flushes. Its explicit-return trace recorded 33
+  repeated `reason=channel` rejections for the live one-channel textured path;
+  the V4 consumer, prepare path, and runtime observer remained `0`. The other
+  31 capped records were heterogeneous global/setup states and are excluded
+  from the game-owned classification. This remains link/boot/GX evidence only.
+  See [current V4 rejection runtime evidence](docs/evidence/CURRENT-V4-REJECTION-RUNTIME-A53B192-2026-08-13.md).
 - One serialized current-tip `28ebac2` arm64 link reached `[4018/4019]`, and
   one bounded LLDB launch reached the live game graph/GX path. The V4 builder
   entry was observed `558` times, while the typed V4 Apple consumer, its

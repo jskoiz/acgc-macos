@@ -64,7 +64,7 @@ keys, and proprietary game data remain local.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The latest integrated source tip is the clean native arm64
-PC branch `c1/macos-host-launch` at `46a8ae5`, which keeps resolved V4
+PC branch `c1/macos-host-launch` at `a53b192`, which keeps resolved V4
 texture-map aliases safe and allows the live unencoded alpha/depth/cull state
 through the V4-only predicate while wiring the V4 builder into
 the typed Apple consumer/runtime seam on top of `dbf6986` and `4fc6f00`. The
@@ -157,12 +157,18 @@ and 542 V4 builder attempts, but the V4 consumer, prepare path, and runtime
 observer remained `0`; the diagnostic's 64 records still used the old
 `global_state` label. The first correction (`adaddfd`) left a duplicated helper
 check; follow-up commit `a53b192` now aligns the classifier with the relaxed
-predicate, and one final serialized trace is required before naming the
-remaining rejection class.
+predicate, and the follow-up trace below localizes the repeated game-owned
+path to the channel predicate.
 This remains link/boot/GX evidence only. See [current V4 unrendered-raster
 runtime evidence](evidence/CURRENT-V4-UNRENDERED-RASTER-RUNTIME-46A8AE5-2026-08-13.md)
 and [the diagnostic handoffs](evidence/GX-V4-REJECTION-DIAGNOSTIC-ADADDFD-2026-08-13.md)
 and [the corrected classifier](evidence/GX-V4-REJECTION-DIAGNOSTIC-A53B192-2026-08-13.md).
+The resulting `a53b192` current-tip trace reached `[LOGO]`/`[NEOS_OUT]` and
+601 GX flushes; 33 repeated live records now classify as `channel`, while the
+V4 consumer, prepare path, and runtime observer remained `0`. The remaining
+31 capped records are heterogeneous global/setup states. This remains
+link/boot/GX evidence only; the next gate is a remote CPU/contract channel
+crosswalk and fixture. See [the current runtime evidence](evidence/CURRENT-V4-REJECTION-RUNTIME-A53B192-2026-08-13.md).
 The current-tip sanitizer/Windows verification on `f18e7cd` passes the seven
 focused native targets (`7/7`) and the combined ASan/UBSan matrix (`7/7`) with
 no diagnostics. Available `_WIN32`/`-m32` C and static-GBI probes pass, while
