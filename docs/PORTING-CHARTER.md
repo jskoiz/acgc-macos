@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `5157ac1cb`, with
-the Apple V2 sink-status guard integrated on top of the `820906439` V2-local
+As of 2026-08-14, the canonical local PC branch is clean at `afb1cac3c`, with
+the focused input trigger-parity correction integrated on top of the
+`5157ac1cb` Apple V2 sink-status guard and the `820906439` V2-local
 alpha-reference normalization and the
 `59d13a98` bounded base-state rejection classifier and the
 `c973dbee` triangle-list batch handoff, remote M3 Max lane-132 source record,
@@ -99,6 +100,14 @@ The canonical fog audit keeps V1-V4 frozen and defines an end-state reusable
 borrowed resource ownership for eventual cumulative packet composition. This
 is architecture evidence only. See
 [canonical fog-state contract](evidence/CANONICAL-FOG-STATE-CONTRACT-59D13A98-2026-08-14.md).
+
+The exact remote input commit `047ec5134` is integrated as `afb1cac3c`.
+Axis-bound L/R digital state now follows the same nonzero normalized analog
+value delivered through `PADStatus`, while digital bindings and trigger scaling
+remain unchanged. Exact integrated native and combined ASan/UBSan focused CTest
+pass `1/1` each. This is virtual-controller CPU evidence, not physical input,
+running-game response, device, or playability proof. See
+[input trigger parity](evidence/INPUT-TRIGGER-PARITY-AFB1CAC3C-2026-08-14.md).
 
 Three read-only M3 Max follow-ups now classify both cohorts and the independent
 Apple status policy. The alpha references are dead only for the exact

@@ -34,8 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `5157ac1cb` (`Reject incomplete V2 packets before
-Metal sink`), on top of `820906439` (`Normalize dead V2 alpha references`),
+`c1/macos-host-launch` at `afb1cac3c` (`Restore analog trigger digital
+parity`), on top of `5157ac1cb` (`Reject incomplete V2 packets before Metal
+sink`) and `820906439` (`Normalize dead V2 alpha references`),
 on top of the `59d13a98` rejection classifier, the `c973dbee` grouped-triangle handoff, the `565f877e`
 channel-source contract, lane-132 source record `80e80df`, Apple V2 texture
 sideband `3c08c7f`, and reviewed remote binder `08998d0`. The new bounded
@@ -77,6 +78,16 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   V2 remains fail-closed for fog, and the borrowed texture/TLUT resource
   sideband remains separate. See
   [canonical fog-state contract](docs/evidence/CANONICAL-FOG-STATE-CONTRACT-59D13A98-2026-08-14.md).
+
+- The integrated `afb1cac3c` input correction makes axis-bound L/R digital
+  state follow the same nonzero normalized analog value that reaches
+  `PADStatus`, matching the decomp game-input boundary while preserving
+  digital bindings and trigger scaling. Exact integrated native and combined
+  ASan/UBSan focused CTest pass `1/1` each; zero, analog `88`,
+  above-threshold, digital-binding, and repeated-read states pass. This is a
+  virtual-controller CPU fixture, not physical-controller, running-game,
+  device, or playability proof. See
+  [input trigger parity](docs/evidence/INPUT-TRIGGER-PARITY-AFB1CAC3C-2026-08-14.md).
 
 - The integrated `565f877e` CPU seam adds a fixed-width V2 validator and typed
   Apple consumer contract for decomp-compatible disabled `GX_SRC_REG` /

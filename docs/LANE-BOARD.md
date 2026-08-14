@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`5157ac1cb` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`afb1cac3c` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The Codex app still has no matching saved
 remote project for cross-host task handoff, so remote lanes use the verified
 SSH/Codex runner and are registered here by their durable task IDs. Lane 140 ran
@@ -60,11 +60,10 @@ and lanes 143–144 produced read-only architecture evidence. Root-owned lane
 146–148 completed the read-only alpha, fog/global-count, and Apple status-policy
 crosswalks. Lanes 149 and 150 are complete and integrated as PC `820906439`
 and `5157ac1cb`; lane 151 completed the read-only cumulative fog contract.
-Lanes 152–155 are the current dependency-ready M3 Max wave: two non-overlapping
-source lanes own the standalone canonical fog value section and input-trigger
-parity, while two read-only lanes own the cumulative GX schema and Apple
-consumer/encoder mapping. No full link or LLDB run is active. Remote workers
-may not update the umbrella checkout.
+Lanes 152–154 remain the current dependency-ready M3 Max renderer wave. Lane
+155 is complete and integrated as PC `afb1cac3c`; its exact local native and
+combined ASan/UBSan focused CTest pass `1/1` each. No full link or LLDB run is
+active. Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -191,16 +190,21 @@ may not update the umbrella checkout.
   invalidation rules, first safe CPU source boundary, and later device/pixel
   fixture contract. It may not edit, build, launch, or claim live Metal or a
   rendered frame.
-- Lane 155 / task `01a00276-84d7-7d83-81e6-28aec4c163d3` — active M3 Max
-  source lane. Branch `c1/lane-input-trigger-parity-m3` and worktree
+- Lane 155 / task `01a00276-84d7-7d83-81e6-28aec4c163d3` — complete,
+  integrated, and archive-ready. Branch `c1/lane-input-trigger-parity-m3` and
+  worktree
   `/private/tmp/acgc-lane-input-trigger-parity` start at exact PC
   `5157ac1cb`; decomp is `09ca8e8b`. It owns only `pc/src/pc_pad.c`, the SDL
   input smoke fixture, and minimal CMake registration if required. Its gate is
   restoring decomp-compatible digital L/R semantics for nonzero normalized
   analog trigger values while preserving analog values and digital bindings.
-  Focused native and combined ASan/UBSan roots are
-  `/private/tmp/acgc-lane-input-trigger-{native,asan}`; no physical-input,
-  full-link, LLDB, device, or playability claim is in scope.
+  Worker `047ec5134` is integrated as canonical PC `afb1cac3c`. The exact
+  two-file change adds axis-specific normalized-nonzero L/R semantics and a
+  deterministic virtual-controller fixture. Remote and exact integrated native
+  plus combined ASan/UBSan focused CTest pass `1/1` each; the `_WIN32` host
+  probe remains blocked by missing `process.h`. Evidence is
+  `docs/evidence/INPUT-TRIGGER-PARITY-AFB1CAC3C-2026-08-14.md`. No physical
+  input, full link, LLDB, device, or playability claim follows.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
