@@ -20,10 +20,10 @@ redistribute it or extracted proprietary assets.
 
 ## Lane execution placement
 
-The current lane-111 runtime attempt remains local and protected until its
-owner-managed handoff/cleanup is complete. Future focused source, test, and
-audit lanes should run on the configured remote M3 Max host through Codex
-handoff, each with its own isolated worktree and ignored build/log roots. Full
+Serialized full links and LLDB launches run locally from the canonical
+populated checkout. Focused source, test, and audit lanes run on the configured
+remote M3 Max host through the verified Codex CLI path, each with its own
+isolated worktree and ignored build/log roots. Full
 `ac_pc` links and LLDB launches remain one serialized gate across both hosts;
 the integration owner records the queue and exact provenance in
 `docs/LANE-BOARD.md`. True cloud tasks are reserved for non-build planning or
@@ -73,6 +73,15 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   Native and combined ASan/UBSan focused CTest pass `2/2` each. This is
   CPU/contract evidence, not a live callback, Metal operation, pixel, or
   playability claim. See [V2 triangle-batch evidence](docs/evidence/V2-TRIANGLE-BATCH-HANDOFF-C973DBEE-2026-08-14.md).
+
+- One serialized `c973dbee` arm64 link and GUI-session LLDB launch then reached
+  GAFE01/COPYDATE, LOGO/NEOS through frame 901, game-owned graph/GX, and 213
+  eligible grouped-triangle batch entries. Every batch reached its first
+  exact-three internal builder call, but none passed the initial V2 base-state
+  predicate or reached the Apple consumer/provider/observer. TERM returned
+  through `graph_proc` with status 0 and no KILL fallback. This proves the live
+  grouped path and its next fail-closed tier, not a packet, Metal work, a pixel,
+  natural shutdown, or playability. See [current V2 triangle runtime evidence](docs/evidence/CURRENT-V2-TRIANGLE-RUNTIME-C973DBEE-2026-08-14.md).
 
 - The test-only follow-up at `2b141a753` adds focused coverage for the V2 null
   callback guard, non-triangle topology, ordinary emu64 blend state,

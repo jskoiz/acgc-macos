@@ -121,6 +121,18 @@ CPU/contract gate; one separately serialized current-tip link/trace must now
 measure real callback and Apple-consumer reachability. See
 [V2 triangle-batch evidence](evidence/V2-TRIANGLE-BATCH-HANDOFF-C973DBEE-2026-08-14.md).
 
+The separately serialized `c973dbee` runtime gate then linked `[4018/4019]`
+and launched a real GAFE01 inferior. It reached LOGO/NEOS through frame 901,
+game-owned graph/GX, and 213 eligible grouped-triangle batch entries. Every
+batch reached its first exact-three internal builder call, but none passed the
+initial V2 base-state predicate or reached the Apple consumer, texture-source
+provider, or runtime observer. Bounded TERM returned through `graph_proc` with
+status `0`; KILL was unnecessary. The next gate is therefore a narrow,
+test-backed rejection-reason classifier for that compound base-state contract,
+not an unconditional predicate relaxation. This remains link/boot/builder-tier
+evidence only, with no packet, Metal, pixel, device, natural-shutdown, or
+playability claim. See [current V2 triangle runtime evidence](evidence/CURRENT-V2-TRIANGLE-RUNTIME-C973DBEE-2026-08-14.md).
+
 The same `354f33884` snapshot links the full arm64 `ac_pc` target through
 `[4018/4019]`. A normal bounded launch from the current shell stops before
 boot because SDL reports no displays, but a logged-in GUI Terminal launch
