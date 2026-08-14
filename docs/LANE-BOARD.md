@@ -284,8 +284,8 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   Its exact detached worktree and prompt/events/final artifacts are absent.
   No edit, build, launch, asset access, callback, Metal, pixel, or playability
   proof occurred.
-- Lane 160 / task `01a0029d-475c-7a31-a6f9-708e60cb4201` — complete and
-  cleanup-pending, verification-only at exact PC `b5f550ea0` and decomp
+- Lane 160 / task `01a0029d-475c-7a31-a6f9-708e60cb4201` — complete,
+  archived, and cleaned, verification-only at exact PC `b5f550ea0` and decomp
   `09ca8e8b`. Native and combined ASan/UBSan each pass 44 tests with three
   declared Metal-device skips; final sanitizer logs have no diagnostics
   (`detect_leaks=0`). Bounded Windows host probes pass 4 and are blocked at 5
@@ -294,7 +294,8 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   and combined ASan/UBSan delta tests pass `3/3` each. Evidence is
   `docs/evidence/CURRENT-FOCUSED-MATRIX-B5F550EA0-2026-08-14.md`. No full link,
   launch, LLDB, Metal device, pixel, Windows runtime, or playability proof
-  follows.
+  follows. Its detached worktree, native/ASan/Windows roots,
+  prompt/events/final artifacts, and exact local current-delta roots are absent.
 - Lane 161 / task `01a002af-5e39-7e40-b83e-86323c7786c6` — active M3 Max
   source-edit lane on explicit branch `c1/lane-canonical-blend-m3`, exact PC
   base `4dbb71065`, worktree `/private/tmp/acgc-lane-canonical-blend`, and
