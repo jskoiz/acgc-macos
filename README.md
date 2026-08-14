@@ -33,7 +33,19 @@ for the current saved-project prerequisite and handoff sequence.
 
 ## Current evidence
 
-- Latest integrated source is `upstream/ACGC-PC-Port` branch
+The current local integration snapshot is `upstream/ACGC-PC-Port` branch
+`c1/macos-host-launch` at `80e80df` (`Add borrowed GX texture source metadata
+record`), on top of the Apple V2 texture sideband at `3c08c7f`. This adds a
+host-pointer-safe per-map CPU image/TLUT metadata record with explicit source
+kind and generation invalidation, plus a focused fixture. Native and combined
+ASan/UBSan focused tests pass `1/1` each. The existing V2 handoff fixture still
+fails at the same unrelated `v2_probe.status` expectation on both its exact
+parent and the integrated tip, so that pre-existing boundary remains open. No
+live game-owned source binding, Metal encode/readback, pixel, device, or
+playability claim follows. See [texture source record evidence](docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md)
+and the [lane board](docs/LANE-BOARD.md) for exact provenance.
+
+- The preceding V4 integration chain is `upstream/ACGC-PC-Port` branch
   `c1/macos-host-launch` at `a53b192` (`Align V4 rejection reason classifier`),
   on top of `adaddfd` (`Align V4 rejection diagnostics`), `46a8ae5`
   (`Allow V4 unrendered raster state`), `fbb286d`

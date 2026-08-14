@@ -61,9 +61,19 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
+As of 2026-08-14, the canonical local PC branch is clean at `80e80df`, with
+the remote M3 Max lane-132 source commit `d52c6a0f` integrated on top of the
+V2 texture sideband. The new five-file CPU seam records validated borrowed
+image/TLUT metadata per map and invalidates it across cache, replacement,
+fallback, stale, TLUT, and destruction paths. Its native and combined
+ASan/UBSan focused fixture each pass `1/1`; the existing V2 handoff fixture
+continues to fail at its pre-existing status expectation on both parent and
+current tip. This is still CPU/contract evidence only: no live source binding,
+Metal encode/readback, pixel, device, or playability claim is made.
+
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
-fixture are passed. The latest integrated source tip is the clean native arm64
+fixture are passed. The preceding V4 integration snapshot is the clean native arm64
 PC branch `c1/macos-host-launch` at `a53b192`, which keeps resolved V4
 texture-map aliases safe and allows the live unencoded alpha/depth/cull state
 through the V4-only predicate while wiring the V4 builder into
