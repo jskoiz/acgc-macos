@@ -11,6 +11,12 @@ filler. One lane is the integration/evidence owner; up to fourteen are worker
 lanes. Production source editing remains capped at seven simultaneous lanes,
 with the remaining capacity reserved for dependency-ready reference audits,
 focused fixtures, read-only traces, and independent verification.
+Placement policy: lane 111's local runtime/cleanup state remains on this Mac
+until its owner-managed handoff is safe. Future focused source, test, and audit
+lanes are to be handed to the configured remote M3 Max host with isolated
+worktrees and ignored roots. Full `ac_pc` links and LLDB launches remain
+serialized across both hosts. True cloud tasks are planning/review only; the
+ISO, extracted assets, keys, and proprietary data remain local and ignored.
 The texture remediation (17) is now complete/integrated at source `578c8b7`.
 The root-owned audio-bank ABI lane is integrated at source `909f3ca`; its
 historical fresh run decodes compact bank 28, reaches `LOGO draw`, and

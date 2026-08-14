@@ -53,14 +53,20 @@ Source edits stay on explicit branches in the owning submodule. Umbrella
 documents, scripts, evidence, and verified gitlink updates stay here. Generated
 builds, extraction output, logs, the ISO, and all other proprietary game data
 remain under ignored local or build paths and are never committed.
+Focused source, test, and audit lanes may be handed to the configured remote M3
+Max host once their exact branch/worktree contract is recorded. Full
+`ac_pc` links and LLDB launches are serialized across local and remote hosts;
+cloud tasks are limited to non-build planning/review. The ISO, extracted assets,
+keys, and proprietary game data remain local.
 
 ## Current gate state
 
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The latest integrated source tip is the clean native arm64
-PC branch `c1/macos-host-launch` at `83fe50c`, which keeps resolved V4
-texture-map aliases safe while wiring the V4 builder into
+PC branch `c1/macos-host-launch` at `46a8ae5`, which keeps resolved V4
+texture-map aliases safe and allows the live unencoded alpha/depth/cull state
+through the V4-only predicate while wiring the V4 builder into
 the typed Apple consumer/runtime seam on top of `dbf6986` and `4fc6f00`. The
 latest serialized full
 reconstructed `ac_pc` link recorded before the V3 slice was a native arm64
@@ -129,6 +135,12 @@ leaving the texture/TEV extension unrendered in the Apple consumer. Its six
 semantic targets pass `6/6` native and combined ASan/UBSan. This remains
 CPU/contract evidence; a fresh current-tip link and trace are required before
 any live V4 callback or Metal claim. See [V4 texture-map evidence](evidence/GX-V4-TEXTURE-MAP-ALIAS-83FE50C-2026-08-13.md).
+The integrated `46a8ae5` continuation then permits live alpha-test, depth, and
+cull state through V4 while retaining a strict color-write gate and the
+strict V1/V2/V3 predicate. Its six-target native and combined ASan/UBSan
+matrices pass `6/6` each. The Apple packet still leaves those raster fields
+unencoded, so this is a CPU/contract result and not live callback, Metal,
+pixel, or playability proof. See [V4 unrendered raster evidence](evidence/GX-V4-UNRENDERED-RASTER-46A8AE5-2026-08-13.md).
 One serialized current-tip `28ebac2` link reached `[4018/4019]`, and one
 bounded LLDB launch reached the game-owned graph/GX path. The V4 builder entry
 counted `558` attempts, but the typed V4 Apple consumer, prepare path, and
@@ -136,6 +148,12 @@ counted `558` attempts, but the typed V4 Apple consumer, prepare path, and
 builder-rejection boundary only; it does not establish a callback, Metal
 encode/present/readback, pixel, or playability gate. See [current V4 runtime
 evidence](evidence/CURRENT-V4-LIVE-CONSUMER-RUNTIME-28EBAC2-2026-08-13.md).
+The preceding diagnostic run at `fbb286d` reached live graph/GX work and
+emitted 64 bounded `reason=global_state` records; the V4 consumer, prepare
+path, and `pc_metal_runtime_observe` remained `0`. See [V4 rejection trace
+evidence](evidence/CURRENT-V4-REJECTION-TRACE-FBB286D-2026-08-13.md). A fresh
+serialized link and LLDB launch at `46a8ae5` is required before measuring the
+effect of the relaxed V4 predicate.
 The current-tip sanitizer/Windows verification on `f18e7cd` passes the seven
 focused native targets (`7/7`) and the combined ASan/UBSan matrix (`7/7`) with
 no diagnostics. Available `_WIN32`/`-m32` C and static-GBI probes pass, while
