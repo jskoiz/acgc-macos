@@ -62,9 +62,10 @@ crosswalks. Lanes 149 and 150 are complete and integrated as PC `820906439`
 and `5157ac1cb`; lane 151 completed the read-only cumulative fog contract.
 Lanes 152 and 155 are complete and integrated as PC `b5f550ea0` and
 `afb1cac3c`; lanes 153 and 154 completed the read-only cumulative-schema and
-Apple consumer/encoder audits. No worker, full link, or LLDB run is active
-while the integration owner records the exact cleanup state and opens the
-strict envelope successor. Remote workers may not update the umbrella checkout.
+Apple consumer/encoder audits. Lanes 156–158 are the current dependency-ready
+M3 Max batch: two non-overlapping source lanes and one read-only crosswalk.
+No full link or LLDB run is active. Remote workers may not update the umbrella
+checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -183,10 +184,10 @@ strict envelope successor. Remote workers may not update the umbrella checkout.
   snapshot, callback, Metal, pixel, or playability claim follows. Remote and
   local generated verification/transfer roots were holder-free and are absent;
   branch, commits, integration, and evidence remain preserved.
-- Lane 153 / task `01a00275-9cf6-75b0-9275-f7f7f2338084` — complete and
-  archive-ready, read-only M3 Max audit at exact PC `5157ac1cb` and decomp
-  `09ca8e8b`. Detached
-  worktree `/private/tmp/acgc-lane-cumulative-state-schema-audit` owns the
+- Lane 153 / task `01a00275-9cf6-75b0-9275-f7f7f2338084` — complete,
+  archived, and cleaned, read-only M3 Max audit at exact PC `5157ac1cb` and
+  decomp `09ca8e8b`. Its retired detached worktree
+  `/private/tmp/acgc-lane-cumulative-state-schema-audit` owned the
   fixed-width cumulative GX state schema, section masks, validation,
   sideband-resource boundaries, byte layout, and an implementation order. It
   produced the two-upstream field crosswalk, ABI risks, validation fixtures,
@@ -194,7 +195,9 @@ strict envelope successor. Remote workers may not update the umbrella checkout.
   newer fog contract into a strict 14-section envelope whose total size remains
   unfrozen. Evidence is
   `docs/evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md`. No
-  edit, build, launch, asset access, Metal, pixel, or playability claim.
+  edit, build, launch, asset access, Metal, pixel, or playability claim. Its
+  task, worktree, prompt/event artifacts, and transfer bundle were archived or
+  retired after exact holder-free checks; committed evidence remains.
 - Lane 154 / task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete,
   archived, and cleaned, read-only M3 Max audit at exact PC `5157ac1cb` and
   decomp `09ca8e8b`. Detached
@@ -225,6 +228,45 @@ strict envelope successor. Remote workers may not update the umbrella checkout.
   input, full link, LLDB, device, or playability claim follows. Remote and
   local generated verification/transfer roots were holder-free and are absent;
   the branch, commits, source integration, and evidence remain preserved.
+- Lane 156 / task `01a00297-d958-7e93-be9a-6d3949f789c7` — active M3 Max
+  source-edit lane. Explicit PC branch `c1/lane-canonical-envelope-m3` and
+  worktree `/private/tmp/acgc-lane-canonical-envelope` are clean at exact PC
+  `b5f550ea0`; decomp is `09ca8e8b`. It exclusively owns the renderer-neutral
+  canonical-state header/source, one new portable envelope fixture, and minimal
+  portable CMake registration. Its gate is a strict fixed-width 14-section
+  metadata directory around the existing 80-byte fog section, with dynamic
+  payload size and fail-closed ID/version/mask/alignment/range/overlap/reserved
+  validation. Native, combined ASan/UBSan, and bounded ABI/syntax probes use
+  only `/private/tmp/acgc-lane-canonical-envelope-{native,asan,win}`. `pc_gx`,
+  Apple code, V1–V4 ABI, full link, LLDB, assets, Metal, pixels, and playability
+  are out of scope.
+- Lane 157 / task `01a00297-d95c-7742-8feb-a275b16b4b88` — active M3 Max
+  source-edit lane. Explicit PC branch `c1/lane-v4-sink-failclosed-m3` and
+  worktree `/private/tmp/acgc-lane-v4-sink-failclosed` are clean at exact PC
+  `b5f550ea0`; decomp is `09ca8e8b`. It exclusively owns the Apple runtime sink
+  predicate plus its focused runtime-sideband fixture. V1 remains the only
+  legacy packet eligible for the current geometry sink; V2/V3/V4 must fail
+  closed until the canonical CPU render plan exists. Native and combined
+  ASan/UBSan roots are
+  `/private/tmp/acgc-lane-v4-sink-failclosed-{native,asan}`. `pc_gx`, packet
+  ABI/builders, shaders/encoder behavior, full link, LLDB, device, assets,
+  Metal, pixels, and playability are out of scope.
+- Lane 158 / task `01a00297-d958-73f2-a850-d79a18e5f763` — active read-only
+  M3 Max crosswalk. Detached PC worktree
+  `/private/tmp/acgc-lane-canonical-snapshot-audit` is exact `b5f550ea0` and
+  decomp is `09ca8e8b`. It owns the future canonical snapshot-producer boundary
+  at `pc_gx_flush_vertices`: capture timing, available/missing values, vertex
+  lifetime, texture/TLUT owned sideband identity/generation, threading, and the
+  focused fixture/ownership map. It may not edit, branch, build, launch, access
+  assets, or claim callback, Metal, pixel, or playability proof.
+
+The remote Codex project assignment records place tasks 156–158 under the
+saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
+refresh to display the new rows. Their source-only sync bundles contain tracked
+Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
+transferred. The next integration order is lane 157, lane 156, then lane 158's
+read-only implementation contract; the later blend/logic section must wait for
+lane 156 to release canonical header/source ownership.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
