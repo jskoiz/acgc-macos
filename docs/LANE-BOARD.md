@@ -135,18 +135,18 @@ The Windows, sanitizer, iOS, and input frame-guard handoffs are complete. Lane
 107's exact physical roots and visible worktree have been retired by cleanup;
 one source-registry metadata record remains preserved after `Operation not
 permitted`, and the two dirty failed-clone directories remain intentionally
-untouched. The authoritative PC source is `f18e7cd` on
+untouched. The authoritative PC source is `4fc6f00` on
 `c1/macos-host-launch`; the umbrella branch is `main` (the local
-`c1/apple-port-bootstrap` alias is fast-forwarded to the same tip) plus only
+`c1/apple-port-bootstrap` alias is synchronized to the same tip) plus only
 the pre-existing `.codex`/settings edits. The current-tip V3 runtime count is
 complete and remains separate from Metal encode/readback/pixel proof: the
 one unprivileged launch created an inferior and reached boot, GX, and V3
-builder entries, while no V3 consumer or Apple runtime-observer hit. Lane 104's source-backed reason is
-`g_gx.alpha_update_enable == 0`; the focused builder-to-consumer fixture is now
-integrated and the Apple boundary audit is complete. Lane 107 has completed its
-current-tip verification handoff; lanes 107 and 108 are complete/archived, and
-lane 109 is the only active worker. Full links and LLDB launches remain
-serialized.
+builder entries, while no V3 consumer or Apple runtime-observer hit. Lane 104's
+source-backed reason is `g_gx.alpha_update_enable == 0`; the focused
+builder-to-consumer fixture and Apple boundary audit are complete. Lane 109 is
+also complete/integrated/archived with the V4 alpha-state contract and focused
+native/ASan/UBSan `5/5` results. No worker is active; full links and LLDB
+launches remain serialized.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
