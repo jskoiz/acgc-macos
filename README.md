@@ -28,7 +28,8 @@ handoff, each with its own isolated worktree and ignored build/log roots. Full
 the integration owner records the queue and exact provenance in
 `docs/LANE-BOARD.md`. True cloud tasks are reserved for non-build planning or
 review. The ISO, extracted assets, keys, and proprietary game data never leave
-the local machine.
+the local machine. See [the remote focused-lane setup checklist](docs/REMOTE-LANE-SETUP.md)
+for the current saved-project prerequisite and handoff sequence.
 
 ## Current evidence
 
