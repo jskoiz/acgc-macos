@@ -66,11 +66,10 @@ Lanes 152 and 155 are complete and integrated as PC `b5f550ea0` and
 `afb1cac3c`; lanes 153 and 154 completed the read-only cumulative-schema and
 Apple consumer/encoder audits. Lane 157 is complete and integrated. Lane 156
 is integrated as PC `4dbb71065`, and lane 158 completed its read-only producer
-audit. Lane 159 has completed the read-only Blend/logic contract; lane 160 is
-the remaining focused verification matrix. The exact 16-byte Blend/logic
-source slice is now dependency-ready once the current envelope integration is
-recorded. No full link or LLDB run is active. Remote workers may not update the
-umbrella checkout.
+audit. Lane 159 completed the read-only Blend/logic contract; lane 160 is the
+independent focused verification matrix. Lane 161 is now the sole production
+source lane and owns the exact 16-byte Blend/logic section. No full link or
+LLDB run is active. Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -234,7 +233,7 @@ umbrella checkout.
   local generated verification/transfer roots were holder-free and are absent;
   the branch, commits, source integration, and evidence remain preserved.
 - Lane 156 / task `01a00297-d958-7e93-be9a-6d3949f789c7` — complete,
-  integrated, and cleanup-pending. Remote branch
+  integrated, archived, and cleaned. Remote branch
   `c1/lane-canonical-envelope-m3` advanced exact PC `b5f550ea0` to worker
   `18ef2fcbb`; the integration owner cherry-picked its exact four-file change
   as canonical PC `4dbb71065`. It adds the 48-byte header, fourteen ordered
@@ -242,8 +241,11 @@ umbrella checkout.
   metadata validator around the 80-byte fog section. Remote and exact
   integrated native plus combined ASan/UBSan focused CTest pass `2/2` each
   (`detect_leaks=0`, no diagnostics); bounded ABI/syntax probes pass. Evidence
-  is `docs/evidence/CANONICAL-GX-ENVELOPE-4DBB71065-2026-08-14.md`. No live
-  producer, callback, Metal, pixel, device, or playability claim follows.
+  is `docs/evidence/CANONICAL-GX-ENVELOPE-4DBB71065-2026-08-14.md`. Its exact
+  worktree, native/ASan/Windows roots, prompt/events/final, transfer bundle,
+  and local integration roots are absent; the worker branch and commits remain
+  preserved. No live producer, callback, Metal, pixel, device, or playability
+  claim follows.
 - Lane 157 / task `01a00297-d95c-7742-8feb-a275b16b4b88` — complete,
   integrated, archived, and cleaned. Preserved remote branch
   `c1/lane-v4-sink-failclosed-m3` advanced exact PC `b5f550ea0` to worker
@@ -259,24 +261,28 @@ umbrella checkout.
   prompt/event/final artifacts, transfer bundle, and local integration roots
   were holder-free and are absent; worker/canonical branches, commits, and
   evidence remain preserved.
-- Lane 158 / task `01a00297-d958-73f2-a850-d79a18e5f763` — complete and
-  cleanup-pending, read-only at exact PC `b5f550ea0` and decomp `09ca8e8b`.
+- Lane 158 / task `01a00297-d958-73f2-a850-d79a18e5f763` — complete,
+  archived, and cleaned, read-only at exact PC `b5f550ea0` and decomp
+  `09ca8e8b`.
   It selects the committed-vertex boundary at the top of
   `pc_gx_flush_vertices()` before legacy handoffs or GL mutation, defines
   synchronous owned texture/TLUT generation rules, and records the missing
   shadow state that still blocks a truthful producer. Evidence is
   `docs/evidence/CANONICAL-SNAPSHOT-PRODUCER-AUDIT-B5F550EA0-2026-08-14.md`.
+  Its exact detached worktree and prompt/events/final artifacts are absent.
   No edit, build, launch, asset access, callback, Metal, pixel, or playability
   proof occurred.
-- Lane 159 / task `01a0029d-475b-7971-aead-39fe8fc4bc8e` — complete and
-  cleanup-pending, read-only at exact PC `b5f550ea0` and decomp `09ca8e8b`.
+- Lane 159 / task `01a0029d-475b-7971-aead-39fe8fc4bc8e` — complete,
+  archived, and cleaned, read-only at exact PC `b5f550ea0` and decomp
+  `09ca8e8b`.
   It selects the exact reusable V3 four-word Blend/logic record: version 1,
   16 bytes, four-byte aligned, count/capacity 1, modes `0..3`, factors `0..7`,
   and logic operations `0..15`, with no reserved tail or mode-dependent
   normalization. Alpha/update remains `0x0100`; dither/destination alpha remain
   Raster `0x0400`. Evidence is
   `docs/evidence/CANONICAL-BLEND-LOGIC-CONTRACT-B5F550EA0-2026-08-14.md`. No
-  edit, build, launch, asset access, callback, Metal, pixel, or playability
+  Its exact detached worktree and prompt/events/final artifacts are absent.
+  No edit, build, launch, asset access, callback, Metal, pixel, or playability
   proof occurred.
 - Lane 160 / task `01a0029d-475c-7a31-a6f9-708e60cb4201` — active M3 Max
   verification-only lane. Detached PC worktree
@@ -287,14 +293,23 @@ umbrella checkout.
   texture/TEV, mixer, save, and lifecycle targets after checking their
   dependencies; `ac_pc`, launch, LLDB, source edits, real i686/PE/runtime
   sign-off, assets, Metal, pixels, and playability are out of scope.
+- Lane 161 / task `01a002af-5e39-7e40-b83e-86323c7786c6` — active M3 Max
+  source-edit lane on explicit branch `c1/lane-canonical-blend-m3`, exact PC
+  base `4dbb71065`, worktree `/private/tmp/acgc-lane-canonical-blend`, and
+  decomp oracle `09ca8e8b`. It owns only new canonical Blend header/source, one
+  portable fixture, and minimal portable CMake registration. Its gate is the
+  audited version-1 16-byte four-word Blend/logic ABI, strict mode/factor/logic
+  validator, exact envelope metadata fixtures, native and combined ASan/UBSan
+  focused tests, and bounded ABI/Windows host probes under unique
+  `/private/tmp/acgc-lane-canonical-blend-{native,asan,win}` roots. Common
+  envelope semantics, V1-V4, `pc_gx`, Apple/Metal, ac-decomp edits, full link,
+  LLDB, assets, pixels, devices, and playability are out of scope.
 
-The remote Codex project assignment records place tasks 156–160 under the
+The remote Codex project assignment records place tasks 156–161 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
-transferred. The next integration order is lane 156, then lane 158's snapshot
-contract and lane 159's blend/logic contract; the blend/logic source slice must
-wait for lane 156 to release canonical header/source ownership. Lane 160 is a
+transferred. The next integration order is lane 161 after review; lane 160 is a
 base-snapshot verification matrix and will name the exact post-integration
 rerun subset rather than being treated as current-tip sign-off.
 
