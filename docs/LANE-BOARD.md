@@ -83,12 +83,20 @@ on shutdown; no live game-owned source is bound yet. No full link, LLDB,
 device, Metal, pixel, input, audio, save, or playability claim exists. Evidence
 is `docs/evidence/V2-TEXTURE-RUNTIME-SIDEBAND-A10FED8E-2026-08-14.md`.
 
-Lane 131 / task `01a000f0-da9a-77b3-900a-06d627b43a2b` is now the sole active
-remote read-only audit. It is a same-directory fork under the remote
-`acgc-modern-port` project, reviewing game-owned CPU image/TLUT storage and
-its lifetime at the GX handoff. Its dedicated worktree and ignored
-`/private/tmp/acgc-lane-gx-texture-source-audit-m3*` roots are pending setup;
-no source/build/runtime result exists. No full link, LLDB, device, Metal
+Lane 131 / task `01a000f0-da9a-77b3-900a-06d627b43a2b` is complete and archived.
+It ran read-only from `a10fed8e` in detached worktree
+`/private/tmp/acgc-lane-gx-texture-source-audit-m3`; no source files changed and
+no build, launch, debugger, or asset access occurred. The audit proved that
+only transient image/TLUT pointers and GL/cache metadata exist today; no safe
+CPU byte record, sampler state, or generation token reaches the V2 handoff.
+Evidence is `docs/evidence/GAME-OWNED-TEXTURE-SOURCE-AUDIT-A10FED8E-2026-08-14.md`.
+
+Lane 132 / task `01a000f5-789c-70a0-851e-e1fdebe391aa` is now the sole active
+remote source lane. It owns only the per-map CPU texture source record in the
+PC GX texture state/loader plus a narrow V2 metadata accessor and focused
+portable fixture. Its dedicated worktree and ignored
+`/private/tmp/acgc-lane-gx-texture-source-m3*` roots are pending setup. No
+Apple consumer/runtime, packet ABI, full link, LLDB, device, Metal
 encode/readback, pixel, input, audio, save, or playability claim is authorized.
 
 - Lane 116 / task `019fff00-d312-73a0-8396-d94c6618e0b8` — complete pending
@@ -178,8 +186,8 @@ and must exit naturally before stale metadata reconciliation. Lane 112's
 Save_t/CARD fixture is integrated and its four worker/integration roots have
 been retired after holder checks; its preserved worktree still has
   owner-managed holders. The older “no production worker” sentence predates the
-remote M3 Max batch above; lanes 116–130 are complete/integrated/archived and
-lane 131 is the sole active read-only audit. No lane may start a competing full
+remote M3 Max batch above; lanes 116–131 are complete/integrated/archived and
+lane 132 is the sole active source lane. No lane may start a competing full
 link or LLDB trace; no duplicate or filler lane is open. The current portable verification
 tip is `08c27de5`, which keeps
 resolved V4 texture-map aliases
@@ -521,7 +529,8 @@ from compilation alone.
 | 128 | Apple texture/TLUT/TEV CPU consumer seam — `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` | Remote M3 Max source lane; own only Apple consumer/runtime header/source, one focused CPU fixture, minimal CMake, and no `pc_gx.c`/packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Worker `c1/lane-texture-tev-m3` `a6c5e0c8` based on `894ac5f8`; integrated canonical PC `08c27de5`; focused roots `/private/tmp/acgc-integrated-texture-tev-08c27de5` and `-asan` | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `2/2` each, no diagnostics (`detect_leaks=0`); opt-in CPU-only texture/TLUT/TEV resolver, existing V2 handoff remains `NOT_RENDERED`; evidence `docs/evidence/APPLE-TEXTURE-TEV-CPU-SEAM-A6C5E0C8-2026-08-14.md` |
 | 129 | Runtime texture/TLUT/sampler forwarding audit — `01a000e0-e957-7193-b2f8-23fd0447cdaa` | Remote M3 Max read-only/test-only lane; own only the V2 forwarding crosswalk and focused CPU fixtures if a concrete defect is proven; no `pc_gx.c`/packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Same-directory remote project task; source-only PC ref `local-sync/macos-host-launch` at `08c27de5`; worktree `/private/tmp/acgc-lane-runtime-forwarding-m3` on `c1/lane-runtime-forwarding-m3`; focused roots `/private/tmp/acgc-lane-runtime-forwarding-m3-build` and `-asan` | Complete/archived; no source change; native and combined ASan/UBSan focused CTest `2/2` each, no UBSan diagnostics (`detect_leaks=0`); runtime texture/TLUT/sampler forwarding gap proven; evidence `docs/evidence/RUNTIME-TEXTURE-FORWARDING-AUDIT-08C27DE5-2026-08-14.md` |
 | 130 | V2 texture runtime sideband — `01a000e5-6aba-7a81-9431-bd22781967f4` | Remote M3 Max source lane; own only Apple consumer/runtime sideband headers/sources, one focused fixture, and minimal CMake; preserve V1/V2 geometry and V3/V4 behavior; no `pc_gx.c`/packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Worker `c1/lane-v2-texture-runtime-m3` `a10fed8e` based on `08c27de5`; integrated canonical PC `3c08c7f71`; exact worker roots pending cleanup review | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `3/3` each with no diagnostics (`detect_leaks=0`); borrowed V2 sideband/fail-closed status proof only; evidence `docs/evidence/V2-TEXTURE-RUNTIME-SIDEBAND-A10FED8E-2026-08-14.md` |
-| 131 | Game-owned texture source availability audit — `01a000f0-da9a-77b3-900a-06d627b43a2b` | Remote M3 Max read-only/test-only crosswalk of `pc_gx_texture.c`, `PCGXState`, V2 builder, current Apple sideband, and decomp GXTexObj/GXTlutObj lifetime; no source edit/build/link/launch | Same-directory remote project task; source tip `a10fed8e`/sideband content; exact worktree and `/private/tmp/acgc-lane-gx-texture-source-audit-m3*` roots pending setup | Active/setup; require changed-files-none handoff, exact source/TLUT/sampler ownership finding, and one concrete safe successor or blocker before review |
+| 131 | Game-owned texture source availability audit — `01a000f0-da9a-77b3-900a-06d627b43a2b` | Remote M3 Max read-only/test-only crosswalk of `pc_gx_texture.c`, `PCGXState`, V2 builder, current Apple sideband, and decomp GXTexObj/GXTlutObj lifetime; no source edit/build/link/launch | Same-directory remote project task; source tip `a10fed8e`/sideband content; worktree `/private/tmp/acgc-lane-gx-texture-source-audit-m3`; exact logs none | Complete/archived; no source change; static crosswalk proves no safe CPU byte record, sampler state, or generation token reaches V2 handoff; evidence `docs/evidence/GAME-OWNED-TEXTURE-SOURCE-AUDIT-A10FED8E-2026-08-14.md` |
+| 132 | Per-map CPU texture source record — `01a000f5-789c-70a0-851e-e1fdebe391aa` | Remote M3 Max source lane; own only `pc_gx_internal.h`, `pc_gx_texture.c`, `pc_gx.c` metadata accessor, and one focused portable fixture; invalidate cache/replacement/fallback/stale paths; no Apple/packet ABI/Metal/full-link/LLDB/device/pixel/playability scope | Same-directory remote project task from sideband content `a10fed8e`; exact worktree and `/private/tmp/acgc-lane-gx-texture-source-m3*` roots pending setup | Active/setup; require fixed-width/host-pointer-safe record, explicit source-kind/generation invalidation matrix, native and combined ASan/UBSan focused proof, and no proprietary byte copies |
 
 ## Parked intake (not active)
 
