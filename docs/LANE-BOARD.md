@@ -73,9 +73,10 @@ authorized current-tip runtime trace, after the focused builder-to-consumer
 fixture and Apple consumer boundary have passed their CPU gates. Lanes 104–110
 are complete/integrated/archived. Lane 111 has completed its one serialized
 runtime attempt and is awaiting exact-path cleanup. Lane 114's read-only
-mixer/CoreAudio audit is also complete and awaiting exact-path cleanup; lanes
-112–113 remain the active independent CPU lanes: production Save_t/CARD
-recovery and input-boundary verification. No lane may start a competing full
+mixer/CoreAudio audit is also complete and awaiting exact-path cleanup. Lane
+113's input audit is complete and awaiting exact-path cleanup; lane 112 remains
+the sole active source-edit lane for production Save_t/CARD recovery. No lane
+may start a competing full
 link or LLDB trace; no duplicate or filler lane is open. The current portable
 verification tip is `dbf6986`, which
 adds the V4 alpha-state CPU contract and typed Apple consumer validation on
@@ -102,7 +103,8 @@ pixel, or playability claim is authorized. Lane 111's completed runtime attempt
 is recorded in `docs/evidence/CURRENT-V4-RUNTIME-DBF6986-2026-08-13.md`; it
 owns no source edits and cannot claim Metal encode/readback, pixels, or
 playability. Lane 112 owns only the production `pc_m_card.c` recovery seam plus
-one focused fixture; lane 113 is read-only/test-only input characterization.
+one focused fixture. Lane 113's read-only input evidence is recorded
+separately, with a narrow analog-trigger fix candidate requiring authorization.
 Lane 114's transport-only audio evidence is recorded separately; all focused
 roots are unique and must stop at CPU/adapter evidence.
 Lane 94
@@ -163,8 +165,9 @@ also complete/integrated/archived with the V4 alpha-state contract and focused
 native/ASan/UBSan `5/5` results. Lane 110 is complete/integrated/archived;
 its typed V4 Apple consumer validation passes native and combined ASan/UBSan
 focused CTest `6/6` each. Lane 111 and lane 114 are complete/archived pending
-exact-path cleanup; lanes 112–113 are the active non-runtime CPU/read-only
-lanes. Full links and LLDB launches remain serialized.
+exact-path cleanup; lane 113 is also complete/archived pending exact-path
+cleanup, and lane 112 remains the sole active non-runtime source lane. Full
+links and LLDB launches remain serialized.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
@@ -353,7 +356,7 @@ from compilation alone.
 | 110 | V4 Apple consumer/validation seam — `019ffd9e-1fb9-7153-bf9b-2d7dea3f3eed` | Source-edit lane for the smallest typed V4 consumer/runtime validation seam; preserve V1/V2/V3 dispatch, OpenGL behavior, and fail-closed malformed/unsupported state; focused CPU tests only | Visible umbrella worktree `/Users/jk/.codex/worktrees/6756/acgc-modern-port` is detached at setup snapshot `3a4c0e2` (provenance only); worker branch `c1/lane-gx-v4-consumer` at `63b772e` based on `4fc6f00`; integrated canonical PC `c1/macos-host-launch` at `dbf6986`; decomp `09ca8e8b`; worker roots `/private/tmp/acgc-lane-gx-v4-consumer-native-4fc6f00` and `-asan-4fc6f00`, integrated roots `/private/tmp/acgc-integrate-v4-consumer-dbf6986-native` and `-asan` (retire after review); owns only `pc/apple/include/acgc/metal_packet_consumer.h`, `pc/apple/src/metal_packet_consumer.c`, `pc/apple/src/pc_metal_runtime.c`, `pc/tests/pc_gx_semantic_v4_consumer_fixture.c`, and minimal `pc/CMakeLists.txt` registration; no `pc_gx.c` or packet-builder ownership | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `6/6` each with no diagnostics beyond known compiler warnings; V4 accepts explicit alpha-write `0/1`, marks V3/V4 state extensions `NOT_RENDERED`, and rejects malformed state; no full link, LLDB, device, live callback, Metal encode/readback, pixel, input/audio/save, or playability claim; evidence `docs/evidence/GX-V4-APPLE-CONSUMER-DBF6986-2026-08-13.md` |
 | 111 | Current-tip V4 builder-to-consumer runtime reachability — `019ffdb2-129d-7900-98f5-837ffe100fbc` | Read-only one serialized arm64 `ac_pc` link and one bounded no-nice LLDB launch at canonical PC `dbf6986`; count graph/GX/V3/V4 builder, typed V3/V4 consumer, prepare, and runtime-observer symbols with explicit return-safe callbacks | Lane worktree `/Users/jk/.codex/worktrees/d952/acgc-modern-port`; canonical PC `dbf6986` at run time; decomp `09ca8e8b`; exact roots `/private/tmp/acgc-lane-current-v4-runtime-build` and `/private/tmp/acgc-lane-current-v4-runtime-logs` protected for cleanup | Complete/archived pending exact-path cleanup; link `[4019/4019]` and one real boot/NEOS launch passed, but the callback stopped at `graph_task_set00` with `SBBreakpoint.GetName` `AttributeError`; downstream explicit counts are zero only within that stopped trace, and static crosswalk shows V4 is not live-wired; no callback, Metal encode/readback, pixel, input/audio/save/device, simulator, or playability claim; evidence `docs/evidence/CURRENT-V4-RUNTIME-DBF6986-2026-08-13.md` |
 | 112 | Production Save_t/CARD recovery — `019ffdba-e4f1-71d1-82fd-573f767a436b` | Source-edit lane for the two-upstream Save_t/GCI checksum and main/backup recovery seam; own only `pc/src/pc_m_card.c`, one focused recovery fixture, and minimal registration; no full link/LLDB/device | Visible worktree `/Users/jk/.codex/worktrees/6e5b/acgc-modern-port`; canonical PC `c1/lane-card-production-recovery` `3d3204e`; decomp `09ca8e8b`; exact roots `/private/tmp/acgc-lane-card-production-recovery-native-l9JFbi` and `/private/tmp/acgc-lane-card-production-recovery-asan-qm0XQa` | Active/source-edit; exact owned diff is CMake registration plus fixture temp-root naming; focused native and combined ASan/UBSan tests pass with no full link/LLDB/device/persistence/playability claim; protect the shared canonical branch until root review |
-| 113 | Input snapshot boundary audit — `019ffdba-e4ee-72c3-ad9a-5f9d77153f34` | Read-only/test-only characterization of per-frame `PCInputSnapshot`, controller/keyboard mapping, and game-owned frame guard; no source/CMake edits, full link, LLDB, physical input, or playability | Visible worktree `/Users/jk/.codex/worktrees/8a82/acgc-modern-port`; canonical PC `c1/macos-host-launch` `dbf6986`; decomp `09ca8e8b`; exact root `/private/tmp/acgc-lane-input-runtime-boundary-XTPXKu` | Active/verification; native and combined ASan/UBSan focused input/frame-guard tests are `3/3` each with no diagnostics; double-`PADRead` probe and sub-threshold trigger characterization remain pending; no physical-input/simulator/device/playability claim |
+| 113 | Input snapshot boundary audit — `019ffdba-e4ee-72c3-ad9a-5f9d77153f34` | Read-only/test-only characterization of per-frame `PCInputSnapshot`, controller/keyboard mapping, and game-owned frame guard; no source/CMake edits, full link, LLDB, physical input, or playability | Visible worktree `/Users/jk/.codex/worktrees/8a82/acgc-modern-port`; canonical PC `dbf6986` at test time; decomp `09ca8e8b`; exact root `/private/tmp/acgc-lane-input-runtime-boundary-XTPXKu` | Complete/archived pending exact-path cleanup; native and combined ASan/UBSan focused tests `3/3` each with no diagnostics; double-`PADRead` is stable, while sub-threshold analog L/R reproduces `PADStatus` `(88,88)` but game-owned `now.button=0x0000` versus decomp `0x0030`; no source edit or physical-input/device/playability claim; evidence `docs/evidence/INPUT-BOUNDARY-AUDIT-DBF6986-2026-08-13.md`; a separately authorized test-first fix lane is required |
 | 114 | Mixer/DMA/CoreAudio boundary audit — `019ffdba-e4f1-71d1-82fd-57561a66e50a` | Read-only verification of the JAudio mixer/DMA/NEOS-to-Apple sink boundary; no source edits, full link, LLDB, ISO/assets, or audible-device claim | Visible worktree `/Users/jk/.codex/worktrees/0705/acgc-modern-port`; canonical PC `dbf6986`; decomp `09ca8e8b`; exact roots `/private/tmp/acgc-lane-mixer-coreaudio-current-native-VDoxjP` and `/private/tmp/acgc-lane-mixer-coreaudio-current-sanitizer-4WmGA1` | Complete/archived pending exact-path cleanup; native and ASan/UBSan CMake audio sets `4/4` pass, including software mixer/DAC/callback, NEOS/RSP, high-address DMA, and pointer probes; CoreAudio opened 32 kHz stereo/512 with zero underruns/overruns but producer was silent, so no audible-audio claim; evidence `docs/evidence/MIXER-COREAUDIO-AUDIT-DBF6986-2026-08-13.md` |
 
 ## Parked intake (not active)
