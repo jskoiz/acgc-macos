@@ -70,12 +70,12 @@ save, device, or playability claim follows; the current-tip runtime count is
 complete, and the alpha-update V3 rejection reason is now source-backed. The
 next dependency-ready gate is the real Metal state encoder or a separately
 authorized current-tip runtime trace, after the focused builder-to-consumer
-fixture and Apple consumer boundary have passed their CPU gates. Lanes 104–109
-are complete/integrated/archived. Lane 110 is the sole active worker; no
-duplicate or filler lane is open. The current portable verification tip is
-`4fc6f00`, which
-adds the bounded V4 alpha-state CPU contract on top of `f18e7cd`. Native and
-combined ASan/UBSan focused tests for the V4 slice are `5/5` each, while the
+fixture and Apple consumer boundary have passed their CPU gates. Lanes 104–110
+are now complete/integrated/archived; no worker is active and no duplicate or
+filler lane is open. The current portable verification tip is `dbf6986`, which
+adds the V4 alpha-state CPU contract and typed Apple consumer validation on
+top of `4fc6f00`. Native and combined ASan/UBSan focused tests for the V4
+builder/consumer slice are `6/6` each, while the
 real i686 Windows/PE boundary remains blocked by the absent toolchain/sysroot.
 Lane 108's one current-tip link reached `[4018/4019]` and its one unprivileged
 LLDB launch created a real inferior, reached boot/graph/GX, and recorded
@@ -90,10 +90,10 @@ Lane 109 completed the dependency-ready CPU/contract gate: its separately
 versioned V4 alpha-state packet/builder preserves the existing V3 ABI and
 fail-closed behavior. Integrated native and combined ASan/UBSan focused tests
 pass `5/5` each. The lane remains CPU/contract scoped; Apple consumer files are
-a separate successor and no fresh runtime/device run is implied. Lane 110 is
-now the bounded V4 consumer/validation successor, limited to the typed Apple
-consumer/runtime seam and focused native/sanitizer tests; no full link, LLDB,
-device, Metal, pixel, or playability claim is authorized.
+a separate successor and no fresh runtime/device run is implied. Lane 110 has
+now completed its typed Apple consumer/runtime validation seam with native and
+combined ASan/UBSan focused CTest `6/6` each; no full link, LLDB, device, Metal,
+pixel, or playability claim is authorized.
 Lane 94
 (`019ffca1-c92a-7363-9687-a503d2f2851d`) completed one corrected elevated
 LLDB trace from canonical PC `d1e812c`. Explicit-return callbacks continued
@@ -139,7 +139,7 @@ The Windows, sanitizer, iOS, and input frame-guard handoffs are complete. Lane
 107's exact physical roots and visible worktree have been retired by cleanup;
 one source-registry metadata record remains preserved after `Operation not
 permitted`, and the two dirty failed-clone directories remain intentionally
-untouched. The authoritative PC source is `4fc6f00` on
+untouched. The authoritative PC source is `dbf6986` on
 `c1/macos-host-launch`; the umbrella branch is `main` (the local
 `c1/apple-port-bootstrap` alias is synchronized to the same tip) plus only
 the pre-existing `.codex`/settings edits. The current-tip V3 runtime count is
@@ -149,9 +149,10 @@ builder entries, while no V3 consumer or Apple runtime-observer hit. Lane 104's
 source-backed reason is `g_gx.alpha_update_enable == 0`; the focused
 builder-to-consumer fixture and Apple boundary audit are complete. Lane 109 is
 also complete/integrated/archived with the V4 alpha-state contract and focused
-native/ASan/UBSan `5/5` results. Lane 110 is the sole active crosswalk/source
-lane for the V4 Apple consumer validation seam; no other worker is active and
-full links and LLDB launches remain serialized.
+native/ASan/UBSan `5/5` results. Lane 110 is now complete/integrated/archived;
+its typed V4 Apple consumer validation passes native and combined ASan/UBSan
+focused CTest `6/6` each. No worker is active; full links and LLDB launches
+remain serialized.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
@@ -337,7 +338,7 @@ from compilation alone.
 | 107 | Integrated sanitizer and Windows compatibility matrix — `019ffd51-94de-78a3-b583-89cd9d008e40` | Verification-only native/ASan/UBSan and available `_WIN32`/host probes on current PC `f18e7cd`; record unavailable i686 MinGW/sysroot toolchains exactly; no source edits or full link | Canonical PC `c1/macos-host-launch` at `f18e7cd`; decomp `09ca8e8b`; lane roots and visible worktree retired by cleanup; exact stale source metadata `/Users/jk/Documents/Projects/acgc-modern-port/.git/modules/upstream/ACGC-PC-Port/worktrees/ACGC-PC-Port` remains due `Operation not permitted`; dirty failed clones `/private/tmp/acgc-lane-gx-v3-sanitizer-windows-failed-pc` and `...-failed-decomp` are preserved | Complete/archived; focused native CTest `7/7` and combined ASan/UBSan `7/7` with no diagnostics; packet/adapter and C/static-GBI `_WIN32`/ILP32 probes pass, C++ host macro caveat, `pc_gx.c` stops at missing `process.h`, real GNU/MSVC probes stop at missing `string.h`; no i686/PE/runtime/Metal/pixel/playability claim; evidence `docs/evidence/SANITIZER-WINDOWS-CURRENT-F18E7CD-2026-08-13.md` |
 | 108 | Current-tip V3 rejection runtime trace — `019ffd6d-46b9-7aa1-97d9-9e66a19ef45c` | Read-only one serialized `ac_pc` link and one bounded LLDB launch at PC `f18e7cd`; enable `ACGC_METAL_V3_REJECTION_TRACE=1` and count graph/GX/V3 builder, Apple consumer, runtime observer, and alpha-update rejection records | Visible task worktree `/Users/jk/.codex/worktrees/1d58/acgc-modern-port`; canonical populated PC `/Users/jk/Documents/Projects/acgc-modern-port/upstream/ACGC-PC-Port` at `c1/macos-host-launch` `f18e7cd`; decomp `09ca8e8b`; unique roots `/private/tmp/acgc-lane-current-v3-rejection-runtime-build` and `/private/tmp/acgc-lane-current-v3-rejection-runtime-logs` retained for exact cleanup after review | Complete/archived; link `[4018/4019]` passed and the real inferior reached boot/graph/GX; counts were graph/emu64 `29`, GX/flush `532`, V2/V3 builder `531`, Apple consumer/observer `0`; diagnostic cap recorded `64/64` `alpha_update_disabled`; no callback, Metal encode/readback/pixel, input/audio/save/device, simulator, natural-shutdown, or playability claim; evidence `docs/evidence/CURRENT-V3-REJECTION-RUNTIME-F18E7CD-2026-08-13.md` |
 | 109 | V3 alpha-state packet contract — `019ffd84-42ae-72b2-8be3-d3d18d29577c` | Source-edit lane for the smallest reference-faithful versioned packet/builder representation of live `alpha_update_enable == 0`; preserve existing V1/V2/V3 ABI and fail-closed behavior; focused CPU tests only | Visible task worktree `/Users/jk/.codex/worktrees/9941/acgc-modern-port` and source `/private/tmp/acgc-lane-gx-alpha-state/source` are absent after cleanup; branch `c1/lane-gx-alpha-state` remains at `6ef4df7`, based on `f18e7cd`; `/private/tmp/acgc-lane-gx-alpha-state-native`, `-asan`, and empty parent remain preserved because exact metadata removal returned `Operation not permitted` at `.git/modules/upstream/ACGC-PC-Port/worktrees/source`; integrated canonical PC `c1/macos-host-launch` at `4fc6f00`; no Apple consumer/runtime ownership | Complete/integrated/archived; V3 remains `4968` bytes and V4 is `4972` bytes with explicit alpha-write state; native and combined ASan/UBSan focused CTest `5/5` each with no diagnostics; no full link, LLDB, Apple consumer, live callback, Metal encode/readback/pixel, input/audio/save/device, or playability claim; evidence `docs/evidence/GX-V4-ALPHA-STATE-4FC6F00-2026-08-13.md`; stale metadata is preserved for approved owner cleanup only |
-| 110 | V4 Apple consumer/validation seam — `019ffd9e-1fb9-7153-bf9b-2d7dea3f3eed` | Source-edit lane for the smallest typed V4 consumer/runtime validation seam; preserve V1/V2/V3 dispatch, OpenGL behavior, and fail-closed malformed/unsupported state; focused CPU tests only | Visible umbrella worktree `/Users/jk/.codex/worktrees/6756/acgc-modern-port` is detached at setup snapshot `3a4c0e2` (provenance only); owning PC branch/worktree is now `c1/lane-gx-v4-consumer` at exact base `4fc6f00`; ac-decomp `09ca8e8b`; unique `/private/tmp/acgc-lane-gx-v4-consumer-*` roots are setup-pending; owns only `pc/apple/include/acgc/metal_packet_consumer.h`, `pc/apple/src/metal_packet_consumer.c`, `pc/apple/src/pc_metal_runtime.c`, one focused V4 consumer test, and minimal `pc/CMakeLists.txt` registration; no `pc_gx.c` or packet-builder ownership | Active/crosswalk; both-upstream crosswalk is in progress before edits, then focused native plus combined ASan/UBSan CTest with `--parallel 1`; no full link, LLDB, device, live callback, Metal encode/readback, pixel, input/audio/save, or playability claim |
+| 110 | V4 Apple consumer/validation seam — `019ffd9e-1fb9-7153-bf9b-2d7dea3f3eed` | Source-edit lane for the smallest typed V4 consumer/runtime validation seam; preserve V1/V2/V3 dispatch, OpenGL behavior, and fail-closed malformed/unsupported state; focused CPU tests only | Visible umbrella worktree `/Users/jk/.codex/worktrees/6756/acgc-modern-port` is detached at setup snapshot `3a4c0e2` (provenance only); worker branch `c1/lane-gx-v4-consumer` at `63b772e` based on `4fc6f00`; integrated canonical PC `c1/macos-host-launch` at `dbf6986`; decomp `09ca8e8b`; worker roots `/private/tmp/acgc-lane-gx-v4-consumer-native-4fc6f00` and `-asan-4fc6f00`, integrated roots `/private/tmp/acgc-integrate-v4-consumer-dbf6986-native` and `-asan` (retire after review); owns only `pc/apple/include/acgc/metal_packet_consumer.h`, `pc/apple/src/metal_packet_consumer.c`, `pc/apple/src/pc_metal_runtime.c`, `pc/tests/pc_gx_semantic_v4_consumer_fixture.c`, and minimal `pc/CMakeLists.txt` registration; no `pc_gx.c` or packet-builder ownership | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `6/6` each with no diagnostics beyond known compiler warnings; V4 accepts explicit alpha-write `0/1`, marks V3/V4 state extensions `NOT_RENDERED`, and rejects malformed state; no full link, LLDB, device, live callback, Metal encode/readback, pixel, input/audio/save, or playability claim; evidence `docs/evidence/GX-V4-APPLE-CONSUMER-DBF6986-2026-08-13.md` |
 
 ## Parked intake (not active)
 

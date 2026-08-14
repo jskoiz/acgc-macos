@@ -59,8 +59,9 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The latest integrated source tip is the clean native arm64
-PC branch `c1/macos-host-launch` at `4fc6f00`, which adds the V4 alpha-state
-packet/builder contract on top of `f18e7cd`. The latest serialized full
+PC branch `c1/macos-host-launch` at `dbf6986`, which adds the V4 alpha-state
+packet/builder contract and typed Apple consumer validation on top of
+`4fc6f00`. The latest serialized full
 reconstructed `ac_pc` link recorded before the V3 slice was a native arm64
 Mach-O from `042cbf7`, returning `[4018/4019]` in lane 98's one-link run. The
 source tip adds the
@@ -107,6 +108,13 @@ Native and combined ASan/UBSan focused CTest pass `5/5` each with no
 diagnostics. V4 remains a CPU/contract builder and validator only; it has no
 Apple consumer, live callback, Metal encode/readback, pixel, or playability
 claim. See [V4 alpha-state evidence](evidence/GX-V4-ALPHA-STATE-4FC6F00-2026-08-13.md).
+The integrated `dbf6986` V4 consumer seam validates the complete packet,
+accepts explicit alpha-write values `0` and `1`, exercises the disabled-alpha
+case, and rejects malformed state masks/values while keeping V3/V4 state
+extensions `NOT_RENDERED`. Native and combined ASan/UBSan focused CTest pass
+`6/6` each with no sanitizer diagnostics. This remains CPU/contract evidence;
+it does not establish a live V4 callback, Metal encode/readback, pixel, or
+playability gate. See [V4 Apple consumer evidence](evidence/GX-V4-APPLE-CONSUMER-DBF6986-2026-08-13.md).
 The current-tip sanitizer/Windows verification on `f18e7cd` passes the seven
 focused native targets (`7/7`) and the combined ASan/UBSan matrix (`7/7`) with
 no diagnostics. Available `_WIN32`/`-m32` C and static-GBI probes pass, while

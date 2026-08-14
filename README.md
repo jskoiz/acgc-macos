@@ -21,8 +21,9 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `4fc6f00` (`Add GX V4 alpha-state packet builder`),
-  on top of `f18e7cd` (`Add V3 builder consumer fixture`), `add2d6f`
+  `c1/macos-host-launch` at `dbf6986` (`Add V4 Apple consumer validation gate`),
+  on top of `4fc6f00` (`Add GX V4 alpha-state packet builder`), `f18e7cd`
+  (`Add V3 builder consumer fixture`), `add2d6f`
   (`Trace GX V3 rejection state`) and `042cbf7`
   (`Add bounded GX v3 state handoff`),
   on top of `d1e812c` (`Add versioned GX v2 consumer handoff`),
@@ -149,6 +150,12 @@ redistribute it or extracted proprietary assets.
   and remains a builder/validator contract only; no Apple consumer, live
   callback, Metal encode/readback, pixel, or playability claim follows. See
   [V4 alpha-state evidence](docs/evidence/GX-V4-ALPHA-STATE-4FC6F00-2026-08-13.md).
+- The integrated `dbf6986` Apple consumer seam validates the complete V4 packet,
+  accepts alpha-write `0` and `1`, rejects malformed state masks/values, and
+  marks V3/V4 state extensions `NOT_RENDERED`. Native and combined ASan/UBSan
+  focused CTest pass `6/6` each with no sanitizer diagnostics. This is still
+  CPU/contract evidence only: no live V4 callback, Metal encode/readback,
+  pixel, or playability claim follows. See [V4 Apple consumer evidence](docs/evidence/GX-V4-APPLE-CONSUMER-DBF6986-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.
