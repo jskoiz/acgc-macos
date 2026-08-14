@@ -56,10 +56,11 @@ source worktree is deliberately preserved because ignored `assets/` and
 gate and exposed the initial V2 base-state predicate as the next fail-closed
 tier. Lanes 142–144 are complete: lane 142 is integrated as PC `59d13a98`,
 and lanes 143–144 produced read-only architecture evidence. Root-owned lane
-145 has also completed its one serialized `59d13a98` link/LLDB trace. No
-worker, full link, or LLDB run is active. The next dependency-ready work is a
-pair of focused remote reference crosswalks for the live `alpha_test` and
-`global_count` cohorts; remote workers may not update the umbrella checkout.
+145 has also completed its one serialized `59d13a98` link/LLDB trace. Three
+read-only Luna Max/max workers are now active on the M3 Max: lanes 146 and 147
+crosswalk the live `alpha_test` and `global_count` cohorts, while lane 148
+audits the independent ordinary-V2 Apple status policy. No full link or LLDB
+run is active; remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -105,6 +106,26 @@ pair of focused remote reference crosswalks for the live `alpha_test` and
   `docs/evidence/CURRENT-V2-REJECTION-RUNTIME-59D13A98-2026-08-14.md`. This does
   not prove a callback, Metal encode/present/readback, pixel, input, audio,
   save, device, or playability gate.
+
+- Lane 146 / task `01a00250-5adf-7ae3-b348-437a437a0dfe` — active,
+  read-only M3 Max crosswalk at PC `59d13a98` and decomp `09ca8e8b`. It owns
+  whether nonzero alpha reference bytes are semantically ignored when both
+  comparisons are `GX_ALWAYS`, plus the exact fail-closed cases a later
+  test-first predicate lane must retain. No edits, build, test, launch, asset
+  access, callback, Metal, pixel, or playability scope.
+- Lane 147 / task `01a00250-5d82-7a91-9202-636b8478f7f0` — active,
+  read-only M3 Max crosswalk at PC `59d13a98` and decomp `09ca8e8b`. It owns
+  the observed `global_count` tuple (`chans=1`, `texgens=2`, `tev=2`,
+  `ind=0`, `fog=2`), including count-versus-enum classification and the
+  narrow renderer-contract successor. No edits, build, test, launch, asset
+  access, callback, Metal, pixel, or playability scope.
+- Lane 148 / task `01a00250-4e56-7d20-b951-a9b9fc4f57f4` — active,
+  read-only M3 Max audit at PC `59d13a98` and decomp `09ca8e8b`. It owns the
+  ordinary-V2 Apple status-policy question: whether a packet marked
+  `V2_EXTENSION_NOT_RENDERED` can incorrectly reach the geometry sink while
+  the provider-backed `CPU_RESOLVED` texture/TEV path remains separate. No
+  edits, build, test, launch, asset access, live callback, Metal, pixel, or
+  playability scope.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
