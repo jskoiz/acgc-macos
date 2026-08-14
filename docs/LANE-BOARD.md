@@ -88,16 +88,18 @@ been retired after holder checks; its preserved worktree still has
 owner-managed holders. No
 production worker is active; no lane may start a competing full
 link or LLDB trace; no duplicate or filler lane is open. The current portable
-verification tip is `83fe50c`, which keeps resolved V4 texture-map aliases
-safe while wiring the V4 builder into a typed Apple consumer callback after
+verification tip is `46a8ae5`, which keeps resolved V4 texture-map aliases
+safe, permits live unencoded alpha/depth/cull state through the V4-only
+predicate, and wires the V4 builder into a typed Apple consumer callback after
 V2/V3 fail, maps the supported blend/alpha subset, and
 keeps V3 texture-matrix state explicitly `NOT_RENDERED` on top of the `dbf6986`
 V4 consumer seam. The integrated six-target native and combined ASan/UBSan
 focused tests are `6/6` each, and direct Apple consumer/sink fixtures are `2/2`
 in each matrix. This remains CPU/contract and compile coverage only; no live V4
 callback, Metal encode/readback, pixel, device, or playability claim follows.
-See `docs/evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md` and
-`docs/evidence/GX-V4-TEXTURE-MAP-ALIAS-83FE50C-2026-08-13.md`. The Save_t/CARD
+See `docs/evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md`,
+`docs/evidence/GX-V4-TEXTURE-MAP-ALIAS-83FE50C-2026-08-13.md`, and
+`docs/evidence/GX-V4-UNRENDERED-RASTER-46A8AE5-2026-08-13.md`. The Save_t/CARD
 recovery fixture remains integrated at `f19c73f`, while the real i686 Windows/PE
 boundary remains blocked by the absent toolchain/sysroot.
 One serialized current-tip `28ebac2` link reached `[4018/4019]`; its bounded
@@ -107,6 +109,14 @@ prepare path, and `pc_metal_runtime_observe` were all `0`. This is live V4
 builder-rejection evidence only, with no callback, Metal encode/readback,
 pixel, or playability claim. See
 `docs/evidence/CURRENT-V4-LIVE-CONSUMER-RUNTIME-28EBAC2-2026-08-13.md`.
+The current-tip `46a8ae5` link also reached `[4018/4019]`, `[LOGO]`, and
+`[NEOS_OUT]`; its explicit-return trace counted 542 V4 builder attempts but
+zero V4 consumer/prepare/observer hits. The diagnostic cap remained 64
+`reason=global_state` records because the classifier still used the old
+predicate. Integrated PC `adaddfd` now aligns that classifier with the relaxed
+V4 predicate; one follow-up serialized trace is required before naming the
+remaining rejection class. See
+`docs/evidence/CURRENT-V4-UNRENDERED-RASTER-RUNTIME-46A8AE5-2026-08-13.md`.
 Lane 108's one current-tip link reached `[4018/4019]` and its one unprivileged
 LLDB launch created a real inferior, reached boot/graph/GX, and recorded
 `graph_task_set00=29`, `emu64_taskstart=29`, `GXBegin=532`,

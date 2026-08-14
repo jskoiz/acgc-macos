@@ -198,6 +198,14 @@ the local machine.
   alpha/depth/cull state. Its V4 consumer, prepare path, and runtime observer
   stayed at `0`; this is rejection localization only. See [V4 rejection trace
   evidence](docs/evidence/CURRENT-V4-REJECTION-TRACE-FBB286D-2026-08-13.md).
+- One current-tip `46a8ae5` link reached `[4018/4019]` and one explicit-return
+  LLDB launch reached `[LOGO]`, `[NEOS_OUT]`, and repeated V4 builder entries
+  (`542`), while the V4 consumer, prepare path, and runtime observer stayed at
+  `0`. The trace emitted 64 `reason=global_state` records from the old
+  classifier. Commit `adaddfd` now aligns that diagnostic with the relaxed
+  predicate; one follow-up serialized trace is required before naming the
+  remaining rejection class. This is link/boot/GX evidence only. See
+  [current V4 unrendered-raster runtime evidence](docs/evidence/CURRENT-V4-UNRENDERED-RASTER-RUNTIME-46A8AE5-2026-08-13.md).
 - One serialized current-tip `28ebac2` arm64 link reached `[4018/4019]`, and
   one bounded LLDB launch reached the live game graph/GX path. The V4 builder
   entry was observed `558` times, while the typed V4 Apple consumer, its
