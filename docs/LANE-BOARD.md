@@ -41,6 +41,42 @@ ACGC tasks are parked or archived;
 their reviewed commits and evidence remain available in Git and the evidence
 docs.
 
+## Remote M3 Max batch (current)
+
+The M3 Max Screen Sharing/SSH connection is online and the source-only remote
+checkout has been independently verified at umbrella `ee31f53`, PC
+`a53b192`, and decomp `09ca8e8b`, all clean. No ISO, extracted assets, keys, or
+proprietary data were transferred. The old local lane-115 handoff remains
+parked because the handoff registry could not match the saved remote project;
+the following visible remote Codex tasks were opened from the registered remote
+project instead. They use `gpt-5.6-luna` with max reasoning, keep full links and
+LLDB serialized, and do not update the umbrella checkout.
+
+- Lane 116 / task `019fff00-d312-73a0-8396-d94c6618e0b8` — complete pending
+  root review. Remote PC worktree `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-m3`
+  on `c1/lane-gx-v4-channel-diagnostic-m3`, base `a53b192`, final `e8155c6`.
+  The V4-only channel predicate now accepts decomp-compatible disabled
+  `GX_SRC_REG`/`GX_SRC_VTX` material sources while retaining enabled/lighting
+  rejection; native and combined ASan/UBSan focused tests pass `4/4` each with
+  no diagnostics (`detect_leaks=0`). No live callback, Metal, pixel, or
+  playability claim; preserve the worktree/branch until integration review.
+- Lanes 117–127 are active on the remote M3 Max with non-overlapping contracts:
+  Apple V4 consumer/runtime (`019fff16-cacd-7133-9823-15d529e8bb63`), V4
+  handoff fixture (`019fff16-d72e-7703-8721-c81517ebe538`), sanitizer/Windows
+  refresh (`019fff16-e538-7e73-a844-f4e09c18538d`), input trigger audit
+  (`019fff16-f4d5-76b1-b3eb-dd7d9bb18512`), mixer/CoreAudio refresh
+  (`019fff17-0485-79d1-ab6b-47e1495d97af`), CARD production validation
+  (`019fff17-0fe1-7b23-8dd9-b18503b70fe8`), lifecycle/timing audit
+  (`019fff17-1964-7822-babf-2120bc78fb6e`), graph terminator fixture
+  (`019fff17-22e0-7f12-8c20-2fad9a684892`), texture/TLUT/TEV fixtures
+  (`019fff17-2f40-78c1-b2c6-f69c50fc93fb`), Metal state contract audit
+  (`019fff17-38e4-7ed3-a2aa-04e48b823c33`), and iOS shared-boundary audit
+  (`019fff17-4100-78f1-91c4-0996c40e41b5`). Source lanes must create their
+  own PC submodule branches/worktrees; audit lanes are read-only/test-only.
+  No lane may claim a full link, LLDB, device, Metal encode/readback, pixel,
+  input, audible audio, save/device persistence, simulator, or playability
+  gate without separate evidence.
+
 Current maintenance state: lanes 96, 97, and 98 are complete and archived. Lane
 96's first graph task traversed eight inline `G_DL_NOPUSH` continuations to a
 clean `G_ENDDL`, returned `0`, and did not reach `GXBegin`; lane 97 then
