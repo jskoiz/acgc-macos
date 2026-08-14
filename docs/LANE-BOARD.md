@@ -105,6 +105,18 @@ consumer/runtime binding, full link, LLDB, device, Metal encode/readback,
 pixel, input, audio, save, or playability claim is authorized. Evidence is
 `docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md`.
 
+Lane 133 / task `01a00127-b749-7021-bb08-a8b1485773df` is the sole active
+remote M3 Max source lane. It is running from source-only PC tip `a96f358`
+with the exact isolated scratch root
+`/private/tmp/acgc-lane-gx-texture-binder-m3`; the desktop handoff registry is
+currently reconnecting, so the durable remote Codex task is being monitored by
+its M3 Max task ID. It owns only the Apple V2 texture-source binder/validation
+seam, one focused test, and minimal CMake; no `pc_gx.c`/packet-builder,
+decomp, full-link, LLDB, launch, device, Metal, pixel, input, audio, save,
+ISO, or playability scope. Require native plus combined ASan/UBSan focused
+CTest with `--parallel 1`, exact base/final refs, and a clean CPU/contract-only
+handoff before integration.
+
 - Lane 116 / task `019fff00-d312-73a0-8396-d94c6618e0b8` — complete pending
   root review. Remote PC worktree `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-m3`
   on `c1/lane-gx-v4-channel-diagnostic-m3`, base `a53b192`, final `e8155c6`.
