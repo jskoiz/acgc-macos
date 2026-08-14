@@ -59,7 +59,8 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The latest integrated source tip is the clean native arm64
-PC branch `c1/macos-host-launch` at `28ebac2`, which wires the V4 builder into
+PC branch `c1/macos-host-launch` at `83fe50c`, which keeps resolved V4
+texture-map aliases safe while wiring the V4 builder into
 the typed Apple consumer/runtime seam on top of `dbf6986` and `4fc6f00`. The
 latest serialized full
 reconstructed `ac_pc` link recorded before the V3 slice was a native arm64
@@ -122,6 +123,12 @@ pass `6/6` native and `6/6` combined ASan/UBSan; direct Apple consumer/sink
 fixtures pass `2/2` in each matrix. This remains CPU/contract and compile
 coverage only: no live V4 callback, Metal encode/present/readback, device,
 pixel, or playability claim follows. See [V4 live-consumer evidence](evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md).
+The follow-up `83fe50c` V4-only predicate allows a resolved non-indexed GX
+texture-map alias while retaining the strict V1/V2/V3 map-index gate and
+leaving the texture/TEV extension unrendered in the Apple consumer. Its six
+semantic targets pass `6/6` native and combined ASan/UBSan. This remains
+CPU/contract evidence; a fresh current-tip link and trace are required before
+any live V4 callback or Metal claim. See [V4 texture-map evidence](evidence/GX-V4-TEXTURE-MAP-ALIAS-83FE50C-2026-08-13.md).
 One serialized current-tip `28ebac2` link reached `[4018/4019]`, and one
 bounded LLDB launch reached the game-owned graph/GX path. The V4 builder entry
 counted `558` attempts, but the typed V4 Apple consumer, prepare path, and

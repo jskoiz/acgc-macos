@@ -21,7 +21,8 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `28ebac2` (`Wire V4 alpha state to Metal consumer`),
+  `c1/macos-host-launch` at `83fe50c` (`Allow V4 texture map aliases`), on top
+  of `28ebac2` (`Wire V4 alpha state to Metal consumer`),
   on top of `dbf6986` (`Add V4 Apple consumer validation gate`), `4fc6f00`
   (`Add GX V4 alpha-state packet builder`), `f18e7cd`
   (`Add V3 builder consumer fixture`), `add2d6f`
@@ -165,6 +166,13 @@ redistribute it or extracted proprietary assets.
   matrix. This is CPU/contract and compile coverage only: no live V4 callback,
   Metal encode/present/readback, device, pixel, or playability claim follows.
   See [V4 live-consumer evidence](docs/evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md).
+- The integrated `83fe50c` V4-only predicate keeps resolved texture safety
+  checks but allows a valid non-indexed GX texture-map alias, matching the
+  decomp's explicit `GXSetTevOrder` state while the Apple texture/TEV extension
+  remains `NOT_RENDERED`. The six semantic targets pass `6/6` native and
+  combined ASan/UBSan. This is CPU/contract evidence only; a fresh current-tip
+  link and trace are still required before any live V4 callback claim. See
+  [V4 texture-map evidence](docs/evidence/GX-V4-TEXTURE-MAP-ALIAS-83FE50C-2026-08-13.md).
 - One serialized current-tip `28ebac2` arm64 link reached `[4018/4019]`, and
   one bounded LLDB launch reached the live game graph/GX path. The V4 builder
   entry was observed `558` times, while the typed V4 Apple consumer, its

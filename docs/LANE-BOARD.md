@@ -82,14 +82,16 @@ been retired after holder checks; its preserved worktree still has
 owner-managed holders. No
 production worker is active; no lane may start a competing full
 link or LLDB trace; no duplicate or filler lane is open. The current portable
-verification tip is `28ebac2`, which wires the V4 builder into a typed Apple
-consumer callback after V2/V3 fail, maps the supported blend/alpha subset, and
+verification tip is `83fe50c`, which keeps resolved V4 texture-map aliases
+safe while wiring the V4 builder into a typed Apple consumer callback after
+V2/V3 fail, maps the supported blend/alpha subset, and
 keeps V3 texture-matrix state explicitly `NOT_RENDERED` on top of the `dbf6986`
 V4 consumer seam. The integrated six-target native and combined ASan/UBSan
 focused tests are `6/6` each, and direct Apple consumer/sink fixtures are `2/2`
 in each matrix. This remains CPU/contract and compile coverage only; no live V4
 callback, Metal encode/readback, pixel, device, or playability claim follows.
-See `docs/evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md`. The Save_t/CARD
+See `docs/evidence/GX-V4-LIVE-CONSUMER-28EBAC2-2026-08-13.md` and
+`docs/evidence/GX-V4-TEXTURE-MAP-ALIAS-83FE50C-2026-08-13.md`. The Save_t/CARD
 recovery fixture remains integrated at `f19c73f`, while the real i686 Windows/PE
 boundary remains blocked by the absent toolchain/sysroot.
 One serialized current-tip `28ebac2` link reached `[4018/4019]`; its bounded
