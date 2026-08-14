@@ -21,8 +21,9 @@ redistribute it or extracted proprietary assets.
 ## Current evidence
 
 - Latest integrated source is `upstream/ACGC-PC-Port` branch
-  `c1/macos-host-launch` at `f18e7cd` (`Add V3 builder consumer fixture`), on
-  top of `add2d6f` (`Trace GX V3 rejection state`) and `042cbf7`
+  `c1/macos-host-launch` at `4fc6f00` (`Add GX V4 alpha-state packet builder`),
+  on top of `f18e7cd` (`Add V3 builder consumer fixture`), `add2d6f`
+  (`Trace GX V3 rejection state`) and `042cbf7`
   (`Add bounded GX v3 state handoff`),
   on top of `d1e812c` (`Add versioned GX v2 consumer handoff`),
   on top of `26da235` (`Add bounded GX v2 semantic packet fixture`),
@@ -140,6 +141,14 @@ redistribute it or extracted proprietary assets.
   live V3 builder-rejection evidence only: no successful callback, Metal
   encode/present/readback, pixel, natural shutdown, or playability claim.
   See [current V3 rejection runtime evidence](docs/evidence/CURRENT-V3-REJECTION-RUNTIME-F18E7CD-2026-08-13.md).
+- The integrated `4fc6f00` CPU/contract slice adds a distinct 4972-byte V4
+  semantic packet that preserves the 4968-byte V3 ABI and appends the
+  reference-backed `alpha_update_enable` state. Native and combined
+  ASan/UBSan focused CTest pass `5/5` each, with V1/V2/V3 fixtures still green
+  and no sanitizer diagnostics. V4 accepts explicit alpha-write `0` or `1`
+  and remains a builder/validator contract only; no Apple consumer, live
+  callback, Metal encode/readback, pixel, or playability claim follows. See
+  [V4 alpha-state evidence](docs/evidence/GX-V4-ALPHA-STATE-4FC6F00-2026-08-13.md).
 - A single current-tip runtime trace from `d1e812c` linked `4019/4019`, but
   its one LLDB launch failed before creating an inferior with status `-1 (no
   such process)`; every requested graph/GX/v2/Apple breakpoint was zero-hit.

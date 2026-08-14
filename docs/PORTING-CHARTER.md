@@ -59,7 +59,8 @@ remain under ignored local or build paths and are never committed.
 As of 2026-08-13, source/revision proof, the current bounded portable-core
 slice, macOS host launch, and a deterministic Metal clear/triangle/present
 fixture are passed. The latest integrated source tip is the clean native arm64
-PC branch `c1/macos-host-launch` at `f18e7cd`. The latest serialized full
+PC branch `c1/macos-host-launch` at `4fc6f00`, which adds the V4 alpha-state
+packet/builder contract on top of `f18e7cd`. The latest serialized full
 reconstructed `ac_pc` link recorded before the V3 slice was a native arm64
 Mach-O from `042cbf7`, returning `[4018/4019]` in lane 98's one-link run. The
 source tip adds the
@@ -100,6 +101,12 @@ malformed packet is rejected without entering the V1 seam. Native and
 ASan/UBSan focused CTest pass `2/2` each. This remains contract evidence only;
 it does not establish a live callback, Metal encode/readback, pixel, or
 playability gate. See [V3 builder-consumer fixture evidence](evidence/GX-V3-BUILDER-CONSUMER-FIXTURE-F18E7CD-2026-08-13.md).
+The integrated `4fc6f00` V4 contract preserves the `4968`-byte V3 ABI and
+appends an explicit `alpha_update_enable` field for a `4972`-byte packet.
+Native and combined ASan/UBSan focused CTest pass `5/5` each with no
+diagnostics. V4 remains a CPU/contract builder and validator only; it has no
+Apple consumer, live callback, Metal encode/readback, pixel, or playability
+claim. See [V4 alpha-state evidence](evidence/GX-V4-ALPHA-STATE-4FC6F00-2026-08-13.md).
 The current-tip sanitizer/Windows verification on `f18e7cd` passes the seven
 focused native targets (`7/7`) and the combined ASan/UBSan matrix (`7/7`) with
 no diagnostics. Available `_WIN32`/`-m32` C and static-GBI probes pass, while
