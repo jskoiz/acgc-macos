@@ -61,7 +61,7 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `354f33884`, with
+As of 2026-08-14, the canonical local PC branch is clean at `2b141a753`, with
 the remote M3 Max lane-132 source record and lane-133 Apple binder integrated
 on top of the V2 texture sideband. The current five-file CPU source record plus
 four-file Apple seam validates borrowed image/TLUT metadata per map, source
@@ -70,6 +70,13 @@ stale, TLUT, and destruction paths. Native and combined ASan/UBSan focused
 tests pass `3/3` each on the integrated binder snapshot. This remains
 CPU/contract evidence only: no live callback, Metal encode/readback, pixel,
 device, or playability claim is made.
+
+The test-only lane-135 follow-up at `2b141a753` adds rejection coverage for the
+V2 callback guard, fixed triangle topology, ordinary emu64 blend state,
+decomp-compatible `GX_SRC_VTX` channel state, and the downstream texture
+provider boundary. The integrated focused target passes native `1/1` and
+combined ASan/UBSan `1/1` with no diagnostics; no production V2 predicate was
+relaxed. See [V2 rejection fixture evidence](evidence/V2-HANDOFF-REJECTION-FIXTURE-88724CDB-2026-08-14.md).
 
 The same `354f33884` snapshot links the full arm64 `ac_pc` target through
 `[4018/4019]`. A normal bounded launch from the current shell stops before

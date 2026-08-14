@@ -34,9 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `354f33884` (`Bind Apple V2 CPU texture sources`),
-on top of the lane-132 source record `80e80df`, the Apple V2 texture sideband
-`3c08c7f`, and the reviewed remote binder `08998d0`. The Apple seam now
+`c1/macos-host-launch` at `2b141a753` (`Add V2 handoff rejection fixture
+coverage`), on top of the lane-132 source record `80e80df`, the Apple V2
+texture sideband `3c08c7f`, and the reviewed remote binder `08998d0`. The Apple seam now
 synchronously validates the PC-owned per-map image/TLUT metadata, source kind,
 sampler fields, and generation before and after CPU fixture decode, failing
 closed on provider or lifetime errors. Native and combined ASan/UBSan focused
@@ -45,6 +45,14 @@ no live game-owned callback, Metal encode/readback, pixel, device, or
 playability claim follows. See [texture source record evidence](docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md),
 [Apple binder evidence](docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md),
 and the [lane board](docs/LANE-BOARD.md) for exact provenance.
+
+- The test-only follow-up at `2b141a753` adds focused coverage for the V2 null
+  callback guard, non-triangle topology, ordinary emu64 blend state,
+  decomp-compatible `GX_SRC_VTX` channel state, and the downstream texture
+  provider remaining untouched when the builder rejects. The integrated target
+  passes native `1/1` and combined ASan/UBSan `1/1` with no diagnostics. No
+  production predicate changed; this is CPU/contract evidence only. See
+  [V2 rejection fixture evidence](docs/evidence/V2-HANDOFF-REJECTION-FIXTURE-88724CDB-2026-08-14.md).
 
 - The preceding V4 integration chain is `upstream/ACGC-PC-Port` branch
   `c1/macos-host-launch` at `a53b192` (`Align V4 rejection reason classifier`),

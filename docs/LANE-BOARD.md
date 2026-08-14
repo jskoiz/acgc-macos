@@ -221,10 +221,10 @@ and must exit naturally before stale metadata reconciliation. Lane 112's
 Save_t/CARD fixture is integrated and its four worker/integration roots have
 been retired after holder checks; its preserved worktree still has
   owner-managed holders. The older “no production worker” sentence predates the
-remote M3 Max batch above; lanes 116–132 are complete/integrated/archived and
+remote M3 Max batch above; lanes 116–135 are complete/integrated/archived and
 no worker is active. No lane may start a competing full link or LLDB trace; no
 duplicate or filler lane is open. The current portable verification tip is
-`a96f358`, which keeps
+`2b141a753`, which keeps
 resolved V4 texture-map aliases
 safe, permits live unencoded alpha/depth/cull state through the V4-only
 predicate, and wires the V4 builder into a typed Apple consumer callback after
@@ -570,6 +570,7 @@ from compilation alone.
 | 132 | Per-map CPU texture source record — `01a000f5-789c-70a0-851e-e1fdebe391aa` | Remote M3 Max source lane; owned only `pc_gx_internal.h`, `pc_gx_texture.c`, `pc_gx.c` metadata accessor, and one focused portable fixture; invalidated cache/replacement/fallback/stale paths; no Apple/packet ABI/Metal/full-link/LLDB/device/pixel/playability scope | Worker `c1/lane-gx-texture-source-record-m3` `d52c6a0f` based on `a10fed8e`; integrated canonical PC `c1/macos-host-launch` `a96f358` with test-only follow-up `7c9299755`; local roots `/private/tmp/acgc-integrated-v2-source-a96f358-native` and `-asan` | Complete/integrated/archived; focused native and combined ASan/UBSan CTest `2/2` each with no diagnostics (`detect_leaks=0`); sideband-required V2 test is deterministic and green; evidence `docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md`; no live source binding/Metal/pixel/playability claim |
 | 133 | Apple V2 texture-source binder — `01a00127-b749-7021-bb08-a8b1485773df` | Remote M3 Max source lane; own only `pc/apple/include/acgc/metal_packet_consumer.h`, `pc/apple/src/metal_packet_consumer.c`, `pc/apple/src/pc_metal_runtime.c`, one focused Apple test; no packet-builder/decomp/full-link/LLDB/device/Metal/pixel/playability scope | Worker `c1/lane-v2-texture-source-binder-m3` `08998d0` based on `a96f358`; integrated canonical PC `c1/macos-host-launch` `354f33884`; roots `/private/tmp/acgc-lane-gx-texture-binder-m3/native` and `-asan` | Complete/integrated/archived; native and combined ASan/UBSan focused CTest `3/3` each, serially with no diagnostics (`detect_leaks=0`); borrowed game-owned texture metadata and lifetime checks are CPU-only; evidence `docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md`; no live callback/Metal/pixel/playability claim |
 | 134 | Current-tip V2 binder runtime check — root-owned | One serialized `ac_pc` link and bounded GUI launch/LLDB trace at integrated PC `354f33884`; no source edits; runtime proof only | Build root `/private/tmp/acgc-current-v2-texture-binder-runtime`; local ISO remains ignored and symlink-only | Complete; link `[4018/4019]` passed, GUI launch reached GAFE01/COPYDATE/NEOS/LOGO/`graph_proc`, GX counts recorded, V2 Apple consumer/provider/observer remained `0`; no Metal/pixel/input/audio/save/device/playability claim; evidence `docs/evidence/CURRENT-V2-TEXTURE-BINDER-RUNTIME-2026-08-14.md` |
+| 135 | V2 handoff rejection fixture — `01a00165-3830-73a0-a783-481af8df9bbe` | Remote M3 Max test-only fixture; own only `pc/tests/pc_gx_semantic_v2_handoff.c`; no production GX/Apple edits, full link, LLDB, device, Metal, pixel, or playability scope | Worker `c1/lane-v2-rejection-fixture-m3` `88724cdb` based on `354f33884`; worktree `/private/tmp/acgc-lane-v2-rejection-fixture-m3`; focused roots `/private/tmp/acgc-lane-v2-rejection-fixture-m3-native` and `-asan` | Complete/integrated/archived pending exact cleanup; native and combined ASan/UBSan focused CTest `1/1` each on worker and integrated PC `2b141a753`; no diagnostics; evidence `docs/evidence/V2-HANDOFF-REJECTION-FIXTURE-88724CDB-2026-08-14.md`; CPU/contract only, no live callback/Metal/pixel/playability claim |
 
 ## Parked intake (not active)
 
