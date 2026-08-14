@@ -22,11 +22,17 @@ three Git bundles containing tracked history only; no ISO, extracted assets,
 keys, or proprietary game data were moved. Temporary remote bundles were
 removed after the ref check.
 
-The remaining prerequisite for a Codex handoff is a matching saved
-`acgc-modern-port` project on the M3 Max that appears in Codex's remote project
-list. The remote Codex CLI is authenticated and the source path is trusted in
-its config, but the desktop project entry has not yet been confirmed. Do not
-start a remote lane until that project identity is visible to Codex. Lane 115
+The `acgc-modern-port` project is now visible in the signed-in M3 Max Codex app
+and points at the source-only checkout. Its setup-only verification returned
+the refs above, a clean umbrella ahead of its local `origin/main` by the
+documentation commit, clean PC and decomp checkouts, and matching submodule
+working-tree refs. No edit, build, test, launch, ISO, or asset access occurred.
+
+The cross-host handoff service still reports `No matching saved project was
+found on M3 Max` for the preserved lane, so the app project registry and the
+remote-control handoff registry are not yet converged. Treat that as a hard
+setup blocker: do not run the lane locally as a workaround and do not infer a
+successful handoff from the project being visible in the remote app. Lane 115
 is intentionally preserved and paused at this boundary:
 
 - umbrella worktree: `/Users/jk/.codex/worktrees/3526/acgc-modern-port`
@@ -73,8 +79,9 @@ The saved remote project must provide:
 ## Handoff sequence
 
 1. Register/save the `acgc-modern-port` project on the M3 Max in Codex.
-2. Verify the project appears in Codex's remote project list; do not proceed
-   from a host-only SSH connection without a matching saved project.
+2. Verify the project appears in the remote Codex app **and** that the
+   cross-host handoff service resolves it; do not proceed from a host-only SSH
+   connection or an app-only project entry.
 3. Hand off the preserved lane task and verify its worktree, branch, base refs,
    and empty unique roots before allowing edits.
 4. Run only the lane's declared focused gate. Return the exact evidence to the
