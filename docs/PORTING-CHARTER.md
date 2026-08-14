@@ -97,6 +97,18 @@ pass `3/3` each with no diagnostics. This is a CPU/contract gate only; it does
 not prove a live callback, Metal encode/readback, pixel, device, or playability.
 See [V2 channel-source contract evidence](evidence/V2-CHANNEL-SOURCE-CONTRACT-565F877E-2026-08-14.md).
 
+The separately serialized current-tip runtime gate at `565f877e` then linked
+the arm64 target through `[4018/4019]` and booted the local GAFE01 revision in a
+logged-in GUI LLDB session. It reached LOGO/NEOS and recorded 509 V2 builder
+attempts, but no typed Apple consumer/provider/observer call. The 32 bounded
+rejected draws contained no three-vertex batch: 31 were triangle-list multiples
+of three and one was a quad. The first live predicate is therefore the V2
+builder's exact-three-vertex guard, before the channel-source contract. The
+next gate is a focused, all-or-nothing triangle-list splitter that leaves the
+three-vertex Apple consumer and legacy OpenGL path unchanged. This is boot and
+builder-frontier evidence only; it adds no Metal/pixel/device/playability claim.
+See [current V2 channel runtime evidence](evidence/CURRENT-V2-CHANNEL-RUNTIME-565F877E-2026-08-14.md).
+
 The same `354f33884` snapshot links the full arm64 `ac_pc` target through
 `[4018/4019]`. A normal bounded launch from the current shell stops before
 boot because SDL reports no displays, but a logged-in GUI Terminal launch

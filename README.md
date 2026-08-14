@@ -55,6 +55,15 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   no live callback, Metal encode/readback, pixel, device, or playability claim
   follows. See [V2 channel-source contract evidence](docs/evidence/V2-CHANNEL-SOURCE-CONTRACT-565F877E-2026-08-14.md).
 
+- One serialized current-tip arm64 link and one logged-in GUI LLDB launch at
+  `565f877e` reached GAFE01/COPYDATE, LOGO/NEOS, game-owned GX flush, and 509
+  V2 builder attempts. The typed Apple consumer/provider/observer remained at
+  zero hits. All 32 bounded rejected draw samples had more than three vertices;
+  31 were valid triangle-list multiples and one was a quad, while the current
+  V2 builder accepts exactly three vertices. This proves the next builder
+  frontier, not a packet, Metal work, a pixel, or playability. See
+  [current V2 channel runtime evidence](docs/evidence/CURRENT-V2-CHANNEL-RUNTIME-565F877E-2026-08-14.md).
+
 - The test-only follow-up at `2b141a753` adds focused coverage for the V2 null
   callback guard, non-triangle topology, ordinary emu64 blend state,
   decomp-compatible `GX_SRC_VTX` channel state, and the downstream texture
