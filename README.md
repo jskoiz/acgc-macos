@@ -34,17 +34,17 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `c973dbee` (`Route single triangles through direct V2
-handoff`), on top of the `565f877e` channel-source contract, lane-132 source
-record `80e80df`, the Apple V2
-texture sideband `3c08c7f`, and the reviewed remote binder `08998d0`. The Apple seam now
-synchronously validates the PC-owned per-map image/TLUT metadata, source kind,
-sampler fields, and generation before and after CPU fixture decode, failing
-closed on provider or lifetime errors. Native and combined ASan/UBSan focused
-tests pass `3/3` each with no diagnostics. This is CPU/contract evidence only:
-no live game-owned callback, Metal encode/readback, pixel, device, or
-playability claim follows. See [texture source record evidence](docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md),
-[Apple binder evidence](docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md),
+`c1/macos-host-launch` at `59d13a98` (`Classify V2 base-state rejection
+reasons`), on top of the `c973dbee` grouped-triangle handoff, the `565f877e`
+channel-source contract, lane-132 source record `80e80df`, Apple V2 texture
+sideband `3c08c7f`, and reviewed remote binder `08998d0`. The new bounded
+classifier preserves the original V2 acceptance predicate and names the first
+fail-closed reason without printing addresses. Native and combined ASan/UBSan
+focused CTest pass `2/2` each on the exact integrated snapshot. Source and
+fixture crosswalks classify the ordinary source-alpha tuple as `blend`; that is
+not yet a fresh live observation. No live packet, callback, Metal
+encode/readback, pixel, device, or playability claim follows. See
+[V2 rejection-classifier evidence](docs/evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md)
 and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 
 - The integrated `565f877e` CPU seam adds a fixed-width V2 validator and typed
@@ -82,6 +82,27 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   through `graph_proc` with status 0 and no KILL fallback. This proves the live
   grouped path and its next fail-closed tier, not a packet, Metal work, a pixel,
   natural shutdown, or playability. See [current V2 triangle runtime evidence](docs/evidence/CURRENT-V2-TRIANGLE-RUNTIME-C973DBEE-2026-08-14.md).
+
+- The integrated `59d13a98` follow-up adds an ordered diagnostic classifier for
+  every current V2 base-state rejection tier while leaving the original
+  acceptance predicate authoritative. The exact three-file change and its
+  native plus combined ASan/UBSan `2/2` focused results are recorded in
+  [V2 base-state rejection evidence](docs/evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md).
+  The next serialized local gate must confirm the first live reason and tuple;
+  no callback, Metal operation, pixel, or playability is inferred from the
+  source classification.
+
+- Two read-only M3 Max audits closed the architecture question without source
+  changes. The existing V1/V2/V3/V4 packets are not cumulative, so the planned
+  end state is one deliberately named canonical value-only draw/state ABI plus
+  a separate synchronous borrowed texture-resource sideband. The Apple audit
+  also found a potential status-policy defect: ordinary V2 is source-reachable
+  toward the geometry sink
+  while still marked `V2_EXTENSION_NOT_RENDERED`, whereas provider-backed
+  `CPU_RESOLVED` texture/TEV output is deliberately blocked. These are source
+  reachability and contract decisions, not live callback or Metal proof. See
+  [renderer contract consolidation](docs/evidence/RENDERER-CONTRACT-CONSOLIDATION-C973DBEE-2026-08-14.md)
+  and [Apple sink reachability](docs/evidence/APPLE-SINK-REACHABILITY-C973DBEE-2026-08-14.md).
 
 - The test-only follow-up at `2b141a753` adds focused coverage for the V2 null
   callback guard, non-triangle topology, ordinary emu64 blend state,

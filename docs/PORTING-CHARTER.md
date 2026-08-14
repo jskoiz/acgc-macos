@@ -61,16 +61,17 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `c973dbee`, with
-the V2 triangle-list batch handoff, remote M3 Max lane-132 source record, and
-lane-133 Apple binder integrated
-on top of the V2 texture sideband. The current five-file CPU source record plus
-four-file Apple seam validates borrowed image/TLUT metadata per map, source
-kind, sampler fields, and generation across cache, replacement, fallback,
-stale, TLUT, and destruction paths. Native and combined ASan/UBSan focused
-tests pass `3/3` each on the integrated binder snapshot. This remains
-CPU/contract evidence only: no live callback, Metal encode/readback, pixel,
-device, or playability claim is made.
+As of 2026-08-14, the canonical local PC branch is clean at `59d13a98`, with
+the bounded V2 base-state rejection classifier integrated on top of the
+`c973dbee` triangle-list batch handoff, remote M3 Max lane-132 source record,
+and lane-133 Apple binder. The classifier leaves the original V2 acceptance
+predicate authoritative and names each first fail-closed tier. Native and
+combined ASan/UBSan focused CTest pass `2/2` each on the exact integrated
+snapshot. The source/decomp crosswalk classifies the ordinary source-alpha
+tuple as `blend`, but a fresh serialized runtime trace is still required to
+confirm that live reason and tuple. This remains CPU/source evidence only: no
+live packet, callback, Metal encode/readback, pixel, device, or playability
+claim is made. See [V2 base-state rejection evidence](evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md).
 
 The test-only lane-135 follow-up at `2b141a753` adds rejection coverage for the
 V2 callback guard, fixed triangle topology, ordinary emu64 blend state,
@@ -132,6 +133,19 @@ test-backed rejection-reason classifier for that compound base-state contract,
 not an unconditional predicate relaxation. This remains link/boot/builder-tier
 evidence only, with no packet, Metal, pixel, device, natural-shutdown, or
 playability claim. See [current V2 triangle runtime evidence](evidence/CURRENT-V2-TRIANGLE-RUNTIME-C973DBEE-2026-08-14.md).
+
+The read-only renderer-contract and Apple-sink audits at `c973dbee` found that
+V1/V2/V3/V4 are parallel partial contracts rather than cumulative revisions.
+The chosen architecture is one deliberately named canonical value-only
+draw/state ABI with an independent synchronous borrowed texture-resource
+sideband and one required-section status mask. The Apple source path can reach
+the geometry sink from ordinary V2 even while its extension is marked
+`V2_EXTENSION_NOT_RENDERED`; provider-backed `CPU_RESOLVED` texture/TEV output
+is deliberately stopped before the sink. The first observation is a potential
+status-policy defect from static source crosswalk. This is architecture/source
+reachability evidence, not a live callback, Metal encode/present/readback, or
+pixel result. See [renderer contract consolidation](evidence/RENDERER-CONTRACT-CONSOLIDATION-C973DBEE-2026-08-14.md)
+and [Apple sink reachability](evidence/APPLE-SINK-REACHABILITY-C973DBEE-2026-08-14.md).
 
 The same `354f33884` snapshot links the full arm64 `ac_pc` target through
 `[4018/4019]`. A normal bounded launch from the current shell stops before

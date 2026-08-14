@@ -45,41 +45,48 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`c973dbee` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`59d13a98` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The Codex app still has no matching saved
 remote project for cross-host task handoff, so remote lanes use the verified
 SSH/Codex runner and are registered here by their durable task IDs. Lane 140 ran
 `gpt-5.6-luna` with max reasoning from the exact `565f877e` source-only base
 and is now complete/integrated. Its generated roots are retired; its clean
 source worktree is deliberately preserved because ignored `assets/` and
-`orig/` are present. Lane 141 completed the sole serialized current-tip runtime
+`orig/` are present. Lane 141 completed the sole serialized `c973dbee` runtime
 gate and exposed the initial V2 base-state predicate as the next fail-closed
-tier. Three useful, non-overlapping remote workers are now active: lane 142 is
-the only source-edit lane, while lanes 143 and 144 are read-only crosswalks.
-No full link or LLDB run is active; those gates remain serialized, and remote
-workers may not update the umbrella checkout.
+tier. Lanes 142–144 are now complete: lane 142 is integrated as PC `59d13a98`,
+and lanes 143–144 produced read-only architecture evidence. No worker, full
+link, or LLDB run is active. The next selected gate is one serialized local
+`59d13a98` runtime trace with the opt-in rejection diagnostic; remote workers
+may not update the umbrella checkout.
 
-- Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — active source-edit
-  worker on M3 Max branch `c1/lane-v2-base-rejection-reason-m3`, exact base
-  `c973dbee`, worktree
-  `/private/tmp/acgc-lane-v2-base-rejection-reason-m3`. It exclusively owns
-  `pc/src/pc_gx.c`, one focused V2 rejection-reason fixture, and minimal CMake
-  registration. It must preserve the V2 acceptance predicate while classifying
-  its exact fail-closed reason, then pass focused native and combined
-  ASan/UBSan tests serially. Packet ABI, Apple files, full link, LLDB, ISO,
-  assets, Metal, pixels, and playability are out of scope.
-- Lane 143 / task `01a00212-fc10-78c0-a39a-70de7beb923a` — active read-only
-  renderer-contract crosswalk at detached `c973dbee`, worktree
-  `/private/tmp/acgc-lane-renderer-contract-audit-m3`. It maps V2/V3/V4 fields
-  against decomp GX producers and the Apple consumers to recommend the smallest
-  coherent end-state packet contract. It may not edit, build, launch, inspect
-  assets, or make renderer/device claims.
-- Lane 144 / task `01a00212-f8b5-7c71-9557-1c5208f87e17` — active read-only
-  Apple-sink reachability crosswalk at detached `c973dbee`, worktree
-  `/private/tmp/acgc-lane-apple-sink-audit-m3`. It maps successful V2 output
-  through callback registration, typed preparation, texture-provider binding,
-  runtime observation, and Metal sink submission. It may not edit, build,
-  launch, inspect assets, or claim callback/Metal/pixel/device/playability proof.
+- Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
+  integrated, and archived. M3 Max branch
+  `c1/lane-v2-base-rejection-reason-m3` advanced `c973dbee` to worker
+  `6d5b3c893`; the integration owner cherry-picked the exact three-file change
+  as canonical PC `59d13a98`. The unchanged V2 acceptance predicate remains
+  authoritative while a bounded classifier names the first rejection tier.
+  Remote and exact integrated native plus combined ASan/UBSan focused CTest
+  pass `2/2` each (`detect_leaks=0`, no diagnostics). Source/fixture crosswalk
+  classifies source-alpha state as `blend`, but a fresh live trace is pending.
+  No packet, callback, Metal, pixel, or playability claim follows. Evidence is
+  `docs/evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md`.
+- Lane 143 / task `01a00212-fc10-78c0-a39a-70de7beb923a` — complete and
+  archived with no source change. The read-only `c973dbee`/`09ca8e8b`
+  crosswalk found that V1/V2/V3/V4 are not cumulative and selected a
+  deliberately named canonical value-only draw/state ABI plus a separate
+  borrowed texture-resource sideband. No build, launch, asset access, Metal,
+  pixel, or playability proof occurred. Evidence is
+  `docs/evidence/RENDERER-CONTRACT-CONSOLIDATION-C973DBEE-2026-08-14.md`.
+- Lane 144 / task `01a00212-f8b5-7c71-9557-1c5208f87e17` — complete and
+  archived with no source change. The read-only Apple crosswalk mapped the V2
+  validator, typed consumer, provider, observer, and sink boundaries. Ordinary
+  V2 has a potential status-policy defect: it is source-reachable toward the
+  geometry sink despite
+  `V2_EXTENSION_NOT_RENDERED`; provider-backed `CPU_RESOLVED` texture/TEV
+  output is deliberately blocked. No live callback, build, launch, device,
+  Metal, pixel, or playability proof occurred. Evidence is
+  `docs/evidence/APPLE-SINK-REACHABILITY-C973DBEE-2026-08-14.md`.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
