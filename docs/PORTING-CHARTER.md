@@ -155,12 +155,14 @@ evidence](evidence/CURRENT-V4-REJECTION-TRACE-FBB286D-2026-08-13.md). The
 serialized link and LLDB launch at `46a8ae5` then reached `[LOGO]`/`[NEOS_OUT]`
 and 542 V4 builder attempts, but the V4 consumer, prepare path, and runtime
 observer remained `0`; the diagnostic's 64 records still used the old
-`global_state` label. Commit `adaddfd` aligns that classifier with the relaxed
-predicate, and one follow-up serialized trace is required before naming the
+`global_state` label. The first correction (`adaddfd`) left a duplicated helper
+check; follow-up commit `a53b192` now aligns the classifier with the relaxed
+predicate, and one final serialized trace is required before naming the
 remaining rejection class.
 This remains link/boot/GX evidence only. See [current V4 unrendered-raster
 runtime evidence](evidence/CURRENT-V4-UNRENDERED-RASTER-RUNTIME-46A8AE5-2026-08-13.md)
-and [the diagnostic handoff](evidence/GX-V4-REJECTION-DIAGNOSTIC-ADADDFD-2026-08-13.md).
+and [the diagnostic handoffs](evidence/GX-V4-REJECTION-DIAGNOSTIC-ADADDFD-2026-08-13.md)
+and [the corrected classifier](evidence/GX-V4-REJECTION-DIAGNOSTIC-A53B192-2026-08-13.md).
 The current-tip sanitizer/Windows verification on `f18e7cd` passes the seven
 focused native targets (`7/7`) and the combined ASan/UBSan matrix (`7/7`) with
 no diagnostics. Available `_WIN32`/`-m32` C and static-GBI probes pass, while

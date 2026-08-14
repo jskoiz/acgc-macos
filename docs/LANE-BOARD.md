@@ -113,9 +113,10 @@ The current-tip `46a8ae5` link also reached `[4018/4019]`, `[LOGO]`, and
 `[NEOS_OUT]`; its explicit-return trace counted 542 V4 builder attempts but
 zero V4 consumer/prepare/observer hits. The diagnostic cap remained 64
 `reason=global_state` records because the classifier still used the old
-predicate. Integrated PC `adaddfd` now aligns that classifier with the relaxed
-V4 predicate; one follow-up serialized trace is required before naming the
-remaining rejection class. See
+predicate. The first correction (`adaddfd`) left a duplicated helper check;
+integrated PC `a53b192` now aligns the classifier with the relaxed V4 predicate.
+One final follow-up serialized trace is required before naming the remaining
+rejection class. See
 `docs/evidence/CURRENT-V4-UNRENDERED-RASTER-RUNTIME-46A8AE5-2026-08-13.md`.
 Lane 108's one current-tip link reached `[4018/4019]` and its one unprivileged
 LLDB launch created a real inferior, reached boot/graph/GX, and recorded

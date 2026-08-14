@@ -1,13 +1,13 @@
-# V4 rejection diagnostic alignment at `adaddfd`
+# V4 rejection diagnostic attempt at `adaddfd`
 
 ## Result
 
-The V4 rejection classifier now matches the V4 builder predicate introduced at
-`46a8ae5`: alpha-test, depth, and cull state are intentionally not encoded by
-the current V4 packet and therefore are no longer reported as rejection
-reasons. The strict color-write gate remains. This is a diagnostic-only
-change; it does not alter packet layout, callback dispatch, or renderer
-behavior.
+The `adaddfd` source change removed the relaxed alpha-test, depth, and cull
+checks from the V4 builder's common predicate and added an alignment comment to
+the diagnostic helper. The helper itself still retained those checks. The
+subsequent current-tip runtime exposed that mismatch because all records were
+still labeled `global_state`; the complete helper correction is the separate
+`a53b192` follow-up.
 
 No live callback, Metal encode/present, pixel readback, input, audio,
 save/reload, device, simulator, or playability claim follows from this commit.
@@ -45,7 +45,7 @@ redefinition.
 
 ## Next gate
 
-One serialized current-tip arm64 `ac_pc` link and one bounded explicit-return
-LLDB launch at `adaddfd` are required to classify the live V4 rejection. The
-result must remain separate from callback, Metal device encode/readback, pixel,
-input, audio, save/reload, simulator/device, and playability gates.
+The one current-tip `adaddfd` link/LLDB attempt is recorded separately; it
+reached live V4 builder calls but demonstrated that this helper still emitted
+the old `global_state` label. The next exact-tip trace is authorized only after
+the `a53b192` correction is integrated.
