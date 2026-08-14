@@ -191,9 +191,9 @@ active. Remote workers may not update the umbrella checkout.
   fixture contract. It may not edit, build, launch, or claim live Metal or a
   rendered frame.
 - Lane 155 / task `01a00276-84d7-7d83-81e6-28aec4c163d3` — complete,
-  integrated, and archive-ready. Branch `c1/lane-input-trigger-parity-m3` and
-  worktree
-  `/private/tmp/acgc-lane-input-trigger-parity` start at exact PC
+  integrated, archived, and cleaned. Preserved branch
+  `c1/lane-input-trigger-parity-m3` and retired worktree
+  `/private/tmp/acgc-lane-input-trigger-parity` started at exact PC
   `5157ac1cb`; decomp is `09ca8e8b`. It owns only `pc/src/pc_pad.c`, the SDL
   input smoke fixture, and minimal CMake registration if required. Its gate is
   restoring decomp-compatible digital L/R semantics for nonzero normalized
@@ -204,7 +204,9 @@ active. Remote workers may not update the umbrella checkout.
   plus combined ASan/UBSan focused CTest pass `1/1` each; the `_WIN32` host
   probe remains blocked by missing `process.h`. Evidence is
   `docs/evidence/INPUT-TRIGGER-PARITY-AFB1CAC3C-2026-08-14.md`. No physical
-  input, full link, LLDB, device, or playability claim follows.
+  input, full link, LLDB, device, or playability claim follows. Remote and
+  local generated verification/transfer roots were holder-free and are absent;
+  the branch, commits, source integration, and evidence remain preserved.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
