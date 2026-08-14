@@ -149,8 +149,9 @@ builder entries, while no V3 consumer or Apple runtime-observer hit. Lane 104's
 source-backed reason is `g_gx.alpha_update_enable == 0`; the focused
 builder-to-consumer fixture and Apple boundary audit are complete. Lane 109 is
 also complete/integrated/archived with the V4 alpha-state contract and focused
-native/ASan/UBSan `5/5` results. No worker is active; full links and LLDB
-launches remain serialized.
+native/ASan/UBSan `5/5` results. Lane 110 is the sole active crosswalk/source
+lane for the V4 Apple consumer validation seam; no other worker is active and
+full links and LLDB launches remain serialized.
 The graph-capture, GX-to-Metal, save-manager, post-link runtime,
 live-target-resolver, and current-tip trace history remains recorded below.
 Lane 64 is complete/archived with a separate pre-launch LLDB
