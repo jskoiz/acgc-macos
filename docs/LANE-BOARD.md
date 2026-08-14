@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`62ef6638d` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`4dbb71065` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -64,10 +64,13 @@ crosswalks. Lanes 149 and 150 are complete and integrated as PC `820906439`
 and `5157ac1cb`; lane 151 completed the read-only cumulative fog contract.
 Lanes 152 and 155 are complete and integrated as PC `b5f550ea0` and
 `afb1cac3c`; lanes 153 and 154 completed the read-only cumulative-schema and
-Apple consumer/encoder audits. Lane 157 is complete and integrated; lanes 156
-and 158–160 remain the current dependency-ready M3 Max batch: one source lane,
-two read-only crosswalks, and one focused verification matrix. No full link or
-LLDB run is active. Remote workers may not update the umbrella checkout.
+Apple consumer/encoder audits. Lane 157 is complete and integrated. Lane 156
+is integrated as PC `4dbb71065`, and lane 158 completed its read-only producer
+audit. Lane 159 has completed the read-only Blend/logic contract; lane 160 is
+the remaining focused verification matrix. The exact 16-byte Blend/logic
+source slice is now dependency-ready once the current envelope integration is
+recorded. No full link or LLDB run is active. Remote workers may not update the
+umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -230,18 +233,17 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   input, full link, LLDB, device, or playability claim follows. Remote and
   local generated verification/transfer roots were holder-free and are absent;
   the branch, commits, source integration, and evidence remain preserved.
-- Lane 156 / task `01a00297-d958-7e93-be9a-6d3949f789c7` — active M3 Max
-  source-edit lane. Explicit PC branch `c1/lane-canonical-envelope-m3` and
-  worktree `/private/tmp/acgc-lane-canonical-envelope` are clean at exact PC
-  `b5f550ea0`; decomp is `09ca8e8b`. It exclusively owns the renderer-neutral
-  canonical-state header/source, one new portable envelope fixture, and minimal
-  portable CMake registration. Its gate is a strict fixed-width 14-section
-  metadata directory around the existing 80-byte fog section, with dynamic
-  payload size and fail-closed ID/version/mask/alignment/range/overlap/reserved
-  validation. Native, combined ASan/UBSan, and bounded ABI/syntax probes use
-  only `/private/tmp/acgc-lane-canonical-envelope-{native,asan,win}`. `pc_gx`,
-  Apple code, V1–V4 ABI, full link, LLDB, assets, Metal, pixels, and playability
-  are out of scope.
+- Lane 156 / task `01a00297-d958-7e93-be9a-6d3949f789c7` — complete,
+  integrated, and cleanup-pending. Remote branch
+  `c1/lane-canonical-envelope-m3` advanced exact PC `b5f550ea0` to worker
+  `18ef2fcbb`; the integration owner cherry-picked its exact four-file change
+  as canonical PC `4dbb71065`. It adds the 48-byte header, fourteen ordered
+  32-byte directory entries, dynamic aligned payload extent, and fail-closed
+  metadata validator around the 80-byte fog section. Remote and exact
+  integrated native plus combined ASan/UBSan focused CTest pass `2/2` each
+  (`detect_leaks=0`, no diagnostics); bounded ABI/syntax probes pass. Evidence
+  is `docs/evidence/CANONICAL-GX-ENVELOPE-4DBB71065-2026-08-14.md`. No live
+  producer, callback, Metal, pixel, device, or playability claim follows.
 - Lane 157 / task `01a00297-d95c-7742-8feb-a275b16b4b88` — complete,
   integrated, archived, and cleaned. Preserved remote branch
   `c1/lane-v4-sink-failclosed-m3` advanced exact PC `b5f550ea0` to worker
@@ -257,24 +259,25 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   prompt/event/final artifacts, transfer bundle, and local integration roots
   were holder-free and are absent; worker/canonical branches, commits, and
   evidence remain preserved.
-- Lane 158 / task `01a00297-d958-73f2-a850-d79a18e5f763` — active read-only
-  M3 Max crosswalk. Detached PC worktree
-  `/private/tmp/acgc-lane-canonical-snapshot-audit` is exact `b5f550ea0` and
-  decomp is `09ca8e8b`. It owns the future canonical snapshot-producer boundary
-  at `pc_gx_flush_vertices`: capture timing, available/missing values, vertex
-  lifetime, texture/TLUT owned sideband identity/generation, threading, and the
-  focused fixture/ownership map. It may not edit, branch, build, launch, access
-  assets, or claim callback, Metal, pixel, or playability proof.
-- Lane 159 / task `01a0029d-475b-7971-aead-39fe8fc4bc8e` — active read-only
-  M3 Max contract audit. Detached PC worktree
-  `/private/tmp/acgc-lane-blend-logic-contract-audit` is exact `b5f550ea0` and
-  decomp is `09ca8e8b`. It owns the fixed-width canonical Blend/logic section
-  contract at mask `0x0080`, including the boundary with Alpha mask `0x0100`,
-  exact enum/field/offset/alignment/reserved rules, inactive semantics,
-  accepted/rejected fixtures, and future non-overlapping source ownership. It
-  may not edit, branch, build, launch, access assets, or claim callback, Metal,
-  pixel, or playability proof. Success prepares the next source slice after
-  lane 156 releases canonical header/source ownership.
+- Lane 158 / task `01a00297-d958-73f2-a850-d79a18e5f763` — complete and
+  cleanup-pending, read-only at exact PC `b5f550ea0` and decomp `09ca8e8b`.
+  It selects the committed-vertex boundary at the top of
+  `pc_gx_flush_vertices()` before legacy handoffs or GL mutation, defines
+  synchronous owned texture/TLUT generation rules, and records the missing
+  shadow state that still blocks a truthful producer. Evidence is
+  `docs/evidence/CANONICAL-SNAPSHOT-PRODUCER-AUDIT-B5F550EA0-2026-08-14.md`.
+  No edit, build, launch, asset access, callback, Metal, pixel, or playability
+  proof occurred.
+- Lane 159 / task `01a0029d-475b-7971-aead-39fe8fc4bc8e` — complete and
+  cleanup-pending, read-only at exact PC `b5f550ea0` and decomp `09ca8e8b`.
+  It selects the exact reusable V3 four-word Blend/logic record: version 1,
+  16 bytes, four-byte aligned, count/capacity 1, modes `0..3`, factors `0..7`,
+  and logic operations `0..15`, with no reserved tail or mode-dependent
+  normalization. Alpha/update remains `0x0100`; dither/destination alpha remain
+  Raster `0x0400`. Evidence is
+  `docs/evidence/CANONICAL-BLEND-LOGIC-CONTRACT-B5F550EA0-2026-08-14.md`. No
+  edit, build, launch, asset access, callback, Metal, pixel, or playability
+  proof occurred.
 - Lane 160 / task `01a0029d-475c-7a31-a6f9-708e60cb4201` — active M3 Max
   verification-only lane. Detached PC worktree
   `/private/tmp/acgc-lane-current-matrix-b5f550` is exact `b5f550ea0` and uses

@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `62ef6638d`, with
-the legacy V4 sink now fail-closed on top of the standalone canonical fog value
+As of 2026-08-14, the canonical local PC branch is clean at `4dbb71065`, with
+the strict canonical GX envelope validator on top of the legacy V4 sink guard
+and standalone canonical fog value
 section, focused input trigger-parity correction, and the
 `5157ac1cb` Apple V2 sink-status guard and the `820906439` V2-local
 alpha-reference normalization and the
@@ -125,11 +126,23 @@ not a rendering contract because it does not encode all live GX state. See
 [Apple canonical consumer audit](evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md).
 
 The cumulative GX crosswalk selects a strict 14-section canonical envelope and
-rejects a V5 bridge. The full byte size is not frozen: each neutral section
-must first have an exact tested ABI. The next source gate is the envelope
-header/directory validator around the existing fog section, followed by the
-reusable blend/logic section. See
-[canonical GX schema crosswalk](evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md).
+rejects a V5 bridge. Integrated `4dbb71065` adds the fixed header/directory,
+dynamic aligned payload extent, and fail-closed metadata validator around the
+existing fog section; exact integrated native and combined ASan/UBSan focused
+CTest pass `2/2` each. The full byte size is not frozen: each neutral section
+must first have an exact tested ABI. The completed two-upstream Blend/logic
+audit selects the reusable 16-byte V3 four-word record without importing
+Alpha/update or Raster fields; that exact portable value section is the next
+source gate. See [canonical GX schema crosswalk](evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md),
+[canonical envelope evidence](evidence/CANONICAL-GX-ENVELOPE-4DBB71065-2026-08-14.md),
+and [Blend/logic contract](evidence/CANONICAL-BLEND-LOGIC-CONTRACT-B5F550EA0-2026-08-14.md).
+
+The read-only producer audit selects the top of `pc_gx_flush_vertices()` after
+the committed-vertex count check and before legacy packet handoffs, shader
+selection, or GL mutation. It also keeps implementation gated on raw projection,
+signed S10, fog-range, raster/depth, VCD/VAT, TEV-capacity, and owned
+texture/TLUT state. See
+[snapshot producer audit](evidence/CANONICAL-SNAPSHOT-PRODUCER-AUDIT-B5F550EA0-2026-08-14.md).
 
 Three read-only M3 Max follow-ups now classify both cohorts and the independent
 Apple status policy. The alpha references are dead only for the exact

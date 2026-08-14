@@ -34,8 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `62ef6638d` (`Fail closed legacy V4 Apple sink
-eligibility`), on top of `b5f550ea0` (`Add canonical GX fog state`),
+`c1/macos-host-launch` at `4dbb71065` (`Add strict canonical GX envelope
+validator`), on top of `62ef6638d` (`Fail closed legacy V4 Apple sink
+eligibility`), `b5f550ea0` (`Add canonical GX fog state`),
 `afb1cac3c` (`Restore analog trigger digital parity`), `5157ac1cb` (`Reject
 incomplete V2 packets before Metal sink`), and `820906439` (`Normalize dead V2
 alpha references`),
@@ -95,11 +96,24 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [Apple canonical consumer audit](docs/evidence/APPLE-CANONICAL-CONSUMER-AUDIT-5157AC1CB-2026-08-14.md).
 
 - The completed cumulative GX schema crosswalk rejects a V5 bridge and maps
-  the two upstreams into a strict 14-section envelope. Only the standalone fog
-  section is implemented today; total packet size, live producer, and Apple
-  CPU plan remain open. The next bounded source gate is the envelope
-  header/directory validator, followed by the reusable blend/logic section.
-  See [canonical GX schema crosswalk](docs/evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md).
+  the two upstreams into a strict 14-section envelope. Integrated `4dbb71065`
+  now supplies its fixed 48-byte header, ordered directory, dynamic aligned
+  payload extent, and fail-closed metadata validator around the existing fog
+  section. Exact integrated native and combined ASan/UBSan focused CTest pass
+  `2/2` each. Total packet size, live producer, and Apple CPU plan remain open.
+  A completed two-upstream audit fixes Blend/logic as the reusable 16-byte V3
+  four-word value record and keeps Alpha/update and Raster state separate;
+  that exact portable section is the next source slice. See
+  [canonical GX schema crosswalk](docs/evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md)
+  [canonical envelope evidence](docs/evidence/CANONICAL-GX-ENVELOPE-4DBB71065-2026-08-14.md),
+  and [Blend/logic contract](docs/evidence/CANONICAL-BLEND-LOGIC-CONTRACT-B5F550EA0-2026-08-14.md).
+
+- The read-only snapshot-producer audit selects the committed-vertex boundary
+  at the top of `pc_gx_flush_vertices()`, before legacy handoffs, TEV variant
+  selection, or OpenGL mutation. It also proves the producer must remain gated:
+  raw projection, exact S10, fog-range, raster/depth, VCD/VAT, TEV-capacity,
+  and owned texture/TLUT state are incomplete. See
+  [snapshot producer audit](docs/evidence/CANONICAL-SNAPSHOT-PRODUCER-AUDIT-B5F550EA0-2026-08-14.md).
 
 - The integrated `afb1cac3c` input correction makes axis-bound L/R digital
   state follow the same nonzero normalized analog value that reaches
