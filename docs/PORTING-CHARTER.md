@@ -61,7 +61,7 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `2b141a753`, with
+As of 2026-08-14, the canonical local PC branch is clean at `565f877e`, with
 the remote M3 Max lane-132 source record and lane-133 Apple binder integrated
 on top of the V2 texture sideband. The current five-file CPU source record plus
 four-file Apple seam validates borrowed image/TLUT metadata per map, source
@@ -87,6 +87,15 @@ runtime observer remained unobserved. This is live builder-rejection and boot
 progress evidence only, with no Metal encode/present/readback, pixel, input,
 audio, save, device, simulator, or playability claim. See [current V2 rejection
 runtime evidence](evidence/CURRENT-V2-REJECTION-RUNTIME-2B141A753-2026-08-14.md).
+
+The integrated `565f877e` V2 channel-source contract keeps the fixed-width ABI
+unchanged while validating the decomp-compatible disabled `GX_SRC_REG` /
+`GX_SRC_VTX` forms before the typed Apple consumer. Unsupported or malformed
+state fails closed, V1 remains separate, and vertex-source V2 remains
+`V2_EXTENSION_NOT_RENDERED`. Native and combined ASan/UBSan focused CTest
+pass `3/3` each with no diagnostics. This is a CPU/contract gate only; it does
+not prove a live callback, Metal encode/readback, pixel, device, or playability.
+See [V2 channel-source contract evidence](evidence/V2-CHANNEL-SOURCE-CONTRACT-565F877E-2026-08-14.md).
 
 The same `354f33884` snapshot links the full arm64 `ac_pc` target through
 `[4018/4019]`. A normal bounded launch from the current shell stops before

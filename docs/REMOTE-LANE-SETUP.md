@@ -22,18 +22,22 @@ three Git bundles containing tracked history only; no ISO, extracted assets,
 keys, or proprietary game data were moved. Temporary remote bundles were
 removed after the ref check.
 
-The `acgc-modern-port` project is now visible in the signed-in M3 Max Codex app
-and points at the source-only checkout. Its setup-only verification returned
-the refs above, a clean umbrella ahead of its local `origin/main` by the
+The `acgc-modern-port` project is visible in the signed-in M3 Max Codex app and
+points at the source-only checkout. Its setup-only verification returned the
+refs above, a clean umbrella ahead of its local `origin/main` by the
 documentation commit, clean PC and decomp checkouts, and matching submodule
-working-tree refs. No edit, build, test, launch, ISO, or asset access occurred.
+working-tree refs. No ISO or asset access occurred during setup.
 
 The cross-host handoff service still reports `No matching saved project was
 found on M3 Max` for the preserved lane, so the app project registry and the
 remote-control handoff registry are not yet converged. Treat that as a hard
 setup blocker: do not run the lane locally as a workaround and do not infer a
-successful handoff from the project being visible in the remote app. Lane 115
-is intentionally preserved and paused at this boundary:
+successful handoff from the project being visible in the remote app. Focused
+source/test/audit work can still run through the verified SSH Codex CLI with an
+explicit Luna Max/max session contract; lane 138 used that path and was
+integrated locally at PC `565f877e`. This is an execution-path workaround, not
+permission to move game data. Lane 115 remains intentionally preserved and
+paused at this boundary:
 
 - umbrella worktree: `/Users/jk/.codex/worktrees/3526/acgc-modern-port`
 - PC worktree: `/private/tmp/acgc-lane-gx-v4-channel-diagnostic-3526`

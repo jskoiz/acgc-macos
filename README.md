@@ -34,8 +34,8 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `2b141a753` (`Add V2 handoff rejection fixture
-coverage`), on top of the lane-132 source record `80e80df`, the Apple V2
+`c1/macos-host-launch` at `565f877e` (`Define V2 disabled channel-source
+contract`), on top of the lane-132 source record `80e80df`, the Apple V2
 texture sideband `3c08c7f`, and the reviewed remote binder `08998d0`. The Apple seam now
 synchronously validates the PC-owned per-map image/TLUT metadata, source kind,
 sampler fields, and generation before and after CPU fixture decode, failing
@@ -45,6 +45,15 @@ no live game-owned callback, Metal encode/readback, pixel, device, or
 playability claim follows. See [texture source record evidence](docs/evidence/GAME-TEXTURE-SOURCE-RECORD-D52C6A0F-2026-08-14.md),
 [Apple binder evidence](docs/evidence/APPLE-V2-TEXTURE-SOURCE-BINDER-08998D0-2026-08-14.md),
 and the [lane board](docs/LANE-BOARD.md) for exact provenance.
+
+- The integrated `565f877e` CPU seam adds a fixed-width V2 validator and typed
+  Apple consumer contract for decomp-compatible disabled `GX_SRC_REG` /
+  `GX_SRC_VTX` channel state. Unsupported or malformed state still fails
+  closed, V1 remains unchanged, and vertex-source V2 remains
+  `V2_EXTENSION_NOT_RENDERED`. Native and combined ASan/UBSan focused CTest
+  pass `3/3` each with no diagnostics. This is CPU/contract evidence only:
+  no live callback, Metal encode/readback, pixel, device, or playability claim
+  follows. See [V2 channel-source contract evidence](docs/evidence/V2-CHANNEL-SOURCE-CONTRACT-565F877E-2026-08-14.md).
 
 - The test-only follow-up at `2b141a753` adds focused coverage for the V2 null
   callback guard, non-triangle topology, ordinary emu64 blend state,
