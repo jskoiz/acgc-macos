@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `820906439`, with
-the V2-local alpha-reference normalization integrated on top of the
+As of 2026-08-14, the canonical local PC branch is clean at `5157ac1cb`, with
+the Apple V2 sink-status guard integrated on top of the `820906439` V2-local
+alpha-reference normalization and the
 `59d13a98` bounded base-state rejection classifier and the
 `c973dbee` triangle-list batch handoff, remote M3 Max lane-132 source record,
 and lane-133 Apple binder. The classifier leaves the original V2 acceptance
@@ -85,6 +86,19 @@ pass `1/1`. Nonzero refs are ignored only for the reviewed
 active comparisons and unsupported operators still fail closed, and the live
 tuple advances to `blend`. See
 [V2 alpha-reference normalization](evidence/V2-ALPHA-REFERENCE-NORMALIZATION-820906439-2026-08-14.md).
+
+The exact remote Apple policy commit `a4d90512c` is integrated as
+`5157ac1cb`. V1 and the bounded V4 path remain eligible, while ordinary and
+provider-backed V2, V3, malformed, unknown, null, and non-`OK` outputs fail
+closed before the geometry-only sink. Remote and exact integrated native plus
+combined ASan/UBSan focused CTest pass `1/1`; a production syntax compile
+passes. See [Apple V2 sink guard](evidence/APPLE-V2-SINK-GUARD-5157AC1CB-2026-08-14.md).
+
+The canonical fog audit keeps V1-V4 frozen and defines an end-state reusable
+80-byte value-only fog section, explicit state-mask semantics, and separate
+borrowed resource ownership for eventual cumulative packet composition. This
+is architecture evidence only. See
+[canonical fog-state contract](evidence/CANONICAL-FOG-STATE-CONTRACT-59D13A98-2026-08-14.md).
 
 Three read-only M3 Max follow-ups now classify both cohorts and the independent
 Apple status policy. The alpha references are dead only for the exact

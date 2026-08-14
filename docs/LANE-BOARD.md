@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`820906439` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`5157ac1cb` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The Codex app still has no matching saved
 remote project for cross-host task handoff, so remote lanes use the verified
 SSH/Codex runner and are registered here by their durable task IDs. Lane 140 ran
@@ -58,11 +58,11 @@ tier. Lanes 142–144 are complete: lane 142 is integrated as PC `59d13a98`,
 and lanes 143–144 produced read-only architecture evidence. Root-owned lane
 145 has also completed its one serialized `59d13a98` link/LLDB trace. Lanes
 146–148 completed the read-only alpha, fog/global-count, and Apple status-policy
-crosswalks. Lane 149 is complete and integrated as PC `820906439`. Two Luna
-Max/max workers remain active on the M3 Max: lane 150 owns the focused Apple
-CPU policy fix, while lane 151 specifies the
-canonical cumulative fog contract read-only. No full link or LLDB run is
-active; remote workers may not update the umbrella checkout.
+crosswalks. Lanes 149 and 150 are complete and integrated as PC `820906439`
+and `5157ac1cb`; lane 151 completed the read-only cumulative fog contract.
+No worker, full link, or LLDB run is active while the integration owner selects
+the next non-overlapping schema/Apple-design batch. Remote workers may not
+update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -150,19 +150,22 @@ active; remote workers may not update the umbrella checkout.
   focused CTest pass `1/1` each (`detect_leaks=0`, no diagnostics). Evidence is
   `docs/evidence/V2-ALPHA-REFERENCE-NORMALIZATION-820906439-2026-08-14.md`.
   No full-link, LLDB, callback, Metal, pixel, or playability claim follows.
-- Lane 150 / task `01a0025c-9d0d-71d3-9be3-7b01da10cfa2` — active source-edit
-  M3 Max lane. Branch `c1/lane-v2-sink-policy-m3`, worktree
-  `/private/tmp/acgc-lane-v2-sink-policy`, exact base `59d13a98`. It owns only
-  `pc/apple/src/pc_metal_runtime.c` and the focused V2 runtime-sideband test,
-  failing closed for `V2_EXTENSION_NOT_RENDERED` while preserving V1. It must
-  pass native plus combined ASan/UBSan focused tests, commit, and stop. No
-  `pc_gx`, packet ABI, consumer/sink production edit, full-link, LLDB, Metal,
-  pixel, or playability scope.
-- Lane 151 / task `01a0025c-b5aa-7c73-9002-64ee26c07776` — active read-only M3
-  Max contract lane at PC `59d13a98` and decomp `09ca8e8b`. It owns the exact
-  cumulative fog fields, validation, ABI/alignment, state mask, sideband and
-  builder/consumer fixture plan. No source/docs edit, build, test, launch,
-  asset access, callback, Metal, pixel, or playability scope.
+- Lane 150 / task `01a0025c-9d0d-71d3-9be3-7b01da10cfa2` — complete,
+  integrated, and archived. Remote branch `c1/lane-v2-sink-policy-m3`
+  advanced `59d13a98` to `a4d90512c`; the integration owner cherry-picked it
+  after lane 149 as canonical PC `5157ac1cb`. Exactly the Apple CMake target,
+  runtime policy, and V2 runtime-sideband fixture changed. Remote and exact
+  integrated native plus combined ASan/UBSan CTest pass `1/1`; production
+  syntax compile passes. Evidence is
+  `docs/evidence/APPLE-V2-SINK-GUARD-5157AC1CB-2026-08-14.md`. No full-link,
+  callback, Metal, pixel, or playability claim follows.
+- Lane 151 / task `01a0025c-b5aa-7c73-9002-64ee26c07776` — complete and
+  archived read-only. It specified the 80-byte canonical fog value section,
+  validation, mask, sideband, ABI/alignment target, ownership split, and CPU
+  fixture/device proof boundary. Evidence is
+  `docs/evidence/CANONICAL-FOG-STATE-CONTRACT-59D13A98-2026-08-14.md`. No
+  source/docs edit, build, test, launch, asset access, callback, Metal, pixel,
+  or playability claim occurred in the worker.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the

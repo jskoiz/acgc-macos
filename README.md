@@ -34,7 +34,8 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `820906439` (`Normalize dead V2 alpha references`),
+`c1/macos-host-launch` at `5157ac1cb` (`Reject incomplete V2 packets before
+Metal sink`), on top of `820906439` (`Normalize dead V2 alpha references`),
 on top of the `59d13a98` rejection classifier, the `c973dbee` grouped-triangle handoff, the `565f877e`
 channel-source contract, lane-132 source record `80e80df`, Apple V2 texture
 sideband `3c08c7f`, and reviewed remote binder `08998d0`. The new bounded
@@ -61,6 +62,21 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   predicate evidence only, not a live packet, callback, Metal operation,
   pixel, or playability result. See
   [V2 alpha-reference normalization](docs/evidence/V2-ALPHA-REFERENCE-NORMALIZATION-820906439-2026-08-14.md).
+
+- The integrated `5157ac1cb` Apple guard preserves V1 and the bounded V4 sink
+  path while rejecting ordinary `V2_EXTENSION_NOT_RENDERED`, provider-backed
+  `V2_EXTENSION_CPU_RESOLVED`, V3, unknown, malformed, null, and non-`OK`
+  outputs before the geometry-only sink. Remote and exact integrated native
+  plus combined ASan/UBSan focused CTest each pass `1/1`; a production syntax
+  compile also passes. This is CPU policy evidence, not a live callback,
+  Metal operation, pixel, or playability result. See
+  [Apple V2 sink guard](docs/evidence/APPLE-V2-SINK-GUARD-5157AC1CB-2026-08-14.md).
+
+- The read-only fog contract audit keeps V1-V4 unchanged and specifies an
+  80-byte value-only fog section for the eventual cumulative canonical packet.
+  V2 remains fail-closed for fog, and the borrowed texture/TLUT resource
+  sideband remains separate. See
+  [canonical fog-state contract](docs/evidence/CANONICAL-FOG-STATE-CONTRACT-59D13A98-2026-08-14.md).
 
 - The integrated `565f877e` CPU seam adds a fixed-width V2 validator and typed
   Apple consumer contract for decomp-compatible disabled `GX_SRC_REG` /
