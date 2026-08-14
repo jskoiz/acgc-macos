@@ -115,6 +115,14 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   and owned texture/TLUT state are incomplete. See
   [snapshot producer audit](docs/evidence/CANONICAL-SNAPSHOT-PRODUCER-AUDIT-B5F550EA0-2026-08-14.md).
 
+- The broad focused baseline at `b5f550ea0` passes native `44` with three
+  declared Metal-device skips and combined ASan/UBSan `44` with the same three
+  skips; bounded Windows host probes pass `4` and are environment/toolchain
+  blocked at `5`. The exact post-envelope/sink delta at `4dbb71065` then passes
+  native `3/3` and combined ASan/UBSan `3/3`. This is focused CPU/build
+  evidence, not Metal-device, Windows-runtime, or playability proof. See
+  [focused matrix evidence](docs/evidence/CURRENT-FOCUSED-MATRIX-B5F550EA0-2026-08-14.md).
+
 - The integrated `afb1cac3c` input correction makes axis-bound L/R digital
   state follow the same nonzero normalized analog value that reaches
   `PADStatus`, matching the decomp game-input boundary while preserving

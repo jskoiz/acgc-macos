@@ -144,6 +144,14 @@ signed S10, fog-range, raster/depth, VCD/VAT, TEV-capacity, and owned
 texture/TLUT state. See
 [snapshot producer audit](evidence/CANONICAL-SNAPSHOT-PRODUCER-AUDIT-B5F550EA0-2026-08-14.md).
 
+The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
+with three declared Metal-device skips in each configuration. Bounded Windows
+host probes pass `4` and are blocked at `5` by Apple libc++ locale emulation,
+missing `<process.h>`, and absent i686 sysroots/toolchains. The exact
+post-envelope/sink delta at `4dbb71065` passes native and combined ASan/UBSan
+`3/3`. This is CPU/build evidence only. See
+[focused matrix evidence](evidence/CURRENT-FOCUSED-MATRIX-B5F550EA0-2026-08-14.md).
+
 Three read-only M3 Max follow-ups now classify both cohorts and the independent
 Apple status policy. The alpha references are dead only for the exact
 `GX_ALWAYS/GX_ALWAYS` plus `GX_AOP_AND` form and may be ignored locally by V2;
