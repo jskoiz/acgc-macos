@@ -40,11 +40,14 @@ channel-source contract, lane-132 source record `80e80df`, Apple V2 texture
 sideband `3c08c7f`, and reviewed remote binder `08998d0`. The new bounded
 classifier preserves the original V2 acceptance predicate and names the first
 fail-closed reason without printing addresses. Native and combined ASan/UBSan
-focused CTest pass `2/2` each on the exact integrated snapshot. Source and
-fixture crosswalks classify the ordinary source-alpha tuple as `blend`; that is
-not yet a fresh live observation. No live packet, callback, Metal
+focused CTest pass `2/2` each on the exact integrated snapshot. The subsequent
+single current-tip runtime falsified the source-only `blend` prediction: its
+first capped live reason is `alpha_test` with `GX_ALWAYS/GX_ALWAYS` and
+nonzero reference bytes, followed by a distinct `global_count` cohort. No live
+packet, callback, Metal
 encode/readback, pixel, device, or playability claim follows. See
-[V2 rejection-classifier evidence](docs/evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md)
+[V2 rejection-classifier evidence](docs/evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md),
+[current V2 rejection runtime evidence](docs/evidence/CURRENT-V2-REJECTION-RUNTIME-59D13A98-2026-08-14.md),
 and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 
 - The integrated `565f877e` CPU seam adds a fixed-width V2 validator and typed
@@ -88,9 +91,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   acceptance predicate authoritative. The exact three-file change and its
   native plus combined ASan/UBSan `2/2` focused results are recorded in
   [V2 base-state rejection evidence](docs/evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md).
-  The next serialized local gate must confirm the first live reason and tuple;
-  no callback, Metal operation, pixel, or playability is inferred from the
-  source classification.
+  One serialized local link/trace then recorded 3,529 grouped/internal builder
+  entries. Its 64 diagnostic records contain 18 paired `alpha_test` attempts
+  followed by 14 paired `global_count` attempts; packet init/validation and all
+  Apple consumer/provider/observer counts remain zero. The exact PID needed
+  TERM and KILL after the supervisor missed LLDB's buffered launch line. This
+  is live predicate evidence, not a callback, clean shutdown, Metal operation,
+  pixel, or playability result. See [the current runtime evidence](docs/evidence/CURRENT-V2-REJECTION-RUNTIME-59D13A98-2026-08-14.md).
 
 - Two read-only M3 Max audits closed the architecture question without source
   changes. The existing V1/V2/V3/V4 packets are not cumulative, so the planned

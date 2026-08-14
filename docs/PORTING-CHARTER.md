@@ -67,11 +67,15 @@ the bounded V2 base-state rejection classifier integrated on top of the
 and lane-133 Apple binder. The classifier leaves the original V2 acceptance
 predicate authoritative and names each first fail-closed tier. Native and
 combined ASan/UBSan focused CTest pass `2/2` each on the exact integrated
-snapshot. The source/decomp crosswalk classifies the ordinary source-alpha
-tuple as `blend`, but a fresh serialized runtime trace is still required to
-confirm that live reason and tuple. This remains CPU/source evidence only: no
-live packet, callback, Metal encode/readback, pixel, device, or playability
-claim is made. See [V2 base-state rejection evidence](evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md).
+snapshot. A single serialized current-tip link/trace then disproved the
+source-only `blend` prediction: the first capped live reason is `alpha_test`
+with both comparisons `GX_ALWAYS` but nonzero reference bytes, followed by a
+distinct two-texgen/two-TEV/nonzero-fog `global_count` cohort. Packet
+initialization/validation and all Apple consumer/provider/observer counts stay
+at zero. This remains predicate/runtime evidence only: no live packet,
+callback, Metal encode/readback, pixel, device, or playability claim is made.
+See [V2 base-state rejection evidence](evidence/V2-BASE-REJECTION-CLASSIFIER-59D13A98-2026-08-14.md)
+and [current runtime evidence](evidence/CURRENT-V2-REJECTION-RUNTIME-59D13A98-2026-08-14.md).
 
 The test-only lane-135 follow-up at `2b141a753` adds rejection coverage for the
 V2 callback guard, fixed triangle topology, ordinary emu64 blend state,
