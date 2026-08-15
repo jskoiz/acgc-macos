@@ -203,6 +203,15 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [canonical Depth implementation](docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md),
   and [PC raw Depth shadow](docs/evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md).
 
+- The canonical setter-order audit fixes the future capture invariant at
+  `pc_gx_flush_vertices`: a completed old batch must flush before any
+  producer-visible raw/effective state mutation. The repaired Texgen/SU worker
+  applies that rule to its seven setters; `GXEnableTexOffsets` remains
+  Raster-owned. On canonical `251a010b8`, `GXSetZMode` is the next narrow
+  current defect because it stores raw Depth before flushing. Raster, Indirect,
+  and resource-generation ordering remain separate later owners. See
+  [canonical setter-order evidence](docs/evidence/CANONICAL-SETTER-ORDER-251A010B8-2026-08-14.md).
+
 - The read-only Channels/Lighting audit freezes `0x0004` as a 136-byte paired
   channel section and `0x0040` as a 516-byte eight-slot final light-object
   section. It records the PC color, combined/separate setter, initialization,

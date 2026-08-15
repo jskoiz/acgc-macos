@@ -593,7 +593,8 @@ may not update the umbrella checkout.
   correction confirms `GXEnableTexOffsets` is Raster-owned, the repaired Texgen
   lane covers exactly seven setters, and `GXSetZMode` is the next narrow current
   mutation-before-flush defect; viewport/scissor, Indirect, and resource
-  generation remain separate future owners.
+  generation remain separate future owners. Evidence is
+  `docs/evidence/CANONICAL-SETTER-ORDER-251A010B8-2026-08-14.md`.
 - Lane 184 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
   read-only M3 Max canonical Indirect contract audit at exact PC `251a010b8`
   and decomp `09ca8e8b`. It owns no source, branch, build, launch, device,

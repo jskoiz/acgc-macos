@@ -223,6 +223,14 @@ producer remain open; none of this is live-renderer evidence. See the
 the [canonical Depth implementation](evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md),
 and the [PC raw Depth shadow](evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md).
 
+The canonical setter-order audit fixes the producer-facing invariant at
+`pc_gx_flush_vertices`: flush a completed old batch before any raw/effective
+state mutation. The repaired Texgen/SU worker applies it to exactly seven
+setters; `GXEnableTexOffsets` remains Raster-owned. Canonical `251a010b8`
+still stores raw Depth before the flush in `GXSetZMode`, making that the next
+narrow source repair. Raster, Indirect, and resource-generation order remain
+separate owners. See [canonical setter-order evidence](evidence/CANONICAL-SETTER-ORDER-251A010B8-2026-08-14.md).
+
 The Channels/Lighting audit freezes `0x0004` as a 136-byte two-record channel
 section and `0x0040` as a 516-byte eight-slot final light-object section. It
 preserves combined/separate channel semantics, disabled vertex sources,
