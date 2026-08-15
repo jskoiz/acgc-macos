@@ -95,7 +95,8 @@ the child, and the reviewed end state is integrated as canonical PC
 completed its parallel read-only raw Indirect ownership crosswalk. Lane 213
 completed the independent exact-tip matrix with native and combined
 ASan/UBSan `21/21` passes. Its same project-owned verification task completed
-lane 214's independent read-only review. No full
+lane 214's independent read-only review. Lane 216 is the sole active source
+worker and owns the new-file canonical Geometry producer. No full
 link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
@@ -1320,6 +1321,33 @@ also integrated. Remote workers may not update the umbrella checkout.
   child-owned issue was found, and the reviewer crosswalked the clean canonical
   decomp tree at `09ca8e8b` rather than the stale task worktree's uninitialized
   submodule.
+- Lane 216 / reused project-owned M3 Geometry task
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active canonical Geometry producer
+  source/test lane. It reuses the completed lane-210 Geometry audit task for
+  direct ownership continuity and runs `gpt-5.6-luna` with max reasoning. The
+  authoritative source-only bundle is
+  `/private/tmp/acgc-canonical-pc-b9a9f35.bundle` with SHA-256
+  `019d97d9bbe4a0d22565a8233f052a43399d9d2dd7c0e4471f6f35284668768a`.
+  It must create clean source
+  `/private/tmp/acgc-lane-canonical-geometry-producer-m3` on explicit branch
+  `c1/lane-canonical-geometry-producer-m3` at exact PC `b9a9f355`, with decomp
+  `09ca8e8b` read-only. Ownership is limited to new
+  `pc/include/pc_gx_geometry_producer.h`, new
+  `pc/src/pc_gx_geometry_producer.c`, one new focused producer fixture, and
+  minimal `pc/CMakeLists.txt` registration. It may not edit `pc_gx.c`,
+  `pc_gx_internal.h`, canonical Geometry ABI/validator files, the cumulative
+  envelope, Apple/Metal files, decomp, or any ISO/assets path. The producer must
+  consume only an immutable completed raw batch plus explicit dependency
+  results, use the frozen canonical decoder/validator APIs, write to caller-owned
+  output only after full success, and fail closed on unsupported matrix/NBT,
+  CLR1/TEX1-7, malformed metadata, missing dependencies, overflow, or capacity.
+  Unique roots are
+  `/private/tmp/acgc-lane-canonical-geometry-producer-{native,asan,win}`. Native
+  and combined ASan/UBSan focused build/CTest plus bounded syntax probes are the
+  only allowed verification. Full `ac_pc`, LLDB, runtime, Metal, pixel, device,
+  ISO/assets, Windows sign-off, and playability are out of scope. Success
+  unblocks an independent source review and then the all-or-nothing cumulative
+  producer owner.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1348,7 +1376,8 @@ completed the narrow same-branch repair of blocked worker `1730823d45` as child
 `5679bff656` and is integrated at canonical `b9a9f355`; lane 212 is
 complete/archived; lane 213 completed the exact-tip matrix; lane 214 completed
 its read-only BLOCK review; and lane 215 completed its independent read-only
-PASS review. No production worker, full link, LLDB, or device run is active.
+PASS review. Lane 216 is the sole active canonical Geometry producer source
+worker. No full link, LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
