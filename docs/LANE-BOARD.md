@@ -95,12 +95,13 @@ the child, and the reviewed end state is integrated as canonical PC
 completed its parallel read-only raw Indirect ownership crosswalk. Lane 213
 completed the independent exact-tip matrix with native and combined
 ASan/UBSan `21/21` passes. Its same project-owned verification task completed
-lane 214's independent read-only review. Lane 216 has returned source commit
-`5aba10371f` and is on independent-review hold. Lane 217 completed its
+lane 214's independent read-only review. Lane 216 returned source commit
+`5aba10371f`, but lane 218 independently blocked it on strict raw-metadata
+validation and missing mandatory fixture cases. Lane 217 completed its
 read-only current-tip cumulative-producer audit and found the cumulative gate
-still blocked by missing leaf owners/producers. Lane 218 is the sole active
-independent source-review worker. No full
-link, LLDB, or device run is active.
+still blocked by missing leaf owners/producers. Lane 216 is the sole active
+source worker, resumed on the same branch for the exact two-file repair. No
+full link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1325,8 +1326,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   decomp tree at `09ca8e8b` rather than the stale task worktree's uninitialized
   submodule.
 - Lane 216 / reused project-owned M3 Geometry task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete source handoff on
-  independent-review hold. It returned clean branch
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active narrow repair after
+  independent-review `BLOCK`. Its first handoff returned clean branch
   `c1/lane-canonical-geometry-producer-m3` at `5aba10371f` from base
   `b9a9f355`, changing exactly the four contracted producer/fixture/CMake
   files. Remote native and combined ASan/UBSan focused CTest pass `1/1` each
@@ -1335,8 +1336,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   source-only review bundle is
   `/private/tmp/acgc-lane-216-canonical-geometry-producer.bundle`, SHA-256
   `c567f54c51c72664fd38488a65971faccb6ab410543173c38a0ac33f215255f4`.
-  This is a CPU/source handoff only; it is not accepted or integrated until
-  lane 218 returns an independent verdict.
+  This is a CPU/source handoff only and is not accepted or integrated. Lane 218
+  found that exact-boolean/tail metadata validation and direct-quad,
+  explicit-INDEX16-endian, and output/scratch-overlap fixture proof were still
+  missing. The same lane 216 branch now owns only that producer/test repair and
+  must return a child commit plus fresh native and combined ASan/UBSan `1/1`
+  evidence before a new independent review.
   The lane was originally registered as an active canonical Geometry producer
   source/test lane. It reuses the completed lane-210 Geometry audit task for
   direct ownership continuity and runs `gpt-5.6-luna` with max reasoning. The
@@ -1383,15 +1388,22 @@ also integrated. Remote workers may not update the umbrella checkout.
   atomic Texture/Dynamic lease pairing are also absent. Evidence is
   `docs/evidence/CUMULATIVE-PRODUCER-READINESS-B9A9F355-2026-08-15.md`.
 - Lane 218 / reused project-owned M3 review task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active independent read-only review
-  of lane 216's exact `b9a9f355..5aba103` candidate. It owns no edit, branch,
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete independent read-only
+  `BLOCK` review of lane 216's exact `b9a9f355..5aba103` candidate. It owns no edit, branch,
   build, test, cleanup, integration, or runtime work. It must verify the bundle
   hash/ancestry/four-file scope; crosswalk the raw completed-batch contract and
   canonical Geometry validators against decomp; review direct/indexed ordering,
   little-endian layout, overflow/capacity checks, dependency validation,
   unsupported-state rejection, and all-or-nothing output semantics; then return
-  PASS or exact material findings. No full link, LLDB, Metal, device, pixel,
-  ISO/assets, Windows sign-off, or playability claim is in scope.
+  PASS or exact material findings. It verified bundle/ancestry/four-file scope
+  and the core staged serialization, then blocked acceptance because used
+  `value_known`/`index_known` bytes were treated as truthy rather than exact
+  booleans, direct `value_source_index` and inactive/tail metadata were not
+  fully enforced, and the fixture omitted direct-quad, explicit INDEX16 byte,
+  and output/scratch overlap cases. Evidence is
+  `docs/evidence/CANONICAL-GEOMETRY-PRODUCER-REVIEW-5ABA103-2026-08-15.md`.
+  No full link, LLDB, Metal, device, pixel, ISO/assets, Windows sign-off, or
+  playability claim is in scope.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1420,10 +1432,10 @@ completed the narrow same-branch repair of blocked worker `1730823d45` as child
 `5679bff656` and is integrated at canonical `b9a9f355`; lane 212 is
 complete/archived; lane 213 completed the exact-tip matrix; lane 214 completed
 its read-only BLOCK review; and lane 215 completed its independent read-only
-PASS review. Lane 216 is complete and held for lane 218's independent review;
-lane 217 is complete/blocked at the cumulative readiness gate. Lane 218 is the
-sole active read-only source-review worker. No full link, LLDB, or device run
-is active.
+PASS review. Lane 216 is the sole active worker for the exact lane-218 repair;
+lane 217 is complete/blocked at the cumulative readiness gate, and lane 218 is
+complete with a source-review `BLOCK`. No full link, LLDB, or device run is
+active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
