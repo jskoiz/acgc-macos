@@ -365,8 +365,8 @@ checkout.
   `docs/evidence/CANONICAL-ALPHA-STATE-F2B7AB153-2026-08-14.md`. No live
   producer, callback, Metal, pixel, device, or playability claim follows;
   `GXSetZCompLoc` remains a separate PC shadow-state gap.
-- Lane 166 / task `01a002c6-bb9a-7ed3-8f25-b6bb85d41b76` — complete and
-  integrated, cleanup pending. Remote branch `c1/lane-tev-raw-shadow-m3`
+- Lane 166 / task `01a002c6-bb9a-7ed3-8f25-b6bb85d41b76` — complete,
+  integrated, and archived. Remote branch `c1/lane-tev-raw-shadow-m3`
   advanced exact PC `216d1e24b` to worker `11cf5db00`; the integration owner
   cherry-picked its exact four-file change as canonical PC `037689462`. It
   adds setter-owned raw PREV/REG0-2 and K0-3 state with explicit unavailable,
@@ -375,16 +375,20 @@ checkout.
   pass `1/1` each; Windows runtime/toolchain proof remains blocked. Evidence is
   `docs/evidence/PC-RAW-TEV-SHADOW-037689462-2026-08-14.md`. No canonical
   section, snapshot, callback, Metal, pixel, device, or playability claim
-  follows.
+  follows. Remote native/ASan/Windows roots, docs worktree, transfer bundle,
+  and exact local integration roots are absent. The clean source worktree and
+  prompt/events/final artifacts remain protected by one live remote holder;
+  the branch and commit are preserved and no process was killed.
 - Lane 167 / task `01a002cb-26b4-78d1-b01c-1708f6a7b9e5` — complete,
-  archive and cleanup pending, read-only at exact PC `216d1e24b` and decomp
+  archived, and cleaned, read-only at exact PC `216d1e24b` and decomp
   `09ca8e8b`. It freezes version-1 `0x0002` as an 888-byte aggregate with raw
   projection, ten position and ten normal matrices, current logical ID, and
   explicit knownness. Texture/post matrix and manual SU state remain solely in
   `0x0008`. Evidence is
   `docs/evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md`. No
   edit, build, launch, asset, callback, Metal, pixel, device, or playability
-  operation occurred.
+  operation occurred. Its detached source/docs worktrees and prompt/events/
+  final artifacts are absent.
 - Lane 168 / task `01a002d3-e737-76c1-8349-fc4e003fc0b9` — active M3 Max
   source-edit lane on explicit branch `c1/lane-canonical-tev-m3`, exact PC
   base `f2b7ab153`, worktree `/private/tmp/acgc-lane-canonical-tev`, and
