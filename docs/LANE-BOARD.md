@@ -105,9 +105,9 @@ the two source commits are integrated as canonical PC `689590cc`. Lane 219
 completed the portable Texgen/SU ABI source handoff at `f503fb924` and is on
 root-review hold. Lane 221 completed its independent read-only Transform
 leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
-Lanes 222 and 223 are registered setup-pending successors for independent
-Texgen review and the Transform leaf producer respectively. No full link,
-LLDB, or device run is active.
+Lanes 222 and 223 are active successors for independent Texgen review and the
+Transform leaf producer respectively. No full link, LLDB, or device run is
+active.
 
 ## Remote M3 Max batch (current)
 
@@ -1482,7 +1482,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   `pc/CMakeLists.txt`. Evidence is
   `docs/evidence/TRANSFORM-PRODUCER-READINESS-B9A9F355-2026-08-15.md`.
 - Lane 222 / reused project-owned M3 review task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — setup-pending independent read-only
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active independent read-only
   review of lane 219 worker `f503fb924d` against base `b9a9f355f7`. It must use
   only the immutable review bundle with SHA-256 `d47b45d4...9d7a5cb`, create a
   detached review source at `/private/tmp/acgc-lane-222-texgen-state-review`,
@@ -1491,7 +1491,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   integration, full link, LLDB, runtime, Apple/Metal, device/pixel, Windows
   sign-off, ISO/assets, or playability work.
 - Lane 223 / reused project-owned M3 Transform task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — setup-pending source/test successor
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — active source/test successor
   on `gpt-5.6-luna` with max reasoning. It must create
   `/private/tmp/acgc-lane-transform-producer-m3` on branch
   `c1/lane-transform-producer-m3` at exact canonical PC `689590cc`, using only
