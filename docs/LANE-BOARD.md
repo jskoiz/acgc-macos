@@ -66,11 +66,11 @@ Lanes 152 and 155 are complete and integrated as PC `b5f550ea0` and
 `afb1cac3c`; lanes 153 and 154 completed the read-only cumulative-schema and
 Apple consumer/encoder audits. Lane 157 is complete and integrated. Lane 156
 is integrated as PC `4dbb71065`, and lane 158 completed its read-only producer
-audit. Lane 159 completed the read-only Blend/logic contract; lane 160 is the
-independent focused verification matrix. Lane 161 is the sole production
-source lane and owns the exact 16-byte Blend/logic section; lanes 162–163 are
-read-only Alpha/update and TEV contract audits. No full link or LLDB run is
-active. Remote workers may not update the umbrella checkout.
+audit. Lane 159 completed the read-only Blend/logic contract; lane 160 completed
+the independent focused verification matrix; lane 161 is integrated as PC
+`216d1e24b`. Lanes 162–164 are the active read-only Alpha/update, TEV, and
+Transforms/Texgens provenance audits. No production source lane, full link, or
+LLDB run is active. Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -298,7 +298,7 @@ active. Remote workers may not update the umbrella checkout.
   follows. Its detached worktree, native/ASan/Windows roots,
   prompt/events/final artifacts, and exact local current-delta roots are absent.
 - Lane 161 / task `01a002af-5e39-7e40-b83e-86323c7786c6` — complete,
-  integrated, and cleanup-pending. Remote branch
+  integrated, archived, and cleaned. Remote branch
   `c1/lane-canonical-blend-m3` advanced exact PC `4dbb71065` to worker
   `a170654b0`; the integration owner cherry-picked its exact four-file change
   as canonical PC `216d1e24b`. It adds the audited version-1 16-byte four-word
@@ -306,7 +306,9 @@ active. Remote workers may not update the umbrella checkout.
   fixture without changing common envelope semantics, V1-V4, `pc_gx`, or
   Apple code. Remote focused native/ASan and exact integrated native/ASan
   results pass `1/1` and `3/3` respectively; ABI and bounded `_WIN32` probes
-  pass. Evidence is
+  pass. Its exact worktree, native/ASan/Windows roots, prompt/events/final,
+  transfer bundle, and local integration roots are absent; the worker branch
+  and commits remain preserved. Evidence is
   `docs/evidence/CANONICAL-BLEND-STATE-216D1E24B-2026-08-14.md`. No live
   snapshot, callback, Metal, pixel, device, or playability claim follows.
 - Lane 162 / task `01a002b5-525f-7480-81df-8c9bde594295` — active read-only
@@ -326,8 +328,17 @@ active. Remote workers may not update the umbrella checkout.
   S10 provenance gap, and non-overlapping future ownership. It may not edit,
   branch, build, launch, access assets, or claim a live snapshot, callback,
   Metal, pixel, device, or playability proof.
+- Lane 164 / task `01a002be-b284-7492-95f3-c3ad066a2906` — active read-only
+  M3 Max Transforms/Texgens provenance audit. Detached worktree
+  `/private/tmp/acgc-lane-canonical-transform-texgen-audit` is exact PC
+  `216d1e24b` with decomp oracle `09ca8e8b`. It owns the minimum truthful
+  shadow-state decision for raw pre-host-adjustment projection, matrix type,
+  texgen normalize/post, manual scale/bias/offset, and matrix-slot references,
+  plus fail-closed producer rules and future non-overlapping source fixtures.
+  Alpha, TEV, Blend, fog, raster/depth, texture bytes, Apple/Metal, edits,
+  builds, assets, pixels, devices, and playability are out of scope.
 
-The remote Codex project assignment records place tasks 156–163 under the
+The remote Codex project assignment records place tasks 156–164 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
