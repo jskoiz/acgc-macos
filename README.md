@@ -34,9 +34,11 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `85b25cb3c` (`Honor GX viewport jitter field`),
-adding setter-owned raw Raster provenance and the source-faithful half-pixel
-jitter adjustment on top of the strict pointer-free Indirect value contract,
+`c1/macos-host-launch` at `b9a9f355` (`Close raw Geometry producer contract`),
+adding reviewed setter-owned raw Geometry closure, typed indexed host mirroring,
+packed-color FIFO-width provenance, and RGBX8 ignored-byte handling on top of
+setter-owned raw Raster provenance, the source-faithful half-pixel jitter
+adjustment, and the strict pointer-free Indirect value contract,
 setter-owned Alpha/ZCompLoc provenance, production-object availability, the
 strict pointer-free Raster value contract, and
 persistent setter-owned raw Channels and Lighting,
@@ -288,16 +290,17 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   integrated `698d45d3e` supplies Texture/TLUT generations and synchronous
   resource leases, `b3336504c` supplies the neutral Raster value ABI, and
   `039afce0e` supplies raw Alpha/ZCompLoc provenance, `a42da8e155`
-  supplies the neutral Indirect ABI, and `85b25cb3c` supplies setter-owned raw
-  Raster provenance with source-faithful viewport jitter. Raw Indirect
-  ownership/conversion and complete Geometry conversion still gate the
-  all-or-nothing cumulative serializer and immutable Apple CPU plan.
-  A current-tip read-only Geometry audit also finds that the existing completed
-  raw batch is not yet a complete canonical producer: mutation ordering,
-  caller-array lifetime, unsupported attribute coverage, canonical byte
-  conversion, and Transform/Texgen dependency checks remain open. The raw
-  Geometry closure is now dependency-ready because raw Raster released
-  overlapping `pc_gx.c` ownership, but no successor is active yet.
+  supplies the neutral Indirect ABI, `85b25cb3c` supplies setter-owned raw
+  Raster provenance with source-faithful viewport jitter, and `b9a9f355`
+  closes the bounded setter-owned raw Geometry contract. Its copied batch now
+  fail-closes unsupported matrix/NBT and extra attribute slots, preserves
+  mutation/order/lifetime boundaries, decodes all supported indexed scalar
+  forms into the host mirror, and preserves exact packed-color FIFO widths.
+  Raw Indirect ownership/conversion and a separately owned canonical Geometry
+  converter still gate the all-or-nothing cumulative serializer and immutable
+  Apple CPU plan. The canonical Geometry converter is now dependency-ready in
+  new files because the raw `pc_gx.c` owner has completed and released its
+  overlap.
   Apple consumption follows only after those complete typed dependencies and
   stable resources. See the
   [raw Geometry integration evidence](docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),
@@ -308,6 +311,7 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [raw Alpha/ZCompLoc evidence](docs/evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
   [raw Raster evidence](docs/evidence/PC-RAW-RASTER-85B25CB3C-2026-08-15.md),
   [current Geometry converter readiness audit](docs/evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
+  [raw Geometry closure evidence](docs/evidence/PC-RAW-GEOMETRY-CLOSURE-B9A9F355-2026-08-15.md),
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
 - The exact `23c26e520a` focused baseline passes all twelve neutral validators

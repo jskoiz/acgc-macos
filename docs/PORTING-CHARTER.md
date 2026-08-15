@@ -61,7 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-15, the canonical local PC branch is clean at `85b25cb3c`, with
+As of 2026-08-15, the canonical local PC branch is clean at `b9a9f355`, with
+reviewed setter-owned raw Geometry closure, typed indexed host mirroring,
+packed-color FIFO-width provenance and RGBX8 ignored-byte handling,
 setter-owned raw Raster provenance, the source-faithful viewport-jitter
 adjustment, setter-owned raw Alpha/ZCompLoc provenance and production-object
 availability, the strict portable Raster value ABI, persistent raw Channels and
@@ -311,10 +313,13 @@ completed-batch provenance at `pc_gx_flush_vertices`, including direct
 supplies persistent raw Channels and Lighting, `698d45d3e` supplies raw
 Texture/TLUT generations and synchronous resource leases, `b3336504c`
 supplies the neutral Raster value ABI, `039afce0e` supplies raw
-Alpha/ZCompLoc provenance, and `85b25cb3c` supplies setter-owned raw Raster
-provenance with the decomp viewport-jitter adjustment. Integrated `a42da8e155`
+Alpha/ZCompLoc provenance, `85b25cb3c` supplies setter-owned raw Raster
+provenance with the decomp viewport-jitter adjustment, and `b9a9f355` closes
+the bounded raw Geometry contract with copied lifetime, supported indexed
+scalar host conversion, exact packed-color entry widths, and fail-closed
+unsupported matrix/NBT and extra attribute slots. Integrated `a42da8e155`
 supplies the neutral section-13 Indirect ABI. Raw Indirect ownership/conversion
-and complete Geometry conversion remain prerequisites. A cumulative producer
+and a separately owned canonical Geometry converter remain prerequisites. A cumulative producer
 must then preflight
 every required section and resource
 generation before one synchronous all-or-nothing callback. Apple consumption
@@ -328,16 +333,16 @@ owned resources, encoder, MSL, present, and readback gates. See the
 [raw Alpha/ZCompLoc evidence](evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
 [raw Raster evidence](evidence/PC-RAW-RASTER-85B25CB3C-2026-08-15.md),
 [current Geometry converter readiness audit](evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
+[raw Geometry closure evidence](evidence/PC-RAW-GEOMETRY-CLOSURE-B9A9F355-2026-08-15.md),
 and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
-The current-tip Geometry audit confirms that the completed raw batch is only a
-bounded provenance snapshot, not a finished canonical producer. Mid-`GXBegin`
-setter mutation, caller-array lifetime, incomplete attribute coverage,
-canonical byte conversion, Transform/Texgen dependency checks, and synchronous
-completed-copy lifetime must be closed first. That raw Geometry successor is
-now dependency-ready because raw Raster released overlapping `pc_gx.c`
-ownership, but no successor is active and no transition packet or duplicate
-owner is introduced.
+The final raw Geometry lane closes the setter-owned batch boundaries identified
+by the earlier audit without inventing a transition packet. The copied batch is
+still not the finished canonical producer: a separately owned converter must
+serialize the supported raw subset, validate Transform/Texgen dependencies,
+and fail closed on unsupported matrix/NBT and extra color/texture slots. That
+converter is now dependency-ready in new files because the raw `pc_gx.c` owner
+has completed and released its overlap; no duplicate owner is introduced.
 
 The exact `23c26e520a` focused baseline passes all twelve neutral validators
 and five setter-owned raw fixtures natively (`17/17`) and under combined
