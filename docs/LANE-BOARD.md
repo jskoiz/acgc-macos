@@ -76,7 +76,11 @@ setter surface. Lanes 206–207 completed their read-only audits and are
 reviewed/archived under the remote M3 Max `acgc-modern-port` project. No
 production worker is active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
-evidence remain available in Git and the evidence docs.
+evidence remain available in Git and the evidence docs. Exact lane-204 cleanup
+is complete. Lanes 208–210 are registered as setup-pending successors for raw
+Raster, portable Indirect, and a read-only Geometry-converter audit; they do
+not count active until their exact `039afce0e` source scope/worktree is
+confirmed on the M3 Max.
 
 ## Remote M3 Max batch (current)
 
@@ -1135,6 +1139,59 @@ also integrated. Remote workers may not update the umbrella checkout.
   source owner is a portable header/source/fixture/CMake lane only. Evidence is
   `docs/evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md`; no
   build, full link, LLDB, callback, Metal, pixel, device, or playability claim.
+- Lane 208 / reused project-owned M3 task
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending raw Raster
+  source/test successor. It must import the tracked-source-only canonical PC
+  bundle with SHA-256
+  `5d280a7f1ffc6919d31a7dc88ef0720ba1280f74d57b199e5c7729003fbe4afe`
+  without rewriting remote `c1/macos-host-launch`, then create
+  `/private/tmp/acgc-lane-raw-raster-m3` on `c1/lane-raw-raster-m3` at exact
+  PC base `039afce0e` with decomp `09ca8e8b`. The gate is one setter-owned raw
+  Raster shadow and converter to the existing 128-byte canonical Raster ABI,
+  preserving logical pre-host values and completed-batch flush ordering.
+  Ownership is limited to `pc/include/pc_gx_internal.h`, `pc/src/pc_gx.c`, one
+  new `pc/tests/pc_gx_raster_raw_shadow_fixture.c`, minimal `pc/CMakeLists.txt`,
+  and an additional new private raw-Raster source only if the same symbols
+  cannot remain reviewable in `pc_gx.c`. Portable ABI files, packet/envelope,
+  Indirect, Apple/Metal, shaders, decomp, ISO/assets, full link, LLDB, device,
+  pixel, and playability are out of scope. Required evidence is a two-upstream
+  setter/caller crosswalk, clean commit, production-object compile, and serial
+  native plus combined ASan/UBSan focused Raster tests from unique
+  `/private/tmp/acgc-lane-raw-raster-{native,asan,win}` roots. This is not
+  counted active until the branch/worktree/base are confirmed.
+- Lane 209 / reused project-owned M3 task
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — setup-pending portable canonical
+  Indirect ABI successor. It must use the same verified source-only bundle and
+  create `/private/tmp/acgc-lane-canonical-indirect-m3` on
+  `c1/lane-canonical-indirect-m3` at exact PC `039afce0e`, with decomp
+  `09ca8e8b`. Ownership is exactly new
+  `include/acgc/gx_canonical_indirect_state.h`, new
+  `src/gx_canonical_indirect_state.c`, one new portable validator/roundtrip
+  fixture, and minimal `pc/portable/CMakeLists.txt` registration. It implements
+  the accepted section-13/mask-`0x1000`, version-1, 248-byte shared
+  count/order/scale/matrix record and strict TEV cross-validation without
+  duplicating the nine canonical TEV per-stage fields. `pc_gx`, raw setters,
+  packet/envelope producers, Apple/Metal, shaders, decomp edits, resources,
+  ISO/assets, full link, LLDB, device, pixel, and playability are out of scope.
+  Required evidence is a clean commit, exact layout/metadata/dependency
+  fixtures, serial native plus combined ASan/UBSan focused tests, analyzer and
+  bounded C/C++/ILP32/Windows syntax probes in unique
+  `/private/tmp/acgc-lane-canonical-indirect-{native,asan,win}` roots. This is
+  not counted active until the branch/worktree/base are confirmed.
+- Lane 210 / reused project-owned M3 task
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending read-only Geometry
+  conversion audit at exact PC `039afce0e` and decomp `09ca8e8b`. Its concrete
+  detached source scope is
+  `/private/tmp/acgc-lane-geometry-converter-audit-m3`; it may import the same
+  source-only bundle but must create no branch, edit, build, or test root. The
+  gate is to crosswalk the immutable `PCGXRawGeometry` completed-batch state
+  against the canonical Geometry ABI and decomp `GXAttr.c`, `GXGeometry.c`,
+  `GXVert.c`, and representative emu64/game callers, then return the exact
+  missing conversion rules, resource/lifetime dependencies, owned files and
+  symbols, focused fixture matrix, and an explicit dependency-ready verdict.
+  Raw Raster, Indirect, cumulative producer, Apple/Metal, ISO/assets, full
+  link, LLDB, device, pixel, and playability are out of scope. This is not
+  counted active until the detached exact-tip scope is confirmed.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1154,8 +1211,9 @@ lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is reviewe
 and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
 integrated at canonical PC `b3336504c`; lane 204 is reviewed and integrated at
 canonical PC `039afce0e`. Lanes 206–207 are complete, reviewed, and archived
-read-only audits. No worker is active and no replacement lane is selected
-while exact lane-204 cleanup is pending.
+read-only audits. Exact lane-204 cleanup is complete. Lanes 208–210 are
+registered setup-pending and are not active until the M3 Max reports their
+exact `039afce0e` scopes; no full link, LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
