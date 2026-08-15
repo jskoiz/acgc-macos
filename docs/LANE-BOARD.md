@@ -85,7 +85,9 @@ and Apple canonical-plan preflights. Lane 179 completed the exact current-tip
 native/sanitizer/Windows focused matrix. Lanes 180–181 completed the read-only
 Channels/Lighting and Raster implementation preflights. Lane 182 completed the
 current-tip M3 Max synthetic Metal-device fixture gate. No full link or LLDB
-run is active. Remote workers may not update the umbrella checkout.
+run is active. Lane 183 is the sole active read-only successor, freezing the
+state-before-geometry temporal-order contract exposed by the producer audit.
+Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -565,6 +567,14 @@ run is active. Remote workers may not update the umbrella checkout.
   its existing deterministic readback assertions. This is synthetic fixture
   evidence, not a game-owned frame, present, iOS, or playability claim. Evidence
   is `docs/evidence/M3-METAL-DEVICE-FIXTURES-251A010B8-2026-08-14.md`.
+- Lane 183 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
+  read-only M3 Max canonical setter-order preflight in detached
+  `/private/tmp/acgc-lane-canonical-state-order-preflight`. It compares exact
+  canonical PC `251a010b8`, raw Texgen/SU worker `2e3c95dae`, and decomp
+  `09ca8e8b` to map every state mutation that occurs before versus after
+  `pc_gx_flush_if_begin_complete()`. It owns no source, build, launch, device,
+  asset, Metal, pixel, or playability operation. Success unblocks one serial
+  post-Texgen state-order repair; it does not authorize that edit.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -576,7 +586,8 @@ independent/root review; their production and CMake ownership does not overlap.
 Lanes 177–178 completed read-only without source ownership, lane 179 completed
 verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only. Full links and LLDB launches remain
-serialized and are not active.
+serialized and are not active. Lane 183 is the only active remote task and is
+read-only.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
