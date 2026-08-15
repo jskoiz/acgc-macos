@@ -218,6 +218,15 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   evidence, not Metal-device, Windows-runtime, or playability proof. See
   [focused matrix evidence](docs/evidence/CURRENT-FOCUSED-MATRIX-B5F550EA0-2026-08-14.md).
 
+- A current-tip verification-only run at `251a010b8` proves the existing
+  synthetic Apple fixtures on an M3 Max: the selected native set passes `9/9`,
+  the six CPU-compatible combined ASan/UBSan tests pass `6/6`, three embedded
+  shaders compile offline, and the offscreen Metal sink completes deterministic
+  pixel/checksum readback assertions. This closes the synthetic device-fixture
+  question only. It is not a cumulative game snapshot, live game callback,
+  game-owned encode, window present, game-owned pixel, or playability result.
+  See [M3 Max Metal-device fixture evidence](docs/evidence/M3-METAL-DEVICE-FIXTURES-251A010B8-2026-08-14.md).
+
 - The integrated `afb1cac3c` input correction makes axis-bound L/R digital
   state follow the same nonzero normalized analog value that reaches
   `PADStatus`, matching the decomp game-input boundary while preserving

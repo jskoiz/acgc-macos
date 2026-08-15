@@ -77,15 +77,15 @@ audit; lane 170 is integrated as PC `59714a1fd`; lane 171 completed the
 read-only exact Channels/Lighting contract audit; lane 172 is integrated as PC
 `c736f9686`; lanes 175–176 are complete and integrated as canonical PC
 `c3e158398` and `251a010b8`, adding the neutral Transform ABI and setter-owned
-raw Depth provenance. Lanes 173–174 have been reused for the two active,
-non-overlapping M3 Max successors: raw Texgen/SU provenance and the neutral
-Geometry ABI. Lanes 177–178 are active read-only current-tip successors for
-the cumulative producer and Apple canonical-plan contracts. Lane 179 is the
-independent current-tip native/sanitizer/Windows focused-matrix refresh. Lanes
-180–181 are read-only Channels/Lighting and Raster implementation preflights.
-Lane 182 is the current-tip M3 Max Metal-device fixture gate. No
-full link or LLDB run is active. Remote workers may not update the umbrella
-checkout.
+raw Depth provenance. Lanes 173–174 completed clean, non-overlapping handoffs
+for raw Texgen/SU provenance (`2e3c95dae`) and the neutral Geometry ABI
+(`2b394943a`); both are under integration-owner review and are not yet in the
+canonical PC branch. Lanes 177–178 completed the read-only cumulative-producer
+and Apple canonical-plan preflights. Lane 179 completed the exact current-tip
+native/sanitizer/Windows focused matrix. Lanes 180–181 completed the read-only
+Channels/Lighting and Raster implementation preflights. Lane 182 completed the
+current-tip M3 Max synthetic Metal-device fixture gate. No full link or LLDB
+run is active. Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -453,11 +453,13 @@ checkout.
   `docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md`. No PC setter
   shadow, cumulative producer, full link, LLDB, Metal, pixel, device, or
   playability claim follows.
-- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — active M3 Max raw
-  Texgen/SU provenance source/test successor in
+- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — complete and under
+  integration-owner review. The M3 Max raw Texgen/SU provenance source/test
+  successor ran in
   `/private/tmp/acgc-lane-pc-texgen-shadow`, branch
-  `c1/lane-pc-texgen-shadow-m3` at exact PC `251a010b8`, with decomp oracle
-  `09ca8e8b`. The completed corrective audit freezes section `0x0008` as the
+  `c1/lane-pc-texgen-shadow-m3`, advancing exact PC `251a010b8` to clean worker
+  `2e3c95dae`, with decomp oracle `09ca8e8b`. The completed corrective audit
+  freezes section `0x0008` as the
   exact `0xA40` value contract, including writable ordinary selector `60` and
   post selector `125`; evidence is
   `docs/evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md`. The
@@ -467,12 +469,14 @@ checkout.
   scope. Native and ASan roots are
   `/private/tmp/acgc-lane-pc-texgen-shadow-{native,asan}`. No full link, LLDB,
   asset access, callback, Metal, pixel, device, Windows-runtime, iOS, or
-  playability claim is allowed.
-- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active M3 Max
-  neutral Geometry ABI source/test successor in
+  playability claim follows. The worker commit is not yet integrated.
+- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — complete and under
+  integration-owner review. The M3 Max neutral Geometry ABI source/test
+  successor ran in
   `/private/tmp/acgc-lane-canonical-geometry`, branch
-  `c1/lane-canonical-geometry-m3` at exact PC `251a010b8`, with decomp oracle
-  `09ca8e8b`. The completed corrective audit freezes section `0x0001` with the
+  `c1/lane-canonical-geometry-m3`, advancing exact PC `251a010b8` to clean
+  worker `2b394943a`, with decomp oracle `09ca8e8b`. The completed corrective
+  audit freezes section `0x0001` with the
   `0x6B0` prefix, 26 exact descriptors, a section-relative bounded stream, and
   a `0x10000` inclusive size cap; evidence is
   `docs/evidence/CANONICAL-GEOMETRY-CONTRACT-6D1D310C0-2026-08-14.md`. The
@@ -481,7 +485,7 @@ checkout.
   proprietary inputs are out of scope. Native and ASan roots are
   `/private/tmp/acgc-lane-canonical-geometry-{native,asan}`. No full link,
   LLDB, callback, Metal, pixel, device, Windows-runtime, iOS, or playability
-  claim is allowed.
+  claim follows. The worker commit is not yet integrated.
 - Lane 175 / task `01a00358-efb4-7d51-b5b7-7fe5801e059a` — complete,
   independently reviewed, and integrated. M3 Max branch
   `c1/lane-canonical-transform-m3` advanced `59714a1fd` to worker
@@ -508,7 +512,7 @@ checkout.
   generated roots and transfer bundles are retired. The clean source worktree
   remains protected because remote task processes still hold it; no holder was
   killed, and the branch and commits remain preserved.
-- Lane 177 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
+- Lane 177 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — complete
   read-only M3 Max cumulative-producer preflight in detached
   `/private/tmp/acgc-lane-cumulative-producer-preflight` at exact PC
   `251a010b8` and decomp `09ca8e8b`. It updates the earlier `b5f550ea0`
@@ -517,14 +521,14 @@ checkout.
   newly frozen Geometry/Texgen and integrated Transform/Depth prerequisites.
   It may not edit, build, link, launch, access assets, or claim callback,
   Metal, pixel, device, or playability proof.
-- Lane 178 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active
+- Lane 178 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete
   read-only M3 Max Apple canonical-plan preflight in detached
   `/private/tmp/acgc-lane-apple-canonical-plan-preflight` at exact PC
   `251a010b8` and decomp `09ca8e8b`. It updates the earlier Apple audit into an
   exact immutable CPU-plan, cache/lifetime, state-mapping, fixture, and later
   device-gated encode/present/readback contract. It may not edit, build, link,
   launch, access assets, or infer Metal, pixel, device, or playability proof.
-- Lane 179 / reused task `01a0029d-475c-7a31-a6f9-708e60cb4201` — active
+- Lane 179 / reused task `01a0029d-475c-7a31-a6f9-708e60cb4201` — complete
   verification-only M3 Max current-tip matrix in detached
   `/private/tmp/acgc-lane-current-focused-matrix-251a010` at exact PC
   `251a010b8` and decomp `09ca8e8b`. It owns only explicit focused native,
@@ -533,7 +537,7 @@ checkout.
   roots. It may not edit source/docs/refs, build full `ac_pc`, launch, use a
   Metal device, or claim pixels, Windows runtime, device behavior, or
   playability.
-- Lane 180 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active
+- Lane 180 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete
   read-only M3 Max Channels/Lighting implementation preflight in detached
   `/private/tmp/acgc-lane-channels-lighting-preflight` at exact PC
   `251a010b8` and decomp `09ca8e8b`. It converts the frozen 136-byte Channels
@@ -541,7 +545,7 @@ checkout.
   ownership plans without overlapping the active portable-CMake or `pc_gx`
   owners. No edit, build, link, launch, asset, Metal, pixel, or playability
   claim is allowed.
-- Lane 181 / reused task `01a002d6-8511-79d2-afeb-4348ff78a52a` — active
+- Lane 181 / reused task `01a002d6-8511-79d2-afeb-4348ff78a52a` — complete
   read-only M3 Max Raster implementation preflight in detached
   `/private/tmp/acgc-lane-raster-preflight` at exact PC `251a010b8` and decomp
   `09ca8e8b`. It turns the frozen 128-byte section `0x0400` contract into exact
@@ -549,27 +553,30 @@ checkout.
   TexCoord-offset masks separate from Texgen/SU bias/cylinder/manual state.
   No edit, build, link, launch, asset, Metal, pixel, or playability claim is
   allowed.
-- Lane 182 / reused task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` — active
+- Lane 182 / reused task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` — complete
   verification-only M3 Max Metal-device fixture gate in detached
   `/private/tmp/acgc-lane-current-metal-device-fixtures` at exact PC
   `251a010b8` and decomp `09ca8e8b`. It may build and run only explicit
   existing Apple CPU/offline-shader/device encode/readback fixtures under
-  `/private/tmp/acgc-lane-current-metal-device-fixtures-{build,asan}`. It may
-  not edit source/docs/refs, link or launch full `ac_pc`, access assets, or
-  turn synthetic device/readback evidence into a game-owned frame, present,
-  iOS, or playability claim.
+  `/private/tmp/acgc-lane-current-metal-device-fixtures-{build,asan}`. It
+  changed no source/docs/refs and did not link or launch full `ac_pc` or access
+  assets. Native passes `9/9`, combined ASan/UBSan CPU fixtures pass `6/6`,
+  three offline MSL compilations pass, and the M3 Max offscreen sink completes
+  its existing deterministic readback assertions. This is synthetic fixture
+  evidence, not a game-owned frame, present, iOS, or playability claim. Evidence
+  is `docs/evidence/M3-METAL-DEVICE-FIXTURES-251A010B8-2026-08-14.md`.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
 transferred. Lanes 170, 172, 175, and 176 are individually reviewed and
-integrated. Lanes 173–174 are reused for dependency-ready implementation
-successors and are the only active source-edit owners; their production and
-CMake ownership does not overlap. Lanes 177–178 are read-only and do not own
-source; lane 179 is verification-only. Full links and LLDB launches remain
-serialized and are not active. Lanes 180–181 are read-only prerequisite audits.
-Lane 182 is verification-only and does not own source.
+integrated. Lanes 173–174 have clean implementation handoffs under
+independent/root review; their production and CMake ownership does not overlap.
+Lanes 177–178 completed read-only without source ownership, lane 179 completed
+verification-only, lanes 180–181 completed read-only prerequisite audits, and
+lane 182 completed verification-only. Full links and LLDB launches remain
+serialized and are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the

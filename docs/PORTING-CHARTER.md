@@ -240,6 +240,14 @@ post-envelope/sink delta at `4dbb71065` passes native and combined ASan/UBSan
 `3/3`. This is CPU/build evidence only. See
 [focused matrix evidence](evidence/CURRENT-FOCUSED-MATRIX-B5F550EA0-2026-08-14.md).
 
+The current-tip `251a010b8` M3 Max device-fixture gate separately passes nine
+selected native Apple fixtures, six CPU-compatible combined ASan/UBSan tests,
+three offline MSL compilations, and the existing offscreen sink's deterministic
+pixel/checksum readback assertions. This is synthetic device evidence only. It
+does not prove a cumulative game snapshot, live game callback, game-owned
+Metal encode, window presentation, game-owned pixel, iOS, or playability. See
+[M3 Max Metal-device fixture evidence](evidence/M3-METAL-DEVICE-FIXTURES-251A010B8-2026-08-14.md).
+
 Three read-only M3 Max follow-ups now classify both cohorts and the independent
 Apple status policy. The alpha references are dead only for the exact
 `GX_ALWAYS/GX_ALWAYS` plus `GX_AOP_AND` form and may be ignored locally by V2;
