@@ -77,10 +77,10 @@ reviewed/archived under the remote M3 Max `acgc-modern-port` project. No
 production worker is active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs. Exact lane-204 cleanup
-is complete. Lanes 208–210 are registered as setup-pending successors for raw
-Raster, portable Indirect, and a read-only Geometry-converter audit; they do
-not count active until their exact `039afce0e` source scope/worktree is
-confirmed on the M3 Max.
+is complete. Lanes 208–210 are the three active M3 Max workers: raw Raster,
+portable Indirect, and a read-only Geometry-converter audit. Their separate
+clean `039afce0e` worktrees/scopes are confirmed, and no full link, LLDB, or
+device run is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1140,7 +1140,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   `docs/evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md`; no
   build, full link, LLDB, callback, Metal, pixel, device, or playability claim.
 - Lane 208 / reused project-owned M3 task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending raw Raster
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active raw Raster
   source/test successor. It must import the tracked-source-only canonical PC
   bundle with SHA-256
   `5d280a7f1ffc6919d31a7dc88ef0720ba1280f74d57b199e5c7729003fbe4afe`
@@ -1157,10 +1157,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   pixel, and playability are out of scope. Required evidence is a two-upstream
   setter/caller crosswalk, clean commit, production-object compile, and serial
   native plus combined ASan/UBSan focused Raster tests from unique
-  `/private/tmp/acgc-lane-raw-raster-{native,asan,win}` roots. This is not
-  counted active until the branch/worktree/base are confirmed.
+  `/private/tmp/acgc-lane-raw-raster-{native,asan,win}` roots. The branch,
+  worktree, and exact clean base are confirmed.
 - Lane 209 / reused project-owned M3 task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — setup-pending portable canonical
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active portable canonical
   Indirect ABI successor. It must use the same verified source-only bundle and
   create `/private/tmp/acgc-lane-canonical-indirect-m3` on
   `c1/lane-canonical-indirect-m3` at exact PC `039afce0e`, with decomp
@@ -1176,10 +1176,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   Required evidence is a clean commit, exact layout/metadata/dependency
   fixtures, serial native plus combined ASan/UBSan focused tests, analyzer and
   bounded C/C++/ILP32/Windows syntax probes in unique
-  `/private/tmp/acgc-lane-canonical-indirect-{native,asan,win}` roots. This is
-  not counted active until the branch/worktree/base are confirmed.
+  `/private/tmp/acgc-lane-canonical-indirect-{native,asan,win}` roots. The
+  branch, worktree, and exact clean base are confirmed.
 - Lane 210 / reused project-owned M3 task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending read-only Geometry
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active read-only Geometry
   conversion audit at exact PC `039afce0e` and decomp `09ca8e8b`. Its concrete
   detached source scope is
   `/private/tmp/acgc-lane-geometry-converter-audit-m3`; it may import the same
@@ -1190,8 +1190,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   missing conversion rules, resource/lifetime dependencies, owned files and
   symbols, focused fixture matrix, and an explicit dependency-ready verdict.
   Raw Raster, Indirect, cumulative producer, Apple/Metal, ISO/assets, full
-  link, LLDB, device, pixel, and playability are out of scope. This is not
-  counted active until the detached exact-tip scope is confirmed.
+  link, LLDB, device, pixel, and playability are out of scope. The detached
+  clean exact-tip source scope is confirmed.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1211,9 +1211,9 @@ lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is reviewe
 and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
 integrated at canonical PC `b3336504c`; lane 204 is reviewed and integrated at
 canonical PC `039afce0e`. Lanes 206–207 are complete, reviewed, and archived
-read-only audits. Exact lane-204 cleanup is complete. Lanes 208–210 are
-registered setup-pending and are not active until the M3 Max reports their
-exact `039afce0e` scopes; no full link, LLDB, or device run is active.
+read-only audits. Exact lane-204 cleanup is complete. Lanes 208–210 are the
+three active M3 Max workers on confirmed clean, separate `039afce0e` scopes;
+no full link, LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
