@@ -919,7 +919,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   build, full link, LLDB, resource bytes, Apple/Metal, pixel, device, or
   playability action. Success permits or blocks root integration with one
   exact finding.
-- Lane 199 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — setup-pending
+- Lane 199 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active
   M3 Max source/test repair on `c1/lane-raw-channels-m3` at `c9eec84b0e`.
   It owns only `pc/src/pc_gx_channels_raw.c` and the focused Channels fixture.
   `pc_gx_raw_channels_set_num` must preserve inactive controls/colors as the
@@ -944,8 +944,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194–197 are complete. Lane 198 is active; lane 199 is
-setup-pending. The current
+191–192 and 194–197 are complete. Lanes 198–199 are active. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
