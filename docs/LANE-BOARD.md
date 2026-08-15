@@ -108,9 +108,9 @@ archived. Lane 221 completed its independent read-only Transform
 leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
 Lane 222 completed the independent Texgen review. Lane 223 completed the
 Transform leaf-producer source handoff at `4fde6d94` and is on root-review
-hold. No full link, LLDB, or device run is active. Lanes 224 and 225 are active
-read-only audits for TEV leaf production and the Alpha/Blend/Depth/Fog
-producer topology.
+hold. No full link, LLDB, or device run is active. Lane 224 completed its
+read-only TEV audit with `BLOCK`; lane 225 remains active on the
+Alpha/Blend/Depth/Fog producer topology.
 
 ## Remote M3 Max batch (current)
 
@@ -1521,7 +1521,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   has SHA-256
   `f4c9b0b33de7a8713fe8732ae820a686cf1b851b739a67357855301e25c393e5`.
 - Lane 224 / reused project-owned M3 audit task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active independent read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete independent read-only
   TEV leaf-producer readiness audit at exact canonical PC `689590cc` and
   decomp `09ca8e8b`. It must use the verified source-only bundle and detached
   source `/private/tmp/acgc-lane-224-tev-producer-audit`, crosswalk the
@@ -1529,7 +1529,14 @@ also integrated. Remote workers may not update the umbrella checkout.
   stage/swap/indirect dependencies, and the decomp setters/callers, then return
   `READY` or the exact missing predecessor raw provenance. It owns no edit,
   branch, build, test, cleanup, integration, full link, LLDB, Apple/Metal,
-  device/pixel, ISO/assets, Windows sign-off, or playability work.
+  device/pixel, ISO/assets, Windows sign-off, or playability work. It returned
+  `BLOCK`: exact raw PREV/REG/KONST provenance exists, but complete
+  stage/active-count/swap and indirect knownness, sticky invalid state,
+  source-faithful indirect quantization, flush-before-mutation, and one
+  immutable completed snapshot do not. The smallest predecessor owns only raw
+  TEV/Indirect state and setter hooks in `pc_gx_internal.h`/`pc_gx.c`, one
+  fixture, and minimal CMake. Evidence is
+  `docs/evidence/TEV-PRODUCER-READINESS-689590CC-2026-08-15.md`.
 - Lane 225 / reused project-owned M3 audit task
   `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active independent read-only
   Alpha/Blend/Depth/Fog leaf-producer topology audit at exact canonical PC
