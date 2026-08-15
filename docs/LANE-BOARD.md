@@ -64,7 +64,9 @@ completed the M3 Max raw Texture/TLUT producer. Root review rejected its
 initial all-map TLUT invalidation; the same lane repaired that defect as child
 commit `698d45d3e`, and the final tree is reviewed and integrated on canonical
 `c1/macos-host-launch`. Fresh exact-tip native and combined ASan/UBSan focused
-matrices pass `7/7` each. No production worker is currently active.
+matrices pass `7/7` each. Lanes 204–207 are now registered under the remote M3
+Max `acgc-modern-port` project: lanes 204–205 are non-overlapping focused source
+lanes, while lanes 206–207 are read-only contract/readiness audits.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -74,10 +76,10 @@ The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
 `698d45d3e` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
-`acgc-modern-port` project, but built-in cross-host handoff matching does not
-enumerate it from the local host. Remote lanes therefore use the verified
-SSH/Codex runner, persist their task-to-project assignment on the M3, and are
-registered here by durable task ID. Lane 140 ran
+`acgc-modern-port` project. Built-in cross-host handoff matching still does not
+enumerate it from the local host, so lanes 204–207 were created directly from
+that remote project's UI and are registered here by durable task ID before
+work. Lane 140 ran
 `gpt-5.6-luna` with max reasoning from the exact `565f877e` source-only base
 and is now complete/integrated. Its generated roots are retired; its clean
 source worktree is deliberately preserved because ignored `assets/` and
@@ -1063,6 +1065,66 @@ also integrated. Remote workers may not update the umbrella checkout.
   separately owned cumulative all-or-nothing snapshot producer; it does not
   prove a full link, live callback, Metal encode/present/readback, pixel,
   device, or playability gate.
+- Lane 204 / project-owned M3 task
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — setup-pending focused raw
+  Alpha/ZCompLoc source lane. It is pinned to canonical PC `698d45d3e` and
+  decomp `09ca8e8b`; its dedicated source path is
+  `/private/tmp/acgc-lane-raw-alpha-zcomp-m3` on branch
+  `c1/lane-raw-alpha-zcomp-m3`. The exact gate is to preserve the existing
+  canonical Alpha ABI while adding truthful raw/update provenance for
+  `GXSetZCompLoc`, with flush-before-mutation ordering and a focused
+  fail-closed fixture. Ownership is limited to `pc/include/pc_gx_internal.h`,
+  the Alpha/ZCompLoc setters and raw builder seam in `pc/src/pc_gx.c`, one new
+  focused fixture, and minimal `pc/CMakeLists.txt` registration. It must
+  crosswalk those PC symbols against decomp `GXPixel.c`, `GXInit.c`, public GX
+  declarations/enums, and representative callers before editing. All packet
+  ABI files, Apple/Metal files, Texture/TLUT, Raster, Indirect, cumulative
+  producer policy, ISO/assets, full link, LLDB, device, pixel, and playability
+  work are out of scope. Unique roots are
+  `/private/tmp/acgc-lane-raw-alpha-zcomp-{native,asan,win}`. Success requires
+  a clean worker commit plus serial focused native and combined ASan/UBSan
+  evidence; no runtime or rendering claim follows.
+- Lane 205 / project-owned M3 task
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending portable canonical
+  Raster ABI source lane. It is pinned to canonical PC `698d45d3e` and decomp
+  `09ca8e8b`; its dedicated source path is
+  `/private/tmp/acgc-lane-canonical-raster-m3` on branch
+  `c1/lane-canonical-raster-m3`. It owns only new
+  `include/acgc/gx_canonical_raster_state.h`, new
+  `src/gx_canonical_raster_state.c`, one portable validator/roundtrip fixture,
+  and minimal `pc/portable/CMakeLists.txt` registration. The frozen contract is
+  section `0x0400`, version `1`, exactly 128 bytes/32 words, with finite
+  viewport/scissor/offset/clip/cull/line/point/dither/destination-alpha/field
+  domains and four reserved zero words. The lane must crosswalk PC raster
+  setters/state against decomp `GXGeometry.c`, `GXPixel.c`, `GXInit.c`, public
+  declarations/enums, and representative callers before editing. It may not
+  touch `pc_gx`, packet/cumulative producer policy, Apple/Metal, resources,
+  ISO/assets, full link, LLDB, device, pixel, or playability. Unique roots are
+  `/private/tmp/acgc-lane-canonical-raster-{native,asan,win}`. Success is a
+  clean worker commit plus serial focused native and combined ASan/UBSan
+  validator evidence only.
+- Lane 206 / project-owned M3 task
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending read-only exact-tip
+  cumulative producer-readiness reconciliation. Its concrete detached source
+  path is `/private/tmp/acgc-lane-current-producer-readiness-m3` at PC
+  `698d45d3e`; decomp remains `09ca8e8b`. It owns no branch, source, tests,
+  CMake, docs, gitlink, or build root. It must reconcile the stale readiness
+  tables after Geometry, Channels, Lighting, and Texture/TLUT integration,
+  identify every still-missing raw owner/portable ABI/converter/resource lease,
+  and state the first honest all-or-nothing cumulative producer boundary. It
+  stops at exact path/symbol evidence and a dependency-ordered next-lane map;
+  no build, launch, callback, Metal, pixel, device, or playability claim.
+- Lane 207 / project-owned M3 task
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — setup-pending read-only Indirect
+  contract and raw-ownership audit. Its concrete detached source path is
+  `/private/tmp/acgc-lane-indirect-contract-m3` at PC `698d45d3e`; decomp
+  remains `09ca8e8b`. It owns no branch, source, tests, CMake, docs, gitlink, or
+  build root. It must crosswalk every PC/decomp Indirect setter, enum, caller,
+  mutation/flush ordering point, and texture/TLUT dependency; freeze a
+  pointer-free fixed-width section layout and strict validation domains; and
+  name the smallest dependency-ready source successor. It stops at read-only
+  evidence with no build, full link, LLDB, callback, Metal, pixel, device, or
+  playability claim.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
