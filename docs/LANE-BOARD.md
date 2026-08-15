@@ -36,17 +36,17 @@ Graph capture (16) and integrated verification (22) are complete/parked. The
 post-fix game-frame request is superseded by the root-owned integrated run;
 the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
-Expensive full links and LLDB launch traces remain serialized. Lane 187 is the
-sole active worker and is read-only; lane 185 is integrated, lane 186 has a
-clean review-pending source handoff, and lane 188 is complete. No full link,
-LLDB launch, or Metal-device run is active. Reviewed commits and evidence
-remain available in Git and the evidence docs.
+Expensive full links and LLDB launch traces remain serialized. Lanes 185–186
+are reviewed and integrated, and lanes 187–188 are complete read-only audits.
+No worker, full link, LLDB launch, or Metal-device run is active while the next
+non-overlapping source batch is selected. Reviewed commits and evidence remain
+available in Git and the evidence docs.
 
 ## Remote M3 Max batch (current)
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`9f149b6fd9` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`324c174ae3` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -102,10 +102,11 @@ lane 173 is complete/integrated/archived. Lane 185 reused that project-owned M3
 task and protected source worktree for the Depth temporal-ordering repair; its
 reviewed worker `a2cbfda07e` is integrated as canonical PC `9f149b6fd9`, with
 exact integrated native and combined ASan/UBSan raw-state matrices passing
-`4/4`. Lane 186 completed its neutral Channels ABI handoff and is under root
-review. Lane 187 remains the sole active read-only cumulative-producer audit;
-lane 188 completed the read-only Apple-plan audit. Remote workers may not
-update the umbrella checkout.
+`4/4`. Lane 186 is independently reviewed and integrated as canonical PC
+`324c174ae3`; the exact integrated canonical native and combined ASan/UBSan
+matrices pass `9/9`. Lanes 187–188 completed the read-only cumulative-producer
+and Apple-plan audits. No remote worker is currently active. Remote workers may
+not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -649,13 +650,14 @@ update the umbrella checkout.
   diagnostics (`detect_leaks=0`). Bounded `-m32` syntax passed; missing Windows
   headers/sysroot/toolchain prevent Windows sign-off. The protected remote
   source worktree `/private/tmp/acgc-lane-pc-texgen-shadow` remains because its
-  ignored `assets/` and `orig/` paths must not be deleted; generated roots and
-  bundle are exact cleanup candidates after archival. Evidence is
+  ignored `assets/` and `orig/` paths must not be deleted. All exact local and
+  remote generated review/build/bundle paths are retired after holder checks;
+  the branch and commits remain. Evidence is
   `docs/evidence/PC-DEPTH-FLUSH-ORDER-9F149B6FD-2026-08-14.md`. No full link,
   launch, renderer, Metal, pixel, device, or playability claim follows.
-- Lane 186 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete M3
-  Max neutral Channels ABI source/test handoff awaiting root review. The clean
-  preserved worktree
+- Lane 186 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete,
+  independently reviewed, and integrated neutral Channels ABI lane. The clean
+  preserved M3 worktree
   `/private/tmp/acgc-lane-channels-lighting-preflight` is on explicit branch
   `c1/lane-canonical-channels-m3` at exact canonical PC `1d48691a4f`; decomp
   remains `09ca8e8b`. It implements only the frozen version-1, section-`0x0004`,
@@ -674,22 +676,28 @@ update the umbrella checkout.
   PC channel state/setters, and decomp `GXLight.c`, `GXInit.c`, `GXEnum.h`, and
   channel callers. Unique roots are
   `/private/tmp/acgc-lane-canonical-channels-{native,asan,win}`. Worker
-  `325ecd3625` is clean and changes exactly the four owned files. The worker
-  reports native and combined ASan/UBSan canonical matrices `9/9`, C/C++ ABI,
-  analyzer, diff, and bounded `-m32`/`_WIN32` probes passing; no real Windows
-  toolchain/runtime is available. Root imported the source-only bundle under
-  an isolated review ref and will integrate only after independent review.
-  This proves no PC producer, runtime, renderer, device, or playability gate.
-- Lane 187 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
+  `325ecd3625` changes exactly the four owned files; root integrated it as
+  canonical PC `324c174ae3`. Independent review passed, and exact integrated
+  native plus combined ASan/UBSan canonical CTest pass `9/9` each with no
+  sanitizer diagnostics (`detect_leaks=0`). C/C++ ABI, analyzer, diff, and
+  bounded `-m32`/Windows-header probes pass; no real Windows
+  toolchain/runtime is available. Evidence is
+  `docs/evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md`. This proves
+  no raw PC Channels producer, runtime, renderer, device, or playability gate.
+- Lane 187 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — complete
   read-only current-tip cumulative-producer readiness audit in clean detached
   `/private/tmp/acgc-lane-cumulative-producer-preflight` at exact PC
   `1d48691a4f` and decomp `09ca8e8b`. It must inventory all fourteen canonical
   sections against their implemented validators and setter-owned raw sources,
   classify exact ready/missing/unknown dependencies after Geometry and
   Texgen/SU integration, verify the all-or-nothing snapshot boundary before
-  V1–V4/GL submission, and choose the next bounded source ownership after
-  lanes 185–186. It owns no source, branch, build, test, docs, link, launch,
-  asset, Apple/Metal, pixel, device, or playability operation.
+  V1–V4/GL submission. It concludes the next draw-critical source owner is
+  immutable Geometry VCD/VAT/array/batch provenance, not a partial cumulative
+  packet. Depth ordering and the neutral Channels ABI have since integrated,
+  but raw Channels and the other typed/resource dependencies remain open. It
+  owns no source, branch, build, test, docs, link, launch, asset, Apple/Metal,
+  pixel, device, or playability operation. Evidence is
+  `docs/evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md`.
 - Lane 188 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete
   read-only current-tip Apple canonical-plan audit in clean detached
   `/private/tmp/acgc-lane-apple-canonical-plan-preflight` at exact PC
@@ -702,7 +710,8 @@ update the umbrella checkout.
   sections, stable resource ownership/generations, exact MSL, and the immutable
   Apple CPU plan remain required. It owns no source, branch, build, test,
   device, full link, LLDB, ISO/assets, Metal execution, pixel, iOS, or
-  playability claim.
+  playability claim. Evidence is
+  `docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md`.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -715,9 +724,9 @@ saved-project handoff registry is unresolved.
 Lanes 177–178 completed read-only without source ownership, lane 179 completed
 verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
-LLDB launches remain serialized and are not active. Lane 185 is integrated,
-lane 186 is complete and under review, lane 187 is the sole active read-only
-audit, lane 188 is complete, lane 183 is complete, and lane 184 is stopped.
+LLDB launches remain serialized and are not active. Lanes 185–186 are
+integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
+and lane 184 is stopped. No worker is active pending the next registered batch.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the

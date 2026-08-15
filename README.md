@@ -34,9 +34,10 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `9f149b6fd9` (`Repair GXSetZMode flush ordering`),
-completing the reviewed Depth ordering, raw Texgen/SU, and canonical Geometry
-chains on top of `251a010b8` (`Preserve typed GX depth setter ABI`),
+`c1/macos-host-launch` at `324c174ae3` (`Add canonical GX Channels ABI
+validator`), completing the reviewed neutral Channels ABI, Depth ordering, raw
+Texgen/SU, and canonical Geometry chains on top of `251a010b8` (`Preserve typed
+GX depth setter ABI`),
 `eeec2301c1` (`Track PC raw GX depth provenance`), and `c3e158398`
 (`Add canonical Transform ABI validator`), `59714a1fd` (`Repair indexed
 Transform shadow slots`), `4c3aeac40` (`Add PC raw Transform shadow`), `c736f9686`
@@ -221,12 +222,22 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   Indirect, and resource-generation ordering remain separate later owners. See
   [canonical setter-order evidence](docs/evidence/CANONICAL-SETTER-ORDER-251A010B8-2026-08-14.md).
 
-- The read-only Channels/Lighting audit freezes `0x0004` as a 136-byte paired
-  channel section and `0x0040` as a 516-byte eight-slot final light-object
-  section. It records the PC color, combined/separate setter, initialization,
-  direction, indexed-load, specular-helper, finite-value, and knownness gaps.
-  Neither section is implemented yet. See
-  [canonical Channels/Lighting contracts](docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md).
+- The Channels/Lighting audit freezes `0x0004` as a 136-byte paired channel
+  section and `0x0040` as a 516-byte eight-slot final light-object section.
+  Integrated `324c174ae3` implements the strict pointer-free Channels value ABI
+  and exact present/absent metadata validation; the current canonical native
+  and combined ASan/UBSan matrices pass `9/9`. Setter-owned raw Channels,
+  Lighting, and their cross-section producer remain open. See the
+  [canonical Channels/Lighting contracts](docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md)
+  and [canonical Channels implementation](docs/evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md).
+
+- Current read-only producer and Apple audits confirm that another V1-V4 shim
+  is not the next gate. The first draw-critical source lane is immutable
+  Geometry VCD/VAT/array/batch provenance at `pc_gx_flush_vertices`; Apple
+  consumption follows only after cumulative production, complete typed
+  dependencies, and stable resource generations. See the
+  [canonical producer readiness audit](docs/evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md)
+  and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three

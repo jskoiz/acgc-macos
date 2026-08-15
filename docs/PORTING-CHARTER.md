@@ -61,9 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `9f149b6fd9`, with
-the repaired `GXSetZMode` flush-before-mutation boundary, setter-owned raw
-Texgen/SU provenance, and the strict canonical Geometry ABI on
+As of 2026-08-14, the canonical local PC branch is clean at `324c174ae3`, with
+the strict neutral Channels ABI, repaired `GXSetZMode` flush-before-mutation
+boundary, setter-owned raw Texgen/SU provenance, and canonical Geometry ABI on
 top of the portable 888-byte Transform ABI and setter-owned raw Transform and
 Depth provenance, the portable 16-byte Depth ABI,
 setter-owned raw TEV/KONST provenance, and the canonical 32-byte Alpha/update
@@ -243,13 +243,24 @@ resource-generation order remain separate owners. See
 and the [Depth flush-order repair](evidence/PC-DEPTH-FLUSH-ORDER-9F149B6FD-2026-08-14.md).
 
 The Channels/Lighting audit freezes `0x0004` as a 136-byte two-record channel
-section and `0x0040` as a 516-byte eight-slot final light-object section. It
-preserves combined/separate channel semantics, disabled vertex sources,
-effective specular diffuse behavior, exact light masks, final coefficients,
-raw direction, and cross-section dependencies. The PC still needs exact raw
-color, direction, load, helper, bounds, and knownness repairs. Neither section
-is implemented or live. See
-[canonical Channels/Lighting contracts](evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md).
+section and `0x0040` as a 516-byte eight-slot final light-object section.
+Integrated `324c174ae3` implements the strict pointer-free Channels ABI and
+exact envelope metadata validation; native and combined ASan/UBSan canonical
+matrices pass `9/9`. The PC still needs setter-owned raw Channels provenance,
+while Lighting still needs exact raw color, direction, load, helper, bounds,
+knownness, and portable value implementation. See the
+[canonical Channels/Lighting contracts](evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md)
+and [canonical Channels implementation](evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md).
+
+The refreshed producer and Apple audits reject another transitional packet
+shim. The first draw-critical source gate is immutable Geometry VCD/VAT/array
+and batch provenance at `pc_gx_flush_vertices`. A cumulative producer then
+preflights every required section and resource generation before one
+synchronous all-or-nothing callback. Apple consumption begins only after that
+contract, through a pure-C immutable plan and separately owned resources,
+encoder, MSL, present, and readback gates. See the
+[canonical producer readiness audit](evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md)
+and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
 The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
 with three declared Metal-device skips in each configuration. Bounded Windows
