@@ -79,7 +79,7 @@ No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs. Exact lane-204 cleanup
 is complete. Lanes 208–209 are the two active M3 Max source workers: raw
 Raster and portable Indirect. Lane 210 completed its read-only
-Geometry-converter audit and is reviewed/archive-ready. Its verdict is that a
+Geometry-converter audit and is reviewed/archived. Its verdict is that a
 complete producer is not dependency-ready; the raw Geometry closure successor
 must wait until lane 208 releases overlapping `pc_gx.c` ownership. No full
 link, LLDB, or device run is active.
@@ -1182,7 +1182,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   branch, worktree, and exact clean base are confirmed.
 - Lane 210 / reused project-owned M3 task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete, reviewed, and
-  archive-ready read-only Geometry conversion audit at exact PC `039afce0e`
+  archived read-only Geometry conversion audit at exact PC `039afce0e`
   and decomp `09ca8e8b`. Its detached clean source scope is
   `/private/tmp/acgc-lane-geometry-converter-audit-m3`; it created no branch,
   edit, build, or test root. The completed `PCGXRawGeometry` batch safely
@@ -1218,7 +1218,7 @@ integrated at canonical PC `b3336504c`; lane 204 is reviewed and integrated at
 canonical PC `039afce0e`. Lanes 206–207 are complete, reviewed, and archived
 read-only audits. Exact lane-204 cleanup is complete. Lanes 208–209 are the two
 active M3 Max source workers on confirmed clean, separate `039afce0e` scopes.
-Lane 210 is complete, reviewed, and archive-ready; its Geometry raw-closure
+Lane 210 is complete, reviewed, and archived; its Geometry raw-closure
 successor is dependency-blocked by lane 208's `pc_gx.c` ownership. No lane 211
 is opened or queued; no full link, LLDB, or device run is active.
 The current
