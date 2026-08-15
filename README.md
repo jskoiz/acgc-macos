@@ -34,8 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `324c174ae3` (`Add canonical GX Channels ABI
-validator`), completing the reviewed neutral Channels ABI, Depth ordering, raw
+`c1/macos-host-launch` at `43992e7085` (`Add canonical GX Lighting ABI
+validator`), completing the reviewed neutral Lighting and Channels ABIs,
+Depth ordering, raw
 Texgen/SU, and canonical Geometry chains on top of `251a010b8` (`Preserve typed
 GX depth setter ABI`),
 `eeec2301c1` (`Track PC raw GX depth provenance`), and `c3e158398`
@@ -224,12 +225,22 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 
 - The Channels/Lighting audit freezes `0x0004` as a 136-byte paired channel
   section and `0x0040` as a 516-byte eight-slot final light-object section.
-  Integrated `324c174ae3` implements the strict pointer-free Channels value ABI
-  and exact present/absent metadata validation; the current canonical native
-  and combined ASan/UBSan matrices pass `9/9`. Setter-owned raw Channels,
-  Lighting, and their cross-section producer remain open. See the
-  [canonical Channels/Lighting contracts](docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md)
-  and [canonical Channels implementation](docs/evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md).
+  Integrated `324c174ae3` implements Channels and `43992e7085` implements
+  Lighting as strict pointer-free value ABIs with exact present/absent metadata
+  validation; the current canonical native and combined ASan/UBSan matrices
+  pass `10/10`. Setter-owned raw Channels and Lighting plus their cross-section
+  producer remain open. See the
+  [canonical Channels/Lighting contracts](docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md),
+  [canonical Channels implementation](docs/evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md),
+  and [canonical Lighting implementation](docs/evidence/CANONICAL-LIGHTING-STATE-43992E708-2026-08-14.md).
+
+- The Texture/TLUT/Dynamic audit freezes separate pointer-free `0x0010` and
+  `0x2000` value contracts with stable logical IDs, owner epochs, per-resource
+  generations, exact metadata, and an external synchronous lease for bytes.
+  The next source gate is the neutral synthetic-value ABI; raw PC resource
+  state, generations, leases, cumulative production, and Apple consumption
+  remain later gates. See the
+  [canonical Texture/Dynamic contract](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md).
 
 - Current read-only producer and Apple audits confirm that another V1-V4 shim
   is not the next gate. The first draw-critical source lane is immutable

@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `324c174ae3`, with
-the strict neutral Channels ABI, repaired `GXSetZMode` flush-before-mutation
+As of 2026-08-14, the canonical local PC branch is clean at `43992e7085`, with
+the strict neutral Lighting and Channels ABIs, repaired `GXSetZMode`
+flush-before-mutation
 boundary, setter-owned raw Texgen/SU provenance, and canonical Geometry ABI on
 top of the portable 888-byte Transform ABI and setter-owned raw Transform and
 Depth provenance, the portable 16-byte Depth ABI,
@@ -244,13 +245,23 @@ and the [Depth flush-order repair](evidence/PC-DEPTH-FLUSH-ORDER-9F149B6FD-2026-
 
 The Channels/Lighting audit freezes `0x0004` as a 136-byte two-record channel
 section and `0x0040` as a 516-byte eight-slot final light-object section.
-Integrated `324c174ae3` implements the strict pointer-free Channels ABI and
-exact envelope metadata validation; native and combined ASan/UBSan canonical
-matrices pass `9/9`. The PC still needs setter-owned raw Channels provenance,
-while Lighting still needs exact raw color, direction, load, helper, bounds,
-knownness, and portable value implementation. See the
-[canonical Channels/Lighting contracts](evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md)
-and [canonical Channels implementation](evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md).
+Integrated `324c174ae3` implements Channels and `43992e7085` implements
+Lighting as strict pointer-free value ABIs with exact envelope metadata
+validation; native and combined ASan/UBSan canonical matrices pass `10/10`.
+The PC still needs setter-owned raw Channels and Lighting provenance, exact
+producer conversion, and their cross-section validation. See the
+[canonical Channels/Lighting contracts](evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md),
+the [canonical Channels implementation](evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md),
+and the [canonical Lighting implementation](evidence/CANONICAL-LIGHTING-STATE-43992E708-2026-08-14.md).
+
+The Texture/TLUT/Dynamic audit freezes separate pointer-free `0x0010` and
+`0x2000` contracts. Stable logical IDs, owner epochs, per-image and per-TLUT
+generations, exact metadata, and a synchronous external byte lease replace
+host pointers, GL names, and cache hashes. Neutral synthetic-value validators
+are the next source gate; raw PC resource state, generation/invalidation,
+leases, cumulative production, and Apple delivery remain separate later
+owners. See the
+[canonical Texture/Dynamic contract](evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md).
 
 The refreshed producer and Apple audits reject another transitional packet
 shim. The first draw-critical source gate is immutable Geometry VCD/VAT/array
