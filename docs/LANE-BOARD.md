@@ -72,7 +72,8 @@ the independent focused verification matrix; lane 161 is integrated as PC
 164 completed the Transforms/Texgens provenance audit; lane 165 is integrated
 as PC `f2b7ab153`; lane 166 remains the active PC raw-TEV-shadow source lane;
 lane 167 is the active read-only exact Transforms ABI audit; lane 168 is the
-non-overlapping portable canonical TEV ABI source lane. No
+non-overlapping portable canonical TEV ABI source lane; lane 169 is the
+read-only Depth/Raster exact contract audit. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -394,8 +395,17 @@ checkout.
   Apple/Metal, producer wiring, full link, LLDB, assets, pixels, devices, and
   playability are out of scope. Success supplies the portable packing target
   for lane 166's independently reviewed exact raw TEV shadow.
+- Lane 169 / task `01a002d6-8511-79d2-afeb-4348ff78a52a` — active read-only
+  M3 Max Depth/Raster contract audit in detached worktree
+  `/private/tmp/acgc-lane-depth-raster-contract-audit` at exact PC
+  `f2b7ab153`, with decomp oracle `09ca8e8b`. It separately owns the exact
+  versioned `0x0200` Depth and `0x0400` Raster/viewport/scissor value layouts,
+  two-upstream bounds/initialization/knownness, current PC no-op and lossy
+  setters, and the smallest serial shadow-state repair plan. It may not edit,
+  branch, build, launch, access assets, overlap source ownership, or claim
+  callback, Metal, pixel, device, Windows runtime, iOS, or playability proof.
 
-The remote Codex project assignment records place tasks 156–168 under the
+The remote Codex project assignment records place tasks 156–169 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
