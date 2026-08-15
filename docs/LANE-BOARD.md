@@ -99,9 +99,10 @@ lane 214's independent read-only review. Lane 216 returned source commit
 `5aba10371f`, but lane 218 independently blocked it on strict raw-metadata
 validation and missing mandatory fixture cases. Lane 217 completed its
 read-only current-tip cumulative-producer audit and found the cumulative gate
-still blocked by missing leaf owners/producers. Lane 216 is the sole active
-source worker, resumed on the same branch for the exact two-file repair. No
-full link, LLDB, or device run is active.
+still blocked by missing leaf owners/producers. Lane 216 is active on the same
+branch for the exact two-file repair, and lane 219 is active on the independent
+portable Texgen/SU ABI prerequisite. No full link, LLDB, or device run is
+active.
 
 ## Remote M3 Max batch (current)
 
@@ -1404,6 +1405,24 @@ also integrated. Remote workers may not update the umbrella checkout.
   `docs/evidence/CANONICAL-GEOMETRY-PRODUCER-REVIEW-5ABA103-2026-08-15.md`.
   No full link, LLDB, Metal, device, pixel, ISO/assets, Windows sign-off, or
   playability claim is in scope.
+- Lane 219 / reused project-owned M3 canonical task
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active portable Texgen/SU ABI
+  source/test lane on `gpt-5.6-luna` with max reasoning. Its dedicated source
+  is `/private/tmp/acgc-lane-canonical-texgen-state-m3` on branch
+  `c1/lane-canonical-texgen-state-m3` at exact PC `b9a9f355`; decomp
+  `09ca8e8b` is read-only. It consumes the frozen ID4 contract and integrated
+  raw-owner evidence from two hash-verified source-only control files. Exact
+  ownership is new `include/acgc/gx_canonical_texgen_state.h`, new
+  `src/gx_canonical_texgen_state.c`, one new portable fixture, and minimal
+  `pc/portable/CMakeLists.txt` registration. It may not edit `pc_gx.c`, raw
+  state, Geometry, Transform, Raster, Texture/TEV/Indirect, the cumulative
+  envelope, Apple/Metal, decomp, or ISO/assets paths. The gate is the frozen
+  2,624-byte pointer-free little-endian section, strict record/matrix/SU
+  validation, native and combined ASan/UBSan focused tests, bounded syntax
+  probes, and one reviewable source commit. Unique roots are
+  `/private/tmp/acgc-lane-canonical-texgen-state-{native,asan,win}`. This is
+  CPU/ABI evidence only; it cannot prove the later PC leaf producer, callback,
+  Metal, pixel, device, Windows runtime, or playability.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1432,10 +1451,10 @@ completed the narrow same-branch repair of blocked worker `1730823d45` as child
 `5679bff656` and is integrated at canonical `b9a9f355`; lane 212 is
 complete/archived; lane 213 completed the exact-tip matrix; lane 214 completed
 its read-only BLOCK review; and lane 215 completed its independent read-only
-PASS review. Lane 216 is the sole active worker for the exact lane-218 repair;
-lane 217 is complete/blocked at the cumulative readiness gate, and lane 218 is
-complete with a source-review `BLOCK`. No full link, LLDB, or device run is
-active.
+PASS review. Lane 216 is active for the exact lane-218 repair; lane 217 is
+complete/blocked at the cumulative readiness gate, lane 218 is complete with a
+source-review `BLOCK`, and lane 219 is the independent active Texgen/SU ABI
+worker. No full link, LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
