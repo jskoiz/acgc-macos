@@ -64,12 +64,17 @@ completed the M3 Max raw Texture/TLUT producer. Root review rejected its
 initial all-map TLUT invalidation; the same lane repaired that defect as child
 commit `698d45d3e`, and the final tree is reviewed and integrated on canonical
 `c1/macos-host-launch`. Fresh exact-tip native and combined ASan/UBSan focused
-matrices pass `7/7` each. Lane 205 is now reviewed and integrated as canonical
-PC `b3336504c`; its native and combined ASan/UBSan canonical matrices pass
-`13/13`. Root review returned lane 204's first commit for exact malformed-GXBool
-and production-builder repair; it remains the sole source-edit worker. Lanes
-206–207 completed their read-only audits and are reviewed/archive-ready under
-the remote M3 Max `acgc-modern-port` project.
+matrices pass `7/7` each. Lane 205 is reviewed and integrated as canonical PC
+`b3336504c`; its native and combined ASan/UBSan canonical matrices pass
+`13/13`. Lane 204's final two-commit worker range is reviewed and squashed onto
+that newer tip as canonical PC `039afce0e`; exact native and combined
+ASan/UBSan focused CTest pass `2/2` each and the real production `pc_gx.c`
+object compiles. Root's initial malformed-`GXBool` concern was retracted
+because `TARGET_PC` defines `GXBool` as C `bool`; the final fixture uses only
+valid booleans and checks an out-of-range compare value through the real `u32`
+setter surface. Lanes 206–207 completed their read-only audits and are
+reviewed/archived under the remote M3 Max `acgc-modern-port` project. No
+production worker is active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -77,7 +82,7 @@ evidence remain available in Git and the evidence docs.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`b3336504c` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`039afce0e` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1069,30 +1074,28 @@ also integrated. Remote workers may not update the umbrella checkout.
   prove a full link, live callback, Metal encode/present/readback, pixel,
   device, or playability gate.
 - Lane 204 / project-owned M3 task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — active focused raw
-  Alpha/ZCompLoc repair lane. Initial clean commit `35b1e7a2d` is pinned to
-  canonical PC base `698d45d3e` and
-  decomp `09ca8e8b`; its dedicated source path is
-  `/private/tmp/acgc-lane-raw-alpha-zcomp-m3` on branch
-  `c1/lane-raw-alpha-zcomp-m3`. The exact gate is to preserve the existing
-  canonical Alpha ABI while adding truthful raw/update provenance for
-  `GXSetZCompLoc`, with flush-before-mutation ordering and a focused
-  fail-closed fixture. Ownership is limited to `pc/include/pc_gx_internal.h`,
-  the Alpha/ZCompLoc setters and raw builder seam in `pc/src/pc_gx.c`, one new
-  focused fixture, and minimal `pc/CMakeLists.txt` registration. It must
-  crosswalk those PC symbols against decomp `GXPixel.c`, `GXInit.c`, public GX
-  declarations/enums, and representative callers before editing. All packet
-  ABI files, Apple/Metal files, Texture/TLUT, Raster, Indirect, cumulative
-  producer policy, ISO/assets, full link, LLDB, device, pixel, and playability
-  work are out of scope. Unique roots are
-  `/private/tmp/acgc-lane-raw-alpha-zcomp-{native,asan,win}`. Success requires
-  a clean worker commit plus serial focused native and combined ASan/UBSan
-  evidence; no runtime or rendering claim follows. Root review rejected the
-  initial candidate because it normalized malformed nonzero `GXBool` values
-  instead of failing closed and compiled the canonical builder only into the
-  fixture target rather than the production `ac_pc` object. The same lane owns
-  the narrow child repair and focused production-object compile; no new lane
-  or broadened scope is authorized.
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — complete, reviewed, integrated,
+  and archived raw Alpha/ZCompLoc producer lane. Worker branch
+  `c1/lane-raw-alpha-zcomp-m3` advanced from canonical PC base `698d45d3e`
+  through initial commit `35b1e7a2d` to repaired final `ae5102de3`; root
+  squashed the accepted four-file end state onto newer canonical `b3336504c`
+  as `039afce0e`. Exact ownership is `pc/CMakeLists.txt`,
+  `pc/include/pc_gx_internal.h`, `pc/src/pc_gx.c`, and
+  `pc/tests/pc_gx_alpha_raw_shadow_fixture.c`. It adds setter-owned Alpha
+  known/invalid provenance, captures `GXSetZCompLoc` with completed-batch
+  flush-before-mutation ordering, converts only complete valid state through
+  the existing canonical Alpha ABI, and enables/links the builder on the real
+  `ac_pc` target. A narrow production-object target prevents fixture-only
+  compile-definition success. Root retracted the initial malformed-`GXBool`
+  repair request after confirming `TARGET_PC` uses C `bool`; the final fixture
+  contains no ABI-mismatched boolean call and instead checks the representable
+  out-of-range `GXCompare` domain. Fresh integrated native and combined
+  ASan/UBSan focused CTest pass `2/2` each, the production object compiles in
+  both roots, no diagnostics were emitted, and leak detection was disabled.
+  Evidence is
+  `docs/evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md`. No cumulative
+  envelope, full link, runtime, callback, Metal, pixel, device, or playability
+  claim follows.
 - Lane 205 / project-owned M3 task
   `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete, reviewed, integrated,
   and archive-ready portable canonical Raster ABI lane. Worker branch
@@ -1149,9 +1152,10 @@ integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
 lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is reviewed
 and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
-integrated at canonical PC `b3336504c`. Lane 204 is the sole active source-edit
-worker under root-review repair; lanes 206–207 are complete, reviewed, and
-archive-ready read-only audits.
+integrated at canonical PC `b3336504c`; lane 204 is reviewed and integrated at
+canonical PC `039afce0e`. Lanes 206–207 are complete, reviewed, and archived
+read-only audits. No worker is active and no replacement lane is selected
+while exact lane-204 cleanup is pending.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.

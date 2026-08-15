@@ -61,7 +61,8 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-15, the canonical local PC branch is clean at `b3336504c`, with
+As of 2026-08-15, the canonical local PC branch is clean at `039afce0e`, with
+setter-owned raw Alpha/ZCompLoc provenance and production-object availability,
 the strict portable Raster value ABI, persistent setter-owned raw Channels and
 Lighting, immutable raw Geometry
 batches, a pointer-free raw Texture/TLUT owner and synchronous resource lease,
@@ -240,6 +241,15 @@ the [canonical Raster implementation](evidence/CANONICAL-RASTER-STATE-B3336504C-
 the [PC raw Depth shadow](evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md),
 and the [Depth flush-order repair](evidence/PC-DEPTH-FLUSH-ORDER-9F149B6FD-2026-08-14.md).
 
+Integrated `039afce0e` adds setter-owned Alpha compare, color/alpha update,
+and `GXSetZCompLoc` provenance with completed-batch flush-before-mutation
+ordering. It publishes only a complete, valid eight-word state through the
+existing canonical Alpha validator, and the real production target now
+compiles and links the builder. Exact native and combined ASan/UBSan focused
+CTest pass `2/2` each, including a production-object compile. This is CPU
+producer evidence only, not a full link or live renderer result. See
+[PC raw Alpha/ZCompLoc evidence](evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md).
+
 The canonical setter-order audit fixes the producer-facing invariant at
 `pc_gx_flush_vertices`: flush a completed old batch before any raw/effective
 state mutation. The repaired Texgen/SU worker applies it to exactly seven
@@ -298,9 +308,10 @@ shim. Integrated `23c26e520a` now captures immutable Geometry VCD/VAT/array and
 completed-batch provenance at `pc_gx_flush_vertices`, including direct
 `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated `97aebd8a2d`
 supplies persistent raw Channels and Lighting, `698d45d3e` supplies raw
-Texture/TLUT generations and synchronous resource leases, and `b3336504c`
-supplies the neutral Raster value ABI. Raw Raster, Alpha/ZCompLoc, and Indirect
-ownership remain prerequisites. A cumulative producer must then preflight
+Texture/TLUT generations and synchronous resource leases, `b3336504c`
+supplies the neutral Raster value ABI, and `039afce0e` supplies raw
+Alpha/ZCompLoc provenance. Raw Raster and Indirect ownership remain
+prerequisites. A cumulative producer must then preflight
 every required section and resource
 generation before one synchronous all-or-nothing callback. Apple consumption
 begins only after that contract, through a pure-C immutable plan and separately
@@ -309,6 +320,7 @@ owned resources, encoder, MSL, present, and readback gates. See the
 [earlier canonical producer readiness audit](evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md),
 [current cumulative readiness reconciliation](evidence/CURRENT-CUMULATIVE-PRODUCER-READINESS-698D45D3E-2026-08-15.md),
 [canonical Indirect contract](evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md),
+[raw Alpha/ZCompLoc evidence](evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
 and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
 The exact `23c26e520a` focused baseline passes all twelve neutral validators
