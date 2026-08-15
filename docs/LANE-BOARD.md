@@ -110,7 +110,8 @@ Lane 222 completed the independent Texgen review. Lane 223 completed the
 Transform leaf-producer source handoff at `4fde6d94` and is on root-review
 hold. No full link, LLDB, or device run is active. Lane 224 completed its
 read-only TEV audit with `BLOCK`; lane 225 remains active on the
-Alpha/Blend/Depth/Fog producer topology.
+Alpha/Blend/Depth/Fog producer topology. Lane 226 is registered setup-pending
+for the independent Transform producer review.
 
 ## Remote M3 Max batch (current)
 
@@ -1545,6 +1546,16 @@ also integrated. Remote workers may not update the umbrella checkout.
   and freeze only disjoint later source contracts. It owns no edit, branch,
   build, test, cleanup, integration, full link, LLDB, Apple/Metal, device/pixel,
   ISO/assets, Windows sign-off, or playability work.
+- Lane 226 / reused project-owned M3 review task
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending independent read-only
+  review of lane 223 worker `4fde6d94ed` against base `689590cc`. It must use
+  only the verified canonical and thin review bundles plus the hash-verified
+  readiness control, create detached review source
+  `/private/tmp/acgc-lane-226-transform-producer-review`, verify exact four-file
+  scope and both-upstream semantics, and return `PASS` or exact material
+  findings. It owns no edit, branch, build, test, cleanup, integration, full
+  link, LLDB, Apple/Metal, device/pixel, ISO/assets, Windows sign-off, or
+  playability work.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
