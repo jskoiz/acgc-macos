@@ -55,7 +55,8 @@ combined ASan/UBSan `17/17` passes; its exact holder-free generated roots are
 retired. Lane 198 completed the independent read-only review of the initial
 lane-195 candidate; root review supersedes its PASS at the documented
 persistence boundary. Lane 200 is the sole active production worker, owning
-the now-unblocked raw Lighting producer on the M3 Max.
+the now-unblocked raw Lighting producer on the M3 Max. Lane 201 independently
+refreshes the exact post-Channels focused matrix without editing source.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -965,6 +966,20 @@ also integrated. Remote workers may not update the umbrella checkout.
   clean worker commit, exact two-upstream crosswalk, focused native and
   combined ASan/UBSan serial results, static probes, and a bounded handoff; it
   releases shared `pc_gx` ownership to the raw Texture/TLUT successor.
+- Lane 201 / reused project-owned M3 task
+  `01a002e1-540c-7693-b25d-363a1f209dd4` — active verification-only successor
+  at exact canonical PC `38343a5eb5` and decomp `09ca8e8b`. It uses the same
+  verified tracked-source-only bundle as lane 200 but owns no source, branch,
+  docs, or gitlink. Its separate detached source path is
+  `/private/tmp/acgc-lane-current-383-matrix-source`, with unique generated
+  roots `/private/tmp/acgc-lane-current-383-matrix-{native,asan,win}`. The
+  exact gate is twelve neutral validators plus raw TEV, Transform, Depth,
+  Texgen/SU, Geometry, and Channels fixtures: `18/18` native and `18/18`
+  combined ASan/UBSan are required, followed by bounded C/C++11, ILP32, and
+  Windows/i686 syntax probes. A missing cross-toolchain remains a reported
+  boundary, not Windows sign-off. No full link, LLDB, game/resources,
+  Apple/Metal device, pixel, input/audio/save, iOS, or playability action is
+  authorized. It may not touch lane 200's raw Lighting worktree.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -981,7 +996,7 @@ LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
 lanes 191–192, 194, and 196–198 are complete. Lane 200 is the sole active
-production worker. The current
+production worker and lane 201 is the sole active verification worker. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
