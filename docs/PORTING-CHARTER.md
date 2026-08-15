@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `037689462`, with
-setter-owned raw TEV/KONST provenance plus the canonical 32-byte Alpha/update
+As of 2026-08-14, the canonical local PC branch is clean at `59714a1fd`, with
+setter-owned raw Transform provenance, the portable 16-byte Depth ABI,
+setter-owned raw TEV/KONST provenance, and the canonical 32-byte Alpha/update
 and 16-byte Blend/logic sections on top of the strict GX envelope
 validator, legacy V4 sink guard, standalone canonical fog value section,
 focused input trigger-parity correction, and the
@@ -188,17 +189,23 @@ See [Transforms/Texgens provenance](evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENAN
 The exact follow-up freezes `0x0002` as a version-1 888-byte Transform payload
 with six raw projection coefficients, ten position and ten normal slots,
 strict logical IDs, and explicit knownness. Ordinary/post texture matrices,
-texgen references, and manual SU remain solely in `0x0008`. The PC still needs
-a raw Transform shadow before live production. See
-[canonical Transform contract](evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md).
+texgen references, and manual SU remain solely in `0x0008`. Integrated
+`59714a1fd` now retains the setter-owned raw values and per-slot unresolved
+indexed state without changing the host renderer; exact native and combined
+ASan/UBSan Transform plus raw-TEV fixtures pass `2/2`. The portable `0x0002`
+section and live cumulative producer remain open. See the
+[canonical Transform contract](evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md)
+and [PC raw Transform shadow](evidence/PC-RAW-TRANSFORM-SHADOW-59714A1FD-2026-08-14.md).
 
 The Depth/Raster audit freezes `0x0200` as a 16-byte Z-mode section and
 `0x0400` as a 128-byte logical viewport/scissor/raster section. It identifies
 the PC host-state, no-op, jitter, cull-override, line/point, destination-alpha,
-field, and knownness gaps. Neutral Depth and Raster ABIs come first; their
-overlapping setter hooks then belong to one serial PC shadow owner. Neither
-section is implemented or live yet. See
-[canonical Depth/Raster contracts](evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md).
+field, and knownness gaps. Integrated `c736f9686` implements the strict
+portable Depth section and exact envelope metadata validation; native and
+combined ASan/UBSan canonical matrices pass `6/6`. Raster and the overlapping
+serial PC shadow owner remain open; neither is live-renderer evidence. See the
+[canonical Depth/Raster contracts](evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md)
+and [canonical Depth implementation](evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md).
 
 The Channels/Lighting audit freezes `0x0004` as a 136-byte two-record channel
 section and `0x0040` as a 516-byte eight-slot final light-object section. It

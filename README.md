@@ -34,8 +34,11 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `037689462` (`Add PC raw TEV register shadow`), on
-top of `f2b7ab153` (`Add canonical Alpha test/update state`), `216d1e24b`
+`c1/macos-host-launch` at `59714a1fd` (`Repair indexed Transform shadow
+slots`), on top of `4c3aeac40` (`Add PC raw Transform shadow`), `c736f9686`
+(`Add canonical GX Depth ABI validator`), `6d1d310c0` (`Add canonical GX TEV
+value ABI`), `037689462` (`Add PC raw TEV register shadow`), `f2b7ab153`
+(`Add canonical Alpha test/update state`), `216d1e24b`
 (`Add canonical Blend logic state`), `4dbb71065`
 (`Add strict canonical GX envelope validator`), and
 `62ef6638d` (`Fail closed legacy V4 Apple sink eligibility`),
@@ -165,16 +168,22 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   888-byte aggregate containing raw six-coefficient projection, ten position
   matrices, ten normal matrices, current logical ID, and explicit knownness.
   All texture/post matrices and manual SU state remain exclusively in
-  `0x0008`. This is read-only architecture evidence; PC raw Transform shadow
-  state is still required. See
-  [canonical Transform contract](docs/evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md).
+  `0x0008`. Integrated `59714a1fd` now retains that setter-owned raw state,
+  including exact per-slot unresolved indexed loads and finite immediate
+  repair, while preserving the existing host renderer. Native and combined
+  ASan/UBSan Transform plus raw-TEV fixtures pass `2/2`; the portable `0x0002`
+  ABI and cumulative producer remain open. See the
+  [canonical Transform contract](docs/evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md)
+  and [PC raw Transform shadow](docs/evidence/PC-RAW-TRANSFORM-SHADOW-59714A1FD-2026-08-14.md).
 
 - The read-only Depth/Raster audit freezes `0x0200` as a 16-byte logical
   Z-mode section and `0x0400` as a 128-byte viewport/scissor/raster section.
-  It identifies lost/no-op PC setters and selects neutral Depth and Raster
-  ABIs before one serial shared `pc_gx` shadow repair. This is architecture
-  evidence only; neither section is implemented yet. See
-  [canonical Depth/Raster contracts](docs/evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md).
+  Integrated `c736f9686` implements the strict portable Depth ABI and exact
+  present/absent envelope validation; the shared canonical native and combined
+  ASan/UBSan matrix passes `6/6` in each configuration. Raster and the serial
+  PC Z/raster provenance shadow remain open. See the
+  [canonical Depth/Raster contracts](docs/evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md)
+  and [canonical Depth implementation](docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md).
 
 - The read-only Channels/Lighting audit freezes `0x0004` as a 136-byte paired
   channel section and `0x0040` as a 516-byte eight-slot final light-object
