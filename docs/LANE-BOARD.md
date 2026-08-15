@@ -144,12 +144,14 @@ passing natively and under combined ASan/UBSan. Lane 235's final immutable
 re-review returned `PASS`. Root imported the verified final bundle, applied all
 three commits one at a time, and integrated canonical PC `62c810e5b`; fresh
 exact-tip native and combined ASan/UBSan focused CTest pass `2/2` each. Both
-tasks are complete/integrated/archived. Lanes 236 and 237 are now the only
-active workers: two disjoint remote M3 Max source lanes for the canonical TEV
-and Indirect leaf producers. Lane 236 alone owns `pc/CMakeLists.txt`; lane 237
-must use a source-direct focused harness until root registration after the
-ownership boundary releases. No full link, LLDB, launch, or device work is
-active.
+tasks are complete/integrated/archived. Lane 236 is the sole active source-edit
+worker for the canonical TEV leaf producer. Lane 237 has completed its clean
+canonical Indirect leaf handoff at worker `2f6ba5dff` and is held for
+independent root review; nothing from it is integrated yet. Lane 238 is the
+parallel read-only cumulative snapshot and Apple CPU-boundary audit at the
+same exact `62c810e5b` source tip. Lane 236 alone owns `pc/CMakeLists.txt`;
+lane 237 used a source-direct focused harness and lane 238 owns no files. No
+full link, LLDB, launch, or device work is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1900,11 +1902,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   LLDB, runtime, Apple/Metal, device/pixel, Windows sign-off, assets, and
   playability are out of scope.
 - Lane 237 / reused project-owned M3 Max task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active/registered source-edit lane
-  for the canonical Indirect leaf producer. It uses the same verified bundle,
-  exact PC/decomp bases, and has clean isolated source
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete/root-review-hold
+  source-edit lane for the canonical Indirect leaf producer. It used the same
+  verified bundle and exact PC/decomp bases, and its clean isolated source
   `/private/tmp/acgc-lane-canonical-indirect-producer-m3` on
-  `c1/lane-canonical-indirect-producer-m3` at `62c810e5b`; future roots are
+  `c1/lane-canonical-indirect-producer-m3` advanced from `62c810e5b` to clean
+  worker `2f6ba5dff`; roots are
   `/private/tmp/acgc-lane-canonical-indirect-producer-{native,asan,win}`. It
   owns only new `pc/include/pc_gx_indirect_producer.h`, new
   `pc/src/pc_gx_indirect_producer.c`, and new
@@ -1919,7 +1922,29 @@ also integrated. Remote workers may not update the umbrella checkout.
   diff, and bounded syntax evidence is authorized; TEV-side indirect fields,
   `pc_gx.c`, raw ownership, CMake, cumulative dependency validation, full link,
   LLDB, runtime, Apple/Metal, device/pixel, Windows sign-off, assets, and
-  playability are out of scope.
+  playability are out of scope. Native and combined ASan/UBSan source-direct
+  fixtures pass, the production producer object and bounded C/C++/ILP32 probes
+  pass, and `_WIN32` remains blocked by the missing Windows SDK `process.h`.
+  Complete-history bundle
+  `/private/tmp/acgc-lane-237-canonical-indirect-producer.bundle` has SHA-256
+  `aaab318c0cbe19e6d52b63107e1431489eb4a1ee6762ecf34a87c072796b30c2`.
+  Nothing is integrated and all lane paths remain protected pending an
+  independent immutable review.
+- Lane 238 / reused project-owned M3 Max task
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active/registered independent
+  read-only audit. Setup verified the complete-history source-only bundle
+  `/private/tmp/acgc-canonical-pc-62c810e.bundle` at SHA-256
+  `7e8c25348f11fdb124e8c5ad75d78b0b4de1d139cd37e435ac535f303e2617e5`,
+  exact PC `62c810e5b`, and clean decomp `09ca8e8b`. Its clean detached source
+  is `/private/tmp/acgc-lane-238-cumulative-apple-audit-m3` at the exact PC
+  tip; it has no branch, files, build/test/log roots, or runtime authority. It
+  will decide separately whether the smallest cumulative CPU assembler, typed
+  Apple CPU consumer, and later live callback trace are dependency-ready after
+  lanes 236/237, map every available/missing truthful section producer, freeze
+  atomic snapshot/lease/publication failure behavior, and name exact
+  non-overlapping successors. No edit, build, test, CMake, full link, LLDB,
+  runtime, Metal/device/pixel, input/audio/save, iOS, or playability claim is
+  authorized.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
