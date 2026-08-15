@@ -61,8 +61,8 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `38343a5eb5`, with
-persistent setter-owned raw Channels, immutable raw Geometry batches, the
+As of 2026-08-14, the canonical local PC branch is clean at `97aebd8a2d`, with
+persistent setter-owned raw Channels and Lighting, immutable raw Geometry batches, the
 strict neutral Texture/TLUT, Dynamic, Lighting, and Channels ABIs, repaired `GXSetZMode`
 flush-before-mutation
 boundary, setter-owned raw Texgen/SU provenance, and canonical Geometry ABI on
@@ -257,12 +257,17 @@ leak detection disabled), with corrected public C/C++11 and bounded ILP32/
 Windows ABI syntax probes. A real Windows build remains blocked by host SDL
 framework imports and the absent private-PC Windows toolchain/headers; see
 [current focused matrix evidence](evidence/CURRENT-FOCUSED-MATRIX-38343A5EB-2026-08-14.md).
-The PC still needs setter-owned raw Lighting provenance, exact cross-section
-conversion, and dependency validation. See the
+Integrated `97aebd8a2d` adds pointer-free eight-slot raw Lighting provenance,
+unresolved indexed-load tracking and repair, final-direction semantics, and
+strict Channels dependency validation. Exact integrated native and combined
+ASan/UBSan focused matrices pass `9/9`, with both production objects compiling.
+The PC still needs cumulative cross-section conversion and resource ownership.
+See the
 [canonical Channels/Lighting contracts](evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md),
 the [canonical Channels implementation](evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md),
 the [canonical Lighting implementation](evidence/CANONICAL-LIGHTING-STATE-43992E708-2026-08-14.md),
-and [raw Channels integration evidence](evidence/PC-RAW-CHANNELS-38343A5EB-2026-08-14.md).
+[raw Channels integration evidence](evidence/PC-RAW-CHANNELS-38343A5EB-2026-08-14.md),
+and [raw Lighting integration evidence](evidence/PC-RAW-LIGHTING-97AEBD8A2-2026-08-14.md).
 
 The Texture/TLUT/Dynamic audit freezes separate pointer-free `0x0010` and
 `0x2000` contracts. Stable logical IDs, owner epochs, per-image and per-TLUT
@@ -280,9 +285,9 @@ and [raw Texture/TLUT producer plan](evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C
 The refreshed producer and Apple audits reject another transitional packet
 shim. Integrated `23c26e520a` now captures immutable Geometry VCD/VAT/array and
 completed-batch provenance at `pc_gx_flush_vertices`, including direct
-`GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated `38343a5eb5`
-supplies persistent raw Channels. Setter-owned raw Lighting and Texture/TLUT
-resource generations remain required. A
+`GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated `97aebd8a2d`
+supplies persistent raw Channels and Lighting. Texture/TLUT resource
+generations remain required. A
 cumulative producer then preflights every required section and resource
 generation before one synchronous all-or-nothing callback. Apple consumption
 begins only after that contract, through a pure-C immutable plan and separately

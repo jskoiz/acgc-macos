@@ -34,8 +34,8 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `38343a5eb5` (`Capture persistent raw GX channel
-state`), completing persistent setter-owned raw Channels, immutable raw
+`c1/macos-host-launch` at `97aebd8a2d` (`Capture raw GX Lighting register
+state`), completing persistent setter-owned raw Channels and Lighting, immutable raw
 Geometry batches, the reviewed neutral Texture/TLUT, Dynamic, Lighting, and
 Channels ABIs, Depth ordering, raw
 Texgen/SU, and canonical Geometry chains on top of `251a010b8` (`Preserve typed
@@ -232,12 +232,17 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   Integrated `38343a5eb5` adds setter-owned raw Channels, including persistent
   inactive register state, partial RGBA knownness, sticky invalidity, and exact
   inactive canonical zeroing. Its exact canonical native and combined
-  ASan/UBSan focused matrices pass `7/7`. Setter-owned raw Lighting and the
-  cross-section producer remain open. See the
+  ASan/UBSan focused matrices pass `7/7`. Integrated `97aebd8a2d` then adds
+  pointer-free eight-slot raw Lighting provenance, unresolved indexed-load
+  tracking, immediate-load repair, and strict Channels dependency validation.
+  Exact integrated native and combined ASan/UBSan matrices pass `9/9`, with
+  both production objects compiling. The cross-section producer remains open.
+  See the
   [canonical Channels/Lighting contracts](docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md),
   [canonical Channels implementation](docs/evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md),
   [canonical Lighting implementation](docs/evidence/CANONICAL-LIGHTING-STATE-43992E708-2026-08-14.md),
-  and [raw Channels integration evidence](docs/evidence/PC-RAW-CHANNELS-38343A5EB-2026-08-14.md).
+  [raw Channels integration evidence](docs/evidence/PC-RAW-CHANNELS-38343A5EB-2026-08-14.md),
+  and [raw Lighting integration evidence](docs/evidence/PC-RAW-LIGHTING-97AEBD8A2-2026-08-14.md).
 
 - The Texture/TLUT/Dynamic audit freezes separate pointer-free `0x0010` and
   `0x2000` value contracts with stable logical IDs, owner epochs, per-resource
@@ -254,9 +259,9 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 - Integrated `23c26e520a` now captures immutable Geometry
   VCD/VAT/array/completed-batch provenance at `pc_gx_flush_vertices`, including
   direct `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated
-  `38343a5eb5` supplies its persistent raw Channels dependency. Remaining
-  draw-critical source work is setter-owned raw Lighting and Texture/TLUT
-  resource generations followed by one all-or-nothing cumulative serializer.
+  `97aebd8a2d` supplies persistent raw Channels and Lighting dependencies.
+  Remaining draw-critical source work is Texture/TLUT resource generations
+  followed by one all-or-nothing cumulative serializer.
   Apple consumption follows only after those complete typed dependencies and
   stable resources. See the
   [raw Geometry integration evidence](docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),

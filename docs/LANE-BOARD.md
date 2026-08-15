@@ -55,12 +55,11 @@ combined ASan/UBSan `17/17` passes; its exact holder-free generated roots are
 retired. Lane 198 completed the independent read-only review of the initial
 lane-195 candidate; root review supersedes its PASS at the documented
 persistence boundary. Lane 200 completed the raw Lighting producer on the M3
-Max and is in root integration review. Lane 201 completed its
+Max and is reviewed and integrated as canonical PC `97aebd8a2d`. Lane 201 completed its
 independent exact post-Channels matrix: native and combined ASan/UBSan each
 pass `18/18`, the corrected ABI/syntax probes pass, and Windows remains at the
-documented SDL/toolchain boundary. Lane 202 is the sole active verification
-worker, independently reviewing the lane-200 five-file diff without editing or
-building it. No production worker is active.
+documented SDL/toolchain boundary. Lane 202 completed its independent
+read-only five-file review with `PASS` and is archived. No worker is active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -68,7 +67,7 @@ evidence remain available in Git and the evidence docs.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`38343a5eb5` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`97aebd8a2d` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -951,8 +950,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   cumulative packet, full link, LLDB, Metal, pixel, device, or playability
   claim follows.
 - Lane 200 / reused project-owned M3 task
-  `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete raw Lighting source/test
-  successor, root-review pending. The verified tracked-source-only bundle
+  `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete, reviewed, integrated,
+  and archive-ready raw Lighting source/test successor. The verified tracked-source-only bundle
   `/private/tmp/acgc-canonical-pc-38343a5.bundle` has SHA-256
   `11f1631915c8e97ae9d48b79ef3132b8083cfc756a2efe1e2b4f1d258fdfa0ce`,
   contains exact canonical PC `38343a5eb5`, and requires base `23c26e520a`.
@@ -974,7 +973,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   reports native plus combined ASan/UBSan `9/9` each. Root imported a verified
   Git-only bundle with SHA-256
   `6a2ba66a08968c73889ff45aa639856c6629c6a1abf8bcc7d2c266624ab78165`
-  into detached local review `/private/tmp/acgc-review-raw-lighting-97a`. No
+  into detached local review `/private/tmp/acgc-review-raw-lighting-97a`.
+  Independent lane 202 returned `PASS`; root fast-forwarded the exact tree to
+  canonical `c1/macos-host-launch` and fresh integrated native plus combined
+  ASan/UBSan matrices pass `9/9` each, with both production objects compiling.
+  Evidence is
+  `docs/evidence/PC-RAW-LIGHTING-97AEBD8A2-2026-08-14.md`. No
   full link, LLDB, callback, Metal, pixel, device, or playability claim follows.
 - Lane 201 / reused project-owned M3 task
   `01a002e1-540c-7693-b25d-363a1f209dd4` — complete, reviewed, and archived
@@ -996,7 +1000,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   Apple/Metal device, pixel, input/audio/save, iOS, or playability action is
   authorized. Its exact source/native/ASan/Windows roots are retired.
 - Lane 202 / reused project-owned M3 task
-  `01a002e1-540c-7693-b25d-363a1f209dd4` — active independent read-only review
+  `01a002e1-540c-7693-b25d-363a1f209dd4` — complete and archived independent read-only review
   of lane 200. It is pinned to PC base `38343a5eb5`, candidate
   `97aebd8a2d`, decomp `09ca8e8b`, and the clean M3 worker path
   `/private/tmp/acgc-lane-raw-lighting-m3`. It owns no source, branch, tests,
@@ -1004,8 +1008,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   against the frozen raw-Lighting plan, canonical Channels/Lighting validators,
   the PC legacy GL/Windows path, and decomp `GXLight.c`, `GXInit.c`,
   `GXVerify.c`, public types/enums, and representative callers. It returns
-  PASS or a concrete BLOCKER with the smallest repair; lane-200 test results are
-  reported evidence only. No build, launch, LLDB, resource access, callback,
+  `PASS` after resolving the actual PC `GXColor` object-byte ABI and finding no
+  candidate-owned blocker; lane-200 test results were reported evidence only.
+  No build, launch, LLDB, resource access, callback,
   Metal, pixel, device, iOS, Windows sign-off, or playability scope is allowed.
 
 The remote Codex project assignment records place tasks 156–176 under the
@@ -1022,8 +1027,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
-lanes 191–192, 194, 196–198, 200, and 201 are complete. Lane 202 is the sole
-active verification worker; no production worker is active. The current
+lanes 191–192, 194, 196–198, and 200–202 are complete. No worker is active. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
