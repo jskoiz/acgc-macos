@@ -74,13 +74,15 @@ because `TARGET_PC` defines `GXBool` as C `bool`; the final fixture uses only
 valid booleans and checks an out-of-range compare value through the real `u32`
 setter surface. Lanes 206–207 completed their read-only audits and are
 reviewed/archived under the remote M3 Max `acgc-modern-port` project. No
-production worker is active.
+production worker from that completed batch remains active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs. Exact lane-204 cleanup
-is complete. Lanes 208–210 are the three active M3 Max workers: raw Raster,
-portable Indirect, and a read-only Geometry-converter audit. Their separate
-clean `039afce0e` worktrees/scopes are confirmed, and no full link, LLDB, or
-device run is active.
+is complete. Lanes 208–209 are the two active M3 Max source workers: raw
+Raster and portable Indirect. Lane 210 completed its read-only
+Geometry-converter audit and is reviewed/archive-ready. Its verdict is that a
+complete producer is not dependency-ready; the raw Geometry closure successor
+must wait until lane 208 releases overlapping `pc_gx.c` ownership. No full
+link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1179,19 +1181,22 @@ also integrated. Remote workers may not update the umbrella checkout.
   `/private/tmp/acgc-lane-canonical-indirect-{native,asan,win}` roots. The
   branch, worktree, and exact clean base are confirmed.
 - Lane 210 / reused project-owned M3 task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active read-only Geometry
-  conversion audit at exact PC `039afce0e` and decomp `09ca8e8b`. Its concrete
-  detached source scope is
-  `/private/tmp/acgc-lane-geometry-converter-audit-m3`; it may import the same
-  source-only bundle but must create no branch, edit, build, or test root. The
-  gate is to crosswalk the immutable `PCGXRawGeometry` completed-batch state
-  against the canonical Geometry ABI and decomp `GXAttr.c`, `GXGeometry.c`,
-  `GXVert.c`, and representative emu64/game callers, then return the exact
-  missing conversion rules, resource/lifetime dependencies, owned files and
-  symbols, focused fixture matrix, and an explicit dependency-ready verdict.
-  Raw Raster, Indirect, cumulative producer, Apple/Metal, ISO/assets, full
-  link, LLDB, device, pixel, and playability are out of scope. The detached
-  clean exact-tip source scope is confirmed.
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete, reviewed, and
+  archive-ready read-only Geometry conversion audit at exact PC `039afce0e`
+  and decomp `09ca8e8b`. Its detached clean source scope is
+  `/private/tmp/acgc-lane-geometry-converter-audit-m3`; it created no branch,
+  edit, build, or test root. The completed `PCGXRawGeometry` batch safely
+  preserves copied values and generation metadata for a bounded subset, but a
+  full canonical producer is not dependency-ready: mid-`GXBegin` setter
+  mutation, caller-array lifetime, CLR1/TEX1–7/array/matrix/NBT coverage,
+  canonical byte conversion, cross-section dependencies, and completed-copy
+  lifetime remain open. The smallest successor first closes raw Geometry in
+  `pc_gx_internal.h`, `pc_gx.c`, and the existing raw fixture, but it must wait
+  until lane 208 releases overlapping `pc_gx.c` ownership; a later separate
+  producer owns only new PC converter files and its fixture. Evidence is
+  `docs/evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md`.
+  No build, full link, LLDB, runtime, Metal, pixel, device, or playability claim
+  follows.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1211,9 +1216,11 @@ lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is reviewe
 and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
 integrated at canonical PC `b3336504c`; lane 204 is reviewed and integrated at
 canonical PC `039afce0e`. Lanes 206–207 are complete, reviewed, and archived
-read-only audits. Exact lane-204 cleanup is complete. Lanes 208–210 are the
-three active M3 Max workers on confirmed clean, separate `039afce0e` scopes;
-no full link, LLDB, or device run is active.
+read-only audits. Exact lane-204 cleanup is complete. Lanes 208–209 are the two
+active M3 Max source workers on confirmed clean, separate `039afce0e` scopes.
+Lane 210 is complete, reviewed, and archive-ready; its Geometry raw-closure
+successor is dependency-blocked by lane 208's `pc_gx.c` ownership. No lane 211
+is opened or queued; no full link, LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.

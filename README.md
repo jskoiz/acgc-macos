@@ -288,6 +288,12 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   `039afce0e` supplies raw Alpha/ZCompLoc provenance. Raw Raster and Indirect
   ownership still gate the
   all-or-nothing cumulative serializer and immutable Apple CPU plan.
+  A current-tip read-only Geometry audit also finds that the existing completed
+  raw batch is not yet a complete canonical producer: mutation ordering,
+  caller-array lifetime, unsupported attribute coverage, canonical byte
+  conversion, and Transform/Texgen dependency checks remain open. The raw
+  Geometry closure must wait until current raw Raster work releases overlapping
+  `pc_gx.c` ownership.
   Apple consumption follows only after those complete typed dependencies and
   stable resources. See the
   [raw Geometry integration evidence](docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),
@@ -295,6 +301,7 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [current cumulative readiness reconciliation](docs/evidence/CURRENT-CUMULATIVE-PRODUCER-READINESS-698D45D3E-2026-08-15.md),
   [canonical Indirect contract](docs/evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md),
   [raw Alpha/ZCompLoc evidence](docs/evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
+  [current Geometry converter readiness audit](docs/evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
 - The exact `23c26e520a` focused baseline passes all twelve neutral validators

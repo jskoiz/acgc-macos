@@ -321,7 +321,16 @@ owned resources, encoder, MSL, present, and readback gates. See the
 [current cumulative readiness reconciliation](evidence/CURRENT-CUMULATIVE-PRODUCER-READINESS-698D45D3E-2026-08-15.md),
 [canonical Indirect contract](evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md),
 [raw Alpha/ZCompLoc evidence](evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
+[current Geometry converter readiness audit](evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
 and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
+
+The current-tip Geometry audit confirms that the completed raw batch is only a
+bounded provenance snapshot, not a finished canonical producer. Mid-`GXBegin`
+setter mutation, caller-array lifetime, incomplete attribute coverage,
+canonical byte conversion, Transform/Texgen dependency checks, and synchronous
+completed-copy lifetime must be closed first. That raw Geometry successor is
+held until the active raw Raster lane releases overlapping `pc_gx.c`
+ownership; no transition packet or duplicate owner is introduced.
 
 The exact `23c26e520a` focused baseline passes all twelve neutral validators
 and five setter-owned raw fixtures natively (`17/17`) and under combined
