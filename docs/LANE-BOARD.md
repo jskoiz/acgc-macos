@@ -38,9 +38,10 @@ the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
 Expensive full links and LLDB launch traces remain serialized. Lanes 185–186
 are reviewed and integrated, and lanes 187–188 are complete read-only audits.
-No worker, full link, LLDB launch, or Metal-device run is active while the next
-non-overlapping source batch is selected. Reviewed commits and evidence remain
-available in Git and the evidence docs.
+Lanes 189–192 are the current M3 Max batch: two non-overlapping source lanes
+and two read-only audits. No full link, LLDB launch, or Metal-device run is
+active. Reviewed commits and evidence remain available in Git and the evidence
+docs.
 
 ## Remote M3 Max batch (current)
 
@@ -105,8 +106,10 @@ exact integrated native and combined ASan/UBSan raw-state matrices passing
 `4/4`. Lane 186 is independently reviewed and integrated as canonical PC
 `324c174ae3`; the exact integrated canonical native and combined ASan/UBSan
 matrices pass `9/9`. Lanes 187–188 completed the read-only cumulative-producer
-and Apple-plan audits. No remote worker is currently active. Remote workers may
-not update the umbrella checkout.
+and Apple-plan audits. Lanes 189–192 now reuse the same four project-owned M3
+tasks/worktrees for Geometry raw-batch provenance, the neutral Lighting ABI,
+the Texture/TLUT/Dynamic contract, and raw Channels planning. Remote workers
+may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -712,6 +715,55 @@ not update the umbrella checkout.
   device, full link, LLDB, ISO/assets, Metal execution, pixel, iOS, or
   playability claim. Evidence is
   `docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md`.
+- Lane 189 / reused task `01a002f3-0540-7db0-b2ac-052fed62f957` — active M3
+  Max Geometry raw-batch source/test lane. It reuses protected worktree
+  `/private/tmp/acgc-lane-pc-texgen-shadow`, imports source-only bundle
+  `/private/tmp/acgc-canonical-pc-324c174.bundle` (SHA-256
+  `7a4a5b3d6b47975456d37bfea522df576a251f1c8b8488a1a5b122cfd5d12c4f`),
+  and owns branch `c1/lane-geometry-raw-batch-m3` from exact canonical PC
+  `324c174ae3`; decomp remains `09ca8e8b`. It owns only
+  `pc/include/pc_gx_internal.h`, `pc/src/pc_gx.c`, a new focused Geometry raw
+  fixture, and minimal `pc/CMakeLists.txt`. The gate is immutable VCD/VAT/array
+  and completed-batch provenance with direct/index8/index16 semantics,
+  old-batch-before-new-state ordering, safe copied lifetime, and fail-closed
+  unsupported formats. Portable schemas, cumulative packet/callback, Apple,
+  full link, LLDB, assets, Metal, pixel, device, and playability are out of
+  scope. Unique roots are `/private/tmp/acgc-lane-geometry-raw-batch-{native,asan,win}`;
+  focused and existing raw-state tests run serially. Success unblocks a later
+  pure-C all-or-nothing canonical serializer fixture.
+- Lane 190 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active M3
+  Max neutral Lighting ABI source/test lane. It reuses protected worktree
+  `/private/tmp/acgc-lane-channels-lighting-preflight`, branch
+  `c1/lane-canonical-lighting-m3`, from exact canonical PC `324c174ae3` and
+  decomp `09ca8e8b`. It owns only new canonical Lighting header/source/test and
+  minimal `pc/portable/CMakeLists.txt`. The frozen contract is section
+  `0x0040`, version 1, 516 bytes, alignment 4, eight 64-byte final light-object
+  records, exact loaded mask, zero reserved/unloaded state, finite binary32
+  coefficients/position/direction, logical RGBA8, and exact envelope metadata.
+  Raw PC Lighting, cross-validator, producer, Apple, full link, LLDB, assets,
+  device, and playability are out of scope. Unique roots are
+  `/private/tmp/acgc-lane-canonical-lighting-{native,asan,win}`; the integrated-style
+  canonical matrix is expected to contain ten serial tests. Success unblocks
+  raw Lighting provenance and Channels/Lighting cross-validation.
+- Lane 191 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
+  read-only M3 Max Texture/TLUT plus Dynamic resource-sideband contract audit
+  in `/private/tmp/acgc-lane-cumulative-producer-preflight`, detached at exact
+  canonical PC `324c174ae3` with decomp `09ca8e8b`. It freezes separate
+  pointer-free layouts, logical identities/generations, metadata, invalidation,
+  synchronous borrowing versus owned-copy lifetime, and cross-section rules
+  without reading resource bytes. It owns no branch, source, build, test, docs,
+  launch, asset, Apple/Metal execution, pixel, device, or playability action.
+  Success unblocks a later neutral Texture/Dynamic ABI lane.
+- Lane 192 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active
+  read-only M3 Max raw Channels producer crosswalk in
+  `/private/tmp/acgc-lane-apple-canonical-plan-preflight`, detached at exact
+  canonical PC `324c174ae3` with decomp `09ca8e8b`. It maps exact raw structs,
+  known/invalid masks, combined/separate and partial-color setter semantics,
+  disabled vertex sources, specular effective diffuse behavior, initialization,
+  flush ordering, and the future fixture/ownership split. It owns no branch,
+  source, build, test, docs, launch, asset, Apple/Metal execution, pixel,
+  device, or playability action. Success unblocks the raw Channels source lane
+  after Geometry releases `pc_gx` ownership.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -726,7 +778,9 @@ verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
-and lane 184 is stopped. No worker is active pending the next registered batch.
+and lane 184 is stopped. Lanes 189–192 are active with two source owners and
+two read-only audits; their protected worktrees contain ignored assets/orig and
+must not be deleted or inspected beyond counts.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
