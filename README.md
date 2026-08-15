@@ -34,9 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `a641e55efb` (`Narrow canonical texture filter
-domains`), completing the reviewed neutral Texture/TLUT, Dynamic, Lighting,
-and Channels ABIs, Depth ordering, raw
+`c1/macos-host-launch` at `23c26e520a` (`Repair Geometry scalar and index
+provenance`), completing immutable raw Geometry batches, the reviewed neutral
+Texture/TLUT, Dynamic, Lighting, and Channels ABIs, Depth ordering, raw
 Texgen/SU, and canonical Geometry chains on top of `251a010b8` (`Preserve typed
 GX depth setter ABI`),
 `eeec2301c1` (`Track PC raw GX depth provenance`), and `c3e158398`
@@ -245,11 +245,14 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [canonical Texture/Dynamic contract](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md)
   and [integrated implementation evidence](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md).
 
-- Current read-only producer and Apple audits confirm that another V1-V4 shim
-  is not the next gate. The first draw-critical source lane is immutable
-  Geometry VCD/VAT/array/batch provenance at `pc_gx_flush_vertices`; Apple
-  consumption follows only after cumulative production, complete typed
-  dependencies, and stable resource generations. See the
+- Integrated `23c26e520a` now captures immutable Geometry
+  VCD/VAT/array/completed-batch provenance at `pc_gx_flush_vertices`, including
+  direct `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Remaining
+  draw-critical source work is setter-owned raw Channels, Lighting, and
+  Texture/TLUT resource generations followed by one all-or-nothing cumulative
+  serializer. Apple consumption follows only after those complete typed
+  dependencies and stable resources. See the
+  [raw Geometry integration evidence](docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),
   [canonical producer readiness audit](docs/evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md)
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 

@@ -61,9 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `a641e55efb`, with
-the strict neutral Texture/TLUT, Dynamic, Lighting, and Channels ABIs, repaired
-`GXSetZMode`
+As of 2026-08-14, the canonical local PC branch is clean at `23c26e520a`, with
+immutable raw Geometry batches, the strict neutral Texture/TLUT, Dynamic,
+Lighting, and Channels ABIs, repaired `GXSetZMode`
 flush-before-mutation
 boundary, setter-owned raw Texgen/SU provenance, and canonical Geometry ABI on
 top of the portable 888-byte Transform ABI and setter-owned raw Transform and
@@ -268,12 +268,15 @@ remain separate later owners. See the
 and [integrated implementation evidence](evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md).
 
 The refreshed producer and Apple audits reject another transitional packet
-shim. The first draw-critical source gate is immutable Geometry VCD/VAT/array
-and batch provenance at `pc_gx_flush_vertices`. A cumulative producer then
-preflights every required section and resource generation before one
-synchronous all-or-nothing callback. Apple consumption begins only after that
-contract, through a pure-C immutable plan and separately owned resources,
-encoder, MSL, present, and readback gates. See the
+shim. Integrated `23c26e520a` now captures immutable Geometry VCD/VAT/array and
+completed-batch provenance at `pc_gx_flush_vertices`, including direct
+`GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Setter-owned raw
+Channels, Lighting, and Texture/TLUT resource generations remain required. A
+cumulative producer then preflights every required section and resource
+generation before one synchronous all-or-nothing callback. Apple consumption
+begins only after that contract, through a pure-C immutable plan and separately
+owned resources, encoder, MSL, present, and readback gates. See the
+[raw Geometry integration evidence](evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),
 [canonical producer readiness audit](evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md)
 and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 

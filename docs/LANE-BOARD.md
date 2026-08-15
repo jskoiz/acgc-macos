@@ -38,14 +38,13 @@ the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
 Expensive full links and LLDB launch traces remain serialized. Lanes 185–186
 are reviewed and integrated, and lanes 187–188 are complete read-only audits.
-Lane 189 is the active M3 Max repair lane. Independent root review
-blocked lane 189 on direct `GX_TEX_S` capture and INDEX8/INDEX16 API-width
-validation. Lane 193's effective magnification-filter repair is independently
-reviewed and integrated; lane 194 has completed its read-only Lighting
-producer audit. Lane 190 is independently
-reviewed and integrated, and lanes 191–192 completed their read-only contracts.
-The raw Channels successor is not refilled because it would overlap lane 189's
-`pc_gx` ownership. No
+Lane 189's direct `GX_TEX_S` and INDEX8/INDEX16 repair is independently
+reviewed and integrated, as is lane 193's effective magnification-filter
+repair. Lane 194 has completed its read-only Lighting producer audit. Lane 190
+is independently reviewed and integrated, and lanes 191–192 completed their
+read-only contracts.
+The raw Channels successor is now dependency-ready but is not counted active
+until its exact current-tip task contract is registered. No
 full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -53,7 +52,7 @@ evidence remain available in Git and the evidence docs.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`a641e55efb` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`23c26e520a` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -115,9 +114,8 @@ matrices pass `9/9`. Lanes 187–188 completed the read-only cumulative-producer
 and Apple-plan audits. Lanes 189–192 reused the same four project-owned M3
 tasks/worktrees for Geometry raw-batch provenance, the neutral Lighting ABI,
 the Texture/TLUT/Dynamic contract, and raw Channels planning. Lane 189 remains
-active; lanes 190–194 are complete, with lanes 190 and 193 integrated. Remote
-workers
-may not update the umbrella checkout.
+complete and integrated; lanes 190–194 are complete, with lanes 190 and 193
+also integrated. Remote workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -723,10 +721,12 @@ may not update the umbrella checkout.
   device, full link, LLDB, ISO/assets, Metal execution, pixel, iOS, or
   playability claim. Evidence is
   `docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md`.
-- Lane 189 / reused task `01a002f3-0540-7db0-b2ac-052fed62f957` — active M3
-  Max Geometry raw-batch repair lane after independent root review blocked the
-  first handoff on direct `GX_TEX_S` capture and INDEX8/INDEX16 API-width
-  mismatches. It reuses protected worktree
+- Lane 189 / reused task `01a002f3-0540-7db0-b2ac-052fed62f957` — complete,
+  independently reviewed, and integrated M3 Max Geometry raw-batch lane. The
+  first handoff `9ec853b0fb` was blocked on direct `GX_TEX_S` capture and
+  INDEX8/INDEX16 API-width mismatches; child repair `401ef1f195` closes both
+  findings while preserving the compatibility ABI, legacy host behavior, and
+  deliberate sticky-invalid policy. It reused protected worktree
   `/private/tmp/acgc-lane-pc-texgen-shadow`, imports source-only bundle
   `/private/tmp/acgc-canonical-pc-324c174.bundle` (SHA-256
   `7a4a5b3d6b47975456d37bfea522df576a251f1c8b8488a1a5b122cfd5d12c4f`),
@@ -742,13 +742,13 @@ may not update the umbrella checkout.
   focused and existing raw-state tests ran serially. Worker `9ec853b0fb`
   changes exactly the four owned files; native and combined ASan/UBSan focused
   matrices passed `5/5` each, with no sanitizer diagnostics
-  (`detect_leaks=0`), but those tests lacked the now-required direct-S and
-  mismatched-index-width regressions. The active repair is limited to the same
-  four owned files and must return a new reviewed child commit and refreshed
-  source-only bundle before integration. This remains CPU-side provenance
-  evidence until root resolves both findings and repeats the focused matrix on
-  the exact integrated snapshot. Success unblocks a later pure-C all-or-nothing
-  canonical serializer fixture.
+  (`detect_leaks=0`). Root cherry-picked the two commits one at a time as
+  canonical `b315e57071` then `23c26e520a`; exact integrated native and
+  combined ASan/UBSan raw-state matrices pass `5/5` each. Evidence is
+  `docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md`. This is
+  CPU-side provenance evidence and unblocks raw Channels/Lighting ownership
+  plus the later pure-C all-or-nothing canonical serializer; it proves no
+  callback/Metal/pixel or playability gate.
 - Lane 190 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete,
   independently reviewed, and integrated neutral Lighting ABI lane. It reused
   protected worktree
@@ -857,8 +857,9 @@ verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
-and lane 184 is stopped. Lane 189 is the only active repair lane; lanes 190 and
-193 are integrated, and lanes 191–192 and 194 are complete. Their
+and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
+191–192 and 194 are complete. No worker lane is active until the next exact
+dependency-ready contract is registered. Their
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
