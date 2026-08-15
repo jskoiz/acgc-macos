@@ -101,9 +101,10 @@ validation and missing mandatory fixture cases. Lane 217 completed its
 read-only current-tip cumulative-producer audit and found the cumulative gate
 still blocked by missing leaf owners/producers. Lane 216 completed its exact
 two-file repair as child `5324c8739e`; lane 220 independently passed it, and
-the two source commits are integrated as canonical PC `689590cc`. Lane 219
-completed the portable Texgen/SU ABI source handoff at `f503fb924` and is on
-root-review hold. Lane 221 completed its independent read-only Transform
+the two source commits are integrated as canonical PC `689590cc`. Lanes 219
+and 222 completed the portable Texgen/SU ABI source/review pair; worker
+`f503fb924` is integrated as canonical PC `590b2bd73` and both tasks are
+archived. Lane 221 completed its independent read-only Transform
 leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
 Lanes 222 and 223 are active successors for independent Texgen review and the
 Transform leaf producer respectively. No full link, LLDB, or device run is
@@ -114,7 +115,7 @@ and the Alpha/Blend/Depth/Fog producer topology.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`689590cc` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`590b2bd73` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1423,9 +1424,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   No full link, LLDB, Metal, device, pixel, ISO/assets, Windows sign-off, or
   playability claim is in scope.
 - Lane 219 / reused project-owned M3 canonical task
-  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete portable Texgen/SU ABI
-  source/test lane on `gpt-5.6-luna` with max reasoning, held for independent
-  review before integration. Its dedicated source
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete, independently reviewed,
+  integrated, and archived portable Texgen/SU ABI source/test lane on
+  `gpt-5.6-luna` with max reasoning. Its dedicated source
   is `/private/tmp/acgc-lane-canonical-texgen-state-m3` on branch
   `c1/lane-canonical-texgen-state-m3` at exact PC `b9a9f355`; decomp
   `09ca8e8b` is read-only. It consumes the frozen ID4 contract and integrated
@@ -1438,7 +1439,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   2,624-byte pointer-free little-endian section, strict record/matrix/SU
   validation, native and combined ASan/UBSan focused tests, bounded syntax
   probes, and one reviewable source commit. It returned clean worker
-  `f503fb924d` from base `b9a9f355f7`; native and combined ASan/UBSan focused
+  `f503fb924d` from base `b9a9f355f7`, integrated as canonical `590b2bd73`;
+  native and combined ASan/UBSan focused
   CTest pass `1/1` each with no diagnostics (`detect_leaks=0`), native C11,
   C++11, and `_WIN32` syntax probes pass, and real i686 compilation remains
   blocked by the missing MinGW `string.h`/sysroot. Review bundle
@@ -1447,7 +1449,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   Unique roots are
   `/private/tmp/acgc-lane-canonical-texgen-state-{native,asan,win}`. This is
   CPU/ABI evidence only; it cannot prove the later PC leaf producer, callback,
-  Metal, pixel, device, Windows runtime, or playability.
+  Metal, pixel, device, Windows runtime, or playability. Fresh exact-integrated
+  native and combined ASan/UBSan CTest also pass `1/1` each with no diagnostics.
+  Evidence is `docs/evidence/CANONICAL-TEXGEN-SU-590B2BD73-2026-08-15.md`.
 - Lane 220 / reused project-owned M3 Geometry review task
   `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete independent read-only
   re-review of exact repaired final `5324c8739e` from base `b9a9f355` and first
@@ -1483,14 +1487,17 @@ also integrated. Remote workers may not update the umbrella checkout.
   `pc/CMakeLists.txt`. Evidence is
   `docs/evidence/TRANSFORM-PRODUCER-READINESS-B9A9F355-2026-08-15.md`.
 - Lane 222 / reused project-owned M3 review task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active independent read-only
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete and archived independent read-only
   review of lane 219 worker `f503fb924d` against base `b9a9f355f7`. It must use
   only the immutable review bundle with SHA-256 `d47b45d4...9d7a5cb`, create a
   detached review source at `/private/tmp/acgc-lane-222-texgen-state-review`,
   verify exact four-file scope and both-upstream provenance, and return `PASS`
   or exact material findings. It owns no edit, branch, build, test, cleanup,
   integration, full link, LLDB, runtime, Apple/Metal, device/pixel, Windows
-  sign-off, ISO/assets, or playability work.
+  sign-off, ISO/assets, or playability work. It returned `PASS`: exact
+  four-file scope and ancestry, fixed layout, explicit little-endian codec,
+  strict domains/dependencies, destination-preserving fail-closed behavior,
+  and focused fixture coverage have no material candidate-owned blocker.
 - Lane 223 / reused project-owned M3 Transform task
   `01a004f3-1941-7731-a310-d5ad1f52011b` — active source/test successor
   on `gpt-5.6-luna` with max reasoning. It must create

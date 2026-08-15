@@ -34,8 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `689590cc` (`Enforce raw Geometry snapshot domains`),
-adding the independently reviewed canonical Geometry leaf producer on top of
+`c1/macos-host-launch` at `590b2bd73` (`Add canonical Texgen and SU state ABI`),
+adding the independently reviewed portable Texgen/SU value contract and
+canonical Geometry leaf producer on top of
 reviewed setter-owned raw Geometry closure, typed indexed host mirroring,
 packed-color FIFO-width provenance, and RGBX8 ignored-byte handling on top of
 setter-owned raw Raster provenance, the source-faithful half-pixel jitter
@@ -293,15 +294,16 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   `039afce0e` supplies raw Alpha/ZCompLoc provenance, `a42da8e155`
   supplies the neutral Indirect ABI, `85b25cb3c` supplies setter-owned raw
   Raster provenance with source-faithful viewport jitter, `b9a9f355` closes
-  the bounded setter-owned raw Geometry contract, and `689590cc` supplies the
-  strict all-or-nothing canonical Geometry leaf producer. The copied batch now
+  the bounded setter-owned raw Geometry contract, `689590cc` supplies the
+  strict all-or-nothing canonical Geometry leaf producer, and `590b2bd73`
+  supplies the fixed 2,624-byte portable Texgen/SU ABI. The copied batch now
   fail-closes unsupported matrix/NBT and extra attribute slots, preserves
   mutation/order/lifetime boundaries, decodes all supported indexed scalar
   forms into the host mirror, and preserves exact packed-color FIFO widths.
   The Geometry producer accepts only exact raw knownness/tail/source metadata,
   stages explicit little-endian output in caller-owned scratch, and publishes
-  only after standalone and dependency validation. Raw Indirect conversion,
-  the portable Texgen/SU section and remaining section leaf producers still
+  only after standalone and dependency validation. Raw Indirect conversion
+  and remaining section leaf producers still
   gate the all-or-nothing cumulative serializer and immutable Apple CPU plan.
   Apple consumption follows only after those complete typed dependencies and
   stable resources. See the
@@ -313,6 +315,7 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [raw Alpha/ZCompLoc evidence](docs/evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
   [raw Raster evidence](docs/evidence/PC-RAW-RASTER-85B25CB3C-2026-08-15.md),
   [canonical Geometry producer evidence](docs/evidence/CANONICAL-GEOMETRY-PRODUCER-689590CC-2026-08-15.md),
+  [portable Texgen/SU evidence](docs/evidence/CANONICAL-TEXGEN-SU-590B2BD73-2026-08-15.md),
   [current Geometry converter readiness audit](docs/evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
   [raw Geometry closure evidence](docs/evidence/PC-RAW-GEOMETRY-CLOSURE-B9A9F355-2026-08-15.md),
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).

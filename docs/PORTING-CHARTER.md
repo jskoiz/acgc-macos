@@ -61,8 +61,8 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-15, the canonical local PC branch is clean at `689590cc`, with
-the independently reviewed canonical Geometry leaf producer, reviewed
+As of 2026-08-15, the canonical local PC branch is clean at `590b2bd73`, with
+the independently reviewed portable Texgen/SU ABI, canonical Geometry leaf producer, reviewed
 setter-owned raw Geometry closure, typed indexed host mirroring,
 packed-color FIFO-width provenance and RGBX8 ignored-byte handling,
 setter-owned raw Raster provenance, the source-faithful viewport-jitter
@@ -318,10 +318,11 @@ Alpha/ZCompLoc provenance, `85b25cb3c` supplies setter-owned raw Raster
 provenance with the decomp viewport-jitter adjustment, `b9a9f355` closes the
 bounded raw Geometry contract with copied lifetime, supported indexed scalar
 host conversion, exact packed-color entry widths, and fail-closed unsupported
-matrix/NBT and extra attribute slots, and `689590cc` supplies the strict
-pointer-free canonical Geometry producer. Integrated `a42da8e155` supplies the
-neutral section-13 Indirect ABI. Raw Indirect ownership/conversion, the
-portable Texgen/SU section, and remaining leaf producers remain prerequisites.
+matrix/NBT and extra attribute slots, `689590cc` supplies the strict
+pointer-free canonical Geometry producer, and `590b2bd73` supplies the fixed
+2,624-byte portable Texgen/SU section. Integrated `a42da8e155` supplies the
+neutral section-13 Indirect ABI. Raw Indirect ownership/conversion and
+remaining leaf producers remain prerequisites.
 A cumulative producer
 must then preflight
 every required section and resource
@@ -336,6 +337,7 @@ owned resources, encoder, MSL, present, and readback gates. See the
 [raw Alpha/ZCompLoc evidence](evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
 [raw Raster evidence](evidence/PC-RAW-RASTER-85B25CB3C-2026-08-15.md),
 [canonical Geometry producer evidence](evidence/CANONICAL-GEOMETRY-PRODUCER-689590CC-2026-08-15.md),
+[portable Texgen/SU evidence](evidence/CANONICAL-TEXGEN-SU-590B2BD73-2026-08-15.md),
 [current Geometry converter readiness audit](evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
 [raw Geometry closure evidence](evidence/PC-RAW-GEOMETRY-CLOSURE-B9A9F355-2026-08-15.md),
 and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
