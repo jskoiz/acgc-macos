@@ -88,10 +88,10 @@ native/sanitizer/Windows focused matrix. Lanes 180–181 completed the read-only
 Channels/Lighting and Raster implementation preflights. Lane 182 completed,
 was archived, and had its exact holder-free roots retired after the current-tip
 M3 Max synthetic Metal-device fixture gate. No full link or LLDB run is active.
-Lane 183 is the active read-only successor freezing the state-before-geometry
-temporal-order contract exposed by the producer audit; lanes 173–174 are the
-two active read-only cross-reviews. Remote workers may not update the umbrella
-checkout.
+Lane 183 completed the state-before-geometry temporal-order contract and its
+Raster ownership correction. Lane 184 is the active read-only Indirect contract
+audit; lanes 173–174 are the two active read-only cross-reviews. Remote workers
+may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -582,14 +582,26 @@ checkout.
   is `docs/evidence/M3-METAL-DEVICE-FIXTURES-251A010B8-2026-08-14.md`. Its
   exact holder-free worktree and native/ASan roots are absent; refs and evidence
   remain preserved.
-- Lane 183 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
+- Lane 183 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — complete
   read-only M3 Max canonical setter-order preflight in detached
   `/private/tmp/acgc-lane-canonical-state-order-preflight`. It compares exact
   canonical PC `251a010b8`, raw Texgen/SU worker `2e3c95dae`, and decomp
   `09ca8e8b` to map every state mutation that occurs before versus after
   `pc_gx_flush_if_begin_complete()`. It owns no source, build, launch, device,
   asset, Metal, pixel, or playability operation. Success unblocks one serial
-  post-Texgen state-order repair; it does not authorize that edit.
+  post-Texgen state-order repair; it does not authorize that edit. The bounded
+  correction confirms `GXEnableTexOffsets` is Raster-owned, the repaired Texgen
+  lane covers exactly seven setters, and `GXSetZMode` is the next narrow current
+  mutation-before-flush defect; viewport/scissor, Indirect, and resource
+  generation remain separate future owners.
+- Lane 184 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
+  read-only M3 Max canonical Indirect contract audit at exact PC `251a010b8`
+  and decomp `09ca8e8b`. It owns no source, branch, build, launch, device,
+  asset, Metal, pixel, or playability operation. It freezes the fixed-width
+  Indirect layout, matrix/stage/TEV records, enum and bitfield domains,
+  knownness, direct-versus-indirect texture-map exclusion, and cross-section
+  references. Success unblocks a later neutral ABI lane only after the
+  Texture/Dynamic contracts are frozen.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -601,8 +613,9 @@ independent cross-review; their production and CMake ownership does not overlap.
 Lanes 177–178 completed read-only without source ownership, lane 179 completed
 verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
-LLDB launches remain serialized and are not active. Lane 183 is the active
-read-only audit alongside the two non-overlapping lane 173–174 cross-reviews.
+LLDB launches remain serialized and are not active. Lane 184 is the active
+read-only audit alongside the two non-overlapping lane 173–174 cross-reviews;
+lane 183 is complete.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
