@@ -18,8 +18,8 @@ macOS first and iOS second. The short version of the remaining critical path is:
 
 1. finish independent review of the completed TEV and Indirect leaf producers;
 2. integrate those reviewed leaves one at a time;
-3. finish the cumulative snapshot/Apple CPU-boundary audit;
-4. add any remaining truthful raw owners and canonical producers;
+3. act on the completed cumulative/Apple audit by closing its exact blockers;
+4. add the remaining truthful Blend/Fog raw owners and production wiring;
 5. assemble one immutable, all-or-nothing renderer-neutral GX snapshot;
 6. carry that snapshot through the Apple CPU consumer into a live game callback;
 7. prove a game-owned Metal encode, present, readback, and identifiable pixel;
@@ -272,9 +272,9 @@ below is part of canonical `c1/macos-host-launch` yet.
 | --- | --- | --- |
 | 236 — TEV leaf producer | Candidate complete; root-review hold | Worker `043d24822cd075b51282101669d7710b785bd01f`; four files including minimal CMake registration; native and combined ASan/UBSan focused `1/1` passed. |
 | 237 — Indirect leaf producer | Candidate complete; root-review hold | Worker `2f6ba5dff300239aa509c2f5a76431cae3d4b3a3`; three new files; source-direct native and sanitizer fixtures passed. |
-| 238 — cumulative/Apple audit | Partial read-only audit | Crosswalk reached the missing cumulative-envelope publication boundary; final READY/BLOCK table and successor order were not accepted before pause. |
-| 239 — Indirect independent review | Partial verification | Static review was consistent and fresh source-direct verification had begun; resume and obtain one immutable PASS/BLOCK handoff. |
-| 240 — TEV independent review | Partial verification | Static review was consistent and fresh focused build verification had begun; resume and obtain one immutable PASS/BLOCK handoff. |
+| 238 — cumulative/Apple audit | Complete read-only audit; three BLOCK verdicts | The cumulative assembler, typed Apple CPU consumer, and serialized live callback trace are each blocked. Missing prerequisites include Blend/Fog raw owners, complete production/envelope wiring, a Geometry dependency-result builder, atomic resource-lease publication, the assembler itself, and Apple consumer/registration code. |
+| 239 — Indirect independent review | Partial verification | Static review, native and combined ASan/UBSan source-direct fixtures, and C11/C++11 probes passed without diagnostics. The `-m32`/`_WIN32` probes and final immutable PASS/BLOCK handoff remain. |
+| 240 — TEV independent review | Partial verification | Crosswalk, native and combined ASan/UBSan focused fixture/object builds and `1/1` CTests, `git diff --check`, and C11/C++11/`-m32` probes passed. The `_WIN32` probe stopped at the missing `process.h` sysroot boundary; the final immutable PASS/BLOCK handoff remains. |
 
 Resume rule: do not infer PASS from partial commentary. The independent final
 handoff must be reviewed, and a blocked candidate must be repaired and
@@ -302,16 +302,28 @@ Exit evidence: clean canonical branch, preserved worker branches, exact changed
 files, bundle hashes, independent PASS handoffs, exact-tip native and sanitizer
 results, and no runtime claim.
 
-### Phase B — finish the cumulative CPU architecture decision
+### Phase B — close the blockers identified by the cumulative CPU audit
 
-1. Resume the read-only cumulative/Apple audit at the new integrated tip.
-2. Produce a section table that separately answers: ABI exists, truthful raw
-   owner exists, leaf exists, production object is linked, cumulative assembler
-   calls it, Apple CPU consumer understands it, and device encoder supports it.
-3. Decide whether a partial section set can render truthfully. An omitted
+Lane 238 completed the base-tip audit and returned BLOCK independently for all
+three gates: the cumulative assembler, the typed Apple CPU consumer, and a live
+callback trace. TEV and Indirect leaves alone do not change those verdicts.
+
+1. After reviewed TEV/Indirect integration, reconcile the completed section
+   table against the exact new canonical tip. Keep separate columns for: ABI
+   exists, truthful raw owner exists, leaf exists, production object is linked,
+   cumulative assembler calls it, Apple CPU consumer understands it, and device
+   encoder supports it.
+2. Implement the missing Blend and Fog setter-owned raw state and their strict
+   canonical leaves in separately serialized `pc_gx.c` lanes. Fog range
+   adjustment remains a known no-op and must not be reported as captured state.
+3. Add the missing Geometry dependency-result builder and wire the already
+   implemented Transform, Depth, Geometry, Texgen/SU, TEV, and Indirect
+   producers into the production envelope path only after each input is proven
+   truthful at the exact integrated tip.
+4. Decide whether a partial section set can render truthfully. An omitted
    section may use a default only when the decomp initialization path proves
    that exact logical default is present in the captured raw state.
-4. Freeze the all-or-nothing transaction:
+5. Freeze the all-or-nothing transaction:
    - capture all raw values at the committed-vertex boundary;
    - construct every section into local temporary storage;
    - validate cross-section dependencies;
@@ -320,7 +332,12 @@ results, and no runtime claim.
    - revalidate generations/epochs immediately before publication;
    - publish exactly once only after complete preflight; and
    - on any error, emit no partial callback and leave legacy rendering intact.
-5. Name the smallest source successors and serialize ownership of
+6. Keep the minimum truthful untextured, unlit, vertex-color packet explicit:
+   Geometry, Transform, Raster, Depth, Blend, Alpha, and TEV, unless the final
+   contract deliberately defines Geometry color as already final. Fog may be
+   omitted only when captured provenance proves it disabled. Other sections are
+   optional only when dependency results prove them inactive or unnecessary.
+7. Name the smallest source successors and serialize ownership of
    `pc_gx.c`, `pc_gx_internal.h`, shared CMake, callback registration, and the
    final assembler.
 
