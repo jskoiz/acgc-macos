@@ -122,9 +122,10 @@ Lane 230 completed its independent read-only Fog audit with `BLOCK`: the PC
 host retains no logical range-adjust state and has no truthful raw Fog owner or
 producer. Lane 231 completed its current-tip cumulative audit with `BLOCK`:
 Texgen/SU, TEV, Blend, Fog, and Indirect still lack truthful leaf inputs, and
-there is no atomic all-section assembler/publication boundary. Lane 232 is the
-sole active worker on the single dependency-ready Texgen/SU leaf, with its
-exact M3 source branch/worktree confirmed clean at the canonical base.
+there is no atomic all-section assembler/publication boundary. Lane 232
+completed the single dependency-ready Texgen/SU leaf as clean worker
+`a14aef4179` and is on root-review hold. Lane 233 is registered setup-pending
+for one immutable independent review; no production worker is counted active.
 
 ## Remote M3 Max batch (current)
 
@@ -1697,7 +1698,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   Windows sign-off, ISO/assets, or playability work and must return the exact
   remaining blockers and safe integration order.
 - Lane 232 / reused project-owned M3 source task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active Texgen/SU
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete/root-review hold
+  Texgen/SU
   raw-to-canonical leaf-producer lane at exact canonical PC `0f896395c` and
   decomp `09ca8e8b`. It must use verified source-only bundle
   `/private/tmp/acgc-canonical-pc-0f89639.bundle` (SHA-256
@@ -1719,7 +1721,25 @@ also integrated. Remote workers may not update the umbrella checkout.
   playability work is authorized. The task verified the bundle and created a
   clean `/private/tmp/acgc-lane-texgen-producer-m3` worktree on
   `c1/lane-texgen-producer-m3` at the exact `0f896395c` base before beginning
-  its mandatory two-upstream crosswalk.
+  its mandatory two-upstream crosswalk. It returned clean worker
+  `a14aef417913f9538d952df867f56a826bb7f124` with exactly the four owned
+  files. Native and combined ASan/UBSan focused CTest pass `2/2` each; the
+  producer object and native C11/C++11 plus ILP32 probes pass; `_WIN32` remains
+  blocked by missing non-Windows headers and is not Windows sign-off. No
+  runtime/rendering claim follows. The source, branch, and generated roots
+  remain protected pending independent review and root integration.
+- Lane 233 / reused project-owned M3 review task
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending immutable read-only
+  review of lane 232 worker `a14aef4179` against base `0f896395c`. It must use
+  the preserved worker source and create only detached review source
+  `/private/tmp/acgc-lane-233-texgen-producer-review`; verify exact ancestry,
+  four-file ownership, raw/canonical/decomp mapping, destination-preserving
+  fail-closed behavior, unresolved indexed/inactive semantics, portability,
+  CMake scope, and focused fixture coverage; then return `PASS` or exact
+  material findings. It owns no edit, branch, build, test, cleanup,
+  integration, full link, LLDB, runtime, Apple/Metal, device/pixel, Windows
+  sign-off, ISO/assets, or playability work. It is not counted active until its
+  exact detached review source and contract are confirmed.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
