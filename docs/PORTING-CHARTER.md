@@ -310,7 +310,8 @@ completed-batch provenance at `pc_gx_flush_vertices`, including direct
 supplies persistent raw Channels and Lighting, `698d45d3e` supplies raw
 Texture/TLUT generations and synchronous resource leases, `b3336504c`
 supplies the neutral Raster value ABI, and `039afce0e` supplies raw
-Alpha/ZCompLoc provenance. Raw Raster and Indirect ownership remain
+Alpha/ZCompLoc provenance. Integrated `a42da8e155` supplies the neutral
+section-13 Indirect ABI. Raw Raster and raw Indirect ownership/conversion remain
 prerequisites. A cumulative producer must then preflight
 every required section and resource
 generation before one synchronous all-or-nothing callback. Apple consumption
@@ -320,6 +321,7 @@ owned resources, encoder, MSL, present, and readback gates. See the
 [earlier canonical producer readiness audit](evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md),
 [current cumulative readiness reconciliation](evidence/CURRENT-CUMULATIVE-PRODUCER-READINESS-698D45D3E-2026-08-15.md),
 [canonical Indirect contract](evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md),
+[canonical Indirect implementation](evidence/CANONICAL-INDIRECT-STATE-A42DA8E15-2026-08-15.md),
 [raw Alpha/ZCompLoc evidence](evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
 [current Geometry converter readiness audit](evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
 and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).

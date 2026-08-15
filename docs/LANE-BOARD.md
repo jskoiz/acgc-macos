@@ -77,8 +77,10 @@ reviewed/archived under the remote M3 Max `acgc-modern-port` project. No
 production worker from that completed batch remains active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs. Exact lane-204 cleanup
-is complete. Lanes 208–209 are the two active M3 Max source workers: raw
-Raster and portable Indirect. Lane 210 completed its read-only
+is complete. Lane 208 is the sole active M3 Max source worker, owning raw
+Raster. Lane 209 is reviewed and integrated as canonical PC `a42da8e155`;
+its remote and fresh local native plus combined ASan/UBSan focused CTest pass
+`1/1` each. Lane 210 completed its read-only
 Geometry-converter audit and is reviewed/archived. Its verdict is that a
 complete producer is not dependency-ready; the raw Geometry closure successor
 must wait until lane 208 releases overlapping `pc_gx.c` ownership. No full
@@ -88,7 +90,7 @@ link, LLDB, or device run is active.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`039afce0e` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`a42da8e155` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1162,24 +1164,21 @@ also integrated. Remote workers may not update the umbrella checkout.
   `/private/tmp/acgc-lane-raw-raster-{native,asan,win}` roots. The branch,
   worktree, and exact clean base are confirmed.
 - Lane 209 / reused project-owned M3 task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active portable canonical
-  Indirect ABI successor. It must use the same verified source-only bundle and
-  create `/private/tmp/acgc-lane-canonical-indirect-m3` on
-  `c1/lane-canonical-indirect-m3` at exact PC `039afce0e`, with decomp
-  `09ca8e8b`. Ownership is exactly new
-  `include/acgc/gx_canonical_indirect_state.h`, new
-  `src/gx_canonical_indirect_state.c`, one new portable validator/roundtrip
-  fixture, and minimal `pc/portable/CMakeLists.txt` registration. It implements
-  the accepted section-13/mask-`0x1000`, version-1, 248-byte shared
-  count/order/scale/matrix record and strict TEV cross-validation without
-  duplicating the nine canonical TEV per-stage fields. `pc_gx`, raw setters,
-  packet/envelope producers, Apple/Metal, shaders, decomp edits, resources,
-  ISO/assets, full link, LLDB, device, pixel, and playability are out of scope.
-  Required evidence is a clean commit, exact layout/metadata/dependency
-  fixtures, serial native plus combined ASan/UBSan focused tests, analyzer and
-  bounded C/C++/ILP32/Windows syntax probes in unique
-  `/private/tmp/acgc-lane-canonical-indirect-{native,asan,win}` roots. The
-  branch, worktree, and exact clean base are confirmed.
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete, reviewed, integrated, and
+  archive-ready portable canonical Indirect ABI lane. Worker branch
+  `c1/lane-canonical-indirect-m3` advanced exact base `039afce0e` to direct
+  child `a42da8e155`, now fast-forwarded onto canonical
+  `c1/macos-host-launch`. Its exact four-file delta is a new Indirect header,
+  validator implementation, focused portable fixture, and minimal portable
+  CMake registration. Section ID `13`, mask `0x1000`, version `1`, is exactly
+  248 bytes/62 words; validation freezes metadata/layout, values,
+  reserved/inactive records, TEV-owned stage/matrix references, optional
+  Texture/Texgen dependencies, and the direct/Indirect texture-map collision.
+  Remote and fresh local native plus combined ASan/UBSan focused CTest pass
+  `1/1` each with no diagnostics (`detect_leaks=0`). Evidence is
+  `docs/evidence/CANONICAL-INDIRECT-STATE-A42DA8E15-2026-08-15.md`. Raw
+  Indirect ownership/conversion, envelope production, full link, callback,
+  Metal, pixel, device, Windows runtime, and playability remain open.
 - Lane 210 / reused project-owned M3 task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete, reviewed, and
   archived read-only Geometry conversion audit at exact PC `039afce0e`
@@ -1216,11 +1215,12 @@ lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is reviewe
 and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
 integrated at canonical PC `b3336504c`; lane 204 is reviewed and integrated at
 canonical PC `039afce0e`. Lanes 206–207 are complete, reviewed, and archived
-read-only audits. Exact lane-204 cleanup is complete. Lanes 208–209 are the two
-active M3 Max source workers on confirmed clean, separate `039afce0e` scopes.
-Lane 210 is complete, reviewed, and archived; its Geometry raw-closure
-successor is dependency-blocked by lane 208's `pc_gx.c` ownership. No lane 211
-is opened or queued; no full link, LLDB, or device run is active.
+read-only audits. Exact lane-204 cleanup is complete. Lane 209 is reviewed and
+integrated as canonical PC `a42da8e155`; lane 208 is the sole remaining active
+M3 Max source worker. Lane 210 is complete, reviewed, and archived; its
+Geometry raw-closure successor is dependency-blocked by lane 208's `pc_gx.c`
+ownership. No lane 211 is opened or queued; no full link, LLDB, or device run
+is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.

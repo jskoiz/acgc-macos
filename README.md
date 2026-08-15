@@ -34,9 +34,10 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `039afce0e` (`Add PC raw Alpha provenance`),
-adding setter-owned Alpha/ZCompLoc provenance and production-object
-availability on top of the strict pointer-free Raster value contract and
+`c1/macos-host-launch` at `a42da8e155` (`Add canonical GX Indirect state
+ABI`), adding the strict pointer-free Indirect value contract on top of
+setter-owned Alpha/ZCompLoc provenance, production-object availability, the
+strict pointer-free Raster value contract, and
 persistent setter-owned raw Channels and Lighting,
 immutable raw Geometry batches, the pointer-free raw Texture/TLUT owner and
 synchronous resource lease, the reviewed neutral Texture/TLUT, Dynamic,
@@ -285,8 +286,9 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   `97aebd8a2d` supplies persistent raw Channels and Lighting dependencies, and
   integrated `698d45d3e` supplies Texture/TLUT generations and synchronous
   resource leases, `b3336504c` supplies the neutral Raster value ABI, and
-  `039afce0e` supplies raw Alpha/ZCompLoc provenance. Raw Raster and Indirect
-  ownership still gate the
+  `039afce0e` supplies raw Alpha/ZCompLoc provenance, and `a42da8e155`
+  supplies the neutral Indirect ABI. Raw Raster and raw Indirect
+  ownership/conversion still gate the
   all-or-nothing cumulative serializer and immutable Apple CPU plan.
   A current-tip read-only Geometry audit also finds that the existing completed
   raw batch is not yet a complete canonical producer: mutation ordering,
@@ -300,6 +302,7 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [earlier canonical producer readiness audit](docs/evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md),
   [current cumulative readiness reconciliation](docs/evidence/CURRENT-CUMULATIVE-PRODUCER-READINESS-698D45D3E-2026-08-15.md),
   [canonical Indirect contract](docs/evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md),
+  [canonical Indirect implementation](docs/evidence/CANONICAL-INDIRECT-STATE-A42DA8E15-2026-08-15.md),
   [raw Alpha/ZCompLoc evidence](docs/evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
   [current Geometry converter readiness audit](docs/evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
