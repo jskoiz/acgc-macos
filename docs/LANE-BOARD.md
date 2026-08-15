@@ -115,8 +115,10 @@ read-only TEV audit with `BLOCK`. Lane 225 completed the Alpha/Blend/Depth/Fog
 producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
 on the documented distinct predecessors. Lane 227 worker `dfef13a2` passed
 lane 228's immutable independent review and is integrated as canonical PC
-`0f896395c`; both tasks are archived. Lanes 229–231 are registered
-active on disjoint Blend, Fog, and cumulative-producer audits.
+`0f896395c`; both tasks are archived. Lane 229 completed its independent
+read-only Blend audit with `BLOCK`: the canonical Blend ABI exists, but no
+setter-owned raw Blend owner/knownness/invalid state or truthful builder does.
+Lanes 230–231 remain active on disjoint Fog and cumulative-producer audits.
 
 ## Remote M3 Max batch (current)
 
@@ -1627,7 +1629,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   coverage have no material blocker. Its detached review source is preserved
   because bounded cleanup checks found `assets`/`orig` entries.
 - Lane 229 / reused project-owned M3 audit task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — active independent read-only
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — complete/root-reviewed and
+  archive-pending independent read-only
   Blend raw-owner/leaf-producer contract audit at exact canonical PC
   `0f896395c` and decomp `09ca8e8b`. It must use source-only bundle
   `/private/tmp/acgc-canonical-pc-0f89639.bundle` (SHA-256
@@ -1637,9 +1640,15 @@ also integrated. Remote workers may not update the umbrella checkout.
   and detached source `/private/tmp/acgc-lane-229-blend-audit-m3`. It must map
   PC `GXSetBlendMode` state/knownness/order and the canonical Blend ABI against
   decomp `GXSetBlendMode`, initialization, and callers, then return `READY` or
-  the exact smallest raw-owner predecessor. It owns no edit, branch, build,
-  test, cleanup, link, LLDB, Apple/Metal, device/pixel, Windows sign-off,
-  ISO/assets, or playability work.
+  the exact smallest raw-owner predecessor. It returned `BLOCK`: current PC
+  retains only host/OpenGL Blend values and has no setter-owned raw Blend
+  state, knownness, sticky invalid history, or raw-to-canonical builder. The
+  smallest successor owns only `pc_gx_internal.h`, `pc_gx.c`, one focused raw
+  Blend fixture, and minimal CMake; it cannot overlap Fog or TEV source work.
+  Evidence is
+  `docs/evidence/BLEND-PRODUCER-READINESS-0F896395C-2026-08-15.md`. It owns no
+  edit, branch, build, test, cleanup, link, LLDB, Apple/Metal, device/pixel,
+  Windows sign-off, ISO/assets, or playability work.
 - Lane 230 / reused project-owned M3 audit task
   `01a004f3-5a55-7702-95ec-8acf22b8b806` — active independent read-only
   Fog raw-owner/leaf-producer contract audit at exact canonical PC `0f896395c`
