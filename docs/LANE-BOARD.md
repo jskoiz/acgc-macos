@@ -910,15 +910,17 @@ also integrated. Remote workers may not update the umbrella checkout.
   header probes pass, while a real i686 Windows build remains toolchain-blocked.
   Evidence is
   `docs/evidence/CURRENT-FOCUSED-MATRIX-23C26E520-2026-08-14.md`.
-- Lane 198 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active
+- Lane 198 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete
   M3 Max read-only independent review of lane 195. It must verify bundle
   `989a4d3b49125098abb4d854bd06a3f59873260cdb54ef9f1c677d5e7bbeacd8`,
   exact parent `23c26e520a`, final `c9eec84b0e`, five-file ownership, both
   upstreams, raw/canonical semantics, legacy Windows/GL preservation, and
   native plus combined ASan/UBSan evidence. It owns no source, branch, docs,
   build, full link, LLDB, resource bytes, Apple/Metal, pixel, device, or
-  playability action. Success permits or blocks root integration with one
-  exact finding.
+  playability action. It returned PASS for the initial candidate's five-file
+  mapping and fail-closed behavior but did not identify the frozen plan's
+  persistence contradiction. Root review therefore supersedes that PASS and
+  lane 199 remains the required repair before integration.
 - Lane 199 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active
   M3 Max source/test repair on `c1/lane-raw-channels-m3` at `c9eec84b0e`.
   It owns only `pc/src/pc_gx_channels_raw.c` and the focused Channels fixture.
@@ -944,7 +946,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194–197 are complete. Lanes 198–199 are active. The current
+191–192 and 194–198 are complete. Lane 199 is active. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
