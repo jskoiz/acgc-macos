@@ -55,15 +55,16 @@ combined ASan/UBSan `17/17` passes; its exact holder-free generated roots are
 retired. Lane 198 completed the independent read-only review of the initial
 lane-195 candidate; root review supersedes its PASS at the documented
 persistence boundary. Lane 200 completed the raw Lighting producer on the M3
-Max and is reviewed and integrated as canonical PC `97aebd8a2d`. Lane 201 completed its
-independent exact post-Channels matrix: native and combined ASan/UBSan each
-pass `18/18`, the corrected ABI/syntax probes pass, and Windows remains at the
-documented SDL/toolchain boundary. Lane 202 completed its independent
-read-only five-file review with `PASS` and is archived. Lane 203 is the sole
-active production lane in the saved ACGC project for the M3 Max raw
-Texture/TLUT producer. Its dedicated remote PC worktree is clean on
-`c1/lane-raw-texture-tlut-m3` at exact canonical `97aebd8a2d`; the setup turn
-created no source diff or build root.
+Max and is reviewed and integrated as canonical PC `97aebd8a2d`. Lane 201
+completed its independent exact post-Channels matrix: native and combined
+ASan/UBSan each pass `18/18`, the corrected ABI/syntax probes pass, and Windows
+remains at the documented SDL/toolchain boundary. Lane 202 completed its
+independent read-only five-file review with `PASS` and is archived. Lane 203
+completed the M3 Max raw Texture/TLUT producer. Root review rejected its
+initial all-map TLUT invalidation; the same lane repaired that defect as child
+commit `698d45d3e`, and the final tree is reviewed and integrated on canonical
+`c1/macos-host-launch`. Fresh exact-tip native and combined ASan/UBSan focused
+matrices pass `7/7` each. No production worker is currently active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -71,7 +72,7 @@ evidence remain available in Git and the evidence docs.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`97aebd8a2d` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`698d45d3e` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -1017,16 +1018,21 @@ also integrated. Remote workers may not update the umbrella checkout.
   No build, launch, LLDB, resource access, callback,
   Metal, pixel, device, iOS, Windows sign-off, or playability scope is allowed.
 - Lane 203 / reused project-owned M3 task
-  `01a00275-9cf6-7113-8511-5e9a4d18deff` — active M3 Max raw Texture/TLUT
-  source/test successor. The local setup placeholder
+  `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete, reviewed, integrated,
+  and archive-ready M3 Max raw Texture/TLUT source/test successor. The local setup placeholder
   `01a004ae-d74c-7d13-8be7-e8fdfb897318` is archived and is not a worker. The
   exact gate
   is the pointer-free raw map/TLUT owner epoch, per-resource generations,
   mutation/invalidation boundary, canonical Texture/Dynamic conversion, and
   synchronous callback-scoped byte lease frozen in
   `docs/evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md`.
-  It depends on canonical PC `97aebd8a2d` and decomp `09ca8e8b`; success stops
-  after a clean worker commit and focused CPU/source proof. The owning branch
+  It is based on canonical PC `97aebd8a2d` and decomp `09ca8e8b`. Initial
+  worker commit `4e6caa0b3e` was held after root review found that TLUT load and
+  native-endian conversion dropped unrelated non-indexed image leases. Child
+  repair `698d45d3e` decouples legacy source clearing from raw lease lifetime,
+  preserves global invalidation at true cache/clear/destroy boundaries, and
+  adds exact nondependent-survival/dependent-invalidation assertions. The final
+  canonical source is `c1/macos-host-launch` at `698d45d3e`. The owning branch
   is `c1/lane-raw-texture-tlut-m3` in dedicated remote PC worktree
   `/private/tmp/acgc-lane-raw-texture-tlut-m3`, initialized clean at
   `97aebd8a2df935ebfc8d69dfc9419b54d063ddeb` from verified tracked-source-only
@@ -1041,16 +1047,22 @@ also integrated. Remote workers may not update the umbrella checkout.
   relevant emu64 call site may be added after an explicit crosswalk. All Apple
   files, cumulative multi-section packet policy, renderer code, unrelated GX
   state, ISO/assets, full `ac_pc` link, LLDB, Metal/device, pixel, iOS, and
-  playability are out of scope. Planned unique roots are
-  `/private/tmp/acgc-lane-raw-texture-tlut-{native,asan,win}`. The mandatory
+  playability are out of scope. Worker roots are
+  `/private/tmp/acgc-lane-raw-texture-tlut-{native,asan,win}`. Exact local
+  integrated verification roots are
+  `/private/tmp/acgc-integrate-raw-texture-tlut-698-{native,asan}`. The mandatory
   two-upstream crosswalk covers PC `pc_gx_internal.h`, `pc_gx_texture.c`,
   `pc_gx.c`, the canonical Texture/Dynamic validators and fixtures, plus
   decomp `GXTexture.c`, `GXInit.c`, public GX enums/structs, and representative
   emu64/JUT/game callers. Focused native and combined ASan/UBSan serial tests,
   C/C++11 and bounded compatibility probes, `git diff --check`, exact refs,
-  and a clean handoff are required. Success unblocks a separately owned
-  cumulative all-or-nothing snapshot producer; it does not prove a callback,
-  Metal encode/present/readback, pixel, device, or playability gate.
+  and a clean handoff pass. Remote and exact integrated native plus combined
+  ASan/UBSan focused matrices pass `7/7` each, with leak detection disabled and
+  no sanitizer diagnostics. Evidence is
+  `docs/evidence/PC-RAW-TEXTURE-TLUT-698D45D3E-2026-08-15.md`. This unblocks a
+  separately owned cumulative all-or-nothing snapshot producer; it does not
+  prove a full link, live callback, Metal encode/present/readback, pixel,
+  device, or playability gate.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1066,8 +1078,9 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
-lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is the sole
-active production lane. The current
+lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is reviewed
+and integrated at canonical PC `698d45d3e`; no production worker is active.
+The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 

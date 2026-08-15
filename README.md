@@ -34,10 +34,11 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `97aebd8a2d` (`Capture raw GX Lighting register
-state`), completing persistent setter-owned raw Channels and Lighting, immutable raw
-Geometry batches, the reviewed neutral Texture/TLUT, Dynamic, Lighting, and
-Channels ABIs, Depth ordering, raw
+`c1/macos-host-launch` at `698d45d3e` (`Repair Texture TLUT lease
+invalidation`), completing persistent setter-owned raw Channels and Lighting,
+immutable raw Geometry batches, the pointer-free raw Texture/TLUT owner and
+synchronous resource lease, the reviewed neutral Texture/TLUT, Dynamic,
+Lighting, and Channels ABIs, Depth ordering, raw
 Texgen/SU, and canonical Geometry chains on top of `251a010b8` (`Preserve typed
 GX depth setter ABI`),
 `eeec2301c1` (`Track PC raw GX depth provenance`), and `c3e158398`
@@ -249,19 +250,27 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   generations, exact metadata, and an external synchronous lease for bytes.
   Integrated `a641e55efb` implements both neutral value ABIs, including exact
   minification `0..5` and decomp-effective magnification `0..1` domains; exact
-  native and combined ASan/UBSan canonical matrices pass `12/12`. Raw PC
-  resource state, generations, invalidation, leases, cumulative production,
-  and Apple consumption remain later gates. See the
+  native and combined ASan/UBSan canonical matrices pass `12/12`. Integrated
+  `698d45d3e` now adds the private raw map/TLUT owner, checked generations,
+  exact tiled/mip/source metadata, converted-image provenance, canonical
+  Texture/Dynamic conversion, and callback-scoped borrowed resources. Root
+  review rejected the initial all-map TLUT invalidation and the repair now
+  preserves unrelated non-indexed leases while invalidating only dependent
+  indexed maps. Exact integrated native and combined ASan/UBSan focused
+  matrices pass `7/7` each. Cumulative production and Apple consumption remain
+  later gates. See the
   [canonical Texture/Dynamic contract](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md)
   [integrated implementation evidence](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md),
-  and [raw Texture/TLUT producer plan](docs/evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md).
+  [raw Texture/TLUT producer plan](docs/evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md),
+  and [raw Texture/TLUT integration evidence](docs/evidence/PC-RAW-TEXTURE-TLUT-698D45D3E-2026-08-15.md).
 
 - Integrated `23c26e520a` now captures immutable Geometry
   VCD/VAT/array/completed-batch provenance at `pc_gx_flush_vertices`, including
   direct `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated
-  `97aebd8a2d` supplies persistent raw Channels and Lighting dependencies.
-  Remaining draw-critical source work is Texture/TLUT resource generations
-  followed by one all-or-nothing cumulative serializer.
+  `97aebd8a2d` supplies persistent raw Channels and Lighting dependencies, and
+  integrated `698d45d3e` supplies Texture/TLUT generations and synchronous
+  resource leases. Remaining draw-critical source work is one all-or-nothing
+  cumulative serializer and immutable Apple CPU plan.
   Apple consumption follows only after those complete typed dependencies and
   stable resources. See the
   [raw Geometry integration evidence](docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),

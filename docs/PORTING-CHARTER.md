@@ -61,9 +61,10 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `97aebd8a2d`, with
-persistent setter-owned raw Channels and Lighting, immutable raw Geometry batches, the
-strict neutral Texture/TLUT, Dynamic, Lighting, and Channels ABIs, repaired `GXSetZMode`
+As of 2026-08-15, the canonical local PC branch is clean at `698d45d3e`, with
+persistent setter-owned raw Channels and Lighting, immutable raw Geometry
+batches, a pointer-free raw Texture/TLUT owner and synchronous resource lease,
+the strict neutral Texture/TLUT, Dynamic, Lighting, and Channels ABIs, repaired `GXSetZMode`
 flush-before-mutation
 boundary, setter-owned raw Texgen/SU provenance, and canonical Geometry ABI on
 top of the portable 888-byte Transform ABI and setter-owned raw Transform and
@@ -275,20 +276,26 @@ generations, exact metadata, and a synchronous external byte lease replace
 host pointers, GL names, and cache hashes. Integrated `a641e55efb` implements
 both neutral synthetic-value validators with exact minification `0..5` and
 decomp-effective magnification `0..1` domains; exact native and combined
-ASan/UBSan canonical matrices pass `12/12`. Raw PC resource state,
-generation/invalidation, leases, cumulative production, and Apple delivery
-remain separate later owners. See the
+ASan/UBSan canonical matrices pass `12/12`. Integrated `698d45d3e` implements
+the private raw map/TLUT owner, checked generations, exact tiled/mip/source
+metadata, converted-image provenance, canonical conversion, and the
+callback-scoped borrowed-resource lease. Root review rejected the first
+over-broad TLUT invalidation; the repair preserves unrelated non-indexed maps
+and invalidates only indexed maps dependent on the changed TLUT. Exact
+integrated native and combined ASan/UBSan focused matrices pass `7/7` each.
+Cumulative production and Apple delivery remain separate later owners. See the
 [canonical Texture/Dynamic contract](evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md)
 [integrated implementation evidence](evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md),
-and [raw Texture/TLUT producer plan](evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md).
+the [raw Texture/TLUT producer plan](evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md),
+and [raw Texture/TLUT integration evidence](evidence/PC-RAW-TEXTURE-TLUT-698D45D3E-2026-08-15.md).
 
 The refreshed producer and Apple audits reject another transitional packet
 shim. Integrated `23c26e520a` now captures immutable Geometry VCD/VAT/array and
 completed-batch provenance at `pc_gx_flush_vertices`, including direct
 `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated `97aebd8a2d`
-supplies persistent raw Channels and Lighting. Texture/TLUT resource
-generations remain required. A
-cumulative producer then preflights every required section and resource
+supplies persistent raw Channels and Lighting, while `698d45d3e` supplies raw
+Texture/TLUT generations and synchronous resource leases. A cumulative
+producer now must preflight every required section and resource
 generation before one synchronous all-or-nothing callback. Apple consumption
 begins only after that contract, through a pure-C immutable plan and separately
 owned resources, encoder, MSL, present, and readback gates. See the
