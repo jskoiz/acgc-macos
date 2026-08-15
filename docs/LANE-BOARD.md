@@ -99,10 +99,11 @@ lane 214's independent read-only review. Lane 216 returned source commit
 `5aba10371f`, but lane 218 independently blocked it on strict raw-metadata
 validation and missing mandatory fixture cases. Lane 217 completed its
 read-only current-tip cumulative-producer audit and found the cumulative gate
-still blocked by missing leaf owners/producers. Lane 216 is active on the same
-branch for the exact two-file repair, and lane 219 is active on the independent
-portable Texgen/SU ABI prerequisite. No full link, LLDB, or device run is
-active.
+still blocked by missing leaf owners/producers. Lane 216 completed its exact
+two-file repair as child `5324c8739e` and is held for lane 220's independent
+re-review. Lane 219 is active on the independent portable Texgen/SU ABI
+prerequisite, and lane 220 is the active read-only Geometry re-review. No full
+link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1327,8 +1328,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   decomp tree at `09ca8e8b` rather than the stale task worktree's uninitialized
   submodule.
 - Lane 216 / reused project-owned M3 Geometry task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active narrow repair after
-  independent-review `BLOCK`. Its first handoff returned clean branch
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete narrow repair on
+  independent re-review hold. Its first handoff returned clean branch
   `c1/lane-canonical-geometry-producer-m3` at `5aba10371f` from base
   `b9a9f355`, changing exactly the four contracted producer/fixture/CMake
   files. Remote native and combined ASan/UBSan focused CTest pass `1/1` each
@@ -1342,7 +1343,13 @@ also integrated. Remote workers may not update the umbrella checkout.
   explicit-INDEX16-endian, and output/scratch-overlap fixture proof were still
   missing. The same lane 216 branch now owns only that producer/test repair and
   must return a child commit plus fresh native and combined ASan/UBSan `1/1`
-  evidence before a new independent review.
+  evidence before a new independent review. It returned clean child
+  `5324c8739e` on the same branch, changing only the producer source and focused
+  fixture. Fresh native and combined ASan/UBSan CTest pass `1/1` each with no
+  sanitizer diagnostics and `detect_leaks=0`; `git diff --check` passes. The
+  refreshed protected source-only bundle has SHA-256
+  `b78573c42dfa8bda2c1a09e0369539fb16e9da117a09de27673b11611fe7c9b6`.
+  Nothing is accepted or integrated until lane 220 returns its verdict.
   The lane was originally registered as an active canonical Geometry producer
   source/test lane. It reuses the completed lane-210 Geometry audit task for
   direct ownership continuity and runs `gpt-5.6-luna` with max reasoning. The
@@ -1423,6 +1430,17 @@ also integrated. Remote workers may not update the umbrella checkout.
   `/private/tmp/acgc-lane-canonical-texgen-state-{native,asan,win}`. This is
   CPU/ABI evidence only; it cannot prove the later PC leaf producer, callback,
   Metal, pixel, device, Windows runtime, or playability.
+- Lane 220 / reused project-owned M3 Geometry review task
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active independent read-only
+  re-review of exact repaired final `5324c8739e` from base `b9a9f355` and first
+  candidate `5aba10371f`. It uses only the hash-verified immutable lane-216
+  bundle and detached source `/private/tmp/acgc-lane-220-geometry-producer-review`;
+  it may not inspect the live worker or old asset-bearing review source. The
+  gate is to prove the prior exact-boolean, direct-source, inactive/tail,
+  direct-quad, INDEX16-endian, and buffer-overlap blockers are closed without a
+  new correctness, UB, portability, or coverage regression. It owns no edit,
+  branch, build, test, cleanup, integration, link, LLDB, runtime, Apple/Metal,
+  device/pixel, Windows sign-off, ISO/assets, or playability work.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1451,10 +1469,11 @@ completed the narrow same-branch repair of blocked worker `1730823d45` as child
 `5679bff656` and is integrated at canonical `b9a9f355`; lane 212 is
 complete/archived; lane 213 completed the exact-tip matrix; lane 214 completed
 its read-only BLOCK review; and lane 215 completed its independent read-only
-PASS review. Lane 216 is active for the exact lane-218 repair; lane 217 is
-complete/blocked at the cumulative readiness gate, lane 218 is complete with a
-source-review `BLOCK`, and lane 219 is the independent active Texgen/SU ABI
-worker. No full link, LLDB, or device run is active.
+PASS review. Lane 216 completed the exact lane-218 repair and is held for lane
+220; lane 217 is complete/blocked at the cumulative readiness gate, lane 218 is
+complete with its first source-review `BLOCK`, lane 219 is the active Texgen/SU
+ABI worker, and lane 220 is the active independent Geometry re-review. No full
+link, LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
