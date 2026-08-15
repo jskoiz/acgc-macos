@@ -110,8 +110,10 @@ Lane 222 completed the independent Texgen review. Lane 223 completed the
 Transform leaf-producer source handoff at `4fde6d94` and is on root-review
 hold. No full link, LLDB, or device run is active. Lane 224 completed its
 read-only TEV audit with `BLOCK`; lane 225 remains active on the
-Alpha/Blend/Depth/Fog producer topology. Lane 226 is active on the independent
-Transform producer review.
+Alpha/Blend/Depth/Fog producer topology. Lane 225 has now completed: Alpha is
+`READY`, while Blend, Depth, and Fog are `BLOCKED` on the documented distinct
+predecessors. Lane 226 is active on the independent Transform producer review.
+Lane 227 is registered setup-pending for the narrow Depth converter.
 
 ## Remote M3 Max batch (current)
 
@@ -1541,13 +1543,17 @@ also integrated. Remote workers may not update the umbrella checkout.
   fixture, and minimal CMake. Evidence is
   `docs/evidence/TEV-PRODUCER-READINESS-689590CC-2026-08-15.md`.
 - Lane 225 / reused project-owned M3 audit task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active independent read-only
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete independent read-only
   Alpha/Blend/Depth/Fog leaf-producer topology audit at exact canonical PC
   `689590cc` and decomp `09ca8e8b`. It must classify each section separately as
   producer-ready or blocked, identify exact raw owner/knownness/ordering gaps,
   and freeze only disjoint later source contracts. It owns no edit, branch,
   build, test, cleanup, integration, full link, LLDB, Apple/Metal, device/pixel,
-  ISO/assets, Windows sign-off, or playability work.
+  ISO/assets, Windows sign-off, or playability work. It found Alpha `READY`,
+  Depth blocked only on its canonical converter/API/fixture, Blend blocked on a
+  setter-owned raw shadow, and Fog blocked on complete logical value plus
+  synchronous range-table capture. Evidence is
+  `docs/evidence/PIXEL-LEAF-PRODUCER-TOPOLOGY-689590CC-2026-08-15.md`.
 - Lane 226 / reused project-owned M3 review task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active independent read-only
   review of lane 223 worker `4fde6d94ed` against base `689590cc`. It must use
@@ -1558,6 +1564,17 @@ also integrated. Remote workers may not update the umbrella checkout.
   findings. It owns no edit, branch, build, test, cleanup, integration, full
   link, LLDB, Apple/Metal, device/pixel, ISO/assets, Windows sign-off, or
   playability work.
+- Lane 227 / reused project-owned M3 source task
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending Depth leaf-converter
+  source/test lane on `gpt-5.6-luna` with max reasoning. It must use a verified
+  current canonical source-only bundle, own only a new Depth producer
+  header/source, one focused fixture, and minimal `pc/CMakeLists.txt`, and
+  preserve the existing raw Depth owner and canonical ABI. It may not edit
+  `pc_gx.c`, `pc_gx_internal.h`, Transform/Texgen/TEV/Blend/Fog, cumulative or
+  Apple/Metal code, decomp, or ISO/assets. Native and combined ASan/UBSan
+  focused tests plus production-object/syntax probes are the only verification;
+  no full link, LLDB, runtime, device, pixel, Windows sign-off, or playability
+  claim is authorized.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
