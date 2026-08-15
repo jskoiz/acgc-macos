@@ -392,7 +392,7 @@ checkout.
   operation occurred. Its detached source/docs worktrees and prompt/events/
   final artifacts are absent.
 - Lane 168 / task `01a002d3-e737-76c1-8349-fc4e003fc0b9` — complete,
-  integrated, and cleanup-pending. Remote branch
+  integrated, archived, and cleaned. Remote branch
   `c1/lane-canonical-tev-m3` advanced exact PC `f2b7ab153` to worker
   `4862aa651`; the integration owner cherry-picked its exact four-file change
   as canonical PC `6d1d310c0`. It implements the version-1, section-`0x0020`,
@@ -403,7 +403,7 @@ checkout.
   `docs/evidence/CANONICAL-TEV-STATE-6D1D310C0-2026-08-14.md`. No cumulative
   producer, Apple/Metal callback, pixel, device, or playability claim follows.
 - Lane 169 / task `01a002d6-8511-79d2-afeb-4348ff78a52a` — complete,
-  archived, and cleanup-pending, read-only at exact PC `f2b7ab153` and decomp
+  archived, and cleaned, read-only at exact PC `f2b7ab153` and decomp
   `09ca8e8b`. It freezes versioned `0x0200` Depth as 16 bytes and `0x0400`
   Raster/viewport/scissor as 128 bytes, records the current PC no-op/lossy
   setters and knownness gaps, and selects neutral ABI lanes before one serial
