@@ -120,7 +120,9 @@ read-only Blend audit with `BLOCK`: the canonical Blend ABI exists, but no
 setter-owned raw Blend owner/knownness/invalid state or truthful builder does.
 Lane 230 completed its independent read-only Fog audit with `BLOCK`: the PC
 host retains no logical range-adjust state and has no truthful raw Fog owner or
-producer. Lane 231 remains active on cumulative-producer readiness.
+producer. Lane 231 completed its current-tip cumulative audit with `BLOCK`:
+Texgen/SU, TEV, Blend, Fog, and Indirect still lack truthful leaf inputs, and
+there is no atomic all-section assembler/publication boundary.
 
 ## Remote M3 Max batch (current)
 
@@ -1672,7 +1674,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   edit, branch, build, test, cleanup, link, LLDB, Apple/Metal, device/pixel,
   Windows sign-off, ISO/assets, or playability work.
 - Lane 231 / reused project-owned M3 audit task
-  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active independent read-only
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete/root-reviewed and
+  archive-pending independent read-only
   current-tip cumulative-producer readiness reconciliation at exact canonical
   PC `0f896395c` and decomp `09ca8e8b`. It must use the canonical bundle,
   prior control `/private/tmp/acgc-lane-231-cumulative-readiness.md` (SHA-256
@@ -1680,9 +1683,17 @@ also integrated. Remote workers may not update the umbrella checkout.
   and detached source `/private/tmp/acgc-lane-231-cumulative-audit-m3` to
   enumerate every required section/raw owner/leaf producer, immutable resource
   lease, dependency, and atomic publication boundary after the new Transform
-  and Depth producers. It owns no edit, branch, build, test, cleanup, link,
-  LLDB, Apple/Metal, device/pixel, Windows sign-off, ISO/assets, or playability
-  work and must return the exact remaining blockers and safe integration order.
+  and Depth producers. It returned `BLOCK`: Texgen/SU lacks its PC leaf; TEV,
+  Blend, Fog, and Indirect lack complete raw owners/leaves; existing producer
+  objects are not all production-linked; Geometry dependency results are not
+  atomically derived; and no all-or-nothing lease/publication transaction
+  exists. The safe order is Texgen/SU leaf, serialized TEV ownership/leaf,
+  serialized Pixel/Raster/Indirect provenance, Geometry dependency builder,
+  then the final assembler. Evidence is
+  `docs/evidence/CUMULATIVE-PRODUCER-READINESS-0F896395C-2026-08-15.md`. It owns
+  no edit, branch, build, test, cleanup, link, LLDB, Apple/Metal, device/pixel,
+  Windows sign-off, ISO/assets, or playability work and must return the exact
+  remaining blockers and safe integration order.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
