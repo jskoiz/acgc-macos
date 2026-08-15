@@ -140,16 +140,18 @@ bundle. Lane 235's immutable re-review returned `BLOCK` because the existing
 legacy raw-TEV fixture still expects malformed S10 input to mutate a legacy
 shadow that the production repair now correctly leaves unchanged. Lane 234
 returned clean one-file fixture child `62a9f5b23` with both focused fixtures
-passing natively and under combined ASan/UBSan, and is on root-review hold.
-Lane 235 is the sole active worker for the final immutable re-review. Nothing
-from the pair is integrated. No full link, LLDB, launch, or device work is
-active.
+passing natively and under combined ASan/UBSan. Lane 235's final immutable
+re-review returned `PASS`. Root imported the verified final bundle, applied all
+three commits one at a time, and integrated canonical PC `62c810e5b`; fresh
+exact-tip native and combined ASan/UBSan focused CTest pass `2/2` each. Both
+tasks are complete/integrated/archived and no production worker is active. No
+full link, LLDB, launch, or device work is active.
 
 ## Remote M3 Max batch (current)
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`c832fb862` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`62c810e5b` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1784,10 +1786,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   and both-upstream semantics without editing, building, testing, or cleaning.
   The task is archived after the reviewed integration.
 - Lane 234 / remote M3 Max task
-  `01a00640-960d-7d41-9320-721f26037d8a` — complete candidate on root-review
-  hold after one-file test repair following production repair of the
-  setter-owned raw TEV/Indirect provenance lane after lane 235's independent
-  `BLOCK`. It uses verified complete-
+  `01a00640-960d-7d41-9320-721f26037d8a` — complete, independently reviewed,
+  integrated, and archived after one-file test repair following production
+  repair of the setter-owned raw TEV/Indirect provenance lane after lane 235's
+  independent `BLOCK`. It uses verified complete-
   history source-only bundle `/private/tmp/acgc-canonical-pc-c832fb8.bundle`
   (SHA-256
   `c52633a629d26ec9df65d0613aa03b6c6b4d8150ac6ac41eff4b755927e9b21f`),
@@ -1838,13 +1840,18 @@ also integrated. Remote workers may not update the umbrella checkout.
   object compiles, and `git diff --check` passes. Final source-only bundle
   `/private/tmp/acgc-lane-234-final-source.bundle` has SHA-256
   `dd6b9b22d994acce275fe13c16569552ca042b9079c7e38636bfd970a04a29d5`
-  and complete history. Lane 235 must return final independent `PASS` before
-  root integration.
+  and complete history. Lane 235 returned final independent `PASS`. Root
+  preserved worker branch `c1/lane-raw-tev-m3` at `62a9f5b23`, applied the
+  three commits individually as canonical `e036cc947`, `6e797744a`, and
+  `62c810e5b`, and reran fresh native plus combined ASan/UBSan focused CTest
+  `2/2` each. Evidence is
+  `docs/evidence/PC-RAW-TEV-INDIRECT-62C810E5B-2026-08-15.md`.
   This is CPU/source evidence only; there is no canonical leaf, callback,
   Metal, pixel, Windows, or playability claim.
 - Lane 235 / remote M3 Max task
-  `01a00669-46ec-7c50-959c-50dafe702923` — active final immutable independent
-  read-only re-review of test-only child `62a9f5b23`. Its initial review of lane
+  `01a00669-46ec-7c50-959c-50dafe702923` — complete final immutable independent
+  read-only re-review of test-only child `62a9f5b23`, returning `PASS` and now
+  archived. Its initial review of lane
   234 candidate `34da318d4` confirmed exact provenance and bundle hash. It
   returned `BLOCK`: raw validators mark sticky invalidity,
   but multiple enclosing TEV/Indirect setters continue into legacy dirty/mirror
@@ -1861,8 +1868,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   input to update the legacy shadow. The smallest safe repair is test-only; do
   not restore the old source mutation. The final re-review uses fresh roots
   `/private/tmp/acgc-lane-235-final-review-{native,asan}`, owns no source or
-  integration, and must return `PASS` or one exact material blocker. No full
-  link, LLDB,
+  integration, and verified the one-file repair, complete commit chain,
+  unchanged production repair, both focused native and sanitizer fixtures, and
+  production object compile. No full link, LLDB,
   runtime, Metal, device/pixel,
   Windows sign-off, or playability claim follows.
 
