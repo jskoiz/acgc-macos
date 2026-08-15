@@ -162,17 +162,22 @@ still prevents a complete live producer. See
 [canonical Alpha implementation](evidence/CANONICAL-ALPHA-STATE-F2B7AB153-2026-08-14.md).
 
 The TEV audit selects a full 16-stage, 2560-byte `0x0020` value contract rather
-than inheriting the PC shader cap of 3 or legacy packet cap of 2. Current PC
-setters discard exact signed S10 provenance into normalized floats, so the live
-producer remains fail-closed until a narrow setter-owned raw-shadow change is
-proved. See [canonical TEV contract](evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
+than inheriting the PC shader cap of 3 or legacy packet cap of 2. See
+[canonical TEV contract](evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
 
 Integrated `037689462` now retains exact setter-owned PREV/REG0-2 signed or
 u8 values and K0-3 u8 values, including unavailable and malformed knownness,
 while preserving the existing float path. Exact integrated native and combined
-ASan/UBSan focused CTest pass `1/1` each. It remains a PC CPU-state prerequisite,
-not a canonical section or renderer handoff. See
+ASan/UBSan focused CTest pass `1/1` each. See
 [PC raw TEV shadow](evidence/PC-RAW-TEV-SHADOW-037689462-2026-08-14.md).
+
+Integrated `6d1d310c0` implements the separate portable TEV section with exact
+layout, value, inactive-record, selector-hole, and metadata validation. Exact
+integrated native and combined ASan/UBSan canonical-state CTest pass `5/5`
+each. Compare operations preserve logical setter arguments rather than packed
+BP-register bits. A future cumulative producer must join this ABI with the raw
+shadow and validate cross-section references; no live renderer handoff follows.
+See [canonical TEV implementation](evidence/CANONICAL-TEV-STATE-6D1D310C0-2026-08-14.md).
 
 The Transforms/Texgens provenance audit keeps both sections fail-closed until
 the PC port retains raw pre-widescreen projection, exact matrix domains/types/
@@ -186,6 +191,14 @@ strict logical IDs, and explicit knownness. Ordinary/post texture matrices,
 texgen references, and manual SU remain solely in `0x0008`. The PC still needs
 a raw Transform shadow before live production. See
 [canonical Transform contract](evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md).
+
+The Depth/Raster audit freezes `0x0200` as a 16-byte Z-mode section and
+`0x0400` as a 128-byte logical viewport/scissor/raster section. It identifies
+the PC host-state, no-op, jitter, cull-override, line/point, destination-alpha,
+field, and knownness gaps. Neutral Depth and Raster ABIs come first; their
+overlapping setter hooks then belong to one serial PC shadow owner. Neither
+section is implemented or live yet. See
+[canonical Depth/Raster contracts](evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md).
 
 The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
 with three declared Metal-device skips in each configuration. Bounded Windows

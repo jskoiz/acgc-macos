@@ -138,18 +138,21 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [canonical Alpha implementation](docs/evidence/CANONICAL-ALPHA-STATE-F2B7AB153-2026-08-14.md).
 
 - The TEV audit freezes `0x0020` as a full 16-stage, 2560-byte value contract,
-  independent of the current 3-stage shader and 2-stage legacy packet caps.
-  Exact signed S10 register values cannot be recovered from the PC port's
-  normalized floats, so the live producer remains fail-closed pending a narrow
-  setter-owned raw-shadow change. See
+  independent of the current 3-stage shader and 2-stage legacy packet caps. See
   [canonical TEV contract](docs/evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
 
 - Integrated `037689462` adds setter-owned exact raw PREV/REG0-2 and K0-3
   provenance beside the unchanged normalized-float path. Exact integrated
-  native and combined ASan/UBSan focused CTest pass `1/1` each. This is only
-  the PC raw-state prerequisite; lane 168 separately owns the portable
-  2,560-byte TEV ABI and later producer wiring remains fail-closed. See
+  native and combined ASan/UBSan focused CTest pass `1/1` each. See
   [PC raw TEV shadow](docs/evidence/PC-RAW-TEV-SHADOW-037689462-2026-08-14.md).
+
+- Integrated `6d1d310c0` implements the portable 2,560-byte TEV ABI with
+  strict layout, value, inactive-record, selector-hole, and metadata
+  validation. Exact integrated native and combined ASan/UBSan canonical-state
+  CTest pass `5/5` each. Compare-mode fields preserve logical setter arguments,
+  not packed BP-register bits. The raw shadow and portable ABI remain CPU
+  prerequisites; a cumulative producer has not joined them yet. See
+  [canonical TEV implementation](docs/evidence/CANONICAL-TEV-STATE-6D1D310C0-2026-08-14.md).
 
 - The Transforms/Texgens provenance audit finds both sections still
   fail-closed: the PC path loses raw pre-widescreen projection, matrix
@@ -165,6 +168,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   `0x0008`. This is read-only architecture evidence; PC raw Transform shadow
   state is still required. See
   [canonical Transform contract](docs/evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md).
+
+- The read-only Depth/Raster audit freezes `0x0200` as a 16-byte logical
+  Z-mode section and `0x0400` as a 128-byte viewport/scissor/raster section.
+  It identifies lost/no-op PC setters and selects neutral Depth and Raster
+  ABIs before one serial shared `pc_gx` shadow repair. This is architecture
+  evidence only; neither section is implemented yet. See
+  [canonical Depth/Raster contracts](docs/evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md).
 
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three
