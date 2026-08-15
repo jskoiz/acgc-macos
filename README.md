@@ -34,8 +34,8 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `1d48691a4f` (`Restore Texgen legacy equality
-ordering`), completing the reviewed raw Texgen/SU and canonical Geometry
+`c1/macos-host-launch` at `9f149b6fd9` (`Repair GXSetZMode flush ordering`),
+completing the reviewed Depth ordering, raw Texgen/SU, and canonical Geometry
 chains on top of `251a010b8` (`Preserve typed GX depth setter ABI`),
 `eeec2301c1` (`Track PC raw GX depth provenance`), and `c3e158398`
 (`Add canonical Transform ABI validator`), `59714a1fd` (`Repair indexed
@@ -202,21 +202,23 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   Integrated `c736f9686` implements the strict portable Depth ABI and exact
   present/absent envelope validation; the shared canonical native and combined
   ASan/UBSan matrix passes `6/6` in each configuration. Integrated
-  `eeec2301c1`/`251a010b8` add setter-owned raw Depth provenance
-  while preserving the typed `GXSetZMode` boundary; native and combined
-  ASan/UBSan raw Depth/Transform/TEV matrices pass `3/3`. Raster provenance and
-  the cumulative producer remain open. See the
+  `eeec2301c1`/`251a010b8` add setter-owned raw Depth provenance while
+  preserving the typed `GXSetZMode` boundary. Integrated `9f149b6fd9` then
+  repairs the temporal boundary so a completed old batch flushes before raw or
+  effective Depth state changes; exact native and combined ASan/UBSan
+  Transform/Depth/TEV/Texgen matrices pass `4/4`. Raster provenance and the
+  cumulative producer remain open. See the
   [canonical Depth/Raster contracts](docs/evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md),
   [canonical Depth implementation](docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md),
-  and [PC raw Depth shadow](docs/evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md).
+  [PC raw Depth shadow](docs/evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md),
+  and [Depth flush-order repair](docs/evidence/PC-DEPTH-FLUSH-ORDER-9F149B6FD-2026-08-14.md).
 
 - The canonical setter-order audit fixes the future capture invariant at
   `pc_gx_flush_vertices`: a completed old batch must flush before any
   producer-visible raw/effective state mutation. The repaired Texgen/SU worker
-  applies that rule to its seven setters; `GXEnableTexOffsets` remains
-  Raster-owned. On canonical `1d48691a4f`, `GXSetZMode` is the next narrow
-  current defect because it stores raw Depth before flushing. Raster, Indirect,
-  and resource-generation ordering remain separate later owners. See
+  applies that rule to its seven setters; canonical `9f149b6fd9` now applies it
+  to `GXSetZMode` as well. `GXEnableTexOffsets` remains Raster-owned. Raster,
+  Indirect, and resource-generation ordering remain separate later owners. See
   [canonical setter-order evidence](docs/evidence/CANONICAL-SETTER-ORDER-251A010B8-2026-08-14.md).
 
 - The read-only Channels/Lighting audit freezes `0x0004` as a 136-byte paired
