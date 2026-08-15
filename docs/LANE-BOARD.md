@@ -1629,8 +1629,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   coverage have no material blocker. Its detached review source is preserved
   because bounded cleanup checks found `assets`/`orig` entries.
 - Lane 229 / reused project-owned M3 audit task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — complete/root-reviewed and
-  archive-pending independent read-only
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — complete/root-reviewed/archived
+  independent read-only
   Blend raw-owner/leaf-producer contract audit at exact canonical PC
   `0f896395c` and decomp `09ca8e8b`. It must use source-only bundle
   `/private/tmp/acgc-canonical-pc-0f89639.bundle` (SHA-256
