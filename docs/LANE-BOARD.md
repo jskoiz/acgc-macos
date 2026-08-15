@@ -488,7 +488,9 @@ checkout.
   ASan/UBSan canonical matrices pass `7/7` each. Evidence is
   `docs/evidence/CANONICAL-TRANSFORM-STATE-C3E158398-2026-08-14.md`. It proves
   only CPU ABI behavior; no producer, full link, callback, Metal, pixel,
-  device, or playability claim follows. Review-safe cleanup is pending.
+  device, or playability claim follows. Its holder-free source worktree,
+  generated roots, and transfer bundles are retired; the branch and commits
+  remain preserved.
 - Lane 176 / task `01a00358-efb5-7f43-b28a-337c0d8ad584` — complete,
   independently reviewed, and integrated. M3 Max branch
   `c1/lane-pc-depth-shadow-m3` advanced `59714a1fd` through worker commits
@@ -499,8 +501,10 @@ checkout.
   pass `3/3` each. Evidence is
   `docs/evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md`. It proves only
   CPU provenance; no canonical producer, full link, callback, Metal, pixel,
-  device, Windows-runtime, or playability claim follows. Review-safe cleanup
-  is pending.
+  device, Windows-runtime, or playability claim follows. Its holder-free
+  generated roots and transfer bundles are retired. The clean source worktree
+  remains protected because remote task processes still hold it; no holder was
+  killed, and the branch and commits remain preserved.
 - Lane 177 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
   read-only M3 Max cumulative-producer preflight in detached
   `/private/tmp/acgc-lane-cumulative-producer-preflight` at exact PC
