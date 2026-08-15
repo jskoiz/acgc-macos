@@ -44,10 +44,9 @@ repair. Lane 194 has completed its read-only Lighting producer audit. Lane 190
 is independently reviewed and integrated, and lanes 191–192 completed their
 read-only contracts.
 The raw Channels source successor and raw Texture/TLUT read-only audit are
-registered below as lanes 195–196. They remain setup-pending and are not
-counted active until their M3 Max tasks accept the exact current-tip contracts.
-No
-full link, LLDB launch, or Metal-device run is active. Reviewed commits and
+active below as lanes 195–196 after their existing M3 Max project tasks
+accepted the exact current-tip contracts.
+No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
 ## Remote M3 Max batch (current)
@@ -845,8 +844,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   `docs/evidence/RAW-LIGHTING-PRODUCER-PLAN-43992E708-2026-08-14.md`.
   Success unblocks a raw Lighting source lane only after lane 189 releases
   `pc_gx` ownership.
-- Lane 195 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — registered
-  setup-pending M3 Max raw Channels source/test lane at exact canonical PC
+- Lane 195 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active M3 Max
+  raw Channels source/test lane at exact canonical PC
   `23c26e520a` and decomp `09ca8e8b`. It may reuse protected clean worktree
   `/private/tmp/acgc-lane-apple-canonical-plan-preflight`, import source-only
   bundle `/private/tmp/acgc-canonical-pc-23c26e.bundle` (SHA-256
@@ -864,8 +863,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   native and combined ASan/UBSan serial verification can prove only the CPU raw
   Channels contract. Success releases `pc_gx` for the raw Lighting lane and
   supplies the Channels dependency to the cumulative producer.
-- Lane 196 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — registered
-  setup-pending M3 Max read-only raw Texture/TLUT ownership audit at exact
+- Lane 196 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active M3 Max
+  read-only raw Texture/TLUT ownership audit at exact
   canonical PC `23c26e520a` and decomp `09ca8e8b`. It may reuse protected
   clean worktree `/private/tmp/acgc-lane-cumulative-producer-preflight`, import
   the same verified source-only bundle, and detach read-only to the exact tip.
@@ -893,8 +892,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194 are complete. Lanes 195–196 are registered setup-pending and
-are not yet active. Their
+191–192 and 194 are complete. Lanes 195–196 are active. Their
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
