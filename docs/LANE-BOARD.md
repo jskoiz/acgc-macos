@@ -108,20 +108,20 @@ archived. Lane 221 completed its independent read-only Transform
 leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
 Lane 222 completed the independent Texgen review. Lane 223 worker `4fde6d94`
 passed lane 226's independent review and is integrated as canonical PC
-`37ae640d5`; both tasks are archive-ready. No full link, LLDB, or device run is
+`37ae640d5`; both tasks are archived and generated-root cleanup is complete.
+No full link, LLDB, or device run is
 active. Lane 224 completed its
 read-only TEV audit with `BLOCK`. Lane 225 completed the Alpha/Blend/Depth/Fog
 producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
-on the documented distinct predecessors. Lane 227 completed the narrow Depth
-converter as clean worker `dfef13a2` from its exact, disjoint canonical base
-`590b2bd73` and is on root-review hold. Lane 228 is active on the immutable
-independent review.
+on the documented distinct predecessors. Lane 227 worker `dfef13a2` passed
+lane 228's immutable independent review and is integrated as canonical PC
+`0f896395c`; both tasks are archive-ready.
 
 ## Remote M3 Max batch (current)
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`37ae640d5` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`0f896395c` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1508,7 +1508,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   cleanup.
 - Lane 223 / reused project-owned M3 Transform task
   `01a004f3-1941-7731-a310-d5ad1f52011b` — complete, independently reviewed,
-  integrated, and archive-ready source/test successor on `gpt-5.6-luna` with
+  integrated, archived, and generated-root-cleaned source/test successor on `gpt-5.6-luna` with
   max reasoning. It created
   `/private/tmp/acgc-lane-transform-producer-m3` on branch
   `c1/lane-transform-producer-m3` at exact canonical PC `689590cc`, using only
@@ -1531,6 +1531,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   `37ae640d5`, where fresh native and combined ASan/UBSan focused CTest pass
   `2/2` each and the producer object compiles. Evidence is
   `docs/evidence/CANONICAL-TRANSFORM-PRODUCER-37AE640D5-2026-08-15.md`.
+  Generated local/remote build and bundle roots are absent after exact cleanup;
+  the remote worker/review sources remain preserved because bounded checks found
+  `assets`/`orig` entries.
 - Lane 224 / reused project-owned M3 audit task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete independent read-only
   TEV leaf-producer readiness audit at exact canonical PC `689590cc` and
@@ -1561,7 +1564,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   synchronous range-table capture. Evidence is
   `docs/evidence/PIXEL-LEAF-PRODUCER-TOPOLOGY-689590CC-2026-08-15.md`.
 - Lane 226 / reused project-owned M3 review task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/archive-ready independent read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/archived independent read-only
   review of lane 223 worker `4fde6d94ed` against base `689590cc`. It must use
   only the verified canonical and thin review bundles plus the hash-verified
   readiness control, create detached review source
@@ -1573,7 +1576,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   ownership, field/domain mapping, destination-preserving fail-closed behavior,
   header portability, and focused coverage have no material blocker.
 - Lane 227 / reused project-owned M3 source task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete/root-review-hold Depth leaf-converter
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete, independently reviewed,
+  integrated, and archive-ready Depth leaf-converter
   source/test lane on `gpt-5.6-luna` with max reasoning. It must create remote
   source `/private/tmp/acgc-lane-depth-producer-m3` on branch
   `c1/lane-depth-producer-m3` at exact canonical PC `590b2bd73`, using only
@@ -1595,8 +1599,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   remains blocked by missing `process.h` with no Windows sign-off. Review
   bundle `/private/tmp/acgc-lane-227-depth-producer.bundle` has SHA-256
   `c4c6d0e191ec12e89154b1d87a9ba0c7d112c17828461e4351372ca8fafb21bd`.
+  Lane 228 returned `PASS`; root cherry-picked the exact change as canonical
+  `0f896395c`, where fresh native and combined ASan/UBSan focused CTest pass
+  `3/3` each and the producer object compiles. Evidence is
+  `docs/evidence/CANONICAL-DEPTH-PRODUCER-0F896395C-2026-08-15.md`.
 - Lane 228 / reused project-owned M3 review task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active independent read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/archive-ready independent read-only
   review of lane 227 worker `dfef13a23e` against base `590b2bd73`. It must use
   only canonical bundle `/private/tmp/acgc-canonical-pc-590b2bd.bundle`
   (SHA-256 `c5b712caecd66a1262afbfeac5f8651d90c913bcccaf27a9960304c0245157af`),
@@ -1609,8 +1617,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   output preservation, portability, and focused fixture coverage. It owns no
   edit, branch, build, test, cleanup, integration, full link, LLDB,
   Apple/Metal, device/pixel, Windows sign-off, ISO/assets, or playability work.
-  The immutable controls match and the named review source is clean/detached at
-  exact candidate `dfef13a2`; static contract review is in progress.
+  It returned `PASS`: immutable provenance, exact four-file ownership,
+  raw/canonical/decomp field mapping, truthful raw invalid-history limitation,
+  destination-preserving fail-closed behavior, portability, and focused
+  coverage have no material blocker.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
