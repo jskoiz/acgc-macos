@@ -131,10 +131,12 @@ the verified source-only bundle, applied both commits one at a time, and
 integrated the reviewed end state as canonical PC `c832fb862`. Fresh native
 and combined ASan/UBSan focused CTest pass `2/2` each and the production
 producer object compiles. Both tasks are complete/archived and no production
-worker from that pair is active. Lane 234 is now the sole active production
-worker: a setter-owned raw TEV/Indirect provenance lane on the remote M3 Max,
-with exclusive `pc_gx_internal.h` and TEV/Indirect `pc_gx.c` ownership. No full
-link, LLDB, launch, or device work is active.
+worker from that pair is active. Lane 234 completed the setter-owned raw
+TEV/Indirect provenance source candidate as clean worker `34da318d4` and is on
+root-review hold; it is not integrated. Lane 235 is the sole active worker, an
+independent read-only review of that exact candidate against both upstreams
+with unique focused verification roots. No full link, LLDB, launch, or device
+work is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1775,15 +1777,17 @@ also integrated. Remote workers may not update the umbrella checkout.
   and both-upstream semantics without editing, building, testing, or cleaning.
   The task is archived after the reviewed integration.
 - Lane 234 / remote M3 Max task
-  `01a00640-960d-7d41-9320-721f26037d8a` — active source-edit
-  setter-owned raw TEV/Indirect provenance lane. It uses verified complete-
+  `01a00640-960d-7d41-9320-721f26037d8a` — complete source-edit
+  setter-owned raw TEV/Indirect provenance lane on root-review hold. It uses verified complete-
   history source-only bundle `/private/tmp/acgc-canonical-pc-c832fb8.bundle`
   (SHA-256
   `c52633a629d26ec9df65d0613aa03b6c6b4d8150ac6ac41eff4b755927e9b21f`),
-  exact PC base `c832fb862`, and decomp `09ca8e8b`. Setup completed without
-  source edits or builds: `/private/tmp/acgc-lane-raw-tev-m3` is clean and
-  registered on `c1/lane-raw-tev-m3` at the exact base; unique roots
-  `/private/tmp/acgc-lane-raw-tev-{native,asan,win}` are absent before work.
+  exact PC base `c832fb862`, and decomp `09ca8e8b`. Clean source worktree
+  `/private/tmp/acgc-lane-raw-tev-m3` is registered on
+  `c1/lane-raw-tev-m3`; final worker commit is `34da318d4`. Its frozen
+  source-only review bundle is
+  `/private/tmp/acgc-lane-234-raw-tev-indirect.bundle` (SHA-256
+  `cc0635a6916352a0f8bdabee85ad325484359f5636d9b0ed15329cb76ea851d1`).
   Its gate is the smallest pointer-free setter-owned raw owner for active TEV
   count, all 16 logical stages, swap tables, PREV/REG/KONST state, per-stage
   indirect tuples, and indirect order/scale/matrix provenance, with exact
@@ -1794,13 +1798,29 @@ also integrated. Remote workers may not update the umbrella checkout.
   minimal `pc/CMakeLists.txt`. Canonical ABIs/producers, packets/cumulative
   assembly, other raw owners, Apple/Metal/shaders, decomp, umbrella, ISO/assets,
   full link, LLDB, runtime, device/pixel, Windows sign-off, and playability are
-  out of scope. It must crosswalk PC `pc_gx` state and the existing raw
-  PREV/REG/KONST fixture against decomp `GXTev.c`, `GXBump.c`, and `GXInit.c`
-  before edits, then return one clean source commit with focused native plus
-  combined ASan/UBSan fixture evidence, production-object compile, bounded
-  syntax probes, and strict CPU/source-only claims. Success unblocks separate
-  new-file canonical TEV and Indirect leaf-producer successors; no leaf,
-  callback, Metal, pixel, or playability proof follows from this lane alone.
+  out of scope. Its two-upstream crosswalk completed; the worker corrected the
+  raw `GXSetTevOp` path to decomp semantics while preserving the legacy PC host
+  expansion, made matrix knownness explicit for all six coefficients plus the
+  encoded scale, and made invalid register/KONST IDs fail closed. Focused
+  native and combined ASan/UBSan fixtures pass, the production `pc_gx.c`
+  object compiles, native C/C++ and AppleClang `-m32` syntax probes pass, and
+  real Windows/i686 proof remains blocked by the missing toolchain and
+  `process.h`. This is CPU/source evidence only and awaits lane-235 review;
+  there is no canonical leaf, callback, Metal, pixel, Windows, or playability
+  claim.
+- Lane 235 / remote M3 Max task
+  `01a00669-46ec-7c50-959c-50dafe702923` — active independent read-only
+  review of lane 234. It verifies exact base `c832fb862`, candidate
+  `34da318d4`, frozen bundle/hash, and clean source/decomp provenance, then
+  reviews the complete four-file diff for flush-before-mutation, per-field
+  knownness, sticky invalidity, source-faithful `GXSetTevOp`, matrix
+  quantization/lifetime, legacy layout preservation, and fixture isolation.
+  It may rerun only the new and legacy focused fixtures in unique roots
+  `/private/tmp/acgc-lane-235-raw-tev-review-{native,asan}`. Source edits,
+  integration, full link, LLDB, runtime, Metal, device/pixel, assets, Windows
+  sign-off, and playability are out of scope. A `PASS` unblocks root review and
+  one-at-a-time integration; an exact finding returns to the same lane-234
+  branch without opening a duplicate owner.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
