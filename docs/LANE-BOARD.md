@@ -421,24 +421,24 @@ checkout.
   are `/private/tmp/acgc-lane-transform-raw-shadow-{native,asan,win}`. Canonical
   ABI files, portable CMake, Texgen/SU, V1-V4, Apple/Metal, producer wiring,
   full link, LLDB, assets, pixels, devices, and playability are out of scope.
-- Lane 171 / task `01a002e1-540c-7693-b25d-363a1f209dd4` — active read-only
-  M3 Max Channels/Lighting contract audit in detached worktree
-  `/private/tmp/acgc-lane-channel-lighting-contract-audit` at exact PC
-  `037689462`, with decomp oracle `09ca8e8b`. It separately owns the exact
-  versioned `0x0004` Channels and `0x0040` Lighting value layouts,
-  initialization/knownness, V2-V4 reuse boundaries, current PC no-op/lossy
-  state, and the smallest serial shadow-state repair plan. It may not edit,
-  branch, build, launch, access assets, overlap source ownership, or claim
-  callback, Metal, pixel, device, Windows runtime, iOS, or playability proof.
+- Lane 171 / task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete,
+  archived, and cleanup-pending, read-only at exact PC `037689462` and decomp
+  `09ca8e8b`. It freezes versioned `0x0004` Channels as 136 bytes and `0x0040`
+  Lighting as 516 bytes, records exact combined/separate channel semantics,
+  final light-object values, cross-section references, PC loss/no-op gaps, and
+  the serial repair order. Evidence is
+  `docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md`.
+  No edit, build, launch, callback, Metal, pixel, device, Windows runtime,
+  iOS, or playability operation occurred.
 
 The remote Codex project assignment records place tasks 156–171 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
 transferred. The next source integration is lane 170's raw Transform shadow
-after individual review. Lane 171 may independently finish its read-only
-Channels/Lighting contract. Full links and LLDB launches remain serialized and
-are not active.
+after individual review. Channels and Lighting are now architecture-ready for
+separate neutral ABI lanes, followed by one serial shared shadow owner. Full
+links and LLDB launches remain serialized and are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the

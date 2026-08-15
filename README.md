@@ -176,6 +176,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   evidence only; neither section is implemented yet. See
   [canonical Depth/Raster contracts](docs/evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md).
 
+- The read-only Channels/Lighting audit freezes `0x0004` as a 136-byte paired
+  channel section and `0x0040` as a 516-byte eight-slot final light-object
+  section. It records the PC color, combined/separate setter, initialization,
+  direction, indexed-load, specular-helper, finite-value, and knownness gaps.
+  Neither section is implemented yet. See
+  [canonical Channels/Lighting contracts](docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md).
+
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three
   skips; bounded Windows host probes pass `4` and are environment/toolchain

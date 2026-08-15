@@ -200,6 +200,15 @@ overlapping setter hooks then belong to one serial PC shadow owner. Neither
 section is implemented or live yet. See
 [canonical Depth/Raster contracts](evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md).
 
+The Channels/Lighting audit freezes `0x0004` as a 136-byte two-record channel
+section and `0x0040` as a 516-byte eight-slot final light-object section. It
+preserves combined/separate channel semantics, disabled vertex sources,
+effective specular diffuse behavior, exact light masks, final coefficients,
+raw direction, and cross-section dependencies. The PC still needs exact raw
+color, direction, load, helper, bounds, and knownness repairs. Neither section
+is implemented or live. See
+[canonical Channels/Lighting contracts](evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md).
+
 The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
 with three declared Metal-device skips in each configuration. Bounded Windows
 host probes pass `4` and are blocked at `5` by Apple libc++ locale emulation,
