@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `216d1e24b`, with
-the canonical 16-byte Blend/logic section on top of the strict GX envelope
+As of 2026-08-14, the canonical local PC branch is clean at `f2b7ab153`, with
+the canonical 32-byte Alpha/update section and 16-byte Blend/logic section on
+top of the strict GX envelope
 validator, legacy V4 sink guard, standalone canonical fog value section,
 focused input trigger-parity correction, and the
 `5157ac1cb` Apple V2 sink-status guard and the `820906439` V2-local
@@ -152,6 +153,13 @@ contract for alpha comparisons/references/operator, color/alpha update, and
 `z_comp_loc`. The PC port still drops `GXSetZCompLoc`, so portable contract
 implementation does not yet establish complete live producer provenance. See
 [canonical Alpha/update contract](evidence/CANONICAL-ALPHA-UPDATE-CONTRACT-4DBB71065-2026-08-14.md).
+
+Integrated `f2b7ab153` implements that exact portable Alpha/update ABI,
+strict value and metadata validation, and inactive-reference preservation.
+Exact integrated native and combined ASan/UBSan canonical-state CTest pass
+`4/4` each. This remains CPU-contract evidence: the PC `GXSetZCompLoc` no-op
+still prevents a complete live producer. See
+[canonical Alpha implementation](evidence/CANONICAL-ALPHA-STATE-F2B7AB153-2026-08-14.md).
 
 The TEV audit selects a full 16-stage, 2560-byte `0x0020` value contract rather
 than inheriting the PC shader cap of 3 or legacy packet cap of 2. Current PC

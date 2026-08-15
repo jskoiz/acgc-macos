@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`216d1e24b` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`f2b7ab153` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -69,9 +69,9 @@ is integrated as PC `4dbb71065`, and lane 158 completed its read-only producer
 audit. Lane 159 completed the read-only Blend/logic contract; lane 160 completed
 the independent focused verification matrix; lane 161 is integrated as PC
 `216d1e24b`. Lanes 162–163 completed the Alpha/update and TEV contracts; lane
-164 completed the Transforms/Texgens provenance audit; lanes 165–166 are the
-two non-overlapping production source lanes for portable Alpha and PC raw TEV
-shadow state; lane 167 is the active read-only exact Transforms ABI audit. No
+164 completed the Transforms/Texgens provenance audit; lane 165 is integrated
+as PC `f2b7ab153`; lane 166 remains the active PC raw-TEV-shadow source lane;
+lane 167 is the active read-only exact Transforms ABI audit. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -349,18 +349,18 @@ checkout.
   Its exact detached worktree and prompt/events/final artifacts are absent. No
   edit, build, launch, asset access, callback, Metal, pixel, device, or
   playability proof occurred.
-- Lane 165 / task `01a002c2-ce08-7193-ba94-d50aac6913d9` — active M3 Max
-  source-edit lane on explicit branch `c1/lane-canonical-alpha-m3`, exact PC
-  base `216d1e24b`, worktree `/private/tmp/acgc-lane-canonical-alpha`, and
-  decomp oracle `09ca8e8b`. It owns only new canonical Alpha header/source, one
-  portable fixture, and minimal portable CMake registration. Its gate is the
-  audited version-1 32-byte eight-word Alpha/update ABI, strict value and exact
-  metadata validators, native and combined ASan/UBSan focused tests, and
-  bounded ABI/Windows host probes under unique
-  `/private/tmp/acgc-lane-canonical-alpha-{native,asan,win}` roots. Common
-  envelope/Blend, V1-V4, `pc_gx`, Apple/Metal, ac-decomp edits, full link,
-  LLDB, assets, pixels, devices, and playability are out of scope;
-  `GXSetZCompLoc` remains a separate live-shadow gap.
+- Lane 165 / task `01a002c2-ce08-7193-ba94-d50aac6913d9` — complete and
+  integrated, cleanup pending. Remote branch `c1/lane-canonical-alpha-m3`
+  advanced exact PC `216d1e24b` to worker `acd12449a`; the integration owner
+  cherry-picked its exact four-file change as canonical PC `f2b7ab153`. It
+  adds the audited version-1 32-byte eight-word Alpha/update ABI, strict value
+  and exact metadata validators, inactive-reference preservation, and a
+  portable fixture. Remote native/ASan focused tests pass `1/1`; exact
+  integrated native and combined ASan/UBSan canonical-state tests pass `4/4`.
+  The worker branch and commits remain preserved. Evidence is
+  `docs/evidence/CANONICAL-ALPHA-STATE-F2B7AB153-2026-08-14.md`. No live
+  producer, callback, Metal, pixel, device, or playability claim follows;
+  `GXSetZCompLoc` remains a separate PC shadow-state gap.
 - Lane 166 / task `01a002c6-bb9a-7ed3-8f25-b6bb85d41b76` — active M3 Max
   source-edit lane on explicit branch `c1/lane-tev-raw-shadow-m3`, exact PC
   base `216d1e24b`, worktree `/private/tmp/acgc-lane-tev-raw-shadow`, and

@@ -34,8 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `216d1e24b` (`Add canonical Blend logic state`), on
-top of `4dbb71065` (`Add strict canonical GX envelope validator`) and
+`c1/macos-host-launch` at `f2b7ab153` (`Add canonical Alpha test/update state`),
+on top of `216d1e24b` (`Add canonical Blend logic state`), `4dbb71065`
+(`Add strict canonical GX envelope validator`), and
 `62ef6638d` (`Fail closed legacy V4 Apple sink eligibility`),
 `b5f550ea0` (`Add canonical GX fog state`),
 `afb1cac3c` (`Restore analog trigger digital parity`), `5157ac1cb` (`Reject
@@ -126,6 +127,14 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   `GXSetZCompLoc`, so a live producer must fail closed until that state is
   shadowed. See
   [canonical Alpha/update contract](docs/evidence/CANONICAL-ALPHA-UPDATE-CONTRACT-4DBB71065-2026-08-14.md).
+
+- Integrated `f2b7ab153` implements that frozen Alpha/update ABI as a strict
+  pointer-free 32-byte value section with exact metadata validation and
+  inactive-reference preservation. Exact integrated native and combined
+  ASan/UBSan canonical-state CTest pass `4/4` each. This is portable CPU
+  contract evidence only: the PC `GXSetZCompLoc` no-op still blocks complete
+  live producer provenance. See
+  [canonical Alpha implementation](docs/evidence/CANONICAL-ALPHA-STATE-F2B7AB153-2026-08-14.md).
 
 - The TEV audit freezes `0x0020` as a full 16-stage, 2560-byte value contract,
   independent of the current 3-stage shader and 2-stage legacy packet caps.
