@@ -106,10 +106,11 @@ and 222 completed the portable Texgen/SU ABI source/review pair; worker
 `f503fb924` is integrated as canonical PC `590b2bd73` and both tasks are
 archived. Lane 221 completed its independent read-only Transform
 leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
-Lanes 222 and 223 are active successors for independent Texgen review and the
-Transform leaf producer respectively. No full link, LLDB, or device run is
-active. Lanes 224 and 225 are active read-only audits for TEV leaf production
-and the Alpha/Blend/Depth/Fog producer topology.
+Lane 222 completed the independent Texgen review. Lane 223 completed the
+Transform leaf-producer source handoff at `4fde6d94` and is on root-review
+hold. No full link, LLDB, or device run is active. Lanes 224 and 225 are active
+read-only audits for TEV leaf production and the Alpha/Blend/Depth/Fog
+producer topology.
 
 ## Remote M3 Max batch (current)
 
@@ -1499,7 +1500,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   strict domains/dependencies, destination-preserving fail-closed behavior,
   and focused fixture coverage have no material candidate-owned blocker.
 - Lane 223 / reused project-owned M3 Transform task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — active source/test successor
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — complete source/test successor on
+  root-review hold
   on `gpt-5.6-luna` with max reasoning. It must create
   `/private/tmp/acgc-lane-transform-producer-m3` on branch
   `c1/lane-transform-producer-m3` at exact canonical PC `689590cc`, using only
@@ -1511,7 +1513,13 @@ also integrated. Remote workers may not update the umbrella checkout.
   cumulative/Apple/Metal, decomp, and ISO/assets are out of scope. Native and
   combined ASan/UBSan focused tests plus bounded syntax probes are the only
   verification; no full link, LLDB, runtime, device, pixel, Windows sign-off,
-  or playability claim is authorized.
+  or playability claim is authorized. It returned clean worker `4fde6d94ed`
+  with exact four-file scope; native and combined ASan/UBSan focused CTest pass
+  `2/2` each, the producer object compiles, native C11/C++11 syntax probes pass,
+  and real i686 remains blocked by the missing `sys/types.h`/MinGW sysroot.
+  Review bundle `/private/tmp/acgc-lane-transform-producer-m3-review.bundle`
+  has SHA-256
+  `f4c9b0b33de7a8713fe8732ae820a686cf1b851b739a67357855301e25c393e5`.
 - Lane 224 / reused project-owned M3 audit task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active independent read-only
   TEV leaf-producer readiness audit at exact canonical PC `689590cc` and
