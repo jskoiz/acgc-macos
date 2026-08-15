@@ -38,8 +38,10 @@ the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
 Expensive full links and LLDB launch traces remain serialized. Lanes 185–186
 are reviewed and integrated, and lanes 187–188 are complete read-only audits.
-Lane 193 is the active M3 Max source lane. Lane 189 has returned a clean
-Geometry raw-batch commit and is under independent root review; lane 194 has
+Lanes 189 and 193 are the active M3 Max repair lanes. Independent root review
+blocked lane 189 on direct `GX_TEX_S` capture and INDEX8/INDEX16 API-width
+validation, and blocked lane 193 on the effective magnification-filter domain;
+lane 194 has
 completed its read-only Lighting producer audit. Lane 190 is independently
 reviewed and integrated, and lanes 191–192 completed their read-only contracts.
 The raw Channels successor is not refilled because it would overlap lane 189's
@@ -720,9 +722,10 @@ may not update the umbrella checkout.
   device, full link, LLDB, ISO/assets, Metal execution, pixel, iOS, or
   playability claim. Evidence is
   `docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md`.
-- Lane 189 / reused task `01a002f3-0540-7db0-b2ac-052fed62f957` — complete M3
-  Max Geometry raw-batch source/test handoff, pending independent root review
-  and integration decision. It reuses protected worktree
+- Lane 189 / reused task `01a002f3-0540-7db0-b2ac-052fed62f957` — active M3
+  Max Geometry raw-batch repair lane after independent root review blocked the
+  first handoff on direct `GX_TEX_S` capture and INDEX8/INDEX16 API-width
+  mismatches. It reuses protected worktree
   `/private/tmp/acgc-lane-pc-texgen-shadow`, imports source-only bundle
   `/private/tmp/acgc-canonical-pc-324c174.bundle` (SHA-256
   `7a4a5b3d6b47975456d37bfea522df576a251f1c8b8488a1a5b122cfd5d12c4f`),
@@ -737,10 +740,13 @@ may not update the umbrella checkout.
   scope. Unique roots are `/private/tmp/acgc-lane-geometry-raw-batch-{native,asan,win}`;
   focused and existing raw-state tests ran serially. Worker `9ec853b0fb`
   changes exactly the four owned files; native and combined ASan/UBSan focused
-  matrices pass `5/5` each, with no sanitizer diagnostics
-  (`detect_leaks=0`). This remains CPU-side provenance evidence until root
-  resolves independent review findings and repeats the focused matrix on the
-  exact integrated snapshot. Success unblocks a later pure-C all-or-nothing
+  matrices passed `5/5` each, with no sanitizer diagnostics
+  (`detect_leaks=0`), but those tests lacked the now-required direct-S and
+  mismatched-index-width regressions. The active repair is limited to the same
+  four owned files and must return a new reviewed child commit and refreshed
+  source-only bundle before integration. This remains CPU-side provenance
+  evidence until root resolves both findings and repeats the focused matrix on
+  the exact integrated snapshot. Success unblocks a later pure-C all-or-nothing
   canonical serializer fixture.
 - Lane 190 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete,
   independently reviewed, and integrated neutral Lighting ABI lane. It reused
@@ -787,7 +793,11 @@ may not update the umbrella checkout.
   opened. Evidence is
   `docs/evidence/RAW-CHANNELS-PRODUCER-PLAN-324C174AE-2026-08-14.md`.
 - Lane 193 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active M3
-  Max neutral Texture/TLUT plus Dynamic ABI source/test lane. It reuses
+  Max neutral Texture/TLUT plus Dynamic ABI repair lane. Its first source/test
+  handoff `b8245ad019` passed its focused matrices but independent root review
+  found that one shared filter maximum incorrectly accepted effective
+  magnification values `2..5`; the repair must split the final logical min
+  (`0..5`) and mag (`0..1`) domains without changing the frozen ABI. It reuses
   protected
   worktree `/private/tmp/acgc-lane-cumulative-producer-preflight`, imports
   source-only bundle `/private/tmp/acgc-canonical-pc-43992e.bundle` (SHA-256
@@ -805,8 +815,10 @@ may not update the umbrella checkout.
   and playability are out of scope. Unique roots are
   `/private/tmp/acgc-lane-canonical-texture-dynamic-{native,asan,win}`;
   verification is serial native plus combined ASan/UBSan and bounded
-  C/C++/ILP32/Windows syntax. Success unblocks a separate raw PC Texture/TLUT
-  state, generation, invalidation, and synchronous lease lane.
+  C/C++/ILP32/Windows syntax. No integration occurs until the repaired child
+  commit passes independent review and the exact integrated serial matrix.
+  Success unblocks a separate raw PC Texture/TLUT state, generation,
+  invalidation, and synchronous lease lane.
 - Lane 194 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete
   read-only M3 Max raw Lighting producer crosswalk. It reused protected
   worktree `/private/tmp/acgc-lane-channels-lighting-preflight`, verifies and
@@ -839,8 +851,8 @@ verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
-and lane 184 is stopped. Lane 193 is active; lane 189 is review-pending, lane
-194 is complete, lane 190 is integrated, and lanes 191–192 are complete. Their
+and lane 184 is stopped. Lanes 189 and 193 are active repair lanes, lane 194 is
+complete, lane 190 is integrated, and lanes 191–192 are complete. Their
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
