@@ -147,6 +147,12 @@ signed S10, fog-range, raster/depth, VCD/VAT, TEV-capacity, and owned
 texture/TLUT state. See
 [snapshot producer audit](evidence/CANONICAL-SNAPSHOT-PRODUCER-AUDIT-B5F550EA0-2026-08-14.md).
 
+The read-only Alpha/update audit freezes `0x0100` as a 32-byte eight-word
+contract for alpha comparisons/references/operator, color/alpha update, and
+`z_comp_loc`. The PC port still drops `GXSetZCompLoc`, so portable contract
+implementation does not yet establish complete live producer provenance. See
+[canonical Alpha/update contract](evidence/CANONICAL-ALPHA-UPDATE-CONTRACT-4DBB71065-2026-08-14.md).
+
 The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
 with three declared Metal-device skips in each configuration. Bounded Windows
 host probes pass `4` and are blocked at `5` by Apple libc++ locale emulation,

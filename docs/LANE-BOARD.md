@@ -311,15 +311,15 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   and commits remain preserved. Evidence is
   `docs/evidence/CANONICAL-BLEND-STATE-216D1E24B-2026-08-14.md`. No live
   snapshot, callback, Metal, pixel, device, or playability claim follows.
-- Lane 162 / task `01a002b5-525f-7480-81df-8c9bde594295` — active read-only
-  M3 Max Alpha/update contract audit. Detached worktree
-  `/private/tmp/acgc-lane-canonical-alpha-audit` is exact PC `4dbb71065` with
-  decomp oracle `09ca8e8b`. It owns the `0x0100` value-contract decision for
-  alpha comparisons/references/operator, color update, alpha update, and
-  `z_comp_loc`, including exact size/layout/domains/inactive semantics and the
-  boundary that keeps dither/destination alpha in Raster `0x0400`. It may not
-  edit, branch, build, launch, access assets, or claim callback, Metal, pixel,
-  device, or playability proof.
+- Lane 162 / task `01a002b5-525f-7480-81df-8c9bde594295` — complete and
+  cleanup-pending, read-only at exact PC `4dbb71065` and decomp `09ca8e8b`.
+  It freezes `0x0100` as a version-1, 32-byte, eight-word Alpha/update section:
+  two comparisons/references, operator, color update, alpha update, and
+  `z_comp_loc`, with exact bounds and no inactive normalization. It identifies
+  PC `GXSetZCompLoc` as the remaining no-op producer gap. Evidence is
+  `docs/evidence/CANONICAL-ALPHA-UPDATE-CONTRACT-4DBB71065-2026-08-14.md`.
+  No edit, build, launch, asset access, callback, Metal, pixel, device, or
+  playability proof occurred.
 - Lane 163 / task `01a002b5-525f-7862-aa8c-0e0ccecdf5c2` — active read-only
   M3 Max TEV contract audit. Detached worktree
   `/private/tmp/acgc-lane-canonical-tev-audit` is exact PC `4dbb71065` with

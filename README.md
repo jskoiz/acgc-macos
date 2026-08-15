@@ -120,6 +120,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   and owned texture/TLUT state are incomplete. See
   [snapshot producer audit](docs/evidence/CANONICAL-SNAPSHOT-PRODUCER-AUDIT-B5F550EA0-2026-08-14.md).
 
+- The read-only Alpha/update audit freezes section `0x0100` as an exact
+  32-byte, eight-word value contract for comparison/reference/operator,
+  color/alpha update, and `z_comp_loc`. The PC port still drops
+  `GXSetZCompLoc`, so a live producer must fail closed until that state is
+  shadowed. See
+  [canonical Alpha/update contract](docs/evidence/CANONICAL-ALPHA-UPDATE-CONTRACT-4DBB71065-2026-08-14.md).
+
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three
   skips; bounded Windows host probes pass `4` and are environment/toolchain
