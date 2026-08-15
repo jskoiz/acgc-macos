@@ -96,7 +96,8 @@ completed its parallel read-only raw Indirect ownership crosswalk. Lane 213
 completed the independent exact-tip matrix with native and combined
 ASan/UBSan `21/21` passes. Its same project-owned verification task completed
 lane 214's independent read-only review. Lane 216 is the sole active source
-worker and owns the new-file canonical Geometry producer. No full
+worker and owns the new-file canonical Geometry producer; lane 217 is a
+parallel read-only current-tip cumulative-producer readiness audit. No full
 link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
@@ -1348,6 +1349,22 @@ also integrated. Remote workers may not update the umbrella checkout.
   ISO/assets, Windows sign-off, and playability are out of scope. Success
   unblocks an independent source review and then the all-or-nothing cumulative
   producer owner.
+- Lane 217 / reused project-owned M3 review task
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active read-only current-tip
+  cumulative-producer readiness audit. It reuses the completed lane-215 review
+  task for source-review continuity and runs `gpt-5.6-luna` with max reasoning.
+  It must verify the same source-only bundle and inspect detached PC
+  `b9a9f355` plus clean decomp `09ca8e8b`; it creates no source branch and owns
+  no edit. The gate is to determine, section by section, whether the current
+  canonical ABIs, raw owners, leaf producers, dependency results, resource
+  lease, and pre-GL publication boundary are sufficient for one atomic
+  cumulative envelope after lane 216. It must identify exact missing owners or
+  ordering/lifetime blockers, freeze the smallest non-overlapping cumulative
+  producer file/symbol contract, and distinguish current evidence from the
+  pending Geometry producer. No build, test, source/docs edit, full link, LLDB,
+  runtime, Apple/Metal, pixel, device, ISO/assets, or playability work is in
+  scope. Success unblocks only a bounded cumulative-producer lane after lane
+  216 passes independent review and integration.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1377,7 +1394,8 @@ completed the narrow same-branch repair of blocked worker `1730823d45` as child
 complete/archived; lane 213 completed the exact-tip matrix; lane 214 completed
 its read-only BLOCK review; and lane 215 completed its independent read-only
 PASS review. Lane 216 is the sole active canonical Geometry producer source
-worker. No full link, LLDB, or device run is active.
+worker, and lane 217 is the only parallel read-only cumulative-producer
+readiness audit. No full link, LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
