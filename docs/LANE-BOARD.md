@@ -103,7 +103,8 @@ still blocked by missing leaf owners/producers. Lane 216 completed its exact
 two-file repair as child `5324c8739e` and is held for lane 220's independent
 re-review. Lane 219 is active on the independent portable Texgen/SU ABI
 prerequisite, and lane 220 is the active read-only Geometry re-review. No full
-link, LLDB, or device run is active.
+link, LLDB, or device run is active. Lane 221 is an independent active
+read-only Transform leaf-producer readiness audit.
 
 ## Remote M3 Max batch (current)
 
@@ -1441,6 +1442,21 @@ also integrated. Remote workers may not update the umbrella checkout.
   new correctness, UB, portability, or coverage regression. It owns no edit,
   branch, build, test, cleanup, integration, link, LLDB, runtime, Apple/Metal,
   device/pixel, Windows sign-off, ISO/assets, or playability work.
+- Lane 221 / reused project-owned M3 Transform task
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — active read-only Transform
+  leaf-producer readiness and contract audit on `gpt-5.6-luna` with max
+  reasoning. It verifies exact PC `b9a9f355`, decomp `09ca8e8b`, the
+  source-only canonical bundle, and four hash-verified Transform contract/raw
+  evidence controls, using detached source
+  `/private/tmp/acgc-lane-221-transform-producer-audit`. It owns no edit,
+  branch, build, test, cleanup, integration, full link, LLDB, runtime,
+  Apple/Metal, ISO/assets, device/pixel, Windows sign-off, or playability work.
+  The gate is a field-by-field verdict on whether `PCGXRawTransform` can
+  truthfully populate the frozen canonical Transform ABI, including projection,
+  position/normal slots, current matrix ID, load-range knownness, unresolved
+  indexed loads, finite binary32 values, and Geometry/Texgen dependencies. If
+  ready, it freezes only the smallest later producer header/source/fixture/CMake
+  contract; if blocked, it names the exact predecessor raw-owner repair.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1473,7 +1489,8 @@ PASS review. Lane 216 completed the exact lane-218 repair and is held for lane
 220; lane 217 is complete/blocked at the cumulative readiness gate, lane 218 is
 complete with its first source-review `BLOCK`, lane 219 is the active Texgen/SU
 ABI worker, and lane 220 is the active independent Geometry re-review. No full
-link, LLDB, or device run is active.
+link, LLDB, or device run is active. Lane 221 is the active independent
+read-only Transform producer audit.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
