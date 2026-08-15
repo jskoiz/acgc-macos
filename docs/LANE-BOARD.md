@@ -99,8 +99,10 @@ Raster ownership correction. Lane 184 stopped after a bounded partial Indirect
 crosswalk rather than duplicating work while project handoff is unresolved;
 lane 173 is complete/integrated/archived. Lane 185 reuses that project-owned
 M3 task and protected source worktree for the dependency-ready Depth temporal-
-ordering successor; it is the sole active remote production worker. Remote
-workers may not update the umbrella checkout.
+ordering successor. Lane 186 independently owns the neutral Channels ABI in a
+separate project-owned M3 task/worktree. They are the only two active remote
+production workers and own no overlapping file. Remote workers may not update
+the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -656,6 +658,31 @@ workers may not update the umbrella checkout.
   Windows runtime. A clean single child commit unblocks the cumulative Depth
   producer prerequisite and the next non-overlapping Raster state lane; no
   link, runtime, renderer, or playability claim follows.
+- Lane 186 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active M3
+  Max neutral Channels ABI source/test successor. The clean preserved worktree
+  `/private/tmp/acgc-lane-channels-lighting-preflight` is on explicit branch
+  `c1/lane-canonical-channels-m3` at exact canonical PC `1d48691a4f`; decomp
+  remains `09ca8e8b`. It implements only the frozen version-1, section-`0x0004`,
+  136-byte pointer-free Channels value ABI and strict validator: exact active
+  count/mask, two 64-byte color/alpha-pair records, packed RGBA8 colors,
+  boolean/source/light-mask/diffuse/attenuation domains, effective
+  `GX_AF_SPEC` diffuse semantics, zero inactive records/reserved fields, and
+  exact present/absent envelope metadata. It owns only new
+  `include/acgc/gx_canonical_channel_state.h`,
+  `src/gx_canonical_channel_state.c`,
+  `pc/portable/tests/test_gx_canonical_channel_state.c`, and minimal
+  `pc/portable/CMakeLists.txt` registration. `pc_gx`, raw PC state, Lighting,
+  Geometry, packet producer, Apple, decomp, full `ac_pc`, LLDB, ISO/assets,
+  Metal, pixel, device, and playability are out of scope. References are the
+  frozen Channels/Lighting evidence, existing canonical state implementations,
+  PC channel state/setters, and decomp `GXLight.c`, `GXInit.c`, `GXEnum.h`, and
+  channel callers. Unique roots are
+  `/private/tmp/acgc-lane-canonical-channels-{native,asan,win}`. Focused native
+  and combined ASan/UBSan tests, C/C++ ABI probes, static analysis, diff check,
+  and bounded available `_WIN32`/`-m32` probes are required. A clean commit
+  unblocks later setter-owned raw Channels provenance and cumulative producer
+  work; it proves no PC producer, runtime, renderer, device, or playability
+  gate.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -668,8 +695,8 @@ saved-project handoff registry is unresolved.
 Lanes 177–178 completed read-only without source ownership, lane 179 completed
 verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
-LLDB launches remain serialized and are not active. Lane 185 is the sole remote
-production worker; lane 183 is complete and lane 184 is stopped.
+LLDB launches remain serialized and are not active. Lanes 185–186 are the only
+remote production workers; lane 183 is complete and lane 184 is stopped.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
