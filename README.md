@@ -34,9 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `590b2bd73` (`Add canonical Texgen and SU state ABI`),
-adding the independently reviewed portable Texgen/SU value contract and
-canonical Geometry leaf producer on top of
+`c1/macos-host-launch` at `37ae640d5` (`Add canonical Transform leaf producer`),
+adding the independently reviewed Transform leaf converter and portable
+Texgen/SU value contract on top of the canonical Geometry leaf producer and
 reviewed setter-owned raw Geometry closure, typed indexed host mirroring,
 packed-color FIFO-width provenance, and RGBX8 ignored-byte handling on top of
 setter-owned raw Raster provenance, the source-faithful half-pixel jitter
@@ -295,8 +295,9 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   supplies the neutral Indirect ABI, `85b25cb3c` supplies setter-owned raw
   Raster provenance with source-faithful viewport jitter, `b9a9f355` closes
   the bounded setter-owned raw Geometry contract, `689590cc` supplies the
-  strict all-or-nothing canonical Geometry leaf producer, and `590b2bd73`
-  supplies the fixed 2,624-byte portable Texgen/SU ABI. The copied batch now
+  strict all-or-nothing canonical Geometry leaf producer, `590b2bd73`
+  supplies the fixed 2,624-byte portable Texgen/SU ABI, and `37ae640d5`
+  supplies the destination-preserving Transform leaf producer. The copied batch now
   fail-closes unsupported matrix/NBT and extra attribute slots, preserves
   mutation/order/lifetime boundaries, decodes all supported indexed scalar
   forms into the host mirror, and preserves exact packed-color FIFO widths.

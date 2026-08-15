@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-15, the canonical local PC branch is clean at `590b2bd73`, with
-the independently reviewed portable Texgen/SU ABI, canonical Geometry leaf producer, reviewed
+As of 2026-08-15, the canonical local PC branch is clean at `37ae640d5`, with
+the independently reviewed Transform leaf producer, portable Texgen/SU ABI,
+canonical Geometry leaf producer, reviewed
 setter-owned raw Geometry closure, typed indexed host mirroring,
 packed-color FIFO-width provenance and RGBX8 ignored-byte handling,
 setter-owned raw Raster provenance, the source-faithful viewport-jitter
@@ -319,8 +320,9 @@ provenance with the decomp viewport-jitter adjustment, `b9a9f355` closes the
 bounded raw Geometry contract with copied lifetime, supported indexed scalar
 host conversion, exact packed-color entry widths, and fail-closed unsupported
 matrix/NBT and extra attribute slots, `689590cc` supplies the strict
-pointer-free canonical Geometry producer, and `590b2bd73` supplies the fixed
-2,624-byte portable Texgen/SU section. Integrated `a42da8e155` supplies the
+pointer-free canonical Geometry producer, `590b2bd73` supplies the fixed
+2,624-byte portable Texgen/SU section, and `37ae640d5` supplies the
+destination-preserving Transform leaf producer. Integrated `a42da8e155` supplies the
 neutral section-13 Indirect ABI. Raw Indirect ownership/conversion and
 remaining leaf producers remain prerequisites.
 A cumulative producer

@@ -106,20 +106,21 @@ and 222 completed the portable Texgen/SU ABI source/review pair; worker
 `f503fb924` is integrated as canonical PC `590b2bd73` and both tasks are
 archived. Lane 221 completed its independent read-only Transform
 leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
-Lane 222 completed the independent Texgen review. Lane 223 completed the
-Transform leaf-producer source handoff at `4fde6d94` and is on root-review
-hold. No full link, LLDB, or device run is active. Lane 224 completed its
+Lane 222 completed the independent Texgen review. Lane 223 worker `4fde6d94`
+passed lane 226's independent review and is integrated as canonical PC
+`37ae640d5`; both tasks are archive-ready. No full link, LLDB, or device run is
+active. Lane 224 completed its
 read-only TEV audit with `BLOCK`. Lane 225 completed the Alpha/Blend/Depth/Fog
 producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
-on the documented distinct predecessors. Lane 226 is active on the independent
-Transform producer review. Lane 227 is registered setup-pending for the narrow
-Depth converter from canonical PC `590b2bd73`.
+on the documented distinct predecessors. Lane 227 is registered setup-pending
+for the narrow Depth converter from its exact, disjoint canonical base
+`590b2bd73`.
 
 ## Remote M3 Max batch (current)
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`590b2bd73` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`37ae640d5` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1505,9 +1506,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   asset-bearing detached review source remains preserved after generated-root
   cleanup.
 - Lane 223 / reused project-owned M3 Transform task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — complete source/test successor on
-  root-review hold
-  on `gpt-5.6-luna` with max reasoning. It must create
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — complete, independently reviewed,
+  integrated, and archive-ready source/test successor on `gpt-5.6-luna` with
+  max reasoning. It created
   `/private/tmp/acgc-lane-transform-producer-m3` on branch
   `c1/lane-transform-producer-m3` at exact canonical PC `689590cc`, using only
   source bundle `/private/tmp/acgc-canonical-pc-689590cc.bundle` with SHA-256
@@ -1525,6 +1526,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   Review bundle `/private/tmp/acgc-lane-transform-producer-m3-review.bundle`
   has SHA-256
   `f4c9b0b33de7a8713fe8732ae820a686cf1b851b739a67357855301e25c393e5`.
+  Lane 226 returned `PASS`; root cherry-picked the exact change as canonical
+  `37ae640d5`, where fresh native and combined ASan/UBSan focused CTest pass
+  `2/2` each and the producer object compiles. Evidence is
+  `docs/evidence/CANONICAL-TRANSFORM-PRODUCER-37AE640D5-2026-08-15.md`.
 - Lane 224 / reused project-owned M3 audit task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete independent read-only
   TEV leaf-producer readiness audit at exact canonical PC `689590cc` and
@@ -1555,7 +1560,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   synchronous range-table capture. Evidence is
   `docs/evidence/PIXEL-LEAF-PRODUCER-TOPOLOGY-689590CC-2026-08-15.md`.
 - Lane 226 / reused project-owned M3 review task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active independent read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/archive-ready independent read-only
   review of lane 223 worker `4fde6d94ed` against base `689590cc`. It must use
   only the verified canonical and thin review bundles plus the hash-verified
   readiness control, create detached review source
@@ -1563,7 +1568,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   scope and both-upstream semantics, and return `PASS` or exact material
   findings. It owns no edit, branch, build, test, cleanup, integration, full
   link, LLDB, Apple/Metal, device/pixel, ISO/assets, Windows sign-off, or
-  playability work.
+  playability work. It returned `PASS`: exact clean provenance, four-file
+  ownership, field/domain mapping, destination-preserving fail-closed behavior,
+  header portability, and focused coverage have no material blocker.
 - Lane 227 / reused project-owned M3 source task
   `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending Depth leaf-converter
   source/test lane on `gpt-5.6-luna` with max reasoning. It must create remote
