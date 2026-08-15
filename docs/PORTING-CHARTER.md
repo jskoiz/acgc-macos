@@ -251,6 +251,12 @@ Lighting as strict pointer-free value ABIs with exact envelope metadata
 validation; native and combined ASan/UBSan canonical matrices pass `10/10`.
 Integrated `38343a5eb5` now captures persistent setter-owned raw Channels and
 passes the exact affected native and combined ASan/UBSan matrices `7/7` each.
+An independent exact-tip refresh passes all twelve neutral validators and six
+raw fixtures natively and under combined ASan/UBSan (`18/18` each, serial,
+leak detection disabled), with corrected public C/C++11 and bounded ILP32/
+Windows ABI syntax probes. A real Windows build remains blocked by host SDL
+framework imports and the absent private-PC Windows toolchain/headers; see
+[current focused matrix evidence](evidence/CURRENT-FOCUSED-MATRIX-38343A5EB-2026-08-14.md).
 The PC still needs setter-owned raw Lighting provenance, exact cross-section
 conversion, and dependency validation. See the
 [canonical Channels/Lighting contracts](evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md),

@@ -272,7 +272,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [current focused matrix evidence](docs/evidence/CURRENT-FOCUSED-MATRIX-23C26E520-2026-08-14.md).
   The exact post-Channels tree at `38343a5eb5` separately passes the seven
   directly affected canonical/raw targets natively and under combined
-  ASan/UBSan (`7/7` each, leak detection disabled).
+  ASan/UBSan (`7/7` each, leak detection disabled). An independent full focused
+  refresh at the same exact tree then passes all twelve neutral validators and
+  six raw fixtures natively and under combined ASan/UBSan (`18/18` each,
+  serial, leak detection disabled). Corrected C/C++11 and bounded ILP32/public
+  Windows ABI probes pass; host SDL framework imports and missing private-PC
+  headers/toolchains still block a real Windows build. See the
+  [post-Channels focused matrix](docs/evidence/CURRENT-FOCUSED-MATRIX-38343A5EB-2026-08-14.md).
 
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three
