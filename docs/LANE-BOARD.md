@@ -38,8 +38,9 @@ the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
 Expensive full links and LLDB launch traces remain serialized. Lanes 185–186
 are reviewed and integrated, and lanes 187–188 are complete read-only audits.
-Lane 189 is the sole active M3 Max source lane. Lane 190 is independently
-reviewed and integrated, and lanes 191–192 completed their read-only contracts.
+Lanes 189 and 193 are the active, non-overlapping M3 Max source lanes. Lane 190
+is independently reviewed and integrated, and lanes 191–192 completed their
+read-only contracts.
 The raw Channels successor is not refilled because it would overlap lane 189's
 `pc_gx` ownership. No
 full link, LLDB launch, or Metal-device run is active. Reviewed commits and
@@ -778,6 +779,27 @@ may not update the umbrella checkout.
   dependency-ready only after Geometry releases `pc_gx` ownership; no refill is
   opened. Evidence is
   `docs/evidence/RAW-CHANNELS-PRODUCER-PLAN-324C174AE-2026-08-14.md`.
+- Lane 193 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active M3
+  Max neutral Texture/TLUT plus Dynamic ABI source/test lane. It reuses
+  protected
+  worktree `/private/tmp/acgc-lane-cumulative-producer-preflight`, imports
+  source-only bundle `/private/tmp/acgc-canonical-pc-43992e.bundle` (SHA-256
+  `54df26da2f2e943a82a61b2d7e179684b355fce6765c226fce21b2bd3e573890`),
+  and owns branch `c1/lane-canonical-texture-dynamic-m3` from exact canonical
+  PC `43992e7085`; decomp remains `09ca8e8b`. It owns only new canonical
+  Texture and Dynamic header/source pairs, two synthetic portable fixtures,
+  and minimal `pc/portable/CMakeLists.txt` registration. It must implement the
+  frozen `0x0010`/1216-byte and `0x2000`/1600-byte pointer-free value ABIs,
+  strict value/metadata/cross-section validation, explicit little-endian
+  fields, stable logical IDs, owner epoch/generation domains, exact byte-size
+  overflow checks, zero absent/reserved state, and external-lease metadata
+  without accessing bytes. `pc_gx`, `pc_gx_texture`, raw generations/leases,
+  cumulative production, Apple, full link, LLDB, assets, Metal, pixel, device,
+  and playability are out of scope. Unique roots are
+  `/private/tmp/acgc-lane-canonical-texture-dynamic-{native,asan,win}`;
+  verification is serial native plus combined ASan/UBSan and bounded
+  C/C++/ILP32/Windows syntax. Success unblocks a separate raw PC Texture/TLUT
+  state, generation, invalidation, and synchronous lease lane.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -792,8 +814,8 @@ verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
-and lane 184 is stopped. Lane 189 is active; lane 190 is integrated and lanes
-191–192 are complete. Their protected worktrees contain
+and lane 184 is stopped. Lanes 189 and 193 are active; lane 190 is integrated
+and lanes 191–192 are complete. Their protected worktrees contain
 ignored assets/orig and must not be deleted or inspected beyond counts.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
