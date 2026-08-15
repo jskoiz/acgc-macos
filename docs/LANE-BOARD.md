@@ -45,7 +45,8 @@ is independently reviewed and integrated, and lanes 191–192 completed their
 read-only contracts.
 The raw Channels source successor and raw Texture/TLUT read-only audit are
 active below as lanes 195–196 after their existing M3 Max project tasks
-accepted the exact current-tip contracts.
+accepted the exact current-tip contracts. Lane 197 is registered setup-pending
+for an independent current-tip focused verification matrix.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -877,6 +878,20 @@ also integrated. Remote workers may not update the umbrella checkout.
   full link, LLDB, resource-byte/ISO/asset access, Apple/Metal execution,
   pixel, device, or playability action. Success unblocks one bounded raw
   Texture/TLUT source lane after ownership review.
+- Lane 197 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — registered
+  setup-pending M3 Max verification-only lane at exact canonical PC
+  `23c26e520a` and decomp `09ca8e8b`. It may reuse protected clean worktree
+  `/private/tmp/acgc-lane-channels-lighting-preflight`, import the verified
+  `23c26e520a` source-only bundle, and detach read-only to the exact tip. Unique
+  roots are `/private/tmp/acgc-lane-current-23c-matrix-{native,asan,win}`. It
+  owns no source, branch, docs, or runtime path. The gate is the exact serial
+  seventeen-target matrix combining twelve neutral canonical validators with
+  the TEV/Transform/Depth/Texgen/Geometry raw fixtures, native and combined
+  ASan/UBSan, plus bounded shared-header C/C++/ILP32/Windows syntax probes. No
+  full `ac_pc` link, LLDB, resource byte, ISO/asset, Apple/Metal device,
+  pixel, or playability operation is allowed. Success proves only the focused
+  integrated CPU baseline and supplies an independent regression check before
+  lanes 195–196 hand off source/architecture results.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -892,7 +907,8 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194 are complete. Lanes 195–196 are active. Their
+191–192 and 194 are complete. Lanes 195–196 are active and lane 197 is
+setup-pending. Their
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
