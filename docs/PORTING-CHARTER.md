@@ -61,10 +61,10 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `910c7f6f52`, with
-the strict canonical Geometry ABI on top of the portable 888-byte Transform
-ABI and setter-owned raw Transform and Depth
-provenance, the portable 16-byte Depth ABI,
+As of 2026-08-14, the canonical local PC branch is clean at `1d48691a4f`, with
+setter-owned raw Texgen/SU provenance and the strict canonical Geometry ABI on
+top of the portable 888-byte Transform ABI and setter-owned raw Transform and
+Depth provenance, the portable 16-byte Depth ABI,
 setter-owned raw TEV/KONST provenance, and the canonical 32-byte Alpha/update
 and 16-byte Blend/logic sections on top of the strict GX envelope
 validator, legacy V4 sink guard, standalone canonical fog value section,
@@ -185,8 +185,8 @@ See [canonical TEV implementation](evidence/CANONICAL-TEV-STATE-6D1D310C0-2026-0
 The Transforms/Texgens provenance audit kept both sections fail-closed until
 the PC port retained raw pre-widescreen projection, exact matrix domains/types/
 knownness, texgen normalize/post state, and manual SU fields. The
-Transform/matrix repair and neutral Transform ABI are now integrated; the
-non-overlapping raw Texgen/SU repair remains active.
+Transform/matrix repair, neutral Transform ABI, and non-overlapping raw
+Texgen/SU repair are now integrated; the cumulative producer remains open.
 See [Transforms/Texgens provenance](evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENANCE-216D1E24B-2026-08-14.md).
 
 The exact follow-up freezes `0x0002` as a version-1 888-byte Transform payload
@@ -207,11 +207,13 @@ per-word knownness, and raw manual-SU state. The corrected Geometry contract
 freezes section `0x0001` with a `0x6B0` fixed prefix, 26 exact descriptors, a
 section-relative stream, and a `0x10000` inclusive size cap. The neutral
 Geometry worker chain is independently reviewed and integrated as
-`910c7f6f52`; exact integrated native and combined ASan/UBSan canonical
-matrices pass `8/8` each. Raw Texgen/SU remains held for a legacy dirty-state
-repair. See the [Texgen/SU contract](evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md),
+`910c7f6f52`; raw Texgen/SU is independently reviewed and integrated through
+`1d48691a4f`. Exact integrated native and combined ASan/UBSan raw-state
+matrices pass `4/4` each, while the canonical matrix passes `8/8`. See the
+[Texgen/SU contract](evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md),
 [Geometry contract](evidence/CANONICAL-GEOMETRY-CONTRACT-6D1D310C0-2026-08-14.md),
-and [Geometry implementation](evidence/CANONICAL-GEOMETRY-STATE-910C7F6F5-2026-08-14.md).
+the [Geometry implementation](evidence/CANONICAL-GEOMETRY-STATE-910C7F6F5-2026-08-14.md),
+and the [PC raw Texgen/SU shadow](evidence/PC-RAW-TEXGEN-SU-SHADOW-1D48691A4-2026-08-14.md).
 
 The Depth/Raster audit freezes `0x0200` as a 16-byte Z-mode section and
 `0x0400` as a 128-byte logical viewport/scissor/raster section. It identifies
@@ -230,7 +232,7 @@ and the [PC raw Depth shadow](evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.
 The canonical setter-order audit fixes the producer-facing invariant at
 `pc_gx_flush_vertices`: flush a completed old batch before any raw/effective
 state mutation. The repaired Texgen/SU worker applies it to exactly seven
-setters; `GXEnableTexOffsets` remains Raster-owned. Canonical `251a010b8`
+setters; `GXEnableTexOffsets` remains Raster-owned. Canonical `1d48691a4f`
 still stores raw Depth before the flush in `GXSetZMode`, making that the next
 narrow source repair. Raster, Indirect, and resource-generation order remain
 separate owners. See [canonical setter-order evidence](evidence/CANONICAL-SETTER-ORDER-251A010B8-2026-08-14.md).
