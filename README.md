@@ -279,7 +279,9 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   Apple consumption follows only after those complete typed dependencies and
   stable resources. See the
   [raw Geometry integration evidence](docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),
-  [canonical producer readiness audit](docs/evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md)
+  [earlier canonical producer readiness audit](docs/evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md),
+  [current cumulative readiness reconciliation](docs/evidence/CURRENT-CUMULATIVE-PRODUCER-READINESS-698D45D3E-2026-08-15.md),
+  [canonical Indirect contract](docs/evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md),
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
 - The exact `23c26e520a` focused baseline passes all twelve neutral validators

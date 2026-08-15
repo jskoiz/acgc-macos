@@ -66,9 +66,10 @@ commit `698d45d3e`, and the final tree is reviewed and integrated on canonical
 `c1/macos-host-launch`. Fresh exact-tip native and combined ASan/UBSan focused
 matrices pass `7/7` each. Lane 205 is now reviewed and integrated as canonical
 PC `b3336504c`; its native and combined ASan/UBSan canonical matrices pass
-`13/13`. Lane 204 remains the sole source-edit worker, while lanes 206–207 are
-read-only contract/readiness audits under the remote M3 Max
-`acgc-modern-port` project.
+`13/13`. Root review returned lane 204's first commit for exact malformed-GXBool
+and production-builder repair; it remains the sole source-edit worker. Lanes
+206–207 completed their read-only audits and are reviewed/archive-ready under
+the remote M3 Max `acgc-modern-port` project.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -1069,7 +1070,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   device, or playability gate.
 - Lane 204 / project-owned M3 task
   `01a004f3-1941-7731-a310-d5ad1f52011b` — active focused raw
-  Alpha/ZCompLoc source lane. It is pinned to canonical PC `698d45d3e` and
+  Alpha/ZCompLoc repair lane. Initial clean commit `35b1e7a2d` is pinned to
+  canonical PC base `698d45d3e` and
   decomp `09ca8e8b`; its dedicated source path is
   `/private/tmp/acgc-lane-raw-alpha-zcomp-m3` on branch
   `c1/lane-raw-alpha-zcomp-m3`. The exact gate is to preserve the existing
@@ -1085,7 +1087,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   work are out of scope. Unique roots are
   `/private/tmp/acgc-lane-raw-alpha-zcomp-{native,asan,win}`. Success requires
   a clean worker commit plus serial focused native and combined ASan/UBSan
-  evidence; no runtime or rendering claim follows.
+  evidence; no runtime or rendering claim follows. Root review rejected the
+  initial candidate because it normalized malformed nonzero `GXBool` values
+  instead of failing closed and compiled the canonical builder only into the
+  fixture target rather than the production `ac_pc` object. The same lane owns
+  the narrow child repair and focused production-object compile; no new lane
+  or broadened scope is authorized.
 - Lane 205 / project-owned M3 task
   `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete, reviewed, integrated,
   and archive-ready portable canonical Raster ABI lane. Worker branch
@@ -1103,27 +1110,28 @@ also integrated. Remote workers may not update the umbrella checkout.
   CPU/contract proof only; raw Raster, cumulative production, full link,
   callback, Metal, pixel, device, and playability remain open.
 - Lane 206 / project-owned M3 task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active read-only exact-tip
-  cumulative producer-readiness reconciliation. Its concrete detached source
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete, reviewed, and
+  archive-ready read-only cumulative producer-readiness reconciliation. Its concrete detached source
   path is `/private/tmp/acgc-lane-current-producer-readiness-m3` at PC
-  `698d45d3e`; decomp remains `09ca8e8b`. It owns no branch, source, tests,
-  CMake, docs, gitlink, or build root. It must reconcile the stale readiness
-  tables after Geometry, Channels, Lighting, and Texture/TLUT integration,
-  identify every still-missing raw owner/portable ABI/converter/resource lease,
-  and state the first honest all-or-nothing cumulative producer boundary. It
-  stops at exact path/symbol evidence and a dependency-ordered next-lane map;
+  `698d45d3e`; decomp is `09ca8e8b`. It changed nothing and ran no build. The
+  audit concludes that a full cumulative producer is not dependency-ready:
+  raw owners/converters, portable Texgen/SU and Indirect sections, complete
+  Geometry serialization, the all-or-nothing envelope/lease assembler, and
+  the Apple complete-envelope consumer remain open. Canonical `b3336504c`
+  closes only the audit's portable Raster-ABI row. Evidence is
+  `docs/evidence/CURRENT-CUMULATIVE-PRODUCER-READINESS-698D45D3E-2026-08-15.md`;
   no build, launch, callback, Metal, pixel, device, or playability claim.
 - Lane 207 / project-owned M3 task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active read-only Indirect
-  contract and raw-ownership audit. Its concrete detached source path is
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete, reviewed, and
+  archive-ready read-only Indirect contract and raw-ownership audit. Its concrete detached source path is
   `/private/tmp/acgc-lane-indirect-contract-m3` at PC `698d45d3e`; decomp
-  remains `09ca8e8b`. It owns no branch, source, tests, CMake, docs, gitlink, or
-  build root. It must crosswalk every PC/decomp Indirect setter, enum, caller,
-  mutation/flush ordering point, and texture/TLUT dependency; freeze a
-  pointer-free fixed-width section layout and strict validation domains; and
-  name the smallest dependency-ready source successor. It stops at read-only
-  evidence with no build, full link, LLDB, callback, Metal, pixel, device, or
-  playability claim.
+  is `09ca8e8b`. It changed nothing and ran no build. The accepted proposed
+  contract uses reserved section ID `13` / mask `0x1000`, version `1`, and one
+  248-byte/62-word shared count/order/scale/matrix value record; the nine
+  per-stage Indirect fields remain owned by canonical TEV. The smallest next
+  source owner is a portable header/source/fixture/CMake lane only. Evidence is
+  `docs/evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md`; no
+  build, full link, LLDB, callback, Metal, pixel, device, or playability claim.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1142,7 +1150,8 @@ and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
 lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is reviewed
 and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
 integrated at canonical PC `b3336504c`. Lane 204 is the sole active source-edit
-worker, and lanes 206–207 remain active read-only audits.
+worker under root-review repair; lanes 206–207 are complete, reviewed, and
+archive-ready read-only audits.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
