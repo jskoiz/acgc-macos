@@ -83,7 +83,7 @@ Geometry ABI. Lanes 177–178 are active read-only current-tip successors for
 the cumulative producer and Apple canonical-plan contracts. Lane 179 is the
 independent current-tip native/sanitizer/Windows focused-matrix refresh. Lanes
 180–181 are read-only Channels/Lighting and Raster implementation preflights.
-No
+Lane 182 is the current-tip M3 Max Metal-device fixture gate. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -549,6 +549,15 @@ checkout.
   TexCoord-offset masks separate from Texgen/SU bias/cylinder/manual state.
   No edit, build, link, launch, asset, Metal, pixel, or playability claim is
   allowed.
+- Lane 182 / reused task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` — active
+  verification-only M3 Max Metal-device fixture gate in detached
+  `/private/tmp/acgc-lane-current-metal-device-fixtures` at exact PC
+  `251a010b8` and decomp `09ca8e8b`. It may build and run only explicit
+  existing Apple CPU/offline-shader/device encode/readback fixtures under
+  `/private/tmp/acgc-lane-current-metal-device-fixtures-{build,asan}`. It may
+  not edit source/docs/refs, link or launch full `ac_pc`, access assets, or
+  turn synthetic device/readback evidence into a game-owned frame, present,
+  iOS, or playability claim.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -560,6 +569,7 @@ successors and are the only active source-edit owners; their production and
 CMake ownership does not overlap. Lanes 177–178 are read-only and do not own
 source; lane 179 is verification-only. Full links and LLDB launches remain
 serialized and are not active. Lanes 180–181 are read-only prerequisite audits.
+Lane 182 is verification-only and does not own source.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
