@@ -125,8 +125,9 @@ Texgen/SU, TEV, Blend, Fog, and Indirect still lack truthful leaf inputs, and
 there is no atomic all-section assembler/publication boundary. Lane 232
 completed the initial Texgen/SU leaf as clean worker `a14aef4179`. Lane 233's
 immutable review returned `BLOCK` on one matrix-provenance/mask invariant.
-Lane 233 is archived, and lane 232 is the sole active production worker,
-resumed on the same branch to repair only that exact finding.
+Lane 232 completed the exact two-file repair as clean child `e6f26abde5` and
+is on root-review hold. Lane 233 is setup-pending to re-review only that child;
+no production worker is counted active.
 
 ## Remote M3 Max batch (current)
 
@@ -1699,7 +1700,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   Windows sign-off, ISO/assets, or playability work and must return the exact
   remaining blockers and safe integration order.
 - Lane 232 / reused project-owned M3 source task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active bounded Texgen/SU repair
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete/root-review hold bounded
+  Texgen/SU repair
   raw-to-canonical leaf-producer lane at exact canonical PC `0f896395c` and
   decomp `09ca8e8b`. It must use verified source-only bundle
   `/private/tmp/acgc-canonical-pc-0f89639.bundle` (SHA-256
@@ -1730,8 +1732,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   indexed-unresolved matrix records can carry impossible attempted-range known
   masks. The same branch must add exact provenance/mask checks plus two
   destination-sentinel negative fixture cases in only the producer source and
-  fixture, rerun the focused gates, commit one child, and stop. The source,
-  branch, and generated roots remain protected; nothing is integrated.
+  fixture, rerun the focused gates, commit one child, and stop. It returned
+  clean child `e6f26abde5327347d43532a5605b11402a3b8330` with exactly that two-file
+  delta. Native and combined ASan/UBSan focused CTest pass `2/2` each, the
+  producer object builds, native C11/C++11 and ILP32 probes pass, and `_WIN32`
+  remains blocked by missing non-Windows headers. The source, branch, and
+  generated roots remain protected; nothing is integrated.
 - Lane 233 / reused project-owned M3 review task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/root-reviewed/archived
   immutable read-only
@@ -1748,6 +1754,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   immediate provenance and zero attempted-range bits for indexed-unresolved
   provenance, allowing malformed inactive records to publish. Evidence is
   `docs/evidence/TEXGEN-PRODUCER-REVIEW-A14AEF41-2026-08-15.md`.
+  The same task is setup-pending for a read-only re-review of repaired child
+  `e6f26abde5`; it must verify only the exact two-file repair and return `PASS`
+  or a new material finding without editing, building, testing, or cleaning.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
