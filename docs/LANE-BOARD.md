@@ -38,9 +38,9 @@ the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
 Expensive full links and LLDB launch traces remain serialized. Lanes 185–186
 are reviewed and integrated, and lanes 187–188 are complete read-only audits.
-Lanes 189 and 193 are the active, non-overlapping M3 Max source lanes. Lane 190
-is independently reviewed and integrated, and lanes 191–192 completed their
-read-only contracts.
+Lanes 189 and 193 are the active, non-overlapping M3 Max source lanes, and lane
+194 is a read-only Lighting producer audit. Lane 190 is independently reviewed
+and integrated, and lanes 191–192 completed their read-only contracts.
 The raw Channels successor is not refilled because it would overlap lane 189's
 `pc_gx` ownership. No
 full link, LLDB launch, or Metal-device run is active. Reviewed commits and
@@ -800,6 +800,19 @@ may not update the umbrella checkout.
   verification is serial native plus combined ASan/UBSan and bounded
   C/C++/ILP32/Windows syntax. Success unblocks a separate raw PC Texture/TLUT
   state, generation, invalidation, and synchronous lease lane.
+- Lane 194 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active
+  read-only M3 Max raw Lighting producer crosswalk. It reuses protected
+  worktree `/private/tmp/acgc-lane-channels-lighting-preflight`, verifies and
+  detaches read-only to source-only canonical PC `43992e7085`, and crosswalks
+  decomp `GXLight.c`/public objects/callers against PC light-object helpers,
+  `GXLoadLightObjImm`, `g_gx.lights`, channel masks, shader conversion, and the
+  new neutral Lighting ABI. It must freeze exact raw knownness/invalidity,
+  RGBA conversion, direction convention, helper semantics, one-hot slot
+  validation, flush-before-mutation, initialization, and a deterministic
+  fixture/ownership plan. It owns no branch, source, build, test, docs, link,
+  LLDB, resource bytes, assets, Apple/Metal execution, pixel, device, or
+  playability action. Success unblocks a raw Lighting source lane only after
+  lane 189 releases `pc_gx` ownership.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -814,8 +827,8 @@ verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
-and lane 184 is stopped. Lanes 189 and 193 are active; lane 190 is integrated
-and lanes 191–192 are complete. Their protected worktrees contain
+and lane 184 is stopped. Lanes 189, 193, and 194 are active; lane 190 is
+integrated and lanes 191–192 are complete. Their protected worktrees contain
 ignored assets/orig and must not be deleted or inspected beyond counts.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
