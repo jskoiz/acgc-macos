@@ -480,8 +480,9 @@ active. Remote workers may not update the umbrella checkout.
   successor owns only `pc_gx` raw Texgen, matrix, and manual-SU sidebands, one
   focused fixture, and PC CMake registration. Geometry, portable canonical
   files, Raster `GXEnableTexOffsets`, producer, and Apple files are out of
-  scope. Native and ASan roots are
-  `/private/tmp/acgc-lane-pc-texgen-shadow-{native,asan}`. No full link, LLDB,
+  scope. Generated native/ASan roots and the temporary bundle are retired. The
+  clean source worktree is deliberately preserved because its ignored
+  `assets/` and `orig/` paths are protected. No full link, LLDB,
   asset access, callback, Metal, pixel, device, Windows-runtime, iOS, or
   playability claim follows. Commits `2df84f628` and `731b7ee41` repaired
   flush-before-mutation ordering, validation, and the intercepting fixture
