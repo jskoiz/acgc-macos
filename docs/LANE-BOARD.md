@@ -1,6 +1,6 @@
 # ACGC visible lane board
 
-Updated 2026-08-14 under the resumed rolling-refill scheduler. The board records the
+Updated 2026-08-15 under the resumed rolling-refill scheduler. The board records the
 visible Codex tasks, their ownership, and the order in which evidence may be
 integrated. All new and successor tasks are Luna Max with max reasoning. A
 task being active means it is allowed to inspect or run its bounded work; it
@@ -1066,7 +1066,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   prove a full link, live callback, Metal encode/present/readback, pixel,
   device, or playability gate.
 - Lane 204 / project-owned M3 task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — setup-pending focused raw
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — active focused raw
   Alpha/ZCompLoc source lane. It is pinned to canonical PC `698d45d3e` and
   decomp `09ca8e8b`; its dedicated source path is
   `/private/tmp/acgc-lane-raw-alpha-zcomp-m3` on branch
@@ -1085,7 +1085,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   a clean worker commit plus serial focused native and combined ASan/UBSan
   evidence; no runtime or rendering claim follows.
 - Lane 205 / project-owned M3 task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending portable canonical
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active portable canonical
   Raster ABI source lane. It is pinned to canonical PC `698d45d3e` and decomp
   `09ca8e8b`; its dedicated source path is
   `/private/tmp/acgc-lane-canonical-raster-m3` on branch
@@ -1104,7 +1104,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   clean worker commit plus serial focused native and combined ASan/UBSan
   validator evidence only.
 - Lane 206 / project-owned M3 task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending read-only exact-tip
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active read-only exact-tip
   cumulative producer-readiness reconciliation. Its concrete detached source
   path is `/private/tmp/acgc-lane-current-producer-readiness-m3` at PC
   `698d45d3e`; decomp remains `09ca8e8b`. It owns no branch, source, tests,
@@ -1115,7 +1115,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   stops at exact path/symbol evidence and a dependency-ordered next-lane map;
   no build, launch, callback, Metal, pixel, device, or playability claim.
 - Lane 207 / project-owned M3 task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — setup-pending read-only Indirect
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active read-only Indirect
   contract and raw-ownership audit. Its concrete detached source path is
   `/private/tmp/acgc-lane-indirect-contract-m3` at PC `698d45d3e`; decomp
   remains `09ca8e8b`. It owns no branch, source, tests, CMake, docs, gitlink, or
