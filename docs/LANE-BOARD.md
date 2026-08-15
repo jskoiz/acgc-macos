@@ -131,12 +131,13 @@ the verified source-only bundle, applied both commits one at a time, and
 integrated the reviewed end state as canonical PC `c832fb862`. Fresh native
 and combined ASan/UBSan focused CTest pass `2/2` each and the production
 producer object compiles. Both tasks are complete/archived and no production
-worker from that pair is active. Lane 234 completed the setter-owned raw
-TEV/Indirect provenance source candidate as clean worker `34da318d4` and is on
-root-review hold; it is not integrated. Lane 235 is the sole active worker, an
-independent read-only review of that exact candidate against both upstreams
-with unique focused verification roots. No full link, LLDB, launch, or device
-work is active.
+worker from that pair is active. Lane 235 completed its independent review of
+lane 234 candidate `34da318d4` with `BLOCK`: invalid current-call TEV/Indirect
+inputs can mark the raw owner invalid yet still mutate legacy host mirrors, and
+the fixture does not cover those invalid domains. Lane 234 is the sole active
+worker, resumed on the same branch for a two-file validation-result and
+regression-fixture repair. It is not integrated. No full link, LLDB, launch, or
+device work is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1777,8 +1778,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   and both-upstream semantics without editing, building, testing, or cleaning.
   The task is archived after the reviewed integration.
 - Lane 234 / remote M3 Max task
-  `01a00640-960d-7d41-9320-721f26037d8a` — complete source-edit
-  setter-owned raw TEV/Indirect provenance lane on root-review hold. It uses verified complete-
+  `01a00640-960d-7d41-9320-721f26037d8a` — active source-edit repair of the
+  setter-owned raw TEV/Indirect provenance lane after lane 235's independent
+  `BLOCK`. It uses verified complete-
   history source-only bundle `/private/tmp/acgc-canonical-pc-c832fb8.bundle`
   (SHA-256
   `c52633a629d26ec9df65d0613aa03b6c6b4d8150ac6ac41eff4b755927e9b21f`),
@@ -1805,22 +1807,31 @@ also integrated. Remote workers may not update the umbrella checkout.
   native and combined ASan/UBSan fixtures pass, the production `pc_gx.c`
   object compiles, native C/C++ and AppleClang `-m32` syntax probes pass, and
   real Windows/i686 proof remains blocked by the missing toolchain and
-  `process.h`. This is CPU/source evidence only and awaits lane-235 review;
-  there is no canonical leaf, callback, Metal, pixel, Windows, or playability
-  claim.
+  `process.h`. Lane 235 found that invalid current calls can still write legacy
+  mirrors after the raw validator fails. The resumed repair owns only
+  `pc/src/pc_gx.c` and
+  `pc/tests/pc_gx_tev_indirect_raw_shadow_fixture.c`: raw helpers must report
+  current-call validity, invalid calls must return before legacy mutation, and
+  a later valid call must retain legacy-PC behavior even after sticky raw
+  invalidity. It must add invalid-domain and legacy-immutability regressions,
+  rerun focused native plus combined ASan/UBSan tests, compile the production
+  object, and return a clean child commit and refreshed source-only bundle.
+  This is CPU/source evidence only; there is no canonical leaf, callback,
+  Metal, pixel, Windows, or playability claim.
 - Lane 235 / remote M3 Max task
-  `01a00669-46ec-7c50-959c-50dafe702923` — active independent read-only
-  review of lane 234. It verifies exact base `c832fb862`, candidate
-  `34da318d4`, frozen bundle/hash, and clean source/decomp provenance, then
-  reviews the complete four-file diff for flush-before-mutation, per-field
-  knownness, sticky invalidity, source-faithful `GXSetTevOp`, matrix
-  quantization/lifetime, legacy layout preservation, and fixture isolation.
-  It may rerun only the new and legacy focused fixtures in unique roots
-  `/private/tmp/acgc-lane-235-raw-tev-review-{native,asan}`. Source edits,
-  integration, full link, LLDB, runtime, Metal, device/pixel, assets, Windows
-  sign-off, and playability are out of scope. A `PASS` unblocks root review and
-  one-at-a-time integration; an exact finding returns to the same lane-234
-  branch without opening a duplicate owner.
+  `01a00669-46ec-7c50-959c-50dafe702923` — complete independent read-only
+  review of lane 234 candidate `34da318d4`, with exact provenance and bundle
+  hash confirmed. It returned `BLOCK`: raw validators mark sticky invalidity,
+  but multiple enclosing TEV/Indirect setters continue into legacy dirty/mirror
+  writes; the fixture covers invalid IDs but not invalid stages, selectors,
+  orders, ranges, counts, or null/non-finite matrices and mirror immutability.
+  Native and combined ASan/UBSan legacy/new fixtures each pass, so this is a
+  source-contract and missing-regression finding rather than a sanitizer
+  failure. Unique review roots are
+  `/private/tmp/acgc-lane-235-raw-tev-review-{native,asan}`. The same task is
+  retained for an immutable re-review of lane 234's repaired child; it owns no
+  source or integration. No full link, LLDB, runtime, Metal, device/pixel,
+  Windows sign-off, or playability claim follows.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
