@@ -1165,7 +1165,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   worktree, and exact clean base are confirmed.
 - Lane 209 / reused project-owned M3 task
   `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete, reviewed, integrated, and
-  archive-ready portable canonical Indirect ABI lane. Worker branch
+  archived portable canonical Indirect ABI lane. Worker branch
   `c1/lane-canonical-indirect-m3` advanced exact base `039afce0e` to direct
   child `a42da8e155`, now fast-forwarded onto canonical
   `c1/macos-host-launch`. Its exact four-file delta is a new Indirect header,
