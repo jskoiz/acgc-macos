@@ -34,8 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `f2b7ab153` (`Add canonical Alpha test/update state`),
-on top of `216d1e24b` (`Add canonical Blend logic state`), `4dbb71065`
+`c1/macos-host-launch` at `037689462` (`Add PC raw TEV register shadow`), on
+top of `f2b7ab153` (`Add canonical Alpha test/update state`), `216d1e24b`
+(`Add canonical Blend logic state`), `4dbb71065`
 (`Add strict canonical GX envelope validator`), and
 `62ef6638d` (`Fail closed legacy V4 Apple sink eligibility`),
 `b5f550ea0` (`Add canonical GX fog state`),
@@ -143,12 +144,27 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   setter-owned raw-shadow change. See
   [canonical TEV contract](docs/evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
 
+- Integrated `037689462` adds setter-owned exact raw PREV/REG0-2 and K0-3
+  provenance beside the unchanged normalized-float path. Exact integrated
+  native and combined ASan/UBSan focused CTest pass `1/1` each. This is only
+  the PC raw-state prerequisite; lane 168 separately owns the portable
+  2,560-byte TEV ABI and later producer wiring remains fail-closed. See
+  [PC raw TEV shadow](docs/evidence/PC-RAW-TEV-SHADOW-037689462-2026-08-14.md).
+
 - The Transforms/Texgens provenance audit finds both sections still
   fail-closed: the PC path loses raw pre-widescreen projection, matrix
   domain/type/knownness, texgen normalize/post state, and manual SU state.
   It selects two serial PC repairs—Transform/matrix first, Texgen/SU second—
   before a live canonical producer. See
   [Transforms/Texgens provenance](docs/evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENANCE-216D1E24B-2026-08-14.md).
+
+- The follow-up exact Transform audit freezes `0x0002` as a version-1,
+  888-byte aggregate containing raw six-coefficient projection, ten position
+  matrices, ten normal matrices, current logical ID, and explicit knownness.
+  All texture/post matrices and manual SU state remain exclusively in
+  `0x0008`. This is read-only architecture evidence; PC raw Transform shadow
+  state is still required. See
+  [canonical Transform contract](docs/evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md).
 
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three

@@ -61,9 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `f2b7ab153`, with
-the canonical 32-byte Alpha/update section and 16-byte Blend/logic section on
-top of the strict GX envelope
+As of 2026-08-14, the canonical local PC branch is clean at `037689462`, with
+setter-owned raw TEV/KONST provenance plus the canonical 32-byte Alpha/update
+and 16-byte Blend/logic sections on top of the strict GX envelope
 validator, legacy V4 sink guard, standalone canonical fog value section,
 focused input trigger-parity correction, and the
 `5157ac1cb` Apple V2 sink-status guard and the `820906439` V2-local
@@ -167,11 +167,25 @@ setters discard exact signed S10 provenance into normalized floats, so the live
 producer remains fail-closed until a narrow setter-owned raw-shadow change is
 proved. See [canonical TEV contract](evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
 
+Integrated `037689462` now retains exact setter-owned PREV/REG0-2 signed or
+u8 values and K0-3 u8 values, including unavailable and malformed knownness,
+while preserving the existing float path. Exact integrated native and combined
+ASan/UBSan focused CTest pass `1/1` each. It remains a PC CPU-state prerequisite,
+not a canonical section or renderer handoff. See
+[PC raw TEV shadow](evidence/PC-RAW-TEV-SHADOW-037689462-2026-08-14.md).
+
 The Transforms/Texgens provenance audit keeps both sections fail-closed until
 the PC port retains raw pre-widescreen projection, exact matrix domains/types/
 knownness, texgen normalize/post state, and manual SU fields. It selects a
 Transform/matrix repair first and a non-overlapping Texgen/SU repair second.
 See [Transforms/Texgens provenance](evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENANCE-216D1E24B-2026-08-14.md).
+
+The exact follow-up freezes `0x0002` as a version-1 888-byte Transform payload
+with six raw projection coefficients, ten position and ten normal slots,
+strict logical IDs, and explicit knownness. Ordinary/post texture matrices,
+texgen references, and manual SU remain solely in `0x0008`. The PC still needs
+a raw Transform shadow before live production. See
+[canonical Transform contract](evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md).
 
 The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
 with three declared Metal-device skips in each configuration. Bounded Windows

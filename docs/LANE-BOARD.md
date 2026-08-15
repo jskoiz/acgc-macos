@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`f2b7ab153` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`037689462` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -70,8 +70,8 @@ audit. Lane 159 completed the read-only Blend/logic contract; lane 160 completed
 the independent focused verification matrix; lane 161 is integrated as PC
 `216d1e24b`. Lanes 162–163 completed the Alpha/update and TEV contracts; lane
 164 completed the Transforms/Texgens provenance audit; lane 165 is integrated
-as PC `f2b7ab153`; lane 166 remains the active PC raw-TEV-shadow source lane;
-lane 167 is the active read-only exact Transforms ABI audit; lane 168 is the
+as PC `f2b7ab153`; lane 166 is integrated as PC `037689462`; lane 167 completed
+the read-only exact Transforms ABI audit; lane 168 is the
 non-overlapping portable canonical TEV ABI source lane; lane 169 is the
 read-only Depth/Raster exact contract audit. No
 full link or LLDB run is active. Remote workers may not update the umbrella
@@ -365,25 +365,26 @@ checkout.
   `docs/evidence/CANONICAL-ALPHA-STATE-F2B7AB153-2026-08-14.md`. No live
   producer, callback, Metal, pixel, device, or playability claim follows;
   `GXSetZCompLoc` remains a separate PC shadow-state gap.
-- Lane 166 / task `01a002c6-bb9a-7ed3-8f25-b6bb85d41b76` — active M3 Max
-  source-edit lane on explicit branch `c1/lane-tev-raw-shadow-m3`, exact PC
-  base `216d1e24b`, worktree `/private/tmp/acgc-lane-tev-raw-shadow`, and
-  decomp oracle `09ca8e8b`. It exclusively owns PC private GX state/setters,
-  one raw-shadow fixture, and minimal PC CMake registration for exact
-  PREV/REG0-2 signed register and K0-3 KONST values, validity, overwrite order,
-  initialization, and invalid-input safety. Unique focused roots are
-  `/private/tmp/acgc-lane-tev-raw-shadow-{native,asan,win}`. Shaders, V1-V4,
-  canonical ABI files, producer wiring, Apple/Metal, full link, LLDB, assets,
-  pixels, devices, and playability are out of scope.
-- Lane 167 / task `01a002cb-26b4-78d1-b01c-1708f6a7b9e5` — active read-only
-  M3 Max exact Transforms ABI audit. Detached worktree
-  `/private/tmp/acgc-lane-canonical-transform-contract-audit` is exact PC
-  `216d1e24b` with decomp oracle `09ca8e8b`. It owns `0x0002` section layout,
-  projection/position/normal/current references and knownness, the exact
-  matrix boundary with `0x0008`, count/capacity/reserved/malformed rules, and
-  a future portable fixture/ownership map. It may not edit, build, launch,
-  access assets, overlap live PC setter ownership, or claim callback, Metal,
-  pixel, device, or playability proof.
+- Lane 166 / task `01a002c6-bb9a-7ed3-8f25-b6bb85d41b76` — complete and
+  integrated, cleanup pending. Remote branch `c1/lane-tev-raw-shadow-m3`
+  advanced exact PC `216d1e24b` to worker `11cf5db00`; the integration owner
+  cherry-picked its exact four-file change as canonical PC `037689462`. It
+  adds setter-owned raw PREV/REG0-2 and K0-3 state with explicit unavailable,
+  valid, source, and malformed provenance while preserving the float path.
+  Remote and exact integrated native plus combined ASan/UBSan focused CTest
+  pass `1/1` each; Windows runtime/toolchain proof remains blocked. Evidence is
+  `docs/evidence/PC-RAW-TEV-SHADOW-037689462-2026-08-14.md`. No canonical
+  section, snapshot, callback, Metal, pixel, device, or playability claim
+  follows.
+- Lane 167 / task `01a002cb-26b4-78d1-b01c-1708f6a7b9e5` — complete,
+  archive and cleanup pending, read-only at exact PC `216d1e24b` and decomp
+  `09ca8e8b`. It freezes version-1 `0x0002` as an 888-byte aggregate with raw
+  projection, ten position and ten normal matrices, current logical ID, and
+  explicit knownness. Texture/post matrix and manual SU state remain solely in
+  `0x0008`. Evidence is
+  `docs/evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md`. No
+  edit, build, launch, asset, callback, Metal, pixel, device, or playability
+  operation occurred.
 - Lane 168 / task `01a002d3-e737-76c1-8349-fc4e003fc0b9` — active M3 Max
   source-edit lane on explicit branch `c1/lane-canonical-tev-m3`, exact PC
   base `f2b7ab153`, worktree `/private/tmp/acgc-lane-canonical-tev`, and
@@ -409,10 +410,10 @@ The remote Codex project assignment records place tasks 156–169 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
-transferred. The next source integration order is lane 166's raw TEV shadow,
-then lane 168's portable TEV ABI, subject to individual review; lane 167's
-read-only result selects the subsequent Transform source boundary. Full links
-and LLDB launches remain serialized and are not active.
+transferred. The next source integration is lane 168's portable TEV ABI after
+individual review. Lane 167's frozen Transform contract selects a subsequent
+raw Transform-shadow lane once shared `pc_gx` ownership is released. Full
+links and LLDB launches remain serialized and are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
