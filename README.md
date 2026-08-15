@@ -34,9 +34,10 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `4dbb71065` (`Add strict canonical GX envelope
-validator`), on top of `62ef6638d` (`Fail closed legacy V4 Apple sink
-eligibility`), `b5f550ea0` (`Add canonical GX fog state`),
+`c1/macos-host-launch` at `216d1e24b` (`Add canonical Blend logic state`), on
+top of `4dbb71065` (`Add strict canonical GX envelope validator`) and
+`62ef6638d` (`Fail closed legacy V4 Apple sink eligibility`),
+`b5f550ea0` (`Add canonical GX fog state`),
 `afb1cac3c` (`Restore analog trigger digital parity`), `5157ac1cb` (`Reject
 incomplete V2 packets before Metal sink`), and `820906439` (`Normalize dead V2
 alpha references`),
@@ -103,10 +104,14 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   `2/2` each. Total packet size, live producer, and Apple CPU plan remain open.
   A completed two-upstream audit fixes Blend/logic as the reusable 16-byte V3
   four-word value record and keeps Alpha/update and Raster state separate;
-  that exact portable section is the next source slice. See
-  [canonical GX schema crosswalk](docs/evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md)
+  integrated `216d1e24b` now implements that exact 16-byte section, a strict
+  validator, and an exact Blend metadata helper without changing V1-V4,
+  `pc_gx`, or Apple code. Exact integrated native and combined ASan/UBSan
+  focused CTest pass `3/3` each. See
+  [canonical GX schema crosswalk](docs/evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md),
   [canonical envelope evidence](docs/evidence/CANONICAL-GX-ENVELOPE-4DBB71065-2026-08-14.md),
-  and [Blend/logic contract](docs/evidence/CANONICAL-BLEND-LOGIC-CONTRACT-B5F550EA0-2026-08-14.md).
+  [Blend/logic contract](docs/evidence/CANONICAL-BLEND-LOGIC-CONTRACT-B5F550EA0-2026-08-14.md),
+  and [Blend implementation evidence](docs/evidence/CANONICAL-BLEND-STATE-216D1E24B-2026-08-14.md).
 
 - The read-only snapshot-producer audit selects the committed-vertex boundary
   at the top of `pc_gx_flush_vertices()`, before legacy handoffs, TEV variant

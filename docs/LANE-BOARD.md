@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`4dbb71065` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`216d1e24b` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -297,17 +297,18 @@ active. Remote workers may not update the umbrella checkout.
   launch, LLDB, Metal device, pixel, Windows runtime, or playability proof
   follows. Its detached worktree, native/ASan/Windows roots,
   prompt/events/final artifacts, and exact local current-delta roots are absent.
-- Lane 161 / task `01a002af-5e39-7e40-b83e-86323c7786c6` — active M3 Max
-  source-edit lane on explicit branch `c1/lane-canonical-blend-m3`, exact PC
-  base `4dbb71065`, worktree `/private/tmp/acgc-lane-canonical-blend`, and
-  decomp oracle `09ca8e8b`. It owns only new canonical Blend header/source, one
-  portable fixture, and minimal portable CMake registration. Its gate is the
-  audited version-1 16-byte four-word Blend/logic ABI, strict mode/factor/logic
-  validator, exact envelope metadata fixtures, native and combined ASan/UBSan
-  focused tests, and bounded ABI/Windows host probes under unique
-  `/private/tmp/acgc-lane-canonical-blend-{native,asan,win}` roots. Common
-  envelope semantics, V1-V4, `pc_gx`, Apple/Metal, ac-decomp edits, full link,
-  LLDB, assets, pixels, devices, and playability are out of scope.
+- Lane 161 / task `01a002af-5e39-7e40-b83e-86323c7786c6` — complete,
+  integrated, and cleanup-pending. Remote branch
+  `c1/lane-canonical-blend-m3` advanced exact PC `4dbb71065` to worker
+  `a170654b0`; the integration owner cherry-picked its exact four-file change
+  as canonical PC `216d1e24b`. It adds the audited version-1 16-byte four-word
+  Blend/logic ABI, strict value validator, exact metadata helper, and portable
+  fixture without changing common envelope semantics, V1-V4, `pc_gx`, or
+  Apple code. Remote focused native/ASan and exact integrated native/ASan
+  results pass `1/1` and `3/3` respectively; ABI and bounded `_WIN32` probes
+  pass. Evidence is
+  `docs/evidence/CANONICAL-BLEND-STATE-216D1E24B-2026-08-14.md`. No live
+  snapshot, callback, Metal, pixel, device, or playability claim follows.
 - Lane 162 / task `01a002b5-525f-7480-81df-8c9bde594295` — active read-only
   M3 Max Alpha/update contract audit. Detached worktree
   `/private/tmp/acgc-lane-canonical-alpha-audit` is exact PC `4dbb71065` with

@@ -61,10 +61,10 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `4dbb71065`, with
-the strict canonical GX envelope validator on top of the legacy V4 sink guard
-and standalone canonical fog value
-section, focused input trigger-parity correction, and the
+As of 2026-08-14, the canonical local PC branch is clean at `216d1e24b`, with
+the canonical 16-byte Blend/logic section on top of the strict GX envelope
+validator, legacy V4 sink guard, standalone canonical fog value section,
+focused input trigger-parity correction, and the
 `5157ac1cb` Apple V2 sink-status guard and the `820906439` V2-local
 alpha-reference normalization and the
 `59d13a98` bounded base-state rejection classifier and the
@@ -132,10 +132,13 @@ existing fog section; exact integrated native and combined ASan/UBSan focused
 CTest pass `2/2` each. The full byte size is not frozen: each neutral section
 must first have an exact tested ABI. The completed two-upstream Blend/logic
 audit selects the reusable 16-byte V3 four-word record without importing
-Alpha/update or Raster fields; that exact portable value section is the next
-source gate. See [canonical GX schema crosswalk](evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md),
+Alpha/update or Raster fields. Integrated `216d1e24b` implements its fixed ABI,
+strict value validator, and exact metadata helper; exact integrated native and
+combined ASan/UBSan focused CTest pass `3/3` each. See
+[canonical GX schema crosswalk](evidence/CANONICAL-GX-SCHEMA-CROSSWALK-5157AC1CB-2026-08-14.md),
 [canonical envelope evidence](evidence/CANONICAL-GX-ENVELOPE-4DBB71065-2026-08-14.md),
-and [Blend/logic contract](evidence/CANONICAL-BLEND-LOGIC-CONTRACT-B5F550EA0-2026-08-14.md).
+[Blend/logic contract](evidence/CANONICAL-BLEND-LOGIC-CONTRACT-B5F550EA0-2026-08-14.md),
+and [Blend implementation evidence](evidence/CANONICAL-BLEND-STATE-216D1E24B-2026-08-14.md).
 
 The read-only producer audit selects the top of `pc_gx_flush_vertices()` after
 the committed-vertex count check and before legacy packet handoffs, shader
