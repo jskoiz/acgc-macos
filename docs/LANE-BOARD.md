@@ -1674,8 +1674,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   edit, branch, build, test, cleanup, link, LLDB, Apple/Metal, device/pixel,
   Windows sign-off, ISO/assets, or playability work.
 - Lane 231 / reused project-owned M3 audit task
-  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete/root-reviewed and
-  archive-pending independent read-only
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete/root-reviewed/archived
+  independent read-only
   current-tip cumulative-producer readiness reconciliation at exact canonical
   PC `0f896395c` and decomp `09ca8e8b`. It must use the canonical bundle,
   prior control `/private/tmp/acgc-lane-231-cumulative-readiness.md` (SHA-256
