@@ -34,8 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `698d45d3e` (`Repair Texture TLUT lease
-invalidation`), completing persistent setter-owned raw Channels and Lighting,
+`c1/macos-host-launch` at `b3336504c` (`Add canonical Raster ABI validator`),
+adding the strict pointer-free Raster value contract on top of persistent
+setter-owned raw Channels and Lighting,
 immutable raw Geometry batches, the pointer-free raw Texture/TLUT owner and
 synchronous resource lease, the reviewed neutral Texture/TLUT, Dynamic,
 Lighting, and Channels ABIs, Depth ordering, raw
@@ -210,10 +211,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   preserving the typed `GXSetZMode` boundary. Integrated `9f149b6fd9` then
   repairs the temporal boundary so a completed old batch flushes before raw or
   effective Depth state changes; exact native and combined ASan/UBSan
-  Transform/Depth/TEV/Texgen matrices pass `4/4`. Raster provenance and the
-  cumulative producer remain open. See the
+  Transform/Depth/TEV/Texgen matrices pass `4/4`. Integrated `b3336504c`
+  implements the strict 128-byte portable Raster ABI; the exact native and
+  combined ASan/UBSan canonical matrices pass `13/13`. Raw Raster provenance
+  and the cumulative producer remain open. See the
   [canonical Depth/Raster contracts](docs/evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md),
   [canonical Depth implementation](docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md),
+  [canonical Raster implementation](docs/evidence/CANONICAL-RASTER-STATE-B3336504C-2026-08-15.md),
   [PC raw Depth shadow](docs/evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md),
   and [Depth flush-order repair](docs/evidence/PC-DEPTH-FLUSH-ORDER-9F149B6FD-2026-08-14.md).
 
@@ -269,8 +273,9 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   direct `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated
   `97aebd8a2d` supplies persistent raw Channels and Lighting dependencies, and
   integrated `698d45d3e` supplies Texture/TLUT generations and synchronous
-  resource leases. Remaining draw-critical source work is one all-or-nothing
-  cumulative serializer and immutable Apple CPU plan.
+  resource leases, and `b3336504c` supplies the neutral Raster value ABI.
+  Raw Raster, Alpha/ZCompLoc, and Indirect ownership still gate the
+  all-or-nothing cumulative serializer and immutable Apple CPU plan.
   Apple consumption follows only after those complete typed dependencies and
   stable resources. See the
   [raw Geometry integration evidence](docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),

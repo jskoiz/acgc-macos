@@ -64,9 +64,11 @@ completed the M3 Max raw Texture/TLUT producer. Root review rejected its
 initial all-map TLUT invalidation; the same lane repaired that defect as child
 commit `698d45d3e`, and the final tree is reviewed and integrated on canonical
 `c1/macos-host-launch`. Fresh exact-tip native and combined ASan/UBSan focused
-matrices pass `7/7` each. Lanes 204–207 are now registered under the remote M3
-Max `acgc-modern-port` project: lanes 204–205 are non-overlapping focused source
-lanes, while lanes 206–207 are read-only contract/readiness audits.
+matrices pass `7/7` each. Lane 205 is now reviewed and integrated as canonical
+PC `b3336504c`; its native and combined ASan/UBSan canonical matrices pass
+`13/13`. Lane 204 remains the sole source-edit worker, while lanes 206–207 are
+read-only contract/readiness audits under the remote M3 Max
+`acgc-modern-port` project.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -74,7 +76,7 @@ evidence remain available in Git and the evidence docs.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`698d45d3e` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`b3336504c` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1085,24 +1087,21 @@ also integrated. Remote workers may not update the umbrella checkout.
   a clean worker commit plus serial focused native and combined ASan/UBSan
   evidence; no runtime or rendering claim follows.
 - Lane 205 / project-owned M3 task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active portable canonical
-  Raster ABI source lane. It is pinned to canonical PC `698d45d3e` and decomp
-  `09ca8e8b`; its dedicated source path is
-  `/private/tmp/acgc-lane-canonical-raster-m3` on branch
-  `c1/lane-canonical-raster-m3`. It owns only new
-  `include/acgc/gx_canonical_raster_state.h`, new
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete, reviewed, integrated,
+  and archive-ready portable canonical Raster ABI lane. Worker branch
+  `c1/lane-canonical-raster-m3` advanced from base `698d45d3e` to clean commit
+  `b3336504c`, now fast-forwarded onto canonical `c1/macos-host-launch`. The
+  exact four-file delta is new `include/acgc/gx_canonical_raster_state.h`, new
   `src/gx_canonical_raster_state.c`, one portable validator/roundtrip fixture,
-  and minimal `pc/portable/CMakeLists.txt` registration. The frozen contract is
-  section `0x0400`, version `1`, exactly 128 bytes/32 words, with finite
-  viewport/scissor/offset/clip/cull/line/point/dither/destination-alpha/field
-  domains and four reserved zero words. The lane must crosswalk PC raster
-  setters/state against decomp `GXGeometry.c`, `GXPixel.c`, `GXInit.c`, public
-  declarations/enums, and representative callers before editing. It may not
-  touch `pc_gx`, packet/cumulative producer policy, Apple/Metal, resources,
-  ISO/assets, full link, LLDB, device, pixel, or playability. Unique roots are
-  `/private/tmp/acgc-lane-canonical-raster-{native,asan,win}`. Success is a
-  clean worker commit plus serial focused native and combined ASan/UBSan
-  validator evidence only.
+  and minimal `pc/portable/CMakeLists.txt` registration. Section `0x0400`,
+  version `1`, is exactly 128 bytes/32 words with strict finite viewport,
+  scissor, offset, clip, cull, line/point, dither, destination-alpha, field,
+  and reserved-zero validation. Fresh integrated native and combined
+  ASan/UBSan canonical matrices pass `13/13` each with no diagnostics and leak
+  detection disabled. Evidence is
+  `docs/evidence/CANONICAL-RASTER-STATE-B3336504C-2026-08-15.md`. This is
+  CPU/contract proof only; raw Raster, cumulative production, full link,
+  callback, Metal, pixel, device, and playability remain open.
 - Lane 206 / project-owned M3 task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active read-only exact-tip
   cumulative producer-readiness reconciliation. Its concrete detached source
@@ -1141,7 +1140,9 @@ LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
 lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is reviewed
-and integrated at canonical PC `698d45d3e`; no production worker is active.
+and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
+integrated at canonical PC `b3336504c`. Lane 204 is the sole active source-edit
+worker, and lanes 206–207 remain active read-only audits.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.

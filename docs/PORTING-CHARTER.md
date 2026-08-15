@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-15, the canonical local PC branch is clean at `698d45d3e`, with
-persistent setter-owned raw Channels and Lighting, immutable raw Geometry
+As of 2026-08-15, the canonical local PC branch is clean at `b3336504c`, with
+the strict portable Raster value ABI, persistent setter-owned raw Channels and
+Lighting, immutable raw Geometry
 batches, a pointer-free raw Texture/TLUT owner and synchronous resource lease,
 the strict neutral Texture/TLUT, Dynamic, Lighting, and Channels ABIs, repaired `GXSetZMode`
 flush-before-mutation
@@ -229,10 +230,13 @@ combined ASan/UBSan canonical matrices pass `6/6`. Integrated
 the typed `GXSetZMode` boundary. Integrated `9f149b6fd9` then ensures a
 completed old batch flushes before raw or effective Depth mutation; exact
 native and combined ASan/UBSan Transform/Depth/TEV/Texgen matrices pass `4/4`.
+Integrated `b3336504c` implements the strict 128-byte portable Raster ABI;
+exact native and combined ASan/UBSan canonical matrices pass `13/13`. Raw
 Raster provenance and the cumulative producer remain open; none of this is
 live-renderer evidence. See the
 [canonical Depth/Raster contracts](evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md),
 the [canonical Depth implementation](evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md),
+the [canonical Raster implementation](evidence/CANONICAL-RASTER-STATE-B3336504C-2026-08-15.md),
 the [PC raw Depth shadow](evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md),
 and the [Depth flush-order repair](evidence/PC-DEPTH-FLUSH-ORDER-9F149B6FD-2026-08-14.md).
 
@@ -293,9 +297,11 @@ The refreshed producer and Apple audits reject another transitional packet
 shim. Integrated `23c26e520a` now captures immutable Geometry VCD/VAT/array and
 completed-batch provenance at `pc_gx_flush_vertices`, including direct
 `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated `97aebd8a2d`
-supplies persistent raw Channels and Lighting, while `698d45d3e` supplies raw
-Texture/TLUT generations and synchronous resource leases. A cumulative
-producer now must preflight every required section and resource
+supplies persistent raw Channels and Lighting, `698d45d3e` supplies raw
+Texture/TLUT generations and synchronous resource leases, and `b3336504c`
+supplies the neutral Raster value ABI. Raw Raster, Alpha/ZCompLoc, and Indirect
+ownership remain prerequisites. A cumulative producer must then preflight
+every required section and resource
 generation before one synchronous all-or-nothing callback. Apple consumption
 begins only after that contract, through a pure-C immutable plan and separately
 owned resources, encoder, MSL, present, and readback gates. See the
