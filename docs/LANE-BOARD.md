@@ -122,7 +122,9 @@ Lane 230 completed its independent read-only Fog audit with `BLOCK`: the PC
 host retains no logical range-adjust state and has no truthful raw Fog owner or
 producer. Lane 231 completed its current-tip cumulative audit with `BLOCK`:
 Texgen/SU, TEV, Blend, Fog, and Indirect still lack truthful leaf inputs, and
-there is no atomic all-section assembler/publication boundary.
+there is no atomic all-section assembler/publication boundary. Lane 232 is
+registered setup-pending for the single dependency-ready Texgen/SU leaf; it is
+not counted active until its exact M3 source branch/worktree is confirmed.
 
 ## Remote M3 Max batch (current)
 
@@ -1694,6 +1696,28 @@ also integrated. Remote workers may not update the umbrella checkout.
   no edit, branch, build, test, cleanup, link, LLDB, Apple/Metal, device/pixel,
   Windows sign-off, ISO/assets, or playability work and must return the exact
   remaining blockers and safe integration order.
+- Lane 232 / reused project-owned M3 source task
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending Texgen/SU
+  raw-to-canonical leaf-producer lane at exact canonical PC `0f896395c` and
+  decomp `09ca8e8b`. It must use verified source-only bundle
+  `/private/tmp/acgc-canonical-pc-0f89639.bundle` (SHA-256
+  `a789027090e9f2ce6f6241932cbc4cb9e6f185bcedb069d27b25049afcd09c6c`),
+  create `/private/tmp/acgc-lane-texgen-producer-m3` on branch
+  `c1/lane-texgen-producer-m3`, and stop if either is not clean at the exact
+  base. Ownership is limited to new `pc_gx_texgen_producer.h/.c`, one new
+  focused producer fixture, and minimal `pc/CMakeLists.txt` registration.
+  Existing `pc_gx.c`, `pc_gx_internal.h`, canonical ABI/source, every other
+  producer, packets, Apple/Metal, decomp, umbrella, ISO/assets, and runtime are
+  out of scope. Unique roots are
+  `/private/tmp/acgc-lane-texgen-producer-native`,
+  `/private/tmp/acgc-lane-texgen-producer-asan`, and
+  `/private/tmp/acgc-lane-texgen-producer-win`. It must complete the exact
+  two-upstream crosswalk, return one clean source commit, run focused native and
+  combined ASan/UBSan tests plus a production-object compile and bounded
+  C/C++/ILP32/`_WIN32` probes, and make only CPU/source claims. No full link,
+  LLDB, callback, renderer, Metal, pixel, device, Windows sign-off, or
+  playability work is authorized. It is not active until the branch/worktree
+  and complete contract are confirmed by the task.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
