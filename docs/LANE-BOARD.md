@@ -107,7 +107,8 @@ root-review hold. Lane 221 completed its independent read-only Transform
 leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
 Lanes 222 and 223 are active successors for independent Texgen review and the
 Transform leaf producer respectively. No full link, LLDB, or device run is
-active.
+active. Lanes 224 and 225 are registered setup-pending read-only audits for
+TEV leaf production and the Alpha/Blend/Depth/Fog producer topology.
 
 ## Remote M3 Max batch (current)
 
@@ -1504,6 +1505,24 @@ also integrated. Remote workers may not update the umbrella checkout.
   combined ASan/UBSan focused tests plus bounded syntax probes are the only
   verification; no full link, LLDB, runtime, device, pixel, Windows sign-off,
   or playability claim is authorized.
+- Lane 224 / reused project-owned M3 audit task
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending independent read-only
+  TEV leaf-producer readiness audit at exact canonical PC `689590cc` and
+  decomp `09ca8e8b`. It must use the verified source-only bundle and detached
+  source `/private/tmp/acgc-lane-224-tev-producer-audit`, crosswalk the
+  integrated raw TEV/KONST owner, the 2,560-byte canonical TEV ABI, all logical
+  stage/swap/indirect dependencies, and the decomp setters/callers, then return
+  `READY` or the exact missing predecessor raw provenance. It owns no edit,
+  branch, build, test, cleanup, integration, full link, LLDB, Apple/Metal,
+  device/pixel, ISO/assets, Windows sign-off, or playability work.
+- Lane 225 / reused project-owned M3 audit task
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending independent read-only
+  Alpha/Blend/Depth/Fog leaf-producer topology audit at exact canonical PC
+  `689590cc` and decomp `09ca8e8b`. It must classify each section separately as
+  producer-ready or blocked, identify exact raw owner/knownness/ordering gaps,
+  and freeze only disjoint later source contracts. It owns no edit, branch,
+  build, test, cleanup, integration, full link, LLDB, Apple/Metal, device/pixel,
+  ISO/assets, Windows sign-off, or playability work.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
