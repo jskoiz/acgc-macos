@@ -34,8 +34,10 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `59714a1fd` (`Repair indexed Transform shadow
-slots`), on top of `4c3aeac40` (`Add PC raw Transform shadow`), `c736f9686`
+`c1/macos-host-launch` at `251a010b8` (`Preserve typed GX depth setter ABI`),
+on top of `eeec2301c1` (`Track PC raw GX depth provenance`), `c3e158398`
+(`Add canonical Transform ABI validator`), `59714a1fd` (`Repair indexed
+Transform shadow slots`), `4c3aeac40` (`Add PC raw Transform shadow`), `c736f9686`
 (`Add canonical GX Depth ABI validator`), `6d1d310c0` (`Add canonical GX TEV
 value ABI`), `037689462` (`Add PC raw TEV register shadow`), `f2b7ab153`
 (`Add canonical Alpha test/update state`), `216d1e24b`
@@ -157,33 +159,49 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   prerequisites; a cumulative producer has not joined them yet. See
   [canonical TEV implementation](docs/evidence/CANONICAL-TEV-STATE-6D1D310C0-2026-08-14.md).
 
-- The Transforms/Texgens provenance audit finds both sections still
-  fail-closed: the PC path loses raw pre-widescreen projection, matrix
-  domain/type/knownness, texgen normalize/post state, and manual SU state.
-  It selects two serial PC repairs—Transform/matrix first, Texgen/SU second—
-  before a live canonical producer. See
+- The Transforms/Texgens provenance audit found both sections fail-closed: the
+  PC path lost raw pre-widescreen projection, matrix domain/type/knownness,
+  texgen normalize/post state, and manual SU state. The Transform repair is now
+  integrated; the separate raw Texgen/SU repair is active before a live
+  canonical producer. See
   [Transforms/Texgens provenance](docs/evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENANCE-216D1E24B-2026-08-14.md).
 
 - The follow-up exact Transform audit freezes `0x0002` as a version-1,
   888-byte aggregate containing raw six-coefficient projection, ten position
   matrices, ten normal matrices, current logical ID, and explicit knownness.
   All texture/post matrices and manual SU state remain exclusively in
-  `0x0008`. Integrated `59714a1fd` now retains that setter-owned raw state,
+  `0x0008`. Integrated `59714a1fd` retains that setter-owned raw state,
   including exact per-slot unresolved indexed loads and finite immediate
-  repair, while preserving the existing host renderer. Native and combined
-  ASan/UBSan Transform plus raw-TEV fixtures pass `2/2`; the portable `0x0002`
-  ABI and cumulative producer remain open. See the
-  [canonical Transform contract](docs/evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md)
-  and [PC raw Transform shadow](docs/evidence/PC-RAW-TRANSFORM-SHADOW-59714A1FD-2026-08-14.md).
+  repair, while `c3e158398` implements the strict portable `0x0002` value ABI.
+  Exact integrated native and combined ASan/UBSan canonical matrices pass
+  `7/7`; the cumulative producer remains open. See the
+  [canonical Transform contract](docs/evidence/CANONICAL-TRANSFORM-CONTRACT-216D1E24B-2026-08-14.md),
+  [PC raw Transform shadow](docs/evidence/PC-RAW-TRANSFORM-SHADOW-59714A1FD-2026-08-14.md),
+  and [canonical Transform implementation](docs/evidence/CANONICAL-TRANSFORM-STATE-C3E158398-2026-08-14.md).
+
+- The corrected Texgen/SU contract freezes section `0x0008` as an exact
+  `0xA40` value payload with eight generators, eleven ordinary matrices,
+  twenty-one post matrices, eight SU records, writable selector `60`/`125`
+  identity slots, per-word knownness, and raw manual-SU semantics. The
+  corrected Geometry contract freezes section `0x0001` with a `0x6B0` fixed
+  prefix, 26 exact descriptors, a section-relative bounded stream, and a
+  `0x10000` inclusive size cap. The neutral Geometry ABI and raw Texgen/SU
+  provenance are now isolated active M3 Max lanes. See the
+  [Texgen/SU contract](docs/evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md)
+  and [Geometry contract](docs/evidence/CANONICAL-GEOMETRY-CONTRACT-6D1D310C0-2026-08-14.md).
 
 - The read-only Depth/Raster audit freezes `0x0200` as a 16-byte logical
   Z-mode section and `0x0400` as a 128-byte viewport/scissor/raster section.
   Integrated `c736f9686` implements the strict portable Depth ABI and exact
   present/absent envelope validation; the shared canonical native and combined
-  ASan/UBSan matrix passes `6/6` in each configuration. Raster and the serial
-  PC Z/raster provenance shadow remain open. See the
-  [canonical Depth/Raster contracts](docs/evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md)
-  and [canonical Depth implementation](docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md).
+  ASan/UBSan matrix passes `6/6` in each configuration. Integrated
+  `eeec2301c1`/`251a010b8` add setter-owned raw Depth provenance
+  while preserving the typed `GXSetZMode` boundary; native and combined
+  ASan/UBSan raw Depth/Transform/TEV matrices pass `3/3`. Raster provenance and
+  the cumulative producer remain open. See the
+  [canonical Depth/Raster contracts](docs/evidence/CANONICAL-DEPTH-RASTER-CONTRACT-F2B7AB153-2026-08-14.md),
+  [canonical Depth implementation](docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md),
+  and [PC raw Depth shadow](docs/evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md).
 
 - The read-only Channels/Lighting audit freezes `0x0004` as a 136-byte paired
   channel section and `0x0040` as a 516-byte eight-slot final light-object

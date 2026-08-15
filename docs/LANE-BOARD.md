@@ -45,7 +45,7 @@ docs.
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`59714a1fd` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`251a010b8` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -75,10 +75,11 @@ the read-only exact Transforms ABI audit; lane 168 is integrated as PC
 `6d1d310c0`; lane 169 completed the read-only Depth/Raster exact contract
 audit; lane 170 is integrated as PC `59714a1fd`; lane 171 completed the
 read-only exact Channels/Lighting contract audit; lane 172 is integrated as PC
-`c736f9686`; lanes 173–174 are completing corrective read-only review of the
-Texgen/SU and Geometry/VCD/VAT contracts; lanes 175–176 are the two active,
-non-overlapping M3 Max source owners for neutral Transform ABI and raw Depth
-provenance. No
+`c736f9686`; lanes 175–176 are complete and integrated as canonical PC
+`c3e158398` and `251a010b8`, adding the neutral Transform ABI and setter-owned
+raw Depth provenance. Lanes 173–174 have been reused for the two active,
+non-overlapping M3 Max successors: raw Texgen/SU provenance and the neutral
+Geometry ABI. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -448,59 +449,66 @@ checkout.
   `docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md`. No PC setter
   shadow, cumulative producer, full link, LLDB, Metal, pixel, device, or
   playability claim follows.
-- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — active corrective read-only
-  M3 Max exact Texgen/SU contract audit in detached worktree
-  `/private/tmp/acgc-lane-texgen-contract-audit` at exact PC `6d1d310c0`, with
-  decomp oracle `09ca8e8b`. It owns only the versioned `0x0008` value-layout,
-  matrix/source/type/normalize/post/manual-SU domains, initialization,
-  knownness, cross-section references, PC gaps, and a non-overlapping future
-  ownership plan. Independent review rejected the earlier `0xB60`/`0x8D0`
-  drafts as incomplete because writable identity slots, active/inactive
-  knownness, SU register semantics, and Raster ownership were not all exact;
-  the reused task must return one corrected authoritative ABI or a freeze
-  NO-GO. It may not edit, build, launch, access assets, or claim
-  callback, Metal, pixel, device, Windows runtime, iOS, or playability proof.
-- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active corrective read-only
-  M3 Max exact Geometry/VCD/VAT contract audit in detached worktree
-  `/private/tmp/acgc-lane-geometry-contract-audit` at exact PC `6d1d310c0`,
-  with decomp oracle `09ca8e8b`. It owns only the versioned `0x0001` logical
-  geometry/value-stream layout, VCD/VAT formats, primitive/count/stride/bounds,
-  guest/host separation, cross-section references, and future producer/fixture
-  ownership. Independent review retained the `0x6B0` fixed prefix and bounded
-  topology intent but requires exact masks, descriptor relationships, NBT3
-  handling or exclusion, matrix defaults, decoding, alignment, deterministic
-  bytes, and normative cross-section dependencies before freeze. It may not
-  edit, build, launch, access assets, or claim callback,
-  Metal, pixel, device, Windows runtime, iOS, or playability proof.
-- Lane 175 / task `01a00358-efb4-7d51-b5b7-7fe5801e059a` — active M3 Max
-  neutral Transform ABI source/test owner in `/private/tmp/acgc-lane-canonical-transform`,
-  branch `c1/lane-canonical-transform-m3` at exact PC `59714a1fd`, with decomp
-  oracle `09ca8e8b`. It owns only the new fixed 888-byte section-`0x0002`
-  header/source/portable fixture and narrow portable CMake registration.
-  Unique native and ASan/UBSan roots are
-  `/private/tmp/acgc-lane-canonical-transform-{native,asan}`. It may not edit
-  `pc_gx`, wire a producer, run a full link/LLDB, access assets, or claim
-  callback, Metal, pixel, device, or playability proof.
-- Lane 176 / task `01a00358-efb5-7f43-b28a-337c0d8ad584` — active M3 Max raw
-  Depth provenance source/test owner in `/private/tmp/acgc-lane-pc-depth-shadow`,
-  branch `c1/lane-pc-depth-shadow-m3` at exact PC `59714a1fd`, with decomp
-  oracle `09ca8e8b`. It owns only `pc_gx` state/reset/`GXSetZMode`, one focused
-  raw-depth fixture, and narrow PC CMake registration; Transform, TEV,
-  canonical sections, producer, and Apple files are out of scope. Unique
-  native and ASan/UBSan roots are
-  `/private/tmp/acgc-lane-pc-depth-shadow-{native,asan}`. It may not run a full
-  link/LLDB, access assets, or claim canonical production, callback, Metal,
-  pixel, device, or playability proof.
+- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — active M3 Max raw
+  Texgen/SU provenance source/test successor in
+  `/private/tmp/acgc-lane-pc-texgen-shadow`, branch
+  `c1/lane-pc-texgen-shadow-m3` at exact PC `251a010b8`, with decomp oracle
+  `09ca8e8b`. The completed corrective audit freezes section `0x0008` as the
+  exact `0xA40` value contract, including writable ordinary selector `60` and
+  post selector `125`; evidence is
+  `docs/evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md`. The
+  successor owns only `pc_gx` raw Texgen, matrix, and manual-SU sidebands, one
+  focused fixture, and PC CMake registration. Geometry, portable canonical
+  files, Raster `GXEnableTexOffsets`, producer, and Apple files are out of
+  scope. Native and ASan roots are
+  `/private/tmp/acgc-lane-pc-texgen-shadow-{native,asan}`. No full link, LLDB,
+  asset access, callback, Metal, pixel, device, Windows-runtime, iOS, or
+  playability claim is allowed.
+- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active M3 Max
+  neutral Geometry ABI source/test successor in
+  `/private/tmp/acgc-lane-canonical-geometry`, branch
+  `c1/lane-canonical-geometry-m3` at exact PC `251a010b8`, with decomp oracle
+  `09ca8e8b`. The completed corrective audit freezes section `0x0001` with the
+  `0x6B0` prefix, 26 exact descriptors, a section-relative bounded stream, and
+  a `0x10000` inclusive size cap; evidence is
+  `docs/evidence/CANONICAL-GEOMETRY-CONTRACT-6D1D310C0-2026-08-14.md`. The
+  successor owns only a new canonical Geometry header/source/portable fixture
+  and portable CMake registration. `pc_gx`, producer, Apple, Texgen, and all
+  proprietary inputs are out of scope. Native and ASan roots are
+  `/private/tmp/acgc-lane-canonical-geometry-{native,asan}`. No full link,
+  LLDB, callback, Metal, pixel, device, Windows-runtime, iOS, or playability
+  claim is allowed.
+- Lane 175 / task `01a00358-efb4-7d51-b5b7-7fe5801e059a` — complete,
+  independently reviewed, and integrated. M3 Max branch
+  `c1/lane-canonical-transform-m3` advanced `59714a1fd` to worker
+  `caf3ec133`; root integrated it as canonical PC `c3e158398`. The exact
+  four-file implementation adds the fixed 888-byte section-`0x0002` neutral
+  Transform ABI and strict validator. Integrated native and combined
+  ASan/UBSan canonical matrices pass `7/7` each. Evidence is
+  `docs/evidence/CANONICAL-TRANSFORM-STATE-C3E158398-2026-08-14.md`. It proves
+  only CPU ABI behavior; no producer, full link, callback, Metal, pixel,
+  device, or playability claim follows. Review-safe cleanup is pending.
+- Lane 176 / task `01a00358-efb5-7f43-b28a-337c0d8ad584` — complete,
+  independently reviewed, and integrated. M3 Max branch
+  `c1/lane-pc-depth-shadow-m3` advanced `59714a1fd` through worker commits
+  `7debdfb79` and ABI repair `3a574f6b4`; root integrated them as canonical PC
+  `eeec2301c1` and `251a010b8`. The exact four-file result adds setter-owned
+  raw Depth provenance while preserving the typed `GXSetZMode` boundary.
+  Integrated native and combined ASan/UBSan raw Depth/Transform/TEV matrices
+  pass `3/3` each. Evidence is
+  `docs/evidence/PC-RAW-DEPTH-SHADOW-251A010B8-2026-08-14.md`. It proves only
+  CPU provenance; no canonical producer, full link, callback, Metal, pixel,
+  device, Windows-runtime, or playability claim follows. Review-safe cleanup
+  is pending.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
-transferred. Lanes 170 and 172 are individually reviewed and integrated; their
-generated roots are retired and their clean source worktrees remain protected
-only until holder-free cleanup. Lanes 173–174 are reused for their bounded
-contract corrections; lanes 175–176 are the only active source-edit owners and
-their file ownership does not overlap. Full links and LLDB launches remain
+transferred. Lanes 170, 172, 175, and 176 are individually reviewed and
+integrated. Lanes 173–174 are reused for dependency-ready implementation
+successors and are the only active source-edit owners; their production and
+CMake ownership does not overlap. Full links and LLDB launches remain
 serialized and are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
