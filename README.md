@@ -243,7 +243,8 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   resource state, generations, invalidation, leases, cumulative production,
   and Apple consumption remain later gates. See the
   [canonical Texture/Dynamic contract](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md)
-  and [integrated implementation evidence](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md).
+  [integrated implementation evidence](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md),
+  and [raw Texture/TLUT producer plan](docs/evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md).
 
 - Integrated `23c26e520a` now captures immutable Geometry
   VCD/VAT/array/completed-batch provenance at `pc_gx_flush_vertices`, including

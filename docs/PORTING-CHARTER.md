@@ -265,7 +265,8 @@ ASan/UBSan canonical matrices pass `12/12`. Raw PC resource state,
 generation/invalidation, leases, cumulative production, and Apple delivery
 remain separate later owners. See the
 [canonical Texture/Dynamic contract](evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md)
-and [integrated implementation evidence](evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md).
+[integrated implementation evidence](evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md),
+and [raw Texture/TLUT producer plan](evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md).
 
 The refreshed producer and Apple audits reject another transitional packet
 shim. Integrated `23c26e520a` now captures immutable Geometry VCD/VAT/array and

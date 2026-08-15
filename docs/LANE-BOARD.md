@@ -43,10 +43,10 @@ reviewed and integrated, as is lane 193's effective magnification-filter
 repair. Lane 194 has completed its read-only Lighting producer audit. Lane 190
 is independently reviewed and integrated, and lanes 191–192 completed their
 read-only contracts.
-The raw Channels source successor and raw Texture/TLUT read-only audit are
-active below as lanes 195–196 after their existing M3 Max project tasks
-accepted the exact current-tip contracts. Lane 197 is also active with an
-independent current-tip focused verification matrix.
+The raw Channels source successor remains active below as lane 195. Lane 196
+completed its read-only raw Texture/TLUT ownership audit and froze the private
+pointer-free shadow plus synchronous lease boundary. Lane 197 remains active
+with an independent current-tip focused verification matrix.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -864,7 +864,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   native and combined ASan/UBSan serial verification can prove only the CPU raw
   Channels contract. Success releases `pc_gx` for the raw Lighting lane and
   supplies the Channels dependency to the cumulative producer.
-- Lane 196 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active M3 Max
+- Lane 196 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — complete M3 Max
   read-only raw Texture/TLUT ownership audit at exact
   canonical PC `23c26e520a` and decomp `09ca8e8b`. It may reuse protected
   clean worktree `/private/tmp/acgc-lane-cumulative-producer-preflight`, import
@@ -877,7 +877,11 @@ also integrated. Remote workers may not update the umbrella checkout.
   and non-overlap with lane 195. It owns no source, branch, build, test, docs,
   full link, LLDB, resource-byte/ISO/asset access, Apple/Metal execution,
   pixel, device, or playability action. Success unblocks one bounded raw
-  Texture/TLUT source lane after ownership review.
+  Texture/TLUT source lane after lane 195 releases shared `pc_gx` ownership.
+  The audit froze a private pointer-free eight-map/sixteen-TLUT shadow, stable
+  image/TLUT IDs, owner-epoch and generation rules, tiled-size derivation, and
+  an all-or-nothing synchronous lease at `pc_gx_flush_vertices`. Evidence is
+  `docs/evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md`.
 - Lane 197 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active M3
   Max verification-only lane at exact canonical PC
   `23c26e520a` and decomp `09ca8e8b`. It may reuse protected clean worktree
@@ -907,7 +911,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194 are complete. Lanes 195–197 are active. Their
+191–192, 194, and 196 are complete. Lanes 195 and 197 are active. Their
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
