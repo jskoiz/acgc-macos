@@ -125,8 +125,8 @@ Texgen/SU, TEV, Blend, Fog, and Indirect still lack truthful leaf inputs, and
 there is no atomic all-section assembler/publication boundary. Lane 232
 completed the initial Texgen/SU leaf as clean worker `a14aef4179`. Lane 233's
 immutable review returned `BLOCK` on one matrix-provenance/mask invariant.
-Lane 232 is registered setup-pending to repair only that same-lane finding; no
-production worker is counted active until the resumed task is confirmed.
+Lane 233 is archived, and lane 232 is the sole active production worker,
+resumed on the same branch to repair only that exact finding.
 
 ## Remote M3 Max batch (current)
 
@@ -1699,7 +1699,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   Windows sign-off, ISO/assets, or playability work and must return the exact
   remaining blockers and safe integration order.
 - Lane 232 / reused project-owned M3 source task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — repair setup-pending Texgen/SU
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active bounded Texgen/SU repair
   raw-to-canonical leaf-producer lane at exact canonical PC `0f896395c` and
   decomp `09ca8e8b`. It must use verified source-only bundle
   `/private/tmp/acgc-canonical-pc-0f89639.bundle` (SHA-256
@@ -1733,8 +1733,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   fixture, rerun the focused gates, commit one child, and stop. The source,
   branch, and generated roots remain protected; nothing is integrated.
 - Lane 233 / reused project-owned M3 review task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/root-reviewed and
-  archive-pending immutable read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/root-reviewed/archived
+  immutable read-only
   review of lane 232 worker `a14aef4179` against base `0f896395c`. It must use
   the preserved worker source and create only detached review source
   `/private/tmp/acgc-lane-233-texgen-producer-review`; verify exact ancestry,
