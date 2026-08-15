@@ -144,8 +144,12 @@ passing natively and under combined ASan/UBSan. Lane 235's final immutable
 re-review returned `PASS`. Root imported the verified final bundle, applied all
 three commits one at a time, and integrated canonical PC `62c810e5b`; fresh
 exact-tip native and combined ASan/UBSan focused CTest pass `2/2` each. Both
-tasks are complete/integrated/archived and no production worker is active. No
-full link, LLDB, launch, or device work is active.
+tasks are complete/integrated/archived. Lanes 236 and 237 are now the only
+active workers: two disjoint remote M3 Max source lanes for the canonical TEV
+and Indirect leaf producers. Lane 236 alone owns `pc/CMakeLists.txt`; lane 237
+must use a source-direct focused harness until root registration after the
+ownership boundary releases. No full link, LLDB, launch, or device work is
+active.
 
 ## Remote M3 Max batch (current)
 
@@ -1873,6 +1877,49 @@ also integrated. Remote workers may not update the umbrella checkout.
   production object compile. No full link, LLDB,
   runtime, Metal, device/pixel,
   Windows sign-off, or playability claim follows.
+- Lane 236 / reused project-owned M3 Max task
+  `01a00640-960d-7d41-9320-721f26037d8a` — active/registered source-edit lane
+  for the canonical TEV leaf producer. Setup verified source-only bundle
+  `/private/tmp/acgc-canonical-pc-62c810e.bundle` at SHA-256
+  `7e8c25348f11fdb124e8c5ad75d78b0b4de1d139cd37e435ac535f303e2617e5`,
+  exact PC base `62c810e5b`, and clean decomp `09ca8e8b`. Its clean isolated
+  source is `/private/tmp/acgc-lane-canonical-tev-producer-m3` on
+  `c1/lane-canonical-tev-producer-m3` at the exact base; future roots are
+  `/private/tmp/acgc-lane-canonical-tev-producer-{native,asan,win}`. It owns
+  only new `pc/include/pc_gx_tev_producer.h`, new
+  `pc/src/pc_gx_tev_producer.c`, new
+  `pc/tests/pc_gx_tev_producer_fixture.c`, and minimal
+  `pc/CMakeLists.txt`. Its PC/decomp crosswalk covers `PCGXRawTevIndirect`,
+  the 2,560-byte canonical TEV ABI, the existing depth/Texgen producer pattern,
+  `GXTev.c`, `GXBump.c`, `GXInit.c`, and the corresponding public headers. The
+  producer must stage locally, require exact active-stage/register/KONST/swap
+  provenance, zero inactive/reserved state, validate canonically, and preserve
+  every destination byte on failure. Focused serial native plus combined
+  ASan/UBSan, producer-object, diff, and bounded syntax evidence is authorized;
+  `pc_gx.c`, raw ownership, Indirect files, cumulative assembly, full link,
+  LLDB, runtime, Apple/Metal, device/pixel, Windows sign-off, assets, and
+  playability are out of scope.
+- Lane 237 / reused project-owned M3 Max task
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active/registered source-edit lane
+  for the canonical Indirect leaf producer. It uses the same verified bundle,
+  exact PC/decomp bases, and has clean isolated source
+  `/private/tmp/acgc-lane-canonical-indirect-producer-m3` on
+  `c1/lane-canonical-indirect-producer-m3` at `62c810e5b`; future roots are
+  `/private/tmp/acgc-lane-canonical-indirect-producer-{native,asan,win}`. It
+  owns only new `pc/include/pc_gx_indirect_producer.h`, new
+  `pc/src/pc_gx_indirect_producer.c`, and new
+  `pc/tests/pc_gx_indirect_producer_fixture.c`; it must not edit CMake while
+  lane 236 is active. Its PC/decomp crosswalk covers the raw order/scale/matrix
+  subset, exact six-coefficient quantization and encoded scale, the 248-byte
+  canonical Indirect ABI, existing producer patterns, `GXBump.c`, `GXTev.c`,
+  `GXInit.c`, and their public headers. The producer must stage locally, derive
+  exact active/matrix masks, copy only complete raw records, zero inactive and
+  reserved state, validate canonically, and preserve every destination byte on
+  failure. Source-direct native plus combined ASan/UBSan, producer-object,
+  diff, and bounded syntax evidence is authorized; TEV-side indirect fields,
+  `pc_gx.c`, raw ownership, CMake, cumulative dependency validation, full link,
+  LLDB, runtime, Apple/Metal, device/pixel, Windows sign-off, assets, and
+  playability are out of scope.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
