@@ -45,8 +45,9 @@ is independently reviewed and integrated, and lanes 191–192 completed their
 read-only contracts.
 The raw Channels source successor remains active below as lane 195. Lane 196
 completed its read-only raw Texture/TLUT ownership audit and froze the private
-pointer-free shadow plus synchronous lease boundary. Lane 197 remains active
-with an independent current-tip focused verification matrix.
+pointer-free shadow plus synchronous lease boundary. Lane 197 completed the
+independent current-tip focused verification matrix with native and combined
+ASan/UBSan `17/17` passes.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -882,7 +883,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   image/TLUT IDs, owner-epoch and generation rules, tiled-size derivation, and
   an all-or-nothing synchronous lease at `pc_gx_flush_vertices`. Evidence is
   `docs/evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md`.
-- Lane 197 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active M3
+- Lane 197 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete M3
   Max verification-only lane at exact canonical PC
   `23c26e520a` and decomp `09ca8e8b`. It may reuse protected clean worktree
   `/private/tmp/acgc-lane-channels-lighting-preflight`, import the verified
@@ -895,7 +896,11 @@ also integrated. Remote workers may not update the umbrella checkout.
   full `ac_pc` link, LLDB, resource byte, ISO/asset, Apple/Metal device,
   pixel, or playability operation is allowed. Success proves only the focused
   integrated CPU baseline and supplies an independent regression check before
-  lanes 195–196 hand off source/architecture results.
+  lane 195 hands off source. Native and combined ASan/UBSan matrices pass
+  `17/17` each with no sanitizer report; C/C++11, ILP32, and bounded Windows
+  header probes pass, while a real i686 Windows build remains toolchain-blocked.
+  Evidence is
+  `docs/evidence/CURRENT-FOCUSED-MATRIX-23C26E520-2026-08-14.md`.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -911,7 +916,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192, 194, and 196 are complete. Lanes 195 and 197 are active. Their
+191–192, 194, and 196–197 are complete. Lane 195 is active. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 

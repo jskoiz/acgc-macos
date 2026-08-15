@@ -281,6 +281,14 @@ owned resources, encoder, MSL, present, and readback gates. See the
 [canonical producer readiness audit](evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md)
 and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
+The exact `23c26e520a` focused baseline passes all twelve neutral validators
+and five setter-owned raw fixtures natively (`17/17`) and under combined
+ASan/UBSan (`17/17`, leak detection disabled). C/C++11 plus bounded ILP32 and
+Windows-header probes pass. A real i686 Windows build remains blocked by the
+absent compiler, sysroot, archive, and link toolchain, so this is not Windows
+sign-off or full-link/runtime/Metal/pixel/playability evidence. See
+[current focused matrix evidence](evidence/CURRENT-FOCUSED-MATRIX-23C26E520-2026-08-14.md).
+
 The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
 with three declared Metal-device skips in each configuration. Bounded Windows
 host probes pass `4` and are blocked at `5` by Apple libc++ locale emulation,

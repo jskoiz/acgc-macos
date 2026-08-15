@@ -257,6 +257,14 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [canonical producer readiness audit](docs/evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md)
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
 
+- The exact `23c26e520a` focused baseline passes all twelve neutral validators
+  and five setter-owned raw fixtures natively (`17/17`) and under combined
+  ASan/UBSan (`17/17`, leak detection disabled). C/C++11 and bounded ILP32 and
+  Windows-header probes pass, while a real i686 Windows build remains blocked
+  by the absent compiler/sysroot/archive/link toolchain. This is CPU evidence,
+  not a full link, Windows sign-off, Metal, pixel, or playability result. See
+  [current focused matrix evidence](docs/evidence/CURRENT-FOCUSED-MATRIX-23C26E520-2026-08-14.md).
+
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three
   skips; bounded Windows host probes pass `4` and are environment/toolchain
