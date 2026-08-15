@@ -118,7 +118,9 @@ lane 228's immutable independent review and is integrated as canonical PC
 `0f896395c`; both tasks are archived. Lane 229 completed its independent
 read-only Blend audit with `BLOCK`: the canonical Blend ABI exists, but no
 setter-owned raw Blend owner/knownness/invalid state or truthful builder does.
-Lanes 230–231 remain active on disjoint Fog and cumulative-producer audits.
+Lane 230 completed its independent read-only Fog audit with `BLOCK`: the PC
+host retains no logical range-adjust state and has no truthful raw Fog owner or
+producer. Lane 231 remains active on cumulative-producer readiness.
 
 ## Remote M3 Max batch (current)
 
@@ -1650,7 +1652,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   edit, branch, build, test, cleanup, link, LLDB, Apple/Metal, device/pixel,
   Windows sign-off, ISO/assets, or playability work.
 - Lane 230 / reused project-owned M3 audit task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active independent read-only
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete/root-reviewed and
+  archive-pending independent read-only
   Fog raw-owner/leaf-producer contract audit at exact canonical PC `0f896395c`
   and decomp `09ca8e8b`, using the same canonical bundle, verified control
   `/private/tmp/acgc-lane-230-fog-readiness.md` (SHA-256
@@ -1659,8 +1662,15 @@ also integrated. Remote workers may not update the umbrella checkout.
   logical fog fields, finite-word domains, range-adjust enable/center and all
   ten table entries, setter ordering/knownness, canonical Fog ABI, and decomp
   `GXSetFog`/`GXSetFogRangeAdj`, then return `READY` or the exact smallest
-  predecessor. It owns no edit, branch, build, test, cleanup, link, LLDB,
-  Apple/Metal, device/pixel, Windows sign-off, ISO/assets, or playability work.
+  predecessor. It returned `BLOCK`: `GXSetFog` retains only host state,
+  `GXInitFogAdjTable` is a no-op, `GXSetFogRangeAdj` discards all logical
+  arguments, and no raw Fog owner/producer exists. The smallest successor owns
+  the raw state/setter hooks, a pure producer, two focused fixtures, and minimal
+  CMake, while preserving explicit range-center and Fog-enum reference
+  differences. Evidence is
+  `docs/evidence/FOG-PRODUCER-READINESS-0F896395C-2026-08-15.md`. It owns no
+  edit, branch, build, test, cleanup, link, LLDB, Apple/Metal, device/pixel,
+  Windows sign-off, ISO/assets, or playability work.
 - Lane 231 / reused project-owned M3 audit task
   `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active independent read-only
   current-tip cumulative-producer readiness reconciliation at exact canonical
