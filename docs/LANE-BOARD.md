@@ -324,14 +324,16 @@ checkout.
   Its exact detached worktree and prompt/events/final artifacts are absent. No
   edit, build, launch, asset access, callback, Metal, pixel, device, or
   playability proof occurred.
-- Lane 163 / task `01a002b5-525f-7862-aa8c-0e0ccecdf5c2` — active read-only
-  M3 Max TEV contract audit. Detached worktree
-  `/private/tmp/acgc-lane-canonical-tev-audit` is exact PC `4dbb71065` with
-  decomp oracle `09ca8e8b`. It owns the strict `0x0020` stage/register/konst/
-  swap/reference ABI decision, stage capacity, inactive-record rules, signed
-  S10 provenance gap, and non-overlapping future ownership. It may not edit,
-  branch, build, launch, access assets, or claim a live snapshot, callback,
-  Metal, pixel, device, or playability proof.
+- Lane 163 / task `01a002b5-525f-7862-aa8c-0e0ccecdf5c2` — complete and
+  cleanup-pending, read-only at exact PC `4dbb71065` and decomp `09ca8e8b`.
+  It freezes `0x0020` as a version-1, 2560-byte, full 16-stage TEV section with
+  exact stage/register/KONST/swap/reference rules, independent of the current
+  3-stage shader and 2-stage legacy packet caps. It proves current normalized
+  PC floats cannot supply exact signed S10 provenance and selects a narrow raw
+  setter-shadow successor. Evidence is
+  `docs/evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md`. No edit,
+  build, launch, asset access, callback, Metal, pixel, device, or playability
+  proof occurred.
 - Lane 164 / task `01a002be-b284-7492-95f3-c3ad066a2906` — active read-only
   M3 Max Transforms/Texgens provenance audit. Detached worktree
   `/private/tmp/acgc-lane-canonical-transform-texgen-audit` is exact PC

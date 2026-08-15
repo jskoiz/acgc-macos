@@ -127,6 +127,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   shadowed. See
   [canonical Alpha/update contract](docs/evidence/CANONICAL-ALPHA-UPDATE-CONTRACT-4DBB71065-2026-08-14.md).
 
+- The TEV audit freezes `0x0020` as a full 16-stage, 2560-byte value contract,
+  independent of the current 3-stage shader and 2-stage legacy packet caps.
+  Exact signed S10 register values cannot be recovered from the PC port's
+  normalized floats, so the live producer remains fail-closed pending a narrow
+  setter-owned raw-shadow change. See
+  [canonical TEV contract](docs/evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
+
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three
   skips; bounded Windows host probes pass `4` and are environment/toolchain

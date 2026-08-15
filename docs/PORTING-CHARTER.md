@@ -153,6 +153,12 @@ contract for alpha comparisons/references/operator, color/alpha update, and
 implementation does not yet establish complete live producer provenance. See
 [canonical Alpha/update contract](evidence/CANONICAL-ALPHA-UPDATE-CONTRACT-4DBB71065-2026-08-14.md).
 
+The TEV audit selects a full 16-stage, 2560-byte `0x0020` value contract rather
+than inheriting the PC shader cap of 3 or legacy packet cap of 2. Current PC
+setters discard exact signed S10 provenance into normalized floats, so the live
+producer remains fail-closed until a narrow setter-owned raw-shadow change is
+proved. See [canonical TEV contract](evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
+
 The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
 with three declared Metal-device skips in each configuration. Bounded Windows
 host probes pass `4` and are blocked at `5` by Apple libc++ locale emulation,
