@@ -349,15 +349,17 @@ checkout.
   Its exact detached worktree and prompt/events/final artifacts are absent. No
   edit, build, launch, asset access, callback, Metal, pixel, device, or
   playability proof occurred.
-- Lane 165 / task `01a002c2-ce08-7193-ba94-d50aac6913d9` — complete and
-  integrated, cleanup pending. Remote branch `c1/lane-canonical-alpha-m3`
+- Lane 165 / task `01a002c2-ce08-7193-ba94-d50aac6913d9` — complete,
+  integrated, archived, and cleaned. Remote branch `c1/lane-canonical-alpha-m3`
   advanced exact PC `216d1e24b` to worker `acd12449a`; the integration owner
   cherry-picked its exact four-file change as canonical PC `f2b7ab153`. It
   adds the audited version-1 32-byte eight-word Alpha/update ABI, strict value
   and exact metadata validators, inactive-reference preservation, and a
   portable fixture. Remote native/ASan focused tests pass `1/1`; exact
   integrated native and combined ASan/UBSan canonical-state tests pass `4/4`.
-  The worker branch and commits remain preserved. Evidence is
+  Its remote worktree, focused roots, prompt/events/final artifacts, transfer
+  bundle, and exact local integration roots are absent; the worker branch and
+  commits remain preserved. Evidence is
   `docs/evidence/CANONICAL-ALPHA-STATE-F2B7AB153-2026-08-14.md`. No live
   producer, callback, Metal, pixel, device, or playability claim follows;
   `GXSetZCompLoc` remains a separate PC shadow-state gap.
