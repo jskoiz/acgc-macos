@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `251a010b8`, with
-the portable 888-byte Transform ABI, setter-owned raw Transform and Depth
+As of 2026-08-14, the canonical local PC branch is clean at `910c7f6f52`, with
+the strict canonical Geometry ABI on top of the portable 888-byte Transform
+ABI and setter-owned raw Transform and Depth
 provenance, the portable 16-byte Depth ABI,
 setter-owned raw TEV/KONST provenance, and the canonical 32-byte Alpha/update
 and 16-byte Blend/logic sections on top of the strict GX envelope
@@ -205,9 +206,12 @@ payload with writable ordinary selector `60` and post selector `125`, explicit
 per-word knownness, and raw manual-SU state. The corrected Geometry contract
 freezes section `0x0001` with a `0x6B0` fixed prefix, 26 exact descriptors, a
 section-relative stream, and a `0x10000` inclusive size cap. The neutral
-Geometry ABI and raw Texgen/SU provenance are active, non-overlapping M3 Max
-lanes. See the [Texgen/SU contract](evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md)
-and [Geometry contract](evidence/CANONICAL-GEOMETRY-CONTRACT-6D1D310C0-2026-08-14.md).
+Geometry worker chain is independently reviewed and integrated as
+`910c7f6f52`; exact integrated native and combined ASan/UBSan canonical
+matrices pass `8/8` each. Raw Texgen/SU remains held for a legacy dirty-state
+repair. See the [Texgen/SU contract](evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md),
+[Geometry contract](evidence/CANONICAL-GEOMETRY-CONTRACT-6D1D310C0-2026-08-14.md),
+and [Geometry implementation](evidence/CANONICAL-GEOMETRY-STATE-910C7F6F5-2026-08-14.md).
 
 The Depth/Raster audit freezes `0x0200` as a 16-byte Z-mode section and
 `0x0400` as a 128-byte logical viewport/scissor/raster section. It identifies

@@ -36,16 +36,16 @@ Graph capture (16) and integrated verification (22) are complete/parked. The
 post-fix game-frame request is superseded by the root-owned integrated run;
 the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
-Expensive full links and LLDB launch traces remain serialized. All other
-ACGC tasks are parked or archived;
-their reviewed commits and evidence remain available in Git and the evidence
-docs.
+Expensive full links and LLDB launch traces remain serialized. Lane 173 is the
+sole active production repair; all other worker tasks are parked, stopped, or
+archived. Their reviewed commits and evidence remain available in Git and the
+evidence docs.
 
 ## Remote M3 Max batch (current)
 
 The M3 Max Screen Sharing/SSH connection is online and the source-only remote
 checkout is being used for focused lanes; the latest integrated local PC tip is
-`251a010b8` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`910c7f6f52` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -82,17 +82,22 @@ commits for raw Texgen/SU provenance (`2e3c95dae`) and the neutral Geometry ABI
 (`2b394943a`), but independent review found contract blockers in both. Repair
 commits `2df84f628` and `56ede5f1f` returned, but independent cross-review found
 one observer blocker in Texgen/SU and two selector/padding blockers in Geometry.
-Both owning M3 Max repair turns are active and neither result is in the
-canonical PC branch. Lanes 177–178 completed the read-only cumulative-producer
-and Apple canonical-plan preflights. Lane 179 completed the exact current-tip
+Final Geometry repair `8652e233d` passed independent review and is integrated
+as canonical PC `910c7f6f52`; exact native and ASan/UBSan canonical matrices
+pass `8/8`. Texgen repair `731b7ee41` fixed the intercepting observer, but root
+and independent review found a separate legacy dirty-state regression and
+returned it to the existing owner for one child repair. Lanes 177–178
+completed the read-only cumulative-producer and Apple canonical-plan
+preflights. Lane 179 completed the exact current-tip
 native/sanitizer/Windows focused matrix. Lanes 180–181 completed the read-only
 Channels/Lighting and Raster implementation preflights. Lane 182 completed,
 was archived, and had its exact holder-free roots retired after the current-tip
 M3 Max synthetic Metal-device fixture gate. No full link or LLDB run is active.
 Lane 183 completed the state-before-geometry temporal-order contract and its
-Raster ownership correction. Lane 184 is the active read-only Indirect contract
-audit; lanes 173–174 are the two active source-repair turns. Remote workers may
-not update the umbrella checkout.
+Raster ownership correction. Lane 184 stopped after a bounded partial Indirect
+crosswalk rather than duplicating work while project handoff is unresolved;
+lane 173 is the sole active source-repair turn. Remote workers may not update
+the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -480,11 +485,15 @@ not update the umbrella checkout.
   mutation ordering, BUMP-source resolution, and invalid-setter compatibility
   mirror preservation. Repair commit `2df84f628` reports native and combined
   ASan/UBSan `4/4` each, but its return-capable audit observer could suppress
-  the real flush path. The active repair must make the seam fixture-only and
-  non-intercepting, then prove the batch drains. All worker commits remain
+  the real flush path. Commit `731b7ee41` makes the seam fixture-only and
+  non-intercepting and proves the batch drains, but root and independent
+  review found that raw capture updates legacy normalize/post-matrix mirrors
+  before the equality/dirty check. A valid normalize-only or post-matrix-only
+  change can therefore skip `PC_GX_DIRTY_TEXGEN`. The existing owner is active
+  on one child repair and focused regression; all worker commits remain
   preserved and non-integrated.
-- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active second
-  source-repair turn after independent cross-review blocked integration. The M3
+- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — complete,
+  independently reviewed, and integrated. The M3
   Max neutral Geometry ABI source/test successor runs in
   `/private/tmp/acgc-lane-canonical-geometry`, branch
   `c1/lane-canonical-geometry-m3`, advancing exact PC `251a010b8` to clean
@@ -498,14 +507,17 @@ not update the umbrella checkout.
   proprietary inputs are out of scope. Native and ASan roots are
   `/private/tmp/acgc-lane-canonical-geometry-{native,asan}`. No full link,
   LLDB, callback, Metal, pixel, device, Windows-runtime, iOS, or playability
-  claim follows. A separate repair commit must restore the frozen 48-byte
+  claim follows. A separate repair commit restored the frozen 48-byte
   header, canonical primitive/color/index ordering, exact integer and VAT
   validation, color canonicality, and bounded stream extent. Repair commit
-  `56ede5f1f` reports native and combined ASan/UBSan `8/8` each, but it accepts
-  post selector `125` as a Geometry fallback and rejects contract-valid zero
-  final padding. The active repair must restrict fallback selectors to the
-  ordinary domain and validate/accept only zero final padding. All worker
-  commits remain preserved and non-integrated.
+  `56ede5f1f` was followed by `8652e233d`, which restricts fallback selectors
+  to the ordinary domain and validates/accepts only zero final padding. Root
+  integrated the chain as `7623f6c77d`, `cd30badb4d`, and canonical
+  `910c7f6f52`. Exact integrated native and combined ASan/UBSan canonical
+  matrices pass `8/8`; evidence is
+  `docs/evidence/CANONICAL-GEOMETRY-STATE-910C7F6F5-2026-08-14.md`. This proves
+  only the CPU Geometry ABI/validator, not a producer, runtime, Metal pixel,
+  frame, device, or playability gate.
 - Lane 175 / task `01a00358-efb4-7d51-b5b7-7fe5801e059a` — complete,
   independently reviewed, and integrated. M3 Max branch
   `c1/lane-canonical-transform-m3` advanced `59714a1fd` to worker
@@ -601,28 +613,34 @@ not update the umbrella checkout.
   mutation-before-flush defect; viewport/scissor, Indirect, and resource
   generation remain separate future owners. Evidence is
   `docs/evidence/CANONICAL-SETTER-ORDER-251A010B8-2026-08-14.md`.
-- Lane 184 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
-  read-only M3 Max canonical Indirect contract audit at exact PC `251a010b8`
+- Lane 184 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — stopped and
+  archived after a partial read-only M3 Max canonical Indirect crosswalk at
+  exact PC `251a010b8`
   and decomp `09ca8e8b`. It owns no source, branch, build, launch, device,
   asset, Metal, pixel, or playability operation. It freezes the fixed-width
   Indirect layout, matrix/stage/TEV records, enum and bitfield domains,
   knownness, direct-versus-indirect texture-map exclusion, and cross-section
   references. Success unblocks a later neutral ABI lane only after the
-  Texture/Dynamic contracts are frozen.
+  Texture/Dynamic contracts are frozen. The partial result confirms section
+  ID `13`/mask `0x1000`, four stages, three physical matrix slots, sixteen TEV
+  records, and missing flush-before-mutation in the current PC setters. A
+  project-owned restart was not opened because native handoff still returns
+  `No matching saved project was found on M3 Max`; no source/build/runtime
+  result or downstream claim follows.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
-transferred. Lanes 170, 172, 175, and 176 are individually reviewed and
-integrated. Lanes 173–174 have preserved first and repair commits with active
-second repair turns; their production and CMake ownership does not overlap.
+transferred. Lanes 170, 172, 174, 175, and 176 are individually reviewed and
+integrated. Lane 173 retains non-overlapping source ownership for its final
+dirty-state repair; lane 184 is stopped rather than duplicated while the M3
+saved-project handoff registry is unresolved.
 Lanes 177–178 completed read-only without source ownership, lane 179 completed
 verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
-LLDB launches remain serialized and are not active. Lane 184 is the active
-read-only audit alongside the two non-overlapping lane 173–174 source repairs;
-lane 183 is complete.
+LLDB launches remain serialized and are not active. Lane 173 is the only
+active remote production repair; lane 183 is complete and lane 184 is stopped.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the

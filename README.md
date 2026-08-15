@@ -34,8 +34,10 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `251a010b8` (`Preserve typed GX depth setter ABI`),
-on top of `eeec2301c1` (`Track PC raw GX depth provenance`), `c3e158398`
+`c1/macos-host-launch` at `910c7f6f52` (`Reject post Texgen fallbacks and
+zero-check padding`), completing the reviewed canonical Geometry chain on top
+of `251a010b8` (`Preserve typed GX depth setter ABI`), `eeec2301c1` (`Track PC
+raw GX depth provenance`), and `c3e158398`
 (`Add canonical Transform ABI validator`), `59714a1fd` (`Repair indexed
 Transform shadow slots`), `4c3aeac40` (`Add PC raw Transform shadow`), `c736f9686`
 (`Add canonical GX Depth ABI validator`), `6d1d310c0` (`Add canonical GX TEV
@@ -185,10 +187,14 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   identity slots, per-word knownness, and raw manual-SU semantics. The
   corrected Geometry contract freezes section `0x0001` with a `0x6B0` fixed
   prefix, 26 exact descriptors, a section-relative bounded stream, and a
-  `0x10000` inclusive size cap. The neutral Geometry ABI and raw Texgen/SU
-  provenance are now isolated active M3 Max lanes. See the
-  [Texgen/SU contract](docs/evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md)
-  and [Geometry contract](docs/evidence/CANONICAL-GEOMETRY-CONTRACT-6D1D310C0-2026-08-14.md).
+  `0x10000` inclusive size cap. The neutral Geometry worker chain is now
+  independently reviewed and integrated as `910c7f6f52`; exact integrated
+  native and combined ASan/UBSan canonical matrices pass `8/8` each. Raw
+  Texgen/SU remains held for a legacy dirty-state repair before integration.
+  See the
+  [Texgen/SU contract](docs/evidence/CANONICAL-TEXGEN-CONTRACT-6D1D310C0-2026-08-14.md),
+  [Geometry contract](docs/evidence/CANONICAL-GEOMETRY-CONTRACT-6D1D310C0-2026-08-14.md),
+  and [Geometry implementation](docs/evidence/CANONICAL-GEOMETRY-STATE-910C7F6F5-2026-08-14.md).
 
 - The read-only Depth/Raster audit freezes `0x0200` as a 16-byte logical
   Z-mode section and `0x0400` as a 128-byte viewport/scissor/raster section.
