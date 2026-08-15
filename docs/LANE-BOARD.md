@@ -136,9 +136,12 @@ lane 234 candidate `34da318d4` with `BLOCK`: invalid current-call TEV/Indirect
 inputs can mark the raw owner invalid yet still mutate legacy host mirrors, and
 the fixture does not cover those invalid domains. Lane 234 returned clean
 two-file repaired child `638f91fa2` plus a refreshed verified source-only
-bundle and is on root-review hold. Lane 235 is the sole active worker, resumed
-for an immutable independent re-review of that exact child. Nothing from the
-pair is integrated. No full link, LLDB, launch, or device work is active.
+bundle. Lane 235's immutable re-review returned `BLOCK` because the existing
+legacy raw-TEV fixture still expects malformed S10 input to mutate a legacy
+shadow that the production repair now correctly leaves unchanged. Lane 234 is
+the sole active worker, resumed for an exact one-file legacy-fixture correction
+without production-source changes. Nothing from the pair is integrated. No
+full link, LLDB, launch, or device work is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1779,8 +1782,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   and both-upstream semantics without editing, building, testing, or cleaning.
   The task is archived after the reviewed integration.
 - Lane 234 / remote M3 Max task
-  `01a00640-960d-7d41-9320-721f26037d8a` — complete source-edit candidate on
-  root-review hold after repair of the
+  `01a00640-960d-7d41-9320-721f26037d8a` — active one-file test repair after
+  production repair of the
   setter-owned raw TEV/Indirect provenance lane after lane 235's independent
   `BLOCK`. It uses verified complete-
   history source-only bundle `/private/tmp/acgc-canonical-pc-c832fb8.bundle`
@@ -1822,13 +1825,19 @@ also integrated. Remote workers may not update the umbrella checkout.
   a later valid call must retain legacy-PC behavior even after sticky raw
   invalidity. The child adds invalid-domain and legacy-immutability regressions;
   focused native plus combined ASan/UBSan fixtures pass, the production object
-  compiles, and `git diff --check` passes. Lane 235 must independently confirm
-  the exact blocker is closed before root can integrate either source commit.
+  compiles, and `git diff --check` passes. Lane 235 confirmed the production
+  repair but found the older legacy raw-TEV fixture still asserts the forbidden
+  malformed legacy write. The final repair owns only
+  `pc/tests/pc_gx_tev_raw_shadow_fixture.c`: it must assert unchanged legacy
+  mirrors, inspect malformed provenance in the new raw owner, preserve the
+  later-valid-after-sticky behavior, rerun both focused fixtures natively and
+  under combined ASan/UBSan, and return a clean child plus a distinct bundle.
   This is CPU/source evidence only; there is no canonical leaf, callback,
   Metal, pixel, Windows, or playability claim.
 - Lane 235 / remote M3 Max task
-  `01a00669-46ec-7c50-959c-50dafe702923` — active immutable independent
-  read-only re-review of repaired child `638f91fa2`. Its initial review of lane
+  `01a00669-46ec-7c50-959c-50dafe702923` — complete immutable independent
+  read-only re-review of repaired child `638f91fa2`, currently retained for one
+  final re-review. Its initial review of lane
   234 candidate `34da318d4` confirmed exact provenance and bundle hash. It
   returned `BLOCK`: raw validators mark sticky invalidity,
   but multiple enclosing TEV/Indirect setters continue into legacy dirty/mirror
@@ -1839,8 +1848,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   failure. Unique review roots are
   `/private/tmp/acgc-lane-235-raw-tev-review-{native,asan}`. The re-review uses
   new roots `/private/tmp/acgc-lane-235-repair-review-{native,asan}` and the
-  refreshed repair bundle/hash above. It owns no source or integration and
-  must return `PASS` or one exact material blocker. No full link, LLDB,
+  refreshed repair bundle/hash above. The new focused fixture passes natively
+  and under combined ASan/UBSan, but the legacy fixture fails at
+  `pc_gx_tev_raw_shadow_fixture.c:262` because it still expects malformed S10
+  input to update the legacy shadow. The smallest safe repair is test-only; do
+  not restore the old source mutation. This task owns no source or integration.
+  No full link, LLDB,
   runtime, Metal, device/pixel,
   Windows sign-off, or playability claim follows.
 
