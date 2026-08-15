@@ -5,6 +5,516 @@ recording the evidence and cross-repository plan for a modern Apple port.
 Current work targets macOS first; iOS begins only after the shared 64-bit core
 and Apple renderer have their own evidence.
 
+> **Project status — paused on 2026-08-15.** Development, remote worker lanes,
+> verification, integration, cleanup, full links, and debugger launches are
+> paused at the user's request. The repository is being published as a public
+> engineering record and roadmap. It is **not** a playable release, does not
+> contain game data, and does not grant rights to Nintendo assets.
+
+## Roadmap at a glance
+
+The goal is an evidence-backed, portable reconstruction that runs on modern
+macOS first and iOS second. The short version of the remaining critical path is:
+
+1. finish independent review of the completed TEV and Indirect leaf producers;
+2. integrate those reviewed leaves one at a time;
+3. finish the cumulative snapshot/Apple CPU-boundary audit;
+4. add any remaining truthful raw owners and canonical producers;
+5. assemble one immutable, all-or-nothing renderer-neutral GX snapshot;
+6. carry that snapshot through the Apple CPU consumer into a live game callback;
+7. prove a game-owned Metal encode, present, readback, and identifiable pixel;
+8. separately prove physical input, audible audio, save/reload, lifecycle, and
+   regression gates;
+9. call the macOS build playable only after human acceptance of an actual game
+   session; and
+10. reuse the proven shared layer for iOS simulator and physical-device work.
+
+The current effort is much further along than a greenfield port: revision
+compatibility, arm64 launch, major LP64 faults, raw GX state ownership, most
+portable section ABIs, focused sanitizer fixtures, host adapters, and several
+runtime boundaries are already evidenced. The project is not yet at the
+renderer handoff that can truthfully claim a Metal-rendered game frame.
+
+### Paused source snapshot
+
+| Item | Paused state |
+| --- | --- |
+| Umbrella branch | `main`, mirrored locally by `c1/apple-port-bootstrap` |
+| Canonical PC-port branch | `c1/macos-host-launch` |
+| Canonical PC-port commit | `62c810e5b6ee7710b2904ef4733ef95a6909fe1f` |
+| Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
+| Supported revision | `GAFE01_00`, USA revision 0 |
+| Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
+| Current execution state | Paused; no build, link, LLDB, runtime, cleanup, or worker lane is running |
+| Current proof level | CPU/source contracts and earlier launch/GX evidence; no current-tip Metal pixel or playability proof |
+
+The disc hash is recorded only to identify the supported local input. The disc,
+extracted files, keys, and proprietary assets are ignored and are never part of
+this repository or its source-only handoff bundles.
+
+### Gate scoreboard
+
+Every row is an independent gate. A later row is not implied by an earlier one.
+
+| Gate | Status | Evidence boundary |
+| --- | --- | --- |
+| Source/revision compatibility | **Done** | Both upstreams identify `GAFE01_00`; config/build hashes agree for the supported revision. |
+| Local-disc identity and ignore rules | **Done** | Exact SHA-256 verified locally; no disc bytes or extracted proprietary assets are tracked. |
+| Portable focused build/tests | **Done, continuing** | Large native and ASan/UBSan matrices pass on integrated snapshots; each new lane still needs exact-tip reruns. |
+| arm64 `ac_pc` full link | **Proven on earlier tips** | Multiple 4,000+ object arm64 links succeeded. The paused `62c810e5b` tip has not yet received a fresh serialized full-link proof. |
+| Process launch and boot progression | **Proven on earlier tips** | Real inferiors reached graph processing, logo/NEOS work, GX entry points, and bounded shutdown paths. |
+| LP64 loader/audio/pointer safety | **Substantially done** | DVD aligned reads, high-address audio DMA, texture handles, and allocator-owned field pointers have focused/runtime evidence. |
+| Graph/display-list capture | **Partial** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; a cumulative renderer-neutral frame snapshot is still absent. |
+| Renderer-neutral section ABIs | **Mostly done** | Fourteen-section envelope and most strict value ABIs exist; some truthful raw owners/producers and cumulative wiring remain open. |
+| Live canonical snapshot publication | **Not done** | No all-or-nothing assembler atomically validates every section and resource lease before callback publication. |
+| Apple typed CPU consumer | **Partial** | CPU contracts and sink fixtures exist; the cumulative canonical plan is not live-wired. |
+| Game-owned Metal encode | **Not proven** | Device tests are gated/skipped where no Metal device is available; no live game callback has reached the canonical Metal encoder. |
+| Metal present/readback/pixel | **Not proven** | No current game-owned drawable presentation and readback identifying a real game pixel. |
+| Input | **Fixture-level partial** | Keyboard/controller snapshot and trigger/frame-guard behavior are tested; physical-controller game-session proof remains open. |
+| Audio | **Fixture-level partial** | Software mixer, NEOS/RSP, DAC/callback, and high-address DMA pass; audible reconstructed game audio is not proven. |
+| Save/reload | **Fixture-level partial** | `Save_t`/GCI codec, checksum, corruption, atomic path, restart, and production orchestration seams pass; live-game restart persistence is open. |
+| Lifecycle/shutdown | **Partial** | A major game cleanup invalid free was fixed and bounded TERM can exit cleanly; normal end-to-end host teardown still needs current-tip proof. |
+| Windows regression | **Host-probe partial** | Shared syntax/ILP32 probes pass where supported; a real i686 MinGW/sysroot/PE/runtime matrix is unavailable and is not signed off. |
+| macOS playability | **Not claimed** | Compilation, boot, logo output, GX hits, and an older identifiable frame do not equal a playable session. |
+| iOS simulator/device | **Gated** | Shared-source audits pass, but implementation waits for the macOS shared core and Metal frame path. |
+
+## What has been completed
+
+### 1. Workspace, legality, revision, and reproducibility
+
+- [x] Kept `ACGC-PC-Port` and `ac-decomp` as separate Git submodule histories.
+- [x] Identified the supported game as USA revision 0, `GAFE01_00`.
+- [x] Verified the legally obtained local disc by SHA-256 without copying its
+  contents into tracked paths.
+- [x] Added ignore rules and scripts that fail closed when local input is
+  absent or has the wrong revision.
+- [x] Recorded upstream licenses, source provenance, compiler/toolchain
+  assumptions, and exact build blockers.
+- [x] Reproduced `ac-decomp` configuration with `python3`; its bounded build
+  correctly stops at the first unavailable extracted file rather than masking
+  the missing local asset-preparation step.
+- [x] Established an evidence-gated charter: compile, link, launch, callback,
+  encode, present, readback, input, audio, save, simulator, device, and human
+  playability are different milestones.
+- [x] Established remote M3 Max source/test/audit lanes using tracked-source
+  Git bundles only. The ISO and extracted assets never travel to the remote
+  host or cloud storage.
+
+### 2. Native macOS host and runtime stability
+
+- [x] Reproduced full arm64 `ac_pc` links on modern macOS.
+- [x] Built host launch supervision with bounded termination evidence and
+  separate TERM/KILL outcomes.
+- [x] Reached real game boot work including graph processing, logo progression,
+  NEOS output, GX entry points, and host flush boundaries.
+- [x] Corrected DVD aligned-read semantics needed by the game loader.
+- [x] Preserved high 64-bit audio DMA addresses instead of truncating through
+  32-bit host storage.
+- [x] Preserved opaque texture/display-list host pointers above 4 GiB through
+  explicit sidecar/handle contracts.
+- [x] Fixed LP64 field display-list allocation/cleanup by retaining the actual
+  allocator-owned pointer rather than a narrowed/aligned surrogate.
+- [x] Converted the reproduced shutdown invalid free into focused native and
+  sanitizer fixtures and demonstrated a bounded clean return after the fix.
+- [x] Isolated Application Support, cache, log, temporary, and save-path roles
+  for sandboxed macOS hosts.
+- [x] Added atomic-save failure injection and lifecycle-focused host fixtures.
+
+### 3. Graph, GX, and renderer-neutral capture
+
+- [x] Traced game-owned graph tasks into `emu64_taskstart`, `GXBegin`, triangle
+  traversal, `pc_gx_flush_vertices`, and graph submission boundaries.
+- [x] Captured root and continuation display-list targets without leaking raw
+  host pointers into evidence.
+- [x] Distinguished incomplete prefixes, indirect lists, malformed lists,
+  oversized lists, unterminated lists, and exact `G_ENDDL` completion.
+- [x] Added fail-closed graph target resolution for the live opaque-handle
+  model, including stale-handle rejection.
+- [x] Captured direct task completion for known no-draw lists, avoiding false
+  frame claims from command-list completion alone.
+- [x] Added renderer-neutral semantic packet versions and rejected unsupported
+  live state rather than silently fabricating it.
+- [x] Added bounded rejection diagnostics that explain why a packet did not
+  reach the Apple callback while redacting addresses.
+- [x] Preserved legacy Windows/OpenGL behavior while building the separate
+  canonical path.
+
+### 4. Canonical GX data model
+
+The project now has a strict 14-slot, pointer-free envelope with fixed section
+IDs, masks, alignment, metadata validation, and explicit absence semantics.
+The table separates an ABI from the raw source of truth and from a live-wired
+producer; those are different accomplishments.
+
+| Section | Portable ABI | Setter-owned/raw source | Canonical producer | Live cumulative wiring |
+| --- | --- | --- | --- | --- |
+| Geometry | Done | Done | Done | Missing |
+| Transform | Done | Done | Done | Missing |
+| Channels | Done | Done | Done | Missing |
+| Texgen/SU | Done | Done | Done | Missing |
+| Texture | Done | Done, with resource generations | Done with Dynamic/lease snapshot | Only an older optional callback seam |
+| TEV | Done, full 16-stage contract | Done for stages/registers/KONST/swaps/indirect-per-stage state | Candidate `043d24822`, review paused, not integrated | Missing |
+| Lighting | Done | Done | Done | Missing |
+| Blend | Done | **Missing truthful raw owner** | Missing | Missing |
+| Alpha/update/ZCompLoc | Done | Done | Done and production-linked | Missing cumulative call |
+| Depth | Done | Done | Done | Missing |
+| Raster | Done | Done | Done | Missing |
+| Fog | Done | **Missing truthful complete raw owner** | Missing | Missing |
+| Indirect | Done | Done for count/orders/scales/matrices | Candidate `2f6ba5dff`, review paused, not integrated | Missing |
+| Dynamic resources | Done | Done with map/TLUT epochs and generations | Done with Texture snapshot | Missing cumulative transaction |
+
+Completed canonical/raw work includes:
+
+- [x] strict fixed-width ABIs, layout assertions, validators, and metadata
+  validators for the common envelope and all named sections;
+- [x] immutable raw Geometry batches with typed indexed host mirroring,
+  source-width preservation, packed-color semantics, and RGBX8 ignored-byte
+  handling;
+- [x] raw and canonical Transform matrices/projection with unresolved indexed
+  operations represented explicitly rather than guessed;
+- [x] raw Channels and Lighting with persistent inactive state, exact
+  knownness, and fail-closed indexed loads;
+- [x] raw Texgen/SU plus a repaired canonical leaf that preserves matrix
+  attempted-range invariants;
+- [x] raw Texture/TLUT ownership, generation/epoch tracking, canonical
+  Texture/Dynamic snapshots, and synchronous borrowed-resource leases;
+- [x] raw Alpha/update/ZCompLoc, Depth, and Raster state with
+  flush-before-mutation ordering;
+- [x] raw TEV/Indirect ownership covering all 16 stages, PREV/REG/KONST,
+  swaps, per-stage indirect tuples, count/order/scale/matrix provenance, exact
+  matrix quantization, and sticky invalidity;
+- [x] canonical Geometry, Transform, Channels, Texgen/SU, Texture/Dynamic,
+  Lighting, Alpha, Depth, and Raster leaf producers with focused native and
+  sanitizer evidence; and
+- [x] cross-section dependency validators that make missing state an explicit
+  failure instead of a renderer default.
+
+### 5. Apple renderer groundwork
+
+- [x] Defined versioned Apple packet-consumer status contracts that distinguish
+  accepted base state from unsupported extension state.
+- [x] Added an Apple runtime registration boundary and offscreen Metal sink
+  implementation without making it a live-frame claim.
+- [x] Added CPU fixtures for state, geometry, texture, TLUT, and TEV planning.
+- [x] Added offline Metal shader compilation checks and fixed reserved MSL
+  identifiers found by those checks.
+- [x] Kept V2/V3/V4 fail closed when live semantics exceed the current Apple
+  consumer instead of passing incomplete state to Metal.
+- [x] Proved legacy game-owned GX/OpenGL activity and callback-registration
+  boundaries independently of Metal.
+- [ ] Build a typed Apple consumer for the cumulative canonical envelope.
+- [ ] Register the cumulative callback at the real flush boundary.
+- [ ] Encode game-owned geometry/state/textures on a real Metal device.
+- [ ] Present a drawable and read back an identifiable game-owned pixel.
+
+### 6. Input, audio, save, filesystem, and lifecycle
+
+#### Input
+
+- [x] Established one per-frame keyboard/controller snapshot boundary.
+- [x] Added double-`PADRead` stability and frame-guard fixtures.
+- [x] Characterized analog-trigger thresholds and repaired digital L/R parity.
+- [ ] Prove physical keyboard and controller behavior inside a running game.
+- [ ] Add touch mapping only after the iOS host phase begins.
+
+#### Audio
+
+- [x] Verified software mixer, DAC/callback, NEOS/RSP, raw-bank safety limits,
+  and high-address DMA behavior natively and under sanitizers.
+- [x] Opened the CoreAudio device at the expected 32 kHz stereo/512-frame
+  contract during a focused probe.
+- [ ] Feed reconstructed game audio into CoreAudio during a real game session.
+- [ ] Capture human-audible or metered non-silent output without conflating
+  device-open success with audibility.
+
+#### Save and filesystem
+
+- [x] Implemented and tested `Save_t`/GCI wire serialization, checksums,
+  corruption rejection, and raw-byte preservation.
+- [x] Exercised restart/reload through production save-manager orchestration
+  seams and fork/exec fixtures.
+- [x] Added sandboxed macOS filesystem roles and atomic replacement/failure
+  injection.
+- [ ] Prove a real running game writes, exits, restarts, and reloads the same
+  save through the final macOS host adapter.
+- [ ] Prove device-container persistence later on iOS.
+
+#### Lifecycle
+
+- [x] Separated launch, liveness, TERM grace, KILL fallback, and normal cleanup
+  evidence.
+- [x] Fixed the reproduced game-cleanup invalid free.
+- [ ] Re-run a current-tip normal host teardown after the renderer path is
+  integrated.
+- [ ] Prove suspend/resume/background behavior in the iOS lifecycle phase.
+
+### 7. Regression and sanitizer coverage
+
+- [x] Repeated focused native and combined ASan/UBSan matrices after each
+  reviewed source integration.
+- [x] Preserved exact expected skips for unavailable CoreAudio/Metal device
+  gates rather than reporting them as passes.
+- [x] Ran C/C++/ILP32/`_WIN32` syntax probes where the host toolchain permits.
+- [ ] Provision a real i686 MinGW/sysroot toolchain and produce PE compile/link
+  evidence before calling Windows compatibility signed off.
+- [ ] Run one fresh current-tip focused matrix after the paused TEV/Indirect
+  integration work resumes.
+- [ ] Run a serialized current-tip full arm64 link and bounded runtime trace
+  only after the cumulative CPU path is ready.
+
+## Work paused in flight
+
+The pause occurred at safe command boundaries. Candidate branches, bundles,
+review roots, and logs are intentionally preserved. None of the two candidates
+below is part of canonical `c1/macos-host-launch` yet.
+
+| Lane | State at pause | Exact result / next action |
+| --- | --- | --- |
+| 236 — TEV leaf producer | Candidate complete; root-review hold | Worker `043d24822cd075b51282101669d7710b785bd01f`; four files including minimal CMake registration; native and combined ASan/UBSan focused `1/1` passed. |
+| 237 — Indirect leaf producer | Candidate complete; root-review hold | Worker `2f6ba5dff300239aa509c2f5a76431cae3d4b3a3`; three new files; source-direct native and sanitizer fixtures passed. |
+| 238 — cumulative/Apple audit | Partial read-only audit | Crosswalk reached the missing cumulative-envelope publication boundary; final READY/BLOCK table and successor order were not accepted before pause. |
+| 239 — Indirect independent review | Partial verification | Static review was consistent and fresh source-direct verification had begun; resume and obtain one immutable PASS/BLOCK handoff. |
+| 240 — TEV independent review | Partial verification | Static review was consistent and fresh focused build verification had begun; resume and obtain one immutable PASS/BLOCK handoff. |
+
+Resume rule: do not infer PASS from partial commentary. The independent final
+handoff must be reviewed, and a blocked candidate must be repaired and
+re-reviewed before integration.
+
+## Detailed macOS critical path
+
+### Phase A — close and integrate the paused leaf producers
+
+1. Resume lane 239 and finish the immutable Indirect review.
+2. Resume lane 240 and finish the immutable TEV review.
+3. If TEV passes, import `043d24822` first because it owns the pending minimal
+   CMake registration.
+4. Re-run only the TEV focused native and combined ASan/UBSan targets on the
+   exact integrated source snapshot.
+5. If Indirect passes, import `2f6ba5dff` second.
+6. Add its minimal non-overlapping CMake fixture/object registration as a
+   separate integration-owner commit.
+7. Re-run TEV and Indirect focused targets together, natively and under
+   combined ASan/UBSan, serially.
+8. Update the submodule pointer, evidence, lane board, and this roadmap only
+   after the exact integrated checks pass.
+
+Exit evidence: clean canonical branch, preserved worker branches, exact changed
+files, bundle hashes, independent PASS handoffs, exact-tip native and sanitizer
+results, and no runtime claim.
+
+### Phase B — finish the cumulative CPU architecture decision
+
+1. Resume the read-only cumulative/Apple audit at the new integrated tip.
+2. Produce a section table that separately answers: ABI exists, truthful raw
+   owner exists, leaf exists, production object is linked, cumulative assembler
+   calls it, Apple CPU consumer understands it, and device encoder supports it.
+3. Decide whether a partial section set can render truthfully. An omitted
+   section may use a default only when the decomp initialization path proves
+   that exact logical default is present in the captured raw state.
+4. Freeze the all-or-nothing transaction:
+   - capture all raw values at the committed-vertex boundary;
+   - construct every section into local temporary storage;
+   - validate cross-section dependencies;
+   - acquire and validate Texture/TLUT/Dynamic resource leases;
+   - serialize the fixed directory and aligned payloads;
+   - revalidate generations/epochs immediately before publication;
+   - publish exactly once only after complete preflight; and
+   - on any error, emit no partial callback and leave legacy rendering intact.
+5. Name the smallest source successors and serialize ownership of
+   `pc_gx.c`, `pc_gx_internal.h`, shared CMake, callback registration, and the
+   final assembler.
+
+Exit evidence: reviewed architecture handoff with READY/BLOCK verdicts for the
+CPU assembler, Apple CPU consumer, and later live trace as three separate gates.
+
+### Phase C — fill remaining truthful state gaps
+
+Expected gaps at the paused snapshot are Blend and Fog raw ownership plus any
+dependency-result and production-link wiring named by the final audit.
+
+For each gap:
+
+1. crosswalk both upstreams before designing the host contract;
+2. capture logical setter inputs, knownness, invalidity, and
+   flush-before-mutation ordering;
+3. never reconstruct guest values from normalized host floats or pointers;
+4. add a narrow raw-owner fixture;
+5. add a separate canonical leaf or dependency-result builder;
+6. run native, ASan/UBSan, production-object, and bounded Windows syntax gates;
+7. require an independent immutable review; and
+8. integrate one source commit at a time.
+
+Exit evidence: every section required by the minimum renderable snapshot is
+truthfully producible with no fabricated state.
+
+### Phase D — implement cumulative snapshot and Apple CPU plan
+
+1. Implement the renderer-neutral envelope assembler in new files where
+   possible, with one narrow call from the flush boundary.
+2. Add atomic lease/publication fixtures covering every early failure and
+   proving zero partial callbacks.
+3. Implement a typed Apple CPU consumer that validates the complete envelope
+   before building an immutable render plan.
+4. Keep Metal device work outside this phase; CPU fixtures prove data ownership
+   and planning only.
+5. Verify malformed, missing, unsupported, stale-resource, and generation-race
+   cases all fail closed while legacy rendering remains available.
+
+Exit evidence: one complete synthetic/current-state CPU snapshot reaches the
+Apple typed consumer and produces a validated immutable CPU plan, with no claim
+about GPU encoding or pixels.
+
+### Phase E — one serialized live callback trace
+
+1. Build the exact integrated `ac_pc` tip once from a provenance-preserving
+   worktree with correctly rooted shaders.
+2. Run one bounded no-nice LLDB launch; do not overlap any other full link or
+   debugger session.
+3. Record durable per-symbol counts for graph submission, display-list task,
+   `GXBegin`, flush, cumulative snapshot build, publication callback, Apple
+   consumer, and runtime observer.
+4. Record process ID, boot/logo/NEOS markers, bounded timeout, TERM grace, KILL
+   fallback, and final status.
+5. Treat zero downstream counts as evidence only if the trace continued past
+   the upstream breakpoint and reached its sentinel.
+
+Exit evidence: at least one game-owned cumulative snapshot reaches the Apple
+CPU consumer during a real inferior. Still no Metal or pixel claim.
+
+### Phase F — Metal encode, present, and readback
+
+1. Run device-gated Metal fixtures on a host with an available Metal device.
+2. Map the immutable CPU plan into explicit pipeline, depth/stencil, raster,
+   blend, texture/TLUT, sampler, TEV, uniform, vertex, and index state.
+3. Encode game-owned geometry without relying on deprecated OpenGL state.
+4. Present through the macOS host lifecycle.
+5. Read back a bounded surface and verify an identifiable game-owned pixel or
+   image region.
+6. Preserve a fail-closed path for unsupported state; never silently substitute
+   a synthetic triangle for a game frame.
+
+Exit evidence: live game callback, Metal encode, command completion, drawable
+present, readback, and identifiable game-owned pixel, each recorded separately.
+
+### Phase G — macOS playable milestone
+
+After the first Metal frame, close the remaining user-facing gates on the same
+integrated build:
+
+1. physical keyboard and controller input;
+2. non-silent audible game audio through CoreAudio;
+3. save, exit, restart, and reload through the final Application Support path;
+4. stable timing/retrace behavior over an extended session;
+5. clean window close and process teardown without forced KILL;
+6. fresh native and sanitizer focused matrices;
+7. documented Windows compile-regression status; and
+8. human confirmation that a representative game session is actually usable.
+
+Only that final human-observed gate may be described as a playable macOS
+milestone.
+
+## iOS roadmap after the macOS shared layer
+
+iOS work remains intentionally gated. When the shared renderer-neutral core and
+Metal frame path are proven on macOS:
+
+1. create an iOS host target that reuses the same portable core, canonical
+   snapshot, Apple CPU plan, and Metal encoders;
+2. replace macOS window/process assumptions with UIKit/SwiftUI lifecycle
+   adapters while keeping game logic platform-neutral;
+3. map background/foreground, interruption, memory warning, and scene lifecycle
+   events into the shared pause/resume/shutdown contract;
+4. map touch controls and hardware controllers into the same per-frame input
+   snapshot used by macOS;
+5. adapt CoreAudio session/category/interruption behavior without changing the
+   reconstructed mixer contract;
+6. place saves in the sandboxed Application Support container with atomic
+   replacement and device restart proof;
+7. build and run in the iOS Simulator, recording build, launch, frame, input,
+   audio, save, and lifecycle as separate gates;
+8. build and run on a physical device, repeating those gates under actual Metal
+   and audio hardware; and
+9. defer signing, TestFlight, App Store submission, and distribution until
+   separately authorized and legally reviewed.
+
+## Recommended parallel lanes when work resumes
+
+Parallelism is useful only when ownership is disjoint. A practical resumed
+team is four to seven active lanes, not filler work:
+
+| Lane type | Suggested responsibility |
+| --- | --- |
+| Integration/evidence owner | Review commits, integrate one at a time, update submodule pointer/docs, serialize full links/LLDB, and protect claim boundaries. |
+| Source lane 1 | One raw owner or canonical leaf with exclusive production-file ownership. |
+| Source lane 2 | A new-file producer or Apple CPU component that does not touch source lane 1 files. |
+| Verification lane | Exact-tip native + ASan/UBSan + bounded Windows probes from unique roots. |
+| Independent review lane | Immutable diff review against both upstreams; returns PASS or an exact repair. |
+| Architecture/read-only lane | Maps the next dependency-ready contract without editing source. |
+| Runtime lane | Only when explicitly scheduled; owns the sole full link/LLDB/device attempt. |
+
+No more than seven source-edit lanes may be active, and expensive full links,
+LLDB launches, and device runs stay serialized across local and remote hosts.
+
+## Definition of evidence
+
+The project uses the following vocabulary literally:
+
+- **Compiled:** the named object or target compiled on the stated snapshot.
+- **Linked:** the complete executable linked; this says nothing about launch.
+- **Launched:** a real inferior/process was created.
+- **Booted:** documented game-owned markers were reached.
+- **Callback reached:** the exact callback symbol executed with a valid input.
+- **Encoded:** Metal accepted game-owned commands for a command buffer.
+- **Presented:** a drawable was actually submitted/presented.
+- **Read back:** bounded GPU output was copied to CPU-visible storage.
+- **Rendered frame:** readback identifies game-owned visual output, not a
+  synthetic fixture.
+- **Input proven:** physical input changed game state in a running build.
+- **Audio proven:** reconstructed game audio was audibly or quantitatively
+  non-silent through the final host device path.
+- **Save/reload proven:** a running game saved, exited, restarted, and restored
+  the same state.
+- **Playable:** a human completed a representative session with frame, input,
+  audio, save, timing, and lifecycle gates working together.
+
+## How to resume safely
+
+1. Verify the umbrella, both submodule refs, status, diff, and preserved dirty
+   boundary before touching source.
+2. Confirm the paused M3 task/worktree/root identities; do not recreate or
+   duplicate them while preserved state exists.
+3. Finish lanes 239 and 240 and accept only their final immutable PASS/BLOCK
+   handoffs.
+4. Integrate TEV then Indirect only on PASS, with exact-tip focused reruns.
+5. Finish lane 238 against the resulting integrated snapshot.
+6. Open only the smallest dependency-ready successor(s) named by that audit.
+7. Keep the ISO and extracted assets local and ignored; transfer only verified
+   tracked-source Git bundles.
+8. Do not schedule a full link/LLDB/device run until the CPU path has a concrete
+   gate it can prove.
+9. Record commands, commit IDs, diagnostics, and claim boundaries in
+   `docs/evidence/` and `docs/LANE-BOARD.md` before cleaning generated roots.
+10. Preserve worker branches and commits even after reviewed worktrees are
+    retired.
+
+## Public-repository boundary
+
+This repository publishes engineering notes, scripts, evidence, and submodule
+pointers. It does not publish or redistribute:
+
+- game-disc images or hashes as downloadable content;
+- extracted Nintendo assets, object files, archives, or proprietary data;
+- console or platform keys;
+- local build products, screenshots containing proprietary assets, caches, or
+  runtime logs; or
+- binaries, signed applications, packages, or App Store artifacts.
+
+The two upstream projects retain their own histories and licenses. This
+umbrella repository does not flatten or relicense them. Some recorded local
+source commits may not yet exist on the public upstream remotes; therefore this
+public tracker is an engineering record, not yet a guaranteed one-command
+public source checkout or distributable release.
+
 ## Layout
 
 - `upstream/ACGC-PC-Port` - the existing PC port codebase.
