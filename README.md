@@ -134,6 +134,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   setter-owned raw-shadow change. See
   [canonical TEV contract](docs/evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
 
+- The Transforms/Texgens provenance audit finds both sections still
+  fail-closed: the PC path loses raw pre-widescreen projection, matrix
+  domain/type/knownness, texgen normalize/post state, and manual SU state.
+  It selects two serial PC repairs—Transform/matrix first, Texgen/SU second—
+  before a live canonical producer. See
+  [Transforms/Texgens provenance](docs/evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENANCE-216D1E24B-2026-08-14.md).
+
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three
   skips; bounded Windows host probes pass `4` and are environment/toolchain

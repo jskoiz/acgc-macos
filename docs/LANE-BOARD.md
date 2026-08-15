@@ -336,15 +336,16 @@ not update the umbrella checkout.
   detached worktree and prompt/events/final artifacts are absent. No edit,
   build, launch, asset access, callback, Metal, pixel, device, or playability
   proof occurred.
-- Lane 164 / task `01a002be-b284-7492-95f3-c3ad066a2906` — active read-only
-  M3 Max Transforms/Texgens provenance audit. Detached worktree
-  `/private/tmp/acgc-lane-canonical-transform-texgen-audit` is exact PC
-  `216d1e24b` with decomp oracle `09ca8e8b`. It owns the minimum truthful
-  shadow-state decision for raw pre-host-adjustment projection, matrix type,
-  texgen normalize/post, manual scale/bias/offset, and matrix-slot references,
-  plus fail-closed producer rules and future non-overlapping source fixtures.
-  Alpha, TEV, Blend, fog, raster/depth, texture bytes, Apple/Metal, edits,
-  builds, assets, pixels, devices, and playability are out of scope.
+- Lane 164 / task `01a002be-b284-7492-95f3-c3ad066a2906` — complete and
+  cleanup-pending, read-only at exact PC `216d1e24b` and decomp `09ca8e8b`.
+  It proves Transforms/Texgens cannot yet be produced truthfully: raw
+  pre-widescreen projection, matrix domain/type/knownness, texgen
+  normalize/post, and manual SU state are missing. It selects serial
+  Transform/matrix then Texgen/SU source repairs with all-or-nothing producer
+  failure until both are complete. Evidence is
+  `docs/evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENANCE-216D1E24B-2026-08-14.md`.
+  No edit, build, launch, asset access, callback, Metal, pixel, device, or
+  playability proof occurred.
 - Lane 165 / task `01a002c2-ce08-7193-ba94-d50aac6913d9` — active M3 Max
   source-edit lane on explicit branch `c1/lane-canonical-alpha-m3`, exact PC
   base `216d1e24b`, worktree `/private/tmp/acgc-lane-canonical-alpha`, and

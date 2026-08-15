@@ -159,6 +159,12 @@ setters discard exact signed S10 provenance into normalized floats, so the live
 producer remains fail-closed until a narrow setter-owned raw-shadow change is
 proved. See [canonical TEV contract](evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md).
 
+The Transforms/Texgens provenance audit keeps both sections fail-closed until
+the PC port retains raw pre-widescreen projection, exact matrix domains/types/
+knownness, texgen normalize/post state, and manual SU fields. It selects a
+Transform/matrix repair first and a non-overlapping Texgen/SU repair second.
+See [Transforms/Texgens provenance](evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENANCE-216D1E24B-2026-08-14.md).
+
 The focused `b5f550ea0` matrix passes native and combined ASan/UBSan `44` tests
 with three declared Metal-device skips in each configuration. Bounded Windows
 host probes pass `4` and are blocked at `5` by Apple libc++ locale emulation,
