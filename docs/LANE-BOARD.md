@@ -88,7 +88,9 @@ Geometry-converter audit and is reviewed/archived. Its raw Geometry closure
 successor is now dependency-ready because lane 208 released overlapping
 `pc_gx.c` ownership. Lane 211 is now the sole active production worker: its
 project-owned M3 Max task owns only the raw Geometry closure at exact PC
-`85b25cb3c`, on an explicit isolated source branch. No full
+`85b25cb3c`, on an explicit isolated source branch. Lane 212 is a parallel
+read-only raw Indirect ownership crosswalk, and lane 213 is an independent
+verification-only exact-tip matrix. No full
 link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
@@ -1223,6 +1225,34 @@ also integrated. Remote workers may not update the umbrella checkout.
   LLDB, launch, device, ISO/assets, and playability are out of scope. Success
   proves CPU/source raw Geometry semantics only and unblocks a separately owned
   canonical Geometry producer.
+- Lane 212 / project-owned M3 task
+  `01a00562-c9bc-7b70-9d2e-de9232703062` — active read-only raw Indirect
+  ownership/conversion crosswalk. The visible project worktree is
+  `/Users/testtest/.codex/worktrees/53c8/acgc-modern-port`; the concrete clean
+  source scope is `/private/tmp/acgc-lane-raw-indirect-crosswalk-m3`, detached
+  at exact PC `85b25cb3c`, with decomp `09ca8e8b` read-only. It owns the
+  reference map for `GXSetNumIndStages`, Indirect order/scale/matrix setters,
+  TEV Indirect/direct calls, initialization/callers, mutation ordering,
+  known/invalid provenance, and the smallest later raw-producer fixture. It
+  must preserve the accepted section-13 shared-state boundary while leaving
+  nine per-stage Indirect fields with canonical TEV. It is forbidden to edit,
+  build, branch, commit, or overlap lane 211's active `pc_gx.c` ownership. Its
+  output is planning/reference evidence only, not implementation, runtime,
+  Metal, pixel, device, or playability proof.
+- Lane 213 / project-owned M3 task
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active verification-only exact-tip
+  matrix. The visible project worktree is
+  `/Users/testtest/.codex/worktrees/e9fb/acgc-modern-port`. It reconstructs a
+  clean detached source at `/private/tmp/acgc-lane-current-85b-matrix-source`
+  from the verified source-only `85b25cb3c` bundle, then uses unique native,
+  combined ASan/UBSan, and bounded Windows-probe roots
+  `/private/tmp/acgc-lane-current-85b-matrix-{native,asan,win}`. It owns no
+  source file and must reproduce the prior focused producer/canonical matrix,
+  explicitly list any new exact-tip tests, run serially with
+  `detect_leaks=0`, and keep host syntax/ILP32 probes separate from real
+  Windows sign-off. Full `ac_pc`, LLDB, launch, device, Metal, pixel,
+  input/audio/save, ISO/assets, and playability remain out of scope. Its result
+  proves only the pre-lane-211 exact-tip CPU/source baseline.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1247,8 +1277,9 @@ integrated as canonical PC `a42da8e155`; lane 208 is reviewed, integrated, and
 archived as canonical PC `85b25cb3c`. Lane 210 is complete,
 reviewed, and archived; its Geometry raw-closure successor is now
 dependency-ready because lane 208 released `pc_gx.c` ownership. Lane 211 is
-the sole active production worker at exact PC `85b25cb3c`; no full link, LLDB,
-or device run is active.
+the sole active production worker at exact PC `85b25cb3c`; lanes 212 and 213
+run alongside it as read-only audit and verification-only work. No full link,
+LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
