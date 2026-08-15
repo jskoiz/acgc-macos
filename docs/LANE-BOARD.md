@@ -75,8 +75,10 @@ the read-only exact Transforms ABI audit; lane 168 is integrated as PC
 `6d1d310c0`; lane 169 completed the read-only Depth/Raster exact contract
 audit; lane 170 is integrated as PC `59714a1fd`; lane 171 completed the
 read-only exact Channels/Lighting contract audit; lane 172 is integrated as PC
-`c736f9686`; lanes 173–174 are read-only exact Texgen/SU and Geometry/VCD/VAT
-contract audits. No
+`c736f9686`; lanes 173–174 are completing corrective read-only review of the
+Texgen/SU and Geometry/VCD/VAT contracts; lanes 175–176 are the two active,
+non-overlapping M3 Max source owners for neutral Transform ABI and raw Depth
+provenance. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -413,7 +415,8 @@ checkout.
   No edit, build, launch, callback, Metal, pixel, device, Windows runtime,
   iOS, or playability operation occurred.
 - Lane 170 / task `01a002e0-0e90-7a01-8775-b09077214ab6` — complete,
-  integrated, and review-clean; physical cleanup is pending. Remote branch
+  integrated, and review-clean. Its generated roots are retired; the clean
+  source worktree remains protected while remote task holders retain it. Remote branch
   `c1/lane-transform-raw-shadow-m3` advanced exact PC `037689462` through
   `523d34e1d` and repair `4fbdcd620`; the integration owner cherry-picked them
   as canonical PC `4c3aeac40` and `59714a1fd`. The setter-owned shadow retains
@@ -434,7 +437,8 @@ checkout.
   No edit, build, launch, callback, Metal, pixel, device, Windows runtime,
   iOS, or playability operation occurred.
 - Lane 172 / task `01a002f3-0540-7a61-9873-cfcbc18dcaae` — complete,
-  integrated, and review-clean; physical cleanup is pending. Remote branch
+  integrated, and review-clean. Its generated roots are retired; the clean
+  source worktree remains protected while remote task holders retain it. Remote branch
   `c1/lane-canonical-depth-m3` advanced exact PC `6d1d310c0` to worker and
   canonical PC `c736f9686`. It implements the frozen version-1,
   section-`0x0200`, 16-byte Z-mode ABI and exact envelope metadata validation.
@@ -444,32 +448,60 @@ checkout.
   `docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md`. No PC setter
   shadow, cumulative producer, full link, LLDB, Metal, pixel, device, or
   playability claim follows.
-- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — active read-only
+- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — active corrective read-only
   M3 Max exact Texgen/SU contract audit in detached worktree
   `/private/tmp/acgc-lane-texgen-contract-audit` at exact PC `6d1d310c0`, with
   decomp oracle `09ca8e8b`. It owns only the versioned `0x0008` value-layout,
   matrix/source/type/normalize/post/manual-SU domains, initialization,
   knownness, cross-section references, PC gaps, and a non-overlapping future
-  ownership plan. It may not edit, build, launch, access assets, or claim
+  ownership plan. Independent review rejected the earlier `0xB60`/`0x8D0`
+  drafts as incomplete because writable identity slots, active/inactive
+  knownness, SU register semantics, and Raster ownership were not all exact;
+  the reused task must return one corrected authoritative ABI or a freeze
+  NO-GO. It may not edit, build, launch, access assets, or claim
   callback, Metal, pixel, device, Windows runtime, iOS, or playability proof.
-- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active read-only
+- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active corrective read-only
   M3 Max exact Geometry/VCD/VAT contract audit in detached worktree
   `/private/tmp/acgc-lane-geometry-contract-audit` at exact PC `6d1d310c0`,
   with decomp oracle `09ca8e8b`. It owns only the versioned `0x0001` logical
   geometry/value-stream layout, VCD/VAT formats, primitive/count/stride/bounds,
   guest/host separation, cross-section references, and future producer/fixture
-  ownership. It may not edit, build, launch, access assets, or claim callback,
+  ownership. Independent review retained the `0x6B0` fixed prefix and bounded
+  topology intent but requires exact masks, descriptor relationships, NBT3
+  handling or exclusion, matrix defaults, decoding, alignment, deterministic
+  bytes, and normative cross-section dependencies before freeze. It may not
+  edit, build, launch, access assets, or claim callback,
   Metal, pixel, device, Windows runtime, iOS, or playability proof.
+- Lane 175 / task `01a00358-efb4-7d51-b5b7-7fe5801e059a` — active M3 Max
+  neutral Transform ABI source/test owner in `/private/tmp/acgc-lane-canonical-transform`,
+  branch `c1/lane-canonical-transform-m3` at exact PC `59714a1fd`, with decomp
+  oracle `09ca8e8b`. It owns only the new fixed 888-byte section-`0x0002`
+  header/source/portable fixture and narrow portable CMake registration.
+  Unique native and ASan/UBSan roots are
+  `/private/tmp/acgc-lane-canonical-transform-{native,asan}`. It may not edit
+  `pc_gx`, wire a producer, run a full link/LLDB, access assets, or claim
+  callback, Metal, pixel, device, or playability proof.
+- Lane 176 / task `01a00358-efb5-7f43-b28a-337c0d8ad584` — active M3 Max raw
+  Depth provenance source/test owner in `/private/tmp/acgc-lane-pc-depth-shadow`,
+  branch `c1/lane-pc-depth-shadow-m3` at exact PC `59714a1fd`, with decomp
+  oracle `09ca8e8b`. It owns only `pc_gx` state/reset/`GXSetZMode`, one focused
+  raw-depth fixture, and narrow PC CMake registration; Transform, TEV,
+  canonical sections, producer, and Apple files are out of scope. Unique
+  native and ASan/UBSan roots are
+  `/private/tmp/acgc-lane-pc-depth-shadow-{native,asan}`. It may not run a full
+  link/LLDB, access assets, or claim canonical production, callback, Metal,
+  pixel, device, or playability proof.
 
-The remote Codex project assignment records place tasks 156–174 under the
+The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
 transferred. Lanes 170 and 172 are individually reviewed and integrated; their
-exact physical roots remain protected only until holder-free cleanup. Lanes
-173–174 continue their read-only contracts in parallel. The next source owner
-must be selected from those exact contracts and may not overlap the cumulative
-producer. Full links and LLDB launches remain serialized and are not active.
+generated roots are retired and their clean source worktrees remain protected
+only until holder-free cleanup. Lanes 173–174 are reused for their bounded
+contract corrections; lanes 175–176 are the only active source-edit owners and
+their file ownership does not overlap. Full links and LLDB launches remain
+serialized and are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
