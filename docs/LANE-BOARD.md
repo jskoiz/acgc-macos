@@ -115,7 +115,8 @@ read-only TEV audit with `BLOCK`. Lane 225 completed the Alpha/Blend/Depth/Fog
 producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
 on the documented distinct predecessors. Lane 227 worker `dfef13a2` passed
 lane 228's immutable independent review and is integrated as canonical PC
-`0f896395c`; both tasks are archive-ready.
+`0f896395c`; both tasks are archived. Lanes 229–231 are registered
+setup-pending for disjoint Blend, Fog, and cumulative-producer audits.
 
 ## Remote M3 Max batch (current)
 
@@ -1621,6 +1622,44 @@ also integrated. Remote workers may not update the umbrella checkout.
   raw/canonical/decomp field mapping, truthful raw invalid-history limitation,
   destination-preserving fail-closed behavior, portability, and focused
   coverage have no material blocker.
+- Lane 229 / reused project-owned M3 audit task
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — setup-pending independent read-only
+  Blend raw-owner/leaf-producer contract audit at exact canonical PC
+  `0f896395c` and decomp `09ca8e8b`. It must use source-only bundle
+  `/private/tmp/acgc-canonical-pc-0f89639.bundle` (SHA-256
+  `a789027090e9f2ce6f6241932cbc4cb9e6f185bcedb069d27b25049afcd09c6c`),
+  verified control `/private/tmp/acgc-lane-229-blend-readiness.md` (SHA-256
+  `1708b17d9d511dab156d6e085290e855b258403d654496b56b5d194feb2843aa`),
+  and detached source `/private/tmp/acgc-lane-229-blend-audit-m3`. It must map
+  PC `GXSetBlendMode` state/knownness/order and the canonical Blend ABI against
+  decomp `GXSetBlendMode`, initialization, and callers, then return `READY` or
+  the exact smallest raw-owner predecessor. It owns no edit, branch, build,
+  test, cleanup, link, LLDB, Apple/Metal, device/pixel, Windows sign-off,
+  ISO/assets, or playability work.
+- Lane 230 / reused project-owned M3 audit task
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — setup-pending independent read-only
+  Fog raw-owner/leaf-producer contract audit at exact canonical PC `0f896395c`
+  and decomp `09ca8e8b`, using the same canonical bundle, verified control
+  `/private/tmp/acgc-lane-230-fog-readiness.md` (SHA-256
+  `1708b17d9d511dab156d6e085290e855b258403d654496b56b5d194feb2843aa`),
+  and detached source `/private/tmp/acgc-lane-230-fog-audit-m3`. It must map
+  logical fog fields, finite-word domains, range-adjust enable/center and all
+  ten table entries, setter ordering/knownness, canonical Fog ABI, and decomp
+  `GXSetFog`/`GXSetFogRangeAdj`, then return `READY` or the exact smallest
+  predecessor. It owns no edit, branch, build, test, cleanup, link, LLDB,
+  Apple/Metal, device/pixel, Windows sign-off, ISO/assets, or playability work.
+- Lane 231 / reused project-owned M3 audit task
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — setup-pending independent read-only
+  current-tip cumulative-producer readiness reconciliation at exact canonical
+  PC `0f896395c` and decomp `09ca8e8b`. It must use the canonical bundle,
+  prior control `/private/tmp/acgc-lane-231-cumulative-readiness.md` (SHA-256
+  `f8cd62e905de36f9aada064ad412ded1a38e50910019f3ca5e9a5dbcc70648b6`),
+  and detached source `/private/tmp/acgc-lane-231-cumulative-audit-m3` to
+  enumerate every required section/raw owner/leaf producer, immutable resource
+  lease, dependency, and atomic publication boundary after the new Transform
+  and Depth producers. It owns no edit, branch, build, test, cleanup, link,
+  LLDB, Apple/Metal, device/pixel, Windows sign-off, ISO/assets, or playability
+  work and must return the exact remaining blockers and safe integration order.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
