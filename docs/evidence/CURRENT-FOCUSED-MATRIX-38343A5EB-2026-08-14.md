@@ -164,15 +164,17 @@ against the twelve neutral validators on the exact integrated tree.
 
 ## Cleanup and claim boundary
 
-Reviewed generated roots are:
+The reviewed generated roots were:
 
 - `/private/tmp/acgc-lane-current-383-matrix-native` (40 MB)
 - `/private/tmp/acgc-lane-current-383-matrix-asan` (53 MB)
 - `/private/tmp/acgc-lane-current-383-matrix-win` (25 MB)
 - `/private/tmp/acgc-lane-current-383-matrix-source`
 
-They may be retired only after exact holder/clean checks. The shared source-only
-bundle remains protected while raw Lighting lane 200 is active.
+Cleanup holder-checked and retired all four exact paths after this evidence was
+committed; the source registry has no remaining record for the detached source
+path. The shared source-only bundle remains protected through raw Lighting
+integration review.
 
 This is CPU-only source compilation, ABI, focused fixture, sanitizer, and
 bounded syntax evidence. It proves no full `ac_pc` link, launch, LLDB hit,

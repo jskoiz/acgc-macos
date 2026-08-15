@@ -54,11 +54,13 @@ the independent current-tip focused verification matrix with native and
 combined ASan/UBSan `17/17` passes; its exact holder-free generated roots are
 retired. Lane 198 completed the independent read-only review of the initial
 lane-195 candidate; root review supersedes its PASS at the documented
-persistence boundary. Lane 200 is the sole active production worker, owning
-the now-unblocked raw Lighting producer on the M3 Max. Lane 201 completed its
+persistence boundary. Lane 200 completed the raw Lighting producer on the M3
+Max and is in root integration review. Lane 201 completed its
 independent exact post-Channels matrix: native and combined ASan/UBSan each
 pass `18/18`, the corrected ABI/syntax probes pass, and Windows remains at the
-documented SDL/toolchain boundary. No verification worker is active.
+documented SDL/toolchain boundary. Lane 202 is the sole active verification
+worker, independently reviewing the lane-200 five-file diff without editing or
+building it. No production worker is active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -949,8 +951,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   cumulative packet, full link, LLDB, Metal, pixel, device, or playability
   claim follows.
 - Lane 200 / reused project-owned M3 task
-  `01a00275-9cf6-7113-8511-5e9a4d18deff` — active raw Lighting source/test
-  successor. The verified tracked-source-only bundle
+  `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete raw Lighting source/test
+  successor, root-review pending. The verified tracked-source-only bundle
   `/private/tmp/acgc-canonical-pc-38343a5.bundle` has SHA-256
   `11f1631915c8e97ae9d48b79ef3132b8083cfc756a2efe1e2b4f1d258fdfa0ce`,
   contains exact canonical PC `38343a5eb5`, and requires base `23c26e520a`.
@@ -966,8 +968,14 @@ also integrated. Remote workers may not update the umbrella checkout.
   device, iOS, and playability are out of scope. Unique roots are
   `/private/tmp/acgc-lane-raw-lighting-{native,asan,win}`. Success requires a
   clean worker commit, exact two-upstream crosswalk, focused native and
-  combined ASan/UBSan serial results, static probes, and a bounded handoff; it
-  releases shared `pc_gx` ownership to the raw Texture/TLUT successor.
+  combined ASan/UBSan serial results, static probes, and a bounded handoff. The
+  clean worker commit is `97aebd8a2d` on `c1/lane-raw-lighting-m3`, based
+  directly on `38343a5eb5`; it changes exactly the five authorized files and
+  reports native plus combined ASan/UBSan `9/9` each. Root imported a verified
+  Git-only bundle with SHA-256
+  `6a2ba66a08968c73889ff45aa639856c6629c6a1abf8bcc7d2c266624ab78165`
+  into detached local review `/private/tmp/acgc-review-raw-lighting-97a`. No
+  full link, LLDB, callback, Metal, pixel, device, or playability claim follows.
 - Lane 201 / reused project-owned M3 task
   `01a002e1-540c-7693-b25d-363a1f209dd4` — complete, reviewed, and archived
   verification-only successor
@@ -986,7 +994,19 @@ also integrated. Remote workers may not update the umbrella checkout.
   `docs/evidence/CURRENT-FOCUSED-MATRIX-38343A5EB-2026-08-14.md`. No full link,
   LLDB, game/resources,
   Apple/Metal device, pixel, input/audio/save, iOS, or playability action is
-  authorized. It may not touch lane 200's raw Lighting worktree.
+  authorized. Its exact source/native/ASan/Windows roots are retired.
+- Lane 202 / reused project-owned M3 task
+  `01a002e1-540c-7693-b25d-363a1f209dd4` — active independent read-only review
+  of lane 200. It is pinned to PC base `38343a5eb5`, candidate
+  `97aebd8a2d`, decomp `09ca8e8b`, and the clean M3 worker path
+  `/private/tmp/acgc-lane-raw-lighting-m3`. It owns no source, branch, tests,
+  docs, gitlink, build root, or bundle. It must inspect the exact five-file diff
+  against the frozen raw-Lighting plan, canonical Channels/Lighting validators,
+  the PC legacy GL/Windows path, and decomp `GXLight.c`, `GXInit.c`,
+  `GXVerify.c`, public types/enums, and representative callers. It returns
+  PASS or a concrete BLOCKER with the smallest repair; lane-200 test results are
+  reported evidence only. No build, launch, LLDB, resource access, callback,
+  Metal, pixel, device, iOS, Windows sign-off, or playability scope is allowed.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1002,8 +1022,8 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
-lanes 191–192, 194, 196–198, and 201 are complete. Lane 200 is the sole active
-production worker; no verification worker is active. The current
+lanes 191–192, 194, 196–198, 200, and 201 are complete. Lane 202 is the sole
+active verification worker; no production worker is active. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
