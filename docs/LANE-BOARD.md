@@ -71,7 +71,8 @@ the independent focused verification matrix; lane 161 is integrated as PC
 `216d1e24b`. Lanes 162–163 completed the Alpha/update and TEV contracts; lane
 164 completed the Transforms/Texgens provenance audit; lane 165 is integrated
 as PC `f2b7ab153`; lane 166 remains the active PC raw-TEV-shadow source lane;
-lane 167 is the active read-only exact Transforms ABI audit. No
+lane 167 is the active read-only exact Transforms ABI audit; lane 168 is the
+non-overlapping portable canonical TEV ABI source lane. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -382,14 +383,26 @@ checkout.
   a future portable fixture/ownership map. It may not edit, build, launch,
   access assets, overlap live PC setter ownership, or claim callback, Metal,
   pixel, device, or playability proof.
+- Lane 168 / task `01a002d3-e737-76c1-8349-fc4e003fc0b9` — active M3 Max
+  source-edit lane on explicit branch `c1/lane-canonical-tev-m3`, exact PC
+  base `f2b7ab153`, worktree `/private/tmp/acgc-lane-canonical-tev`, and
+  decomp oracle `09ca8e8b`. It exclusively owns a new canonical TEV
+  header/source, one portable fixture, and minimal portable CMake registration
+  for the frozen version-1, section-`0x0020`, 2,560-byte full 16-stage ABI.
+  Unique focused roots are `/private/tmp/acgc-lane-canonical-tev-{native,asan,win}`.
+  `pc_gx`, PC private shadow state, V1-V4, common-envelope semantics,
+  Apple/Metal, producer wiring, full link, LLDB, assets, pixels, devices, and
+  playability are out of scope. Success supplies the portable packing target
+  for lane 166's independently reviewed exact raw TEV shadow.
 
-The remote Codex project assignment records place tasks 156–167 under the
+The remote Codex project assignment records place tasks 156–168 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
-transferred. The next integration order is lane 161 after review; lane 160 is a
-base-snapshot verification matrix and will name the exact post-integration
-rerun subset rather than being treated as current-tip sign-off.
+transferred. The next source integration order is lane 166's raw TEV shadow,
+then lane 168's portable TEV ABI, subject to individual review; lane 167's
+read-only result selects the subsequent Transform source boundary. Full links
+and LLDB launches remain serialized and are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
