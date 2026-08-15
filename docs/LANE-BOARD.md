@@ -1652,8 +1652,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   edit, branch, build, test, cleanup, link, LLDB, Apple/Metal, device/pixel,
   Windows sign-off, ISO/assets, or playability work.
 - Lane 230 / reused project-owned M3 audit task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete/root-reviewed and
-  archive-pending independent read-only
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete/root-reviewed/archived
+  independent read-only
   Fog raw-owner/leaf-producer contract audit at exact canonical PC `0f896395c`
   and decomp `09ca8e8b`, using the same canonical bundle, verified control
   `/private/tmp/acgc-lane-230-fog-readiness.md` (SHA-256
