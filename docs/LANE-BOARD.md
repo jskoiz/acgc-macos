@@ -38,10 +38,11 @@ the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
 Expensive full links and LLDB launch traces remain serialized. Lanes 185–186
 are reviewed and integrated, and lanes 187–188 are complete read-only audits.
-Lanes 189–192 are the current M3 Max batch: two non-overlapping source lanes
-and two read-only audits. No full link, LLDB launch, or Metal-device run is
-active. Reviewed commits and evidence remain available in Git and the evidence
-docs.
+Lanes 189–191 are the active M3 Max batch: two non-overlapping source lanes and
+one read-only audit. Lane 192 completed its raw Channels crosswalk and is not
+refilled because the successor would overlap lane 189's `pc_gx` ownership. No
+full link, LLDB launch, or Metal-device run is active. Reviewed commits and
+evidence remain available in Git and the evidence docs.
 
 ## Remote M3 Max batch (current)
 
@@ -754,7 +755,7 @@ may not update the umbrella checkout.
   without reading resource bytes. It owns no branch, source, build, test, docs,
   launch, asset, Apple/Metal execution, pixel, device, or playability action.
   Success unblocks a later neutral Texture/Dynamic ABI lane.
-- Lane 192 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active
+- Lane 192 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete
   read-only M3 Max raw Channels producer crosswalk in
   `/private/tmp/acgc-lane-apple-canonical-plan-preflight`, detached at exact
   canonical PC `324c174ae3` with decomp `09ca8e8b`. It maps exact raw structs,
@@ -762,8 +763,12 @@ may not update the umbrella checkout.
   disabled vertex sources, specular effective diffuse behavior, initialization,
   flush ordering, and the future fixture/ownership split. It owns no branch,
   source, build, test, docs, launch, asset, Apple/Metal execution, pixel,
-  device, or playability action. Success unblocks the raw Channels source lane
-  after Geometry releases `pc_gx` ownership.
+  device, or playability action. It confirms no raw Channels provenance exists
+  and freezes per-component knownness, sticky invalidity, combined/separate
+  setter behavior, and old-batch ordering. The raw Channels source successor is
+  dependency-ready only after Geometry releases `pc_gx` ownership; no refill is
+  opened. Evidence is
+  `docs/evidence/RAW-CHANNELS-PRODUCER-PLAN-324C174AE-2026-08-14.md`.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -778,9 +783,9 @@ verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
-and lane 184 is stopped. Lanes 189–192 are active with two source owners and
-two read-only audits; their protected worktrees contain ignored assets/orig and
-must not be deleted or inspected beyond counts.
+and lane 184 is stopped. Lanes 189–191 are active with two source owners and
+one read-only audit; lane 192 is complete. Their protected worktrees contain
+ignored assets/orig and must not be deleted or inspected beyond counts.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
