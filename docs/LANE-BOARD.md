@@ -68,9 +68,11 @@ Apple consumer/encoder audits. Lane 157 is complete and integrated. Lane 156
 is integrated as PC `4dbb71065`, and lane 158 completed its read-only producer
 audit. Lane 159 completed the read-only Blend/logic contract; lane 160 completed
 the independent focused verification matrix; lane 161 is integrated as PC
-`216d1e24b`. Lanes 162–164 are the active read-only Alpha/update, TEV, and
-Transforms/Texgens provenance audits. No production source lane, full link, or
-LLDB run is active. Remote workers may not update the umbrella checkout.
+`216d1e24b`. Lane 162 completed the Alpha/update contract; lanes 163–164 are
+the active read-only TEV and Transforms/Texgens provenance audits; lane 165 is
+the sole production source lane implementing the portable Alpha section. No
+full link or LLDB run is active. Remote workers may not update the umbrella
+checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -311,14 +313,16 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   and commits remain preserved. Evidence is
   `docs/evidence/CANONICAL-BLEND-STATE-216D1E24B-2026-08-14.md`. No live
   snapshot, callback, Metal, pixel, device, or playability claim follows.
-- Lane 162 / task `01a002b5-525f-7480-81df-8c9bde594295` — complete and
-  cleanup-pending, read-only at exact PC `4dbb71065` and decomp `09ca8e8b`.
+- Lane 162 / task `01a002b5-525f-7480-81df-8c9bde594295` — complete,
+  archived, and cleaned, read-only at exact PC `4dbb71065` and decomp
+  `09ca8e8b`.
   It freezes `0x0100` as a version-1, 32-byte, eight-word Alpha/update section:
   two comparisons/references, operator, color update, alpha update, and
   `z_comp_loc`, with exact bounds and no inactive normalization. It identifies
   PC `GXSetZCompLoc` as the remaining no-op producer gap. Evidence is
   `docs/evidence/CANONICAL-ALPHA-UPDATE-CONTRACT-4DBB71065-2026-08-14.md`.
-  No edit, build, launch, asset access, callback, Metal, pixel, device, or
+  Its exact detached worktree and prompt/events/final artifacts are absent. No
+  edit, build, launch, asset access, callback, Metal, pixel, device, or
   playability proof occurred.
 - Lane 163 / task `01a002b5-525f-7862-aa8c-0e0ccecdf5c2` — active read-only
   M3 Max TEV contract audit. Detached worktree
@@ -337,8 +341,20 @@ LLDB run is active. Remote workers may not update the umbrella checkout.
   plus fail-closed producer rules and future non-overlapping source fixtures.
   Alpha, TEV, Blend, fog, raster/depth, texture bytes, Apple/Metal, edits,
   builds, assets, pixels, devices, and playability are out of scope.
+- Lane 165 / task `01a002c2-ce08-7193-ba94-d50aac6913d9` — active M3 Max
+  source-edit lane on explicit branch `c1/lane-canonical-alpha-m3`, exact PC
+  base `216d1e24b`, worktree `/private/tmp/acgc-lane-canonical-alpha`, and
+  decomp oracle `09ca8e8b`. It owns only new canonical Alpha header/source, one
+  portable fixture, and minimal portable CMake registration. Its gate is the
+  audited version-1 32-byte eight-word Alpha/update ABI, strict value and exact
+  metadata validators, native and combined ASan/UBSan focused tests, and
+  bounded ABI/Windows host probes under unique
+  `/private/tmp/acgc-lane-canonical-alpha-{native,asan,win}` roots. Common
+  envelope/Blend, V1-V4, `pc_gx`, Apple/Metal, ac-decomp edits, full link,
+  LLDB, assets, pixels, devices, and playability are out of scope;
+  `GXSetZCompLoc` remains a separate live-shadow gap.
 
-The remote Codex project assignment records place tasks 156–164 under the
+The remote Codex project assignment records place tasks 156–165 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
