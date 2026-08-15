@@ -107,8 +107,8 @@ root-review hold. Lane 221 completed its independent read-only Transform
 leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
 Lanes 222 and 223 are active successors for independent Texgen review and the
 Transform leaf producer respectively. No full link, LLDB, or device run is
-active. Lanes 224 and 225 are registered setup-pending read-only audits for
-TEV leaf production and the Alpha/Blend/Depth/Fog producer topology.
+active. Lanes 224 and 225 are active read-only audits for TEV leaf production
+and the Alpha/Blend/Depth/Fog producer topology.
 
 ## Remote M3 Max batch (current)
 
@@ -1506,7 +1506,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   verification; no full link, LLDB, runtime, device, pixel, Windows sign-off,
   or playability claim is authorized.
 - Lane 224 / reused project-owned M3 audit task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending independent read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active independent read-only
   TEV leaf-producer readiness audit at exact canonical PC `689590cc` and
   decomp `09ca8e8b`. It must use the verified source-only bundle and detached
   source `/private/tmp/acgc-lane-224-tev-producer-audit`, crosswalk the
@@ -1516,7 +1516,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   branch, build, test, cleanup, integration, full link, LLDB, Apple/Metal,
   device/pixel, ISO/assets, Windows sign-off, or playability work.
 - Lane 225 / reused project-owned M3 audit task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending independent read-only
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active independent read-only
   Alpha/Blend/Depth/Fog leaf-producer topology audit at exact canonical PC
   `689590cc` and decomp `09ca8e8b`. It must classify each section separately as
   producer-ready or blocked, identify exact raw owner/knownness/ordering gaps,
