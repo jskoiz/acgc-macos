@@ -69,10 +69,11 @@ is integrated as PC `4dbb71065`, and lane 158 completed its read-only producer
 audit. Lane 159 completed the read-only Blend/logic contract; lane 160 completed
 the independent focused verification matrix; lane 161 is integrated as PC
 `216d1e24b`. Lanes 162–163 completed the Alpha/update and TEV contracts; lane
-164 is the active read-only Transforms/Texgens provenance audit; lanes 165–166
-are the two non-overlapping production source lanes for portable Alpha and PC
-raw TEV shadow state. No full link or LLDB run is active. Remote workers may
-not update the umbrella checkout.
+164 completed the Transforms/Texgens provenance audit; lanes 165–166 are the
+two non-overlapping production source lanes for portable Alpha and PC raw TEV
+shadow state; lane 167 is the active read-only exact Transforms ABI audit. No
+full link or LLDB run is active. Remote workers may not update the umbrella
+checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -336,15 +337,17 @@ not update the umbrella checkout.
   detached worktree and prompt/events/final artifacts are absent. No edit,
   build, launch, asset access, callback, Metal, pixel, device, or playability
   proof occurred.
-- Lane 164 / task `01a002be-b284-7492-95f3-c3ad066a2906` — complete and
-  cleanup-pending, read-only at exact PC `216d1e24b` and decomp `09ca8e8b`.
+- Lane 164 / task `01a002be-b284-7492-95f3-c3ad066a2906` — complete,
+  archived, and cleaned, read-only at exact PC `216d1e24b` and decomp
+  `09ca8e8b`.
   It proves Transforms/Texgens cannot yet be produced truthfully: raw
   pre-widescreen projection, matrix domain/type/knownness, texgen
   normalize/post, and manual SU state are missing. It selects serial
   Transform/matrix then Texgen/SU source repairs with all-or-nothing producer
   failure until both are complete. Evidence is
   `docs/evidence/CANONICAL-TRANSFORM-TEXGEN-PROVENANCE-216D1E24B-2026-08-14.md`.
-  No edit, build, launch, asset access, callback, Metal, pixel, device, or
+  Its exact detached worktree and prompt/events/final artifacts are absent. No
+  edit, build, launch, asset access, callback, Metal, pixel, device, or
   playability proof occurred.
 - Lane 165 / task `01a002c2-ce08-7193-ba94-d50aac6913d9` — active M3 Max
   source-edit lane on explicit branch `c1/lane-canonical-alpha-m3`, exact PC
@@ -368,8 +371,17 @@ not update the umbrella checkout.
   `/private/tmp/acgc-lane-tev-raw-shadow-{native,asan,win}`. Shaders, V1-V4,
   canonical ABI files, producer wiring, Apple/Metal, full link, LLDB, assets,
   pixels, devices, and playability are out of scope.
+- Lane 167 / task `01a002cb-26b4-78d1-b01c-1708f6a7b9e5` — active read-only
+  M3 Max exact Transforms ABI audit. Detached worktree
+  `/private/tmp/acgc-lane-canonical-transform-contract-audit` is exact PC
+  `216d1e24b` with decomp oracle `09ca8e8b`. It owns `0x0002` section layout,
+  projection/position/normal/current references and knownness, the exact
+  matrix boundary with `0x0008`, count/capacity/reserved/malformed rules, and
+  a future portable fixture/ownership map. It may not edit, build, launch,
+  access assets, overlap live PC setter ownership, or claim callback, Metal,
+  pixel, device, or playability proof.
 
-The remote Codex project assignment records place tasks 156–166 under the
+The remote Codex project assignment records place tasks 156–167 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
