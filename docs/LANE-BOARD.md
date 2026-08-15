@@ -101,10 +101,13 @@ validation and missing mandatory fixture cases. Lane 217 completed its
 read-only current-tip cumulative-producer audit and found the cumulative gate
 still blocked by missing leaf owners/producers. Lane 216 completed its exact
 two-file repair as child `5324c8739e`; lane 220 independently passed it, and
-the two source commits are integrated as canonical PC `689590cc`. Lane 219 is
-active on the independent portable Texgen/SU ABI prerequisite. No full link,
-LLDB, or device run is active. Lane 221 is an independent active read-only
-Transform leaf-producer readiness audit.
+the two source commits are integrated as canonical PC `689590cc`. Lane 219
+completed the portable Texgen/SU ABI source handoff at `f503fb924` and is on
+root-review hold. Lane 221 completed its independent read-only Transform
+leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
+Lanes 222 and 223 are registered setup-pending successors for independent
+Texgen review and the Transform leaf producer respectively. No full link,
+LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1419,8 +1422,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   No full link, LLDB, Metal, device, pixel, ISO/assets, Windows sign-off, or
   playability claim is in scope.
 - Lane 219 / reused project-owned M3 canonical task
-  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active portable Texgen/SU ABI
-  source/test lane on `gpt-5.6-luna` with max reasoning. Its dedicated source
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete portable Texgen/SU ABI
+  source/test lane on `gpt-5.6-luna` with max reasoning, held for independent
+  review before integration. Its dedicated source
   is `/private/tmp/acgc-lane-canonical-texgen-state-m3` on branch
   `c1/lane-canonical-texgen-state-m3` at exact PC `b9a9f355`; decomp
   `09ca8e8b` is read-only. It consumes the frozen ID4 contract and integrated
@@ -1432,7 +1436,14 @@ also integrated. Remote workers may not update the umbrella checkout.
   envelope, Apple/Metal, decomp, or ISO/assets paths. The gate is the frozen
   2,624-byte pointer-free little-endian section, strict record/matrix/SU
   validation, native and combined ASan/UBSan focused tests, bounded syntax
-  probes, and one reviewable source commit. Unique roots are
+  probes, and one reviewable source commit. It returned clean worker
+  `f503fb924d` from base `b9a9f355f7`; native and combined ASan/UBSan focused
+  CTest pass `1/1` each with no diagnostics (`detect_leaks=0`), native C11,
+  C++11, and `_WIN32` syntax probes pass, and real i686 compilation remains
+  blocked by the missing MinGW `string.h`/sysroot. Review bundle
+  `/private/tmp/acgc-lane-219-canonical-texgen.bundle` has SHA-256
+  `d47b45d486107f21e26cebcc51d512d9a93ff7e66a29c29481a40e73c9d7a5cb`.
+  Unique roots are
   `/private/tmp/acgc-lane-canonical-texgen-state-{native,asan,win}`. This is
   CPU/ABI evidence only; it cannot prove the later PC leaf producer, callback,
   Metal, pixel, device, Windows runtime, or playability.
@@ -1451,7 +1462,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   total scope remains four files, the repair touches only producer/test, and no
   new material blocker was found.
 - Lane 221 / reused project-owned M3 Transform task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — active read-only Transform
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — complete read-only Transform
   leaf-producer readiness and contract audit on `gpt-5.6-luna` with max
   reasoning. It verifies exact PC `b9a9f355`, decomp `09ca8e8b`, the
   source-only canonical bundle, and four hash-verified Transform contract/raw
@@ -1464,7 +1475,35 @@ also integrated. Remote workers may not update the umbrella checkout.
   position/normal slots, current matrix ID, load-range knownness, unresolved
   indexed loads, finite binary32 values, and Geometry/Texgen dependencies. If
   ready, it freezes only the smallest later producer header/source/fixture/CMake
-  contract; if blocked, it names the exact predecessor raw-owner repair.
+  contract; if blocked, it names the exact predecessor raw-owner repair. It
+  returned `READY`: the value-only raw owner supplies every required field,
+  knownness bit, unresolved-index guard, and finite-word invariant. The frozen
+  successor owns only a new producer header/source, one fixture, and minimal
+  `pc/CMakeLists.txt`. Evidence is
+  `docs/evidence/TRANSFORM-PRODUCER-READINESS-B9A9F355-2026-08-15.md`.
+- Lane 222 / reused project-owned M3 review task
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — setup-pending independent read-only
+  review of lane 219 worker `f503fb924d` against base `b9a9f355f7`. It must use
+  only the immutable review bundle with SHA-256 `d47b45d4...9d7a5cb`, create a
+  detached review source at `/private/tmp/acgc-lane-222-texgen-state-review`,
+  verify exact four-file scope and both-upstream provenance, and return `PASS`
+  or exact material findings. It owns no edit, branch, build, test, cleanup,
+  integration, full link, LLDB, runtime, Apple/Metal, device/pixel, Windows
+  sign-off, ISO/assets, or playability work.
+- Lane 223 / reused project-owned M3 Transform task
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — setup-pending source/test successor
+  on `gpt-5.6-luna` with max reasoning. It must create
+  `/private/tmp/acgc-lane-transform-producer-m3` on branch
+  `c1/lane-transform-producer-m3` at exact canonical PC `689590cc`, using only
+  source bundle `/private/tmp/acgc-canonical-pc-689590cc.bundle` with SHA-256
+  `30cd438904f7ebe89394e35e35043208cffc4f67d6a89c31138d1735f48af9de`.
+  Ownership is limited to new `pc/include/pc_gx_transform_producer.h`, new
+  `pc/src/pc_gx_transform_producer.c`, one focused fixture, and minimal
+  `pc/CMakeLists.txt`; `pc_gx.c`, raw/canonical ABIs, Texgen, Geometry,
+  cumulative/Apple/Metal, decomp, and ISO/assets are out of scope. Native and
+  combined ASan/UBSan focused tests plus bounded syntax probes are the only
+  verification; no full link, LLDB, runtime, device, pixel, Windows sign-off,
+  or playability claim is authorized.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
