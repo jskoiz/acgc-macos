@@ -144,14 +144,15 @@ passing natively and under combined ASan/UBSan. Lane 235's final immutable
 re-review returned `PASS`. Root imported the verified final bundle, applied all
 three commits one at a time, and integrated canonical PC `62c810e5b`; fresh
 exact-tip native and combined ASan/UBSan focused CTest pass `2/2` each. Both
-tasks are complete/integrated/archived. Lane 236 is the sole active source-edit
-worker for the canonical TEV leaf producer. Lane 237 has completed its clean
-canonical Indirect leaf handoff at worker `2f6ba5dff` and is held for
-independent root review; nothing from it is integrated yet. Lane 238 is the
-parallel read-only cumulative snapshot and Apple CPU-boundary audit at the
-same exact `62c810e5b` source tip. Lane 236 alone owns `pc/CMakeLists.txt`;
-lane 237 used a source-direct focused harness and lane 238 owns no files. No
-full link, LLDB, launch, or device work is active.
+tasks are complete/integrated/archived. Lanes 236 and 237 have completed clean
+canonical TEV and Indirect leaf handoffs at workers `043d24822` and
+`2f6ba5dff`; neither is integrated. Lanes 239 and 240 are their registered
+independent immutable CPU/source reviews, while lane 238 is the parallel
+read-only cumulative snapshot and Apple CPU-boundary audit at the same exact
+`62c810e5b` source tip. The completed TEV candidate alone changed
+`pc/CMakeLists.txt`; the Indirect candidate used a source-direct harness, and
+all three review/audit lanes own no production files. No full link, LLDB,
+launch, or device work is active.
 
 ## Remote M3 Max batch (current)
 
@@ -1880,13 +1881,15 @@ also integrated. Remote workers may not update the umbrella checkout.
   runtime, Metal, device/pixel,
   Windows sign-off, or playability claim follows.
 - Lane 236 / reused project-owned M3 Max task
-  `01a00640-960d-7d41-9320-721f26037d8a` — active/registered source-edit lane
-  for the canonical TEV leaf producer. Setup verified source-only bundle
+  `01a00640-960d-7d41-9320-721f26037d8a` — complete/root-review-hold
+  source-edit lane for the canonical TEV leaf producer. Setup verified
+  source-only bundle
   `/private/tmp/acgc-canonical-pc-62c810e.bundle` at SHA-256
   `7e8c25348f11fdb124e8c5ad75d78b0b4de1d139cd37e435ac535f303e2617e5`,
   exact PC base `62c810e5b`, and clean decomp `09ca8e8b`. Its clean isolated
-  source is `/private/tmp/acgc-lane-canonical-tev-producer-m3` on
-  `c1/lane-canonical-tev-producer-m3` at the exact base; future roots are
+  source `/private/tmp/acgc-lane-canonical-tev-producer-m3` on
+  `c1/lane-canonical-tev-producer-m3` advanced from the exact base to worker
+  `043d24822`; roots are
   `/private/tmp/acgc-lane-canonical-tev-producer-{native,asan,win}`. It owns
   only new `pc/include/pc_gx_tev_producer.h`, new
   `pc/src/pc_gx_tev_producer.c`, new
@@ -1900,7 +1903,14 @@ also integrated. Remote workers may not update the umbrella checkout.
   ASan/UBSan, producer-object, diff, and bounded syntax evidence is authorized;
   `pc_gx.c`, raw ownership, Indirect files, cumulative assembly, full link,
   LLDB, runtime, Apple/Metal, device/pixel, Windows sign-off, assets, and
-  playability are out of scope.
+  playability are out of scope. Native and combined ASan/UBSan focused CTest
+  pass `1/1` each, the production producer object and bounded C/C++/ILP32
+  probes pass, and `_WIN32` remains blocked by missing host `process.h`.
+  Complete-history bundle
+  `/private/tmp/acgc-lane-236-canonical-tev-producer.bundle` has SHA-256
+  `ba4d9a1ca72bd18dcffd31eddfd60969d96cb1ef8cb726d4042def6c02372f40`.
+  Nothing is integrated and all lane paths remain protected pending an
+  independent immutable review.
 - Lane 237 / reused project-owned M3 Max task
   `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete/root-review-hold
   source-edit lane for the canonical Indirect leaf producer. It used the same
@@ -1945,6 +1955,34 @@ also integrated. Remote workers may not update the umbrella checkout.
   non-overlapping successors. No edit, build, test, CMake, full link, LLDB,
   runtime, Metal/device/pixel, input/audio/save, iOS, or playability claim is
   authorized.
+- Lane 239 / reused project-owned M3 Max task
+  `01a00669-46ec-7c50-959c-50dafe702923` — active/registered independent
+  immutable review of the lane-237 Indirect producer. Setup verified candidate
+  bundle SHA-256
+  `aaab318c0cbe19e6d52b63107e1431489eb4a1ee6762ecf34a87c072796b30c2`,
+  exact one-commit parentage `62c810e5b` to `2f6ba5dff`, clean decomp
+  `09ca8e8b`, and the exact three new-file diff. Its clean detached review
+  source is `/private/tmp/acgc-lane-239-indirect-producer-review`; unique
+  native/ASan roots are `/private/tmp/acgc-lane-239-indirect-review-native`
+  and `-asan`. It owns no files and must return `PASS` or an exact material
+  candidate-owned blocker after source review, source-direct native and
+  combined ASan/UBSan reruns, production-object compile, and bounded syntax
+  probes. No CMake edit, integration, full link, LLDB, runtime, Metal/device,
+  pixel, or playability scope.
+- Lane 240 / reused project-owned M3 Max task
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active/registered independent
+  immutable review of the lane-236 TEV producer. Setup verified candidate
+  bundle SHA-256
+  `ba4d9a1ca72bd18dcffd31eddfd60969d96cb1ef8cb726d4042def6c02372f40`,
+  exact one-commit parentage `62c810e5b` to `043d24822`, clean decomp
+  `09ca8e8b`, and the exact four-file diff. Its clean detached review source is
+  `/private/tmp/acgc-lane-240-tev-producer-review`; unique native/ASan roots
+  are `/private/tmp/acgc-lane-240-tev-review-native` and `-asan`. It owns no
+  files and must return `PASS` or an exact material candidate-owned blocker
+  after source review, focused native and combined ASan/UBSan CTest,
+  production-object compile, and bounded syntax probes. No source edit,
+  integration, full link, LLDB, runtime, Metal/device, pixel, or playability
+  scope.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
