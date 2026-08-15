@@ -74,7 +74,8 @@ as PC `f2b7ab153`; lane 166 is integrated as PC `037689462`; lane 167 completed
 the read-only exact Transforms ABI audit; lane 168 is the
 non-overlapping portable canonical TEV ABI source lane; lane 169 is the
 read-only Depth/Raster exact contract audit; lane 170 is the focused PC raw
-Transform/matrix shadow source lane. No
+Transform/matrix shadow source lane; lane 171 is the read-only exact
+Channels/Lighting contract audit. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -420,8 +421,17 @@ checkout.
   are `/private/tmp/acgc-lane-transform-raw-shadow-{native,asan,win}`. Canonical
   ABI files, portable CMake, Texgen/SU, V1-V4, Apple/Metal, producer wiring,
   full link, LLDB, assets, pixels, devices, and playability are out of scope.
+- Lane 171 / task `01a002e1-540c-7693-b25d-363a1f209dd4` — active read-only
+  M3 Max Channels/Lighting contract audit in detached worktree
+  `/private/tmp/acgc-lane-channel-lighting-contract-audit` at exact PC
+  `037689462`, with decomp oracle `09ca8e8b`. It separately owns the exact
+  versioned `0x0004` Channels and `0x0040` Lighting value layouts,
+  initialization/knownness, V2-V4 reuse boundaries, current PC no-op/lossy
+  state, and the smallest serial shadow-state repair plan. It may not edit,
+  branch, build, launch, access assets, overlap source ownership, or claim
+  callback, Metal, pixel, device, Windows runtime, iOS, or playability proof.
 
-The remote Codex project assignment records place tasks 156–170 under the
+The remote Codex project assignment records place tasks 156–171 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
