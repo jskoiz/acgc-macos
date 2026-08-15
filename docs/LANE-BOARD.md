@@ -74,8 +74,10 @@ as PC `f2b7ab153`; lane 166 is integrated as PC `037689462`; lane 167 completed
 the read-only exact Transforms ABI audit; lane 168 is integrated as PC
 `6d1d310c0`; lane 169 completed the read-only Depth/Raster exact contract
 audit; lane 170 is the focused PC raw
-Transform/matrix shadow source lane; lane 171 is the read-only exact
-Channels/Lighting contract audit. No
+Transform/matrix shadow source lane; lane 171 completed the read-only exact
+Channels/Lighting contract audit; lane 172 is the neutral canonical Depth ABI
+source lane; lanes 173–174 are read-only exact Texgen/SU and Geometry/VCD/VAT
+contract audits. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -422,7 +424,7 @@ checkout.
   ABI files, portable CMake, Texgen/SU, V1-V4, Apple/Metal, producer wiring,
   full link, LLDB, assets, pixels, devices, and playability are out of scope.
 - Lane 171 / task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete,
-  archived, and cleanup-pending, read-only at exact PC `037689462` and decomp
+  archived, and cleaned, read-only at exact PC `037689462` and decomp
   `09ca8e8b`. It freezes versioned `0x0004` Channels as 136 bytes and `0x0040`
   Lighting as 516 bytes, records exact combined/separate channel semantics,
   final light-object values, cross-section references, PC loss/no-op gaps, and
@@ -430,15 +432,40 @@ checkout.
   `docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md`.
   No edit, build, launch, callback, Metal, pixel, device, Windows runtime,
   iOS, or playability operation occurred.
+- Lane 172 / task `01a002f3-0540-7a61-9873-cfcbc18dcaae` — active M3 Max
+  source-edit lane on explicit branch `c1/lane-canonical-depth-m3`, exact PC
+  base `6d1d310c0`, worktree `/private/tmp/acgc-lane-canonical-depth`, and
+  decomp oracle `09ca8e8b`. It exclusively owns a new canonical Depth
+  header/source, one portable fixture, and minimal portable CMake registration
+  for the frozen version-1, section-`0x0200`, 16-byte Z-mode ABI. Unique roots
+  are `/private/tmp/acgc-lane-canonical-depth-{native,asan}`. `pc_gx`, Raster,
+  private shadow state, V1-V4, Apple/Metal, producer wiring, full link, LLDB,
+  assets, pixels, devices, and playability are out of scope.
+- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — active read-only
+  M3 Max exact Texgen/SU contract audit in detached worktree
+  `/private/tmp/acgc-lane-texgen-contract-audit` at exact PC `6d1d310c0`, with
+  decomp oracle `09ca8e8b`. It owns only the versioned `0x0008` value-layout,
+  matrix/source/type/normalize/post/manual-SU domains, initialization,
+  knownness, cross-section references, PC gaps, and a non-overlapping future
+  ownership plan. It may not edit, build, launch, access assets, or claim
+  callback, Metal, pixel, device, Windows runtime, iOS, or playability proof.
+- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active read-only
+  M3 Max exact Geometry/VCD/VAT contract audit in detached worktree
+  `/private/tmp/acgc-lane-geometry-contract-audit` at exact PC `6d1d310c0`,
+  with decomp oracle `09ca8e8b`. It owns only the versioned `0x0001` logical
+  geometry/value-stream layout, VCD/VAT formats, primitive/count/stride/bounds,
+  guest/host separation, cross-section references, and future producer/fixture
+  ownership. It may not edit, build, launch, access assets, or claim callback,
+  Metal, pixel, device, Windows runtime, iOS, or playability proof.
 
-The remote Codex project assignment records place tasks 156–171 under the
+The remote Codex project assignment records place tasks 156–174 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
-transferred. The next source integration is lane 170's raw Transform shadow
-after individual review. Channels and Lighting are now architecture-ready for
-separate neutral ABI lanes, followed by one serial shared shadow owner. Full
-links and LLDB launches remain serialized and are not active.
+transferred. The next source integrations are lane 170's raw Transform shadow
+and lane 172's neutral Depth ABI after individual review; their production-file
+ownership does not overlap. Lanes 173–174 may finish their read-only contracts
+in parallel. Full links and LLDB launches remain serialized and are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
