@@ -45,8 +45,8 @@ is independently reviewed and integrated, and lanes 191–192 completed their
 read-only contracts.
 The raw Channels source successor and raw Texture/TLUT read-only audit are
 active below as lanes 195–196 after their existing M3 Max project tasks
-accepted the exact current-tip contracts. Lane 197 is registered setup-pending
-for an independent current-tip focused verification matrix.
+accepted the exact current-tip contracts. Lane 197 is also active with an
+independent current-tip focused verification matrix.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -878,8 +878,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   full link, LLDB, resource-byte/ISO/asset access, Apple/Metal execution,
   pixel, device, or playability action. Success unblocks one bounded raw
   Texture/TLUT source lane after ownership review.
-- Lane 197 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — registered
-  setup-pending M3 Max verification-only lane at exact canonical PC
+- Lane 197 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active M3
+  Max verification-only lane at exact canonical PC
   `23c26e520a` and decomp `09ca8e8b`. It may reuse protected clean worktree
   `/private/tmp/acgc-lane-channels-lighting-preflight`, import the verified
   `23c26e520a` source-only bundle, and detach read-only to the exact tip. Unique
@@ -907,8 +907,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194 are complete. Lanes 195–196 are active and lane 197 is
-setup-pending. Their
+191–192 and 194 are complete. Lanes 195–197 are active. Their
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
