@@ -100,9 +100,10 @@ crosswalk rather than duplicating work while project handoff is unresolved;
 lane 173 is complete/integrated/archived. Lane 185 reuses that project-owned
 M3 task and protected source worktree for the dependency-ready Depth temporal-
 ordering successor. Lane 186 independently owns the neutral Channels ABI in a
-separate project-owned M3 task/worktree. They are the only two active remote
-production workers and own no overlapping file. Remote workers may not update
-the umbrella checkout.
+separate project-owned M3 task/worktree. Lanes 187–188 are current-tip
+read-only producer and Apple-plan audits. Four remote lanes are active total:
+two non-overlapping source workers and two read-only audits. Remote workers may
+not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -683,6 +684,25 @@ the umbrella checkout.
   unblocks later setter-owned raw Channels provenance and cumulative producer
   work; it proves no PC producer, runtime, renderer, device, or playability
   gate.
+- Lane 187 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active
+  read-only current-tip cumulative-producer readiness audit in clean detached
+  `/private/tmp/acgc-lane-cumulative-producer-preflight` at exact PC
+  `1d48691a4f` and decomp `09ca8e8b`. It must inventory all fourteen canonical
+  sections against their implemented validators and setter-owned raw sources,
+  classify exact ready/missing/unknown dependencies after Geometry and
+  Texgen/SU integration, verify the all-or-nothing snapshot boundary before
+  V1–V4/GL submission, and choose the next bounded source ownership after
+  lanes 185–186. It owns no source, branch, build, test, docs, link, launch,
+  asset, Apple/Metal, pixel, device, or playability operation.
+- Lane 188 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active
+  read-only current-tip Apple canonical-plan audit in clean detached
+  `/private/tmp/acgc-lane-apple-canonical-plan-preflight` at exact PC
+  `1d48691a4f` and decomp `09ca8e8b`. It must reconcile the immutable canonical
+  CPU plan, typed consumer/runtime, resource cache/lifetime, geometry/state
+  encoder, sink, shader, present, and readback gates against the now-integrated
+  Geometry and Texgen/SU prerequisites, with exact file/symbol ownership and
+  serial proof order. It owns no source, branch, build, test, device, full
+  link, LLDB, ISO/assets, Metal execution, pixel, iOS, or playability claim.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -696,7 +716,8 @@ Lanes 177–178 completed read-only without source ownership, lane 179 completed
 verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are the only
-remote production workers; lane 183 is complete and lane 184 is stopped.
+remote production workers, while lanes 187–188 are read-only audits; lane 183
+is complete and lane 184 is stopped.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
