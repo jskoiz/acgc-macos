@@ -116,7 +116,7 @@ producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
 on the documented distinct predecessors. Lane 227 worker `dfef13a2` passed
 lane 228's immutable independent review and is integrated as canonical PC
 `0f896395c`; both tasks are archived. Lanes 229–231 are registered
-setup-pending for disjoint Blend, Fog, and cumulative-producer audits.
+active on disjoint Blend, Fog, and cumulative-producer audits.
 
 ## Remote M3 Max batch (current)
 
@@ -1578,7 +1578,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   header portability, and focused coverage have no material blocker.
 - Lane 227 / reused project-owned M3 source task
   `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete, independently reviewed,
-  integrated, and archive-ready Depth leaf-converter
+  integrated, archived, and generated-root-cleaned Depth leaf-converter
   source/test lane on `gpt-5.6-luna` with max reasoning. It must create remote
   source `/private/tmp/acgc-lane-depth-producer-m3` on branch
   `c1/lane-depth-producer-m3` at exact canonical PC `590b2bd73`, using only
@@ -1603,9 +1603,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   Lane 228 returned `PASS`; root cherry-picked the exact change as canonical
   `0f896395c`, where fresh native and combined ASan/UBSan focused CTest pass
   `3/3` each and the producer object compiles. Evidence is
-  `docs/evidence/CANONICAL-DEPTH-PRODUCER-0F896395C-2026-08-15.md`.
+  `docs/evidence/CANONICAL-DEPTH-PRODUCER-0F896395C-2026-08-15.md`. Exact
+  local/remote generated roots and worker bundle are absent after cleanup; the
+  remote source remains preserved because bounded checks found `assets`/`orig`
+  entries. The old canonical bundle remains preserved for recorded provenance.
 - Lane 228 / reused project-owned M3 review task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/archive-ready independent read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete/archived independent read-only
   review of lane 227 worker `dfef13a23e` against base `590b2bd73`. It must use
   only canonical bundle `/private/tmp/acgc-canonical-pc-590b2bd.bundle`
   (SHA-256 `c5b712caecd66a1262afbfeac5f8651d90c913bcccaf27a9960304c0245157af`),
@@ -1621,9 +1624,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   It returned `PASS`: immutable provenance, exact four-file ownership,
   raw/canonical/decomp field mapping, truthful raw invalid-history limitation,
   destination-preserving fail-closed behavior, portability, and focused
-  coverage have no material blocker.
+  coverage have no material blocker. Its detached review source is preserved
+  because bounded cleanup checks found `assets`/`orig` entries.
 - Lane 229 / reused project-owned M3 audit task
-  `01a004f3-1941-7731-a310-d5ad1f52011b` — setup-pending independent read-only
+  `01a004f3-1941-7731-a310-d5ad1f52011b` — active independent read-only
   Blend raw-owner/leaf-producer contract audit at exact canonical PC
   `0f896395c` and decomp `09ca8e8b`. It must use source-only bundle
   `/private/tmp/acgc-canonical-pc-0f89639.bundle` (SHA-256
@@ -1637,7 +1641,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   test, cleanup, link, LLDB, Apple/Metal, device/pixel, Windows sign-off,
   ISO/assets, or playability work.
 - Lane 230 / reused project-owned M3 audit task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — setup-pending independent read-only
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active independent read-only
   Fog raw-owner/leaf-producer contract audit at exact canonical PC `0f896395c`
   and decomp `09ca8e8b`, using the same canonical bundle, verified control
   `/private/tmp/acgc-lane-230-fog-readiness.md` (SHA-256
@@ -1649,7 +1653,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   predecessor. It owns no edit, branch, build, test, cleanup, link, LLDB,
   Apple/Metal, device/pixel, Windows sign-off, ISO/assets, or playability work.
 - Lane 231 / reused project-owned M3 audit task
-  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — setup-pending independent read-only
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active independent read-only
   current-tip cumulative-producer readiness reconciliation at exact canonical
   PC `0f896395c` and decomp `09ca8e8b`. It must use the canonical bundle,
   prior control `/private/tmp/acgc-lane-231-cumulative-readiness.md` (SHA-256
