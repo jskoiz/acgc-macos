@@ -114,8 +114,8 @@ read-only TEV audit with `BLOCK`. Lane 225 completed the Alpha/Blend/Depth/Fog
 producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
 on the documented distinct predecessors. Lane 227 completed the narrow Depth
 converter as clean worker `dfef13a2` from its exact, disjoint canonical base
-`590b2bd73` and is on root-review hold. Lane 228 is registered setup-pending
-for the immutable independent review.
+`590b2bd73` and is on root-review hold. Lane 228 is active on the immutable
+independent review.
 
 ## Remote M3 Max batch (current)
 
@@ -1596,7 +1596,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   bundle `/private/tmp/acgc-lane-227-depth-producer.bundle` has SHA-256
   `c4c6d0e191ec12e89154b1d87a9ba0c7d112c17828461e4351372ca8fafb21bd`.
 - Lane 228 / reused project-owned M3 review task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending independent read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active independent read-only
   review of lane 227 worker `dfef13a23e` against base `590b2bd73`. It must use
   only canonical bundle `/private/tmp/acgc-canonical-pc-590b2bd.bundle`
   (SHA-256 `c5b712caecd66a1262afbfeac5f8651d90c913bcccaf27a9960304c0245157af`),
@@ -1609,6 +1609,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   output preservation, portability, and focused fixture coverage. It owns no
   edit, branch, build, test, cleanup, integration, full link, LLDB,
   Apple/Metal, device/pixel, Windows sign-off, ISO/assets, or playability work.
+  The immutable controls match and the named review source is clean/detached at
+  exact candidate `dfef13a2`; static contract review is in progress.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
