@@ -34,9 +34,10 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `23c26e520a` (`Repair Geometry scalar and index
-provenance`), completing immutable raw Geometry batches, the reviewed neutral
-Texture/TLUT, Dynamic, Lighting, and Channels ABIs, Depth ordering, raw
+`c1/macos-host-launch` at `38343a5eb5` (`Capture persistent raw GX channel
+state`), completing persistent setter-owned raw Channels, immutable raw
+Geometry batches, the reviewed neutral Texture/TLUT, Dynamic, Lighting, and
+Channels ABIs, Depth ordering, raw
 Texgen/SU, and canonical Geometry chains on top of `251a010b8` (`Preserve typed
 GX depth setter ABI`),
 `eeec2301c1` (`Track PC raw GX depth provenance`), and `c3e158398`
@@ -227,12 +228,16 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   section and `0x0040` as a 516-byte eight-slot final light-object section.
   Integrated `324c174ae3` implements Channels and `43992e7085` implements
   Lighting as strict pointer-free value ABIs with exact present/absent metadata
-  validation; the current canonical native and combined ASan/UBSan matrices
-  pass `10/10`. Setter-owned raw Channels and Lighting plus their cross-section
-  producer remain open. See the
+  validation; the neutral native and combined ASan/UBSan matrices pass `10/10`.
+  Integrated `38343a5eb5` adds setter-owned raw Channels, including persistent
+  inactive register state, partial RGBA knownness, sticky invalidity, and exact
+  inactive canonical zeroing. Its exact canonical native and combined
+  ASan/UBSan focused matrices pass `7/7`. Setter-owned raw Lighting and the
+  cross-section producer remain open. See the
   [canonical Channels/Lighting contracts](docs/evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md),
   [canonical Channels implementation](docs/evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md),
-  and [canonical Lighting implementation](docs/evidence/CANONICAL-LIGHTING-STATE-43992E708-2026-08-14.md).
+  [canonical Lighting implementation](docs/evidence/CANONICAL-LIGHTING-STATE-43992E708-2026-08-14.md),
+  and [raw Channels integration evidence](docs/evidence/PC-RAW-CHANNELS-38343A5EB-2026-08-14.md).
 
 - The Texture/TLUT/Dynamic audit freezes separate pointer-free `0x0010` and
   `0x2000` value contracts with stable logical IDs, owner epochs, per-resource
@@ -248,11 +253,12 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 
 - Integrated `23c26e520a` now captures immutable Geometry
   VCD/VAT/array/completed-batch provenance at `pc_gx_flush_vertices`, including
-  direct `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Remaining
-  draw-critical source work is setter-owned raw Channels, Lighting, and
-  Texture/TLUT resource generations followed by one all-or-nothing cumulative
-  serializer. Apple consumption follows only after those complete typed
-  dependencies and stable resources. See the
+  direct `GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated
+  `38343a5eb5` supplies its persistent raw Channels dependency. Remaining
+  draw-critical source work is setter-owned raw Lighting and Texture/TLUT
+  resource generations followed by one all-or-nothing cumulative serializer.
+  Apple consumption follows only after those complete typed dependencies and
+  stable resources. See the
   [raw Geometry integration evidence](docs/evidence/PC-RAW-GEOMETRY-BATCH-23C26E520-2026-08-14.md),
   [canonical producer readiness audit](docs/evidence/CANONICAL-PRODUCER-READINESS-1D48691A4-2026-08-14.md)
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
@@ -264,6 +270,9 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   by the absent compiler/sysroot/archive/link toolchain. This is CPU evidence,
   not a full link, Windows sign-off, Metal, pixel, or playability result. See
   [current focused matrix evidence](docs/evidence/CURRENT-FOCUSED-MATRIX-23C26E520-2026-08-14.md).
+  The exact post-Channels tree at `38343a5eb5` separately passes the seven
+  directly affected canonical/raw targets natively and under combined
+  ASan/UBSan (`7/7` each, leak detection disabled).
 
 - The broad focused baseline at `b5f550ea0` passes native `44` with three
   declared Metal-device skips and combined ASan/UBSan `44` with the same three

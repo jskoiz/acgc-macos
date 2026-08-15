@@ -61,9 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `23c26e520a`, with
-immutable raw Geometry batches, the strict neutral Texture/TLUT, Dynamic,
-Lighting, and Channels ABIs, repaired `GXSetZMode`
+As of 2026-08-14, the canonical local PC branch is clean at `38343a5eb5`, with
+persistent setter-owned raw Channels, immutable raw Geometry batches, the
+strict neutral Texture/TLUT, Dynamic, Lighting, and Channels ABIs, repaired `GXSetZMode`
 flush-before-mutation
 boundary, setter-owned raw Texgen/SU provenance, and canonical Geometry ABI on
 top of the portable 888-byte Transform ABI and setter-owned raw Transform and
@@ -249,11 +249,14 @@ section and `0x0040` as a 516-byte eight-slot final light-object section.
 Integrated `324c174ae3` implements Channels and `43992e7085` implements
 Lighting as strict pointer-free value ABIs with exact envelope metadata
 validation; native and combined ASan/UBSan canonical matrices pass `10/10`.
-The PC still needs setter-owned raw Channels and Lighting provenance, exact
-producer conversion, and their cross-section validation. See the
+Integrated `38343a5eb5` now captures persistent setter-owned raw Channels and
+passes the exact affected native and combined ASan/UBSan matrices `7/7` each.
+The PC still needs setter-owned raw Lighting provenance, exact cross-section
+conversion, and dependency validation. See the
 [canonical Channels/Lighting contracts](evidence/CANONICAL-CHANNELS-LIGHTING-CONTRACT-037689462-2026-08-14.md),
 the [canonical Channels implementation](evidence/CANONICAL-CHANNELS-STATE-324C174AE-2026-08-14.md),
-and the [canonical Lighting implementation](evidence/CANONICAL-LIGHTING-STATE-43992E708-2026-08-14.md).
+the [canonical Lighting implementation](evidence/CANONICAL-LIGHTING-STATE-43992E708-2026-08-14.md),
+and [raw Channels integration evidence](evidence/PC-RAW-CHANNELS-38343A5EB-2026-08-14.md).
 
 The Texture/TLUT/Dynamic audit freezes separate pointer-free `0x0010` and
 `0x2000` contracts. Stable logical IDs, owner epochs, per-image and per-TLUT
@@ -271,8 +274,9 @@ and [raw Texture/TLUT producer plan](evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C
 The refreshed producer and Apple audits reject another transitional packet
 shim. Integrated `23c26e520a` now captures immutable Geometry VCD/VAT/array and
 completed-batch provenance at `pc_gx_flush_vertices`, including direct
-`GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Setter-owned raw
-Channels, Lighting, and Texture/TLUT resource generations remain required. A
+`GX_TEX_S` and exact INDEX8/INDEX16 entry-point width. Integrated `38343a5eb5`
+supplies persistent raw Channels. Setter-owned raw Lighting and Texture/TLUT
+resource generations remain required. A
 cumulative producer then preflights every required section and resource
 generation before one synchronous all-or-nothing callback. Apple consumption
 begins only after that contract, through a pure-C immutable plan and separately

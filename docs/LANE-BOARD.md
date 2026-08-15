@@ -43,15 +43,19 @@ reviewed and integrated, as is lane 193's effective magnification-filter
 repair. Lane 194 has completed its read-only Lighting producer audit. Lane 190
 is independently reviewed and integrated, and lanes 191–192 completed their
 read-only contracts.
-Lane 195 completed its raw Channels source handoff, but root review found that
-`GXSetNumChans` incorrectly erases persistent inactive raw records. Lane 199 is
-registered below as the narrow child repair.
+Lane 195 completed its raw Channels source handoff; root review found that
+`GXSetNumChans` incorrectly erased persistent inactive raw records. Lane 199
+repaired that contradiction, and the final tree is integrated as canonical PC
+`38343a5eb5` without recording the broken intermediate commit on the canonical
+branch.
 Lane 196 completed its read-only raw Texture/TLUT ownership audit and froze the
 private pointer-free shadow plus synchronous lease boundary. Lane 197 completed
 the independent current-tip focused verification matrix with native and
 combined ASan/UBSan `17/17` passes; its exact holder-free generated roots are
-retired. Lane 198 is registered below as the independent read-only review of
-the lane-195 candidate before integration.
+retired. Lane 198 completed the independent read-only review of the initial
+lane-195 candidate; root review supersedes its PASS at the documented
+persistence boundary. No production worker is active while the next raw
+Lighting lane is being registered.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -59,7 +63,7 @@ evidence remain available in Git and the evidence docs.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`23c26e520a` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`38343a5eb5` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -869,11 +873,13 @@ also integrated. Remote workers may not update the umbrella checkout.
   native and combined ASan/UBSan serial verification can prove only the CPU raw
   Channels contract. Success releases `pc_gx` for the raw Lighting lane and
   supplies the Channels dependency to the cumulative producer. Worker branch
-  `c1/lane-raw-channels-m3` is clean at `c9eec84b0e`; source-only bundle
-  `/private/tmp/acgc-lane-195-raw-channels.bundle` has SHA-256
-  `989a4d3b49125098abb4d854bd06a3f59873260cdb54ef9f1c677d5e7bbeacd8`
-  and requires exact base `23c26e520a`. Native and combined ASan/UBSan focused
-  raw-state matrices pass; root review and integration remain pending.
+  `c1/lane-raw-channels-m3` is clean at repaired final `fe4aac5259`; replacement
+  source-only bundle `/private/tmp/acgc-lane-195-raw-channels.bundle` has
+  SHA-256 `8ce913b763a03de15ccca91a5fab3b7e50af02c0c5a63fa00261aea0722704f5`
+  and requires exact base `23c26e520a`. The repaired final tree is integrated
+  as canonical PC `38343a5eb5`; native and combined ASan/UBSan focused
+  raw-state matrices pass `7/7` each. Evidence is
+  `docs/evidence/PC-RAW-CHANNELS-38343A5EB-2026-08-14.md`.
 - Lane 196 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — complete M3 Max
   read-only raw Texture/TLUT ownership audit at exact
   canonical PC `23c26e520a` and decomp `09ca8e8b`. It may reuse protected
@@ -921,8 +927,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   mapping and fail-closed behavior but did not identify the frozen plan's
   persistence contradiction. Root review therefore supersedes that PASS and
   lane 199 remains the required repair before integration.
-- Lane 199 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active
-  M3 Max source/test repair on `c1/lane-raw-channels-m3` at `c9eec84b0e`.
+- Lane 199 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete,
+  reviewed, and integrated M3 Max source/test repair on
+  `c1/lane-raw-channels-m3`, advancing initial `c9eec84b0e` to repaired final
+  `fe4aac5259`.
   It owns only `pc/src/pc_gx_channels_raw.c` and the focused Channels fixture.
   `pc_gx_raw_channels_set_num` must preserve inactive controls/colors as the
   original GX register state does; canonical conversion must zero inactive
@@ -931,6 +939,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   reissuing controls/colors and a valid zero-channel canonical section while
   private state is retained. No other production file, full link, LLDB,
   resource, Apple/Metal, pixel, device, or playability scope is authorized.
+  The repair preserves private records across `2 -> 0 -> 1 -> 2`, zeroes only
+  inactive canonical output, and passes native plus combined ASan/UBSan
+  seven-target matrices. Root integrated the final tree as one canonical
+  commit `38343a5eb5`, avoiding the known-broken intermediate history. No
+  cumulative packet, full link, LLDB, Metal, pixel, device, or playability
+  claim follows.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -945,8 +959,9 @@ verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
-and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194–198 are complete. Lane 199 is active. The current
+and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
+lanes 191–192, 194, and 196–198 are complete. No production worker is active
+while the raw Lighting successor is being registered. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
