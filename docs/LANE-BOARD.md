@@ -110,8 +110,8 @@ Lane 222 completed the independent Texgen review. Lane 223 completed the
 Transform leaf-producer source handoff at `4fde6d94` and is on root-review
 hold. No full link, LLDB, or device run is active. Lane 224 completed its
 read-only TEV audit with `BLOCK`; lane 225 remains active on the
-Alpha/Blend/Depth/Fog producer topology. Lane 226 is registered setup-pending
-for the independent Transform producer review.
+Alpha/Blend/Depth/Fog producer topology. Lane 226 is active on the independent
+Transform producer review.
 
 ## Remote M3 Max batch (current)
 
@@ -1448,8 +1448,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   blocked by the missing MinGW `string.h`/sysroot. Review bundle
   `/private/tmp/acgc-lane-219-canonical-texgen.bundle` has SHA-256
   `d47b45d486107f21e26cebcc51d512d9a93ff7e66a29c29481a40e73c9d7a5cb`.
-  Unique roots are
-  `/private/tmp/acgc-lane-canonical-texgen-state-{native,asan,win}`. This is
+  Generated worker/integration roots and both review bundles were retired by
+  exact holder-free cleanup; asset-bearing source roots remain preserved. This is
   CPU/ABI evidence only; it cannot prove the later PC leaf producer, callback,
   Metal, pixel, device, Windows runtime, or playability. Fresh exact-integrated
   native and combined ASan/UBSan CTest also pass `1/1` each with no diagnostics.
@@ -1499,7 +1499,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   sign-off, ISO/assets, or playability work. It returned `PASS`: exact
   four-file scope and ancestry, fixed layout, explicit little-endian codec,
   strict domains/dependencies, destination-preserving fail-closed behavior,
-  and focused fixture coverage have no material candidate-owned blocker.
+  and focused fixture coverage have no material candidate-owned blocker. Its
+  asset-bearing detached review source remains preserved after generated-root
+  cleanup.
 - Lane 223 / reused project-owned M3 Transform task
   `01a004f3-1941-7731-a310-d5ad1f52011b` — complete source/test successor on
   root-review hold
@@ -1547,7 +1549,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   build, test, cleanup, integration, full link, LLDB, Apple/Metal, device/pixel,
   ISO/assets, Windows sign-off, or playability work.
 - Lane 226 / reused project-owned M3 review task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending independent read-only
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active independent read-only
   review of lane 223 worker `4fde6d94ed` against base `689590cc`. It must use
   only the verified canonical and thin review bundles plus the hash-verified
   readiness control, create detached review source
