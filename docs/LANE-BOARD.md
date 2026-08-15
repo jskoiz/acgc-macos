@@ -81,7 +81,9 @@ raw Depth provenance. Lanes 173–174 have been reused for the two active,
 non-overlapping M3 Max successors: raw Texgen/SU provenance and the neutral
 Geometry ABI. Lanes 177–178 are active read-only current-tip successors for
 the cumulative producer and Apple canonical-plan contracts. Lane 179 is the
-independent current-tip native/sanitizer/Windows focused-matrix refresh. No
+independent current-tip native/sanitizer/Windows focused-matrix refresh. Lanes
+180–181 are read-only Channels/Lighting and Raster implementation preflights.
+No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -531,6 +533,22 @@ checkout.
   roots. It may not edit source/docs/refs, build full `ac_pc`, launch, use a
   Metal device, or claim pixels, Windows runtime, device behavior, or
   playability.
+- Lane 180 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active
+  read-only M3 Max Channels/Lighting implementation preflight in detached
+  `/private/tmp/acgc-lane-channels-lighting-preflight` at exact PC
+  `251a010b8` and decomp `09ca8e8b`. It converts the frozen 136-byte Channels
+  and 516-byte Lighting contracts into exact neutral-ABI and later raw-PC
+  ownership plans without overlapping the active portable-CMake or `pc_gx`
+  owners. No edit, build, link, launch, asset, Metal, pixel, or playability
+  claim is allowed.
+- Lane 181 / reused task `01a002d6-8511-79d2-afeb-4348ff78a52a` — active
+  read-only M3 Max Raster implementation preflight in detached
+  `/private/tmp/acgc-lane-raster-preflight` at exact PC `251a010b8` and decomp
+  `09ca8e8b`. It turns the frozen 128-byte section `0x0400` contract into exact
+  neutral-ABI and later raw-PC plans while keeping Raster-owned line/point
+  TexCoord-offset masks separate from Texgen/SU bias/cylinder/manual state.
+  No edit, build, link, launch, asset, Metal, pixel, or playability claim is
+  allowed.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -541,7 +559,7 @@ integrated. Lanes 173–174 are reused for dependency-ready implementation
 successors and are the only active source-edit owners; their production and
 CMake ownership does not overlap. Lanes 177–178 are read-only and do not own
 source; lane 179 is verification-only. Full links and LLDB launches remain
-serialized and are not active.
+serialized and are not active. Lanes 180–181 are read-only prerequisite audits.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
