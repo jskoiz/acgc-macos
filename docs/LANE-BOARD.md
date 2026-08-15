@@ -43,11 +43,13 @@ reviewed and integrated, as is lane 193's effective magnification-filter
 repair. Lane 194 has completed its read-only Lighting producer audit. Lane 190
 is independently reviewed and integrated, and lanes 191–192 completed their
 read-only contracts.
-The raw Channels source successor remains active below as lane 195. Lane 196
-completed its read-only raw Texture/TLUT ownership audit and froze the private
-pointer-free shadow plus synchronous lease boundary. Lane 197 completed the
-independent current-tip focused verification matrix with native and combined
-ASan/UBSan `17/17` passes.
+Lane 195 completed its raw Channels source handoff and is root-review pending.
+Lane 196 completed its read-only raw Texture/TLUT ownership audit and froze the
+private pointer-free shadow plus synchronous lease boundary. Lane 197 completed
+the independent current-tip focused verification matrix with native and
+combined ASan/UBSan `17/17` passes; its exact holder-free generated roots are
+retired. Lane 198 is registered below as the independent read-only review of
+the lane-195 candidate before integration.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -846,7 +848,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   `docs/evidence/RAW-LIGHTING-PRODUCER-PLAN-43992E708-2026-08-14.md`.
   Success unblocks a raw Lighting source lane only after lane 189 releases
   `pc_gx` ownership.
-- Lane 195 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — active M3 Max
+- Lane 195 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — complete M3 Max
   raw Channels source/test lane at exact canonical PC
   `23c26e520a` and decomp `09ca8e8b`. It may reuse protected clean worktree
   `/private/tmp/acgc-lane-apple-canonical-plan-preflight`, import source-only
@@ -864,7 +866,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   roots are `/private/tmp/acgc-lane-raw-channels-{native,asan,win}`. Focused
   native and combined ASan/UBSan serial verification can prove only the CPU raw
   Channels contract. Success releases `pc_gx` for the raw Lighting lane and
-  supplies the Channels dependency to the cumulative producer.
+  supplies the Channels dependency to the cumulative producer. Worker branch
+  `c1/lane-raw-channels-m3` is clean at `c9eec84b0e`; source-only bundle
+  `/private/tmp/acgc-lane-195-raw-channels.bundle` has SHA-256
+  `989a4d3b49125098abb4d854bd06a3f59873260cdb54ef9f1c677d5e7bbeacd8`
+  and requires exact base `23c26e520a`. Native and combined ASan/UBSan focused
+  raw-state matrices pass; root review and integration remain pending.
 - Lane 196 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — complete M3 Max
   read-only raw Texture/TLUT ownership audit at exact
   canonical PC `23c26e520a` and decomp `09ca8e8b`. It may reuse protected
@@ -901,6 +908,15 @@ also integrated. Remote workers may not update the umbrella checkout.
   header probes pass, while a real i686 Windows build remains toolchain-blocked.
   Evidence is
   `docs/evidence/CURRENT-FOCUSED-MATRIX-23C26E520-2026-08-14.md`.
+- Lane 198 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — setup-pending
+  M3 Max read-only independent review of lane 195. It must verify bundle
+  `989a4d3b49125098abb4d854bd06a3f59873260cdb54ef9f1c677d5e7bbeacd8`,
+  exact parent `23c26e520a`, final `c9eec84b0e`, five-file ownership, both
+  upstreams, raw/canonical semantics, legacy Windows/GL preservation, and
+  native plus combined ASan/UBSan evidence. It owns no source, branch, docs,
+  build, full link, LLDB, resource bytes, Apple/Metal, pixel, device, or
+  playability action. Success permits or blocks root integration with one
+  exact finding.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -916,7 +932,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192, 194, and 196–197 are complete. Lane 195 is active. The current
+191–192 and 194–197 are complete. Lane 198 is setup-pending. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 

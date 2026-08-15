@@ -77,9 +77,9 @@ Generated roots at handoff were:
 - `/private/tmp/acgc-lane-current-23c-matrix-asan` (45 MiB);
 - `/private/tmp/acgc-lane-current-23c-matrix-win` (164 KiB partial configure).
 
-They are cleanup candidates only after exact holder checks. The protected
-source worktree is not a cleanup candidate because it contains ignored
-local-only paths.
+Exact remote holder checks returned no open files. All three generated roots
+were then removed by exact path and rechecked absent. The protected source
+worktree remains because it contains ignored local-only paths.
 
 ## Evidence boundary
 
