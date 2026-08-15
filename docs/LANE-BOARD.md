@@ -109,11 +109,11 @@ leaf-producer audit with `READY`; no predecessor raw-owner repair is required.
 Lane 222 completed the independent Texgen review. Lane 223 completed the
 Transform leaf-producer source handoff at `4fde6d94` and is on root-review
 hold. No full link, LLDB, or device run is active. Lane 224 completed its
-read-only TEV audit with `BLOCK`; lane 225 remains active on the
-Alpha/Blend/Depth/Fog producer topology. Lane 225 has now completed: Alpha is
-`READY`, while Blend, Depth, and Fog are `BLOCKED` on the documented distinct
-predecessors. Lane 226 is active on the independent Transform producer review.
-Lane 227 is registered setup-pending for the narrow Depth converter.
+read-only TEV audit with `BLOCK`. Lane 225 completed the Alpha/Blend/Depth/Fog
+producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
+on the documented distinct predecessors. Lane 226 is active on the independent
+Transform producer review. Lane 227 is registered setup-pending for the narrow
+Depth converter from canonical PC `590b2bd73`.
 
 ## Remote M3 Max batch (current)
 
@@ -1566,12 +1566,18 @@ also integrated. Remote workers may not update the umbrella checkout.
   playability work.
 - Lane 227 / reused project-owned M3 source task
   `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending Depth leaf-converter
-  source/test lane on `gpt-5.6-luna` with max reasoning. It must use a verified
-  current canonical source-only bundle, own only a new Depth producer
-  header/source, one focused fixture, and minimal `pc/CMakeLists.txt`, and
-  preserve the existing raw Depth owner and canonical ABI. It may not edit
-  `pc_gx.c`, `pc_gx_internal.h`, Transform/Texgen/TEV/Blend/Fog, cumulative or
-  Apple/Metal code, decomp, or ISO/assets. Native and combined ASan/UBSan
+  source/test lane on `gpt-5.6-luna` with max reasoning. It must create remote
+  source `/private/tmp/acgc-lane-depth-producer-m3` on branch
+  `c1/lane-depth-producer-m3` at exact canonical PC `590b2bd73`, using only
+  source bundle `/private/tmp/acgc-canonical-pc-590b2bd.bundle` with SHA-256
+  `c5b712caecd66a1262afbfeac5f8651d90c913bcccaf27a9960304c0245157af`.
+  Ownership is limited to a new Depth producer header/source, one focused
+  fixture, and minimal `pc/CMakeLists.txt`; existing raw/canonical Depth ABIs,
+  `pc_gx.c`, `pc_gx_internal.h`, Transform/Texgen/TEV/Blend/Fog, cumulative and
+  Apple/Metal code, decomp, and ISO/assets are out of scope. Unique roots are
+  `/private/tmp/acgc-lane-depth-producer-native`,
+  `/private/tmp/acgc-lane-depth-producer-asan`, and
+  `/private/tmp/acgc-lane-depth-producer-win`. Native and combined ASan/UBSan
   focused tests plus production-object/syntax probes are the only verification;
   no full link, LLDB, runtime, device, pixel, Windows sign-off, or playability
   claim is authorized.
