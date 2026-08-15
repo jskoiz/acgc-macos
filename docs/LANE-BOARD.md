@@ -54,8 +54,8 @@ the independent current-tip focused verification matrix with native and
 combined ASan/UBSan `17/17` passes; its exact holder-free generated roots are
 retired. Lane 198 completed the independent read-only review of the initial
 lane-195 candidate; root review supersedes its PASS at the documented
-persistence boundary. No production worker is active while the next raw
-Lighting lane is being registered.
+persistence boundary. Lane 200 is the sole active production worker, owning
+the now-unblocked raw Lighting producer on the M3 Max.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -945,6 +945,26 @@ also integrated. Remote workers may not update the umbrella checkout.
   commit `38343a5eb5`, avoiding the known-broken intermediate history. No
   cumulative packet, full link, LLDB, Metal, pixel, device, or playability
   claim follows.
+- Lane 200 / reused project-owned M3 task
+  `01a00275-9cf6-7113-8511-5e9a4d18deff` — active raw Lighting source/test
+  successor. The verified tracked-source-only bundle
+  `/private/tmp/acgc-canonical-pc-38343a5.bundle` has SHA-256
+  `11f1631915c8e97ae9d48b79ef3132b8083cfc756a2efe1e2b4f1d258fdfa0ce`,
+  contains exact canonical PC `38343a5eb5`, and requires base `23c26e520a`.
+  The dedicated PC worktree is `/private/tmp/acgc-lane-raw-lighting-m3` on
+  branch `c1/lane-raw-lighting-m3` at exact base `38343a5eb5`; decomp remains
+  `09ca8e8b`. It owns only `pc/include/pc_gx_internal.h`, a narrow new
+  `pc/src/pc_gx_lighting_raw.c`, Lighting setter/load calls in
+  `pc/src/pc_gx.c`, one focused raw Lighting fixture, and minimal
+  `pc/CMakeLists.txt` registration. The frozen contract is
+  `docs/evidence/RAW-LIGHTING-PRODUCER-PLAN-43992E708-2026-08-14.md`.
+  Raw Channels, Geometry, Texture/TLUT, the cumulative packet, Apple files,
+  umbrella docs/gitlink, full `ac_pc` link, LLDB, ISO/assets, Metal, pixel,
+  device, iOS, and playability are out of scope. Unique roots are
+  `/private/tmp/acgc-lane-raw-lighting-{native,asan,win}`. Success requires a
+  clean worker commit, exact two-upstream crosswalk, focused native and
+  combined ASan/UBSan serial results, static probes, and a bounded handoff; it
+  releases shared `pc_gx` ownership to the raw Texture/TLUT successor.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -960,8 +980,8 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
-lanes 191–192, 194, and 196–198 are complete. No production worker is active
-while the raw Lighting successor is being registered. The current
+lanes 191–192, 194, and 196–198 are complete. Lane 200 is the sole active
+production worker. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
