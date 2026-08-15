@@ -908,7 +908,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   header probes pass, while a real i686 Windows build remains toolchain-blocked.
   Evidence is
   `docs/evidence/CURRENT-FOCUSED-MATRIX-23C26E520-2026-08-14.md`.
-- Lane 198 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — setup-pending
+- Lane 198 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — active
   M3 Max read-only independent review of lane 195. It must verify bundle
   `989a4d3b49125098abb4d854bd06a3f59873260cdb54ef9f1c677d5e7bbeacd8`,
   exact parent `23c26e520a`, final `c9eec84b0e`, five-file ownership, both
@@ -932,7 +932,7 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194–197 are complete. Lane 198 is setup-pending. The current
+191–192 and 194–197 are complete. Lane 198 is active. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
