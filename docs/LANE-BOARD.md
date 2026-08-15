@@ -77,20 +77,23 @@ reviewed/archived under the remote M3 Max `acgc-modern-port` project. No
 production worker from that completed batch remains active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs. Exact lane-204 cleanup
-is complete. Lane 208 is the sole active M3 Max source worker, owning raw
-Raster. Lane 209 is reviewed and integrated as canonical PC `a42da8e155`;
+is complete. Lane 208 is reviewed and integrated as canonical PC
+`85b25cb3c`; its initial candidate passed raw-shadow review but root held the
+canonical branch until the same task restored decomp's `field == 0` viewport
+jitter adjustment and added a focused regression. Lane 209 is reviewed and
+integrated as canonical PC `a42da8e155`;
 its remote and fresh local native plus combined ASan/UBSan focused CTest pass
 `1/1` each. Lane 210 completed its read-only
-Geometry-converter audit and is reviewed/archived. Its verdict is that a
-complete producer is not dependency-ready; the raw Geometry closure successor
-must wait until lane 208 releases overlapping `pc_gx.c` ownership. No full
+Geometry-converter audit and is reviewed/archived. Its raw Geometry closure
+successor is now dependency-ready because lane 208 released overlapping
+`pc_gx.c` ownership, but no successor is active. No full
 link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`a42da8e155` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`85b25cb3c` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1144,25 +1147,22 @@ also integrated. Remote workers may not update the umbrella checkout.
   `docs/evidence/CANONICAL-INDIRECT-CONTRACT-698D45D3E-2026-08-15.md`; no
   build, full link, LLDB, callback, Metal, pixel, device, or playability claim.
 - Lane 208 / reused project-owned M3 task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active raw Raster
-  source/test successor. It must import the tracked-source-only canonical PC
-  bundle with SHA-256
-  `5d280a7f1ffc6919d31a7dc88ef0720ba1280f74d57b199e5c7729003fbe4afe`
-  without rewriting remote `c1/macos-host-launch`, then create
-  `/private/tmp/acgc-lane-raw-raster-m3` on `c1/lane-raw-raster-m3` at exact
-  PC base `039afce0e` with decomp `09ca8e8b`. The gate is one setter-owned raw
-  Raster shadow and converter to the existing 128-byte canonical Raster ABI,
-  preserving logical pre-host values and completed-batch flush ordering.
-  Ownership is limited to `pc/include/pc_gx_internal.h`, `pc/src/pc_gx.c`, one
-  new `pc/tests/pc_gx_raster_raw_shadow_fixture.c`, minimal `pc/CMakeLists.txt`,
-  and an additional new private raw-Raster source only if the same symbols
-  cannot remain reviewable in `pc_gx.c`. Portable ABI files, packet/envelope,
-  Indirect, Apple/Metal, shaders, decomp, ISO/assets, full link, LLDB, device,
-  pixel, and playability are out of scope. Required evidence is a two-upstream
-  setter/caller crosswalk, clean commit, production-object compile, and serial
-  native plus combined ASan/UBSan focused Raster tests from unique
-  `/private/tmp/acgc-lane-raw-raster-{native,asan,win}` roots. The branch,
-  worktree, and exact clean base are confirmed.
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete, reviewed, integrated,
+  and archive-ready raw Raster source/test lane. Worker branch
+  `c1/lane-raw-raster-m3` advanced exact base `039afce0e` through initial
+  `e5b0b9fc4` and repair `c04ffb385`; the reviewed range was applied onto the
+  newer canonical `a42da8e155` tip as `c2b5bd929` plus canonical PC
+  `85b25cb3c`. Its exact four-file range adds a setter-owned raw Raster shadow,
+  all-or-nothing converter to the existing 128-byte ABI, production-object
+  compile target, and focused fixture. Root review held the initial candidate
+  because `GXSetViewportJitter(field=0)` still omitted decomp's half-pixel top
+  adjustment; the same task repaired it and covered both jitter branches.
+  Fresh exact-tip native and combined ASan/UBSan focused CTest pass `2/2`
+  each, the production Raster object compiles in both roots, and no sanitizer
+  diagnostic is emitted (`detect_leaks=0`). Evidence is
+  `docs/evidence/PC-RAW-RASTER-85B25CB3C-2026-08-15.md`. This is CPU/source
+  proof only; no envelope, full link, callback, Metal, pixel, device, Windows
+  runtime, or playability claim follows.
 - Lane 209 / reused project-owned M3 task
   `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete, reviewed, integrated, and
   archived portable canonical Indirect ABI lane. Worker branch
@@ -1216,11 +1216,11 @@ and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
 integrated at canonical PC `b3336504c`; lane 204 is reviewed and integrated at
 canonical PC `039afce0e`. Lanes 206–207 are complete, reviewed, and archived
 read-only audits. Exact lane-204 cleanup is complete. Lane 209 is reviewed and
-integrated as canonical PC `a42da8e155`; lane 208 is the sole remaining active
-M3 Max source worker. Lane 210 is complete, reviewed, and archived; its
-Geometry raw-closure successor is dependency-blocked by lane 208's `pc_gx.c`
-ownership. No lane 211 is opened or queued; no full link, LLDB, or device run
-is active.
+integrated as canonical PC `a42da8e155`; lane 208 is reviewed and integrated
+as canonical PC `85b25cb3c` and is archive-ready. Lane 210 is complete,
+reviewed, and archived; its Geometry raw-closure successor is now
+dependency-ready because lane 208 released `pc_gx.c` ownership. No lane 211 is
+opened or queued; no full link, LLDB, or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
