@@ -80,7 +80,8 @@ read-only exact Channels/Lighting contract audit; lane 172 is integrated as PC
 raw Depth provenance. Lanes 173–174 have been reused for the two active,
 non-overlapping M3 Max successors: raw Texgen/SU provenance and the neutral
 Geometry ABI. Lanes 177–178 are active read-only current-tip successors for
-the cumulative producer and Apple canonical-plan contracts. No
+the cumulative producer and Apple canonical-plan contracts. Lane 179 is the
+independent current-tip native/sanitizer/Windows focused-matrix refresh. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -521,6 +522,15 @@ checkout.
   exact immutable CPU-plan, cache/lifetime, state-mapping, fixture, and later
   device-gated encode/present/readback contract. It may not edit, build, link,
   launch, access assets, or infer Metal, pixel, device, or playability proof.
+- Lane 179 / reused task `01a0029d-475c-7a31-a6f9-708e60cb4201` — active
+  verification-only M3 Max current-tip matrix in detached
+  `/private/tmp/acgc-lane-current-focused-matrix-251a010` at exact PC
+  `251a010b8` and decomp `09ca8e8b`. It owns only explicit focused native,
+  combined ASan/UBSan, and bounded `_WIN32`/ILP32 targets under unique
+  `/private/tmp/acgc-lane-current-focused-matrix-251a010-{native,asan,win}`
+  roots. It may not edit source/docs/refs, build full `ac_pc`, launch, use a
+  Metal device, or claim pixels, Windows runtime, device behavior, or
+  playability.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -530,7 +540,7 @@ transferred. Lanes 170, 172, 175, and 176 are individually reviewed and
 integrated. Lanes 173–174 are reused for dependency-ready implementation
 successors and are the only active source-edit owners; their production and
 CMake ownership does not overlap. Lanes 177–178 are read-only and do not own
-source. Full links and LLDB launches remain
+source; lane 179 is verification-only. Full links and LLDB launches remain
 serialized and are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
