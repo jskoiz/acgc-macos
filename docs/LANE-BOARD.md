@@ -59,7 +59,10 @@ Max and is reviewed and integrated as canonical PC `97aebd8a2d`. Lane 201 comple
 independent exact post-Channels matrix: native and combined ASan/UBSan each
 pass `18/18`, the corrected ABI/syntax probes pass, and Windows remains at the
 documented SDL/toolchain boundary. Lane 202 completed its independent
-read-only five-file review with `PASS` and is archived. No worker is active.
+read-only five-file review with `PASS` and is archived. Lane 203 is
+setup-pending in the saved ACGC project for the M3 Max raw Texture/TLUT
+producer; it is not counted active until its remote source worktree and branch
+are initialized at exact canonical `97aebd8a2d`.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -1012,6 +1015,34 @@ also integrated. Remote workers may not update the umbrella checkout.
   candidate-owned blocker; lane-200 test results were reported evidence only.
   No build, launch, LLDB, resource access, callback,
   Metal, pixel, device, iOS, Windows sign-off, or playability scope is allowed.
+- Lane 203 / project task `01a004ae-d74c-7d13-8be7-e8fdfb897318` —
+  setup-pending M3 Max raw Texture/TLUT source/test successor. The exact gate
+  is the pointer-free raw map/TLUT owner epoch, per-resource generations,
+  mutation/invalidation boundary, canonical Texture/Dynamic conversion, and
+  synchronous callback-scoped byte lease frozen in
+  `docs/evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md`.
+  It depends on canonical PC `97aebd8a2d` and decomp `09ca8e8b`; success stops
+  after a clean worker commit and focused CPU/source proof. The owning branch
+  will be `c1/lane-raw-texture-tlut-m3` in a dedicated remote PC worktree.
+  Owned files are new `pc/include/pc_gx_texture_raw_state.h`, raw texture/TLUT
+  state and mutation calls in `pc/src/pc_gx_texture.c`, new
+  `pc/src/pc_gx_canonical_snapshot.c`, one narrow producer call in
+  `pc/src/pc_gx.c`, one focused
+  `pc/tests/pc_gx_texture_dynamic_producer_fixture.c`, and minimal
+  `pc/CMakeLists.txt`; only a proven converted-image provenance marker at the
+  relevant emu64 call site may be added after an explicit crosswalk. All Apple
+  files, cumulative multi-section packet policy, renderer code, unrelated GX
+  state, ISO/assets, full `ac_pc` link, LLDB, Metal/device, pixel, iOS, and
+  playability are out of scope. Planned unique roots are
+  `/private/tmp/acgc-lane-raw-texture-tlut-{native,asan,win}`. The mandatory
+  two-upstream crosswalk covers PC `pc_gx_internal.h`, `pc_gx_texture.c`,
+  `pc_gx.c`, the canonical Texture/Dynamic validators and fixtures, plus
+  decomp `GXTexture.c`, `GXInit.c`, public GX enums/structs, and representative
+  emu64/JUT/game callers. Focused native and combined ASan/UBSan serial tests,
+  C/C++11 and bounded compatibility probes, `git diff --check`, exact refs,
+  and a clean handoff are required. Success unblocks a separately owned
+  cumulative all-or-nothing snapshot producer; it does not prove a callback,
+  Metal encode/present/readback, pixel, device, or playability gate.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1027,7 +1058,8 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
-lanes 191–192, 194, 196–198, and 200–202 are complete. No worker is active. The current
+lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is
+setup-pending and is not yet active. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
