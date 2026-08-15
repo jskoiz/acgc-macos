@@ -112,9 +112,10 @@ passed lane 226's independent review and is integrated as canonical PC
 active. Lane 224 completed its
 read-only TEV audit with `BLOCK`. Lane 225 completed the Alpha/Blend/Depth/Fog
 producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
-on the documented distinct predecessors. Lane 227 is active
-on the narrow Depth converter from its exact, disjoint canonical base
-`590b2bd73`.
+on the documented distinct predecessors. Lane 227 completed the narrow Depth
+converter as clean worker `dfef13a2` from its exact, disjoint canonical base
+`590b2bd73` and is on root-review hold. Lane 228 is registered setup-pending
+for the immutable independent review.
 
 ## Remote M3 Max batch (current)
 
@@ -1572,7 +1573,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   ownership, field/domain mapping, destination-preserving fail-closed behavior,
   header portability, and focused coverage have no material blocker.
 - Lane 227 / reused project-owned M3 source task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active Depth leaf-converter
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete/root-review-hold Depth leaf-converter
   source/test lane on `gpt-5.6-luna` with max reasoning. It must create remote
   source `/private/tmp/acgc-lane-depth-producer-m3` on branch
   `c1/lane-depth-producer-m3` at exact canonical PC `590b2bd73`, using only
@@ -1587,10 +1588,27 @@ also integrated. Remote workers may not update the umbrella checkout.
   `/private/tmp/acgc-lane-depth-producer-win`. Native and combined ASan/UBSan
   focused tests plus production-object/syntax probes are the only verification;
   no full link, LLDB, runtime, device, pixel, Windows sign-off, or playability
-  claim is authorized. The dedicated branch/worktree is initialized cleanly at
-  the declared base; its in-progress diff is limited to the four owned files,
-  native focused configure/build has succeeded, and serial native plus combined
-  ASan/UBSan test completion remains pending.
+  claim is authorized. It returned clean worker
+  `dfef13a23ebe021eef29dd46b734b47ad5c2f2e7` with exact four-file scope;
+  native and combined ASan/UBSan focused CTest pass `3/3` each, the production
+  object builds, native C11/C++11 and `-m32` header probes pass, and `_WIN32`
+  remains blocked by missing `process.h` with no Windows sign-off. Review
+  bundle `/private/tmp/acgc-lane-227-depth-producer.bundle` has SHA-256
+  `c4c6d0e191ec12e89154b1d87a9ba0c7d112c17828461e4351372ca8fafb21bd`.
+- Lane 228 / reused project-owned M3 review task
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — setup-pending independent read-only
+  review of lane 227 worker `dfef13a23e` against base `590b2bd73`. It must use
+  only canonical bundle `/private/tmp/acgc-canonical-pc-590b2bd.bundle`
+  (SHA-256 `c5b712caecd66a1262afbfeac5f8651d90c913bcccaf27a9960304c0245157af`),
+  the immutable worker bundle above, and readiness control
+  `/private/tmp/acgc-lane-228-depth-readiness.md` (SHA-256
+  `1708b17d9d511dab156d6e085290e855b258403d654496b56b5d194feb2843aa`).
+  It owns only detached review source
+  `/private/tmp/acgc-lane-228-depth-producer-review` and must return `PASS` or
+  exact material findings for scope, raw/canonical/decomp mapping, fail-closed
+  output preservation, portability, and focused fixture coverage. It owns no
+  edit, branch, build, test, cleanup, integration, full link, LLDB,
+  Apple/Metal, device/pixel, Windows sign-off, ISO/assets, or playability work.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
