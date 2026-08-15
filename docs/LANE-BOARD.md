@@ -68,11 +68,11 @@ Apple consumer/encoder audits. Lane 157 is complete and integrated. Lane 156
 is integrated as PC `4dbb71065`, and lane 158 completed its read-only producer
 audit. Lane 159 completed the read-only Blend/logic contract; lane 160 completed
 the independent focused verification matrix; lane 161 is integrated as PC
-`216d1e24b`. Lane 162 completed the Alpha/update contract; lanes 163–164 are
-the active read-only TEV and Transforms/Texgens provenance audits; lane 165 is
-the sole production source lane implementing the portable Alpha section. No
-full link or LLDB run is active. Remote workers may not update the umbrella
-checkout.
+`216d1e24b`. Lanes 162–163 completed the Alpha/update and TEV contracts; lane
+164 is the active read-only Transforms/Texgens provenance audit; lanes 165–166
+are the two non-overlapping production source lanes for portable Alpha and PC
+raw TEV shadow state. No full link or LLDB run is active. Remote workers may
+not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -324,14 +324,16 @@ checkout.
   Its exact detached worktree and prompt/events/final artifacts are absent. No
   edit, build, launch, asset access, callback, Metal, pixel, device, or
   playability proof occurred.
-- Lane 163 / task `01a002b5-525f-7862-aa8c-0e0ccecdf5c2` — complete and
-  cleanup-pending, read-only at exact PC `4dbb71065` and decomp `09ca8e8b`.
+- Lane 163 / task `01a002b5-525f-7862-aa8c-0e0ccecdf5c2` — complete,
+  archived, and cleaned, read-only at exact PC `4dbb71065` and decomp
+  `09ca8e8b`.
   It freezes `0x0020` as a version-1, 2560-byte, full 16-stage TEV section with
   exact stage/register/KONST/swap/reference rules, independent of the current
   3-stage shader and 2-stage legacy packet caps. It proves current normalized
   PC floats cannot supply exact signed S10 provenance and selects a narrow raw
   setter-shadow successor. Evidence is
-  `docs/evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md`. No edit,
+  `docs/evidence/CANONICAL-TEV-CONTRACT-4DBB71065-2026-08-14.md`. Its exact
+  detached worktree and prompt/events/final artifacts are absent. No edit,
   build, launch, asset access, callback, Metal, pixel, device, or playability
   proof occurred.
 - Lane 164 / task `01a002be-b284-7492-95f3-c3ad066a2906` — active read-only
@@ -355,8 +357,18 @@ checkout.
   envelope/Blend, V1-V4, `pc_gx`, Apple/Metal, ac-decomp edits, full link,
   LLDB, assets, pixels, devices, and playability are out of scope;
   `GXSetZCompLoc` remains a separate live-shadow gap.
+- Lane 166 / task `01a002c6-bb9a-7ed3-8f25-b6bb85d41b76` — active M3 Max
+  source-edit lane on explicit branch `c1/lane-tev-raw-shadow-m3`, exact PC
+  base `216d1e24b`, worktree `/private/tmp/acgc-lane-tev-raw-shadow`, and
+  decomp oracle `09ca8e8b`. It exclusively owns PC private GX state/setters,
+  one raw-shadow fixture, and minimal PC CMake registration for exact
+  PREV/REG0-2 signed register and K0-3 KONST values, validity, overwrite order,
+  initialization, and invalid-input safety. Unique focused roots are
+  `/private/tmp/acgc-lane-tev-raw-shadow-{native,asan,win}`. Shaders, V1-V4,
+  canonical ABI files, producer wiring, Apple/Metal, full link, LLDB, assets,
+  pixels, devices, and playability are out of scope.
 
-The remote Codex project assignment records place tasks 156–165 under the
+The remote Codex project assignment records place tasks 156–166 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
