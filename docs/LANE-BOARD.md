@@ -38,11 +38,11 @@ the older client-only successor requests listed below never became durable
 tasks or worktrees and remain parked historical intake, not active lanes.
 Expensive full links and LLDB launch traces remain serialized. Lanes 185–186
 are reviewed and integrated, and lanes 187–188 are complete read-only audits.
-Lanes 189 and 193 are the active M3 Max repair lanes. Independent root review
+Lane 189 is the active M3 Max repair lane. Independent root review
 blocked lane 189 on direct `GX_TEX_S` capture and INDEX8/INDEX16 API-width
-validation, and blocked lane 193 on the effective magnification-filter domain;
-lane 194 has
-completed its read-only Lighting producer audit. Lane 190 is independently
+validation. Lane 193's effective magnification-filter repair is independently
+reviewed and integrated; lane 194 has completed its read-only Lighting
+producer audit. Lane 190 is independently
 reviewed and integrated, and lanes 191–192 completed their read-only contracts.
 The raw Channels successor is not refilled because it would overlap lane 189's
 `pc_gx` ownership. No
@@ -53,7 +53,7 @@ evidence remain available in Git and the evidence docs.
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`43992e7085` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`a641e55efb` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project, but built-in cross-host handoff matching does not
 enumerate it from the local host. Remote lanes therefore use the verified
@@ -115,7 +115,8 @@ matrices pass `9/9`. Lanes 187–188 completed the read-only cumulative-producer
 and Apple-plan audits. Lanes 189–192 reused the same four project-owned M3
 tasks/worktrees for Geometry raw-batch provenance, the neutral Lighting ABI,
 the Texture/TLUT/Dynamic contract, and raw Channels planning. Lane 189 remains
-active; lanes 190–192 are complete. Remote workers
+active; lanes 190–194 are complete, with lanes 190 and 193 integrated. Remote
+workers
 may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
@@ -792,12 +793,13 @@ may not update the umbrella checkout.
   dependency-ready only after Geometry releases `pc_gx` ownership; no refill is
   opened. Evidence is
   `docs/evidence/RAW-CHANNELS-PRODUCER-PLAN-324C174AE-2026-08-14.md`.
-- Lane 193 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — active M3
-  Max neutral Texture/TLUT plus Dynamic ABI repair lane. Its first source/test
-  handoff `b8245ad019` passed its focused matrices but independent root review
-  found that one shared filter maximum incorrectly accepted effective
-  magnification values `2..5`; the repair must split the final logical min
-  (`0..5`) and mag (`0..1`) domains without changing the frozen ABI. It reuses
+- Lane 193 / reused task `01a00297-d958-73f2-a850-d79a18e5f763` — complete,
+  independently reviewed, and integrated neutral Texture/TLUT plus Dynamic ABI
+  lane. Its first source/test handoff `b8245ad019` passed its focused matrices
+  but independent root review found that one shared filter maximum incorrectly
+  accepted effective magnification values `2..5`. Repair `096e76c464` splits
+  the final logical min (`0..5`) and mag (`0..1`) domains without changing the
+  frozen ABI. It reused
   protected
   worktree `/private/tmp/acgc-lane-cumulative-producer-preflight`, imports
   source-only bundle `/private/tmp/acgc-canonical-pc-43992e.bundle` (SHA-256
@@ -815,10 +817,14 @@ may not update the umbrella checkout.
   and playability are out of scope. Unique roots are
   `/private/tmp/acgc-lane-canonical-texture-dynamic-{native,asan,win}`;
   verification is serial native plus combined ASan/UBSan and bounded
-  C/C++/ILP32/Windows syntax. No integration occurs until the repaired child
-  commit passes independent review and the exact integrated serial matrix.
-  Success unblocks a separate raw PC Texture/TLUT state, generation,
-  invalidation, and synchronous lease lane.
+  C/C++/ILP32/Windows syntax. Root cherry-picked the two commits one at a time
+  as canonical `cf81b028d9` then `a641e55efb`; exact integrated native and
+  combined ASan/UBSan canonical matrices pass `12/12` each with no sanitizer
+  diagnostics (`detect_leaks=0`). Evidence is
+  `docs/evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md`. This
+  unblocks a separate raw PC Texture/TLUT state, generation, invalidation, and
+  synchronous lease lane, but proves no live resource/callback/Metal/pixel or
+  playability gate.
 - Lane 194 / reused task `01a002e1-540c-7693-b25d-363a1f209dd4` — complete
   read-only M3 Max raw Lighting producer crosswalk. It reused protected
   worktree `/private/tmp/acgc-lane-channels-lighting-preflight`, verifies and
@@ -851,8 +857,8 @@ verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
-and lane 184 is stopped. Lanes 189 and 193 are active repair lanes, lane 194 is
-complete, lane 190 is integrated, and lanes 191–192 are complete. Their
+and lane 184 is stopped. Lane 189 is the only active repair lane; lanes 190 and
+193 are integrated, and lanes 191–192 and 194 are complete. Their
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 

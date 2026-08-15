@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-14, the canonical local PC branch is clean at `43992e7085`, with
-the strict neutral Lighting and Channels ABIs, repaired `GXSetZMode`
+As of 2026-08-14, the canonical local PC branch is clean at `a641e55efb`, with
+the strict neutral Texture/TLUT, Dynamic, Lighting, and Channels ABIs, repaired
+`GXSetZMode`
 flush-before-mutation
 boundary, setter-owned raw Texgen/SU provenance, and canonical Geometry ABI on
 top of the portable 888-byte Transform ABI and setter-owned raw Transform and
@@ -257,11 +258,14 @@ and the [canonical Lighting implementation](evidence/CANONICAL-LIGHTING-STATE-43
 The Texture/TLUT/Dynamic audit freezes separate pointer-free `0x0010` and
 `0x2000` contracts. Stable logical IDs, owner epochs, per-image and per-TLUT
 generations, exact metadata, and a synchronous external byte lease replace
-host pointers, GL names, and cache hashes. Neutral synthetic-value validators
-are the next source gate; raw PC resource state, generation/invalidation,
-leases, cumulative production, and Apple delivery remain separate later
-owners. See the
-[canonical Texture/Dynamic contract](evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md).
+host pointers, GL names, and cache hashes. Integrated `a641e55efb` implements
+both neutral synthetic-value validators with exact minification `0..5` and
+decomp-effective magnification `0..1` domains; exact native and combined
+ASan/UBSan canonical matrices pass `12/12`. Raw PC resource state,
+generation/invalidation, leases, cumulative production, and Apple delivery
+remain separate later owners. See the
+[canonical Texture/Dynamic contract](evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md)
+and [integrated implementation evidence](evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md).
 
 The refreshed producer and Apple audits reject another transitional packet
 shim. The first draw-critical source gate is immutable Geometry VCD/VAT/array

@@ -34,9 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `43992e7085` (`Add canonical GX Lighting ABI
-validator`), completing the reviewed neutral Lighting and Channels ABIs,
-Depth ordering, raw
+`c1/macos-host-launch` at `a641e55efb` (`Narrow canonical texture filter
+domains`), completing the reviewed neutral Texture/TLUT, Dynamic, Lighting,
+and Channels ABIs, Depth ordering, raw
 Texgen/SU, and canonical Geometry chains on top of `251a010b8` (`Preserve typed
 GX depth setter ABI`),
 `eeec2301c1` (`Track PC raw GX depth provenance`), and `c3e158398`
@@ -237,10 +237,13 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
 - The Texture/TLUT/Dynamic audit freezes separate pointer-free `0x0010` and
   `0x2000` value contracts with stable logical IDs, owner epochs, per-resource
   generations, exact metadata, and an external synchronous lease for bytes.
-  The next source gate is the neutral synthetic-value ABI; raw PC resource
-  state, generations, leases, cumulative production, and Apple consumption
-  remain later gates. See the
-  [canonical Texture/Dynamic contract](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md).
+  Integrated `a641e55efb` implements both neutral value ABIs, including exact
+  minification `0..5` and decomp-effective magnification `0..1` domains; exact
+  native and combined ASan/UBSan canonical matrices pass `12/12`. Raw PC
+  resource state, generations, invalidation, leases, cumulative production,
+  and Apple consumption remain later gates. See the
+  [canonical Texture/Dynamic contract](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-CONTRACT-324C174AE-2026-08-14.md)
+  and [integrated implementation evidence](docs/evidence/CANONICAL-TEXTURE-DYNAMIC-A641E55EF-2026-08-14.md).
 
 - Current read-only producer and Apple audits confirm that another V1-V4 shim
   is not the next gate. The first draw-critical source lane is immutable
