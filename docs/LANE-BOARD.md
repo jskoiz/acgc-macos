@@ -86,13 +86,14 @@ its remote and fresh local native plus combined ASan/UBSan focused CTest pass
 `1/1` each. Lane 210 completed its read-only
 Geometry-converter audit and is reviewed/archived. Its raw Geometry closure
 successor is now dependency-ready because lane 208 released overlapping
-`pc_gx.c` ownership. Lane 211 completed its raw Geometry source handoff at
-worker `1730823d45` and is on root-review hold; it is not integrated. Lane 212
+`pc_gx.c` ownership. Lane 211 completed its first raw Geometry source handoff
+at worker `1730823d45`, but lane 214 independently blocked it on indexed host
+mirroring and packed-color FIFO-width/RGBX8 semantics. The same lane 211 branch
+is active for a narrow child repair; nothing is integrated. Lane 212
 completed its parallel read-only raw Indirect ownership crosswalk. Lane 213
 completed the independent exact-tip matrix with native and combined
-ASan/UBSan `21/21` passes. Its same project-owned verification task is reused
-as lane 214 for an independent read-only review of lane 211 before any source
-integration. No full
+ASan/UBSan `21/21` passes. Its same project-owned verification task completed
+lane 214's independent read-only review. No full
 link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
@@ -1203,8 +1204,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   No build, full link, LLDB, runtime, Metal, pixel, device, or playability claim
   follows.
 - Lane 211 / project-owned M3 task
-  `01a0055c-6bac-7743-84f8-6ceb8bf0daf4` — complete raw Geometry source/test
-  handoff on root-review hold; not integrated. The task is visibly nested under
+  `01a0055c-6bac-7743-84f8-6ceb8bf0daf4` — active same-branch child repair;
+  first handoff blocked and not integrated. The task is visibly nested under
   the remote `acgc-modern-port` project
   and runs `gpt-5.6-luna` with max reasoning. Its Codex umbrella worktree
   `/Users/testtest/.codex/worktrees/5f1b/acgc-modern-port` is a stale detached
@@ -1233,7 +1234,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   pass, while no real i686 Windows toolchain is installed. The source-only
   handoff bundle has SHA-256
   `4e6ab587db263312c72156536c25e7dceced5ccb9d24b64733d33b0e8d8f7a58`.
-  Independent review and exact-tip integration reruns remain required.
+  Independent review found two candidate-owned blockers: raw-valid indexed
+  non-F32 POS/NRM/TEX0 values do not reach the host mirror, and direct packed
+  color entry-point width plus RGBX8's ignored X byte are not preserved. The
+  same branch may add only a child repair and focused fixture coverage before a
+  new independent review. Evidence is
+  `docs/evidence/RAW-GEOMETRY-REVIEW-1730823D-2026-08-15.md`.
 - Lane 212 / project-owned M3 task
   `01a00562-c9bc-7b70-9d2e-de9232703062` — complete, reviewed, and archived
   read-only raw Indirect ownership/conversion crosswalk. The visible project worktree is
@@ -1270,7 +1276,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   `docs/evidence/CURRENT-FOCUSED-MATRIX-85B25CB3C-2026-08-15.md`. This proves
   only the pre-lane-211 exact-tip CPU/source baseline.
 - Lane 214 / reused project-owned M3 verification task
-  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active independent read-only review
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete independent read-only review
   of raw Geometry worker `1730823d45` against base `85b25cb3c` and decomp
   `09ca8e8b`. It must inspect exactly the four lane-211 files and the
   two-upstream crosswalk, with special attention to invalid indexed-position
@@ -1278,8 +1284,11 @@ also integrated. Remote workers may not update the umbrella checkout.
   matrix/NBT fail-closed behavior, packed-color validation, mid-batch
   invalidation, and fixture-only CMake defines. It owns no edit, branch, build,
   cleanup, full link, LLDB, runtime, Metal, pixel, device, or playability claim.
-  It returns `PASS` or an exact candidate-owned blocker before root may
-  integrate lane 211.
+  It returned `BLOCK`: raw-valid indexed non-F32 scalar data can produce zero
+  or stale host values; RGBX8 rejects a valid ignored byte; and the direct
+  color wrappers lose 2/3/4-byte FIFO-width provenance. Evidence is
+  `docs/evidence/RAW-GEOMETRY-REVIEW-1730823D-2026-08-15.md`. No build or source
+  edit occurred.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1304,10 +1313,10 @@ integrated as canonical PC `a42da8e155`; lane 208 is reviewed, integrated, and
 archived as canonical PC `85b25cb3c`. Lane 210 is complete,
 reviewed, and archived; its Geometry raw-closure successor is now
 dependency-ready because lane 208 released `pc_gx.c` ownership. Lane 211 is
-complete and held for independent review at worker `1730823d45`; lane 212 is
-complete/archived; lane 213 completed the exact-tip matrix; and its same
-project-owned task is active as lane 214 read-only review. No full link, LLDB,
-or device run is active.
+active only for the narrow same-branch repair of blocked worker `1730823d45`;
+lane 212 is complete/archived; lane 213 completed the exact-tip matrix; and
+lane 214 completed its read-only BLOCK review. No full link, LLDB, or device
+run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
