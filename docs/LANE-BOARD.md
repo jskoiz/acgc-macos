@@ -43,7 +43,9 @@ reviewed and integrated, as is lane 193's effective magnification-filter
 repair. Lane 194 has completed its read-only Lighting producer audit. Lane 190
 is independently reviewed and integrated, and lanes 191–192 completed their
 read-only contracts.
-Lane 195 completed its raw Channels source handoff and is root-review pending.
+Lane 195 completed its raw Channels source handoff, but root review found that
+`GXSetNumChans` incorrectly erases persistent inactive raw records. Lane 199 is
+registered below as the narrow child repair.
 Lane 196 completed its read-only raw Texture/TLUT ownership audit and froze the
 private pointer-free shadow plus synchronous lease boundary. Lane 197 completed
 the independent current-tip focused verification matrix with native and
@@ -917,6 +919,16 @@ also integrated. Remote workers may not update the umbrella checkout.
   build, full link, LLDB, resource bytes, Apple/Metal, pixel, device, or
   playability action. Success permits or blocks root integration with one
   exact finding.
+- Lane 199 / reused task `01a00275-9cf6-7113-8511-5e9a4d18deff` — setup-pending
+  M3 Max source/test repair on `c1/lane-raw-channels-m3` at `c9eec84b0e`.
+  It owns only `pc/src/pc_gx_channels_raw.c` and the focused Channels fixture.
+  `pc_gx_raw_channels_set_num` must preserve inactive controls/colors as the
+  original GX register state does; canonical conversion must zero inactive
+  output records without requiring the private inactive raw records to be
+  zero. The fixture must prove count `2 -> 0 -> 2` reactivation without
+  reissuing controls/colors and a valid zero-channel canonical section while
+  private state is retained. No other production file, full link, LLDB,
+  resource, Apple/Metal, pixel, device, or playability scope is authorized.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -932,7 +944,8 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, and 193 are integrated, and lanes
-191–192 and 194–197 are complete. Lane 198 is active. The current
+191–192 and 194–197 are complete. Lane 198 is active; lane 199 is
+setup-pending. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
