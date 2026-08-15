@@ -86,11 +86,13 @@ its remote and fresh local native plus combined ASan/UBSan focused CTest pass
 `1/1` each. Lane 210 completed its read-only
 Geometry-converter audit and is reviewed/archived. Its raw Geometry closure
 successor is now dependency-ready because lane 208 released overlapping
-`pc_gx.c` ownership. Lane 211 is now the sole active production worker: its
-project-owned M3 Max task owns only the raw Geometry closure at exact PC
-`85b25cb3c`, on an explicit isolated source branch. Lane 212 completed its
-parallel read-only raw Indirect ownership crosswalk, and lane 213 remains an
-independent verification-only exact-tip matrix. No full
+`pc_gx.c` ownership. Lane 211 completed its raw Geometry source handoff at
+worker `1730823d45` and is on root-review hold; it is not integrated. Lane 212
+completed its parallel read-only raw Indirect ownership crosswalk. Lane 213
+completed the independent exact-tip matrix with native and combined
+ASan/UBSan `21/21` passes. Its same project-owned verification task is reused
+as lane 214 for an independent read-only review of lane 211 before any source
+integration. No full
 link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
@@ -1201,8 +1203,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   No build, full link, LLDB, runtime, Metal, pixel, device, or playability claim
   follows.
 - Lane 211 / project-owned M3 task
-  `01a0055c-6bac-7743-84f8-6ceb8bf0daf4` — active raw Geometry source/test
-  lane. The task is visibly nested under the remote `acgc-modern-port` project
+  `01a0055c-6bac-7743-84f8-6ceb8bf0daf4` — complete raw Geometry source/test
+  handoff on root-review hold; not integrated. The task is visibly nested under
+  the remote `acgc-modern-port` project
   and runs `gpt-5.6-luna` with max reasoning. Its Codex umbrella worktree
   `/Users/testtest/.codex/worktrees/5f1b/acgc-modern-port` is a stale detached
   setup snapshot at `ee31f535` with PC gitlink `a53b192`; it is provenance only
@@ -1224,7 +1227,13 @@ also integrated. Remote workers may not update the umbrella checkout.
   Geometry production, the cumulative envelope, Apple/Metal, full `ac_pc`,
   LLDB, launch, device, ISO/assets, and playability are out of scope. Success
   proves CPU/source raw Geometry semantics only and unblocks a separately owned
-  canonical Geometry producer.
+  canonical Geometry producer. The clean worker branch advanced exact base
+  `85b25cb3c` to `1730823d45` in exactly the four owned files. Native focused
+  build/CTest and combined ASan/UBSan CTest each pass `1/1`; host syntax probes
+  pass, while no real i686 Windows toolchain is installed. The source-only
+  handoff bundle has SHA-256
+  `4e6ab587db263312c72156536c25e7dceced5ccb9d24b64733d33b0e8d8f7a58`.
+  Independent review and exact-tip integration reruns remain required.
 - Lane 212 / project-owned M3 task
   `01a00562-c9bc-7b70-9d2e-de9232703062` — complete, reviewed, and archived
   read-only raw Indirect ownership/conversion crosswalk. The visible project worktree is
@@ -1241,7 +1250,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   It proves planning/reference readiness only, not implementation, runtime,
   Metal, pixel, device, or playability.
 - Lane 213 / project-owned M3 task
-  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active verification-only exact-tip
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete verification-only exact-tip
   matrix. The visible project worktree is
   `/Users/testtest/.codex/worktrees/e9fb/acgc-modern-port`. It reconstructs a
   clean detached source at `/private/tmp/acgc-lane-current-85b-matrix-source`
@@ -1252,8 +1261,23 @@ also integrated. Remote workers may not update the umbrella checkout.
   explicitly list any new exact-tip tests, run serially with
   `detect_leaks=0`, and keep host syntax/ILP32 probes separate from real
   Windows sign-off. Full `ac_pc`, LLDB, launch, device, Metal, pixel,
-  input/audio/save, ISO/assets, and playability remain out of scope. Its result
-  proves only the pre-lane-211 exact-tip CPU/source baseline.
+  input/audio/save, ISO/assets, and playability remain out of scope. Native and
+  combined ASan/UBSan serial builds and CTest each pass `21/21` with no
+  sanitizer diagnostics (`detect_leaks=0`); public ABI probes pass `8/8` and
+  bounded production syntax probes pass `6/6`. Missing i686 headers/toolchain
+  and host-SDL CMake features remain Windows blockers, not Windows sign-off.
+  This proves only the pre-lane-211 exact-tip CPU/source baseline.
+- Lane 214 / reused project-owned M3 verification task
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active independent read-only review
+  of raw Geometry worker `1730823d45` against base `85b25cb3c` and decomp
+  `09ca8e8b`. It must inspect exactly the four lane-211 files and the
+  two-upstream crosswalk, with special attention to invalid indexed-position
+  fallback, `GXSetArray` size/stride bounds, supported attribute slots,
+  matrix/NBT fail-closed behavior, packed-color validation, mid-batch
+  invalidation, and fixture-only CMake defines. It owns no edit, branch, build,
+  cleanup, full link, LLDB, runtime, Metal, pixel, device, or playability claim.
+  It returns `PASS` or an exact candidate-owned blocker before root may
+  integrate lane 211.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1278,9 +1302,10 @@ integrated as canonical PC `a42da8e155`; lane 208 is reviewed, integrated, and
 archived as canonical PC `85b25cb3c`. Lane 210 is complete,
 reviewed, and archived; its Geometry raw-closure successor is now
 dependency-ready because lane 208 released `pc_gx.c` ownership. Lane 211 is
-the sole active production worker at exact PC `85b25cb3c`; lane 212 is
-complete/archived and lane 213 continues verification-only work. No full link,
-LLDB, or device run is active.
+complete and held for independent review at worker `1730823d45`; lane 212 is
+complete/archived; lane 213 completed the exact-tip matrix; and its same
+project-owned task is active as lane 214 read-only review. No full link, LLDB,
+or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
