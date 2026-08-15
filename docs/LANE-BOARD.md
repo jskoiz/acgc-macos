@@ -86,7 +86,9 @@ its remote and fresh local native plus combined ASan/UBSan focused CTest pass
 `1/1` each. Lane 210 completed its read-only
 Geometry-converter audit and is reviewed/archived. Its raw Geometry closure
 successor is now dependency-ready because lane 208 released overlapping
-`pc_gx.c` ownership, but no successor is active. No full
+`pc_gx.c` ownership. Lane 211 is now the sole active production worker: its
+project-owned M3 Max task owns only the raw Geometry closure at exact PC
+`85b25cb3c`, on an explicit isolated source branch. No full
 link, LLDB, or device run is active.
 
 ## Remote M3 Max batch (current)
@@ -1196,6 +1198,31 @@ also integrated. Remote workers may not update the umbrella checkout.
   `docs/evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md`.
   No build, full link, LLDB, runtime, Metal, pixel, device, or playability claim
   follows.
+- Lane 211 / project-owned M3 task
+  `01a0055c-6bac-7743-84f8-6ceb8bf0daf4` — active raw Geometry source/test
+  lane. The task is visibly nested under the remote `acgc-modern-port` project
+  and runs `gpt-5.6-luna` with max reasoning. Its Codex umbrella worktree
+  `/Users/testtest/.codex/worktrees/5f1b/acgc-modern-port` is a stale detached
+  setup snapshot at `ee31f535` with PC gitlink `a53b192`; it is provenance only
+  and must not be edited or cited as current source. The authoritative
+  source-only bundle `/private/tmp/acgc-canonical-pc-85b25cb.bundle` has
+  SHA-256
+  `5aa5c6bf21b4e1ed9f254139802a886dc5f649ca78bc2b69f1b8ee106142bc46`.
+  The concrete clean source checkout is
+  `/private/tmp/acgc-lane-raw-geometry-closure-m3` on explicit branch
+  `c1/lane-raw-geometry-closure-m3` at exact PC `85b25cb3c`; the read-only
+  decomp oracle is clean `09ca8e8b`. Ownership is limited to raw Geometry
+  declarations in `pc/include/pc_gx_internal.h`, raw Geometry/VCD/VAT/array and
+  draw-capture ordering in `pc/src/pc_gx.c`, the focused
+  `pc/tests/pc_gx_geometry_raw_batch_fixture.c`, and minimal existing
+  `pc/CMakeLists.txt` registration. It must freeze mid-`GXBegin` mutation,
+  supported attributes, array/completed-copy lifetime, finite/value domains,
+  and fail-closed unsupported CLR1/TEX1-7/matrix-array/NBT cases. Unique roots
+  are `/private/tmp/acgc-lane-raw-geometry-closure-{native,asan,win}`. Canonical
+  Geometry production, the cumulative envelope, Apple/Metal, full `ac_pc`,
+  LLDB, launch, device, ISO/assets, and playability are out of scope. Success
+  proves CPU/source raw Geometry semantics only and unblocks a separately owned
+  canonical Geometry producer.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1219,8 +1246,9 @@ read-only audits. Exact lane-204 cleanup is complete. Lane 209 is reviewed and
 integrated as canonical PC `a42da8e155`; lane 208 is reviewed, integrated, and
 archived as canonical PC `85b25cb3c`. Lane 210 is complete,
 reviewed, and archived; its Geometry raw-closure successor is now
-dependency-ready because lane 208 released `pc_gx.c` ownership. No lane 211 is
-opened or queued; no full link, LLDB, or device run is active.
+dependency-ready because lane 208 released `pc_gx.c` ownership. Lane 211 is
+the sole active production worker at exact PC `85b25cb3c`; no full link, LLDB,
+or device run is active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
