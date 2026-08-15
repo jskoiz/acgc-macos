@@ -89,7 +89,8 @@ successor is now dependency-ready because lane 208 released overlapping
 `pc_gx.c` ownership. Lane 211 completed its first raw Geometry source handoff
 at worker `1730823d45`, but lane 214 independently blocked it on indexed host
 mirroring and packed-color FIFO-width/RGBX8 semantics. The same lane 211 branch
-is active for a narrow child repair; nothing is integrated. Lane 212
+completed a narrow child repair at `5679bff656`; nothing is integrated. Lane 215
+now owns the fresh independent read-only review of that child. Lane 212
 completed its parallel read-only raw Indirect ownership crosswalk. Lane 213
 completed the independent exact-tip matrix with native and combined
 ASan/UBSan `21/21` passes. Its same project-owned verification task completed
@@ -1204,8 +1205,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   No build, full link, LLDB, runtime, Metal, pixel, device, or playability claim
   follows.
 - Lane 211 / project-owned M3 task
-  `01a0055c-6bac-7743-84f8-6ceb8bf0daf4` — active same-branch child repair;
-  first handoff blocked and not integrated. The task is visibly nested under
+  `01a0055c-6bac-7743-84f8-6ceb8bf0daf4` — complete source handoff on root-review
+  hold; first handoff blocked and repaired by one child, with nothing integrated.
+  The task is visibly nested under
   the remote `acgc-modern-port` project
   and runs `gpt-5.6-luna` with max reasoning. Its Codex umbrella worktree
   `/Users/testtest/.codex/worktrees/5f1b/acgc-modern-port` is a stale detached
@@ -1237,8 +1239,18 @@ also integrated. Remote workers may not update the umbrella checkout.
   Independent review found two candidate-owned blockers: raw-valid indexed
   non-F32 POS/NRM/TEX0 values do not reach the host mirror, and direct packed
   color entry-point width plus RGBX8's ignored X byte are not preserved. The
-  same branch may add only a child repair and focused fixture coverage before a
-  new independent review. Evidence is
+  same branch added exactly one child commit `5679bff656` without rewriting
+  blocked parent `1730823d45`. The child changes only `pc/src/pc_gx.c` and
+  `pc/tests/pc_gx_geometry_raw_batch_fixture.c`; native focused build/CTest and
+  combined ASan/UBSan CTest each pass `1/1`, with `detect_leaks=0` and no
+  sanitizer diagnostics. It adds typed indexed host decoding with VAT fraction
+  scaling, signed normal normalization, finite-F32 checks, shared overflow-safe
+  array validation, explicit invalid-position/no-op fallback behavior, RGBX8
+  ignored-byte normalization, and strict 2/3/4-byte packed-color API/VAT
+  matching. The source-only repair bundle has SHA-256
+  `344e76694b94c25f9e29eb9de99f9d136dbb842c72fcafc4760fa8615adb67fc`.
+  This remains a worker claim pending lane 215's independent review. Evidence
+  for the blocked parent is
   `docs/evidence/RAW-GEOMETRY-REVIEW-1730823D-2026-08-15.md`.
 - Lane 212 / project-owned M3 task
   `01a00562-c9bc-7b70-9d2e-de9232703062` — complete, reviewed, and archived
@@ -1289,6 +1301,18 @@ also integrated. Remote workers may not update the umbrella checkout.
   color wrappers lose 2/3/4-byte FIFO-width provenance. Evidence is
   `docs/evidence/RAW-GEOMETRY-REVIEW-1730823D-2026-08-15.md`. No build or source
   edit occurred.
+- Lane 215 / reused project-owned M3 verification task
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active independent read-only child
+  review. It reuses the archived lane-214 task only for review continuity and
+  inspects blocked parent `1730823d45` through child `5679bff656` against base
+  `85b25cb3c` and decomp `09ca8e8b`. It owns no production edit, branch, build,
+  cleanup, full link, LLDB, runtime, Metal, pixel, device, or playability claim.
+  The review must prove the two lane-214 blockers are closed without regressing
+  overflow-safe indexed reads, VAT scaling/normalization, deferred position
+  ordering, packed-color entry-width provenance, RGBX8 ignored-byte semantics,
+  unsupported attribute fail-closed behavior, or the legacy host update
+  boundary. It must return PASS or exact candidate-owned findings before any
+  integration.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -1312,11 +1336,12 @@ read-only audits. Exact lane-204 cleanup is complete. Lane 209 is reviewed and
 integrated as canonical PC `a42da8e155`; lane 208 is reviewed, integrated, and
 archived as canonical PC `85b25cb3c`. Lane 210 is complete,
 reviewed, and archived; its Geometry raw-closure successor is now
-dependency-ready because lane 208 released `pc_gx.c` ownership. Lane 211 is
-active only for the narrow same-branch repair of blocked worker `1730823d45`;
-lane 212 is complete/archived; lane 213 completed the exact-tip matrix; and
-lane 214 completed its read-only BLOCK review. No full link, LLDB, or device
-run is active.
+dependency-ready because lane 208 released `pc_gx.c` ownership. Lane 211
+completed the narrow same-branch repair of blocked worker `1730823d45` as child
+`5679bff656`; lane 212 is complete/archived; lane 213 completed the exact-tip
+matrix; lane 214 completed its read-only BLOCK review; and lane 215 is the sole
+active independent read-only child review. No full link, LLDB, or device run is
+active.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
