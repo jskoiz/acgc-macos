@@ -100,17 +100,17 @@ lane 214's independent read-only review. Lane 216 returned source commit
 validation and missing mandatory fixture cases. Lane 217 completed its
 read-only current-tip cumulative-producer audit and found the cumulative gate
 still blocked by missing leaf owners/producers. Lane 216 completed its exact
-two-file repair as child `5324c8739e` and is held for lane 220's independent
-re-review. Lane 219 is active on the independent portable Texgen/SU ABI
-prerequisite, and lane 220 is the active read-only Geometry re-review. No full
-link, LLDB, or device run is active. Lane 221 is an independent active
-read-only Transform leaf-producer readiness audit.
+two-file repair as child `5324c8739e`; lane 220 independently passed it, and
+the two source commits are integrated as canonical PC `689590cc`. Lane 219 is
+active on the independent portable Texgen/SU ABI prerequisite. No full link,
+LLDB, or device run is active. Lane 221 is an independent active read-only
+Transform leaf-producer readiness audit.
 
 ## Remote M3 Max batch (current)
 
 The authorized M3 Max Codex host and SSH path are online, and the source-only
 remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`b9a9f355` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+`689590cc` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1329,8 +1329,8 @@ also integrated. Remote workers may not update the umbrella checkout.
   decomp tree at `09ca8e8b` rather than the stale task worktree's uninitialized
   submodule.
 - Lane 216 / reused project-owned M3 Geometry task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete narrow repair on
-  independent re-review hold. Its first handoff returned clean branch
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — complete, reviewed, integrated,
+  and archive-ready. Its first handoff returned clean branch
   `c1/lane-canonical-geometry-producer-m3` at `5aba10371f` from base
   `b9a9f355`, changing exactly the four contracted producer/fixture/CMake
   files. Remote native and combined ASan/UBSan focused CTest pass `1/1` each
@@ -1350,7 +1350,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   sanitizer diagnostics and `detect_leaks=0`; `git diff --check` passes. The
   refreshed protected source-only bundle has SHA-256
   `b78573c42dfa8bda2c1a09e0369539fb16e9da117a09de27673b11611fe7c9b6`.
-  Nothing is accepted or integrated until lane 220 returns its verdict.
+  Lane 220 returned `PASS`. Root imported the two worker commits one at a time
+  as canonical `099a66ad` and `689590cc`, then rebuilt the producer object and
+  fixture in fresh native and combined ASan/UBSan roots. Both exact-tip CTest
+  runs pass `1/1`; no sanitizer diagnostic was emitted with
+  `detect_leaks=0`. Evidence is
+  `docs/evidence/CANONICAL-GEOMETRY-PRODUCER-689590CC-2026-08-15.md`.
   The lane was originally registered as an active canonical Geometry producer
   source/test lane. It reuses the completed lane-210 Geometry audit task for
   direct ownership continuity and runs `gpt-5.6-luna` with max reasoning. The
@@ -1432,7 +1437,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   CPU/ABI evidence only; it cannot prove the later PC leaf producer, callback,
   Metal, pixel, device, Windows runtime, or playability.
 - Lane 220 / reused project-owned M3 Geometry review task
-  `01a004f3-5a55-7702-95ec-8acf22b8b806` — active independent read-only
+  `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete independent read-only
   re-review of exact repaired final `5324c8739e` from base `b9a9f355` and first
   candidate `5aba10371f`. It uses only the hash-verified immutable lane-216
   bundle and detached source `/private/tmp/acgc-lane-220-geometry-producer-review`;
@@ -1441,7 +1446,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   direct-quad, INDEX16-endian, and buffer-overlap blockers are closed without a
   new correctness, UB, portability, or coverage regression. It owns no edit,
   branch, build, test, cleanup, integration, link, LLDB, runtime, Apple/Metal,
-  device/pixel, Windows sign-off, ISO/assets, or playability work.
+  device/pixel, Windows sign-off, ISO/assets, or playability work. It returned
+  `PASS`: the exact repair delta closes every prior raw-domain and fixture gap,
+  total scope remains four files, the repair touches only producer/test, and no
+  new material blocker was found.
 - Lane 221 / reused project-owned M3 Transform task
   `01a004f3-1941-7731-a310-d5ad1f52011b` — active read-only Transform
   leaf-producer readiness and contract audit on `gpt-5.6-luna` with max
@@ -1485,12 +1493,12 @@ completed the narrow same-branch repair of blocked worker `1730823d45` as child
 `5679bff656` and is integrated at canonical `b9a9f355`; lane 212 is
 complete/archived; lane 213 completed the exact-tip matrix; lane 214 completed
 its read-only BLOCK review; and lane 215 completed its independent read-only
-PASS review. Lane 216 completed the exact lane-218 repair and is held for lane
-220; lane 217 is complete/blocked at the cumulative readiness gate, lane 218 is
-complete with its first source-review `BLOCK`, lane 219 is the active Texgen/SU
-ABI worker, and lane 220 is the active independent Geometry re-review. No full
-link, LLDB, or device run is active. Lane 221 is the active independent
-read-only Transform producer audit.
+PASS review. Lane 216 is integrated as canonical `689590cc`; lane 217 is
+complete/blocked at the cumulative readiness gate, lane 218 is complete with
+its first source-review `BLOCK`, lane 219 is the active Texgen/SU ABI worker,
+and lane 220 is complete with the repaired Geometry `PASS`. No full link, LLDB,
+or device run is active. Lane 221 is the active independent read-only Transform
+producer audit.
 The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.

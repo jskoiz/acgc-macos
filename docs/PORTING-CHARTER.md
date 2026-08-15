@@ -61,8 +61,9 @@ keys, and proprietary game data remain local.
 
 ## Current gate state
 
-As of 2026-08-15, the canonical local PC branch is clean at `b9a9f355`, with
-reviewed setter-owned raw Geometry closure, typed indexed host mirroring,
+As of 2026-08-15, the canonical local PC branch is clean at `689590cc`, with
+the independently reviewed canonical Geometry leaf producer, reviewed
+setter-owned raw Geometry closure, typed indexed host mirroring,
 packed-color FIFO-width provenance and RGBX8 ignored-byte handling,
 setter-owned raw Raster provenance, the source-faithful viewport-jitter
 adjustment, setter-owned raw Alpha/ZCompLoc provenance and production-object
@@ -314,12 +315,14 @@ supplies persistent raw Channels and Lighting, `698d45d3e` supplies raw
 Texture/TLUT generations and synchronous resource leases, `b3336504c`
 supplies the neutral Raster value ABI, `039afce0e` supplies raw
 Alpha/ZCompLoc provenance, `85b25cb3c` supplies setter-owned raw Raster
-provenance with the decomp viewport-jitter adjustment, and `b9a9f355` closes
-the bounded raw Geometry contract with copied lifetime, supported indexed
-scalar host conversion, exact packed-color entry widths, and fail-closed
-unsupported matrix/NBT and extra attribute slots. Integrated `a42da8e155`
-supplies the neutral section-13 Indirect ABI. Raw Indirect ownership/conversion
-and a separately owned canonical Geometry converter remain prerequisites. A cumulative producer
+provenance with the decomp viewport-jitter adjustment, `b9a9f355` closes the
+bounded raw Geometry contract with copied lifetime, supported indexed scalar
+host conversion, exact packed-color entry widths, and fail-closed unsupported
+matrix/NBT and extra attribute slots, and `689590cc` supplies the strict
+pointer-free canonical Geometry producer. Integrated `a42da8e155` supplies the
+neutral section-13 Indirect ABI. Raw Indirect ownership/conversion, the
+portable Texgen/SU section, and remaining leaf producers remain prerequisites.
+A cumulative producer
 must then preflight
 every required section and resource
 generation before one synchronous all-or-nothing callback. Apple consumption
@@ -332,6 +335,7 @@ owned resources, encoder, MSL, present, and readback gates. See the
 [canonical Indirect implementation](evidence/CANONICAL-INDIRECT-STATE-A42DA8E15-2026-08-15.md),
 [raw Alpha/ZCompLoc evidence](evidence/PC-RAW-ALPHA-ZCOMP-039AFCE0E-2026-08-15.md),
 [raw Raster evidence](evidence/PC-RAW-RASTER-85B25CB3C-2026-08-15.md),
+[canonical Geometry producer evidence](evidence/CANONICAL-GEOMETRY-PRODUCER-689590CC-2026-08-15.md),
 [current Geometry converter readiness audit](evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
 [raw Geometry closure evidence](evidence/PC-RAW-GEOMETRY-CLOSURE-B9A9F355-2026-08-15.md),
 and [Apple canonical-plan readiness audit](evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
