@@ -34,9 +34,9 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `0f896395c` (`Add PC raw Depth canonical producer`),
-adding the independently reviewed Depth and Transform leaf converters plus the
-portable Texgen/SU value contract on top of the canonical Geometry leaf producer and
+`c1/macos-host-launch` at `c832fb862` (`Validate Texgen matrix attempted ranges`),
+adding the independently reviewed Texgen/SU, Depth, and Transform leaf converters
+plus the portable Texgen/SU value contract on top of the canonical Geometry leaf producer and
 reviewed setter-owned raw Geometry closure, typed indexed host mirroring,
 packed-color FIFO-width provenance, and RGBX8 ignored-byte handling on top of
 setter-owned raw Raster provenance, the source-faithful half-pixel jitter
@@ -298,7 +298,9 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   strict all-or-nothing canonical Geometry leaf producer, `590b2bd73`
   supplies the fixed 2,624-byte portable Texgen/SU ABI, and `37ae640d5`
   supplies the destination-preserving Transform leaf producer. `0f896395c`
-  adds the corresponding raw-to-canonical Depth producer. The copied batch now
+  adds the corresponding raw-to-canonical Depth producer, while `c832fb862`
+  adds the destination-preserving Texgen/SU leaf producer with strict
+  immediate/indexed attempted-range validation. The copied batch now
   fail-closes unsupported matrix/NBT and extra attribute slots, preserves
   mutation/order/lifetime boundaries, decodes all supported indexed scalar
   forms into the host mirror, and preserves exact packed-color FIFO widths.
@@ -318,6 +320,7 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   [raw Raster evidence](docs/evidence/PC-RAW-RASTER-85B25CB3C-2026-08-15.md),
   [canonical Geometry producer evidence](docs/evidence/CANONICAL-GEOMETRY-PRODUCER-689590CC-2026-08-15.md),
   [portable Texgen/SU evidence](docs/evidence/CANONICAL-TEXGEN-SU-590B2BD73-2026-08-15.md),
+  [Texgen/SU leaf-producer evidence](docs/evidence/CANONICAL-TEXGEN-PRODUCER-C832FB862-2026-08-15.md),
   [current Geometry converter readiness audit](docs/evidence/CURRENT-GEOMETRY-CONVERTER-READINESS-039AFCE0E-2026-08-15.md),
   [raw Geometry closure evidence](docs/evidence/PC-RAW-GEOMETRY-CLOSURE-B9A9F355-2026-08-15.md),
   and [Apple canonical-plan readiness audit](docs/evidence/APPLE-CANONICAL-PLAN-READINESS-1D48691A4-2026-08-14.md).
