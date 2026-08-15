@@ -97,8 +97,10 @@ M3 Max synthetic Metal-device fixture gate. No full link or LLDB run is active.
 Lane 183 completed the state-before-geometry temporal-order contract and its
 Raster ownership correction. Lane 184 stopped after a bounded partial Indirect
 crosswalk rather than duplicating work while project handoff is unresolved;
-lane 173 is complete/integrated/archived, so no remote production worker is
-active. Remote workers may not update the umbrella checkout.
+lane 173 is complete/integrated/archived. Lane 185 reuses that project-owned
+M3 task and protected source worktree for the dependency-ready Depth temporal-
+ordering successor; it is the sole active remote production worker. Remote
+workers may not update the umbrella checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
   integrated, and archived. M3 Max branch
@@ -631,6 +633,29 @@ active. Remote workers may not update the umbrella checkout.
   project-owned restart was not opened because native handoff still returns
   `No matching saved project was found on M3 Max`; no source/build/runtime
   result or downstream claim follows.
+- Lane 185 / reused task `01a002f3-0540-7db0-b2ac-052fed62f957` — active M3
+  Max Depth temporal-order source/test successor. The clean preserved worktree
+  `/private/tmp/acgc-lane-pc-texgen-shadow` is now on explicit branch
+  `c1/lane-depth-flush-order-m3` at exact canonical PC `1d48691a4f`; decomp
+  remains `09ca8e8b`. Its exact gate is to make `GXSetZMode` flush a completed
+  old batch before changing setter-owned raw Depth or legacy effective state,
+  while preserving typed boolean normalization, malformed-function fail-closed
+  behavior, equality/no-op dirty behavior, Windows/OpenGL behavior, and every
+  other GX setter. It owns only `pc/src/pc_gx.c`, the focused
+  `pc/tests/pc_gx_depth_raw_shadow_fixture.c`, and a fixture-only internal
+  declaration/CMake definition if observation cannot otherwise be proven.
+  Packet builders, Apple files, Texgen, Transform, TEV, Raster, Indirect,
+  decomp, full `ac_pc`, LLDB, ISO/assets, Metal, pixel, device, and playability
+  are out of scope. The PC references are `GXSetZMode`,
+  `pc_gx_raw_depth_store`, `pc_gx_flush_if_begin_complete`, and the existing
+  Depth fixture; the decomp oracle is
+  `src/static/dolphin/gx/GXPixel.c:185-194`. Unique roots are
+  `/private/tmp/acgc-lane-depth-flush-order-{native,asan,win}`. Focused native
+  and combined ASan/UBSan Transform/Depth/TEV/Texgen tests must run serially;
+  available `_WIN32`/`-m32` syntax probes must be recorded without claiming a
+  Windows runtime. A clean single child commit unblocks the cumulative Depth
+  producer prerequisite and the next non-overlapping Raster state lane; no
+  link, runtime, renderer, or playability claim follows.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -643,8 +668,8 @@ saved-project handoff registry is unresolved.
 Lanes 177–178 completed read-only without source ownership, lane 179 completed
 verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
-LLDB launches remain serialized and are not active. No remote production
-worker is active; lane 183 is complete and lane 184 is stopped.
+LLDB launches remain serialized and are not active. Lane 185 is the sole remote
+production worker; lane 183 is complete and lane 184 is stopped.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
