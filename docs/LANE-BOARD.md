@@ -112,8 +112,8 @@ passed lane 226's independent review and is integrated as canonical PC
 active. Lane 224 completed its
 read-only TEV audit with `BLOCK`. Lane 225 completed the Alpha/Blend/Depth/Fog
 producer topology: Alpha is `READY`, while Blend, Depth, and Fog are `BLOCKED`
-on the documented distinct predecessors. Lane 227 is registered setup-pending
-for the narrow Depth converter from its exact, disjoint canonical base
+on the documented distinct predecessors. Lane 227 is active
+on the narrow Depth converter from its exact, disjoint canonical base
 `590b2bd73`.
 
 ## Remote M3 Max batch (current)
@@ -1572,7 +1572,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   ownership, field/domain mapping, destination-preserving fail-closed behavior,
   header portability, and focused coverage have no material blocker.
 - Lane 227 / reused project-owned M3 source task
-  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — setup-pending Depth leaf-converter
+  `01a004f3-3ae3-7560-9c9c-e1799056aad6` — active Depth leaf-converter
   source/test lane on `gpt-5.6-luna` with max reasoning. It must create remote
   source `/private/tmp/acgc-lane-depth-producer-m3` on branch
   `c1/lane-depth-producer-m3` at exact canonical PC `590b2bd73`, using only
@@ -1587,7 +1587,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   `/private/tmp/acgc-lane-depth-producer-win`. Native and combined ASan/UBSan
   focused tests plus production-object/syntax probes are the only verification;
   no full link, LLDB, runtime, device, pixel, Windows sign-off, or playability
-  claim is authorized.
+  claim is authorized. The dedicated branch/worktree is initialized cleanly at
+  the declared base; its in-progress diff is limited to the four owned files,
+  native focused configure/build has succeeded, and serial native plus combined
+  ASan/UBSan test completion remains pending.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
