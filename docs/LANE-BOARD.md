@@ -73,7 +73,8 @@ the independent focused verification matrix; lane 161 is integrated as PC
 as PC `f2b7ab153`; lane 166 is integrated as PC `037689462`; lane 167 completed
 the read-only exact Transforms ABI audit; lane 168 is the
 non-overlapping portable canonical TEV ABI source lane; lane 169 is the
-read-only Depth/Raster exact contract audit. No
+read-only Depth/Raster exact contract audit; lane 170 is the focused PC raw
+Transform/matrix shadow source lane. No
 full link or LLDB run is active. Remote workers may not update the umbrella
 checkout.
 
@@ -409,15 +410,25 @@ checkout.
   setters, and the smallest serial shadow-state repair plan. It may not edit,
   branch, build, launch, access assets, overlap source ownership, or claim
   callback, Metal, pixel, device, Windows runtime, iOS, or playability proof.
+- Lane 170 / task `01a002e0-0e90-7a01-8775-b09077214ab6` — active M3 Max
+  source-edit lane on explicit branch `c1/lane-transform-raw-shadow-m3`, exact
+  PC base `037689462`, worktree `/private/tmp/acgc-lane-transform-raw-shadow`,
+  and decomp oracle `09ca8e8b`. It exclusively owns PC private Transform state
+  and setters, one focused fixture, and minimal PC CMake registration for raw
+  pre-widescreen projection, strict position/normal slots, current logical ID,
+  knownness, and fail-closed unresolved indexed behavior. Unique focused roots
+  are `/private/tmp/acgc-lane-transform-raw-shadow-{native,asan,win}`. Canonical
+  ABI files, portable CMake, Texgen/SU, V1-V4, Apple/Metal, producer wiring,
+  full link, LLDB, assets, pixels, devices, and playability are out of scope.
 
-The remote Codex project assignment records place tasks 156–169 under the
+The remote Codex project assignment records place tasks 156–170 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
-transferred. The next source integration is lane 168's portable TEV ABI after
-individual review. Lane 167's frozen Transform contract selects a subsequent
-raw Transform-shadow lane once shared `pc_gx` ownership is released. Full
-links and LLDB launches remain serialized and are not active.
+transferred. The next source integrations are lane 168's portable TEV ABI and
+lane 170's raw Transform shadow, each only after individual review; their file
+ownership does not overlap. Full links and LLDB launches remain serialized and
+are not active.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
