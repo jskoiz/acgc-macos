@@ -1266,7 +1266,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   sanitizer diagnostics (`detect_leaks=0`); public ABI probes pass `8/8` and
   bounded production syntax probes pass `6/6`. Missing i686 headers/toolchain
   and host-SDL CMake features remain Windows blockers, not Windows sign-off.
-  This proves only the pre-lane-211 exact-tip CPU/source baseline.
+  Evidence is
+  `docs/evidence/CURRENT-FOCUSED-MATRIX-85B25CB3C-2026-08-15.md`. This proves
+  only the pre-lane-211 exact-tip CPU/source baseline.
 - Lane 214 / reused project-owned M3 verification task
   `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active independent read-only review
   of raw Geometry worker `1730823d45` against base `85b25cb3c` and decomp
