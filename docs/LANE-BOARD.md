@@ -77,7 +77,7 @@ reviewed/archived under the remote M3 Max `acgc-modern-port` project. No
 production worker from that completed batch remains active.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs. Exact lane-204 cleanup
-is complete. Lane 208 is reviewed and integrated as canonical PC
+is complete. Lane 208 is reviewed, integrated, and archived as canonical PC
 `85b25cb3c`; its initial candidate passed raw-shadow review but root held the
 canonical branch until the same task restored decomp's `field == 0` viewport
 jitter adjustment and added a focused regression. Lane 209 is reviewed and
@@ -1148,7 +1148,7 @@ also integrated. Remote workers may not update the umbrella checkout.
   build, full link, LLDB, callback, Metal, pixel, device, or playability claim.
 - Lane 208 / reused project-owned M3 task
   `01a004f3-3ae3-7560-9c9c-e1799056aad6` — complete, reviewed, integrated,
-  and archive-ready raw Raster source/test lane. Worker branch
+  and archived raw Raster source/test lane. Worker branch
   `c1/lane-raw-raster-m3` advanced exact base `039afce0e` through initial
   `e5b0b9fc4` and repair `c04ffb385`; the reviewed range was applied onto the
   newer canonical `a42da8e155` tip as `c2b5bd929` plus canonical PC
@@ -1216,8 +1216,8 @@ and integrated at canonical PC `698d45d3e`; lane 205 is reviewed and
 integrated at canonical PC `b3336504c`; lane 204 is reviewed and integrated at
 canonical PC `039afce0e`. Lanes 206–207 are complete, reviewed, and archived
 read-only audits. Exact lane-204 cleanup is complete. Lane 209 is reviewed and
-integrated as canonical PC `a42da8e155`; lane 208 is reviewed and integrated
-as canonical PC `85b25cb3c` and is archive-ready. Lane 210 is complete,
+integrated as canonical PC `a42da8e155`; lane 208 is reviewed, integrated, and
+archived as canonical PC `85b25cb3c`. Lane 210 is complete,
 reviewed, and archived; its Geometry raw-closure successor is now
 dependency-ready because lane 208 released `pc_gx.c` ownership. No lane 211 is
 opened or queued; no full link, LLDB, or device run is active.
