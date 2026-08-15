@@ -59,10 +59,11 @@ Max and is reviewed and integrated as canonical PC `97aebd8a2d`. Lane 201 comple
 independent exact post-Channels matrix: native and combined ASan/UBSan each
 pass `18/18`, the corrected ABI/syntax probes pass, and Windows remains at the
 documented SDL/toolchain boundary. Lane 202 completed its independent
-read-only five-file review with `PASS` and is archived. Lane 203 is
-setup-pending in the saved ACGC project for the M3 Max raw Texture/TLUT
-producer; it is not counted active until its remote source worktree and branch
-are initialized at exact canonical `97aebd8a2d`.
+read-only five-file review with `PASS` and is archived. Lane 203 is the sole
+active production lane in the saved ACGC project for the M3 Max raw
+Texture/TLUT producer. Its dedicated remote PC worktree is clean on
+`c1/lane-raw-texture-tlut-m3` at exact canonical `97aebd8a2d`; the setup turn
+created no source diff or build root.
 No full link, LLDB launch, or Metal-device run is active. Reviewed commits and
 evidence remain available in Git and the evidence docs.
 
@@ -1015,15 +1016,22 @@ also integrated. Remote workers may not update the umbrella checkout.
   candidate-owned blocker; lane-200 test results were reported evidence only.
   No build, launch, LLDB, resource access, callback,
   Metal, pixel, device, iOS, Windows sign-off, or playability scope is allowed.
-- Lane 203 / project task `01a004ae-d74c-7d13-8be7-e8fdfb897318` —
-  setup-pending M3 Max raw Texture/TLUT source/test successor. The exact gate
+- Lane 203 / reused project-owned M3 task
+  `01a00275-9cf6-7113-8511-5e9a4d18deff` — active M3 Max raw Texture/TLUT
+  source/test successor. The local setup placeholder
+  `01a004ae-d74c-7d13-8be7-e8fdfb897318` is archived and is not a worker. The
+  exact gate
   is the pointer-free raw map/TLUT owner epoch, per-resource generations,
   mutation/invalidation boundary, canonical Texture/Dynamic conversion, and
   synchronous callback-scoped byte lease frozen in
   `docs/evidence/RAW-TEXTURE-TLUT-PRODUCER-PLAN-23C26E520-2026-08-14.md`.
   It depends on canonical PC `97aebd8a2d` and decomp `09ca8e8b`; success stops
   after a clean worker commit and focused CPU/source proof. The owning branch
-  will be `c1/lane-raw-texture-tlut-m3` in a dedicated remote PC worktree.
+  is `c1/lane-raw-texture-tlut-m3` in dedicated remote PC worktree
+  `/private/tmp/acgc-lane-raw-texture-tlut-m3`, initialized clean at
+  `97aebd8a2df935ebfc8d69dfc9419b54d063ddeb` from verified tracked-source-only
+  bundle `/private/tmp/acgc-canonical-pc-97aebd8.bundle` (SHA-256
+  `bbe76092b9db2d089e68f4bfd3687015a6d4cb3bae7a49c817f6456d1264d360`).
   Owned files are new `pc/include/pc_gx_texture_raw_state.h`, raw texture/TLUT
   state and mutation calls in `pc/src/pc_gx_texture.c`, new
   `pc/src/pc_gx_canonical_snapshot.c`, one narrow producer call in
@@ -1058,8 +1066,8 @@ lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lanes 185–186 are
 integrated, lanes 187–188 are complete read-only audits, lane 183 is complete,
 and lane 184 is stopped. Lanes 189, 190, 193, 195, and 199 are integrated, and
-lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is
-setup-pending and is not yet active. The current
+lanes 191–192, 194, 196–198, and 200–202 are complete. Lane 203 is the sole
+active production lane. The current
 protected worktrees contain ignored assets/orig and must not be deleted or
 inspected beyond counts.
 
