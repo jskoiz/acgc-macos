@@ -79,9 +79,10 @@ read-only exact Channels/Lighting contract audit; lane 172 is integrated as PC
 `c3e158398` and `251a010b8`, adding the neutral Transform ABI and setter-owned
 raw Depth provenance. Lanes 173–174 returned preserved, non-overlapping first
 commits for raw Texgen/SU provenance (`2e3c95dae`) and the neutral Geometry ABI
-(`2b394943a`), but independent review found contract blockers in both. Their
-same-branch repair turns are active and neither result is in the canonical PC
-branch. Lanes 177–178 completed the read-only cumulative-producer
+(`2b394943a`), but independent review found contract blockers in both. Repair
+commits `2df84f628` and `56ede5f1f` have returned; independent cross-review
+turns are active and neither result is in the canonical PC branch. Lanes
+177–178 completed the read-only cumulative-producer
 and Apple canonical-plan preflights. Lane 179 completed the exact current-tip
 native/sanitizer/Windows focused matrix. Lanes 180–181 completed the read-only
 Channels/Lighting and Raster implementation preflights. Lane 182 completed,
@@ -89,7 +90,7 @@ was archived, and had its exact holder-free roots retired after the current-tip
 M3 Max synthetic Metal-device fixture gate. No full link or LLDB run is active.
 Lane 183 is the active read-only successor freezing the state-before-geometry
 temporal-order contract exposed by the producer audit; lanes 173–174 are the
-two active source-repair workers. Remote workers may not update the umbrella
+two active read-only cross-reviews. Remote workers may not update the umbrella
 checkout.
 
 - Lane 142 / task `01a00211-7500-7cd3-a5f6-161cfcbff884` — complete,
@@ -458,9 +459,9 @@ checkout.
   `docs/evidence/CANONICAL-DEPTH-STATE-C736F9686-2026-08-14.md`. No PC setter
   shadow, cumulative producer, full link, LLDB, Metal, pixel, device, or
   playability claim follows.
-- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — active source-repair
-  turn after independent review blocked the first handoff. The M3 Max raw
-  Texgen/SU provenance source/test successor runs in
+- Lane 173 / task `01a002f3-0540-7db0-b2ac-052fed62f957` — active independent
+  read-only cross-review after its repair turn returned. The M3 Max raw
+  Texgen/SU provenance source/test successor ran in
   `/private/tmp/acgc-lane-pc-texgen-shadow`, branch
   `c1/lane-pc-texgen-shadow-m3`, advancing exact PC `251a010b8` to clean worker
   `2e3c95dae`, with decomp oracle `09ca8e8b`. The completed corrective audit
@@ -476,11 +477,12 @@ checkout.
   asset access, callback, Metal, pixel, device, Windows-runtime, iOS, or
   playability claim follows. A separate repair commit must fix flush-before-
   mutation ordering, BUMP-source resolution, and invalid-setter compatibility
-  mirror preservation, then pass fresh native and combined ASan/UBSan review.
-  The worker commit is preserved but not integrated.
-- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active source-repair
-  turn after independent review blocked the first handoff. The M3 Max neutral
-  Geometry ABI source/test successor runs in
+  mirror preservation. Repair commit `2df84f628` reports native and combined
+  ASan/UBSan `4/4` each and is now under cross-review. Both worker commits are
+  preserved but not integrated.
+- Lane 174 / task `01a002f3-0540-7361-875e-f9ccf4038788` — active independent
+  read-only cross-review after its repair turn returned. The M3 Max neutral
+  Geometry ABI source/test successor ran in
   `/private/tmp/acgc-lane-canonical-geometry`, branch
   `c1/lane-canonical-geometry-m3`, advancing exact PC `251a010b8` to clean
   worker `2b394943a`, with decomp oracle `09ca8e8b`. The completed corrective
@@ -495,9 +497,9 @@ checkout.
   LLDB, callback, Metal, pixel, device, Windows-runtime, iOS, or playability
   claim follows. A separate repair commit must restore the frozen 48-byte
   header, canonical primitive/color/index ordering, exact integer and VAT
-  validation, color canonicality, and bounded stream extent before fresh native
-  and combined ASan/UBSan review. The worker commit is preserved but not
-  integrated.
+  validation, color canonicality, and bounded stream extent. Repair commit
+  `56ede5f1f` reports native and combined ASan/UBSan `8/8` each and is now under
+  cross-review. Both worker commits are preserved but not integrated.
 - Lane 175 / task `01a00358-efb4-7d51-b5b7-7fe5801e059a` — complete,
   independently reviewed, and integrated. M3 Max branch
   `c1/lane-canonical-transform-m3` advanced `59714a1fd` to worker
@@ -594,13 +596,13 @@ saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
 refresh to display the new rows. Their source-only sync bundles contain tracked
 Git objects/docs only. No ISO, extracted assets, keys, or proprietary data were
 transferred. Lanes 170, 172, 175, and 176 are individually reviewed and
-integrated. Lanes 173–174 have preserved first commits and active repair turns
-after independent review; their production and CMake ownership does not overlap.
+integrated. Lanes 173–174 have preserved first and repair commits under active
+independent cross-review; their production and CMake ownership does not overlap.
 Lanes 177–178 completed read-only without source ownership, lane 179 completed
 verification-only, lanes 180–181 completed read-only prerequisite audits, and
 lane 182 completed verification-only and is archived/cleaned. Full links and
 LLDB launches remain serialized and are not active. Lane 183 is the active
-read-only task alongside the two non-overlapping lane 173–174 source repairs.
+read-only audit alongside the two non-overlapping lane 173–174 cross-reviews.
 
 Lane 128 / task `019fff43-def1-7bd2-8e1a-f7e72a6aac5b` is complete and archived.
 It was created as a same-directory fork so it remained under the
