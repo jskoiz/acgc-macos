@@ -1,29 +1,39 @@
 # ACGC visible lane board
 
-Updated 2026-08-15 under the resumed rolling-refill scheduler. The board records the
-visible Codex tasks, their ownership, and the order in which evidence may be
-integrated. All new and successor tasks are Luna Max with max reasoning. A
-task being active means it is allowed to inspect or run its bounded work; it
-does not mean its gate passed.
+Updated 2026-08-17. **The project paused on 2026-08-15 at the user's
+request.** The rolling-refill scheduler is stopped, no lane is active, and no
+development, remote worker, verification, integration, cleanup, full-link, or
+debugger work is running. This board is preserved as the historical lane
+record; a task described as active below reflects its pre-pause registration,
+and being active never meant its gate passed.
 
-Current scheduler ceiling: up to fifteen useful visible ACGC lanes, with no
-filler. One lane is the integration/evidence owner; up to fourteen are worker
-lanes. Production source editing remains capped at seven simultaneous lanes,
-with the remaining capacity reserved for dependency-ready reference audits,
-focused fixtures, read-only traces, and independent verification.
-Placement policy: lane 111's local runtime/cleanup state remains on this Mac
-until its owner-managed handoff is safe. Future focused source, test, and audit
-lanes are to be handed to the configured remote M3 Max host with isolated
-worktrees and ignored roots. Full `ac_pc` links and LLDB launches remain
-serialized across both hosts. True cloud tasks are planning/review only; the
-ISO, extracted assets, keys, and proprietary data remain local and ignored.
+The post-pause host cleanup removed the temporary `/private/tmp` worktrees,
+build roots, bundles, and logs on both hosts, so every `/private/tmp` path in
+this board is a provenance record only and no longer exists. The paused TEV
+and Indirect candidates survive as durable refs in the
+`upstream/ACGC-PC-Port` submodule:
+`c1/archive/cleanup-20260815/canonical-tev-candidate` (worker `043d24822`)
+and `c1/archive/cleanup-20260815/canonical-indirect-candidate` (worker
+`2f6ba5dff`), mirrored by the `acgc-m3-cleanup` remote refs `canonical-tev`,
+`canonical-indirect`, and `canonical-62c810e`.
+
+The pre-pause scheduler ceiling was fifteen visible lanes with production
+source editing capped at seven simultaneous lanes. On resume, follow the
+README's recommended four-to-seven useful lanes instead; the fifteen-lane
+ceiling is historical. Full `ac_pc` links and LLDB launches remain serialized
+across both hosts. True cloud tasks are planning/review only; the ISO,
+extracted assets, keys, and proprietary data remain local and ignored.
 The texture remediation (17) is now complete/integrated at source `578c8b7`.
 The root-owned audio-bank ABI lane is integrated at source `909f3ca`; its
 historical fresh run decodes compact bank 28, reaches `LOGO draw`, and
-produces the first identifiable game-owned frame. The captured screen is retained outside Git at
+produces the first identifiable game-owned frame. The captured screen was
+retained outside Git at
 `/private/tmp/acgc-integrated-audio-wave-build/integrated-frame-screen.png`
-(SHA-256
-`ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`). The
+and recorded at SHA-256
+`ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`; that
+temporary file was lost in the post-pause `/private/tmp` cleanup, so the
+recorded hash and evidence documents are the surviving record and
+re-verifying the image requires a fresh capture. The
 process later exits `139` before clean shutdown, so representative GX/Metal
 readback, input, audible audio, save/load, and playability remain open. The
 authoritative source has since advanced through `09dd182` to `aea3515`: the
@@ -146,19 +156,26 @@ three commits one at a time, and integrated canonical PC `62c810e5b`; fresh
 exact-tip native and combined ASan/UBSan focused CTest pass `2/2` each. Both
 tasks are complete/integrated/archived. Lanes 236 and 237 have completed clean
 canonical TEV and Indirect leaf handoffs at workers `043d24822` and
-`2f6ba5dff`; neither is integrated. Lanes 239 and 240 are their registered
-independent immutable CPU/source reviews, while lane 238 is the parallel
-read-only cumulative snapshot and Apple CPU-boundary audit at the same exact
-`62c810e5b` source tip. The completed TEV candidate alone changed
+`2f6ba5dff`; neither is integrated. Lane 238, the parallel read-only
+cumulative snapshot and Apple CPU-boundary audit at the same exact
+`62c810e5b` source tip, completed before the 2026-08-15 pause with three
+independent `BLOCK` verdicts (see
+`docs/evidence/CUMULATIVE-APPLE-AUDIT-62C810E5B-2026-08-15.md`). Lanes 239
+and 240, the registered independent immutable CPU/source reviews of the two
+candidates, paused mid-verification without final `PASS`/`BLOCK` handoffs
+(see `docs/evidence/TEV-INDIRECT-REVIEW-PAUSE-62C810E5B-2026-08-15.md`).
+The completed TEV candidate alone changed
 `pc/CMakeLists.txt`; the Indirect candidate used a source-direct harness, and
 all three review/audit lanes own no production files. No full link, LLDB,
 launch, or device work is active.
 
-## Remote M3 Max batch (current)
+## Remote M3 Max batch (final pre-pause)
 
-The authorized M3 Max Codex host and SSH path are online, and the source-only
-remote checkout is being used for focused lanes; the latest integrated local PC tip is
-`62c810e5b` and decomp remains `09ca8e8b`. No ISO, extracted assets, keys, or
+Before the pause, the authorized M3 Max Codex host and SSH path were online
+and the source-only remote checkout was used for focused lanes; the latest
+integrated local PC tip is `62c810e5b` and decomp remains `09ca8e8b`. Any
+remote lane state remaining after the pause and `/private/tmp` cleanup must
+be assumed lost. No ISO, extracted assets, keys, or
 proprietary data were transferred. The remote Codex app has a saved
 `acgc-modern-port` project. Built-in cross-host handoff matching still does not
 enumerate it from the local host, so lanes 204–207 were created directly from
@@ -1907,10 +1924,13 @@ also integrated. Remote workers may not update the umbrella checkout.
   pass `1/1` each, the production producer object and bounded C/C++/ILP32
   probes pass, and `_WIN32` remains blocked by missing host `process.h`.
   Complete-history bundle
-  `/private/tmp/acgc-lane-236-canonical-tev-producer.bundle` has SHA-256
-  `ba4d9a1ca72bd18dcffd31eddfd60969d96cb1ef8cb726d4042def6c02372f40`.
-  Nothing is integrated and all lane paths remain protected pending an
-  independent immutable review.
+  `/private/tmp/acgc-lane-236-canonical-tev-producer.bundle` had SHA-256
+  `ba4d9a1ca72bd18dcffd31eddfd60969d96cb1ef8cb726d4042def6c02372f40`; the
+  bundle and lane worktree were lost in the post-pause `/private/tmp`
+  cleanup, and the candidate now survives as durable submodule ref
+  `c1/archive/cleanup-20260815/canonical-tev-candidate` (`043d24822`),
+  mirrored at `acgc-m3-cleanup/canonical-tev`. Nothing is integrated pending
+  the lane-240 independent immutable review.
 - Lane 237 / reused project-owned M3 Max task
   `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete/root-review-hold
   source-edit lane for the canonical Indirect leaf producer. It used the same
@@ -1936,50 +1956,73 @@ also integrated. Remote workers may not update the umbrella checkout.
   fixtures pass, the production producer object and bounded C/C++/ILP32 probes
   pass, and `_WIN32` remains blocked by the missing Windows SDK `process.h`.
   Complete-history bundle
-  `/private/tmp/acgc-lane-237-canonical-indirect-producer.bundle` has SHA-256
-  `aaab318c0cbe19e6d52b63107e1431489eb4a1ee6762ecf34a87c072796b30c2`.
-  Nothing is integrated and all lane paths remain protected pending an
-  independent immutable review.
+  `/private/tmp/acgc-lane-237-canonical-indirect-producer.bundle` had SHA-256
+  `aaab318c0cbe19e6d52b63107e1431489eb4a1ee6762ecf34a87c072796b30c2`; the
+  bundle and lane worktree were lost in the post-pause `/private/tmp`
+  cleanup, and the candidate now survives as durable submodule ref
+  `c1/archive/cleanup-20260815/canonical-indirect-candidate` (`2f6ba5dff`),
+  mirrored at `acgc-m3-cleanup/canonical-indirect`. Nothing is integrated
+  pending the lane-239 independent immutable review.
 - Lane 238 / reused project-owned M3 Max task
-  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — active/registered independent
-  read-only audit. Setup verified the complete-history source-only bundle
+  `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete read-only audit; three
+  `BLOCK` verdicts. Setup verified the complete-history source-only bundle
   `/private/tmp/acgc-canonical-pc-62c810e.bundle` at SHA-256
   `7e8c25348f11fdb124e8c5ad75d78b0b4de1d139cd37e435ac535f303e2617e5`,
-  exact PC `62c810e5b`, and clean decomp `09ca8e8b`. Its clean detached source
-  is `/private/tmp/acgc-lane-238-cumulative-apple-audit-m3` at the exact PC
-  tip; it has no branch, files, build/test/log roots, or runtime authority. It
-  will decide separately whether the smallest cumulative CPU assembler, typed
-  Apple CPU consumer, and later live callback trace are dependency-ready after
-  lanes 236/237, map every available/missing truthful section producer, freeze
-  atomic snapshot/lease/publication failure behavior, and name exact
-  non-overlapping successors. No edit, build, test, CMake, full link, LLDB,
-  runtime, Metal/device/pixel, input/audio/save, iOS, or playability claim is
-  authorized.
+  exact PC `62c810e5b`, and clean decomp `09ca8e8b`. Its clean detached
+  source was `/private/tmp/acgc-lane-238-cumulative-apple-audit-m3` at the
+  exact PC tip; it had no branch, files, build/test/log roots, or runtime
+  authority. Before the 2026-08-15 pause it returned `BLOCK` independently
+  for each of its three gates — the cumulative CPU assembler, the typed Apple
+  CPU consumer, and the later serialized live callback trace — naming missing
+  Blend/Fog raw owners, complete production/envelope wiring, a Geometry
+  dependency-result builder, atomic resource-lease publication, the assembler
+  itself, and Apple consumer/registration code as prerequisites. The lane's
+  raw final handoff transcript and detached source root were not preserved
+  through the post-pause host cleanup; the pause-time record is transcribed
+  with that boundary stated in
+  `docs/evidence/CUMULATIVE-APPLE-AUDIT-62C810E5B-2026-08-15.md`. No edit,
+  build, test, CMake, full link, LLDB, runtime, Metal/device/pixel,
+  input/audio/save, iOS, or playability claim was authorized or made.
 - Lane 239 / reused project-owned M3 Max task
-  `01a00669-46ec-7c50-959c-50dafe702923` — active/registered independent
-  immutable review of the lane-237 Indirect producer. Setup verified candidate
-  bundle SHA-256
+  `01a00669-46ec-7c50-959c-50dafe702923` — paused partial verification;
+  independent immutable review of the lane-237 Indirect producer. Setup
+  verified candidate bundle SHA-256
   `aaab318c0cbe19e6d52b63107e1431489eb4a1ee6762ecf34a87c072796b30c2`,
   exact one-commit parentage `62c810e5b` to `2f6ba5dff`, clean decomp
-  `09ca8e8b`, and the exact three new-file diff. Its clean detached review
-  source is `/private/tmp/acgc-lane-239-indirect-producer-review`; unique
-  native/ASan roots are `/private/tmp/acgc-lane-239-indirect-review-native`
-  and `-asan`. It owns no files and must return `PASS` or an exact material
-  candidate-owned blocker after source review, source-direct native and
-  combined ASan/UBSan reruns, production-object compile, and bounded syntax
-  probes. No CMake edit, integration, full link, LLDB, runtime, Metal/device,
-  pixel, or playability scope.
+  `09ca8e8b`, and the exact three new-file diff. Before the pause its static
+  review, source-direct native and combined ASan/UBSan fixtures, and
+  C11/C++11 probes passed without diagnostics; the `-m32`/`_WIN32` probes and
+  the final immutable `PASS`/`BLOCK` handoff remain open. Its detached review
+  source and unique native/ASan roots under `/private/tmp` were not preserved
+  through the post-pause host cleanup; on resume, re-run the review from
+  archived candidate ref
+  `c1/archive/cleanup-20260815/canonical-indirect-candidate` (`2f6ba5dff`).
+  The paused state is recorded in
+  `docs/evidence/TEV-INDIRECT-REVIEW-PAUSE-62C810E5B-2026-08-15.md`. It owns
+  no files and must return `PASS` or an exact material candidate-owned
+  blocker after source review, source-direct native and combined ASan/UBSan
+  reruns, production-object compile, and bounded syntax probes. No CMake
+  edit, integration, full link, LLDB, runtime, Metal/device, pixel, or
+  playability scope.
 - Lane 240 / reused project-owned M3 Max task
-  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — active/registered independent
-  immutable review of the lane-236 TEV producer. Setup verified candidate
-  bundle SHA-256
+  `01a004f2-96c0-79c2-8c20-c9b028bb5018` — paused partial verification;
+  independent immutable review of the lane-236 TEV producer. Setup verified
+  candidate bundle SHA-256
   `ba4d9a1ca72bd18dcffd31eddfd60969d96cb1ef8cb726d4042def6c02372f40`,
   exact one-commit parentage `62c810e5b` to `043d24822`, clean decomp
-  `09ca8e8b`, and the exact four-file diff. Its clean detached review source is
-  `/private/tmp/acgc-lane-240-tev-producer-review`; unique native/ASan roots
-  are `/private/tmp/acgc-lane-240-tev-review-native` and `-asan`. It owns no
-  files and must return `PASS` or an exact material candidate-owned blocker
-  after source review, focused native and combined ASan/UBSan CTest,
+  `09ca8e8b`, and the exact four-file diff. Before the pause its crosswalk,
+  native and combined ASan/UBSan focused fixture/object builds and `1/1`
+  CTests, `git diff --check`, and C11/C++11/`-m32` probes passed; the
+  `_WIN32` probe stopped at the missing `process.h` sysroot boundary, and the
+  final immutable `PASS`/`BLOCK` handoff remains open. Its detached review
+  source and unique native/ASan roots under `/private/tmp` were not preserved
+  through the post-pause host cleanup; on resume, re-run the review from
+  archived candidate ref
+  `c1/archive/cleanup-20260815/canonical-tev-candidate` (`043d24822`). The
+  paused state is recorded in
+  `docs/evidence/TEV-INDIRECT-REVIEW-PAUSE-62C810E5B-2026-08-15.md`. It owns
+  no files and must return `PASS` or an exact material candidate-owned
+  blocker after source review, focused native and combined ASan/UBSan CTest,
   production-object compile, and bounded syntax probes. No source edit,
   integration, full link, LLDB, runtime, Metal/device, pixel, or playability
   scope.
@@ -2752,27 +2795,26 @@ submodules blindly or edit a detached source checkout.
 
 ## Integration order
 
-1. Preserve the first live capture (`10d6ac0`) as the fixed-width input to the
-   GX adapter lane. Keep renderer translation separate from frame proof, and
-   retain the exact observed prefix even though it currently fails closed.
-2. When a lane completes, inspect its final evidence immediately, mark it
-   integrated/rejected/parked here, and refill only with a useful dependency-ready
-   successor. The input lane is parked because its remaining gate requires an
-   OS/human event or physical controller; no synthetic filler replaces it.
-3. The LP64 texture-object fault is repaired at source `578c8b7`, and the
-   audio-bank wire/native mismatch is integrated at `909f3ca`. The first
-   identifiable game-owned frame is now evidenced; the next bounded lane is a
-   post-frame crash/fault trace, followed by representative GX-to-Metal
-   encode/present/readback. Keep the `83fa889`, `866dd94`, and `ddbb498` fixture
-   contracts separate from live-frame proof.
-4. Keep Save_t/GCI parked on the explicit raw-range mismatch until the codec
-   preserves arbitrary bytes or a proven wire-format boundary is established;
-   do not weaken the roundtrip test. Filesystem adapter, lifecycle, and
-   verification evidence remain synthetic/portable boundaries.
-5. Refresh the native and sanitizer matrix at the integrated
-   `c1/macos-host-launch` source HEAD after the audio fix, then separately prove input, audio
-   device/audibility, save/load, simulator, physical device, and playability.
-6. iOS implementation remains gated behind proven shared macOS core, renderer,
+Earlier eras' scheduling details remain in the lane entries above. The
+current order is the paused critical path recorded in the README
+(Phases A–G):
+
+1. Resume lanes 239 and 240 from the archived candidate refs and accept only
+   their final immutable `PASS`/`BLOCK` handoffs; no partial commentary is a
+   verdict.
+2. On `PASS`, integrate the TEV candidate (`043d24822`) first because it owns
+   the pending minimal CMake registration, then the Indirect candidate
+   (`2f6ba5dff`), with exact-tip focused native and combined ASan/UBSan
+   reruns after each integration and a joint serial rerun after both.
+3. Close the three lane-238 `BLOCK` verdicts in dependency order: truthful
+   Blend and Fog setter-owned raw state and canonical leaves, the Geometry
+   dependency-result builder, production/envelope wiring, atomic
+   resource-lease publication, the all-or-nothing cumulative assembler, and
+   the typed Apple CPU consumer.
+4. Only then schedule the one serialized live callback trace, followed by the
+   Metal encode/present/readback gates and the remaining input, audio,
+   save/reload, lifecycle, regression, and playability gates.
+5. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the

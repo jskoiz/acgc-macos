@@ -264,9 +264,15 @@ Completed canonical/raw work includes:
 
 ## Work paused in flight
 
-The pause occurred at safe command boundaries. Candidate branches, bundles,
-review roots, and logs are intentionally preserved. None of the two candidates
-below is part of canonical `c1/macos-host-launch` yet.
+The pause occurred at safe command boundaries. The post-pause host cleanup
+removed the temporary `/private/tmp` bundles, worktrees, build roots, and logs
+on both hosts, so the durable record is the archived submodule refs and the
+evidence documents, not the paths named in historical lane entries. The two
+candidates below survive in `upstream/ACGC-PC-Port` as
+`c1/archive/cleanup-20260815/canonical-tev-candidate` (`043d24822`) and
+`c1/archive/cleanup-20260815/canonical-indirect-candidate` (`2f6ba5dff`),
+mirrored by the `acgc-m3-cleanup` remote refs. Neither candidate is part of
+canonical `c1/macos-host-launch` yet.
 
 | Lane | State at pause | Exact result / next action |
 | --- | --- | --- |
@@ -275,6 +281,11 @@ below is part of canonical `c1/macos-host-launch` yet.
 | 238 — cumulative/Apple audit | Complete read-only audit; three BLOCK verdicts | The cumulative assembler, typed Apple CPU consumer, and serialized live callback trace are each blocked. Missing prerequisites include Blend/Fog raw owners, complete production/envelope wiring, a Geometry dependency-result builder, atomic resource-lease publication, the assembler itself, and Apple consumer/registration code. |
 | 239 — Indirect independent review | Partial verification | Static review, native and combined ASan/UBSan source-direct fixtures, and C11/C++11 probes passed without diagnostics. The `-m32`/`_WIN32` probes and final immutable PASS/BLOCK handoff remain. |
 | 240 — TEV independent review | Partial verification | Crosswalk, native and combined ASan/UBSan focused fixture/object builds and `1/1` CTests, `git diff --check`, and C11/C++11/`-m32` probes passed. The `_WIN32` probe stopped at the missing `process.h` sysroot boundary; the final immutable PASS/BLOCK handoff remains. |
+
+The lane-238 verdicts and the exact paused review states are recorded, with
+their preservation boundaries stated, in
+[the cumulative/Apple audit record](docs/evidence/CUMULATIVE-APPLE-AUDIT-62C810E5B-2026-08-15.md)
+and [the paused TEV/Indirect review record](docs/evidence/TEV-INDIRECT-REVIEW-PAUSE-62C810E5B-2026-08-15.md).
 
 Resume rule: do not infer PASS from partial commentary. The independent final
 handoff must be reviewed, and a blocked candidate must be repaired and
@@ -498,8 +509,11 @@ The project uses the following vocabulary literally:
 
 1. Verify the umbrella, both submodule refs, status, diff, and preserved dirty
    boundary before touching source.
-2. Confirm the paused M3 task/worktree/root identities; do not recreate or
-   duplicate them while preserved state exists.
+2. Recover the paused candidates from the archived submodule refs
+   `c1/archive/cleanup-20260815/canonical-tev-candidate` and
+   `c1/archive/cleanup-20260815/canonical-indirect-candidate`; the original
+   `/private/tmp` worktrees, bundles, and build roots no longer exist on
+   either host, and any remaining remote lane state must be assumed lost.
 3. Finish lanes 239 and 240 and accept only their final immutable PASS/BLOCK
    handoffs.
 4. Integrate TEV then Indirect only on PASS, with exact-tip focused reruns.
@@ -1495,7 +1509,10 @@ and the [lane board](docs/LANE-BOARD.md) for exact provenance.
   (SHA-256
   `ce1a124b15d07d7f81edb7ad1ef1548832c7d5bbff21bd46a59de533996129b6`)
   visibly contains the Animal Crossing window, character, and `© 2001, 2002
-  Nintendo`. This passes the identifiable game-frame gate. The same run later
+  Nintendo`. This passes the identifiable game-frame gate. The temporary
+  screenshot file was later lost in the post-pause `/private/tmp` cleanup;
+  the recorded SHA-256 and the evidence documents are the surviving record,
+  and re-verifying the image requires a fresh capture. The same run later
   exits with `139` before graceful cleanup, so stable post-frame execution,
   input, audible audio, save/load, and playability remain unproven.
 - Umbrella commit `adc1d6e` adds the parser-only
