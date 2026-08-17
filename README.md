@@ -5,19 +5,22 @@ recording the evidence and cross-repository plan for a modern Apple port.
 Current work targets macOS first; iOS begins only after the shared 64-bit core
 and Apple renderer have their own evidence.
 
-> **Project status — paused on 2026-08-15.** Development, remote worker lanes,
-> verification, integration, cleanup, full links, and debugger launches are
-> paused at the user's request. The repository is being published as a public
-> engineering record and roadmap. It is **not** a playable release, does not
-> contain game data, and does not grant rights to Nintendo assets.
+> **Project status — resumed on 2026-08-17.** Development paused on 2026-08-15
+> and resumed under a simplified single-owner local workflow: no remote worker
+> lanes or multi-lane scheduler, one owner performing serialized reviews,
+> integrations, and verification on this machine. The repository remains a
+> public engineering record and roadmap. It is **not** a playable release,
+> does not contain game data, and does not grant rights to Nintendo assets.
 
 ## Roadmap at a glance
 
 The goal is an evidence-backed, portable reconstruction that runs on modern
 macOS first and iOS second. The short version of the remaining critical path is:
 
-1. finish independent review of the completed TEV and Indirect leaf producers;
-2. integrate those reviewed leaves one at a time;
+1. ~~finish review of the completed TEV and Indirect leaf producers~~ (done
+   2026-08-17);
+2. ~~integrate those reviewed leaves one at a time~~ (done 2026-08-17 at
+   `d50cddb18`);
 3. act on the completed cumulative/Apple audit by closing its exact blockers;
 4. add the remaining truthful Blend/Fog raw owners and production wiring;
 5. assemble one immutable, all-or-nothing renderer-neutral GX snapshot;
@@ -35,17 +38,17 @@ portable section ABIs, focused sanitizer fixtures, host adapters, and several
 runtime boundaries are already evidenced. The project is not yet at the
 renderer handoff that can truthfully claim a Metal-rendered game frame.
 
-### Paused source snapshot
+### Current source snapshot
 
-| Item | Paused state |
+| Item | State |
 | --- | --- |
 | Umbrella branch | `main`, mirrored locally by `c1/apple-port-bootstrap` |
 | Canonical PC-port branch | `c1/macos-host-launch` |
-| Canonical PC-port commit | `62c810e5b6ee7710b2904ef4733ef95a6909fe1f` |
+| Canonical PC-port commit | `d50cddb1815dd640a16b3ec1c899b9f4a7fee9d0` |
 | Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
 | Supported revision | `GAFE01_00`, USA revision 0 |
 | Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
-| Current execution state | Paused; no build, link, LLDB, runtime, cleanup, or worker lane is running |
+| Current execution state | Resumed 2026-08-17; single-owner local workflow, work serialized on this machine |
 | Current proof level | CPU/source contracts and earlier launch/GX evidence; no current-tip Metal pixel or playability proof |
 
 The disc hash is recorded only to identify the supported local input. The disc,
@@ -153,14 +156,14 @@ producer; those are different accomplishments.
 | Channels | Done | Done | Done | Missing |
 | Texgen/SU | Done | Done | Done | Missing |
 | Texture | Done | Done, with resource generations | Done with Dynamic/lease snapshot | Only an older optional callback seam |
-| TEV | Done, full 16-stage contract | Done for stages/registers/KONST/swaps/indirect-per-stage state | Candidate `043d24822`, review paused, not integrated | Missing |
+| TEV | Done, full 16-stage contract | Done for stages/registers/KONST/swaps/indirect-per-stage state | Done, integrated `043d24822` (2026-08-17) | Missing |
 | Lighting | Done | Done | Done | Missing |
 | Blend | Done | **Missing truthful raw owner** | Missing | Missing |
 | Alpha/update/ZCompLoc | Done | Done | Done and production-linked | Missing cumulative call |
 | Depth | Done | Done | Done | Missing |
 | Raster | Done | Done | Done | Missing |
 | Fog | Done | **Missing truthful complete raw owner** | Missing | Missing |
-| Indirect | Done | Done for count/orders/scales/matrices | Candidate `2f6ba5dff`, review paused, not integrated | Missing |
+| Indirect | Done | Done for count/orders/scales/matrices | Done, integrated `b83a6f6e3` (2026-08-17) | Missing |
 | Dynamic resources | Done | Done with map/TLUT epochs and generations | Done with Texture snapshot | Missing cumulative transaction |
 
 Completed canonical/raw work includes:
@@ -262,25 +265,26 @@ Completed canonical/raw work includes:
 - [ ] Run a serialized current-tip full arm64 link and bounded runtime trace
   only after the cumulative CPU path is ready.
 
-## Work paused in flight
+## Work paused in flight (resolved 2026-08-17)
 
 The pause occurred at safe command boundaries. The post-pause host cleanup
 removed the temporary `/private/tmp` bundles, worktrees, build roots, and logs
-on both hosts, so the durable record is the archived submodule refs and the
-evidence documents, not the paths named in historical lane entries. The two
-candidates below survive in `upstream/ACGC-PC-Port` as
+on both hosts, so the durable record became the archived submodule refs
 `c1/archive/cleanup-20260815/canonical-tev-candidate` (`043d24822`) and
-`c1/archive/cleanup-20260815/canonical-indirect-candidate` (`2f6ba5dff`),
-mirrored by the `acgc-m3-cleanup` remote refs. Neither candidate is part of
-canonical `c1/macos-host-launch` yet.
+`c1/archive/cleanup-20260815/canonical-indirect-candidate` (`2f6ba5dff`) plus
+the evidence documents. On resume, both reviews were re-run from those
+archived refs by the single integration owner, both candidates passed, and
+both are now integrated on `c1/macos-host-launch` at `d50cddb18`. See
+[the integration evidence](docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md)
+for the exact gates and the stated single-owner process boundary.
 
-| Lane | State at pause | Exact result / next action |
+| Lane | Final state | Exact result |
 | --- | --- | --- |
-| 236 — TEV leaf producer | Candidate complete; root-review hold | Worker `043d24822cd075b51282101669d7710b785bd01f`; four files including minimal CMake registration; native and combined ASan/UBSan focused `1/1` passed. |
-| 237 — Indirect leaf producer | Candidate complete; root-review hold | Worker `2f6ba5dff300239aa509c2f5a76431cae3d4b3a3`; three new files; source-direct native and sanitizer fixtures passed. |
-| 238 — cumulative/Apple audit | Complete read-only audit; three BLOCK verdicts | The cumulative assembler, typed Apple CPU consumer, and serialized live callback trace are each blocked. Missing prerequisites include Blend/Fog raw owners, complete production/envelope wiring, a Geometry dependency-result builder, atomic resource-lease publication, the assembler itself, and Apple consumer/registration code. |
-| 239 — Indirect independent review | Partial verification | Static review, native and combined ASan/UBSan source-direct fixtures, and C11/C++11 probes passed without diagnostics. The `-m32`/`_WIN32` probes and final immutable PASS/BLOCK handoff remain. |
-| 240 — TEV independent review | Partial verification | Crosswalk, native and combined ASan/UBSan focused fixture/object builds and `1/1` CTests, `git diff --check`, and C11/C++11/`-m32` probes passed. The `_WIN32` probe stopped at the missing `process.h` sysroot boundary; the final immutable PASS/BLOCK handoff remains. |
+| 236 — TEV leaf producer | Integrated 2026-08-17 | Worker `043d24822cd075b51282101669d7710b785bd01f` fast-forwarded onto `62c810e5b`; fresh native and combined ASan/UBSan focused `1/1` each; production object compiles. |
+| 237 — Indirect leaf producer | Integrated 2026-08-17 | Worker `2f6ba5dff300239aa509c2f5a76431cae3d4b3a3` cherry-picked as `b83a6f6e3`; CMake fixture/object registration added separately as `d50cddb18`; source-direct native and sanitizer fixtures passed. |
+| 238 — cumulative/Apple audit | Complete read-only audit; three BLOCK verdicts (standing) | The cumulative assembler, typed Apple CPU consumer, and serialized live callback trace are each blocked. Missing prerequisites include Blend/Fog raw owners, complete production/envelope wiring, a Geometry dependency-result builder, atomic resource-lease publication, the assembler itself, and Apple consumer/registration code. These verdicts remain the active work queue. |
+| 239 — Indirect independent review | Superseded by resumed single-owner review | Pre-pause partial state is recorded; the resumed review re-ran source review, source-direct native and combined ASan/UBSan fixtures from the archived candidate and found no blocker. |
+| 240 — TEV independent review | Superseded by resumed single-owner review | Pre-pause partial state is recorded; the resumed review re-ran the crosswalk checks, focused native and combined ASan/UBSan CTest, and production-object compile from the archived candidate and found no blocker. |
 
 The lane-238 verdicts and the exact paused review states are recorded, with
 their preservation boundaries stated, in
@@ -293,7 +297,14 @@ re-reviewed before integration.
 
 ## Detailed macOS critical path
 
-### Phase A — close and integrate the paused leaf producers
+### Phase A — close and integrate the paused leaf producers (completed 2026-08-17)
+
+Both reviews were re-run from the archived candidate refs and both candidates
+are integrated: `043d24822` (TEV, fast-forward), `b83a6f6e3` (Indirect), and
+`d50cddb18` (separate CMake registration commit), with exact-tip native and
+combined ASan/UBSan focused CTest `2/2` each. See
+[the integration evidence](docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md).
+The original step list is preserved below for the record.
 
 1. Resume lane 239 and finish the immutable Indirect review.
 2. Resume lane 240 and finish the immutable TEV review.
@@ -505,28 +516,28 @@ The project uses the following vocabulary literally:
 - **Playable:** a human completed a representative session with frame, input,
   audio, save, timing, and lifecycle gates working together.
 
-## How to resume safely
+## How work resumed and what remains
 
-1. Verify the umbrella, both submodule refs, status, diff, and preserved dirty
-   boundary before touching source.
-2. Recover the paused candidates from the archived submodule refs
-   `c1/archive/cleanup-20260815/canonical-tev-candidate` and
-   `c1/archive/cleanup-20260815/canonical-indirect-candidate`; the original
-   `/private/tmp` worktrees, bundles, and build roots no longer exist on
-   either host, and any remaining remote lane state must be assumed lost.
-3. Finish lanes 239 and 240 and accept only their final immutable PASS/BLOCK
-   handoffs.
-4. Integrate TEV then Indirect only on PASS, with exact-tip focused reruns.
-5. Finish lane 238 against the resulting integrated snapshot.
-6. Open only the smallest dependency-ready successor(s) named by that audit.
-7. Keep the ISO and extracted assets local and ignored; transfer only verified
-   tracked-source Git bundles.
-8. Do not schedule a full link/LLDB/device run until the CPU path has a concrete
-   gate it can prove.
-9. Record commands, commit IDs, diagnostics, and claim boundaries in
-   `docs/evidence/` and `docs/LANE-BOARD.md` before cleaning generated roots.
-10. Preserve worker branches and commits even after reviewed worktrees are
-    retired.
+Resume steps 1–4 of the original checklist completed on 2026-08-17: the
+baseline was verified against the recorded pause snapshot, both candidates
+were recovered from the archived refs, re-reviewed, and integrated with
+exact-tip focused reruns. The standing rules for the continuing single-owner
+workflow are:
+
+1. The three lane-238 BLOCK verdicts are the active work queue: Blend and Fog
+   raw owners and canonical leaves first, then the Geometry dependency-result
+   builder, production/envelope wiring, atomic resource-lease publication, the
+   cumulative assembler, and the typed Apple CPU consumer.
+2. Work one smallest dependency-ready change at a time, serialized, each with
+   focused native and combined ASan/UBSan gates at the exact tip.
+3. Keep the ISO and extracted assets local and ignored.
+4. Do not schedule a full link/LLDB/device run until the CPU path has a
+   concrete gate it can prove.
+5. Record commands, commit IDs, diagnostics, and claim boundaries in
+   `docs/evidence/` and `docs/LANE-BOARD.md` before cleaning generated roots,
+   and keep irreplaceable local artifacts out of `/private/tmp`.
+6. Preserve worker branches and commits even after reviewed worktrees are
+   retired.
 
 ## Public-repository boundary
 
@@ -575,7 +586,12 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `62c810e5b` (`Align legacy TEV fixture with fail-closed S10`),
+`c1/macos-host-launch` at `d50cddb18` (`Register Indirect producer fixture and
+object`), on top of `b83a6f6e3` (`Add canonical Indirect leaf producer`) and
+`043d24822` (`Add canonical TEV raw producer`), integrated 2026-08-17 with
+exact-tip native and combined ASan/UBSan focused CTest `2/2` each; see
+[the integration evidence](docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md).
+That chain sits on `62c810e5b` (`Align legacy TEV fixture with fail-closed S10`),
 adding independently reviewed setter-owned raw TEV/Indirect provenance and
 fail-closed current-call gating on top of the Texgen/SU, Depth, and Transform
 leaf converters

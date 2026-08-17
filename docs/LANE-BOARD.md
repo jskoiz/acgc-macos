@@ -1,11 +1,14 @@
 # ACGC visible lane board
 
-Updated 2026-08-17. **The project paused on 2026-08-15 at the user's
-request.** The rolling-refill scheduler is stopped, no lane is active, and no
-development, remote worker, verification, integration, cleanup, full-link, or
-debugger work is running. This board is preserved as the historical lane
-record; a task described as active below reflects its pre-pause registration,
-and being active never meant its gate passed.
+Updated 2026-08-17. The project paused on 2026-08-15 at the user's request
+and **resumed on 2026-08-17 under a single-owner local workflow**: no remote
+worker lanes or rolling-refill scheduler, one owner performing serialized
+reviews, integrations, and verification on this machine. This board is
+preserved as the historical lane record; a task described as active below
+reflects its pre-pause registration, and being active never meant its gate
+passed. On resume, the paused TEV/Indirect candidates were re-reviewed and
+integrated at canonical PC `d50cddb18` (see
+`docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md`).
 
 The post-pause host cleanup removed the temporary `/private/tmp` worktrees,
 build roots, bundles, and logs on both hosts, so every `/private/tmp` path in
@@ -154,9 +157,12 @@ passing natively and under combined ASan/UBSan. Lane 235's final immutable
 re-review returned `PASS`. Root imported the verified final bundle, applied all
 three commits one at a time, and integrated canonical PC `62c810e5b`; fresh
 exact-tip native and combined ASan/UBSan focused CTest pass `2/2` each. Both
-tasks are complete/integrated/archived. Lanes 236 and 237 have completed clean
+tasks are complete/integrated/archived. Lanes 236 and 237 completed clean
 canonical TEV and Indirect leaf handoffs at workers `043d24822` and
-`2f6ba5dff`; neither is integrated. Lane 238, the parallel read-only
+`2f6ba5dff`; both are now integrated on `c1/macos-host-launch` (2026-08-17)
+as `043d24822`, `b83a6f6e3`, and CMake registration `d50cddb18`, with
+exact-tip native and combined ASan/UBSan focused CTest `2/2` each. Lane 238,
+the parallel read-only
 cumulative snapshot and Apple CPU-boundary audit at the same exact
 `62c810e5b` source tip, completed before the 2026-08-15 pause with three
 independent `BLOCK` verdicts (see
@@ -1929,8 +1935,9 @@ also integrated. Remote workers may not update the umbrella checkout.
   bundle and lane worktree were lost in the post-pause `/private/tmp`
   cleanup, and the candidate now survives as durable submodule ref
   `c1/archive/cleanup-20260815/canonical-tev-candidate` (`043d24822`),
-  mirrored at `acgc-m3-cleanup/canonical-tev`. Nothing is integrated pending
-  the lane-240 independent immutable review.
+  mirrored at `acgc-m3-cleanup/canonical-tev`. Resolved 2026-08-17: the
+  resumed single-owner review found no blocker and the candidate is
+  integrated on `c1/macos-host-launch` (fast-forward to `043d24822`).
 - Lane 237 / reused project-owned M3 Max task
   `01a004f3-5a55-7702-95ec-8acf22b8b806` — complete/root-review-hold
   source-edit lane for the canonical Indirect leaf producer. It used the same
@@ -1961,8 +1968,10 @@ also integrated. Remote workers may not update the umbrella checkout.
   bundle and lane worktree were lost in the post-pause `/private/tmp`
   cleanup, and the candidate now survives as durable submodule ref
   `c1/archive/cleanup-20260815/canonical-indirect-candidate` (`2f6ba5dff`),
-  mirrored at `acgc-m3-cleanup/canonical-indirect`. Nothing is integrated
-  pending the lane-239 independent immutable review.
+  mirrored at `acgc-m3-cleanup/canonical-indirect`. Resolved 2026-08-17: the
+  resumed single-owner review found no blocker and the candidate is
+  integrated on `c1/macos-host-launch` as `b83a6f6e3`, with its CMake
+  fixture/object registration added separately as `d50cddb18`.
 - Lane 238 / reused project-owned M3 Max task
   `01a00563-bd2c-7cf0-aa82-d5773a4ccdae` — complete read-only audit; three
   `BLOCK` verdicts. Setup verified the complete-history source-only bundle
@@ -1998,12 +2007,11 @@ also integrated. Remote workers may not update the umbrella checkout.
   archived candidate ref
   `c1/archive/cleanup-20260815/canonical-indirect-candidate` (`2f6ba5dff`).
   The paused state is recorded in
-  `docs/evidence/TEV-INDIRECT-REVIEW-PAUSE-62C810E5B-2026-08-15.md`. It owns
-  no files and must return `PASS` or an exact material candidate-owned
-  blocker after source review, source-direct native and combined ASan/UBSan
-  reruns, production-object compile, and bounded syntax probes. No CMake
-  edit, integration, full link, LLDB, runtime, Metal/device, pixel, or
-  playability scope.
+  `docs/evidence/TEV-INDIRECT-REVIEW-PAUSE-62C810E5B-2026-08-15.md`.
+  Resolved 2026-08-17: superseded by the resumed single-owner review, which
+  re-ran source review plus source-direct native and combined ASan/UBSan
+  fixtures from the archived candidate, found no blocker, and integrated it;
+  see `docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md`.
 - Lane 240 / reused project-owned M3 Max task
   `01a004f2-96c0-79c2-8c20-c9b028bb5018` — paused partial verification;
   independent immutable review of the lane-236 TEV producer. Setup verified
@@ -2020,12 +2028,12 @@ also integrated. Remote workers may not update the umbrella checkout.
   archived candidate ref
   `c1/archive/cleanup-20260815/canonical-tev-candidate` (`043d24822`). The
   paused state is recorded in
-  `docs/evidence/TEV-INDIRECT-REVIEW-PAUSE-62C810E5B-2026-08-15.md`. It owns
-  no files and must return `PASS` or an exact material candidate-owned
-  blocker after source review, focused native and combined ASan/UBSan CTest,
-  production-object compile, and bounded syntax probes. No source edit,
-  integration, full link, LLDB, runtime, Metal/device, pixel, or playability
-  scope.
+  `docs/evidence/TEV-INDIRECT-REVIEW-PAUSE-62C810E5B-2026-08-15.md`.
+  Resolved 2026-08-17: superseded by the resumed single-owner review, which
+  re-ran the crosswalk checks, focused native and combined ASan/UBSan CTest,
+  and production-object compile from the archived candidate, found no
+  blocker, and integrated it; see
+  `docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md`.
 
 The remote Codex project assignment records place tasks 156–176 under the
 saved M3 `acgc-modern-port` project; the desktop may need a normal project-list
@@ -2799,13 +2807,11 @@ Earlier eras' scheduling details remain in the lane entries above. The
 current order is the paused critical path recorded in the README
 (Phases A–G):
 
-1. Resume lanes 239 and 240 from the archived candidate refs and accept only
-   their final immutable `PASS`/`BLOCK` handoffs; no partial commentary is a
-   verdict.
-2. On `PASS`, integrate the TEV candidate (`043d24822`) first because it owns
-   the pending minimal CMake registration, then the Indirect candidate
-   (`2f6ba5dff`), with exact-tip focused native and combined ASan/UBSan
-   reruns after each integration and a joint serial rerun after both.
+1. ~~Resume lanes 239 and 240 from the archived candidate refs~~ — done
+   2026-08-17 by the resumed single-owner review; no blocker found.
+2. ~~Integrate TEV first, then Indirect~~ — done 2026-08-17 as `043d24822`,
+   `b83a6f6e3`, and CMake registration `d50cddb18`, with exact-tip native and
+   combined ASan/UBSan focused CTest `2/2` each.
 3. Close the three lane-238 `BLOCK` verdicts in dependency order: truthful
    Blend and Fog setter-owned raw state and canonical leaves, the Geometry
    dependency-result builder, production/envelope wiring, atomic
