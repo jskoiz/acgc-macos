@@ -1,6 +1,6 @@
 [submodule "upstream/ACGC-PC-Port"]
 	path = upstream/ACGC-PC-Port
-	url = https://github.com/flyngmt/ACGC-PC-Port.git
+	url = https://github.com/jskoiz/ACGC-PC-Port.git
 [submodule "upstream/ac-decomp"]
 	path = upstream/ac-decomp
 	url = https://github.com/ACreTeam/ac-decomp.git
