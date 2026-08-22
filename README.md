@@ -5,10 +5,11 @@ recording the evidence and cross-repository plan for a modern Apple port.
 Current work targets macOS first; iOS begins only after the shared 64-bit core
 and Apple renderer have their own evidence.
 
-> **Project status — resumed on 2026-08-17.** Development paused on 2026-08-15
-> and resumed under a simplified single-owner local workflow: no remote worker
-> lanes or multi-lane scheduler, one owner performing serialized reviews,
-> integrations, and verification on this machine. The repository remains a
+> **Project status — orchestrated integration on 2026-08-21.** Eight durable
+> local Luna/max lanes completed bounded source, audit, and independent-review
+> work under one integration owner; two additional setup requests never became
+> active tasks. Reviewed source changes were serialized through three PC-port
+> pull requests and exact-merge focused verification. The repository remains a
 > public engineering record and roadmap. It is **not** a playable release,
 > does not contain game data, and does not grant rights to Nintendo assets.
 
@@ -21,8 +22,9 @@ macOS first and iOS second. The short version of the remaining critical path is:
    2026-08-17);
 2. ~~integrate those reviewed leaves one at a time~~ (done 2026-08-17 at
    `d50cddb18`);
-3. act on the completed cumulative/Apple audit by closing its exact blockers;
-4. add the remaining truthful Blend/Fog raw owners and production wiring;
+3. ~~add reviewed Blend/Fog raw owners and leaves plus the Geometry dependency
+   builder~~ (done 2026-08-21 at PC `4cbb837e6`);
+4. implement the atomic Texture/TLUT/Dynamic lease and publication boundary;
 5. assemble one immutable, all-or-nothing renderer-neutral GX snapshot;
 6. carry that snapshot through the Apple CPU consumer into a live game callback;
 7. prove a game-owned Metal encode, present, readback, and identifiable pixel;
@@ -42,13 +44,13 @@ renderer handoff that can truthfully claim a Metal-rendered game frame.
 
 | Item | State |
 | --- | --- |
-| Umbrella branch | `main`, mirrored locally by `c1/apple-port-bootstrap` |
+| Umbrella branch | `main` |
 | Canonical PC-port branch | `c1/macos-host-launch` |
-| Canonical PC-port commit | `d50cddb1815dd640a16b3ec1c899b9f4a7fee9d0` |
+| Canonical PC-port commit | `4cbb837e62f69c4cab80c1128c25b9e9bd9fb91d` |
 | Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
 | Supported revision | `GAFE01_00`, USA revision 0 |
 | Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
-| Current execution state | Resumed 2026-08-17; single-owner local workflow, work serialized on this machine |
+| Current execution state | Orchestrated local Luna/max lanes; source PR review and integration serialized by one owner |
 | Current proof level | CPU/source contracts and earlier launch/GX evidence; no current-tip Metal pixel or playability proof |
 
 The disc hash is recorded only to identify the supported local input. The disc,
@@ -68,7 +70,7 @@ Every row is an independent gate. A later row is not implied by an earlier one.
 | Process launch and boot progression | **Proven on earlier tips** | Real inferiors reached graph processing, logo/NEOS work, GX entry points, and bounded shutdown paths. |
 | LP64 loader/audio/pointer safety | **Substantially done** | DVD aligned reads, high-address audio DMA, texture handles, and allocator-owned field pointers have focused/runtime evidence. |
 | Graph/display-list capture | **Partial** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; a cumulative renderer-neutral frame snapshot is still absent. |
-| Renderer-neutral section ABIs | **Mostly done** | Fourteen-section envelope and most strict value ABIs exist; some truthful raw owners/producers and cumulative wiring remain open. |
+| Renderer-neutral section ABIs | **Mostly done** | Fourteen-section envelope and strict value ABIs exist; Blend/Fog raw owners and the Geometry dependency builder are integrated, while atomic lease and cumulative production wiring remain open. |
 | Live canonical snapshot publication | **Not done** | No all-or-nothing assembler atomically validates every section and resource lease before callback publication. |
 | Apple typed CPU consumer | **Partial** | CPU contracts and sink fixtures exist; the cumulative canonical plan is not live-wired. |
 | Game-owned Metal encode | **Not proven** | Device tests are gated/skipped where no Metal device is available; no live game callback has reached the canonical Metal encoder. |
@@ -151,18 +153,18 @@ producer; those are different accomplishments.
 
 | Section | Portable ABI | Setter-owned/raw source | Canonical producer | Live cumulative wiring |
 | --- | --- | --- | --- | --- |
-| Geometry | Done | Done | Done | Missing |
+| Geometry | Done | Done | Done; dependency builder integrated `09d174799` | Missing |
 | Transform | Done | Done | Done | Missing |
 | Channels | Done | Done | Done | Missing |
 | Texgen/SU | Done | Done | Done | Missing |
 | Texture | Done | Done, with resource generations | Done with Dynamic/lease snapshot | Only an older optional callback seam |
 | TEV | Done, full 16-stage contract | Done for stages/registers/KONST/swaps/indirect-per-stage state | Done, integrated `043d24822` (2026-08-17) | Missing |
 | Lighting | Done | Done | Done | Missing |
-| Blend | Done | **Missing truthful raw owner** | Missing | Missing |
+| Blend | Done | Done | Done, integrated `07a621428` | Missing |
 | Alpha/update/ZCompLoc | Done | Done | Done and production-linked | Missing cumulative call |
 | Depth | Done | Done | Done | Missing |
 | Raster | Done | Done | Done | Missing |
-| Fog | Done | **Missing truthful complete raw owner** | Missing | Missing |
+| Fog | Done | Done, including copied RangeAdj state | Done, integrated `e0bb5ac96` | Missing |
 | Indirect | Done | Done for count/orders/scales/matrices | Done, integrated `b83a6f6e3` (2026-08-17) | Missing |
 | Dynamic resources | Done | Done with map/TLUT epochs and generations | Done with Texture snapshot | Missing cumulative transaction |
 
@@ -186,6 +188,12 @@ Completed canonical/raw work includes:
 - [x] raw TEV/Indirect ownership covering all 16 stages, PREV/REG/KONST,
   swaps, per-stage indirect tuples, count/order/scale/matrix provenance, exact
   matrix quantization, and sticky invalidity;
+- [x] setter-owned raw Blend and Fog provenance with strict canonical leaves,
+  incomplete-`GXBegin` no-mutation guards, and alignment-safe Fog RangeAdj
+  capture;
+- [x] a source-backed Geometry dependency-result builder for the current PC raw
+  owner, with unsupported attributes and active BUMP dependencies failing
+  closed;
 - [x] canonical Geometry, Transform, Channels, Texgen/SU, Texture/Dynamic,
   Lighting, Alpha, Depth, and Raster leaf producers with focused native and
   sanitizer evidence; and
@@ -260,8 +268,8 @@ Completed canonical/raw work includes:
 - [x] Ran C/C++/ILP32/`_WIN32` syntax probes where the host toolchain permits.
 - [ ] Provision a real i686 MinGW/sysroot toolchain and produce PE compile/link
   evidence before calling Windows compatibility signed off.
-- [ ] Run one fresh current-tip focused matrix after the paused TEV/Indirect
-  integration work resumes.
+- [x] Run exact-tip native and combined ASan/UBSan focused gates after the
+  Blend, Fog, and Geometry dependency integrations.
 - [ ] Run a serialized current-tip full arm64 link and bounded runtime trace
   only after the cumulative CPU path is ready.
 
@@ -282,7 +290,7 @@ for the exact gates and the stated single-owner process boundary.
 | --- | --- | --- |
 | 236 — TEV leaf producer | Integrated 2026-08-17 | Worker `043d24822cd075b51282101669d7710b785bd01f` fast-forwarded onto `62c810e5b`; fresh native and combined ASan/UBSan focused `1/1` each; production object compiles. |
 | 237 — Indirect leaf producer | Integrated 2026-08-17 | Worker `2f6ba5dff300239aa509c2f5a76431cae3d4b3a3` cherry-picked as `b83a6f6e3`; CMake fixture/object registration added separately as `d50cddb18`; source-direct native and sanitizer fixtures passed. |
-| 238 — cumulative/Apple audit | Complete read-only audit; three BLOCK verdicts (standing) | The cumulative assembler, typed Apple CPU consumer, and serialized live callback trace are each blocked. Missing prerequisites include Blend/Fog raw owners, complete production/envelope wiring, a Geometry dependency-result builder, atomic resource-lease publication, the assembler itself, and Apple consumer/registration code. These verdicts remain the active work queue. |
+| 238 — cumulative/Apple audit | Complete read-only audit; three BLOCK verdicts (standing) | Blend/Fog raw ownership and the Geometry dependency-result predecessor were closed on 2026-08-21. The cumulative assembler, typed Apple CPU consumer, and serialized live callback trace remain blocked on atomic resource-lease publication, production/envelope wiring, the assembler itself, and Apple consumer/registration code. |
 | 239 — Indirect independent review | Superseded by resumed single-owner review | Pre-pause partial state is recorded; the resumed review re-ran source review, source-direct native and combined ASan/UBSan fixtures from the archived candidate and found no blocker. |
 | 240 — TEV independent review | Superseded by resumed single-owner review | Pre-pause partial state is recorded; the resumed review re-ran the crosswalk checks, focused native and combined ASan/UBSan CTest, and production-object compile from the archived candidate and found no blocker. |
 
@@ -328,20 +336,21 @@ results, and no runtime claim.
 
 Lane 238 completed the base-tip audit and returned BLOCK independently for all
 three gates: the cumulative assembler, the typed Apple CPU consumer, and a live
-callback trace. TEV and Indirect leaves alone do not change those verdicts.
+callback trace. The 2026-08-21 producer batch closes the Blend, Fog, and narrow
+Geometry dependency predecessors, but does not by itself change those three
+end-to-end verdicts.
 
 1. After reviewed TEV/Indirect integration, reconcile the completed section
    table against the exact new canonical tip. Keep separate columns for: ABI
    exists, truthful raw owner exists, leaf exists, production object is linked,
    cumulative assembler calls it, Apple CPU consumer understands it, and device
    encoder supports it.
-2. Implement the missing Blend and Fog setter-owned raw state and their strict
-   canonical leaves in separately serialized `pc_gx.c` lanes. Fog range
-   adjustment remains a known no-op and must not be reported as captured state.
-3. Add the missing Geometry dependency-result builder and wire the already
-   implemented Transform, Depth, Geometry, Texgen/SU, TEV, and Indirect
-   producers into the production envelope path only after each input is proven
-   truthful at the exact integrated tip.
+2. **Done at `4cbb837e6`:** Blend and Fog now have setter-owned raw state and
+   strict canonical leaves; Fog RangeAdj inputs are copied into owned storage
+   rather than retained by pointer.
+3. **Partially done at `4cbb837e6`:** the Geometry dependency-result builder is
+   integrated. Production registration and envelope wiring for Geometry and
+   the other proven leaves remain successor work.
 4. Decide whether a partial section set can render truthfully. An omitted
    section may use a default only when the decomp initialization path proves
    that exact logical default is present in the captured raw state.
@@ -368,8 +377,11 @@ CPU assembler, Apple CPU consumer, and later live trace as three separate gates.
 
 ### Phase C — fill remaining truthful state gaps
 
-Expected gaps at the paused snapshot are Blend and Fog raw ownership plus any
-dependency-result and production-link wiring named by the final audit.
+At `4cbb837e6`, Blend/Fog raw ownership and the narrow Geometry dependency
+builder are closed. Remaining truthful-state work is the production
+registration, atomic resource lease, and envelope wiring named by the final
+audit; broader Geometry attributes and BUMP/Indirect dependencies remain
+explicit fail-closed successors.
 
 For each gap:
 
@@ -521,12 +533,11 @@ The project uses the following vocabulary literally:
 Resume steps 1–4 of the original checklist completed on 2026-08-17: the
 baseline was verified against the recorded pause snapshot, both candidates
 were recovered from the archived refs, re-reviewed, and integrated with
-exact-tip focused reruns. The standing rules for the continuing single-owner
-workflow are:
+exact-tip focused reruns. The standing rules for the continuing
+integration-owner workflow are:
 
-1. The three lane-238 BLOCK verdicts are the active work queue: Blend and Fog
-   raw owners and canonical leaves first, then the Geometry dependency-result
-   builder, production/envelope wiring, atomic resource-lease publication, the
+1. The three lane-238 BLOCK verdicts remain the active work queue, now narrowed
+   to production/envelope wiring, atomic resource-lease publication, the
    cumulative assembler, and the typed Apple CPU consumer.
 2. Work one smallest dependency-ready change at a time, serialized, each with
    focused native and combined ASan/UBSan gates at the exact tip.
@@ -573,10 +584,10 @@ redistribute it or extracted proprietary assets.
 ## Lane execution placement
 
 Serialized full links and LLDB launches run locally from the canonical
-populated checkout. Focused source, test, and audit lanes run on the configured
-remote M3 Max host through the verified Codex CLI path, each with its own
-isolated worktree and ignored build/log roots. Full
-`ac_pc` links and LLDB launches remain one serialized gate across both hosts;
+populated checkout. Focused source, test, audit, and independent-review lanes
+run in isolated source worktrees and ignored build/log roots on an explicitly
+selected local or remote host. Full `ac_pc` links and LLDB launches remain one
+serialized gate across all hosts;
 the integration owner records the queue and exact provenance in
 `docs/LANE-BOARD.md`. True cloud tasks are reserved for non-build planning or
 review. The ISO, extracted assets, keys, and proprietary game data never leave
@@ -586,11 +597,14 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `d50cddb18` (`Register Indirect producer fixture and
-object`), on top of `b83a6f6e3` (`Add canonical Indirect leaf producer`) and
-`043d24822` (`Add canonical TEV raw producer`), integrated 2026-08-17 with
-exact-tip native and combined ASan/UBSan focused CTest `2/2` each; see
-[the integration evidence](docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md).
+`c1/macos-host-launch` at `4cbb837e6`. It contains the independently reviewed
+Blend producer (`07a621428`, merged as `f772f0bb8`), Fog producer
+(`e0bb5ac96`, merged as `cd55a7789`), and Geometry dependency builder
+(`09d174799`, merged as `4cbb837e6`). Exact merged-tip native and combined
+ASan/UBSan focused gates passed for all three integrations; see
+[the 2026-08-21 producer integration evidence](docs/evidence/BLEND-FOG-GEOMETRY-PRODUCER-INTEGRATION-4CBB837E6-2026-08-21.md).
+The earlier TEV/Indirect integration remains recorded in
+[its integration evidence](docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md).
 That chain sits on `62c810e5b` (`Align legacy TEV fixture with fail-closed S10`),
 adding independently reviewed setter-owned raw TEV/Indirect provenance and
 fail-closed current-call gating on top of the Texgen/SU, Depth, and Transform
