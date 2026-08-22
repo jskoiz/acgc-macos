@@ -1,14 +1,40 @@
 # ACGC visible lane board
 
-Updated 2026-08-17. The project paused on 2026-08-15 at the user's request
-and **resumed on 2026-08-17 under a single-owner local workflow**: no remote
-worker lanes or rolling-refill scheduler, one owner performing serialized
-reviews, integrations, and verification on this machine. This board is
-preserved as the historical lane record; a task described as active below
-reflects its pre-pause registration, and being active never meant its gate
-passed. On resume, the paused TEV/Indirect candidates were re-reviewed and
-integrated at canonical PC `d50cddb18` (see
-`docs/evidence/TEV-INDIRECT-PRODUCER-INTEGRATION-D50CDDB18-2026-08-17.md`).
+Updated 2026-08-21. The project paused on 2026-08-15, resumed on 2026-08-17,
+and ran a bounded local Luna/max producer batch on 2026-08-21 under one
+integration owner. Eight requested lanes became durable tasks; two additional
+setup requests never materialized and are not counted as active. Source PRs,
+merges, and exact-tip verification remained serialized. The current canonical
+PC tip is `4cbb837e6`; see
+`docs/evidence/BLEND-FOG-GEOMETRY-PRODUCER-INTEGRATION-4CBB837E6-2026-08-21.md`.
+The historical entries below remain evidence records; an old task described as
+active does not imply that its gate passed or that it is active now.
+
+## 2026-08-21 orchestrated canonical-producer batch
+
+| Lane | Kind | Final state | Exact result |
+| --- | --- | --- | --- |
+| 241 | Source-edit, then dependency-ready successor | Complete and integrated | Blend candidate `07a621428` passed lane 249 review and merged in PC PR #1 as `f772f0bb8`. The same durable task later produced the reviewed Fog chain ending at `e0bb5ac96`. |
+| 242 | Source-edit | Complete and integrated | Geometry dependency-result chain ending at `09d174799` passed lane 250 review and merged in PC PR #3 as `4cbb837e6`. |
+| 244 | Read-only producer audit, then Fog review | Complete | Mapped all fourteen producer ABIs, identified the missing cumulative publication boundary, blocked the first Fog candidate on four concrete issues, and passed corrected `e0bb5ac96`. |
+| 245 | Read-only atomic resource-lease audit | Complete, successor ready | A dedicated lease implementation is dependency-ready; cumulative publication remains blocked until one envelope-scoped acquire/revalidate/release contract exists. |
+| 246 | Read-only cumulative assembler contract | Complete, implementation blocked | Froze a fourteen-section, `0x3fff` full-mask build order and 76,092-byte maximum envelope. Implementation still depends on atomic lease publication and production-ready section inputs. |
+| 247 | Read-only Apple consumer audit | Complete, implementation blocked | Defined the pure-C Metal-independent consumer boundary; implementation waits for the cumulative assembler and lease predecessor. |
+| 249 | Independent Blend oracle/review | Complete, PASS | Exhaustively checked 4,096 valid Blend tuples, sticky invalidity, exact domains, and flush ordering for `07a621428`. |
+| 250 | Independent Geometry oracle/review | Complete, PASS | Verified source-backed direct and INDEX16 Geometry, Transform/Texgen/Channels/Lighting dependencies, isolated failure fixtures, and native plus ASan/UBSan execution for `09d174799`. |
+
+Requested lane numbers 243 and 248 remained setup-pending client requests with
+no durable task ID or initialized worker. They performed no work, owned no
+files, and are not active lanes.
+
+The integration owner opened and merged three source PRs against
+`c1/macos-host-launch`: Blend
+[`#1`](https://github.com/jskoiz/ACGC-PC-Port/pull/1), Fog
+[`#2`](https://github.com/jskoiz/ACGC-PC-Port/pull/2), and Geometry dependencies
+[`#3`](https://github.com/jskoiz/ACGC-PC-Port/pull/3). The exact merged tip
+passed the focused native and combined ASan/UBSan Blend/Fog CTest gates and the
+source-backed Geometry fixture. No full `ac_pc` link, LLDB launch, callback,
+Metal/device, pixel, input, audio, save/load, or playability claim follows.
 
 The post-pause host cleanup removed the temporary `/private/tmp` worktrees,
 build roots, bundles, and logs on both hosts, so every `/private/tmp` path in
@@ -2803,24 +2829,24 @@ submodules blindly or edit a detached source checkout.
 
 ## Integration order
 
-Earlier eras' scheduling details remain in the lane entries above. The
-current order is the paused critical path recorded in the README
-(Phases A–G):
+Earlier eras' scheduling details remain in the lane entries above. The current
+order follows the updated critical path recorded in the README (Phases A–G):
 
 1. ~~Resume lanes 239 and 240 from the archived candidate refs~~ — done
    2026-08-17 by the resumed single-owner review; no blocker found.
 2. ~~Integrate TEV first, then Indirect~~ — done 2026-08-17 as `043d24822`,
    `b83a6f6e3`, and CMake registration `d50cddb18`, with exact-tip native and
    combined ASan/UBSan focused CTest `2/2` each.
-3. Close the three lane-238 `BLOCK` verdicts in dependency order: truthful
-   Blend and Fog setter-owned raw state and canonical leaves, the Geometry
-   dependency-result builder, production/envelope wiring, atomic
-   resource-lease publication, the all-or-nothing cumulative assembler, and
-   the typed Apple CPU consumer.
-4. Only then schedule the one serialized live callback trace, followed by the
+3. ~~Close the Blend/Fog raw-owner and Geometry dependency-result
+   predecessors~~ — done 2026-08-21 through PC PRs #1–#3 at canonical
+   `4cbb837e6` with independent reviews and exact-tip focused gates.
+4. Close the remaining lane-238 blockers in dependency order: production
+   registration, atomic resource-lease publication, the all-or-nothing
+   cumulative assembler, and the typed Apple CPU consumer.
+5. Only then schedule the one serialized live callback trace, followed by the
    Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
-5. iOS implementation remains gated behind proven shared macOS core, renderer,
+6. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
