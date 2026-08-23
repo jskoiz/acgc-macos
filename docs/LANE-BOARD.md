@@ -1,14 +1,43 @@
 # ACGC visible lane board
 
-Updated 2026-08-21. The project paused on 2026-08-15, resumed on 2026-08-17,
-and ran a bounded local Luna/max producer batch on 2026-08-21 under one
-integration owner. Eight requested lanes became durable tasks; two additional
-setup requests never materialized and are not counted as active. Source PRs,
-merges, and exact-tip verification remained serialized. The current canonical
-PC tip is `4cbb837e6`; see
-`docs/evidence/BLEND-FOG-GEOMETRY-PRODUCER-INTEGRATION-4CBB837E6-2026-08-21.md`.
+Updated 2026-08-22. The current bounded run occupies the fifteen-lane ceiling:
+one integration/evidence owner plus fourteen durable Luna/max workers, with
+two current source-edit owners, never more than three in this run, and the
+remainder assigned to test-only, verification, and read-only contracts. Source
+PRs, merges, and exact-tip verification remain serialized. The current canonical PC tip is
+`f77d5ec86`; see
+`docs/evidence/GEOMETRY-DEPENDENCY-GATE-F77D5EC86-2026-08-22.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
+
+## 2026-08-22 cumulative-publication orchestration
+
+| Lane | Kind | Current state | Exact contract/result |
+| --- | --- | --- | --- |
+| 260 | Source-edit | Candidate complete, immutable review active | Candidate `73188879d` adds a synchronous Texture/TLUT/Dynamic borrow transaction and passes focused native plus ASan/UBSan fixtures; lane 263 is reviewing its lifecycle and reentrancy boundaries before integration. |
+| 261 | Source-edit | Complete and integrated | Registered the source-backed Geometry dependency fixture; candidate `35c0dd350` merged in [PC PR #4](https://github.com/jskoiz/ACGC-PC-Port/pull/4) as `f77d5ec86`, then passed the exact-merge focused CTest gate. |
+| 262 | Source-edit | Active | Build the pure fourteen-section cumulative envelope core from already-built value sections, without live gathering, callbacks, or flush wiring. |
+| 263 | Read-only review | Active | Freeze and independently review the atomic texture lease state machine, mutation inventory, invariants, and negative-test matrix. |
+| 264 | Read-only oracle | Active | Derive independent little-endian envelope offsets, sizes, golden vectors, and corruption cases. |
+| 265 | Read-only/test-only review | Active | Independently verify the Geometry dependency target's exact source, definition, link, native, and sanitizer requirements. |
+| 266 | Read-only audit | Complete | Mapped all fourteen sections and proved that only Channels, Lighting, and Alpha are fully linked into `ac_pc`; none is production-flush-called, while Texture/Dynamic are only conditionally called with missing canonical links. |
+| 267 | Read-only audit | Active | Freeze the cross-section dependency DAG and deterministic producer/preflight order. |
+| 268 | Read-only audit | Active | Identify the single correct cumulative gather/callback position inside `pc_gx_flush_vertices`. |
+| 269 | Read-only audit | Active | Freeze the pure-C, Metal-independent cumulative Apple plan parser contract and status matrix. |
+| 270 | Read-only audit | Active | Map every canonical section to current Apple parse, plan, encoder, shader, and visual-proof capability. |
+| 271 | Test-only verification | Active | Run the bounded current-tip native and ASan/UBSan canonical producer/fixture matrix without linking full `ac_pc`. |
+| 272 | Read-only audit | Active | Review cumulative and lease contracts for Windows, LP64, ILP32, endian, alignment, and overflow hazards. |
+| 273 | Read-only integration review | Active | Independently rank serial integration order, promotion gates, rollback boundaries, and useful successor lanes. |
+| 274 | Read-only successor | Active | Reconcile exact Geometry production object/link prerequisites at `f77d5ec86`, keeping production-linked distinct from production-called. |
+| 275 | Read-only successor | Active | Design the smallest all-section production target topology and bounded compile-only promotion gate without wiring runtime calls. |
+
+PC PR #4 changed only `pc/CMakeLists.txt`; it did not add the Geometry builder
+to the production `ac_pc` link or wire cumulative publication. Fresh native and
+combined ASan/UBSan target-only builds and exact CTest runs passed on candidate
+`35c0dd350`, and the smallest focused native gate passed again on authoritative
+merge `f77d5ec86`. No hosted workflow was configured, and no full link, process
+launch, callback, Metal/device, pixel, input, audio, save/load, or playability
+claim follows.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -2840,13 +2869,16 @@ order follows the updated critical path recorded in the README (Phases A–G):
 3. ~~Close the Blend/Fog raw-owner and Geometry dependency-result
    predecessors~~ — done 2026-08-21 through PC PRs #1–#3 at canonical
    `4cbb837e6` with independent reviews and exact-tip focused gates.
-4. Close the remaining lane-238 blockers in dependency order: production
-   registration, atomic resource-lease publication, the all-or-nothing
-   cumulative assembler, and the typed Apple CPU consumer.
-5. Only then schedule the one serialized live callback trace, followed by the
+4. ~~Register the source-backed Geometry dependency fixture as a reproducible
+   focused CMake/CTest gate~~ — done 2026-08-22 through PC PR #4 at canonical
+   `f77d5ec86`, with native, combined ASan/UBSan, and exact-merge verification.
+5. Close the remaining lane-238 blockers in dependency order: production
+   `ac_pc` link membership, atomic resource-lease publication, the
+   all-or-nothing cumulative assembler, and the typed Apple CPU consumer.
+6. Only then schedule the one serialized live callback trace, followed by the
    Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
-6. iOS implementation remains gated behind proven shared macOS core, renderer,
+7. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
