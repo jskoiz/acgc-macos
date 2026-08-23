@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `1c8781d76`; see
-`docs/evidence/CUMULATIVE-FLUSH-1C8781D76-2026-08-23.md`.
+canonical PC tip is `2d4bc2b7e`; see
+`docs/evidence/APPLE-CANONICAL-PLAN-2D4BC2B7E-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -63,8 +63,12 @@ active does not imply that its gate passed or that it is active now.
 | 310 | Source-edit successor | Complete and integrated | Added one guarded cumulative gather attempt at the completed-Geometry flush seam plus a source-backed fixture in `c2f557e34`; corrective child `a986c7007` closes callback lifecycle/reentrancy findings. Lane 314 passed the final chain and [PC PR #14](https://github.com/jskoiz/ACGC-PC-Port/pull/14) merged it as `1c8781d76`. |
 | 311 | Immutable umbrella review | Complete, PASS | Accepted gatherer umbrella candidate `19b76cce` with exact pointer/evidence scope before umbrella PR #9. |
 | 312 | Independent flush review | Complete, BLOCK resolved | Blocked the first Lane 310 commit on stale callback/context and callback-time lifecycle reset/reentrancy hazards; `a986c7007` closes each finding. |
-| 313 | Source-edit Apple plan successor | Active | Owns only the pure-C Apple canonical CPU plan, all-fourteen explicit little-endian section decoding, focused fixture, and Apple CMake registration; no Metal, callback, flush, or production runtime wiring is in scope. |
+| 313 | Source-edit Apple plan successor | Complete and integrated | Added the pure-C, value-owned all-section Apple canonical plan in `a497ed0d2`; corrective child `deaaa6431` repairs the fixture's false-green failure propagation and canonical setup. Lane 318 passed the final chain and [PC PR #15](https://github.com/jskoiz/ACGC-PC-Port/pull/15) merged it as `2d4bc2b7e`. |
 | 314 | Independent flush re-review | Complete, PASS | Accepted `c2f557e34` + `a986c7007` with no P0/P1/P2 finding, including guarded lifecycle reset, non-reentrant callback contract, one publication per successful flush, older callback suppression, and legacy continuation. |
+| 315 | Immutable umbrella review | Complete, PASS | Accepted flush umbrella candidate `f45bbdb7` with exact four-path scope, retained native/sanitizer/full-link evidence, and no P0/P1/P2 finding before umbrella PR #10. |
+| 316 | Read-only Apple handoff audit | Completed without durable handoff | The worker returned no usable report, so no source decision or readiness claim relies on this lane. The handoff remains a separately owned successor after the pure plan checkpoint. |
+| 317 | Independent Apple plan review | Complete, BLOCK resolved | Found the initial plan fixture false-green: invalid Texgen setup failed before the builder while `CHECK` returned process success. It accepted the static four-path/pure-value scope but withheld executable proof. |
+| 318 | Independent Apple plan re-review | Complete, PASS | Accepted `a497ed0d2` + `deaaa6431` after direct PASS-sentinel execution and exact native plus ASan/UBSan parser/plan `2/2`; no remaining P0/P1/P2 finding. |
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -109,6 +113,20 @@ containing callback registration/clear, gather, and assemble symbols. This
 proves the source-backed production flush contract and production link, not a
 real-process callback, launch, Apple plan/Metal consumption, pixels, device
 behavior, or playability.
+
+PC PR #15 adds a pure-C Apple canonical CPU plan library and focused fixture.
+The plan structurally parses one cumulative envelope, explicitly decodes and
+validates all fourteen sections, normalizes at most 128 Geometry vertices,
+derives cross-section dependencies, rejects unsupported BUMP and invalid
+resource metadata, and writes one pointer-free value plan only after complete
+success. The initial independent review blocked a false-green fixture and
+invalid Texgen setup; corrective child `deaaa6431` makes failures exit nonzero
+and repairs every subsequently exposed malformed fixture mutation. At
+authoritative merge tip `2d4bc2b7e`, fresh native and combined ASan/UBSan roots
+build 37 steps, direct execution prints the PASS sentinel, and exact parser plus
+plan CTests pass `2/2` in each root. The plan remains outside `ac_pc`, callback,
+runtime, and Metal targets; no live delivery, production link, launch, GPU,
+pixel, device, or playability claim follows.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -2963,12 +2981,16 @@ order follows the updated critical path recorded in the README (Phases A–G):
 10. ~~Add one guarded production flush publication~~ — done 2026-08-23 through
    PC PR #14 at canonical `1c8781d76`, with initial independent BLOCK,
    corrective lifecycle/reentrancy child, final PASS, exact-merge native and
-   ASan/UBSan verification, and a serialized exact-tip full link. Add semantic
-   Apple section decoding and the immutable typed CPU plan next.
-11. Only then schedule the one serialized live callback trace, followed by the
+   ASan/UBSan verification, and a serialized exact-tip full link.
+11. ~~Add semantic Apple section decoding and an immutable typed CPU plan~~ —
+   done 2026-08-23 through PC PR #15 at canonical `2d4bc2b7e`, after an initial
+   false-green BLOCK, corrective child, final independent PASS, and exact-merge
+   native plus ASan/UBSan parser/plan `2/2`.
+12. Add the owned callback-to-plan handoff, then schedule one serialized live
+   callback trace, followed by the
    Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
-12. iOS implementation remains gated behind proven shared macOS core, renderer,
+13. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
