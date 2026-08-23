@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `2f944f1ae`; see
-`docs/evidence/MTX-FIX-INTEGRATION-2F944F1AE-2026-08-23.md`.
+canonical PC tip is `b18aa8e92`; see
+`docs/evidence/TRANSFORM-FIXTURE-TOPOLOGY-B18AA8E92-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -88,20 +88,20 @@ active does not imply that its gate passed or that it is active now.
 | 344 | Source-edit runtime arbitration | Complete and integrated | Added cumulative attempt IDs and post-borrow completion, atomic callback-pair registration, borrowed canonical-plan consumption, source-aware winner/fallback policy, and the CPU-only arbitration fixture in `23b97e75d`; [PC PR #19](https://github.com/jskoiz/ACGC-PC-Port/pull/19) merged it as `928594a26`. Exact-merge native PC `3/3`, Apple `4/4`, combined ASan/UBSan `3/3` + `4/4`, and one serialized 4,078-item `ac_pc` link passed. |
 | 347 | Independent runtime-arbitration review | Complete, PASS | Accepted `23b97e75d` with no P0/P1 blocker after adversarial attempt/fallback/reentry/lifecycle review, fresh native and ASan/UBSan matrices, production-object and generated-link checks, and four bounded P2 maintenance notes. |
 | 348 | Immutable umbrella review | Complete, PASS | Accepted umbrella candidate `8f3d6261d` with exact four-path `+302/-23` scope, correct PC/decomp pins, authoritative PR #19 metadata, retained native and ASan/UBSan `3/3` + `4/4`, verified arm64 `NOUNDEFS` artifact/symbols, and no P0/P1 or new umbrella P2 finding. |
-| 349 | Read-only Mtx consumer audit | Active | Exhaustively crosswalking every layout-sensitive `Mtx_t` consumer against the fixed-width PC candidate and decomp wire contract; no source ownership. |
-| 350 | Read-only live-trace gate audit | Complete | Accepted the corrected host-environment LLDB contract, PID-bounded cleanup, and named-stage evidence; shared return-address stops remain noisy and are excluded from claims. |
-| 351 | Test-only CMake source edit | Complete; candidate ready | Commit `e9ca89ecf` repairs only the transform raw-shadow fixture link closure; fresh native and ASan/UBSan configure, serial build, exact discovery, and exact CTest pass `1/1`. Production semantics are unchanged. |
-| 352 | Read-only projection algebra oracle | Active | Separating the fixed LP64 layout fault from an independently observed inherited perspective-reconstruction algebra issue; no edit until its bounded contract is complete. |
-| 353 | Read-only Windows/LLP64 audit | Complete, qualified PASS | Confirmed the fixed-width Mtx layout and GBI wire length for supported C11/C++17 PC consumers, including a Clang LLP64 syntax/layout probe; MinGW link/runtime and unconditional legacy-language compatibility remain unproved. |
-| 354 | Independent Mtx test review | Complete, P1 successor | Accepted the representation checks but found the existing fixture does not exercise fixed-point packing, endian pair order, dynamic `gSPMatrix`, or projection-marker encode/decode behavior; a narrow matrix-wire fixture is required. |
-| 355 | Read-only gatherer-stage audit | Active | Mapping all fourteen stages and the exact short-circuit decision tree; the bounded run proves Transform and Channels succeed before Texgen fails. |
-| 356 | Read-only Apple Geometry audit | Active | Checking parser/plan/consumer count and topology limits against the full canonical Geometry contract; no Metal/device or pixel claim. |
-| 357 | Read-only typed-failure design | Complete, design ready | Froze a first-failure scalar result enum in gatherer execution order, preserving the existing attempt callback, storage immutability, borrow transaction, Apple ABI, and legacy rendering; no source was edited. |
-| 358 | Independent Mtx integration review | Complete, PASS | Accepted source commit `5a8a686a5` against `928594a26` with no P0/P1/P2 finding after exact two-file scope, PC/decomp wire crosswalk, and independent native plus ASan/UBSan GBI execution. |
-| 359 | Read-only umbrella evidence plan | Complete | Froze the four-path umbrella update, exact claim boundaries, evidence filename, historical-SHA preservation, and unchanged decomp pin before integration. |
-| 360 | Read-only launch reproducibility audit | Complete, superseded preflight | Recorded a fail-closed source/build/runtime preflight and found the then-retained binary stale. The integration owner's later fresh affected rebuild and bounded LLDB trace satisfy that freshness requirement; the audit itself made no runtime claim. |
-| 361 | Read-only focused-CMake drift inventory | Active | Sweeping direct-source/raw-owner fixture targets; confirmed broad cumulative-symbol drift plus an independent `pc_gx_texture_mark_image_converted` omission in the GBI traversal target. |
-| 362 | Read-only decomp Mtx crosswalk | Active | Producing citation-ready Mtx storage, conversion, command-size, and caller evidence at exact PC/decomp refs. |
+| 349 | Independent projection review | Active | Adversarially reviewing projection-reconstruction candidate `640cb4ca8` and its focused fixture; no source ownership. |
+| 350 | Serialized Texgen predicate trace | Active | Owns the sole exact-`b18aa8e92` full-link/LLDB slot and must identify the first source-order Texgen predicate without editing source or inferring from shared return addresses. |
+| 351 | Immutable umbrella review | Queued on immutable commit | The test-only CMake source lane is integrated through PR #21; this visible task is reserved for the independent umbrella diff/ref/evidence review before push. |
+| 352 | Projection current-tip replay | Active source edit | Replaying candidate `640cb4ca8` from exact PC `b18aa8e92` in a unique worktree, owning only `emu64.c`, its focused projection fixture, and the narrow portable CMake hunk. |
+| 353 | Typed gatherer borrow-lifetime review | Active | Auditing candidate `ee1e2fa3b` for unconditional borrow end, failure-result accuracy, callback compatibility, and failure immutability; no source ownership. |
+| 354 | Typed gatherer adversarial review | Active | Independently reviewing the typed gatherer result ABI and both retained native/sanitizer fixtures; no source ownership. |
+| 355 | Texgen source-fidelity audit | Active | Comparing PTIDENTITY initialization/materialization/implicit-identity fixes and freezing the smallest positive-plus-negative fixture contract while Lane 350 gathers the live predicate. |
+| 356 | Apple Geometry semantic review | Active | Independently reviewing Apple-only candidate `3086b79e8` for bounded triangle/quad expansion, count/capacity agreement, and fail-closed behavior; no Metal/device or pixel claim. |
+| 357 | Typed gatherer current-tip merge audit | Active | Checking candidate `ee1e2fa3b` against `b18aa8e92`, with special attention to its `pc_gx.c` ownership before a Texgen source owner is selected. |
+| 358 | Projection fixture-topology review | Active | Checking that the new projection test reaches the real reconstruction code and cannot pass through a stubbed or alternate implementation. |
+| 359 | PC PR #21 hosted-state audit | Active | Verifying merged refs, exact hosted diff/check/review state, and workflow exposure so the umbrella evidence does not overstate “no hosted checks.” |
+| 360 | Projection false-green review | Active | Auditing finite and infinite far-plane cases, failure immutability, and tolerance strength without editing the candidate. |
+| 361 | Apple Geometry current-tip topology audit | Active | Proving or blocking a clean replay of `3086b79e8` onto `b18aa8e92` and freezing the exact Apple native/sanitizer target matrix. |
+| 362 | Projection numeric oracle | Active | Comparing frozen 16.16 packed matrices, decoded coefficients, and near/far algebra across the PC candidate and decomp wire contract. |
 
 PC PR #20 fixes the LP64 N64 matrix payload at source commit `5a8a686a5`
 and merges it as `2f944f1ae`. Exact-merge native and ASan/UBSan
@@ -110,6 +110,14 @@ source-tree launch reaches 20 cumulative attempts: Transform and Channels pass
 `20/20`, Texgen fails `20/20`, and no envelope or canonical sink submission
 occurs. This moves the live frontier; it does not prove publication, Metal,
 pixels, or playability.
+
+PC PR #21 repairs only the test-only
+`acgc_pc_gx_transform_raw_shadow_fixture` dependency closure. Candidate
+`6ea409b8b` changes `pc/CMakeLists.txt` by 14 insertions and merges as
+`b18aa8e92`. Fresh exact-merge native and combined ASan/UBSan configuration,
+serial target build, one-test discovery, and exact CTest each pass `1/1`;
+no production source, `ac_pc` membership, launch, renderer, Metal, device, or
+playability claim follows.
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -3115,11 +3123,14 @@ order follows the updated critical path recorded in the README (Phases A–G):
    done 2026-08-23 through PC PR #20 at canonical `2f944f1ae`; exact-merge
    native and ASan/UBSan GBI tests pass, and the real-process frontier moves
    from Transform to Texgen.
-14. Repair and independently review the live Texgen failure, then run one
+14. ~~Repair the transform raw-shadow fixture dependency closure~~ — done
+   2026-08-23 through PC PR #21 at canonical `b18aa8e92`, with independent
+   review and exact-merge native plus ASan/UBSan `1/1`.
+15. Repair and independently review the live Texgen failure, then run one
    serialized successful callback-delivery trace before the Metal
    encode/present/readback gates and the remaining input, audio, save/reload,
    lifecycle, regression, and playability gates.
-15. iOS implementation remains gated behind proven shared macOS core, renderer,
+16. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
