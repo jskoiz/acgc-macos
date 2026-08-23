@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `928594a26`; see
-`docs/evidence/CANONICAL-RUNTIME-ARBITRATION-928594A26-2026-08-23.md`.
+canonical PC tip is `2f944f1ae`; see
+`docs/evidence/MTX-FIX-INTEGRATION-2F944F1AE-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -88,6 +88,28 @@ active does not imply that its gate passed or that it is active now.
 | 344 | Source-edit runtime arbitration | Complete and integrated | Added cumulative attempt IDs and post-borrow completion, atomic callback-pair registration, borrowed canonical-plan consumption, source-aware winner/fallback policy, and the CPU-only arbitration fixture in `23b97e75d`; [PC PR #19](https://github.com/jskoiz/ACGC-PC-Port/pull/19) merged it as `928594a26`. Exact-merge native PC `3/3`, Apple `4/4`, combined ASan/UBSan `3/3` + `4/4`, and one serialized 4,078-item `ac_pc` link passed. |
 | 347 | Independent runtime-arbitration review | Complete, PASS | Accepted `23b97e75d` with no P0/P1 blocker after adversarial attempt/fallback/reentry/lifecycle review, fresh native and ASan/UBSan matrices, production-object and generated-link checks, and four bounded P2 maintenance notes. |
 | 348 | Immutable umbrella review | Complete, PASS | Accepted umbrella candidate `8f3d6261d` with exact four-path `+302/-23` scope, correct PC/decomp pins, authoritative PR #19 metadata, retained native and ASan/UBSan `3/3` + `4/4`, verified arm64 `NOUNDEFS` artifact/symbols, and no P0/P1 or new umbrella P2 finding. |
+| 349 | Read-only Mtx consumer audit | Active | Exhaustively crosswalking every layout-sensitive `Mtx_t` consumer against the fixed-width PC candidate and decomp wire contract; no source ownership. |
+| 350 | Read-only live-trace gate audit | Complete | Accepted the corrected host-environment LLDB contract, PID-bounded cleanup, and named-stage evidence; shared return-address stops remain noisy and are excluded from claims. |
+| 351 | Test-only CMake source edit | Complete; candidate ready | Commit `e9ca89ecf` repairs only the transform raw-shadow fixture link closure; fresh native and ASan/UBSan configure, serial build, exact discovery, and exact CTest pass `1/1`. Production semantics are unchanged. |
+| 352 | Read-only projection algebra oracle | Active | Separating the fixed LP64 layout fault from an independently observed inherited perspective-reconstruction algebra issue; no edit until its bounded contract is complete. |
+| 353 | Read-only Windows/LLP64 audit | Complete, qualified PASS | Confirmed the fixed-width Mtx layout and GBI wire length for supported C11/C++17 PC consumers, including a Clang LLP64 syntax/layout probe; MinGW link/runtime and unconditional legacy-language compatibility remain unproved. |
+| 354 | Independent Mtx test review | Complete, P1 successor | Accepted the representation checks but found the existing fixture does not exercise fixed-point packing, endian pair order, dynamic `gSPMatrix`, or projection-marker encode/decode behavior; a narrow matrix-wire fixture is required. |
+| 355 | Read-only gatherer-stage audit | Active | Mapping all fourteen stages and the exact short-circuit decision tree; the bounded run proves Transform and Channels succeed before Texgen fails. |
+| 356 | Read-only Apple Geometry audit | Active | Checking parser/plan/consumer count and topology limits against the full canonical Geometry contract; no Metal/device or pixel claim. |
+| 357 | Read-only typed-failure design | Complete, design ready | Froze a first-failure scalar result enum in gatherer execution order, preserving the existing attempt callback, storage immutability, borrow transaction, Apple ABI, and legacy rendering; no source was edited. |
+| 358 | Independent Mtx integration review | Complete, PASS | Accepted source commit `5a8a686a5` against `928594a26` with no P0/P1/P2 finding after exact two-file scope, PC/decomp wire crosswalk, and independent native plus ASan/UBSan GBI execution. |
+| 359 | Read-only umbrella evidence plan | Complete | Froze the four-path umbrella update, exact claim boundaries, evidence filename, historical-SHA preservation, and unchanged decomp pin before integration. |
+| 360 | Read-only launch reproducibility audit | Complete, superseded preflight | Recorded a fail-closed source/build/runtime preflight and found the then-retained binary stale. The integration owner's later fresh affected rebuild and bounded LLDB trace satisfy that freshness requirement; the audit itself made no runtime claim. |
+| 361 | Read-only focused-CMake drift inventory | Active | Sweeping direct-source/raw-owner fixture targets; confirmed broad cumulative-symbol drift plus an independent `pc_gx_texture_mark_image_converted` omission in the GBI traversal target. |
+| 362 | Read-only decomp Mtx crosswalk | Active | Producing citation-ready Mtx storage, conversion, command-size, and caller evidence at exact PC/decomp refs. |
+
+PC PR #20 fixes the LP64 N64 matrix payload at source commit `5a8a686a5`
+and merges it as `2f944f1ae`. Exact-merge native and ASan/UBSan
+`acgc_gbi_runtime_tests` pass `1/1`. A bounded content-identical
+source-tree launch reaches 20 cumulative attempts: Transform and Channels pass
+`20/20`, Texgen fails `20/20`, and no envelope or canonical sink submission
+occurs. This moves the live frontier; it does not prove publication, Metal,
+pixels, or playability.
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -215,6 +237,17 @@ serialized 4,078-item `ac_pc` link produces a 15,458,528-byte arm64 Mach-O with
 launched, no asset was accessed, and no game-owned callback, Metal encode,
 present/readback, pixel, device, input/audio/save, iOS, or playability claim
 follows.
+
+PC PR #20 closes the LP64 N64 matrix wire-layout fault. Source commit
+`5a8a686a5` changes only `include/PR/gbi.h` and the focused GBI runtime
+fixture; merge `2f944f1ae` passes fresh native and combined ASan/UBSan
+`acgc_gbi_runtime_tests` `1/1` on the exact integrated snapshot. A full
+`ac_pc` affected rebuild linked on the source commit whose tree is identical
+to the merge. A bounded real inferior reached 20 gather attempts with Transform
+and Channels succeeding `20/20`; Texgen failed `20/20`, all attempts
+reported `NO_PUBLICATION`, and no later encoder, assembler, callback, or sink
+submission occurred. This proves a moved runtime frontier, not successful
+delivery, Metal, pixels, input/audio/save, iOS, or playability.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -3077,10 +3110,16 @@ order follows the updated critical path recorded in the README (Phases A–G):
 12. ~~Add the owned callback-to-plan handoff~~ — done 2026-08-23 through PC PR
    #16 at canonical `a4ee15c1d`, with independent review, exact-merge native
    and ASan/UBSan parser/plan/handoff `3/3`, and a serialized exact-tip full
-   link. Next schedule one serialized live callback-delivery trace, followed by
-   the Metal encode/present/readback gates and the remaining input, audio,
-   save/reload, lifecycle, regression, and playability gates.
-13. iOS implementation remains gated behind proven shared macOS core, renderer,
+   link.
+13. ~~Repair the LP64 N64 matrix payload and rerun the bounded gather trace~~ —
+   done 2026-08-23 through PC PR #20 at canonical `2f944f1ae`; exact-merge
+   native and ASan/UBSan GBI tests pass, and the real-process frontier moves
+   from Transform to Texgen.
+14. Repair and independently review the live Texgen failure, then run one
+   serialized successful callback-delivery trace before the Metal
+   encode/present/readback gates and the remaining input, audio, save/reload,
+   lifecycle, regression, and playability gates.
+15. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
