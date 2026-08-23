@@ -8,8 +8,8 @@ and Apple renderer have their own evidence.
 > **Project status — active orchestrated integration on 2026-08-23.** One
 > integration owner and fourteen durable Luna/max worker tasks were launched on
 > bounded, non-overlapping source, test, audit, and independent-review lanes.
-> Fourteen focused source milestones in this batch have been serialized through
-> PC-port PRs #4–#20 with exact-merge verification. The repository
+> Fifteen focused source milestones in this batch have been serialized through
+> PC-port PRs #4–#21 with exact-merge verification. The repository
 > remains a public engineering record and roadmap. It is **not** a playable
 > release, does not contain game data, and does not grant rights to Nintendo
 > assets.
@@ -69,7 +69,7 @@ renderer handoff that can truthfully claim a Metal-rendered game frame.
 | --- | --- |
 | Umbrella branch | `main` |
 | Canonical PC-port branch | `c1/macos-host-launch` |
-| Canonical PC-port commit | `2f944f1aedacba2df0f0d5c15d5fadc67f8e8c54` |
+| Canonical PC-port commit | `b18aa8e921ae9bd99c8a07728003b91c5c71ad5b` |
 | Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
 | Supported revision | `GAFE01_00`, USA revision 0 |
 | Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
@@ -432,7 +432,7 @@ CPU assembler, Apple CPU consumer, and later live trace as three separate gates.
 
 ### Phase C — fill remaining truthful state gaps
 
-At `2f944f1ae`, Blend/Fog raw ownership, the narrow Geometry dependency
+At `b18aa8e92`, Blend/Fog raw ownership, the narrow Geometry dependency
 builder and focused CMake/CTest gate, and the token-scoped Texture/TLUT/Dynamic
 borrow transaction are closed. The pure cumulative envelope assembler is also
 integrated, and every existing standalone producer plus all canonical libraries
@@ -705,7 +705,7 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `2f944f1ae`. It contains the independently reviewed
+`c1/macos-host-launch` at `b18aa8e92`. It contains the independently reviewed
 Blend producer (`07a621428`, merged as `f772f0bb8`), Fog producer
 (`e0bb5ac96`, merged as `cd55a7789`), and Geometry dependency builder
 (`09d174799`, merged as `4cbb837e6`), plus the Geometry dependency fixture gate
@@ -739,11 +739,15 @@ borrowed-plan handoff, and source-aware canonical/semantic runtime arbitration
 [PC PR #19](https://github.com/jskoiz/ACGC-PC-Port/pull/19) as `928594a26`),
 followed by the fixed-width 64-byte N64 matrix payload and focused wire-layout
 regression (`5a8a686a5`, merged through
-[PC PR #20](https://github.com/jskoiz/ACGC-PC-Port/pull/20) as `2f944f1ae`).
+[PC PR #20](https://github.com/jskoiz/ACGC-PC-Port/pull/20) as `2f944f1ae`),
+followed by the test-only transform raw-shadow fixture dependency repair
+(`6ea409b8b`, merged through
+[PC PR #21](https://github.com/jskoiz/ACGC-PC-Port/pull/21) as `b18aa8e92`).
 Exact merged-tip focused gates passed for these integrations; a bounded
 content-identical source-tree launch passes Transform and Channels on 20/20
 attempts and identifies Texgen as the next fail-closed stage. See
 [the 2026-08-23 LP64 N64 Mtx integration evidence](docs/evidence/MTX-FIX-INTEGRATION-2F944F1AE-2026-08-23.md),
+[the 2026-08-23 transform fixture topology evidence](docs/evidence/TRANSFORM-FIXTURE-TOPOLOGY-B18AA8E92-2026-08-23.md),
 [the 2026-08-23 canonical runtime arbitration evidence](docs/evidence/CANONICAL-RUNTIME-ARBITRATION-928594A26-2026-08-23.md),
 [the 2026-08-23 canonical-plan round-trip evidence](docs/evidence/CANONICAL-PLAN-ROUNDTRIP-818BFE547-2026-08-23.md),
 [the 2026-08-23 Apple canonical-plan consumer evidence](docs/evidence/APPLE-CANONICAL-PLAN-CONSUMER-BD660F754-2026-08-23.md),
