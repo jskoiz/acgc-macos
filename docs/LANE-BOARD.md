@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `818bfe547`; see
-`docs/evidence/CANONICAL-PLAN-ROUNDTRIP-818BFE547-2026-08-23.md`.
+canonical PC tip is `928594a26`; see
+`docs/evidence/CANONICAL-RUNTIME-ARBITRATION-928594A26-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -84,6 +84,10 @@ active does not imply that its gate passed or that it is active now.
 | 338 | Test-only source edit | Complete and integrated | Added a real-setter, real-`GXBegin`/`GXEnd` no-`PNMTXIDX` POS+CLR0 round-trip fixture in `2e20eaa47`; [PC PR #18](https://github.com/jskoiz/ACGC-PC-Port/pull/18) merged it as `818bfe547`, and exact-merge native plus ASan/UBSan execution passes `1/1`. No production source or runtime wiring changed. |
 | 341 | Independent round-trip review | Complete, PASS | Accepted `2e20eaa47` with no P0/P1/P2 finding after exact two-file scope, real setter provenance, callback/borrow failure recovery, false-green, duplicate-object, and retained native/sanitizer review. |
 | 342 | Immutable umbrella review | Complete, PASS | Accepted umbrella candidate `ab4635f3e` with exact four-path scope, retained exact-merge native/sanitizer evidence, synchronized claims, and no P0/P1/P2 finding before the umbrella PR. |
+| 343 | Read-only runtime-freshness audit | Complete, BLOCK with successor closed | Proved the prior handoff retained the last successful plan, made failed/no-publication attempts invisible, and could not distinguish canonical output from semantic V1 at the sink. Froze process-lifetime attempt identity, all-attempt completion, borrowed-plan delivery, source-aware eligibility, and same-attempt fallback/suppression. |
+| 344 | Source-edit runtime arbitration | Complete and integrated | Added cumulative attempt IDs and post-borrow completion, atomic callback-pair registration, borrowed canonical-plan consumption, source-aware winner/fallback policy, and the CPU-only arbitration fixture in `23b97e75d`; [PC PR #19](https://github.com/jskoiz/ACGC-PC-Port/pull/19) merged it as `928594a26`. Exact-merge native PC `3/3`, Apple `4/4`, combined ASan/UBSan `3/3` + `4/4`, and one serialized 4,078-item `ac_pc` link passed. |
+| 347 | Independent runtime-arbitration review | Complete, PASS | Accepted `23b97e75d` with no P0/P1 blocker after adversarial attempt/fallback/reentry/lifecycle review, fresh native and ASan/UBSan matrices, production-object and generated-link checks, and four bounded P2 maintenance notes. |
+| 348 | Immutable umbrella review | Complete, PASS | Accepted umbrella candidate `8f3d6261d` with exact four-path `+302/-23` scope, correct PC/decomp pins, authoritative PR #19 metadata, retained native and ASan/UBSan `3/3` + `4/4`, verified arm64 `NOUNDEFS` artifact/symbols, and no P0/P1 or new umbrella P2 finding. |
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -193,6 +197,24 @@ and it passes `1/1` in both roots. The two-file `+810/-0` change is test-only
 under the Apple compile-audit/CTest condition; no production source, runtime
 arbitration, process delivery, Metal encode/present/readback, pixel, device,
 asset, input/audio/save, iOS, or playability claim follows.
+
+PC PR #19 closes the source-only runtime-arbitration gate. Each production
+flush attempt receives a nonzero process-lifetime ID; publication or
+no-publication is reported exactly once after the Texture/TLUT borrow ends. The
+Apple adapter clears stale plans, exposes a successful plan only as a
+synchronous borrowed callback, and distinguishes `NO_PUBLICATION`,
+`PLAN_REJECTED`, and `PLAN_PUBLISHED`. The runtime accepts canonical output only
+with canonical source provenance, semantic version zero, and zero extension
+statuses. A successful canonical sink submission suppresses later semantic
+callbacks for that attempt only; gather, plan, prepare, and sink failures retain
+semantic V1 fallback, while V2/V3/V4 policy remains fail closed. At authoritative
+merge tip `928594a26`, fresh native PC `3/3` and Apple `4/4` matrices pass; the
+same `3/3` + `4/4` pass under combined ASan/UBSan with no diagnostics. A fresh
+serialized 4,078-item `ac_pc` link produces a 15,458,528-byte arm64 Mach-O with
+`NOUNDEFS` and strong cumulative/handoff/runtime symbols. No process was
+launched, no asset was accessed, and no game-owned callback, Metal encode,
+present/readback, pixel, device, input/audio/save, iOS, or playability claim
+follows.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
