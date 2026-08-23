@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `bd660f754`; see
-`docs/evidence/APPLE-CANONICAL-PLAN-CONSUMER-BD660F754-2026-08-23.md`.
+canonical PC tip is `818bfe547`; see
+`docs/evidence/CANONICAL-PLAN-ROUNDTRIP-818BFE547-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -80,7 +80,10 @@ active does not imply that its gate passed or that it is active now.
 | 331 | Source-edit canonical-plan packet consumer | Complete and integrated | Added a pure bounded adapter from the normalized Apple plan to the existing Metal packet-consumer output in `b74e2f8d9`; corrective child `a13af24ba` closes exact near/far validation and synthetic-provenance findings. [PC PR #17](https://github.com/jskoiz/ACGC-PC-Port/pull/17) merged the chain as `bd660f754`. |
 | 333 | Independent packet-consumer review | Complete, BLOCK resolved | Blocked the first candidate because it omitted the downstream sink's exact `0.0/1.0` near/far requirement and reconstructed synthetic Geometry/VCD/VAT provenance after normalization. Both P1 findings are removed by `a13af24ba`. |
 | 336 | Independent packet-consumer re-review | Complete, PASS | Accepted the corrected chain with no P0/P1 after fresh native and ASan/UBSan canonical plus four neighboring consumer tests passed `5/5`, direct PASS execution, ABI/layout review, and confirmation that runtime remains unwired. |
-| 337 | Read-only producer-reachability audit | Complete, PASS-CONDITIONAL | Found a static setter/producer route for the no-`PNMTXIDX` three-vertex subset and confirmed that explicit `PNMTXIDX` is optional but currently rejected by raw Geometry. Actual composition remains unproved until a source-backed gatherer → assembler → parser → plan → consumer round-trip fixture passes. |
+| 337 | Read-only producer-reachability audit | Complete, PASS-CONDITIONAL; successor closed | Found a static setter/producer route for the no-`PNMTXIDX` three-vertex subset and confirmed that explicit `PNMTXIDX` is optional but currently rejected by raw Geometry. Lane 338 supplies the required source-backed composition proof for that narrow subset. |
+| 338 | Test-only source edit | Complete and integrated | Added a real-setter, real-`GXBegin`/`GXEnd` no-`PNMTXIDX` POS+CLR0 round-trip fixture in `2e20eaa47`; [PC PR #18](https://github.com/jskoiz/ACGC-PC-Port/pull/18) merged it as `818bfe547`, and exact-merge native plus ASan/UBSan execution passes `1/1`. No production source or runtime wiring changed. |
+| 341 | Independent round-trip review | Complete, PASS | Accepted `2e20eaa47` with no P0/P1/P2 finding after exact two-file scope, real setter provenance, callback/borrow failure recovery, false-green, duplicate-object, and retained native/sanitizer review. |
+| 342 | Immutable umbrella review | Complete, PASS | Accepted umbrella candidate `ab4635f3e` with exact four-path scope, retained exact-merge native/sanitizer evidence, synchronized claims, and no P0/P1/P2 finding before the umbrella PR. |
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -174,8 +177,22 @@ handoff/runtime arbitration, process launch, Metal encode/present/readback,
 pixels, device behavior, input/audio/save, iOS, or playability.
 Lane 337 independently traced every accepted predicate through raw
 initialization/setters and classified the no-`PNMTXIDX` subset as statically
-compatible but not yet composed. The next CPU gate is the source-backed
-round-trip fixture; production arbitration follows only after it passes.
+compatible but not yet composed.
+
+PC PR #18 closes that narrow composition gate without changing production
+implementation. Its focused fixture configures the known-state subset through
+real GX setters, emits one direct POS+CLR0 triangle with real
+`GXBegin`/`GXEnd`, and synchronously traverses cumulative gather, explicit
+encoding/assembly, Apple structural parsing, normalized plan construction, and
+canonical-plan packet preparation. It also proves consumer-output immutability,
+unregistered-callback no-op behavior, zero publication on composition failure,
+borrow release, callback clear/re-registration, and a valid retry. At
+authoritative merge tip `818bfe547`, fresh native and combined ASan/UBSan
+65-step target builds pass; exact CTest discovery finds only the named fixture
+and it passes `1/1` in both roots. The two-file `+810/-0` change is test-only
+under the Apple compile-audit/CTest condition; no production source, runtime
+arbitration, process delivery, Metal encode/present/readback, pixel, device,
+asset, input/audio/save, iOS, or playability claim follows.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
