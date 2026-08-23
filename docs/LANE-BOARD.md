@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `2d4bc2b7e`; see
-`docs/evidence/APPLE-CANONICAL-PLAN-2D4BC2B7E-2026-08-23.md`.
+canonical PC tip is `a4ee15c1d`; see
+`docs/evidence/APPLE-PLAN-HANDOFF-A4EE15C1D-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -66,9 +66,17 @@ active does not imply that its gate passed or that it is active now.
 | 313 | Source-edit Apple plan successor | Complete and integrated | Added the pure-C, value-owned all-section Apple canonical plan in `a497ed0d2`; corrective child `deaaa6431` repairs the fixture's false-green failure propagation and canonical setup. Lane 318 passed the final chain and [PC PR #15](https://github.com/jskoiz/ACGC-PC-Port/pull/15) merged it as `2d4bc2b7e`. |
 | 314 | Independent flush re-review | Complete, PASS | Accepted `c2f557e34` + `a986c7007` with no P0/P1/P2 finding, including guarded lifecycle reset, non-reentrant callback contract, one publication per successful flush, older callback suppression, and legacy continuation. |
 | 315 | Immutable umbrella review | Complete, PASS | Accepted flush umbrella candidate `f45bbdb7` with exact four-path scope, retained native/sanitizer/full-link evidence, and no P0/P1/P2 finding before umbrella PR #10. |
-| 316 | Read-only Apple handoff audit | Completed without durable handoff | The worker returned no usable report, so no source decision or readiness claim relies on this lane. The handoff remains a separately owned successor after the pure plan checkpoint. |
+| 316 | Read-only Apple handoff audit | Completed without durable handoff | The worker returned no usable report, so no source decision or readiness claim relies on this lane. Lane 321 later froze the contract and Lane 324 implemented the independently reviewed successor. |
 | 317 | Independent Apple plan review | Complete, BLOCK resolved | Found the initial plan fixture false-green: invalid Texgen setup failed before the builder while `CHECK` returned process success. It accepted the static four-path/pure-value scope but withheld executable proof. |
 | 318 | Independent Apple plan re-review | Complete, PASS | Accepted `a497ed0d2` + `deaaa6431` after direct PASS-sentinel execution and exact native plus ASan/UBSan parser/plan `2/2`; no remaining P0/P1/P2 finding. |
+| 319 | Immutable umbrella review | Complete, PASS | Accepted Apple-plan umbrella candidate `bc901db4c` with exact four-path scope, current merged-tip native and ASan/UBSan `2/2`, and no P0/P1/P2 finding before umbrella PR #11. |
+| 320 | Read-only successor | Completed without durable handoff | The worker returned no usable report; no lifecycle, callback, or source decision relies on it. |
+| 321 | Read-only callback-to-plan audit | Complete, READY | Froze a process-lifetime same-owner adapter: build synchronously inside the envelope lifetime, retain only the value plan, preserve the prior plan on rejection, and clear before invalidation and GX shutdown. |
+| 322 | Read-only successor | Completed without durable handoff | The worker returned no usable report; no source decision or proof claim relies on it. |
+| 323 | Verification successor | Completed without durable handoff | The worker returned no usable report; exact merged-tip gates were performed and recorded by the integration owner instead. |
+| 324 | Source-edit Apple handoff | Complete and integrated | Added the lifecycle-owned callback-to-plan adapter, focused fixture, production Apple source membership, and `pc_main` ordering in candidate `4f327606e`; [PC PR #16](https://github.com/jskoiz/ACGC-PC-Port/pull/16) merged it as `a4ee15c1d`. |
+| 325 | Read-only downstream audit | Completed without durable handoff | The worker returned no usable report; no Metal-consumer or runtime-readiness claim relies on it. |
+| 326 | Independent Apple handoff review | Complete, PASS | Accepted `4f327606e` with no P0/P1 after fresh native and ASan/UBSan parser/plan/handoff `3/3`, normal-library build, production compile-graph review, lifecycle/failure inspection, and two bounded P2 maintenance notes. |
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -124,9 +132,25 @@ invalid Texgen setup; corrective child `deaaa6431` makes failures exit nonzero
 and repairs every subsequently exposed malformed fixture mutation. At
 authoritative merge tip `2d4bc2b7e`, fresh native and combined ASan/UBSan roots
 build 37 steps, direct execution prints the PASS sentinel, and exact parser plus
-plan CTests pass `2/2` in each root. The plan remains outside `ac_pc`, callback,
-runtime, and Metal targets; no live delivery, production link, launch, GPU,
-pixel, device, or playability claim follows.
+plan CTests pass `2/2` in each root. At the PR #15 tip, the plan remained outside
+`ac_pc`, callback, runtime, and Metal targets; that PR alone made no live
+delivery, production link, launch, GPU, pixel, device, or playability claim.
+
+PC PR #16 adds one process-lifetime Apple plan handoff, registers it after
+`pc_gx_init`, builds synchronously within the cumulative envelope callback
+lifetime, retains only the last successful value plan, preserves that plan on
+rejection, and clears the callback before invalidating state and shutting down
+GX. At authoritative merge tip `a4ee15c1d`, fresh native and combined
+ASan/UBSan roots build the normal library plus parser/plan/handoff fixtures;
+direct handoff execution prints the PASS sentinel and the exact matrix passes
+`3/3` in both roots. A fresh serialized 4,078-step `ac_pc` build also links a
+15,245,936-byte arm64 Mach-O containing the handoff, plan builder, callback
+registration, gatherer, and assembler symbols. The independent review found no
+P0/P1; the local callback-ABI redeclaration must track future ABI changes, and
+repeated unpaired GX reinitialization remains outside the documented one-owner
+lifecycle. This proves focused ownership/failure behavior and production link,
+not process launch, real game callback delivery, Metal consumption, pixels,
+device behavior, input/audio/save, iOS, or playability.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -2986,9 +3010,11 @@ order follows the updated critical path recorded in the README (Phases A–G):
    done 2026-08-23 through PC PR #15 at canonical `2d4bc2b7e`, after an initial
    false-green BLOCK, corrective child, final independent PASS, and exact-merge
    native plus ASan/UBSan parser/plan `2/2`.
-12. Add the owned callback-to-plan handoff, then schedule one serialized live
-   callback trace, followed by the
-   Metal encode/present/readback gates and the remaining input, audio,
+12. ~~Add the owned callback-to-plan handoff~~ — done 2026-08-23 through PC PR
+   #16 at canonical `a4ee15c1d`, with independent review, exact-merge native
+   and ASan/UBSan parser/plan/handoff `3/3`, and a serialized exact-tip full
+   link. Next schedule one serialized live callback-delivery trace, followed by
+   the Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
 13. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.

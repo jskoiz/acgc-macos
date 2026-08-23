@@ -8,8 +8,8 @@ and Apple renderer have their own evidence.
 > **Project status — active orchestrated integration on 2026-08-23.** One
 > integration owner and fourteen durable Luna/max worker tasks were launched on
 > bounded, non-overlapping source, test, audit, and independent-review lanes.
-> Nine focused source milestones in this batch have been serialized through
-> PC-port PRs #4–#15 with exact-merge verification. The repository
+> Ten focused source milestones in this batch have been serialized through
+> PC-port PRs #4–#16 with exact-merge verification. The repository
 > remains a public engineering record and roadmap. It is **not** a playable
 > release, does not contain game data, and does not grant rights to Nintendo
 > assets.
@@ -41,8 +41,9 @@ macOS first and iOS second. The short version of the remaining critical path is:
 10. ~~wire exactly one cumulative publication at `pc_gx_flush_vertices`~~
     (done 2026-08-23 at PC `1c8781d76`);
 11. ~~build the pure, value-owned all-section Apple CPU plan~~ (done 2026-08-23
-    at PC `2d4bc2b7e`), then register it at the cumulative callback and prove one
-    real-process delivery;
+    at PC `2d4bc2b7e`) and ~~register one lifecycle-owned synchronous callback
+    handoff~~ (done 2026-08-23 at PC `a4ee15c1d`), then prove one real-process
+    delivery;
 12. prove a game-owned Metal encode, present, readback, and identifiable pixel;
 13. separately prove physical input, audible audio, save/reload, lifecycle, and
    regression gates;
@@ -62,12 +63,12 @@ renderer handoff that can truthfully claim a Metal-rendered game frame.
 | --- | --- |
 | Umbrella branch | `main` |
 | Canonical PC-port branch | `c1/macos-host-launch` |
-| Canonical PC-port commit | `2d4bc2b7e9241af4a8886b655ce9d8bd7d7caede` |
+| Canonical PC-port commit | `a4ee15c1d607994919aef4c32b6e08267b65d3d1` |
 | Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
 | Supported revision | `GAFE01_00`, USA revision 0 |
 | Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
 | Current execution state | Fifteen visible lanes: one integration owner plus fourteen local Luna/max workers; source PR review and integration serialized by the owner |
-| Current proof level | Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, production producer/link availability, explicit little-endian encoders for all fourteen sections, a production-linked lease-owning gatherer, one source-backed production flush publication path, and a pure Apple structural parser plus all-section value plan; no plan callback registration, current-tip process delivery, Metal pixel, or playability proof |
+| Current proof level | Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, production producer/link availability, explicit little-endian encoders for all fourteen sections, a production-linked lease-owning gatherer, one source-backed production flush publication path, a pure Apple structural parser plus all-section value plan, and a lifecycle-owned production callback handoff; no current-tip process delivery, Metal consumption/pixel, or playability proof |
 
 The disc hash is recorded only to identify the supported local input. The disc,
 extracted files, keys, and proprietary assets are ignored and are never part of
@@ -81,14 +82,14 @@ Every row is an independent gate. A later row is not implied by an earlier one.
 | --- | --- | --- |
 | Source/revision compatibility | **Done** | Both upstreams identify `GAFE01_00`; config/build hashes agree for the supported revision. |
 | Local-disc identity and ignore rules | **Done** | Exact SHA-256 verified locally; no disc bytes or extracted proprietary assets are tracked. |
-| Portable focused build/tests | **Done, continuing** | Geometry dependency, Texture/Dynamic lease, cumulative assembler, Apple parser and all-section plan, production GX object, twelve canonical encoder gates, the cumulative gatherer, and its production flush fixture have exact-tip native and ASan/UBSan proof. |
-| arm64 `ac_pc` full link | **Parent production graph proved; plan test-only** | A fresh serialized 4,025-item Ninja plan passed at flush parent `1c8781d76`; it produced a 15,177,520-byte arm64 Mach-O with callback registration/clear, gatherer, and assembler symbols. PR #15 changes only test/Apple plan targets and does not join `ac_pc`; no new full link or launch claim follows. |
+| Portable focused build/tests | **Done, continuing** | Geometry dependency, Texture/Dynamic lease, cumulative assembler, Apple parser, all-section plan and handoff, production GX object, twelve canonical encoder gates, the cumulative gatherer, and its production flush fixture have exact-tip native and ASan/UBSan proof. |
+| arm64 `ac_pc` full link | **Current production graph proved** | A fresh serialized 4,078-step Ninja build passed at `a4ee15c1d`; it produced a 15,245,936-byte arm64 Mach-O containing the handoff, plan-builder, callback-registration, gatherer, and assembler symbols. No process-launch claim follows. |
 | Process launch and boot progression | **Proven on earlier tips** | Real inferiors reached graph processing, logo/NEOS work, GX entry points, and bounded shutdown paths. |
 | LP64 loader/audio/pointer safety | **Substantially done** | DVD aligned reads, high-address audio DMA, texture handles, and allocator-owned field pointers have focused/runtime evidence. |
-| Graph/display-list capture | **Partial** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; the production flush now attempts one cumulative renderer-neutral snapshot, but no current-tip game-process callback trace exists. |
+| Graph/display-list capture | **Partial** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; the production flush now attempts one cumulative renderer-neutral snapshot and the Apple lifecycle registers its value-plan callback, but no current-tip game-process delivery trace exists. |
 | Renderer-neutral section ABIs | **Done for the current gatherer contract** | Fourteen-section value ABIs, explicit little-endian encoders, the Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, every standalone producer, all canonical libraries, and the gatherer are production-linked and called once from the completed-Geometry flush seam. |
-| Live canonical snapshot publication | **Production call wired; runtime unproved** | `pc_gx_flush_vertices` attempts one guarded gather after completed Geometry capture, suppresses the older Texture/Dynamic-only publication, and preserves later observer/legacy ordering. A source-backed fixture proves one callback per successful flush and fail-closed behavior; no real-process callback is claimed. |
-| Apple typed CPU consumer | **Pure plan done; production handoff open** | `acgc_apple_canonical_plan_build` structurally parses, explicitly decodes and validates all fourteen sections, normalizes bounded Geometry, derives dependencies, and stages one pointer-free plan. It is focused-fixture proved but not registered with the cumulative callback or linked into a live Apple runtime. |
+| Live canonical snapshot publication | **Production call and Apple callback wired; runtime unproved** | `pc_gx_flush_vertices` attempts one guarded gather after completed Geometry capture, and Apple platform init registers a synchronous plan-building callback with clear-before-invalidate shutdown. Focused fixtures prove one successful publication, failure preservation, and retry behavior; no real-process callback is claimed. |
+| Apple typed CPU consumer | **Production handoff wired; live delivery open** | `acgc_apple_canonical_plan_build` parses, decodes, validates, normalizes, and stages one pointer-free plan. The lifecycle-owned handoff is production-linked and retains only the last successful value plan; no running game or Metal consumer has observed it. |
 | Game-owned Metal encode | **Not proven** | Device tests are gated/skipped where no Metal device is available; no live game callback has reached the canonical Metal encoder. |
 | Metal present/readback/pixel | **Not proven** | No current game-owned drawable presentation and readback identifying a real game pixel. |
 | Input | **Fixture-level partial** | Keyboard/controller snapshot and trigger/frame-guard behavior are tested; physical-controller game-session proof remains open. |
@@ -239,8 +240,11 @@ Completed canonical/raw work includes:
 - [x] Call the cumulative gatherer once at the real completed-Geometry flush
   boundary, suppress the older Texture/Dynamic-only publication, and preserve
   legacy observer/GL continuation (`1c8781d76`).
-- [ ] Register and consume the cumulative callback through the typed Apple CPU
-  plan.
+- [x] Register one process-lifetime synchronous cumulative callback, build and
+  retain only complete value-owned Apple plans, and clear before invalidation
+  (`a4ee15c1d`).
+- [ ] Prove one current-tip real-process envelope reaches that callback and
+  publishes a plan.
 - [ ] Encode game-owned geometry/state/textures on a real Metal device.
 - [ ] Present a drawable and read back an identifiable game-owned pixel.
 
@@ -316,7 +320,7 @@ for the exact gates and the stated single-owner process boundary.
 | --- | --- | --- |
 | 236 — TEV leaf producer | Integrated 2026-08-17 | Worker `043d24822cd075b51282101669d7710b785bd01f` fast-forwarded onto `62c810e5b`; fresh native and combined ASan/UBSan focused `1/1` each; production object compiles. |
 | 237 — Indirect leaf producer | Integrated 2026-08-17 | Worker `2f6ba5dff300239aa509c2f5a76431cae3d4b3a3` cherry-picked as `b83a6f6e3`; CMake fixture/object registration added separately as `d50cddb18`; source-direct native and sanitizer fixtures passed. |
-| 238 — cumulative/Apple audit | Complete historical audit; two gates now closed | Its original assembler, Apple CPU-consumer, and live-callback BLOCKs were valid at the audited tip. The assembler is now integrated at `c7ce553d7`, the pure typed plan at `2d4bc2b7e`, and the production flush call at `1c8781d76`; callback-to-plan registration and a serialized real-process trace remain open. |
+| 238 — cumulative/Apple audit | Complete historical audit; three gates now closed | Its original assembler, Apple CPU-consumer, and live-callback BLOCKs were valid at the audited tip. The assembler is now integrated at `c7ce553d7`, the pure typed plan at `2d4bc2b7e`, the production flush call at `1c8781d76`, and callback-to-plan ownership at `a4ee15c1d`; a serialized real-process delivery trace remains open. |
 | 239 — Indirect independent review | Superseded by resumed single-owner review | Pre-pause partial state is recorded; the resumed review re-ran source review, source-direct native and combined ASan/UBSan fixtures from the archived candidate and found no blocker. |
 | 240 — TEV independent review | Superseded by resumed single-owner review | Pre-pause partial state is recorded; the resumed review re-ran the crosswalk checks, focused native and combined ASan/UBSan CTest, and production-object compile from the archived candidate and found no blocker. |
 
@@ -411,7 +415,7 @@ CPU assembler, Apple CPU consumer, and later live trace as three separate gates.
 
 ### Phase C — fill remaining truthful state gaps
 
-At `2d4bc2b7e`, Blend/Fog raw ownership, the narrow Geometry dependency
+At `a4ee15c1d`, Blend/Fog raw ownership, the narrow Geometry dependency
 builder and focused CMake/CTest gate, and the token-scoped Texture/TLUT/Dynamic
 borrow transaction are closed. The pure cumulative envelope assembler is also
 integrated, and every existing standalone producer plus all canonical libraries
@@ -420,8 +424,9 @@ section also has an explicit little-endian encoder. The lease-owning all-section
 gatherer is production-linked and focused-fixture proved, and one guarded
 gather attempt now runs at the completed-Geometry flush boundary. A pure
 pointer-free Apple CPU plan now validates and decodes all fourteen envelope
-sections. Remaining truthful-state work is callback registration/owned plan
-handoff and a current-tip real-process trace; broader Geometry attributes and
+sections, and the Apple platform lifecycle now owns one synchronous callback
+handoff that retains only complete value plans. Remaining truthful-state work
+is a current-tip real-process delivery trace; broader Geometry attributes and
 BUMP/Indirect dependencies remain explicit fail-closed successors.
 
 For each gap:
@@ -455,9 +460,12 @@ truthfully producible with no fabricated state.
    envelope, explicitly decode all fourteen sections, normalize bounded
    Geometry, derive cross-section dependencies, and stage immutable
    pointer-free output. Structural parsing remains rooted at `8e55df64e`.
-4. Keep Metal device work outside this phase; CPU fixtures prove data ownership
+4. **Lifecycle-owned plan handoff done at `a4ee15c1d`:** register after GX init,
+   synchronously build inside the callback lifetime, preserve the prior plan on
+   rejection, and clear before invalidation and GX shutdown.
+5. Keep Metal device work outside this phase; CPU fixtures prove data ownership
    and planning only.
-5. Verify malformed, missing, unsupported, stale-resource, and generation-race
+6. Verify malformed, missing, unsupported, stale-resource, and generation-race
    cases all fail closed while legacy rendering remains available.
 
 Exit evidence: one complete synthetic/current-state CPU snapshot reaches the
@@ -646,7 +654,7 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `2d4bc2b7e`. It contains the independently reviewed
+`c1/macos-host-launch` at `a4ee15c1d`. It contains the independently reviewed
 Blend producer (`07a621428`, merged as `f772f0bb8`), Fog producer
 (`e0bb5ac96`, merged as `cd55a7789`), and Geometry dependency builder
 (`09d174799`, merged as `4cbb837e6`), plus the Geometry dependency fixture gate
@@ -666,8 +674,12 @@ followed by the guarded production flush publication (`c2f557e34` plus
 [PC PR #14](https://github.com/jskoiz/ACGC-PC-Port/pull/14) as `1c8781d76`),
 followed by the pure Apple canonical CPU plan (`a497ed0d2` plus corrective
 fixture child `deaaa6431`, merged through
-[PC PR #15](https://github.com/jskoiz/ACGC-PC-Port/pull/15) as `2d4bc2b7e`).
+[PC PR #15](https://github.com/jskoiz/ACGC-PC-Port/pull/15) as `2d4bc2b7e`),
+followed by the lifecycle-owned callback-to-plan handoff (`4f327606e`, merged
+through [PC PR #16](https://github.com/jskoiz/ACGC-PC-Port/pull/16) as
+`a4ee15c1d`).
 Exact merged-tip focused gates passed for these integrations; see
+[the 2026-08-23 Apple plan handoff evidence](docs/evidence/APPLE-PLAN-HANDOFF-A4EE15C1D-2026-08-23.md),
 [the 2026-08-23 Apple canonical plan evidence](docs/evidence/APPLE-CANONICAL-PLAN-2D4BC2B7E-2026-08-23.md),
 [the 2026-08-23 cumulative flush evidence](docs/evidence/CUMULATIVE-FLUSH-1C8781D76-2026-08-23.md),
 [the 2026-08-23 cumulative gatherer evidence](docs/evidence/CUMULATIVE-GATHERER-D6A22182B-2026-08-23.md),
