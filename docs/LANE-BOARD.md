@@ -7,8 +7,8 @@ dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The worker
 pool was re-audited and all fourteen durable tasks were refilled with concrete
 dependency-ready contracts after completed turns were found idle. The current
-canonical PC tip is `de9a26fee`; see
-`docs/evidence/APPLE-MULTIVERTEX-GEOMETRY-DE9A26FEE-2026-08-23.md`.
+canonical PC tip is `ff09b1f22`; see
+`docs/evidence/PROJECTION-RECONSTRUCTION-FF09B1F22-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -90,20 +90,35 @@ active does not imply that its gate passed or that it is active now.
 | 344 | Source-edit runtime arbitration | Complete and integrated | Added cumulative attempt IDs and post-borrow completion, atomic callback-pair registration, borrowed canonical-plan consumption, source-aware winner/fallback policy, and the CPU-only arbitration fixture in `23b97e75d`; [PC PR #19](https://github.com/jskoiz/ACGC-PC-Port/pull/19) merged it as `928594a26`. Exact-merge native PC `3/3`, Apple `4/4`, combined ASan/UBSan `3/3` + `4/4`, and one serialized 4,078-item `ac_pc` link passed. |
 | 347 | Independent runtime-arbitration review | Complete, PASS | Accepted `23b97e75d` with no P0/P1 blocker after adversarial attempt/fallback/reentry/lifecycle review, fresh native and ASan/UBSan matrices, production-object and generated-link checks, and four bounded P2 maintenance notes. |
 | 348 | Immutable umbrella review | Complete, PASS | Accepted umbrella candidate `8f3d6261d` with exact four-path `+302/-23` scope, correct PC/decomp pins, authoritative PR #19 metadata, retained native and ASan/UBSan `3/3` + `4/4`, verified arm64 `NOUNDEFS` artifact/symbols, and no P0/P1 or new umbrella P2 finding. |
-| 349 | Projection integration replay | Active read-only successor | Merge-tree and revision-qualified review of the projection chain `387384c50` → `cd34c0784` onto exact `de9a26fee`, including the exact synthetic diff, Apple/TEV overlap check, and integrated native/ASan gate; no source ownership. |
-| 350 | Post-Texgen trace classifier | Trace complete; active read-only successor | Independently classifying the final 306-event, 20-attempt trace at `/private/tmp/acgc-live-lane350-postfix-final.H9Up9C`; no launch or source ownership. The observed first failure is TEV, not Texgen. |
-| 351 | Apple Geometry independent review | Exact PC merge review complete, PASS; immutable umbrella successor queued | Accepted exact merge `de9a26fee` with no P0/P1, exact seven-path `+500/-67` scope, retained exact-merge native and ASan/UBSan `8/8`, and authorization for a separately reviewed umbrella integration. |
-| 352 | Projection current-tip semantic review | Active read-only successor | Reviewing projection tip `cd34c0784` against `de9a26fee` for finite perspective/orthographic reconstruction, singular fail-closed state, real 16.16 packing, and texture-boundary zero calls; no source ownership. |
-| 353 | Typed-result corrective contract | Active read-only successor | Freezing a test-only enum-to-legacy callback mapping amendment for typed-result chain `4440eaebe` → `231facbaf` while `pc_gx.c` remains reserved for the sole TEV owner. |
-| 354 | Typed-result ABI/merge review | Active read-only successor | Auditing the typed-result chain against `de9a26fee`, exact overlap with future TEV ownership, borrow cleanup, callback compatibility, and the safe post-TEV replay order; no source ownership. |
-| 355 | Final trace artifact verifier | Active read-only successor | Verifying hashes, attempt/result mapping, exact-PID cleanup, and no-publication semantics for the final trace; no duplicate TEV investigation or source ownership. |
-| 356 | Apple umbrella evidence crosswalk | Active read-only successor | Freezing synchronized README/lane-board/evidence facts for PC PR #23, exact-merge focused roots, the post-Texgen TEV frontier, and explicit no-Metal/no-pixel boundaries; no edits. |
-| 357 | Final trace unwind integrity | Active read-only successor | Verifying named-caller return correlation, raw-LR diagnostic treatment, attempt ordering, stop, and cleanup in the final trace without investigating TEV source. |
-| 358 | Projection fixture-topology review | Active read-only successor | Checking the `cd34c0784` target on `de9a26fee` for real `guMtxF2L`/`mtxutil` inclusion, texture-marker zero-call proof, symbol closure, and no dead-strip/stub false green. |
-| 359 | Reusable CMake topology audit | Active read-only successor | Updating the reusable direct-`pc_gx.c` and portable full-`emu64.c` fixture contract at `de9a26fee`, with shared-file ownership parked behind TEV and projection/typed ordering. |
-| 360 | Apple PR #23 hosted audit | Active read-only successor | Verifying remote refs, PR state/commit/files/stats, workflow/check-suite exposure, and the boundary between exact local focused proof and absent hosted execution; no reruns. |
-| 361 | Apple umbrella topology audit | Active read-only successor | Auditing the exact proposed four-path umbrella scope from `0e66038d3`, synchronized status changes, gitlink/decomp pins, and immutable-review commands; no edits. |
-| 362 | Sole TEV source owner | Active root-cause/readiness audit; source edit not yet authorized | Owns the unique future TEV production fix after the exact predicate/root-cause contract converges. It starts any edit from current PC `de9a26fee`; no duplicate TEV source owner exists. |
+| 349 | Projection integration replay | Complete and integrated | Replayed the accepted projection behavior onto `de9a26fee` as source commit `1c1d2d171`; [PC PR #24](https://github.com/jskoiz/ACGC-PC-Port/pull/24) merged it as `ff09b1f22`. |
+| 350 | Post-Texgen trace classifier | Complete | Accepted the bounded exact-`7636cc1d8` trace as 20/20 success through Texture/Dynamic followed by 20/20 TEV failure and no publication; it did not diagnose the source predicate. |
+| 351 | Independent integration reviews | Complete, PASS | Accepted exact Apple Geometry merge `de9a26fee` and later authorized PC PR #24 after immutable four-path, hosted-boundary, and retained focused-proof review. |
+| 352 | Projection current-tip semantic review | Complete, PASS | Accepted finite perspective/orthographic reconstruction, singular fail-closed state, real 16.16 packing, and the instrumented zero-texture-call boundary. |
+| 353 | Typed-result corrective contract | Complete; successor active | Froze the enum-to-legacy callback mapping amendment now owned by Lane 373 on a fresh `ff09b1f22` worktree. |
+| 354 | Typed-result ABI/merge review | Complete; successor active | Established the non-overlapping five-file replay order, borrow cleanup, callback compatibility, and two-fixture gate now re-audited by Lane 374. |
+| 355 | TEV predicate trace | Complete; source owner selected | A one-attempt exact-binary trace found the first TEV short circuit at `register[0].known_mask != 0x0F`, with actual mask zero. Unique source evidence was transferred to Lane 364. |
+| 356 | Apple umbrella evidence crosswalk | Complete and integrated | Supplied synchronized PC PR #23, exact-merge focused, and no-Metal/no-pixel claims used by umbrella PR #19. |
+| 357 | Final trace unwind integrity | Complete | Verified attempt ordering, stop, exact-PID cleanup, and no-publication semantics without expanding into a duplicate TEV investigation. |
+| 358 | Projection fixture-topology review | Complete, PASS | Accepted real `guMtxF2L`/`mtxutil` inclusion, strict undefined-symbol closure, instrumented texture-boundary zero calls, and no dead-strip false green. |
+| 359 | Reusable CMake topology audit | Complete; successor active | Froze the first reusable target/helper partition; Lane 375 refreshes it at `ff09b1f22` while shared CMake ownership remains parked behind TEV. |
+| 360 | Apple PR #23 hosted audit | Complete, PASS | Verified exact refs/files/stats plus absent repository workflows and separated local focused proof from hosted state. |
+| 361 | Apple umbrella topology audit | Complete, PASS | Accepted the reviewed four-path Apple Geometry umbrella scope before umbrella PR #19 merged as `b381bb444`. |
+| 362 | TEV readiness audit | Complete; ownership transferred | Converged the TEV root-cause and source-fidelity prerequisites, then transferred sole production ownership to Lane 364; no duplicate TEV source owner remains. |
+| 363 | Projection PC integration | Complete and integrated | Source commit `1c1d2d171` merged through PC PR #24 as `ff09b1f22`; fresh exact-merge native and combined ASan/UBSan builds each discover and pass `1/1` focused projection test. |
+| 364 | Sole TEV source owner | Active source-edit | Owns only `pc_gx_tev_producer.c`, its focused fixture, and strictly necessary test-only CMake; the final replay must be based on exact `ff09b1f22`. |
+| 365 | Projection exact-merge review | Complete, PASS | Accepted exact merge `ff09b1f22` with no P0/P1, the exact four-path `+296/-4` scope, retained exact-source native and sanitizer `1/1`, zero repository workflows/check runs, and authorization for a separately reviewed umbrella integration. |
+| 366 | TEV fixture oracle | Active read-only test contract | Freezing mutation-resistant positive/negative assertions for unused unavailable register/KColor provenance without opening a second source investigation. |
+| 367 | Projection umbrella evidence | Active read-only preflight | Cross-checking the exact four-path umbrella contract, PR #24 metadata, focused roots, and allowed/forbidden claims. |
+| 368 | Projection artifact audit | Active read-only verification | Verifying exact source identity, flags, discovery, logs, and sanitizer diagnostics in the two fresh `ff09b1f22` focused roots. |
+| 369 | Apple Geometry tip audit | Active read-only verification | Checking that `ff09b1f22` preserves the integrated seven-path multi-vertex Apple contract and its bounded CPU proof. |
+| 370 | Apple consumer contract | Active read-only design gate | Mapping the smallest future live cumulative-envelope-to-Apple consumer handoff without touching TEV, gatherer, Metal, or assets. |
+| 371 | Post-TEV trace protocol | Active read-only trace preparation | Freezing one serialized attempt, source/binary identity, producer-result breakpoints, publication event, timeout, exact-PID cleanup, and artifact hashes for the post-merge run. |
+| 372 | Projection hosted audit | Active read-only verification | Verifying live PR #24 refs, merge object, files/stats, reviews/checks/actions, and workflow exposure without mutation. |
+| 373 | Typed gatherer result replay | Active source-edit | Replaying the exact five-file typed-result behavior onto `ff09b1f22` and adding the missing enum-to-legacy flush assertion; integration remains subordinate to TEV. |
+| 374 | Typed replay audit | Active read-only verification | Checking candidate merge-tree/ABI, callback and borrow ordering, failure immutability, and the required two-fixture gate. |
+| 375 | Reusable CMake topology | Active read-only audit | Refreshing the smallest direct-`pc_gx.c` and portable full-`emu64.c` reusable target contract at `ff09b1f22`; no shared CMake edit while Lane 364 owns it. |
+| 376 | Texture frontier refresh | Active read-only audit | Mapping the exact post-TEV Texture/Dynamic/Indirect decision tree and host-only lease/revalidation fields without launching or claiming reachability. |
+| 377 | TEV gate topology review | Active read-only verification | Freezing exact producer/raw-shadow targets, compile definitions, link closure, CTest regexes, and native plus ASan/UBSan commands without competing on semantics. |
 
 PC PR #20 fixes the LP64 N64 matrix payload at source commit `5a8a686a5`
 and merges it as `2f944f1ae`. Exact-merge native and ASan/UBSan
@@ -142,6 +157,19 @@ Fresh exact-merge native and combined ASan/UBSan target builds each complete 61
 steps, discover exactly eight selected Apple tests, and pass `8/8`. This is
 CPU/offscreen source-backed proof only: no full `ac_pc` link at `de9a26fee`,
 live Apple callback, Metal/device, pixel, or playability claim follows.
+
+PC PR #24 corrects finite `emu64` projection reconstruction and adds one
+focused Apple-host CPU fixture. Candidate `1c1d2d171` changes exactly
+`src/static/libforest/emu64/emu64.c`, `pc/portable/CMakeLists.txt`, and two new
+portable test sources, then merges as `ff09b1f22` with `+296/-4`. The extra
+`+1` in the far-plane inverse is removed; derived values stage before state
+mutation; singular/infinite-far input fails closed; real 16.16 conversion,
+orthographic classification, prior-state immutability, and zero texture calls
+are covered. Fresh exact-merge native and combined ASan/UBSan target builds
+each complete 15 steps, discover exactly one test, and pass `1/1`. This is a
+focused CPU contract only: no full `ac_pc` link, process launch, TEV repair,
+cumulative publication, Apple callback, Metal/device, pixel, or playability
+claim follows.
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
