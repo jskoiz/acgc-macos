@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `a4ee15c1d`; see
-`docs/evidence/APPLE-PLAN-HANDOFF-A4EE15C1D-2026-08-23.md`.
+canonical PC tip is `bd660f754`; see
+`docs/evidence/APPLE-CANONICAL-PLAN-CONSUMER-BD660F754-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -77,6 +77,10 @@ active does not imply that its gate passed or that it is active now.
 | 324 | Source-edit Apple handoff | Complete and integrated | Added the lifecycle-owned callback-to-plan adapter, focused fixture, production Apple source membership, and `pc_main` ordering in candidate `4f327606e`; [PC PR #16](https://github.com/jskoiz/ACGC-PC-Port/pull/16) merged it as `a4ee15c1d`. |
 | 325 | Read-only downstream audit | Completed without durable handoff | The worker returned no usable report; no Metal-consumer or runtime-readiness claim relies on it. |
 | 326 | Independent Apple handoff review | Complete, PASS | Accepted `4f327606e` with no P0/P1 after fresh native and ASan/UBSan parser/plan/handoff `3/3`, normal-library build, production compile-graph review, lifecycle/failure inspection, and two bounded P2 maintenance notes. |
+| 331 | Source-edit canonical-plan packet consumer | Complete and integrated | Added a pure bounded adapter from the normalized Apple plan to the existing Metal packet-consumer output in `b74e2f8d9`; corrective child `a13af24ba` closes exact near/far validation and synthetic-provenance findings. [PC PR #17](https://github.com/jskoiz/ACGC-PC-Port/pull/17) merged the chain as `bd660f754`. |
+| 333 | Independent packet-consumer review | Complete, BLOCK resolved | Blocked the first candidate because it omitted the downstream sink's exact `0.0/1.0` near/far requirement and reconstructed synthetic Geometry/VCD/VAT provenance after normalization. Both P1 findings are removed by `a13af24ba`. |
+| 336 | Independent packet-consumer re-review | Complete, PASS | Accepted the corrected chain with no P0/P1 after fresh native and ASan/UBSan canonical plus four neighboring consumer tests passed `5/5`, direct PASS execution, ABI/layout review, and confirmation that runtime remains unwired. |
+| 337 | Read-only producer-reachability audit | Complete, PASS-CONDITIONAL | Found a static setter/producer route for the no-`PNMTXIDX` three-vertex subset and confirmed that explicit `PNMTXIDX` is optional but currently rejected by raw Geometry. Actual composition remains unproved until a source-backed gatherer → assembler → parser → plan → consumer round-trip fixture passes. |
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -151,6 +155,27 @@ repeated unpaired GX reinitialization remains outside the documented one-owner
 lifecycle. This proves focused ownership/failure behavior and production link,
 not process launch, real game callback delivery, Metal consumption, pixels,
 device behavior, input/audio/save, iOS, or playability.
+
+PC PR #17 adds a pure canonical-plan prepare path beside the existing semantic
+packet-consumer path. It accepts only one value-owned, resource-free,
+three-vertex triangle with the documented transform/color/TEV/raster subset,
+requires exact `0.0/1.0` near/far values, rejects aliases and non-finite or
+unsupported state, and publishes output only after complete validation. The
+first independent review blocked synthetic Geometry/VCD/VAT reconstruction and
+the missing near/far predicate; corrective child `a13af24ba` deletes that
+reconstruction, adds the exact checks, and appends source provenance without
+moving existing output fields. At authoritative merge tip `bd660f754`, fresh
+native and combined ASan/UBSan roots build 53 steps and the canonical fixture
+plus four neighboring consumer fixtures pass `5/5` in each root. A fresh
+serialized 4,078-item `ac_pc` target also links a 15,323,616-byte arm64 Mach-O
+containing both prepare paths, the Apple plan builder, and the cumulative
+gatherer. This proves the bounded pure adapter and production link, not live
+handoff/runtime arbitration, process launch, Metal encode/present/readback,
+pixels, device behavior, input/audio/save, iOS, or playability.
+Lane 337 independently traced every accepted predicate through raw
+initialization/setters and classified the no-`PNMTXIDX` subset as statically
+compatible but not yet composed. The next CPU gate is the source-backed
+round-trip fixture; production arbitration follows only after it passes.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
