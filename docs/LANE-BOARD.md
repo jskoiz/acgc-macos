@@ -7,8 +7,8 @@ dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The worker
 pool was re-audited and all fourteen durable tasks were refilled with concrete
 dependency-ready contracts after completed turns were found idle. The current
-canonical PC tip is `7636cc1d8`; see
-`docs/evidence/TEXGEN-IDENTITY-PROVENANCE-7636CC1D8-2026-08-23.md`.
+canonical PC tip is `de9a26fee`; see
+`docs/evidence/APPLE-MULTIVERTEX-GEOMETRY-DE9A26FEE-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -90,20 +90,20 @@ active does not imply that its gate passed or that it is active now.
 | 344 | Source-edit runtime arbitration | Complete and integrated | Added cumulative attempt IDs and post-borrow completion, atomic callback-pair registration, borrowed canonical-plan consumption, source-aware winner/fallback policy, and the CPU-only arbitration fixture in `23b97e75d`; [PC PR #19](https://github.com/jskoiz/ACGC-PC-Port/pull/19) merged it as `928594a26`. Exact-merge native PC `3/3`, Apple `4/4`, combined ASan/UBSan `3/3` + `4/4`, and one serialized 4,078-item `ac_pc` link passed. |
 | 347 | Independent runtime-arbitration review | Complete, PASS | Accepted `23b97e75d` with no P0/P1 blocker after adversarial attempt/fallback/reentry/lifecycle review, fresh native and ASan/UBSan matrices, production-object and generated-link checks, and four bounded P2 maintenance notes. |
 | 348 | Immutable umbrella review | Complete, PASS | Accepted umbrella candidate `8f3d6261d` with exact four-path `+302/-23` scope, correct PC/decomp pins, authoritative PR #19 metadata, retained native and ASan/UBSan `3/3` + `4/4`, verified arm64 `NOUNDEFS` artifact/symbols, and no P0/P1 or new umbrella P2 finding. |
-| 349 | Projection integration replay | Active read-only successor | Merge-tree and revision-qualified review of candidate `4d5d97ddb` onto exact `7636cc1d8`, including the exact synthetic diff and integrated native/ASan gate; no source ownership. |
-| 350 | Texgen predicate trace and post-fix harness | Trace complete; active read-only successor | The exact pre-fix 20-attempt trace proved Transform/Channels success and first failure at Texgen `active[0].post_range_unknown`; the refilled task is validating the ignored bounded trace harness against exact merge `7636cc1d8` without launching it. |
-| 351 | Texgen independent review and umbrella review | Source review complete, PASS; active read-only successor | Accepted source commit `5032a36bf` with no P0/P1/P2 after fresh native and ASan/UBSan `2/2`; now pre-reviewing the exact PR #22/merge/evidence claim matrix before immutable umbrella review. |
-| 352 | Projection current-tip semantic review | Active read-only successor | Reviewing projection candidate `4d5d97ddb` on the `7636cc1d8` topology and integration order; owns no Texgen, Apple, typed-result, or CMake source. |
-| 353 | Typed-result corrective contract | Active read-only successor | Merge-tree review of `ee1e2fa3b` onto `7636cc1d8` and a fixture-only contract for enum-to-legacy callback mapping, attempt validity, post-borrow ordering, reentry, clear, and registration rejection; `pc_gx.c` remains out of scope. |
-| 354 | Typed-result ABI/merge review | Active read-only successor | Independently reviewing result/attempt ABI, borrow cleanup, callback compatibility, output immutability, overlap, and the safe replay order for `ee1e2fa3b`; no source ownership. |
-| 355 | Sole Texgen source owner | Complete and integrated; active read-only successor | Source-faithful GX identity/post-identity initialization and focused raw/producer fixtures landed as `5032a36bf` and merged through PC PR #22 as `7636cc1d8`; the refilled task is auditing Windows exposure only. No duplicate Texgen source owner exists. |
-| 356 | Apple Geometry merge replay | Active read-only successor | Merge-tree/topology review of Apple-only candidate `869df71a4` onto exact `7636cc1d8`, including seven-path ownership and the eight-test native/ASan matrix; no Metal/device/pixel claim. |
-| 357 | Texture/Dynamic next-frontier audit | Active read-only successor | Mapping the exact post-Texgen Texture/Dynamic predicates, raw image/TLUT lease fields, revalidation order, and future LLDB decision tree without claiming that runtime reaches them. |
-| 358 | Projection fixture-topology review | Active read-only successor | Checking that `4d5d97ddb` reaches real `guMtxF2L`/`mtxutil` code, proves the texture-marker zero-call boundary, closes symbols, and cannot pass through dead-strip or a stub. |
-| 359 | Reusable CMake topology audit | Active read-only successor | Partitioning a reusable direct-`pc_gx.c` fixture closure from the portable full-`emu64.c` texture-marker test closure, with exact target membership and duplicate-symbol hazards; no source edit. |
-| 360 | Apple Geometry adversarial fixture review | Active read-only successor | Testing the candidate contract for triangle/quad expansion, capacity/count and sink-length agreement, malformed immutability, legacy behavior, and callback/borrow lifetime without editing or running Metal. |
-| 361 | Apple live-handoff topology audit | Active read-only successor | Tracing cumulative publication through parser, plan, Geometry expansion, packet consumer, sink, and lifecycle to freeze the first absent production ownership/call seam and one future CPU-only source contract. |
-| 362 | Post-Texgen producer-order audit | Active read-only successor | Building the exact remaining gatherer order, non-texture first-failure predicates, unambiguous breakpoint expressions, and bounded stop rule for the next serialized trace; no build or launch. |
+| 349 | Projection integration replay | Active read-only successor | Merge-tree and revision-qualified review of the projection chain `387384c50` → `cd34c0784` onto exact `de9a26fee`, including the exact synthetic diff, Apple/TEV overlap check, and integrated native/ASan gate; no source ownership. |
+| 350 | Post-Texgen trace classifier | Trace complete; active read-only successor | Independently classifying the final 306-event, 20-attempt trace at `/private/tmp/acgc-live-lane350-postfix-final.H9Up9C`; no launch or source ownership. The observed first failure is TEV, not Texgen. |
+| 351 | Apple Geometry independent review | Exact PC merge review complete, PASS; immutable umbrella successor queued | Accepted exact merge `de9a26fee` with no P0/P1, exact seven-path `+500/-67` scope, retained exact-merge native and ASan/UBSan `8/8`, and authorization for a separately reviewed umbrella integration. |
+| 352 | Projection current-tip semantic review | Active read-only successor | Reviewing projection tip `cd34c0784` against `de9a26fee` for finite perspective/orthographic reconstruction, singular fail-closed state, real 16.16 packing, and texture-boundary zero calls; no source ownership. |
+| 353 | Typed-result corrective contract | Active read-only successor | Freezing a test-only enum-to-legacy callback mapping amendment for typed-result chain `4440eaebe` → `231facbaf` while `pc_gx.c` remains reserved for the sole TEV owner. |
+| 354 | Typed-result ABI/merge review | Active read-only successor | Auditing the typed-result chain against `de9a26fee`, exact overlap with future TEV ownership, borrow cleanup, callback compatibility, and the safe post-TEV replay order; no source ownership. |
+| 355 | Final trace artifact verifier | Active read-only successor | Verifying hashes, attempt/result mapping, exact-PID cleanup, and no-publication semantics for the final trace; no duplicate TEV investigation or source ownership. |
+| 356 | Apple umbrella evidence crosswalk | Active read-only successor | Freezing synchronized README/lane-board/evidence facts for PC PR #23, exact-merge focused roots, the post-Texgen TEV frontier, and explicit no-Metal/no-pixel boundaries; no edits. |
+| 357 | Final trace unwind integrity | Active read-only successor | Verifying named-caller return correlation, raw-LR diagnostic treatment, attempt ordering, stop, and cleanup in the final trace without investigating TEV source. |
+| 358 | Projection fixture-topology review | Active read-only successor | Checking the `cd34c0784` target on `de9a26fee` for real `guMtxF2L`/`mtxutil` inclusion, texture-marker zero-call proof, symbol closure, and no dead-strip/stub false green. |
+| 359 | Reusable CMake topology audit | Active read-only successor | Updating the reusable direct-`pc_gx.c` and portable full-`emu64.c` fixture contract at `de9a26fee`, with shared-file ownership parked behind TEV and projection/typed ordering. |
+| 360 | Apple PR #23 hosted audit | Active read-only successor | Verifying remote refs, PR state/commit/files/stats, workflow/check-suite exposure, and the boundary between exact local focused proof and absent hosted execution; no reruns. |
+| 361 | Apple umbrella topology audit | Active read-only successor | Auditing the exact proposed four-path umbrella scope from `0e66038d3`, synchronized status changes, gitlink/decomp pins, and immutable-review commands; no edits. |
+| 362 | Sole TEV source owner | Active root-cause/readiness audit; source edit not yet authorized | Owns the unique future TEV production fix after the exact predicate/root-cause contract converges. It starts any edit from current PC `de9a26fee`; no duplicate TEV source owner exists. |
 
 PC PR #20 fixes the LP64 N64 matrix payload at source commit `5a8a686a5`
 and merges it as `2f944f1ae`. Exact-merge native and ASan/UBSan
@@ -128,8 +128,20 @@ two existing Texgen fixtures, and their test-only CMake closure, then merges as
 Fresh exact-merge native and combined ASan/UBSan builds discover exactly the
 raw-shadow and producer tests and pass `2/2` each. A pre-fix bounded process
 trace established `GX_PTIDENTITY`'s entirely unknown slot as Texgen's first
-predicate; no post-fix process launch, cumulative publication, callback,
-Metal/device, pixel, or playability claim follows from PR #22.
+predicate. A separate post-fix exact-binary trace now passes Texgen and
+Texture/Dynamic `20/20`, fails TEV `20/20`, and publishes no envelope. The
+runtime result is not a PR #22 fixture claim and does not prove callback,
+Metal/device, pixel, or playability behavior.
+
+PC PR #23 expands only the Apple canonical Geometry replay path. Candidate
+`25ff63fca` changes exactly seven Apple paths and merges as `de9a26fee` with
+`+500/-67`. Canonical triangle lists and quads are bounded to 192 renderer
+vertices; quads expand as `0,1,2,0,2,3`; legacy V1/V2 remains exactly three
+vertices. The independent source and exact-merge reviews found no P0/P1.
+Fresh exact-merge native and combined ASan/UBSan target builds each complete 61
+steps, discover exactly eight selected Apple tests, and pass `8/8`. This is
+CPU/offscreen source-backed proof only: no full `ac_pc` link at `de9a26fee`,
+live Apple callback, Metal/device, pixel, or playability claim follows.
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -3140,11 +3152,19 @@ order follows the updated critical path recorded in the README (Phases A–G):
    review and exact-merge native plus ASan/UBSan `1/1`.
 15. ~~Repair and independently review the live Texgen source failure~~ — done
    2026-08-23 through PC PR #22 at canonical `7636cc1d8`, with exact-merge
-   native and ASan/UBSan Texgen raw/producer `2/2`; now run one serialized
-   post-fix callback-delivery trace before the Metal encode/present/readback
-   gates and the remaining input, audio, save/reload, lifecycle, regression,
-   and playability gates.
-16. iOS implementation remains gated behind proven shared macOS core, renderer,
+   native and ASan/UBSan Texgen raw/producer `2/2`. One serialized post-fix
+   trace then passes Transform, Channels, Texgen, and Texture/Dynamic `20/20`,
+   fails TEV `20/20`, and publishes no envelope.
+16. ~~Expand the Apple canonical Geometry CPU replay path to bounded triangle
+   and quad batches~~ — done 2026-08-23 through PC PR #23 at canonical
+   `de9a26fee`, with independent source and exact-merge PASS plus fresh native
+   and combined ASan/UBSan Apple `8/8`. No live callback, Metal, or pixel proof
+   follows.
+17. Audit and repair TEV with exactly one production owner, merge and verify
+   one PC PR, advance the umbrella through its own immutable review, and run
+   one subsequent serialized trace to the next producer failure or first
+   cumulative publication.
+18. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
