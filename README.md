@@ -8,8 +8,8 @@ and Apple renderer have their own evidence.
 > **Project status — active orchestrated integration on 2026-08-23.** One
 > integration owner and fourteen durable Luna/max worker tasks were launched on
 > bounded, non-overlapping source, test, audit, and independent-review lanes.
-> Eighteen focused source milestones in this batch have been serialized through
-> PC-port PRs #4–#24 with exact-merge verification. The repository
+> Nineteen focused source milestones in this batch have been serialized through
+> PC-port PRs #4–#25 with exact-merge verification. The repository
 > remains a public engineering record and roadmap. It is **not** a playable
 > release, does not contain game data, and does not grant rights to Nintendo
 > assets.
@@ -53,9 +53,12 @@ macOS first and iOS second. The short version of the remaining critical path is:
     initialization~~ (focused source and sanitizer gates done 2026-08-23 at
     PC `7636cc1d8`), and ~~expand the Apple canonical Geometry path to bounded
     multi-vertex triangle and quad batches~~ (done 2026-08-23 at PC
-    `de9a26fee`), and ~~repair finite `emu64` projection reconstruction with a
-    focused real-fixed-point CPU gate~~ (done 2026-08-23 at PC `ff09b1f22`);
-    the post-Texgen trace still stops at TEV with no publication;
+    `de9a26fee`), ~~repair finite `emu64` projection reconstruction with a
+    focused real-fixed-point CPU gate~~ (done 2026-08-23 at PC `ff09b1f22`),
+    and ~~repair unread unavailable TEV register/KColor provenance~~ (focused
+    native and sanitizer gates done 2026-08-23 at PC `70a8e23bc`); the last
+    bounded trace still stops at the pre-fix TEV frontier, so one post-merge
+    serialized trace remains required;
 12. prove a game-owned Metal encode, present, readback, and identifiable pixel;
 13. separately prove physical input, audible audio, save/reload, lifecycle, and
    regression gates;
@@ -75,12 +78,12 @@ renderer handoff that can truthfully claim a Metal-rendered game frame.
 | --- | --- |
 | Umbrella branch | `main` |
 | Canonical PC-port branch | `c1/macos-host-launch` |
-| Canonical PC-port commit | `ff09b1f226978237699f4a3c99678e750fd3625e` |
+| Canonical PC-port commit | `70a8e23bcf4bebe7deaceed5c9cb6ab70d0a94d4` |
 | Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
 | Supported revision | `GAFE01_00`, USA revision 0 |
 | Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
 | Current execution state | Fifteen visible lanes: one integration owner plus fourteen local Luna/max workers; source PR review and integration serialized by the owner |
-| Current proof level | Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, production producer/link availability, explicit little-endian encoders for all fourteen sections, a production-linked lease-owning gatherer, one source-backed production flush publication path, a pure Apple structural parser plus all-section value plan, a lifecycle-owned production callback handoff, a bounded plan-to-Metal-packet adapter with CPU-only canonical triangle/quad replay to at most 192 renderer vertices, one source-backed no-`PNMTXIDX` setter-to-consumer round trip, source-backed per-attempt canonical/semantic runtime arbitration, a fixed 64-byte N64 matrix layout, source-faithful GX identity/post-identity Texgen provenance, and corrected finite `emu64` projection reconstruction with exact-merge native plus ASan/UBSan focused proof; the latest bounded real-process trace remains the earlier exact-`7636cc1d8` run, which passes Transform, Channels, Texgen, and Texture/Dynamic on all 20 attempts but fails at TEV before publication, so cumulative delivery, Metal encode/pixel, and playability remain unproved |
+| Current proof level | Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, production producer/link availability, explicit little-endian encoders for all fourteen sections, a production-linked lease-owning gatherer, one source-backed production flush publication path, a pure Apple structural parser plus all-section value plan, a lifecycle-owned production callback handoff, a bounded plan-to-Metal-packet adapter with CPU-only canonical triangle/quad replay to at most 192 renderer vertices, one source-backed no-`PNMTXIDX` setter-to-consumer round trip, source-backed per-attempt canonical/semantic runtime arbitration, a fixed 64-byte N64 matrix layout, source-faithful GX identity/post-identity Texgen provenance, corrected finite `emu64` projection reconstruction, and source-order TEV unavailable-value dependency handling with exact-merge native plus ASan/UBSan focused proof; the latest bounded real-process trace remains the earlier exact-`7636cc1d8` run, which passes Transform, Channels, Texgen, and Texture/Dynamic on all 20 attempts but fails at the now-repaired TEV predicate before publication, so a post-fix trace, cumulative delivery, Metal encode/pixel, and playability remain unproved |
 
 The disc hash is recorded only to identify the supported local input. The disc,
 extracted files, keys, and proprietary assets are ignored and are never part of
@@ -94,13 +97,13 @@ Every row is an independent gate. A later row is not implied by an earlier one.
 | --- | --- | --- |
 | Source/revision compatibility | **Done** | Both upstreams identify `GAFE01_00`; config/build hashes agree for the supported revision. |
 | Local-disc identity and ignore rules | **Done** | Exact SHA-256 verified locally; no disc bytes or extracted proprietary assets are tracked. |
-| Portable focused build/tests | **Done, continuing** | Geometry dependency, Texture/Dynamic lease, cumulative assembler, Apple parser, all-section plan and handoff, bounded canonical-plan packet consumer including multi-vertex triangle/quad replay, the source-backed no-`PNMTXIDX` round trip, per-attempt runtime arbitration, the 64-byte N64 Mtx layout, source-backed Texgen identity/post-identity initialization, finite `emu64` projection reconstruction, production GX object, twelve canonical encoder gates, the cumulative gatherer, and its production flush fixture have exact-tip native and ASan/UBSan proof. |
-| arm64 `ac_pc` full link | **Current production graph proved through `7636cc1d8`** | A serialized exact-`7636cc1d8` full target produced the traced arm64 binary with SHA-256 `26ea9ff04e15b275b622b221dfac645f199961eab8851c0fd70ac89bc9864e18`. The later Apple Geometry merge `de9a26fee` and projection merge `ff09b1f22` have exact focused native and ASan/UBSan proof but were not full-linked. No later process-launch claim follows from those focused builds. |
-| Process launch and boot progression | **Post-Texgen trace complete; TEV frontier** | One bounded exact-`7636cc1d8` inferior recorded 20 cumulative attempts: Transform, Channels, Texgen, and Texture/Dynamic passed `20/20`; TEV failed `20/20`; no envelope was published. This identifies the next producer frontier without diagnosing or repairing it. |
+| Portable focused build/tests | **Done, continuing** | Geometry dependency, Texture/Dynamic lease, cumulative assembler, Apple parser, all-section plan and handoff, bounded canonical-plan packet consumer including multi-vertex triangle/quad replay, the source-backed no-`PNMTXIDX` round trip, per-attempt runtime arbitration, the 64-byte N64 Mtx layout, source-backed Texgen identity/post-identity initialization, finite `emu64` projection reconstruction, source-order TEV unavailable-value handling, production GX object, twelve canonical encoder gates, the cumulative gatherer, and its production flush fixture have exact-tip native and ASan/UBSan proof. |
+| arm64 `ac_pc` full link | **Current production graph proved through `7636cc1d8`** | A serialized exact-`7636cc1d8` full target produced the traced arm64 binary with SHA-256 `26ea9ff04e15b275b622b221dfac645f199961eab8851c0fd70ac89bc9864e18`. The later Apple Geometry merge `de9a26fee`, projection merge `ff09b1f22`, and TEV merge `70a8e23bc` have exact focused native and ASan/UBSan proof but were not full-linked. No later process-launch claim follows from those focused builds. |
+| Process launch and boot progression | **TEV source fix integrated; post-fix trace pending** | The latest bounded inferior remains exact `7636cc1d8`: Transform, Channels, Texgen, and Texture/Dynamic passed `20/20`; TEV failed `20/20`; no envelope was published. PC PR #25 repairs that exact predicate in source, but no `70a8e23bc` full link or process trace has yet shown the next frontier. |
 | LP64 loader/audio/pointer safety | **Substantially done** | DVD aligned reads, high-address audio DMA, texture handles, and allocator-owned field pointers have focused/runtime evidence. |
-| Graph/display-list capture | **Partial** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; the production flush now attempts one cumulative renderer-neutral snapshot and the Apple lifecycle registers its value-plan callback. The bounded post-Texgen trace reaches TEV after four earlier stages pass, then fails before delivery. |
+| Graph/display-list capture | **Partial** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; the production flush now attempts one cumulative renderer-neutral snapshot and the Apple lifecycle registers its value-plan callback. The latest bounded trace reaches the pre-fix TEV predicate after four earlier stages pass; the integrated repair has not yet been exercised by a real process. |
 | Renderer-neutral section ABIs | **Done for the current gatherer contract** | Fourteen-section value ABIs, explicit little-endian encoders, the Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, every standalone producer, all canonical libraries, and the gatherer are production-linked and called once from the completed-Geometry flush seam. |
-| Live canonical snapshot publication | **Production call, Apple callback, and arbitration wired; TEV blocks live proof** | `pc_gx_flush_vertices` assigns one process-lifetime attempt ID, gathers after completed Geometry capture, reports publication or no-publication after the borrow ends, and then continues the semantic/legacy path. The post-Texgen bounded run observed 20 real attempts reach and fail TEV; no envelope or callback publication was observed. |
+| Live canonical snapshot publication | **Production call, Apple callback, and arbitration wired; post-TEV-fix live proof pending** | `pc_gx_flush_vertices` assigns one process-lifetime attempt ID, gathers after completed Geometry capture, reports publication or no-publication after the borrow ends, and then continues the semantic/legacy path. The latest bounded run observed 20 real attempts reach and fail the now-repaired TEV predicate; no envelope or callback publication has yet been observed. |
 | Apple typed CPU consumer | **Bounded multi-vertex source proof; live dispatch open** | CPU-only fixtures drive canonical publication/rejection, prepare rejection, sink failure, stale tokens, lifecycle/reentry guards, semantic V1 fallback/suppression, bounded triangle lists, quad expansion, and exact sink counts through the production Apple sources. A successful canonical sink submission wins only its current attempt; no real process reached this path and no Metal device was exercised. |
 | Game-owned Metal encode | **Not proven** | Device tests are gated/skipped where no Metal device is available; no live game callback has reached the canonical Metal encoder. |
 | Metal present/readback/pixel | **Not proven** | No current game-owned drawable presentation and readback identifying a real game pixel. |
@@ -187,7 +190,7 @@ producer; those are different accomplishments.
 | Channels | Done | Done | Done | Live producer success `20/20` at exact `7636cc1d8` |
 | Texgen/SU | Done | Done | Done | Live raw, validator, and producer success `20/20` at exact `7636cc1d8` |
 | Texture | Done | Done, with resource generations | Done with Dynamic/lease snapshot | Live Texture/Dynamic success `20/20` at exact `7636cc1d8` |
-| TEV | Done, full 16-stage contract | Done for stages/registers/KONST/swaps/indirect-per-stage state | Done, integrated `043d24822` (2026-08-17) | Reached live and failed producer `20/20`; exact predicate audit pending |
+| TEV | Done, full 16-stage contract | Done for stages/registers/KONST/swaps/indirect-per-stage state | Done; leaf `043d24822`, unavailable-provenance repair `70a8e23bc` | Pre-fix trace failed `20/20`; exact repair passes native and ASan/UBSan `2/2`, post-fix runtime pending |
 | Lighting | Done | Done | Done | One guarded flush gather; runtime unproved |
 | Blend | Done | Done | Done, integrated `07a621428` | One guarded flush gather; runtime unproved |
 | Alpha/update/ZCompLoc | Done | Done | Done and production-linked | One guarded flush gather; runtime unproved |
@@ -275,8 +278,10 @@ Completed canonical/raw work includes:
 - [x] Run one bounded post-Texgen real-process trace; Transform, Channels,
   Texgen, and Texture/Dynamic pass `20/20`, TEV fails `20/20`, and no envelope
   is published.
-- [ ] Repair the exact source-faithful TEV predicate and prove one subsequent
-  real-process envelope reaches the callback and publishes a plan.
+- [x] Repair the exact source-faithful TEV predicate and prove its raw-shadow
+  and producer fixtures on the exact PC merge (`70a8e23bc`).
+- [ ] Run one subsequent serialized real-process trace to the next
+  first-failing producer or a published cumulative envelope.
 - [ ] Encode game-owned geometry/state/textures on a real Metal device.
 - [ ] Present a drawable and read back an identifiable game-owned pixel.
 
@@ -447,7 +452,7 @@ CPU assembler, Apple CPU consumer, and later live trace as three separate gates.
 
 ### Phase C — fill remaining truthful state gaps
 
-At `ff09b1f22`, Blend/Fog raw ownership, the narrow Geometry dependency
+At `70a8e23bc`, Blend/Fog raw ownership, the narrow Geometry dependency
 builder and focused CMake/CTest gate, and the token-scoped Texture/TLUT/Dynamic
 borrow transaction are closed. The pure cumulative envelope assembler is also
 integrated, and every existing standalone producer plus all canonical libraries
@@ -479,7 +484,12 @@ TEV's exact live predicate, and BUMP/Indirect dependencies remain explicit
 successors. PC PR #24 additionally corrects finite `emu64` perspective
 reconstruction, stages derived values before publication, rejects singular
 infinite-far input without state mutation, and adds a focused real-fixed-point
-CPU fixture. No full link or process launch was performed at that newer tip.
+CPU fixture. PC PR #25 then accepts only exact untouched unavailable
+TEV/KColor raw records, rejects any active source-order read before definition,
+tracks color and alpha definitions independently, and canonicalizes only
+semantically unread unavailable values to zero. Its exact-merge raw-shadow and
+producer fixtures pass `2/2` natively and under ASan/UBSan. No full link or
+process launch was performed at either newer focused tip.
 
 For each gap:
 
@@ -546,9 +556,15 @@ truthfully producible with no fabricated state.
     `emu64` inverse algebra no longer adds near to far, all derived values stage
     before mutation, the fixed-point infinite-far limit fails closed, and the
     exact-merge native plus ASan/UBSan focused fixture passes `1/1`.
-12. Keep Metal device work outside this phase; CPU fixtures prove data ownership
+12. **Unread unavailable TEV provenance repaired at `70a8e23bc`:** exact
+    untouched unavailable register/KColor records are accepted only when the
+    active source-order TEV dataflow does not read them; color and alpha output
+    definitions remain independent; malformed records and outputs fail closed.
+    Exact-merge native and combined ASan/UBSan raw-shadow/producer gates pass
+    `2/2`.
+13. Keep Metal device work outside this phase; CPU fixtures prove data ownership
    and planning only.
-13. Verify malformed, missing, unsupported, stale-resource, and generation-race
+14. Verify malformed, missing, unsupported, stale-resource, and generation-race
    cases all fail closed while legacy rendering remains available.
 
 Exit evidence: one complete synthetic/current-state CPU snapshot reaches the
@@ -565,15 +581,16 @@ failed at Texgen before publication. After the source-faithful initialization
 fix merged at `7636cc1d8`, one new serialized exact-binary trace completed its
 20-attempt bound. Transform, Channels, Texgen, and Texture/Dynamic pass on all
 20 attempts; TEV fails on all 20; no envelope, callback, or Apple dispatch is
-observed. The trace therefore moves the first failing producer to TEV without
-claiming its exact predicate.
+observed. The trace therefore identified the first failing producer as TEV.
+PC PR #25 repairs that exact unavailable-register predicate at `70a8e23bc`,
+but no newer process has yet established the next frontier.
 
-1. Audit the exact live TEV predicate against both upstreams and select exactly
-   one production source owner.
-2. Implement only the source-faithful TEV correction with a focused fixture,
-   fresh native and combined ASan/UBSan gates, and independent immutable review.
-3. Merge one PC PR, rerun the smallest focused gate on the exact merge, and
-   integrate that PC pointer through a separately reviewed umbrella PR.
+1. ~~Audit the exact live TEV predicate and select one source owner~~ — done;
+   the first short circuit was unavailable `register[0]` with known mask zero.
+2. ~~Implement and independently review the source-faithful TEV correction~~ —
+   done through PC PR #25 and exact-merge native plus ASan/UBSan `2/2`.
+3. ~~Merge the PC PR and rerun the exact-merge focused gate~~ — done at
+   `70a8e23bc`; its separately reviewed umbrella integration is this milestone.
 4. Run one subsequent bounded, serialized real-process trace and stop at the
    next first-failing producer or the first cumulative publication.
 5. Preserve process ID, attempt correlation, bounded stop, exact-PID cleanup,
@@ -748,7 +765,7 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `ff09b1f22`. It contains the independently reviewed
+`c1/macos-host-launch` at `70a8e23bc`. It contains the independently reviewed
 Blend producer (`07a621428`, merged as `f772f0bb8`), Fog producer
 (`e0bb5ac96`, merged as `cd55a7789`), and Geometry dependency builder
 (`09d174799`, merged as `4cbb837e6`), plus the Geometry dependency fixture gate
@@ -794,12 +811,17 @@ followed by bounded multi-vertex canonical Apple Geometry replay
 [PC PR #23](https://github.com/jskoiz/ACGC-PC-Port/pull/23) as `de9a26fee`),
 followed by corrected finite `emu64` projection reconstruction and its focused
 real-fixed-point CPU gate (`1c1d2d171`, merged through
-[PC PR #24](https://github.com/jskoiz/ACGC-PC-Port/pull/24) as `ff09b1f22`).
+[PC PR #24](https://github.com/jskoiz/ACGC-PC-Port/pull/24) as `ff09b1f22`),
+followed by source-order handling of semantically unread unavailable
+TEV/KColor provenance (`520c7afaf`, merged through
+[PC PR #25](https://github.com/jskoiz/ACGC-PC-Port/pull/25) as `70a8e23bc`).
 Exact merged-tip focused gates passed for these integrations. A bounded
 post-Texgen source-tree launch on exact `7636cc1d8` passes Transform, Channels,
 Texgen, and Texture/Dynamic on 20/20 attempts, then fails at TEV on 20/20 and
-publishes no envelope. This identifies the next producer frontier without
-proving its source predicate or any Apple dispatch. See
+publishes no envelope. PR #25 repairs that exact source predicate, but no
+post-fix full link or trace has identified the next producer frontier or any
+Apple dispatch. See
+[the 2026-08-23 TEV unavailable-provenance evidence](docs/evidence/TEV-UNAVAILABLE-PROVENANCE-70A8E23BC-2026-08-23.md),
 [the 2026-08-23 Apple multi-vertex Geometry evidence](docs/evidence/APPLE-MULTIVERTEX-GEOMETRY-DE9A26FEE-2026-08-23.md),
 [the 2026-08-23 projection reconstruction evidence](docs/evidence/PROJECTION-RECONSTRUCTION-FF09B1F22-2026-08-23.md),
 [the 2026-08-23 Texgen identity provenance evidence](docs/evidence/TEXGEN-IDENTITY-PROVENANCE-7636CC1D8-2026-08-23.md),
