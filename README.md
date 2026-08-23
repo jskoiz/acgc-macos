@@ -34,13 +34,15 @@ macOS first and iOS second. The short version of the remaining critical path is:
    remains open);
 7. ~~promote every existing canonical producer and the cumulative assembler to
    the production link graph~~ (done 2026-08-22 at PC `52019da76`);
-8. gather and publish one lease-safe snapshot through the Apple CPU consumer;
-9. prove a game-owned Metal encode, present, readback, and identifiable pixel;
-10. separately prove physical input, audible audio, save/reload, lifecycle, and
+8. ~~add explicit little-endian encoders for every canonical section still
+   missing one~~ (done 2026-08-22 at PC `670d7128f`);
+9. gather and publish one lease-safe snapshot through the Apple CPU consumer;
+10. prove a game-owned Metal encode, present, readback, and identifiable pixel;
+11. separately prove physical input, audible audio, save/reload, lifecycle, and
    regression gates;
-11. call the macOS build playable only after human acceptance of an actual game
+12. call the macOS build playable only after human acceptance of an actual game
    session; and
-12. reuse the proven shared layer for iOS simulator and physical-device work.
+13. reuse the proven shared layer for iOS simulator and physical-device work.
 
 The current effort is much further along than a greenfield port: revision
 compatibility, arm64 launch, major LP64 faults, raw GX state ownership, most
@@ -54,12 +56,12 @@ renderer handoff that can truthfully claim a Metal-rendered game frame.
 | --- | --- |
 | Umbrella branch | `main` |
 | Canonical PC-port branch | `c1/macos-host-launch` |
-| Canonical PC-port commit | `52019da76cb7539230f913681d1d062d517cf0cd` |
+| Canonical PC-port commit | `670d7128fbb2295d266c175e1f7bedecc6f6b39c` |
 | Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
 | Supported revision | `GAFE01_00`, USA revision 0 |
 | Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
 | Current execution state | Fifteen visible lanes: one integration owner plus fourteen local Luna/max workers; source PR review and integration serialized by the owner |
-| Current proof level | Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, Apple structural parser, and production producer/link availability plus earlier launch/GX evidence; no live cumulative publication, current-tip Metal pixel, or playability proof |
+| Current proof level | Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, Apple structural parser, production producer/link availability, and explicit little-endian encoders for all fourteen sections plus earlier launch/GX evidence; no live cumulative publication, current-tip Metal pixel, or playability proof |
 
 The disc hash is recorded only to identify the supported local input. The disc,
 extracted files, keys, and proprietary assets are ignored and are never part of
@@ -73,12 +75,12 @@ Every row is an independent gate. A later row is not implied by an earlier one.
 | --- | --- | --- |
 | Source/revision compatibility | **Done** | Both upstreams identify `GAFE01_00`; config/build hashes agree for the supported revision. |
 | Local-disc identity and ignore rules | **Done** | Exact SHA-256 verified locally; no disc bytes or extracted proprietary assets are tracked. |
-| Portable focused build/tests | **Done, continuing** | Geometry dependency, Texture/Dynamic lease, cumulative assembler, Apple parser, and production GX object gates have exact-tip native and ASan/UBSan proof. |
-| arm64 `ac_pc` full link | **Current source content proved** | A serialized 4,064-step arm64 link passed on the reviewed PR #8 tree, which is content-identical to merge `52019da76`; fresh native and sanitizer-instrumented object gates passed at the exact merge. |
+| Portable focused build/tests | **Done, continuing** | Geometry dependency, Texture/Dynamic lease, cumulative assembler, Apple parser, production GX object, and twelve newly added canonical encoder gates have exact-tip native and ASan/UBSan proof. |
+| arm64 `ac_pc` full link | **Current source content proved** | A fresh serialized 4,050-step arm64 link passed at exact merge tip `670d7128f`; it produced a 14 MiB arm64 Mach-O executable. This is link proof, not launch proof. |
 | Process launch and boot progression | **Proven on earlier tips** | Real inferiors reached graph processing, logo/NEOS work, GX entry points, and bounded shutdown paths. |
 | LP64 loader/audio/pointer safety | **Substantially done** | DVD aligned reads, high-address audio DMA, texture handles, and allocator-owned field pointers have focused/runtime evidence. |
 | Graph/display-list capture | **Partial** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; a cumulative renderer-neutral frame snapshot is still absent. |
-| Renderer-neutral section ABIs | **Mostly done** | Fourteen-section value ABIs, the Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, every standalone producer, and all canonical libraries are production-linked; gathering/wiring remains open. |
+| Renderer-neutral section ABIs | **Done for the current gatherer contract** | Fourteen-section value ABIs, explicit little-endian encoders, the Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, every standalone producer, and all canonical libraries are production-linked; gathering/wiring remains open. |
 | Live canonical snapshot publication | **Not done** | The production-linked assembler copies already encoded sections; no gatherer constructs all sections, owns/revalidates the lease, or publishes one live callback. |
 | Apple typed CPU consumer | **Partial** | A pure structural envelope parser and earlier CPU sink fixtures exist; section semantic decoding, an immutable cumulative plan, and live wiring remain open. |
 | Game-owned Metal encode | **Not proven** | Device tests are gated/skipped where no Metal device is available; no live game callback has reached the canonical Metal encoder. |
@@ -205,7 +207,10 @@ Completed canonical/raw work includes:
   closed;
 - [x] canonical Geometry, Transform, Channels, Texgen/SU, Texture/Dynamic,
   Lighting, Alpha, Depth, and Raster leaf producers with focused native and
-  sanitizer evidence; and
+  sanitizer evidence;
+- [x] explicit little-endian encoders for all fourteen canonical sections,
+  including the existing Geometry/Texgen encoders and the twelve additions
+  merged through PC PRs #9-#12; and
 - [x] cross-section dependency validators that make missing state an explicit
   failure instead of a renderer default.
 
@@ -392,14 +397,15 @@ CPU assembler, Apple CPU consumer, and later live trace as three separate gates.
 
 ### Phase C — fill remaining truthful state gaps
 
-At `52019da76`, Blend/Fog raw ownership, the narrow Geometry dependency
+At `670d7128f`, Blend/Fog raw ownership, the narrow Geometry dependency
 builder and focused CMake/CTest gate, and the token-scoped Texture/TLUT/Dynamic
 borrow transaction are closed. The pure cumulative envelope assembler is also
 integrated, and every existing standalone producer plus all canonical libraries
-are now available through the production `ac_pc` link graph. Remaining
-truthful-state work is the lease-owning all-section gatherer and single flush
-publication call; broader Geometry attributes and BUMP/Indirect dependencies
-remain explicit fail-closed successors.
+are now available through the production `ac_pc` link graph. Every canonical
+section also has an explicit little-endian encoder. Remaining truthful-state
+work is the lease-owning all-section gatherer and single flush publication
+call; broader Geometry attributes and BUMP/Indirect dependencies remain
+explicit fail-closed successors.
 
 For each gap:
 
@@ -421,7 +427,8 @@ truthfully producible with no fabricated state.
 1. **Pure assembler done at `c7ce553d7`:** the renderer-neutral envelope
    assembler is isolated in new files and registered as a focused CTest gate.
    **Production compilation/link availability is done at `52019da76`;** the
-   narrow production gather/flush call remains open.
+   explicit encoder prerequisite is done at `670d7128f`; the narrow production
+   gather/flush call remains open.
 2. Add cumulative publication fixtures that use the integrated token-scoped
    lease, cover every early failure, and prove zero partial callbacks.
 3. Implement a typed Apple CPU consumer that validates the complete envelope
@@ -618,7 +625,7 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `52019da76`. It contains the independently reviewed
+`c1/macos-host-launch` at `670d7128f`. It contains the independently reviewed
 Blend producer (`07a621428`, merged as `f772f0bb8`), Fog producer
 (`e0bb5ac96`, merged as `cd55a7789`), and Geometry dependency builder
 (`09d174799`, merged as `4cbb837e6`), plus the Geometry dependency fixture gate
@@ -628,7 +635,11 @@ merged as `c91873521`), followed by the cumulative assembler chain
 (`1d3a51485`, `46eee8c75`, and `cfb61d67d`, merged as `c7ce553d7`), followed by
 the Apple structural parser (`33843a6ee` + `9c7603c55`, merged as
 `8e55df64e`), followed by the production GX topology (`acee7d71d`, merged as
-`52019da76`). Exact merged-tip focused gates passed for these integrations; see
+`52019da76`), followed by explicit encoders for Transform/Channels/Lighting,
+Texture/Dynamic, Blend/Alpha/Depth/Raster/Fog, and TEV/Indirect, merged in PC
+PRs #9-#12 as `29fa239a6`, `24c1f6b8a`, `51f8c791c`, and `670d7128f`.
+Exact merged-tip focused gates passed for these integrations; see
+[the 2026-08-22 canonical encoder evidence](docs/evidence/CANONICAL-STATE-ENCODERS-670D7128F-2026-08-22.md),
 [the 2026-08-22 production GX topology evidence](docs/evidence/PRODUCTION-GX-TOPOLOGY-52019DA76-2026-08-22.md),
 [the 2026-08-22 Apple parser evidence](docs/evidence/APPLE-CANONICAL-PARSER-8E55DF64E-2026-08-22.md),
 [the 2026-08-22 cumulative assembler evidence](docs/evidence/CUMULATIVE-SNAPSHOT-C7CE553D7-2026-08-22.md),
