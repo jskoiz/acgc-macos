@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `52019da76`; see
-`docs/evidence/PRODUCTION-GX-TOPOLOGY-52019DA76-2026-08-22.md`.
+canonical PC tip is `670d7128f`; see
+`docs/evidence/CANONICAL-STATE-ENCODERS-670D7128F-2026-08-22.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -45,6 +45,17 @@ active does not imply that its gate passed or that it is active now.
 | 292 | Immutable umbrella review | Complete, PASS | Accepted the Apple parser umbrella commit `a71890569` with exact four-path scope and no P0/P1/P2 finding before umbrella PR #6. |
 | 293 | Source-edit | Complete and integrated | Added the ten standalone producers/assembler to one unconditional production OBJECT target, enabled Raster, and propagated all canonical libraries; candidate `acee7d71d` merged in [PC PR #8](https://github.com/jskoiz/ACGC-PC-Port/pull/8) as `52019da76`. |
 | 294 | Independent review | Complete, PASS | Accepted `acee7d71d` with no P0/P1 finding after fresh native and ASan/UBSan object builds, generated-link-graph inspection, symbol uniqueness checks, and a serialized 4,064-step candidate-tree `ac_pc` link. |
+| 295 | Read-only gatherer audit | Complete, BLOCK then dependency closed | Froze the lease-owning, single-publication gatherer contract and found twelve missing explicit little-endian encoders. PC PRs #9-#12 close exactly that prerequisite; live gathering remains separate. |
+| 296 | Immutable umbrella review | Complete, PASS | Accepted production-topology umbrella commit `cf2e2900e` before umbrella PR #7, with exact pointer/evidence scope and no P0/P1 blocker. |
+| 297 | Source-edit | Complete and integrated | Added explicit Transform, Channels, and Lighting encoders in candidate `134296f35`; Lane 301 passed it and [PC PR #9](https://github.com/jskoiz/ACGC-PC-Port/pull/9) merged it as `29fa239a6`. |
+| 298 | Source-edit | Complete and integrated | Added explicit Blend, Alpha, Depth, Raster, and Fog encoders in candidate `a80c4d909`; Lane 304 passed it and [PC PR #11](https://github.com/jskoiz/ACGC-PC-Port/pull/11) merged it as `51f8c791c`. |
+| 299 | Source-edit | Complete and integrated | Added explicit Texture and Dynamic encoders in candidate `5a66938de`; Lane 302 passed it and [PC PR #10](https://github.com/jskoiz/ACGC-PC-Port/pull/10) merged it as `24c1f6b8a`. |
+| 300 | Source-edit | Complete and integrated | Added explicit TEV and Indirect encoders in candidate `3a29fe8b9`; Lane 303 passed it and [PC PR #12](https://github.com/jskoiz/ACGC-PC-Port/pull/12) merged it as `670d7128f`. |
+| 301 | Independent review | Complete, PASS | Accepted the Transform/Channels/Lighting encoder candidate with no P0/P1 finding after source, contract, and focused native/sanitizer evidence review. |
+| 302 | Independent review | Complete, PASS | Accepted the Texture/Dynamic encoder candidate with no P0/P1/P2 finding, including fixed-size encoding, padding, alias, failure-immutability, and lease-boundary review. |
+| 303 | Independent review | Complete, PASS | Accepted the TEV/Indirect encoder candidate with no P0/P1/P2 finding; the fixture refactor retained validation coverage and the explicit encoders fail closed. |
+| 304 | Independent review | Complete, PASS | Accepted the fixed-state encoder candidate with no P0/P1 finding after exact-domain, little-endian, alias, padding, and failure-immutability review. |
+| 305 | Source-edit successor | Active | Owns the new lease-owning cumulative gatherer and focused fixture at exact base `670d7128f`; it explicitly does not own `pc_gx.c` flush insertion, legacy GL, Apple parsing, or rendering. |
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -55,6 +66,16 @@ The PR does not add a gatherer, lease transaction, flush call, callback, parser
 consumer, or renderer behavior. No hosted workflow was configured, and no
 process launch, cumulative publication, Metal/device, pixel, input, audio,
 save/load, or playability claim follows.
+
+PC PRs #9-#12 add the twelve explicit little-endian section encoders that the
+Lane 295 gatherer audit identified as missing; Geometry and Texgen already had
+encoders. At authoritative merge tip `670d7128f`, the exact twelve-test matrix
+passes `12/12` in fresh native and combined ASan/UBSan trees. A fresh serialized
+4,050-step arm64 `ac_pc` link also passes at that exact tip and produces a 14 MiB
+arm64 Mach-O executable. The link emitted only the inherited common-section
+alignment reduction warning. This proves encoder contracts and production link
+compatibility, not process launch, live gathering, callback publication,
+Apple/Metal consumption, pixels, device behavior, or playability.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
