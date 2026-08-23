@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `8e55df64e`; see
-`docs/evidence/APPLE-CANONICAL-PARSER-8E55DF64E-2026-08-22.md`.
+canonical PC tip is `52019da76`; see
+`docs/evidence/PRODUCTION-GX-TOPOLOGY-52019DA76-2026-08-22.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -29,7 +29,7 @@ active does not imply that its gate passed or that it is active now.
 | 272 | Read-only audit | Complete | Fixed-width leaf contracts passed the bounded portability audit, while pointer leases, cumulative parsing, production wiring, and real Windows targets remain separately unproved. |
 | 273 | Read-only integration review | Complete | Ranked lease before assembler before parser/consumer, with one source PR, exact merged-tip gate, and umbrella pointer update serialized at each accepted step. |
 | 274 | Read-only successor | Complete | Defined the smallest Geometry production source/library prerequisite without confusing production linkage with production calls. |
-| 275 | Read-only successor | Complete | Defined one grouped all-section production object topology, canonical library bundle, raster definition, and duplicate-symbol hazards; implementation remains after lease/assembler integration. |
+| 275 | Read-only successor | Complete | Defined the grouped all-section production object topology, canonical library bundle, raster definition, and duplicate-symbol hazards later implemented by Lane 293. |
 | 278 | Source-edit corrective child | Complete and integrated | `ded31c017` closes the assembler output-size alias corruption and adds a formula-backed assertion for the 76,092-byte public maximum; integrated equivalent `46eee8c75` is in PC PR #6. |
 | 280 | Independent review | Complete, PASS | Re-reviewed the corrected assembler chain with no P0/P1/P2 blocker and fresh native plus ASan/UBSan execution. |
 | 282 | Test-only CMake source edit | Complete and integrated | `81995528a` registers `acgc_pc_gx_cumulative_snapshot_fixture`; integrated equivalent `cfb61d67d` is in PC PR #6 after Lane 285 PASS. |
@@ -39,16 +39,22 @@ active does not imply that its gate passed or that it is active now.
 | 286 | Independent review | Complete, PASS | Accepted the final lease chain with no P0/P1/P2 finding under the documented synchronous single-threaded guarded-API contract. |
 | 287 | Independent re-review | Complete, PASS | Confirmed the corrected parser closes the Fog 80/1/1 metadata blocker, preserves exact canonical order/masks and output immutability, and passes fresh native plus ASan/UBSan. |
 | 288 | Read-only integration audit | Complete, PASS | Proved the accepted assembler chain applies cleanly to `c91873521`, has no lease-API dependency, and changes exactly its three files plus CMake registration. |
+| 289 | Immutable umbrella review | Complete, PASS | Accepted the Texture/TLUT lease umbrella commit and exact focused native plus sanitizer roots before umbrella PR #4. |
+| 290 | Immutable umbrella review | Complete, PASS | Accepted the cumulative assembler umbrella commit and exact focused native plus sanitizer roots before umbrella PR #5. |
 | 291 | Read-only integration audit | Complete, PASS | Proved the corrected parser chain applies cleanly to `c7ce553d7`, matches the landed assembler directory contract, and has no lease or production dependency. |
+| 292 | Immutable umbrella review | Complete, PASS | Accepted the Apple parser umbrella commit `a71890569` with exact four-path scope and no P0/P1/P2 finding before umbrella PR #6. |
+| 293 | Source-edit | Complete and integrated | Added the ten standalone producers/assembler to one unconditional production OBJECT target, enabled Raster, and propagated all canonical libraries; candidate `acee7d71d` merged in [PC PR #8](https://github.com/jskoiz/ACGC-PC-Port/pull/8) as `52019da76`. |
+| 294 | Independent review | Complete, PASS | Accepted `acee7d71d` with no P0/P1 finding after fresh native and ASan/UBSan object builds, generated-link-graph inspection, symbol uniqueness checks, and a serialized 4,064-step candidate-tree `ac_pc` link. |
 
-PC PR #7 adds the pure Apple structural parser and focused CTest gate, but does
-not semantically decode payloads, construct a typed plan, add production
-`ac_pc` membership, gather live state, own resource leases, or invoke a
-callback. Fresh native and combined ASan/UBSan target-only builds and exact
-CTest runs passed on the reviewed chain and authoritative merge `8e55df64e`.
-No hosted workflow was configured, and no full link, process launch, cumulative
-callback, Metal/device, pixel, input, audio, save/load, or playability claim
-follows.
+PC PR #8 adds production compilation/link membership for every standalone GX
+producer and the cumulative assembler, plus Raster and the complete canonical
+library graph. Fresh native and combined ASan/UBSan object builds passed on the
+authoritative merge `52019da76`; a serialized 4,064-step arm64 `ac_pc` link
+passed on the reviewed candidate tree, whose content is identical to the merge.
+The PR does not add a gatherer, lease transaction, flush call, callback, parser
+consumer, or renderer behavior. No hosted workflow was configured, and no
+process launch, cumulative publication, Metal/device, pixel, input, audio,
+save/load, or playability claim follows.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -2893,13 +2899,17 @@ order follows the updated critical path recorded in the README (Phases A–G):
 7. ~~Integrate the independently accepted pure Apple parser~~ — done 2026-08-22
    through PC PR #7 at canonical `8e55df64e`, with exact-merge native and
    ASan/UBSan verification.
-8. Add production `ac_pc` producer membership, a lease-owning live gatherer and
-   single flush call, then semantic Apple section decoding and the immutable
-   typed CPU plan as separately reviewed gates.
-9. Only then schedule the one serialized live callback trace, followed by the
+8. ~~Add production `ac_pc` producer and assembler membership~~ — done
+   2026-08-22 through PC PR #8 at canonical `52019da76`, with independent
+   review, exact-merge native and sanitizer-instrumented object builds, and a
+   serialized content-identical candidate-tree full link.
+9. Add a lease-owning live gatherer and single flush call, then semantic Apple
+   section decoding and the immutable typed CPU plan as separately reviewed
+   gates.
+10. Only then schedule the one serialized live callback trace, followed by the
    Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
-10. iOS implementation remains gated behind proven shared macOS core, renderer,
+11. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
