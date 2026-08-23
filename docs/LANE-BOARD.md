@@ -1,12 +1,12 @@
 # ACGC visible lane board
 
-Updated 2026-08-22. The current bounded run created the fifteen visible tasks
+Updated 2026-08-23. The current bounded run created the fifteen visible tasks
 requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `670d7128f`; see
-`docs/evidence/CANONICAL-STATE-ENCODERS-670D7128F-2026-08-22.md`.
+canonical PC tip is `d6a22182b`; see
+`docs/evidence/CUMULATIVE-GATHERER-D6A22182B-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -55,7 +55,12 @@ active does not imply that its gate passed or that it is active now.
 | 302 | Independent review | Complete, PASS | Accepted the Texture/Dynamic encoder candidate with no P0/P1/P2 finding, including fixed-size encoding, padding, alias, failure-immutability, and lease-boundary review. |
 | 303 | Independent review | Complete, PASS | Accepted the TEV/Indirect encoder candidate with no P0/P1/P2 finding; the fixture refactor retained validation coverage and the explicit encoders fail closed. |
 | 304 | Independent review | Complete, PASS | Accepted the fixed-state encoder candidate with no P0/P1 finding after exact-domain, little-endian, alias, padding, and failure-immutability review. |
-| 305 | Source-edit successor | Active | Owns the new lease-owning cumulative gatherer and focused fixture at exact base `670d7128f`; it explicitly does not own `pc_gx.c` flush insertion, legacy GL, Apple parsing, or rendering. |
+| 305 | Source-edit successor | Complete and integrated | Added the lease-owning fourteen-section cumulative gatherer and focused fixture in candidate `ac4237eec`; Lane 308 passed it and [PC PR #13](https://github.com/jskoiz/ACGC-PC-Port/pull/13) merged it as `d6a22182b`. It intentionally does not wire `pc_gx_flush_vertices`. |
+| 306 | Immutable umbrella review | Complete, PASS | Accepted encoder umbrella commit `d98e1bf9b` with exact pointer/evidence scope before umbrella PR #8. |
+| 307 | Read-only Apple plan audit | Complete, BLOCK with bounded successor | Found the typed Apple CPU plan still needs twelve fixed-section little-endian decoders, a full Geometry stream decoder, and pure dependency derivation; it defined a pure-C successor without claiming Metal or runtime readiness. |
+| 308 | Independent gatherer review | Complete, PASS | Accepted `ac4237eec` with no P0/P1 blocker, including one-borrow cleanup, fourteen-section order, callback-time fail-closed registration, output immutability, and retained native plus ASan/UBSan evidence. |
+| 309 | Read-only flush-integration audit | Complete, READY | Located exactly one gather attempt after completed Geometry capture, required removal of the older live Texture/Dynamic-only publication, froze file-static non-reentrant storage ownership, and designed the real GXBegin/GXEnd source-backed fixture. |
+| 310 | Source-edit successor | Active | Owns only `pc/src/pc_gx.c`, one cumulative flush fixture, and its CMake gate at exact base `d6a22182b`; it must preserve legacy observer/GL ordering and does not own gatherer, encoder, Apple, or renderer code. |
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -76,6 +81,17 @@ arm64 Mach-O executable. The link emitted only the inherited common-section
 alignment reduction warning. This proves encoder contracts and production link
 compatibility, not process launch, live gathering, callback publication,
 Apple/Metal consumption, pixels, device behavior, or playability.
+
+PC PR #13 adds the lease-owning cumulative gatherer to the production GX object
+and a focused source-backed fixture. At authoritative merge tip `d6a22182b`,
+the exact gatherer CTest passes `1/1` in fresh native and combined ASan/UBSan
+trees. A fresh serialized 4,025-item `ac_pc` build also links a 15,213,680-byte
+arm64 Mach-O containing both gather and assemble symbols. The gatherer fixture
+proves raw builders, explicit encoders, fourteen-section assembly, one
+synchronous envelope-only callback, failure immutability, and Texture/TLUT
+borrow cleanup/reuse. It does not prove a live flush call, legacy GL execution,
+process launch, Apple/Metal consumption, pixels, device behavior, or
+playability.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -2924,9 +2940,11 @@ order follows the updated critical path recorded in the README (Phases A–G):
    2026-08-22 through PC PR #8 at canonical `52019da76`, with independent
    review, exact-merge native and sanitizer-instrumented object builds, and a
    serialized content-identical candidate-tree full link.
-9. Add a lease-owning live gatherer and single flush call, then semantic Apple
-   section decoding and the immutable typed CPU plan as separately reviewed
-   gates.
+9. ~~Add a lease-owning all-section gatherer~~ — done 2026-08-23 through PC PR
+   #13 at canonical `d6a22182b`, with independent review, exact-merge native and
+   ASan/UBSan verification, and a serialized exact-tip full link. Add the
+   single flush call next, then semantic Apple section decoding and the
+   immutable typed CPU plan as separately reviewed gates.
 10. Only then schedule the one serialized live callback trace, followed by the
    Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
