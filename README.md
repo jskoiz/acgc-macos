@@ -6,12 +6,12 @@ Current work targets macOS first; iOS begins only after the shared 64-bit core
 and Apple renderer have their own evidence.
 
 > **Project status — active orchestrated integration on 2026-08-22.** One
-> integration owner and fourteen durable Luna/max workers are running bounded,
-> non-overlapping source, test, audit, and independent-review lanes. The first
-> focused source change in this batch was serialized through PC-port PR #4 and
-> exact-merge verification. The repository remains a public engineering record
-> and roadmap. It is **not** a playable release, does not contain game data, and
-> does not grant rights to Nintendo assets.
+> integration owner and fourteen durable Luna/max worker tasks were launched on
+> bounded, non-overlapping source, test, audit, and independent-review lanes.
+> The first two focused source changes in this batch were serialized through
+> PC-port PRs #4 and #5 with exact-merge verification. The repository remains
+> a public engineering record and roadmap. It is **not** a playable release, does not
+> contain game data, and does not grant rights to Nintendo assets.
 
 ## Roadmap at a glance
 
@@ -26,7 +26,8 @@ macOS first and iOS second. The short version of the remaining critical path is:
    builder~~ (done 2026-08-21 at PC `4cbb837e6`);
 4. ~~register the source-backed Geometry dependency fixture as a focused native
    and sanitizer CMake/CTest gate~~ (done 2026-08-22 at PC `f77d5ec86`);
-5. implement the atomic Texture/TLUT/Dynamic lease and publication boundary;
+5. ~~implement the atomic Texture/TLUT/Dynamic lease and publication boundary~~
+   (done 2026-08-22 at PC `c91873521`);
 6. assemble one immutable, all-or-nothing renderer-neutral GX snapshot;
 7. carry that snapshot through the Apple CPU consumer into a live game callback;
 8. prove a game-owned Metal encode, present, readback, and identifiable pixel;
@@ -48,12 +49,12 @@ renderer handoff that can truthfully claim a Metal-rendered game frame.
 | --- | --- |
 | Umbrella branch | `main` |
 | Canonical PC-port branch | `c1/macos-host-launch` |
-| Canonical PC-port commit | `f77d5ec8696c90d8beedea622110260d65369177` |
+| Canonical PC-port commit | `c91873521474057cb5faea8867a92a8122ff3e16` |
 | Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
 | Supported revision | `GAFE01_00`, USA revision 0 |
 | Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
 | Current execution state | Fifteen visible lanes: one integration owner plus fourteen local Luna/max workers; source PR review and integration serialized by the owner |
-| Current proof level | Geometry dependency CMake/CTest gate plus CPU/source contracts and earlier launch/GX evidence; no current-tip Metal pixel or playability proof |
+| Current proof level | Geometry dependency CMake/CTest gate and token-scoped Texture/TLUT snapshot lease plus CPU/source contracts and earlier launch/GX evidence; no current-tip Metal pixel or playability proof |
 
 The disc hash is recorded only to identify the supported local input. The disc,
 extracted files, keys, and proprietary assets are ignored and are never part of
@@ -67,12 +68,12 @@ Every row is an independent gate. A later row is not implied by an earlier one.
 | --- | --- | --- |
 | Source/revision compatibility | **Done** | Both upstreams identify `GAFE01_00`; config/build hashes agree for the supported revision. |
 | Local-disc identity and ignore rules | **Done** | Exact SHA-256 verified locally; no disc bytes or extracted proprietary assets are tracked. |
-| Portable focused build/tests | **Done, continuing** | Large native and ASan/UBSan matrices pass on integrated snapshots; the Geometry dependency fixture is now a registered exact-tip CTest gate, and each new lane still needs exact-tip reruns. |
+| Portable focused build/tests | **Done, continuing** | Large native and ASan/UBSan matrices pass on integrated snapshots; the Geometry dependency and Texture/Dynamic lease fixtures have exact-tip focused proof, and each new lane still needs exact-tip reruns. |
 | arm64 `ac_pc` full link | **Proven on earlier tips** | Multiple 4,000+ object arm64 links succeeded. The paused `62c810e5b` tip has not yet received a fresh serialized full-link proof. |
 | Process launch and boot progression | **Proven on earlier tips** | Real inferiors reached graph processing, logo/NEOS work, GX entry points, and bounded shutdown paths. |
 | LP64 loader/audio/pointer safety | **Substantially done** | DVD aligned reads, high-address audio DMA, texture handles, and allocator-owned field pointers have focused/runtime evidence. |
 | Graph/display-list capture | **Partial** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; a cumulative renderer-neutral frame snapshot is still absent. |
-| Renderer-neutral section ABIs | **Mostly done** | Fourteen-section envelope and strict value ABIs exist; Blend/Fog raw owners and the Geometry dependency builder plus its focused gate are integrated, while atomic lease and cumulative production wiring remain open. |
+| Renderer-neutral section ABIs | **Mostly done** | Fourteen-section envelope and strict value ABIs exist; Blend/Fog raw owners, the Geometry dependency gate, and the token-scoped Texture/TLUT lease are integrated, while cumulative assembly and production wiring remain open. |
 | Live canonical snapshot publication | **Not done** | No all-or-nothing assembler atomically validates every section and resource lease before callback publication. |
 | Apple typed CPU consumer | **Partial** | CPU contracts and sink fixtures exist; the cumulative canonical plan is not live-wired. |
 | Game-owned Metal encode | **Not proven** | Device tests are gated/skipped where no Metal device is available; no live game callback has reached the canonical Metal encoder. |
@@ -184,7 +185,8 @@ Completed canonical/raw work includes:
 - [x] raw Texgen/SU plus a repaired canonical leaf that preserves matrix
   attempted-range invariants;
 - [x] raw Texture/TLUT ownership, generation/epoch tracking, canonical
-  Texture/Dynamic snapshots, and synchronous borrowed-resource leases;
+  Texture/Dynamic snapshots, and an exact-token synchronous borrow transaction
+  with guarded mutation rejection and pre/post-use revalidation;
 - [x] raw Alpha/update/ZCompLoc, Depth, and Raster state with
   flush-before-mutation ordering;
 - [x] raw TEV/Indirect ownership covering all 16 stages, PREV/REG/KONST,
@@ -354,10 +356,15 @@ end-to-end verdicts.
    its source-backed native/sanitizer CMake/CTest gate are integrated.
    Production `ac_pc` link membership and envelope wiring for Geometry and the
    other proven leaves remain successor work.
-4. Decide whether a partial section set can render truthfully. An omitted
+4. **Done at `c91873521`:** Texture/TLUT/Dynamic snapshot publication now
+   requires an exact caller-owned borrow token, rejects guarded mutations and
+   re-entry while borrowed, and revalidates raw state plus selected resource
+   addresses/generations before release. Arbitrary direct writes and concurrent
+   mutation remain outside the supported single-threaded contract.
+5. Decide whether a partial section set can render truthfully. An omitted
    section may use a default only when the decomp initialization path proves
    that exact logical default is present in the captured raw state.
-5. Freeze the all-or-nothing transaction:
+6. Freeze the all-or-nothing transaction:
    - capture all raw values at the committed-vertex boundary;
    - construct every section into local temporary storage;
    - validate cross-section dependencies;
@@ -366,12 +373,12 @@ end-to-end verdicts.
    - revalidate generations/epochs immediately before publication;
    - publish exactly once only after complete preflight; and
    - on any error, emit no partial callback and leave legacy rendering intact.
-6. Keep the minimum truthful untextured, unlit, vertex-color packet explicit:
+7. Keep the minimum truthful untextured, unlit, vertex-color packet explicit:
    Geometry, Transform, Raster, Depth, Blend, Alpha, and TEV, unless the final
    contract deliberately defines Geometry color as already final. Fog may be
    omitted only when captured provenance proves it disabled. Other sections are
    optional only when dependency results prove them inactive or unnecessary.
-7. Name the smallest source successors and serialize ownership of
+8. Name the smallest source successors and serialize ownership of
    `pc_gx.c`, `pc_gx_internal.h`, shared CMake, callback registration, and the
    final assembler.
 
@@ -380,11 +387,12 @@ CPU assembler, Apple CPU consumer, and later live trace as three separate gates.
 
 ### Phase C — fill remaining truthful state gaps
 
-At `f77d5ec86`, Blend/Fog raw ownership, the narrow Geometry dependency
-builder, and its focused CMake/CTest gate are closed. Remaining truthful-state
-work is production `ac_pc` link membership, the atomic resource lease, and the
-envelope wiring named by the final audit; broader Geometry attributes and
-BUMP/Indirect dependencies remain explicit fail-closed successors.
+At `c91873521`, Blend/Fog raw ownership, the narrow Geometry dependency
+builder and focused CMake/CTest gate, and the token-scoped Texture/TLUT/Dynamic
+borrow transaction are closed. Remaining truthful-state work is production
+`ac_pc` link membership and the cumulative envelope wiring named by the final
+audit; broader Geometry attributes and BUMP/Indirect dependencies remain
+explicit fail-closed successors.
 
 For each gap:
 
@@ -405,8 +413,8 @@ truthfully producible with no fabricated state.
 
 1. Implement the renderer-neutral envelope assembler in new files where
    possible, with one narrow call from the flush boundary.
-2. Add atomic lease/publication fixtures covering every early failure and
-   proving zero partial callbacks.
+2. Add cumulative publication fixtures that use the integrated token-scoped
+   lease, cover every early failure, and prove zero partial callbacks.
 3. Implement a typed Apple CPU consumer that validates the complete envelope
    before building an immutable render plan.
 4. Keep Metal device work outside this phase; CPU fixtures prove data ownership
@@ -600,12 +608,15 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `f77d5ec86`. It contains the independently reviewed
+`c1/macos-host-launch` at `c91873521`. It contains the independently reviewed
 Blend producer (`07a621428`, merged as `f772f0bb8`), Fog producer
 (`e0bb5ac96`, merged as `cd55a7789`), and Geometry dependency builder
 (`09d174799`, merged as `4cbb837e6`), plus the Geometry dependency fixture gate
-(`35c0dd350`, merged as `f77d5ec86`). Exact merged-tip focused gates passed for
-all four integrations; see
+(`35c0dd350`, merged as `f77d5ec86`), followed by the exact-token
+Texture/TLUT/Dynamic borrow chain (`00d06cc20`, `168d713ba`, and `f140aa186`,
+merged as `c91873521`). Exact merged-tip focused gates passed for these
+integrations; see
+[the 2026-08-22 texture borrow evidence](docs/evidence/TEXTURE-BORROW-LEASE-C91873521-2026-08-22.md),
 [the 2026-08-22 Geometry gate evidence](docs/evidence/GEOMETRY-DEPENDENCY-GATE-F77D5EC86-2026-08-22.md)
 and
 [the 2026-08-21 producer integration evidence](docs/evidence/BLEND-FOG-GEOMETRY-PRODUCER-INTEGRATION-4CBB837E6-2026-08-21.md).

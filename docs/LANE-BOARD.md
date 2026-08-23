@@ -1,12 +1,12 @@
 # ACGC visible lane board
 
-Updated 2026-08-22. The current bounded run occupies the fifteen-lane ceiling:
-one integration/evidence owner plus fourteen durable Luna/max workers, with
-two current source-edit owners, never more than three in this run, and the
-remainder assigned to test-only, verification, and read-only contracts. Source
-PRs, merges, and exact-tip verification remain serialized. The current canonical PC tip is
-`f77d5ec86`; see
-`docs/evidence/GEOMETRY-DEPENDENCY-GATE-F77D5EC86-2026-08-22.md`.
+Updated 2026-08-22. The current bounded run created the fifteen visible tasks
+requested: one integration/evidence owner plus fourteen durable Luna/max worker
+tasks. Completed workers are parked and refilled only when a useful
+dependency-ready successor exists; they are not reported as actively running.
+Source PRs, merges, and exact-tip verification remain serialized. The current
+canonical PC tip is `c91873521`; see
+`docs/evidence/TEXTURE-BORROW-LEASE-C91873521-2026-08-22.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -14,30 +14,38 @@ active does not imply that its gate passed or that it is active now.
 
 | Lane | Kind | Current state | Exact contract/result |
 | --- | --- | --- | --- |
-| 260 | Source-edit | Candidate complete, immutable review active | Candidate `73188879d` adds a synchronous Texture/TLUT/Dynamic borrow transaction and passes focused native plus ASan/UBSan fixtures; lane 263 is reviewing its lifecycle and reentrancy boundaries before integration. |
+| 260 | Source-edit | Complete and integrated | The corrected three-commit chain ending at `27e16b460` passed final Lane 286 review, was integrated as `00d06cc20` + `168d713ba` + `f140aa186`, and merged in [PC PR #5](https://github.com/jskoiz/ACGC-PC-Port/pull/5) as `c91873521`; exact-merge native and ASan/UBSan gates passed. |
 | 261 | Source-edit | Complete and integrated | Registered the source-backed Geometry dependency fixture; candidate `35c0dd350` merged in [PC PR #4](https://github.com/jskoiz/ACGC-PC-Port/pull/4) as `f77d5ec86`, then passed the exact-merge focused CTest gate. |
-| 262 | Source-edit | Active | Build the pure fourteen-section cumulative envelope core from already-built value sections, without live gathering, callbacks, or flush wiring. |
-| 263 | Read-only review | Active | Freeze and independently review the atomic texture lease state machine, mutation inventory, invariants, and negative-test matrix. |
-| 264 | Read-only oracle | Active | Derive independent little-endian envelope offsets, sizes, golden vectors, and corruption cases. |
-| 265 | Read-only/test-only review | Active | Independently verify the Geometry dependency target's exact source, definition, link, native, and sanitizer requirements. |
+| 262 | Source-edit | Complete, integration queued | Pure fourteen-section assembler `7acc786e7` plus alias-boundary correction `ded31c017` passed Lane 280 immutable review; focused CMake gate `81995528a` passed Lane 285 review. |
+| 263 | Read-only review | Complete | Found exact-token ownership, mutation-coverage, and public-builder lifetime defects in successive lease candidates; corrections were accepted by final Lane 286 review. |
+| 264 | Read-only oracle/review | Complete | Froze explicit little-endian envelope transport, bounds, corruption, output-immutability, and maximum-size expectations used by the corrected assembler review. |
+| 265 | Read-only/test-only review | Complete | Verified the Geometry dependency target's source, definitions, links, native gate, and sanitizer gate without expanding production membership. |
 | 266 | Read-only audit | Complete | Mapped all fourteen sections and proved that only Channels, Lighting, and Alpha are fully linked into `ac_pc`; none is production-flush-called, while Texture/Dynamic are only conditionally called with missing canonical links. |
-| 267 | Read-only audit | Active | Freeze the cross-section dependency DAG and deterministic producer/preflight order. |
-| 268 | Read-only audit | Active | Identify the single correct cumulative gather/callback position inside `pc_gx_flush_vertices`. |
-| 269 | Read-only audit | Active | Freeze the pure-C, Metal-independent cumulative Apple plan parser contract and status matrix. |
-| 270 | Read-only audit | Active | Map every canonical section to current Apple parse, plan, encoder, shader, and visual-proof capability. |
-| 271 | Test-only verification | Active | Run the bounded current-tip native and ASan/UBSan canonical producer/fixture matrix without linking full `ac_pc`. |
-| 272 | Read-only audit | Active | Review cumulative and lease contracts for Windows, LP64, ILP32, endian, alignment, and overflow hazards. |
-| 273 | Read-only integration review | Active | Independently rank serial integration order, promotion gates, rollback boundaries, and useful successor lanes. |
-| 274 | Read-only successor | Active | Reconcile exact Geometry production object/link prerequisites at `f77d5ec86`, keeping production-linked distinct from production-called. |
-| 275 | Read-only successor | Active | Design the smallest all-section production target topology and bounded compile-only promotion gate without wiring runtime calls. |
+| 267 | Read-only audit | Complete | Froze the raw-state freeze, dependency-topological build, lease revalidation, fixed-order envelope, final revalidation, and single-publication order. |
+| 268 | Read-only audit | Complete | Located the future gatherer immediately after completed Geometry capture in `pc_gx_flush_vertices`, before the existing Texture/Dynamic callback, observers, and legacy path. |
+| 269 | Read-only audit then source-edit | Corrected candidate, re-review active | Pure-C parser `6ae7aec1d` was blocked on Fog directory metadata; corrective child `6410b40fb` now uses canonical metadata/masks and passed native plus ASan/UBSan. Lane 287 is independently re-reviewing the final snapshot. |
+| 270 | Read-only audit | Complete | Mapped the current Apple sink as position/color/limited-transform only; no cumulative plan or fourteen-section render capability is claimed. |
+| 271 | Test-only verification | Complete | Lane 277 reran the exact-`f77d5ec86` focused matrix: 41/41 registered executable tests and 11/11 object targets passed in native and combined ASan/UBSan roots. |
+| 272 | Read-only audit | Complete | Fixed-width leaf contracts passed the bounded portability audit, while pointer leases, cumulative parsing, production wiring, and real Windows targets remain separately unproved. |
+| 273 | Read-only integration review | Complete | Ranked lease before assembler before parser/consumer, with one source PR, exact merged-tip gate, and umbrella pointer update serialized at each accepted step. |
+| 274 | Read-only successor | Complete | Defined the smallest Geometry production source/library prerequisite without confusing production linkage with production calls. |
+| 275 | Read-only successor | Complete | Defined one grouped all-section production object topology, canonical library bundle, raster definition, and duplicate-symbol hazards; implementation remains after lease/assembler integration. |
+| 278 | Source-edit corrective child | Complete and accepted | `ded31c017` closes the assembler output-size alias corruption and replaces a drifting maximum literal with the canonical formula; Lane 280 returned PASS. |
+| 280 | Independent review | Complete, PASS | Re-reviewed the corrected assembler chain with no P0/P1/P2 blocker and fresh native plus ASan/UBSan execution. |
+| 282 | Test-only CMake source edit | Complete and accepted | `81995528a` registers `acgc_pc_gx_cumulative_snapshot_fixture`; Lane 285 accepted exact native and sanitizer CTest proof. |
+| 283 | Source-edit corrective child | Complete and accepted | `27e16b460` removes the unsafe auto-borrowing public builder and requires caller-owned active-token lifetime through consume, revalidate, and release. |
+| 284 | Source-edit corrective child | Complete, re-review active | `6410b40fb` enforces canonical metadata for all sections, including Fog 80/1/1, and explicit canonical mask mapping; fresh native and ASan/UBSan passed. |
+| 285 | Independent review | Complete, PASS | Accepted `81995528a`; repeated canonical archives are a warning-only transitive-link-graph observation, not a duplicate-definition failure. |
+| 286 | Independent review | Complete, PASS | Accepted the final lease chain with no P0/P1/P2 finding under the documented synchronous single-threaded guarded-API contract. |
+| 287 | Independent re-review | Active | Re-review exact parser chain through `6410b40fb`; integration is blocked until PASS. |
+| 288 | Read-only integration audit | Active | Check the accepted assembler chain for clean application and unchanged semantics on new PC tip `c91873521`. |
 
-PC PR #4 changed only `pc/CMakeLists.txt`; it did not add the Geometry builder
-to the production `ac_pc` link or wire cumulative publication. Fresh native and
-combined ASan/UBSan target-only builds and exact CTest runs passed on candidate
-`35c0dd350`, and the smallest focused native gate passed again on authoritative
-merge `f77d5ec86`. No hosted workflow was configured, and no full link, process
-launch, callback, Metal/device, pixel, input, audio, save/load, or playability
-claim follows.
+PC PR #5 adds the exact-token Texture/TLUT borrow transaction but does not add a
+cumulative assembler, production gatherer, or Apple consumer. Fresh native and
+combined ASan/UBSan target-only builds and exact CTest runs passed on the
+reviewed chain and authoritative merge `c91873521`. No hosted workflow was
+configured, and no full link, process launch, cumulative callback, Metal/device,
+pixel, input, audio, save/load, or playability claim follows.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -2872,13 +2880,18 @@ order follows the updated critical path recorded in the README (Phases A–G):
 4. ~~Register the source-backed Geometry dependency fixture as a reproducible
    focused CMake/CTest gate~~ — done 2026-08-22 through PC PR #4 at canonical
    `f77d5ec86`, with native, combined ASan/UBSan, and exact-merge verification.
-5. Close the remaining lane-238 blockers in dependency order: production
-   `ac_pc` link membership, atomic resource-lease publication, the
-   all-or-nothing cumulative assembler, and the typed Apple CPU consumer.
-6. Only then schedule the one serialized live callback trace, followed by the
+5. ~~Integrate atomic Texture/TLUT/Dynamic resource borrowing~~ — done
+   2026-08-22 through PC PR #5 at canonical `c91873521`, after three corrective
+   commits, final independent PASS, and exact-merge native plus ASan/UBSan
+   verification.
+6. Integrate the independently accepted all-or-nothing cumulative assembler and
+   focused CTest registration, then the independently accepted Apple parser.
+   Production `ac_pc` membership, live gathering/flush wiring, and the typed
+   Apple CPU plan remain separate successor gates.
+7. Only then schedule the one serialized live callback trace, followed by the
    Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
-7. iOS implementation remains gated behind proven shared macOS core, renderer,
+8. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
