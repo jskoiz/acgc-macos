@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `c7ce553d7`; see
-`docs/evidence/CUMULATIVE-SNAPSHOT-C7CE553D7-2026-08-22.md`.
+canonical PC tip is `8e55df64e`; see
+`docs/evidence/APPLE-CANONICAL-PARSER-8E55DF64E-2026-08-22.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -23,7 +23,7 @@ active does not imply that its gate passed or that it is active now.
 | 266 | Read-only audit | Complete | Mapped all fourteen sections and proved that only Channels, Lighting, and Alpha are fully linked into `ac_pc`; none is production-flush-called, while Texture/Dynamic are only conditionally called with missing canonical links. |
 | 267 | Read-only audit | Complete | Froze the raw-state freeze, dependency-topological build, lease revalidation, fixed-order envelope, final revalidation, and single-publication order. |
 | 268 | Read-only audit | Complete | Located the future gatherer immediately after completed Geometry capture in `pc_gx_flush_vertices`, before the existing Texture/Dynamic callback, observers, and legacy path. |
-| 269 | Read-only audit then source-edit | Corrected candidate accepted, integration queued | Pure-C parser `6ae7aec1d` was blocked on Fog directory metadata; corrective child `6410b40fb` uses canonical metadata/masks, passed native plus ASan/UBSan, and received Lane 287 PASS. |
+| 269 | Read-only audit then source-edit | Complete and integrated | Parser `6ae7aec1d` plus corrective child `6410b40fb` was integrated as `33843a6ee` + `9c7603c55` and merged in [PC PR #7](https://github.com/jskoiz/ACGC-PC-Port/pull/7) as `8e55df64e`; exact-merge native and ASan/UBSan gates passed. |
 | 270 | Read-only audit | Complete | Mapped the current Apple sink as position/color/limited-transform only; no cumulative plan or fourteen-section render capability is claimed. |
 | 271 | Test-only verification | Complete | Lane 277 reran the exact-`f77d5ec86` focused matrix: 41/41 registered executable tests and 11/11 object targets passed in native and combined ASan/UBSan roots. |
 | 272 | Read-only audit | Complete | Fixed-width leaf contracts passed the bounded portability audit, while pointer leases, cumulative parsing, production wiring, and real Windows targets remain separately unproved. |
@@ -34,19 +34,21 @@ active does not imply that its gate passed or that it is active now.
 | 280 | Independent review | Complete, PASS | Re-reviewed the corrected assembler chain with no P0/P1/P2 blocker and fresh native plus ASan/UBSan execution. |
 | 282 | Test-only CMake source edit | Complete and integrated | `81995528a` registers `acgc_pc_gx_cumulative_snapshot_fixture`; integrated equivalent `cfb61d67d` is in PC PR #6 after Lane 285 PASS. |
 | 283 | Source-edit corrective child | Complete and accepted | `27e16b460` removes the unsafe auto-borrowing public builder and requires caller-owned active-token lifetime through consume, revalidate, and release. |
-| 284 | Source-edit corrective child | Complete and accepted | `6410b40fb` enforces canonical metadata for all sections, including Fog 80/1/1, and explicit canonical mask mapping; fresh native and ASan/UBSan plus Lane 287 re-review passed. |
+| 284 | Source-edit corrective child | Complete and integrated | `6410b40fb` enforces canonical metadata for all sections, including Fog 80/1/1, and explicit canonical mask mapping; integrated equivalent `9c7603c55` is in PC PR #7. |
 | 285 | Independent review | Complete, PASS | Accepted `81995528a`; repeated canonical archives are a warning-only transitive-link-graph observation, not a duplicate-definition failure. |
 | 286 | Independent review | Complete, PASS | Accepted the final lease chain with no P0/P1/P2 finding under the documented synchronous single-threaded guarded-API contract. |
 | 287 | Independent re-review | Complete, PASS | Confirmed the corrected parser closes the Fog 80/1/1 metadata blocker, preserves exact canonical order/masks and output immutability, and passes fresh native plus ASan/UBSan. |
 | 288 | Read-only integration audit | Complete, PASS | Proved the accepted assembler chain applies cleanly to `c91873521`, has no lease-API dependency, and changes exactly its three files plus CMake registration. |
+| 291 | Read-only integration audit | Complete, PASS | Proved the corrected parser chain applies cleanly to `c7ce553d7`, matches the landed assembler directory contract, and has no lease or production dependency. |
 
-PC PR #6 adds the pure cumulative assembler and focused CTest gate, but does not
-add it to production `ac_pc`, gather live state, own resource leases, invoke a
-callback, or add an Apple consumer. Fresh native and combined ASan/UBSan
-target-only builds and exact CTest runs passed on the reviewed chain and
-authoritative merge `c7ce553d7`. No hosted workflow was configured, and no full
-link, process launch, cumulative callback, Metal/device, pixel, input, audio,
-save/load, or playability claim follows.
+PC PR #7 adds the pure Apple structural parser and focused CTest gate, but does
+not semantically decode payloads, construct a typed plan, add production
+`ac_pc` membership, gather live state, own resource leases, or invoke a
+callback. Fresh native and combined ASan/UBSan target-only builds and exact
+CTest runs passed on the reviewed chain and authoritative merge `8e55df64e`.
+No hosted workflow was configured, and no full link, process launch, cumulative
+callback, Metal/device, pixel, input, audio, save/load, or playability claim
+follows.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -2888,13 +2890,16 @@ order follows the updated critical path recorded in the README (Phases A–G):
 6. ~~Integrate the independently accepted all-or-nothing cumulative assembler
    and focused CTest registration~~ — done 2026-08-22 through PC PR #6 at
    canonical `c7ce553d7`, with exact-merge native and ASan/UBSan verification.
-7. Integrate the independently accepted pure Apple parser. Production `ac_pc`
-   membership, live gathering/flush wiring, and the typed Apple CPU plan remain
-   separate successor gates.
-8. Only then schedule the one serialized live callback trace, followed by the
+7. ~~Integrate the independently accepted pure Apple parser~~ — done 2026-08-22
+   through PC PR #7 at canonical `8e55df64e`, with exact-merge native and
+   ASan/UBSan verification.
+8. Add production `ac_pc` producer membership, a lease-owning live gatherer and
+   single flush call, then semantic Apple section decoding and the immutable
+   typed CPU plan as separately reviewed gates.
+9. Only then schedule the one serialized live callback trace, followed by the
    Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
-9. iOS implementation remains gated behind proven shared macOS core, renderer,
+10. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
