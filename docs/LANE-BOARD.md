@@ -5,8 +5,8 @@ requested: one integration/evidence owner plus fourteen durable Luna/max worker
 tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The current
-canonical PC tip is `d6a22182b`; see
-`docs/evidence/CUMULATIVE-GATHERER-D6A22182B-2026-08-23.md`.
+canonical PC tip is `1c8781d76`; see
+`docs/evidence/CUMULATIVE-FLUSH-1C8781D76-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -60,7 +60,11 @@ active does not imply that its gate passed or that it is active now.
 | 307 | Read-only Apple plan audit | Complete, BLOCK with bounded successor | Found the typed Apple CPU plan still needs twelve fixed-section little-endian decoders, a full Geometry stream decoder, and pure dependency derivation; it defined a pure-C successor without claiming Metal or runtime readiness. |
 | 308 | Independent gatherer review | Complete, PASS | Accepted `ac4237eec` with no P0/P1 blocker, including one-borrow cleanup, fourteen-section order, callback-time fail-closed registration, output immutability, and retained native plus ASan/UBSan evidence. |
 | 309 | Read-only flush-integration audit | Complete, READY | Located exactly one gather attempt after completed Geometry capture, required removal of the older live Texture/Dynamic-only publication, froze file-static non-reentrant storage ownership, and designed the real GXBegin/GXEnd source-backed fixture. |
-| 310 | Source-edit successor | Active | Owns only `pc/src/pc_gx.c`, one cumulative flush fixture, and its CMake gate at exact base `d6a22182b`; it must preserve legacy observer/GL ordering and does not own gatherer, encoder, Apple, or renderer code. |
+| 310 | Source-edit successor | Complete and integrated | Added one guarded cumulative gather attempt at the completed-Geometry flush seam plus a source-backed fixture in `c2f557e34`; corrective child `a986c7007` closes callback lifecycle/reentrancy findings. Lane 314 passed the final chain and [PC PR #14](https://github.com/jskoiz/ACGC-PC-Port/pull/14) merged it as `1c8781d76`. |
+| 311 | Immutable umbrella review | Complete, PASS | Accepted gatherer umbrella candidate `19b76cce` with exact pointer/evidence scope before umbrella PR #9. |
+| 312 | Independent flush review | Complete, BLOCK resolved | Blocked the first Lane 310 commit on stale callback/context and callback-time lifecycle reset/reentrancy hazards; `a986c7007` closes each finding. |
+| 313 | Source-edit Apple plan successor | Active | Owns only the pure-C Apple canonical CPU plan, all-fourteen explicit little-endian section decoding, focused fixture, and Apple CMake registration; no Metal, callback, flush, or production runtime wiring is in scope. |
+| 314 | Independent flush re-review | Complete, PASS | Accepted `c2f557e34` + `a986c7007` with no P0/P1/P2 finding, including guarded lifecycle reset, non-reentrant callback contract, one publication per successful flush, older callback suppression, and legacy continuation. |
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -92,6 +96,19 @@ synchronous envelope-only callback, failure immutability, and Texture/TLUT
 borrow cleanup/reuse. It does not prove a live flush call, legacy GL execution,
 process launch, Apple/Metal consumption, pixels, device behavior, or
 playability.
+
+PC PR #14 calls that gatherer once from `pc_gx_flush_vertices` immediately
+after completed Geometry capture. It removes the older live
+Texture/Dynamic-only publication from that seam, keeps fixture/semantic/legacy
+ordering intact, uses file-static aligned storage, rejects callback-time nested
+gather/registration/clear and GX lifecycle mutation, and clears callback/context
+at normal lifecycle boundaries. At authoritative merge tip `1c8781d76`, the
+exact flush CTest passes `1/1` in fresh native and combined ASan/UBSan trees. A
+fresh serialized 4,025-item `ac_pc` build links a 15,177,520-byte arm64 Mach-O
+containing callback registration/clear, gather, and assemble symbols. This
+proves the source-backed production flush contract and production link, not a
+real-process callback, launch, Apple plan/Metal consumption, pixels, device
+behavior, or playability.
 
 ## 2026-08-21 orchestrated canonical-producer batch
 
@@ -2942,13 +2959,16 @@ order follows the updated critical path recorded in the README (Phases A–G):
    serialized content-identical candidate-tree full link.
 9. ~~Add a lease-owning all-section gatherer~~ — done 2026-08-23 through PC PR
    #13 at canonical `d6a22182b`, with independent review, exact-merge native and
-   ASan/UBSan verification, and a serialized exact-tip full link. Add the
-   single flush call next, then semantic Apple section decoding and the
-   immutable typed CPU plan as separately reviewed gates.
-10. Only then schedule the one serialized live callback trace, followed by the
+   ASan/UBSan verification, and a serialized exact-tip full link.
+10. ~~Add one guarded production flush publication~~ — done 2026-08-23 through
+   PC PR #14 at canonical `1c8781d76`, with initial independent BLOCK,
+   corrective lifecycle/reentrancy child, final PASS, exact-merge native and
+   ASan/UBSan verification, and a serialized exact-tip full link. Add semantic
+   Apple section decoding and the immutable typed CPU plan next.
+11. Only then schedule the one serialized live callback trace, followed by the
    Metal encode/present/readback gates and the remaining input, audio,
    save/reload, lifecycle, regression, and playability gates.
-11. iOS implementation remains gated behind proven shared macOS core, renderer,
+12. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
