@@ -10,7 +10,7 @@
 set -u
 setopt pipefail
 
-readonly EXPECTED_PC_COMMIT='9860ebc5c3628426da74222aef4448ed6f86bec6'
+readonly EXPECTED_PC_COMMIT='07929bf6af57f486d4f263a584282d4804d8b495'
 readonly ROOT_TEST='acgc_pc_gx_canonical_plan_roundtrip_fixture'
 readonly ROOT_REGEX="^${ROOT_TEST}$"
 readonly APPLE_REGEX='^(acgc_apple_canonical_envelope_parser_fixture|acgc_apple_canonical_plan_fixture|acgc_apple_canonical_plan_handoff_fixture|acgc_apple_canonical_plan_consumer_fixture)$'
