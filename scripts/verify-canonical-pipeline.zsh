@@ -10,7 +10,7 @@
 set -u
 setopt pipefail
 
-readonly EXPECTED_PC_COMMIT='586cf7a616cd38149c911bd4bc8fb2f1de638de4'
+readonly EXPECTED_PC_COMMIT='c7f835f325ea5e061f492213da9ddce5349b269d'
 readonly PC_REGEX='^acgc_pc_gx_(cumulative_gatherer_flush|texture_dynamic_producer|canonical_plan_roundtrip)_fixture$'
 readonly APPLE_REGEX='^(acgc_apple_canonical_(texture_resource_consumer|plan_consumer)_fixture|acgc_pc_metal_runtime_arbitration_fixture)$'
 readonly SANITIZER_FLAGS='-O1 -g -fno-omit-frame-pointer -fsanitize=address,undefined -fno-sanitize-recover=all'
