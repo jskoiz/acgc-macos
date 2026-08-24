@@ -883,7 +883,7 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `586cf7a61`. It contains the independently reviewed
+`c1/macos-host-launch` at `c7f835f32`. It contains the independently reviewed
 Blend producer (`07a621428`, merged as `f772f0bb8`), Fog producer
 (`e0bb5ac96`, merged as `cd55a7789`), and Geometry dependency builder
 (`09d174799`, merged as `4cbb837e6`), plus the Geometry dependency fixture gate
@@ -964,7 +964,10 @@ merged through [PC PR #34](https://github.com/jskoiz/ACGC-PC-Port/pull/34) as
 `d472c6bd3`), followed by synchronous borrow-scoped canonical Texture/TLUT
 resource staging and atomic plan/resource callback ownership (`2fcfe1121`
 through `024206d36`, merged through
-[PC PR #35](https://github.com/jskoiz/ACGC-PC-Port/pull/35) as `586cf7a61`).
+[PC PR #35](https://github.com/jskoiz/ACGC-PC-Port/pull/35) as `586cf7a61`),
+followed by the test-only nonidentity orthographic projection/view
+reconstruction fixture (`2013ea310`, merged through
+[PC PR #36](https://github.com/jskoiz/ACGC-PC-Port/pull/36) as `c7f835f32`).
 Exact merged-tip focused gates passed for the source/test/hygiene integrations.
 A serialized exact-`586cf7a61` full link produced a 15,538,896-byte arm64
 binary with SHA-256
@@ -980,6 +983,7 @@ classifies the overall harness FAIL/P1 because its post-LLDB wrapper assigns to
 zsh's read-only `status`; no retry was run. The published Texture state has
 eight staged resource maps and one staged TLUT, so resource transport success
 is not inferred to mean typed Texture admission. See
+[the 2026-08-24 nonidentity orthographic reconstruction evidence](docs/evidence/NONIDENTITY-ORTHOGRAPHIC-C7F835F32-2026-08-24.md),
 [the 2026-08-24 exact-586 cumulative resource trace evidence](docs/evidence/EXACT-586-CUMULATIVE-TRACE-586CF7A6-2026-08-24.md),
 [the 2026-08-24 Texture resource-handoff evidence](docs/evidence/TEXTURE-RESOURCE-HANDOFF-586CF7A6-2026-08-24.md),
 [the 2026-08-24 typed Texgen and Texture-frontier evidence](docs/evidence/TYPED-TEXGEN-9860EBC5C-2026-08-24.md),
