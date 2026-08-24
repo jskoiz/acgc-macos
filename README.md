@@ -129,6 +129,7 @@ Every row is an independent gate. A later row is not implied by an earlier one.
 | Portable focused build/tests | **Done, continuing** | Geometry dependency, Texture/Dynamic lease, cumulative assembler, Apple parser, all-section plan and handoff, bounded canonical-plan packet consumer including multi-vertex triangle/quad replay and its negative control, borrow-scoped Texture/TLUT resource staging, exact plan/resource callback ownership arbitration, the J2D-shaped direct `POS|CLR0` four-vertex quad plan plus TRIANGLES rejection control, typed section rejection, the source-backed no-`PNMTXIDX`/dormant-Texgen round trip, per-attempt runtime arbitration, the 64-byte N64 Mtx layout, source-backed Texgen identity/post-identity initialization, finite `emu64` projection reconstruction, source-order TEV unavailable-value handling, production GX object, twelve canonical encoder gates, the cumulative gatherer, and its production flush fixture have exact-tip native and ASan/UBSan proof. The exact-`586cf7a61` Texture matrix is PC `3/3` plus Apple `3/3` in both configurations. |
 | arm64 `ac_pc` full link | **Current source graph proved at `9860ebc5c`** | A serialized exact-`9860ebc5c` full target linked a 15,237,616-byte arm64 binary with SHA-256 `cd6832a6e2fc5e54193abb55550434cc0150d1b6bfb9b00b28be8d189fcbcb24` and UUID `04012134-67AA-3C5F-BB39-E3E6F3D35F91`. |
 | Process launch and boot progression | **Typed Texture frontier proved at `9860ebc5c`** | One bounded exact-`9860ebc5c` attempt passed all fourteen producers, gather, publication, callback, Apple plan construction, Geometry, Channels, and Texgen. The public typed consumer then returned status 17, `CANONICAL_TEXTURE_UNSUPPORTED`; the sink was not entered and exact PID cleanup passed. |
+| Exact-PID host-runner ownership | **Local replay candidate; immutable review pending** | Umbrella-only replay of the reviewed `cfaf226ca` runner onto live umbrella `714958f46`; cleanup records and revalidates the exact PID, macOS `lstart`, and exact command, with fail-closed lock/record/state handling and no broad process matching. The bounded shell/fake-callback proof does not claim a real launch, signal, LLDB, hosted-check, asset, or runtime result. See [the exact-PID replay evidence](docs/evidence/EXACT-PID-CLEANUP-714958F46-2026-08-24.md). |
 | LP64 loader/audio/pointer safety | **Substantially done** | DVD aligned reads, high-address audio DMA, texture handles, and allocator-owned field pointers have focused/runtime evidence. |
 | Graph/display-list capture | **Partial; live typed-consumer handoff reached** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; the production flush publishes one renderer-neutral snapshot and the Apple lifecycle receives its callback and builds a plan. The exact-`9860ebc5c` live frontier is typed Texture acceptance, not a producer. |
 | Renderer-neutral section ABIs | **Done for the current gatherer contract** | Fourteen-section value ABIs, explicit little-endian encoders, the Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, every standalone producer, all canonical libraries, and the gatherer are production-linked and called once from the completed-Geometry flush seam. |
@@ -2090,11 +2091,13 @@ ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof ./script/build_and_run
 ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof ACGC_GAME_VERIFY_SECONDS=5 ./script/build_and_run_game.sh --verify
 ```
 
-The final command runs the AppKit executable directly with a five-second
-deadline, requests two Metal clear/triangle/present command buffers, checks the
-renderer fixture's own completion evidence and exit status, and confirms no
-process remains. It is a native geometry-fixture gate without pixel readback,
-not a representative GX, reconstructed game-frame, or playability claim.
+The final command runs the AppKit executable directly in the foreground with a
+five-second deadline, requests two Metal clear/triangle/present command buffers,
+checks the renderer fixture's own completion evidence and exit status, and waits
+for that foreground invocation to exit and be reaped before returning success;
+it is not an independent process-inventory scan. It is a native
+geometry-fixture gate without pixel readback, not a representative GX,
+reconstructed game-frame, or playability claim.
 
 The actual-game `--verify` command is a separate gate. It builds the full
 `ac_pc` target, validates the ignored local disc by SHA-256, symlinks that input
