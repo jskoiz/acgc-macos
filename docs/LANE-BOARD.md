@@ -7,8 +7,8 @@ integration owner is using at most three bounded internal collaboration workers
 under the current four-slot runtime cap; those workers are not represented as
 replacement visible tasks. Source PRs, merges, and exact-tip verification
 remain serialized, and completed workers are refilled only for concrete,
-dependency-ready work. The current canonical PC tip is `dabc78208`; see
-`docs/evidence/TYPED-CHANNELS-DABC78208-2026-08-24.md`.
+dependency-ready work. The current canonical PC tip is `9860ebc5c`; see
+`docs/evidence/TYPED-TEXGEN-9860EBC5C-2026-08-24.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -147,6 +147,12 @@ active does not imply that its gate passed or that it is active now.
 | 403 | Exact-`dabc78208` full link and Texgen traces | Complete; typed frontier advanced and fields closed | The exact merge completed a 4,077-step arm64 link. One 60-second/one-attempt LLDB run passed all fourteen producers, plan build, gather, publication, callback, Geometry, and Channels; published/consumer plan SHA-256 values match. Typed status 16 rejects active Texgen count 2. A second one-attempt field-completion trace on the same exact binary captured record 1 and ordinary selector 30 in raw and canonical state; it did not change the frontier. Neither run called the sink or left a watchdog/PID alive. |
 | 404 | Texgen predicate and trace reviews | Complete, PASS; sole source lane active | The independent source/oracle audit plus both exact-trace reviews found no P0/P1 blocker. The integration owner transferred their unique evidence and the completed-field trace to exactly one source owner for `pc/apple/src/metal_packet_consumer.c` and its existing fixture. Duplicate Texgen investigations are stopped. |
 | 405 | Nested ROM ignore policy | Candidate; clean exact merge-tree gate | Local candidate `f690adbf8` adds only mixed-case recursive `.iso`/`.gcm`/`.ciso` ignore rules under any `rom` directory, with positive/nonmatch checks, zero tracked-image matches, and focused native/ASan fixture passes. Independent review found no patch defect; exact `git merge-tree --write-tree --messages dabc78208 f690adbf8` succeeded with synthetic tree `190030c10a520f73104440d7873488d4ad686d28`. It remains unpushed for ordered replay after the Texgen owner stabilizes. No image was read, moved, deleted, hashed, or published. |
+| 406 | Active Texgen source owner and PC integration | Complete and integrated | Candidate `2fd013273` changes only `metal_packet_consumer.c` and its existing fixture, retains dormant Texgen handling, and admits only the exact observed two-active profile without transforming or emitting texture coordinates. Independent review passed; [PC PR #32](https://github.com/jskoiz/ACGC-PC-Port/pull/32) merged it as `9860ebc5c`. Fresh exact-merge Apple/root native plus combined ASan/UBSan gates each discover and pass `1/1`. |
+| 407 | Exact-`9860ebc5c` link, trace, and immutable review | Complete, PASS; typed frontier advanced | The exact merge links a 15,237,616-byte arm64 binary. Its sole bounded attempt passes all fourteen producers, plan/gather/publication, Geometry, Channels, and Texgen before returning public status 17, `CANONICAL_TEXTURE_UNSUPPORTED`; plan digests match, no sink is called, and exact PID cleanup passes. Independent review found no P0/P1 and retained two explicit trace-capture P2 limits. |
+| 408 | Texgen umbrella integration | Integration candidate under immutable review | This five-path integration advances the PC gitlink and canonical runner pin to `9860ebc5c`, synchronizes README/lane-board claims, and adds the exact merge/link/trace evidence. Its fresh umbrella runner passes PC `1/1` and Apple `4/4` natively and under combined ASan/UBSan. No Metal/pixel/device/playability claim follows. |
+| 409 | J2D four-vertex plan fixture | Test-only candidate; independent review active | Clean candidate `b85cd5927` changes only `pc/apple/tests/test_apple_canonical_plan.c`, adds a source-shaped direct POS+CLR0 `GX_QUADS` plan and a TRIANGLES negative control, and passes the exact plan fixture natively and under combined ASan/UBSan. It owns no production/CMake/runtime file and remains unpushed behind the live Texture path. |
+| 410 | Active Texture/TEV/Dynamic contract audit | Active; no source owner selected yet | Two read-only audits are converging on whether the active eight-map resource-backed Texture state can be separated from its two-stage TEV and Dynamic lease/resource contract. A Texture-only predicate relaxation is prohibited until the atomicity question is resolved; duplicate source edits remain stopped. |
+| 411 | Projection reconstruction current-tip audit | Complete; no production defect | Exact-`9860ebc5c` raw capture, canonical producer, plan decode, and consumer reconstruction match `GXSetProjection`/`GXSetProjectionv`; the retained trace validates the producer/plan path but stops at Texture before consumer transform construction. Only a non-critical test-only plan-decoder coverage successor remains. |
 
 PC PR #20 fixes the LP64 N64 matrix payload at source commit `5a8a686a5`
 and merges it as `2f944f1ae`. Exact-merge native and ASan/UBSan
@@ -3256,14 +3262,18 @@ order follows the updated critical path recorded in the README (Phases A–G):
    live Geometry, logical RGBA fixture, and the exact active Channels mode~~ —
    done through PC PRs #26 and #28–#31, advancing the canonical tip to
    `dabc78208`; every source merge has focused native and ASan/UBSan proof.
-19. Select exactly one active-Texgen source owner after the two read-only reviews
-   converge, merge and verify its smallest focused correction, update the
-   umbrella pointer, then run one bounded serialized trace to the next typed
-   section or sink frontier.
-20. Replay the reviewed download-manifest and nested-ROM hygiene changes one at
+19. ~~Select exactly one active-Texgen source owner after the two read-only
+   reviews converge, merge and verify its smallest focused correction, update
+   the umbrella pointer, then run one bounded serialized trace to the next typed
+   section or sink frontier~~ — source integration and exact trace are complete
+   at `9860ebc5c`; this umbrella integration records them.
+20. Determine whether the current eight-map Texture state, two-stage TEV use,
+   and Dynamic resource lease require one atomic consumer contract; appoint
+   exactly one source owner only after the read-only audits converge.
+21. Replay the reviewed download-manifest and nested-ROM hygiene changes one at
    a time after the live critical-path owner is stable; neither may displace or
-   overlap the Texgen production file.
-21. iOS implementation remains gated behind proven shared macOS core, renderer,
+   overlap the Texture/TEV/Dynamic production files.
+22. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the

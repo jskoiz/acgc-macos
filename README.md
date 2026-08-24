@@ -8,8 +8,8 @@ and Apple renderer have their own evidence.
 > **Project status — active orchestrated integration on 2026-08-24.** The prior
 > fourteen durable Luna/max worker tasks were archived during the stale-task
 > cleanup; one integration owner continues with bounded, non-overlapping local
-> source, test, audit, and independent-review lanes. Twenty-five focused source
-> milestones in this batch have been serialized through PC-port PRs #4–#31 with
+> source, test, audit, and independent-review lanes. Twenty-six focused source
+> milestones in this batch have been serialized through PC-port PRs #4–#32 with
 > exact-merge verification. The repository
 > remains a public engineering record and roadmap. It is **not** a playable
 > release, does not contain game data, and does not grant rights to Nintendo
@@ -76,8 +76,11 @@ macOS first and iOS second. The short version of the remaining critical path is:
     full verification matrix~~ (done 2026-08-23 at PC `621a4d548`), ~~trace the
     exact tip to typed Channels status 15, implement the bounded live
     `COLOR0` AF_NONE lighting contract, and trace the exact merge to the next
-    typed frontier~~ (done 2026-08-24 at PC `dabc78208`); implement the exact
-    active Texgen contract now identified by status 16;
+    typed frontier~~ (done 2026-08-24 at PC `dabc78208`), and ~~implement the
+    exact active Texgen admission contract and trace its exact merge~~ (done
+    2026-08-24 at PC `9860ebc5c`); audit the now-current active
+    Texture/TEV/Dynamic resource contract identified by status 17 before
+    selecting one atomic source owner;
 13. prove a game-owned Metal encode, present, readback, and identifiable pixel;
 14. separately prove physical input, audible audio, save/reload, lifecycle, and
    regression gates;
@@ -97,12 +100,12 @@ renderer handoff that can truthfully claim a Metal-rendered game frame.
 | --- | --- |
 | Umbrella branch | `main` |
 | Canonical PC-port branch | `c1/macos-host-launch` |
-| Canonical PC-port commit | `dabc78208b68c24805054f740f6b82ea0c855822` |
+| Canonical PC-port commit | `9860ebc5c3628426da74222aef4448ed6f86bec6` |
 | Decomp oracle | `09ca8e8b5b24e6ab44047ee980cf0088ad7ecb4c` |
 | Supported revision | `GAFE01_00`, USA revision 0 |
 | Legally obtained local-disc SHA-256 | `a08ad2654831ab298071bdcdf727945efcfdd50d2b0e3512a3d361ee7b18296d` |
 | Current execution state | One integration owner with at most three internal collaboration workers under the current runtime cap; the fourteen stale visible worker tasks were archived, and visible-task creation remains quota-gated until the reported 2026-08-26 reset |
-| Current proof level | Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, production producer/link availability, explicit little-endian encoders for all fourteen sections, a production-linked lease-owning gatherer, one source-backed production flush publication path, a pure Apple structural parser plus all-section value plan, a lifecycle-owned production callback handoff, a bounded plan-to-Metal-packet adapter with CPU-only canonical triangle/quad replay to at most 192 renderer vertices, one source-backed no-`PNMTXIDX` setter-to-consumer round trip, source-backed per-attempt canonical/semantic runtime arbitration, a fixed 64-byte N64 matrix layout, source-faithful GX identity/post-identity Texgen provenance, corrected finite `emu64` projection reconstruction, source-order TEV unavailable-value dependency handling, a corrected canonical CPU baseline, one-pass Apple canonical Geometry-word consumption, bounded validation of the live `POS|NRM|CLR0|TEX0` Geometry shape, corrected logical-RGBA8 fixture expectations, and bounded CPU materialization of the exact live `COLOR0` REG/REG, nonzero-light-mask, `DF_CLAMP`/`AF_NONE` mode; every newest source gate has exact-merge native plus ASan/UBSan focused proof. Two bounded exact-`dabc78208` process attempts—one frontier trace and one narrower field-completion trace—show all fourteen producers passing, a cumulative envelope publishing, Apple building the plan, Geometry and Channels passing, and the typed consumer returning status 16, `CANONICAL_TEXGENS_UNSUPPORTED`, for the fully captured active two-generator canonical Texgen state. No sink, Metal encode/present, pixel, device, or playability proof follows. |
+| Current proof level | Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, production producer/link availability, explicit little-endian encoders for all fourteen sections, a production-linked lease-owning gatherer, one source-backed production flush publication path, a pure Apple structural parser plus all-section value plan, a lifecycle-owned production callback handoff, a bounded plan-to-Metal-packet adapter with CPU-only canonical triangle/quad replay to at most 192 renderer vertices, one source-backed no-`PNMTXIDX` setter-to-consumer round trip, source-backed per-attempt canonical/semantic runtime arbitration, a fixed 64-byte N64 matrix layout, source-faithful GX identity/post-identity Texgen provenance, corrected finite `emu64` projection reconstruction, source-order TEV unavailable-value dependency handling, a corrected canonical CPU baseline, one-pass Apple canonical Geometry-word consumption, bounded validation of the live `POS|NRM|CLR0|TEX0` Geometry shape, corrected logical-RGBA8 fixture expectations, bounded CPU materialization of the exact live `COLOR0` REG/REG `DF_CLAMP`/`AF_NONE` mode, and admission of the exact observed two-active Texgen profile without transforming or emitting texture coordinates; every newest source gate has exact-merge native plus ASan/UBSan focused proof. One bounded exact-`9860ebc5c` attempt shows all fourteen producers passing, a cumulative envelope publishing, Apple building the plan, and Geometry, Channels, and Texgen passing before the typed consumer returns status 17, `CANONICAL_TEXTURE_UNSUPPORTED`. The active canonical Texture metadata is resource-required and its two-stage TEV state references texture map 0, so no Texture-only relaxation is inferred. No sink, Metal encode/present, pixel, device, or playability proof follows. |
 
 The disc hash is recorded only to identify the supported local input. The disc,
 extracted files, keys, and proprietary assets remain local and untracked and are
@@ -119,13 +122,13 @@ Every row is an independent gate. A later row is not implied by an earlier one.
 | Source/revision compatibility | **Done** | Both upstreams identify `GAFE01_00`; config/build hashes agree for the supported revision. |
 | Local-disc identity and ignore rules | **Done for current staging policy** | Exact SHA-256 was verified locally, no disc image is tracked, and PC PR #27 at `503194ff2` adds anchored mixed-case `.iso`/`.gcm`/`.ciso` rules for root, `rom/`, `pc/rom/`, and `orig/`. This proves ignore behavior only, not deletion or history removal. |
 | Portable focused build/tests | **Done, continuing** | Geometry dependency, Texture/Dynamic lease, cumulative assembler, Apple parser, all-section plan and handoff, bounded canonical-plan packet consumer including multi-vertex triangle/quad replay and its negative control, typed section rejection, the source-backed no-`PNMTXIDX`/dormant-Texgen round trip, per-attempt runtime arbitration, the 64-byte N64 Mtx layout, source-backed Texgen identity/post-identity initialization, finite `emu64` projection reconstruction, source-order TEV unavailable-value handling, production GX object, twelve canonical encoder gates, the cumulative gatherer, and its production flush fixture have exact-tip native and ASan/UBSan proof. |
-| arm64 `ac_pc` full link | **Current source graph proved at `dabc78208`** | A serialized exact-`dabc78208` full target completed 4,077 steps and produced a 15,290,128-byte arm64 binary with SHA-256 `91c1875cce09b220d0a92afccc350147ba0c4f8976dc7fc657cdb048feb7ca48` and UUID `BDBA00DA-5DF5-3109-9508-1802D085FEF4`. |
-| Process launch and boot progression | **Typed Texgen frontier proved at `dabc78208`** | One bounded exact-`dabc78208` frontier attempt passed all fourteen producers, returned gather success, notified attempt 1, dispatched the Apple callback, and built the Apple plan. Geometry and Channels passed; the typed consumer then returned status 16, `CANONICAL_TEXGENS_UNSUPPORTED`, and the sink was not entered. A second one-attempt capture on the same binary recorded the two missing Texgen fields only and reproduced the same frontier. |
+| arm64 `ac_pc` full link | **Current source graph proved at `9860ebc5c`** | A serialized exact-`9860ebc5c` full target linked a 15,237,616-byte arm64 binary with SHA-256 `cd6832a6e2fc5e54193abb55550434cc0150d1b6bfb9b00b28be8d189fcbcb24` and UUID `04012134-67AA-3C5F-BB39-E3E6F3D35F91`. |
+| Process launch and boot progression | **Typed Texture frontier proved at `9860ebc5c`** | One bounded exact-`9860ebc5c` attempt passed all fourteen producers, gather, publication, callback, Apple plan construction, Geometry, Channels, and Texgen. The public typed consumer then returned status 17, `CANONICAL_TEXTURE_UNSUPPORTED`; the sink was not entered and exact PID cleanup passed. |
 | LP64 loader/audio/pointer safety | **Substantially done** | DVD aligned reads, high-address audio DMA, texture handles, and allocator-owned field pointers have focused/runtime evidence. |
-| Graph/display-list capture | **Partial; live typed-consumer handoff reached** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; the production flush publishes one renderer-neutral snapshot and the Apple lifecycle receives its callback and builds a plan. The exact-`dabc78208` live frontier is typed Texgen acceptance, not a producer. |
+| Graph/display-list capture | **Partial; live typed-consumer handoff reached** | Root and continuation targets, direct terminators, and GX/flush boundaries were captured; the production flush publishes one renderer-neutral snapshot and the Apple lifecycle receives its callback and builds a plan. The exact-`9860ebc5c` live frontier is typed Texture acceptance, not a producer. |
 | Renderer-neutral section ABIs | **Done for the current gatherer contract** | Fourteen-section value ABIs, explicit little-endian encoders, the Geometry dependency gate, token-scoped Texture/TLUT lease, cumulative assembler, every standalone producer, all canonical libraries, and the gatherer are production-linked and called once from the completed-Geometry flush seam. |
-| Live canonical snapshot publication | **Proved at `dabc78208`** | `pc_gx_flush_vertices` assigned attempt ID 1, all fourteen producers passed, the gatherer returned success, the Apple callback dispatched after borrow release, and the value-owned Apple plan was built. This proves publication and CPU handoff only. |
-| Apple typed CPU consumer | **Geometry and Channels pass; Texgen is current** | PC PR #29 accepts the bounded live `POS|NRM|CLR0|TEX0` Geometry shape. PC PR #31 accepts only the observed active `COLOR0` REG/REG, nonzero-mask, `DF_CLAMP`/`AF_NONE` mode and materializes its validated normal/light contribution into renderer vertex RGB while preserving vertex alpha. Exact-merge native and ASan/UBSan Apple and source-backed root fixtures pass. The exact-current process reaches typed status 16 on active Texgen; no sink or Metal device was exercised. |
+| Live canonical snapshot publication | **Proved at `9860ebc5c`** | `pc_gx_flush_vertices` assigned attempt ID 1, all fourteen producers passed, the gatherer returned success, the Apple callback dispatched after borrow release, and the value-owned Apple plan was built. This proves publication and CPU handoff only. |
+| Apple typed CPU consumer | **Geometry, Channels, and Texgen pass; Texture is current** | PC PRs #29, #31, and #32 accept only their exact observed bounded profiles. PR #32 validates the two-active Texgen state as admission-only provenance and still emits position plus color, not transformed texture coordinates. Exact-merge native and ASan/UBSan Apple and source-backed root fixtures pass. The exact-current process reaches typed status 17 on active Texture; no sink or Metal device was exercised. |
 | Game-owned Metal encode | **Not proven** | Device tests are gated/skipped where no Metal device is available; no live game callback has reached the canonical Metal encoder. |
 | Metal present/readback/pixel | **Not proven** | No current game-owned drawable presentation and readback identifying a real game pixel. |
 | Input | **Fixture-level partial** | Keyboard/controller snapshot and trigger/frame-guard behavior are tested; physical-controller game-session proof remains open. |
@@ -208,20 +211,20 @@ producer; those are different accomplishments.
 
 | Section | Portable ABI | Setter-owned/raw source | Canonical producer | Live cumulative wiring |
 | --- | --- | --- | --- | --- |
-| Geometry | Done | Done | Done; dependency builder integrated `09d174799` | Producer and typed consumer pass in the exact-`dabc78208` attempt |
-| Transform | Done | Done | Done | Producer and typed dependency pass in the exact-`dabc78208` attempt |
-| Channels | Done | Done | Done | Producer and bounded AF_NONE typed mode pass in the exact-`dabc78208` attempt |
-| Texgen/SU | Done | Done | Done | Producer/validator pass; typed consumer is current status 16 at exact `dabc78208` |
-| Texture | Done | Done, with resource generations | Done with Dynamic/lease snapshot | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| TEV | Done, full 16-stage contract | Done for stages/registers/KONST/swaps/indirect-per-stage state | Done; leaf `043d24822`, unavailable-provenance repair `70a8e23bc` | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| Lighting | Done | Done | Done | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| Blend | Done | Done | Done, integrated `07a621428` | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| Alpha/update/ZCompLoc | Done | Done | Done and production-linked | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| Depth | Done | Done | Done | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| Raster | Done | Done | Done | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| Fog | Done | Done, including copied RangeAdj state | Done, integrated `e0bb5ac96` | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| Indirect | Done | Done for count/orders/scales/matrices | Done, integrated `b83a6f6e3` (2026-08-17) | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
-| Dynamic resources | Done | Done with map/TLUT epochs and generations | Done with Texture snapshot | Producer passes in the exact-`dabc78208` attempt; typed gate not yet reached |
+| Geometry | Done | Done | Done; dependency builder integrated `09d174799` | Producer and typed consumer pass in the exact-`9860ebc5c` attempt |
+| Transform | Done | Done | Done | Producer and typed dependency pass in the exact-`9860ebc5c` attempt |
+| Channels | Done | Done | Done | Producer and bounded AF_NONE typed mode pass in the exact-`9860ebc5c` attempt |
+| Texgen/SU | Done | Done | Done | Producer/validator and exact active-profile typed predicate pass at `9860ebc5c`; coordinates are not transformed or emitted |
+| Texture | Done | Done, with resource generations | Done with Dynamic/lease snapshot | Producer passes; typed consumer is current status 17 at exact `9860ebc5c` |
+| TEV | Done, full 16-stage contract | Done for stages/registers/KONST/swaps/indirect-per-stage state | Done; leaf `043d24822`, unavailable-provenance repair `70a8e23bc` | Producer passes in the exact-`9860ebc5c` attempt; typed gate not reached |
+| Lighting | Done | Done | Done | Producer passes in the exact-`9860ebc5c` attempt; typed gate not reached |
+| Blend | Done | Done | Done, integrated `07a621428` | Producer passes in the exact-`9860ebc5c` attempt; typed gate not reached |
+| Alpha/update/ZCompLoc | Done | Done | Done and production-linked | Producer passes in the exact-`9860ebc5c` attempt; typed gate not reached |
+| Depth | Done | Done | Done | Producer passes in the exact-`9860ebc5c` attempt; typed gate not reached |
+| Raster | Done | Done | Done | Producer passes in the exact-`9860ebc5c` attempt; typed gate not reached |
+| Fog | Done | Done, including copied RangeAdj state | Done, integrated `e0bb5ac96` | Producer passes in the exact-`9860ebc5c` attempt; typed gate not reached |
+| Indirect | Done | Done for count/orders/scales/matrices | Done, integrated `b83a6f6e3` (2026-08-17) | Producer passes in the exact-`9860ebc5c` attempt; typed gate not reached |
+| Dynamic resources | Done | Done with map/TLUT epochs and generations | Done with Texture snapshot | Producer and plan dependency validation pass; typed Dynamic gate is after current Texture/TEV gates |
 
 Completed canonical/raw work includes:
 
@@ -675,17 +678,23 @@ binary32 `0x43800000`.
     exact-merge gates~~ — done through PC PR #31 at `dabc78208`.
 12. ~~Run one serialized exact-`dabc78208` full link and one-attempt trace,
     then capture the two omitted Texgen fields without inference~~ — done;
-    Geometry and Channels pass and typed Texgen status 16 is now first.
+    Geometry and Channels passed and typed Texgen status 16 was first.
 13. ~~Select exactly one Texgen source owner from the converged trace/predicate
-    audits~~ — done; implement the smallest observed active contract and repeat the
-    exact-merge gate plus one bounded trace.
-14. Preserve process ID, attempt correlation, bounded stop, exact-PID cleanup,
+    audits, implement the smallest observed active contract, merge it, rerun
+    the exact-merge gate, and execute one bounded trace~~ — done through PC PR
+    #32 at `9860ebc5c`; Geometry, Channels, and Texgen pass before Texture
+    returns status 17.
+14. Audit the exact active Texture, TEV, and Dynamic resource dependency as one
+    potential atomic renderer contract before appointing a source owner. Do not
+    relax the Texture predicate while still emitting position plus color.
+15. Preserve process ID, attempt correlation, bounded stop, exact-PID cleanup,
    and no-inference requirements for every trace.
 
 Exit evidence now includes one game-owned cumulative snapshot reaching the
-typed packet consumer during a real inferior. The exact-`dabc78208` attempt
-passes the repaired Geometry and Channels predicates, then stops at bounded
-active Texgen acceptance with status 16. Still no sink, Metal, or pixel claim.
+typed packet consumer during a real inferior. The exact-`9860ebc5c` attempt
+passes the repaired Geometry, Channels, and Texgen predicates, then stops at
+bounded active Texture acceptance with status 17. Still no sink, Metal, or
+pixel claim.
 
 ### Phase F — Metal encode, present, and readback
 
@@ -852,7 +861,7 @@ for the current saved-project prerequisite and handoff sequence.
 ## Current evidence
 
 The current local integration snapshot is `upstream/ACGC-PC-Port` branch
-`c1/macos-host-launch` at `dabc78208`. It contains the independently reviewed
+`c1/macos-host-launch` at `9860ebc5c`. It contains the independently reviewed
 Blend producer (`07a621428`, merged as `f772f0bb8`), Fog producer
 (`e0bb5ac96`, merged as `cd55a7789`), and Geometry dependency builder
 (`09d174799`, merged as `4cbb837e6`), plus the Geometry dependency fixture gate
@@ -921,19 +930,22 @@ merged through [PC PR #30](https://github.com/jskoiz/ACGC-PC-Port/pull/30) as
 `621a4d548`), followed by bounded CPU materialization of the observed active
 `COLOR0` REG/REG, nonzero-mask, `DF_CLAMP`/`AF_NONE` mode (`25195dfd8`, merged
 through [PC PR #31](https://github.com/jskoiz/ACGC-PC-Port/pull/31) as
-`dabc78208`).
+`dabc78208`), followed by admission of the exact observed two-active Texgen
+profile without transforming or emitting texture coordinates (`2fd013273`,
+merged through [PC PR #32](https://github.com/jskoiz/ACGC-PC-Port/pull/32) as
+`9860ebc5c`).
 Exact merged-tip focused gates passed for the source integrations. A serialized
-exact-`dabc78208` full link completed 4,077 steps and produced a 15,290,128-byte
-arm64 binary with SHA-256
-`91c1875cce09b220d0a92afccc350147ba0c4f8976dc7fc657cdb048feb7ca48` and UUID
-`BDBA00DA-5DF5-3109-9508-1802D085FEF4`. Its bounded one-attempt trace passed all
+exact-`9860ebc5c` full link produced a 15,237,616-byte arm64 binary with SHA-256
+`cd6832a6e2fc5e54193abb55550434cc0150d1b6bfb9b00b28be8d189fcbcb24` and UUID
+`04012134-67AA-3C5F-BB39-E3E6F3D35F91`. Its sole bounded attempt passed all
 fourteen producers, gather, publication, callback dispatch, Apple plan,
-Geometry, and Channels before the typed consumer returned status 16,
-`CANONICAL_TEXGENS_UNSUPPORTED`; the published and consumer plan digests match,
-the sink was not entered, and both recorded PIDs exited. A second bounded
-attempt on the same exact binary captured Texgen record 1 and ordinary selector
-30 in raw and canonical state and reproduced the same frontier, closing the
-field gap without inference. See
+Geometry, Channels, and Texgen before the public typed consumer returned status
+17, `CANONICAL_TEXTURE_UNSUPPORTED`. Published and consumer plan digests match,
+the sink was not entered, the structured error list is empty, and exact PID
+cleanup passed. The published Texture state has eight required resource maps
+and its two-stage TEV state references texture map 0, so a Texture-only
+predicate relaxation is not inferred. See
+[the 2026-08-24 typed Texgen and Texture-frontier evidence](docs/evidence/TYPED-TEXGEN-9860EBC5C-2026-08-24.md),
 [the 2026-08-24 typed Channels and Texgen-frontier evidence](docs/evidence/TYPED-CHANNELS-DABC78208-2026-08-24.md),
 [the 2026-08-23 logical-RGBA8 fixture evidence](docs/evidence/LOGICAL-RGBA8-FIXTURE-621A4D548-2026-08-23.md),
 [the 2026-08-23 typed Geometry consumer evidence](docs/evidence/TYPED-GEOMETRY-CONSUMER-D40CA1C2C-2026-08-23.md),
