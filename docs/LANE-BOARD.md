@@ -1,18 +1,14 @@
 # ACGC visible lane board
 
-Updated 2026-08-23. The current bounded run created the fifteen visible tasks
-requested: one integration/evidence owner plus fourteen durable Luna/max worker
-tasks. Completed workers are parked and refilled only when a useful
-dependency-ready successor exists; they are not reported as actively running.
-Source PRs, merges, and exact-tip verification remain serialized. The worker
-pool was re-audited and all fourteen durable tasks were refilled with concrete
-dependency-ready contracts after completed turns were found idle. Subsequent
-visible-task follow-ups hit the account usage ceiling and now fail until the
-reported 2026-08-26 reset; those retained idle/system-error tasks are not
-counted as actively running. The integration owner continued the serialized
-critical path without treating fallback reviewers as roster replacements. The
-current canonical PC tip is `70a8e23bc`; see
-`docs/evidence/TEV-UNAVAILABLE-PROVENANCE-70A8E23BC-2026-08-23.md`.
+Updated 2026-08-23. The fourteen prior durable visible Luna/max worker tasks
+were archived during the requested stale-task cleanup. Visible-task creation
+remains account-quota-gated until the reported 2026-08-26 reset. The active
+integration owner is using at most three bounded internal collaboration workers
+under the current four-slot runtime cap; those workers are not represented as
+replacement visible tasks. Source PRs, merges, and exact-tip verification
+remain serialized, and completed workers are refilled only for concrete,
+dependency-ready work. The current canonical PC tip is `da96bf622`; see
+`docs/evidence/CANONICAL-BASELINE-DA96BF622-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -126,6 +122,15 @@ active does not imply that its gate passed or that it is active now.
 | 378 | Projection umbrella immutable review | Complete, PASS | Independently accepted umbrella commit `7c1afd0a3` with exact four-path scope, synchronized claims, PC `ff09b1f22`, unchanged decomp pin, retained focused native/sanitizer evidence, and no P0/P1 before [umbrella PR #20](https://github.com/jskoiz/acgc-macos/pull/20) merged as `a1d86575a`. Not counted as a replacement visible task. |
 | 379 | TEV candidate immutable review | Complete, PASS | Independently accepted exact candidate `520c7afaf` with no P0/P1; retained a non-blocking P2 for non-exhaustive KColor component-selector table coverage and preserved the focused CPU-only boundary. Not counted as a replacement visible task. |
 | 380 | TEV PC integration | Complete and integrated | PC PR #25 merged candidate `520c7afaf` onto `ff09b1f22` as `70a8e23bc`; exact first-parent scope is three paths `+434/-15`, and fresh exact-merge native plus ASan/UBSan target-only gates pass `2/2`. |
+| 381 | TEV umbrella integration | Complete and integrated | Independent review accepted the four-path umbrella candidate `2d8b7288c`; [umbrella PR #21](https://github.com/jskoiz/acgc-macos/pull/21) merged it as `962737ede`, pinning PC `70a8e23bc` with synchronized README, lane board, and evidence. |
+| 382 | Stale task/worktree cleanup | Complete | Archived all fourteen prior visible worker tasks; removed 62 registered clean/integrated worktrees, four empty directories, two zero-byte sentinels, and one broken decomp registration. Dirty, active, exact-proof, populated-oracle, and fourteen non-ancestor PC worktrees were preserved; clean worktree removals remain recoverable from Git objects/branches. |
+| 383 | Canonical baseline source owner | Complete and integrated | Reproduced the registered root round-trip failure at exact `70a8e23bc`, repaired dormant Texgen and disabled `COLOR0A0` acceptance, added typed section rejection, repaired the multi-vertex false-green helper plus negative control, and merged candidate `5c62286b7` through [PC PR #26](https://github.com/jskoiz/ACGC-PC-Port/pull/26) as `da96bf622`. |
+| 384 | Baseline semantic/source reviews | Complete, PASS | Two independent read-only reviews found no P0/P1: canonical validation plus zero active Texgens is safe only inside the retained Geometry/Texture/TEV no-consumption predicates; disabled channel controls match PC and decomp/J2D. The root fixture remains J2D-style rather than a claim of an exact full J2D TEV selector contract. |
+| 385 | Baseline immutable review | Complete, PASS | Accepted exact candidate `5c62286b7`, parent `70a8e23bc`, clean four-path `+421/-148` scope, append-only legacy status ABI, input/output immutability, and retained root `1/1` plus Apple `8/8` native and combined-sanitizer evidence with no P0/P1. |
+| 386 | Baseline PC exact-merge verification | Complete, PASS | PC merge `da96bf622` has exact parents `70a8e23bc` and `5c62286b7`, no workflows/check runs, and the exact four-path scope. Fresh exact-merge root native/ASan gates pass `1/1`; fresh Apple native/ASan matrices pass `8/8`; no sanitizer finding was observed. |
+| 387 | Post-baseline trace contract | Complete, READY | Froze one serialized exact-merge `ac_pc` full link plus a 60-second/20-attempt LLDB trace with symbol-by-name resolution, typed consumer status mapping, exact-PID cleanup, and a stop at the next first-failing producer or one real cumulative publication. No process or asset was touched by the audit. |
+| 388 | Proprietary-disc ignore hygiene | Candidate complete; integration queued | Exact-`70a8e23bc` hygiene commit `1c884c74c` changes only root `.gitignore` with anchored case-insensitive `.iso`/`.gcm`/`.ciso` patterns for root, `rom/`, `pc/rom/`, and `orig/`; 24 representative paths are ignored, source paths remain trackable, and no disc image is tracked. It must be replayed/reviewed after the baseline merge and makes no deletion/history claim. |
+| 389 | Supply-chain and verification audit | Complete; successors queued | Found P1 mutable/unhashed binary and `ultralib/main` downloads, plus fragmented executable/compile-only probes and an assert-based wave-reader registration hazard under global `NDEBUG`. Froze sequential manifest/hash, header-pin, and test-manifest successors without downloads or source edits. |
 
 PC PR #20 fixes the LP64 N64 matrix payload at source commit `5a8a686a5`
 and merges it as `2f944f1ae`. Exact-merge native and ASan/UBSan
@@ -190,6 +195,25 @@ exact-merge native and combined ASan/UBSan builds each complete 61 steps,
 discover exactly the raw-shadow and producer tests, and pass `2/2`. No full
 `ac_pc` link, process launch, post-fix producer frontier, cumulative
 publication, Apple callback, Metal/device, pixel, or playability claim follows.
+
+PC PR #26 repairs the registered canonical CPU baseline without changing a
+producer, gatherer, flush call, renderer, or Metal sink. Candidate `5c62286b7`
+changes exactly the Apple consumer header/implementation, its focused fixture,
+and the source-backed root round-trip fixture, then merges as `da96bf622` with
+`+421/-148`. Legacy consumer status values `0..12` remain unchanged; canonical
+section rejections are appended and returned at the first predicate. The
+bounded resource-free consumer now accepts canonical-valid dormant Texgen
+selector/matrix/SU provenance only when the active count is zero and the
+existing Geometry, Texture, and TEV predicates prove it unconsumed. It accepts
+the disabled `COLOR0A0` REG/VTX/no-light/no-diffuse/no-attenuation controls used
+by GX initialization/J2D. The multi-vertex helper now returns failure to its
+caller and a bit-corruption negative control proves that path is test-red.
+Fresh exact-merge native and combined ASan/UBSan roots discover and pass the
+root fixture `1/1`; fresh Apple roots discover and pass the selected matrix
+`8/8`, with no sanitizer findings. This is focused CPU proof only: no full
+`ac_pc` link, process launch, live publication, exact full J2D TEV selector,
+target-sized raster/depth support, Metal/device, pixel, or playability claim
+follows.
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
