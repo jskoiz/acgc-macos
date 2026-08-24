@@ -2091,11 +2091,13 @@ ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof ./script/build_and_run
 ACGC_GAME_BUILD_DIR=local/build/macos-audio-pointer-proof ACGC_GAME_VERIFY_SECONDS=5 ./script/build_and_run_game.sh --verify
 ```
 
-The final command runs the AppKit executable directly with a five-second
-deadline, requests two Metal clear/triangle/present command buffers, checks the
-renderer fixture's own completion evidence and exit status, and confirms no
-process remains. It is a native geometry-fixture gate without pixel readback,
-not a representative GX, reconstructed game-frame, or playability claim.
+The final command runs the AppKit executable directly in the foreground with a
+five-second deadline, requests two Metal clear/triangle/present command buffers,
+checks the renderer fixture's own completion evidence and exit status, and waits
+for that foreground invocation to exit and be reaped before returning success;
+it is not an independent process-inventory scan. It is a native
+geometry-fixture gate without pixel readback, not a representative GX,
+reconstructed game-frame, or playability claim.
 
 The actual-game `--verify` command is a separate gate. It builds the full
 `ac_pc` target, validates the ignored local disc by SHA-256, symlinks that input
