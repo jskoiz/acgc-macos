@@ -10,20 +10,24 @@
 set -u
 setopt pipefail
 
-readonly EXPECTED_PC_COMMIT='d472c6bd32443015b0db8e285e1070b4f60539ee'
-readonly ROOT_TEST='acgc_pc_gx_canonical_plan_roundtrip_fixture'
-readonly ROOT_REGEX="^${ROOT_TEST}$"
-readonly APPLE_REGEX='^(acgc_apple_canonical_envelope_parser_fixture|acgc_apple_canonical_plan_fixture|acgc_apple_canonical_plan_handoff_fixture|acgc_apple_canonical_plan_consumer_fixture)$'
+readonly EXPECTED_PC_COMMIT='586cf7a616cd38149c911bd4bc8fb2f1de638de4'
+readonly PC_REGEX='^acgc_pc_gx_(cumulative_gatherer_flush|texture_dynamic_producer|canonical_plan_roundtrip)_fixture$'
+readonly APPLE_REGEX='^(acgc_apple_canonical_(texture_resource_consumer|plan_consumer)_fixture|acgc_pc_metal_runtime_arbitration_fixture)$'
 readonly SANITIZER_FLAGS='-O1 -g -fno-omit-frame-pointer -fsanitize=address,undefined -fno-sanitize-recover=all'
 readonly SANITIZER_LINK_FLAGS='-fsanitize=address,undefined'
 readonly ASAN_OPTIONS_VALUE='detect_leaks=0:halt_on_error=1:abort_on_error=1'
 readonly UBSAN_OPTIONS_VALUE='halt_on_error=1:print_stacktrace=1'
 
+typeset -a PC_TESTS=(
+    acgc_pc_gx_cumulative_gatherer_flush_fixture
+    acgc_pc_gx_texture_dynamic_producer_fixture
+    acgc_pc_gx_canonical_plan_roundtrip_fixture
+)
+
 typeset -a APPLE_TESTS=(
-    acgc_apple_canonical_envelope_parser_fixture
-    acgc_apple_canonical_plan_fixture
-    acgc_apple_canonical_plan_handoff_fixture
+    acgc_apple_canonical_texture_resource_consumer_fixture
     acgc_apple_canonical_plan_consumer_fixture
+    acgc_pc_metal_runtime_arbitration_fixture
 )
 
 die() {
@@ -78,13 +82,16 @@ resolve_display_path() {
 
 print_matrix() {
     print -- "PC oracle commit: ${EXPECTED_PC_COMMIT}"
-    print -- "Root CTest (exact count 1): ${ROOT_TEST}"
-    print -- 'Apple CTest (exact count 4):'
+    print -- 'PC CTest (exact count 3):'
+    for pc_test in "${PC_TESTS[@]}"; do
+        print -- "  $pc_test"
+    done
+    print -- 'Apple CTest (exact count 3):'
     for apple_test in "${APPLE_TESTS[@]}"; do
         print -- "  $apple_test"
     done
     print -- 'Every build is serialized with --parallel 1.'
-    print -- 'Native and combined ASan/UBSan configurations each cover the root and Apple suites.'
+    print -- 'Native and combined ASan/UBSan configurations each cover the PC and Apple suites.'
 }
 
 
@@ -111,17 +118,17 @@ print_dry_run() {
     print -- "PC root: ${display_pc_root}"
     print -- "Verification root: ${display_build_root}"
     render_command cmake -S "${pc_source}" -B "${native_pc}" -G Ninja -DPC_DARWIN_COMPILE_AUDIT=ON -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug
-    render_command cmake --build "${native_pc}" --target "${ROOT_TEST}" --parallel 1
-    render_command ctest --test-dir "${native_pc}" -N -R "${ROOT_REGEX}"
-    render_command ctest --test-dir "${native_pc}" --output-on-failure --parallel 1 -R "${ROOT_REGEX}"
+    render_command cmake --build "${native_pc}" --target "${PC_TESTS[@]}" --parallel 1
+    render_command ctest --test-dir "${native_pc}" -N -R "${PC_REGEX}"
+    render_command ctest --test-dir "${native_pc}" --output-on-failure --parallel 1 -R "${PC_REGEX}"
     render_command cmake -S "${apple_source}" -B "${native_apple}" -G Ninja -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug
     render_command cmake --build "${native_apple}" --target "${APPLE_TESTS[@]}" --parallel 1
     render_command ctest --test-dir "${native_apple}" -N -R "${APPLE_REGEX}"
     render_command ctest --test-dir "${native_apple}" --output-on-failure --parallel 1 -R "${APPLE_REGEX}"
     render_command cmake -S "${pc_source}" -B "${sanitizer_pc}" -G Ninja -DPC_DARWIN_COMPILE_AUDIT=ON -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_C_FLAGS=${SANITIZER_FLAGS}" "-DCMAKE_CXX_FLAGS=${SANITIZER_FLAGS}" "-DCMAKE_EXE_LINKER_FLAGS=${SANITIZER_LINK_FLAGS}"
-    render_command cmake --build "${sanitizer_pc}" --target "${ROOT_TEST}" --parallel 1
-    render_command ctest --test-dir "${sanitizer_pc}" -N -R "${ROOT_REGEX}"
-    render_command env "ASAN_OPTIONS=${ASAN_OPTIONS_VALUE}" "UBSAN_OPTIONS=${UBSAN_OPTIONS_VALUE}" ctest --test-dir "${sanitizer_pc}" --output-on-failure --parallel 1 -R "${ROOT_REGEX}"
+    render_command cmake --build "${sanitizer_pc}" --target "${PC_TESTS[@]}" --parallel 1
+    render_command ctest --test-dir "${sanitizer_pc}" -N -R "${PC_REGEX}"
+    render_command env "ASAN_OPTIONS=${ASAN_OPTIONS_VALUE}" "UBSAN_OPTIONS=${UBSAN_OPTIONS_VALUE}" ctest --test-dir "${sanitizer_pc}" --output-on-failure --parallel 1 -R "${PC_REGEX}"
     render_command cmake -S "${apple_source}" -B "${sanitizer_apple}" -G Ninja -DBUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_C_FLAGS=${SANITIZER_FLAGS}" "-DCMAKE_CXX_FLAGS=${SANITIZER_FLAGS}" "-DCMAKE_OBJC_FLAGS=${SANITIZER_FLAGS}" "-DCMAKE_EXE_LINKER_FLAGS=${SANITIZER_LINK_FLAGS}"
     render_command cmake --build "${sanitizer_apple}" --target "${APPLE_TESTS[@]}" --parallel 1
     render_command ctest --test-dir "${sanitizer_apple}" -N -R "${APPLE_REGEX}"
@@ -211,21 +218,33 @@ pc_source="$pc_root/pc"
 apple_source="$pc_root/pc/apple"
 [[ -f "$pc_source/CMakeLists.txt" ]] || die "missing PC CMake source: $pc_source"
 [[ -f "$apple_source/CMakeLists.txt" ]] || die "missing Apple CMake source: $apple_source"
-[[ -f "$pc_source/tests/pc_gx_canonical_plan_roundtrip_fixture.c" ]] ||
-    die 'missing root canonical-plan round-trip fixture source'
+for pc_test in "${PC_TESTS[@]}"; do
+    case "$pc_test" in
+        acgc_pc_gx_cumulative_gatherer_flush_fixture)
+            pc_fixture_source="$pc_source/tests/pc_gx_cumulative_gatherer_flush_fixture.c"
+            ;;
+        acgc_pc_gx_texture_dynamic_producer_fixture)
+            pc_fixture_source="$pc_source/tests/pc_gx_texture_dynamic_producer_fixture.c"
+            ;;
+        acgc_pc_gx_canonical_plan_roundtrip_fixture)
+            pc_fixture_source="$pc_source/tests/pc_gx_canonical_plan_roundtrip_fixture.c"
+            ;;
+        *)
+            die "unrecognized PC fixture: $pc_test"
+            ;;
+    esac
+    [[ -f "$pc_fixture_source" ]] || die "missing PC fixture source: $pc_fixture_source"
+done
 for apple_test in "${APPLE_TESTS[@]}"; do
     case "$apple_test" in
-        acgc_apple_canonical_envelope_parser_fixture)
-            apple_fixture_source="$apple_source/tests/test_apple_canonical_envelope_parser.c"
-            ;;
-        acgc_apple_canonical_plan_fixture)
-            apple_fixture_source="$apple_source/tests/test_apple_canonical_plan.c"
+        acgc_apple_canonical_texture_resource_consumer_fixture)
+            apple_fixture_source="$apple_source/tests/test_apple_canonical_texture_resource_consumer.c"
             ;;
         acgc_apple_canonical_plan_consumer_fixture)
             apple_fixture_source="$apple_source/tests/test_apple_canonical_plan_consumer.c"
             ;;
-        acgc_apple_canonical_plan_handoff_fixture)
-            apple_fixture_source="$apple_source/tests/test_apple_canonical_plan_handoff.c"
+        acgc_pc_metal_runtime_arbitration_fixture)
+            apple_fixture_source="$apple_source/tests/test_pc_metal_runtime_arbitration.c"
             ;;
         *)
             die "unrecognized Apple fixture: $apple_test"
@@ -267,7 +286,7 @@ assert_discovery() {
 
     local discovered_count
     local total_count
-    discovered_count=$(awk '/^[[:space:]]*Test #[0-9]+:/{count++} END{print count+0}' "${log_path}")
+    discovered_count=$(awk '/^[[:space:]]*Test[[:space:]]+#[0-9]+:/{count++} END{print count+0}' "${log_path}")
     (( $? == 0 )) || die "unable to read CTest discovery log: ${log_path}"
     total_count=$(awk -F': ' '/Total Tests:/{value=$2} END{print value+0}' "${log_path}")
     (( $? == 0 )) || die "unable to read CTest discovery log: ${log_path}"
@@ -388,11 +407,11 @@ sanitizer_apple_dir="$build_root/asan-ubsan-apple"
 print -- "PC source: $pc_root"
 print -- "PC oracle: $pc_commit"
 print -- "Verification root: $build_root"
-run_suite pc "$pc_source" "$native_pc_dir" "$ROOT_REGEX" 1 no "$ROOT_TEST"
-run_suite apple "$apple_source" "$native_apple_dir" "$APPLE_REGEX" 4 no "${APPLE_TESTS[@]}"
-run_suite pc "$pc_source" "$sanitizer_pc_dir" "$ROOT_REGEX" 1 yes "$ROOT_TEST"
-run_suite apple "$apple_source" "$sanitizer_apple_dir" "$APPLE_REGEX" 4 yes "${APPLE_TESTS[@]}"
+run_suite pc "$pc_source" "$native_pc_dir" "$PC_REGEX" 3 no "${PC_TESTS[@]}"
+run_suite apple "$apple_source" "$native_apple_dir" "$APPLE_REGEX" 3 no "${APPLE_TESTS[@]}"
+run_suite pc "$pc_source" "$sanitizer_pc_dir" "$PC_REGEX" 3 yes "${PC_TESTS[@]}"
+run_suite apple "$apple_source" "$sanitizer_apple_dir" "$APPLE_REGEX" 3 yes "${APPLE_TESTS[@]}"
 
 print -- ''
 print -- 'PASS: canonical pipeline native and combined ASan/UBSan suites completed with exact discovery and zero skips.'
-print -- 'Proof boundary: source-backed CPU fixtures only; no full ac_pc link, process launch, assets, callbacks, Metal, pixels, device, or playability claim.'
+print -- 'Proof boundary: source-backed CPU fixtures, bounded resource staging, and callback-ownership arbitration only; no full ac_pc link, process launch, production callback dispatch, assets, Metal, pixels, device, or playability claim.'
