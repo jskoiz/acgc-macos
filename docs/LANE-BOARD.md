@@ -6,9 +6,13 @@ tasks. Completed workers are parked and refilled only when a useful
 dependency-ready successor exists; they are not reported as actively running.
 Source PRs, merges, and exact-tip verification remain serialized. The worker
 pool was re-audited and all fourteen durable tasks were refilled with concrete
-dependency-ready contracts after completed turns were found idle. The current
-canonical PC tip is `ff09b1f22`; see
-`docs/evidence/PROJECTION-RECONSTRUCTION-FF09B1F22-2026-08-23.md`.
+dependency-ready contracts after completed turns were found idle. Subsequent
+visible-task follow-ups hit the account usage ceiling and now fail until the
+reported 2026-08-26 reset; those retained idle/system-error tasks are not
+counted as actively running. The integration owner continued the serialized
+critical path without treating fallback reviewers as roster replacements. The
+current canonical PC tip is `70a8e23bc`; see
+`docs/evidence/TEV-UNAVAILABLE-PROVENANCE-70A8E23BC-2026-08-23.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -105,20 +109,23 @@ active does not imply that its gate passed or that it is active now.
 | 361 | Apple umbrella topology audit | Complete, PASS | Accepted the reviewed four-path Apple Geometry umbrella scope before umbrella PR #19 merged as `b381bb444`. |
 | 362 | TEV readiness audit | Complete; ownership transferred | Converged the TEV root-cause and source-fidelity prerequisites, then transferred sole production ownership to Lane 364; no duplicate TEV source owner remains. |
 | 363 | Projection PC integration | Complete and integrated | Source commit `1c1d2d171` merged through PC PR #24 as `ff09b1f22`; fresh exact-merge native and combined ASan/UBSan builds each discover and pass `1/1` focused projection test. |
-| 364 | Sole TEV source owner | Active source-edit | Owns only `pc_gx_tev_producer.c`, its focused fixture, and strictly necessary test-only CMake; the final replay must be based on exact `ff09b1f22`. |
+| 364 | Sole TEV source owner | Complete and integrated | Replayed the source-order unavailable-register/KColor provenance fix onto exact `ff09b1f22` as candidate `520c7afaf`; [PC PR #25](https://github.com/jskoiz/ACGC-PC-Port/pull/25) merged it as `70a8e23bc`. Exact-merge native and ASan/UBSan raw-shadow/producer gates pass `2/2`. |
 | 365 | Projection exact-merge review | Complete, PASS | Accepted exact merge `ff09b1f22` with no P0/P1, the exact four-path `+296/-4` scope, retained exact-source native and sanitizer `1/1`, zero repository workflows/check runs, and authorization for a separately reviewed umbrella integration. |
-| 366 | TEV fixture oracle | Active read-only test contract | Freezing mutation-resistant positive/negative assertions for unused unavailable register/KColor provenance without opening a second source investigation. |
-| 367 | Projection umbrella evidence | Active read-only preflight | Cross-checking the exact four-path umbrella contract, PR #24 metadata, focused roots, and allowed/forbidden claims. |
-| 368 | Projection artifact audit | Active read-only verification | Verifying exact source identity, flags, discovery, logs, and sanitizer diagnostics in the two fresh `ff09b1f22` focused roots. |
-| 369 | Apple Geometry tip audit | Active read-only verification | Checking that `ff09b1f22` preserves the integrated seven-path multi-vertex Apple contract and its bounded CPU proof. |
-| 370 | Apple consumer contract | Active read-only design gate | Mapping the smallest future live cumulative-envelope-to-Apple consumer handoff without touching TEV, gatherer, Metal, or assets. |
-| 371 | Post-TEV trace protocol | Active read-only trace preparation | Freezing one serialized attempt, source/binary identity, producer-result breakpoints, publication event, timeout, exact-PID cleanup, and artifact hashes for the post-merge run. |
-| 372 | Projection hosted audit | Active read-only verification | Verifying live PR #24 refs, merge object, files/stats, reviews/checks/actions, and workflow exposure without mutation. |
-| 373 | Typed gatherer result replay | Active source-edit | Replaying the exact five-file typed-result behavior onto `ff09b1f22` and adding the missing enum-to-legacy flush assertion; integration remains subordinate to TEV. |
-| 374 | Typed replay audit | Active read-only verification | Checking candidate merge-tree/ABI, callback and borrow ordering, failure immutability, and the required two-fixture gate. |
-| 375 | Reusable CMake topology | Active read-only audit | Refreshing the smallest direct-`pc_gx.c` and portable full-`emu64.c` reusable target contract at `ff09b1f22`; no shared CMake edit while Lane 364 owns it. |
-| 376 | Texture frontier refresh | Active read-only audit | Mapping the exact post-TEV Texture/Dynamic/Indirect decision tree and host-only lease/revalidation fields without launching or claiming reachability. |
-| 377 | TEV gate topology review | Active read-only verification | Freezing exact producer/raw-shadow targets, compile definitions, link closure, CTest regexes, and native plus ASan/UBSan commands without competing on semantics. |
+| 366 | TEV fixture oracle | Completed without durable handoff | Worker turns ended without a usable report and the focused follow-up was rejected by the usage ceiling. No decision relies on this lane; the independent candidate review separately covered selector mapping and retained one non-blocking component-selector coverage P2. |
+| 367 | Projection umbrella evidence | Completed without durable handoff | Worker turns ended without a usable report and the refill was quota-rejected. The integration owner created the evidence from exact PR/merge objects and fresh roots, then obtained a separate immutable review. |
+| 368 | Projection artifact audit | Completed without durable handoff | Worker turns ended without a usable report. Exact source identity, flags, logs, hashes, and sanitizer diagnostics were rechecked by the integration owner and independent review. |
+| 369 | Apple Geometry tip audit | Completed without durable handoff | Worker turns ended without a usable report; no new Apple Geometry claim relies on this lane. The already integrated `de9a26fee` proof remains unchanged. |
+| 370 | Apple consumer contract | Completed without durable handoff | Worker turns ended without a usable report; no future consumer design or readiness claim relies on this lane. |
+| 371 | Post-TEV trace protocol | Completed without durable handoff | Worker turns ended without a usable report. The next trace remains owner-serialized with exact source/binary identity, bounded attempts, and exact-PID cleanup. |
+| 372 | Projection hosted audit | Completed without durable handoff | Worker turns ended without a usable report. Live PR #24 state and zero-workflow exposure were independently rechecked before projection umbrella integration. |
+| 373 | Typed gatherer result replay | Setup incomplete; quota-blocked | Worker turns ended without a durable source handoff and the replay retry was quota-rejected. No typed-result commit is integrated; this lane remains subordinate to the post-TEV trace. |
+| 374 | Typed replay audit | Completed without durable handoff | Worker turns ended without a usable report; no ABI or integration decision relies on this lane. |
+| 375 | Reusable CMake topology | Completed without durable handoff | Worker turns ended without a usable report; no shared CMake refactor is claimed or integrated. |
+| 376 | Texture frontier refresh | Completed without durable handoff | Worker turns ended without a usable report; no later-producer reachability claim relies on this lane. |
+| 377 | TEV gate topology review | Completed without durable handoff | Worker turns ended without a usable report and the refill was quota-rejected. Exact target/link closure and focused commands were verified on the candidate and exact merge by the integration owner. |
+| 378 | Projection umbrella immutable review | Complete, PASS | Independently accepted umbrella commit `7c1afd0a3` with exact four-path scope, synchronized claims, PC `ff09b1f22`, unchanged decomp pin, retained focused native/sanitizer evidence, and no P0/P1 before [umbrella PR #20](https://github.com/jskoiz/acgc-macos/pull/20) merged as `a1d86575a`. Not counted as a replacement visible task. |
+| 379 | TEV candidate immutable review | Complete, PASS | Independently accepted exact candidate `520c7afaf` with no P0/P1; retained a non-blocking P2 for non-exhaustive KColor component-selector table coverage and preserved the focused CPU-only boundary. Not counted as a replacement visible task. |
+| 380 | TEV PC integration | Complete and integrated | PC PR #25 merged candidate `520c7afaf` onto `ff09b1f22` as `70a8e23bc`; exact first-parent scope is three paths `+434/-15`, and fresh exact-merge native plus ASan/UBSan target-only gates pass `2/2`. |
 
 PC PR #20 fixes the LP64 N64 matrix payload at source commit `5a8a686a5`
 and merges it as `2f944f1ae`. Exact-merge native and ASan/UBSan
@@ -170,6 +177,19 @@ each complete 15 steps, discover exactly one test, and pass `1/1`. This is a
 focused CPU contract only: no full `ac_pc` link, process launch, TEV repair,
 cumulative publication, Apple callback, Metal/device, pixel, or playability
 claim follows.
+
+PC PR #25 repairs source-order handling of unavailable TEV register/KColor
+provenance. Candidate `520c7afaf` changes exactly `pc/CMakeLists.txt`,
+`pc/src/pc_gx_tev_producer.c`, and its focused producer fixture, then merges as
+`70a8e23bc` with `+434/-15`. Exact untouched unavailable records may be
+represented as zero only when no active stage reads them before a matching
+color or alpha definition; malformed, partially known, and contradictory
+records remain fail-closed. The independent immutable review found no P0/P1
+and retained one non-blocking component-selector table-coverage P2. Fresh
+exact-merge native and combined ASan/UBSan builds each complete 61 steps,
+discover exactly the raw-shadow and producer tests, and pass `2/2`. No full
+`ac_pc` link, process launch, post-fix producer frontier, cumulative
+publication, Apple callback, Metal/device, pixel, or playability claim follows.
 
 PC PR #8 adds production compilation/link membership for every standalone GX
 producer and the cumulative assembler, plus Raster and the complete canonical
@@ -3188,10 +3208,12 @@ order follows the updated critical path recorded in the README (Phases A–G):
    `de9a26fee`, with independent source and exact-merge PASS plus fresh native
    and combined ASan/UBSan Apple `8/8`. No live callback, Metal, or pixel proof
    follows.
-17. Audit and repair TEV with exactly one production owner, merge and verify
-   one PC PR, advance the umbrella through its own immutable review, and run
-   one subsequent serialized trace to the next producer failure or first
-   cumulative publication.
+17. ~~Audit and repair TEV with exactly one production owner, merge one PC PR,
+   and verify its exact merge~~ — done 2026-08-23 through PC PR #25 at
+   canonical `70a8e23bc`, with independent PASS and exact-merge native plus
+   ASan/UBSan raw-shadow/producer `2/2`. Advance this umbrella candidate through
+   immutable review, then run one serialized trace to the next producer failure
+   or first cumulative publication.
 18. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
