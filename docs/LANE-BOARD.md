@@ -1,13 +1,12 @@
 # ACGC visible lane board
 
-Updated 2026-08-24. The fourteen prior durable visible Luna/max worker tasks
-were archived during the requested stale-task cleanup. The active integration
-owner is using at most three bounded internal collaboration workers under the
-current hard four-slot runtime cap; those workers are not represented as
-replacement visible tasks. Source PRs, merges, and exact-tip verification
-remain serialized, and completed workers are refilled only for concrete,
-dependency-ready work. The current canonical PC tip is `c7f835f32`; see
-`docs/evidence/NONIDENTITY-ORTHOGRAPHIC-C7F835F32-2026-08-24.md`.
+Updated 2026-08-25. The active integration owner uses one dependency-ready,
+user-visible Luna/max task per focused source, independent review, or bounded
+trace gate. Production ownership and full links/traces remain serialized;
+duplicate investigations, filler work, and P2-driven review restarts are
+stopped. The current handoff pin is PC `e431cde18`; the first game-owned sink
+call is proved and returns aggregate status 3. See
+`docs/RENDERING-HANDOFF-2026-08-25.md`.
 The historical entries below remain evidence records; an old task described as
 active does not imply that its gate passed or that it is active now.
 
@@ -158,6 +157,10 @@ active does not imply that its gate passed or that it is active now.
 | 415 | Exact-PID host-runner cleanup replay | Complete and integrated | The reviewed two-script ownership patch plus synchronized evidence merged through [umbrella PR #33](https://github.com/jskoiz/acgc-macos/pull/33) as `039a5317a`. The exact merge again passes bash/zsh syntax, help, and fake-callback ownership gates. This is shell ownership-contract proof only; it does not itself claim a real launch, signal, LLDB, hosted Apple check, asset, or runtime result. |
 | 416 | Exact-`586cf7a61` full link and cumulative resource trace | Complete; metadata PASS, wrapper FAIL/P1 | A serialized 4,078-step exact-tip link produced a 15,538,896-byte arm64 binary. Its sole attempt passed all fourteen producers, three borrow revalidations, same-attempt Texture/TLUT staging, 14,104-byte publication, callback dispatch, and Apple plan construction before typed status 17; no sink was entered. LLDB killed the stopped inferior and both exact PIDs are absent. Independent review passes the 62-event in-process metadata contract but classifies the overall invocation FAIL/P1 because the post-LLDB zsh wrapper assigns to read-only `status`; no rerun occurred. [Evidence](evidence/EXACT-586-CUMULATIVE-TRACE-586CF7A6-2026-08-24.md). |
 | 417 | Nonidentity orthographic Apple consumer fixture | Complete and integrated | Candidate `2013ea310` changes only `pc/apple/tests/test_apple_canonical_plan_consumer.c`, asserts the source-faithful six-word orthographic projection, a nonidentity 3x4 view, all 16 exact column-major outputs, finiteness, and input immutability. Independent candidate and exact-merge reviews passed; [PC PR #36](https://github.com/jskoiz/ACGC-PC-Port/pull/36) merged it as `c7f835f32`, and fresh exact-merge native plus ASan/UBSan runs each discover and pass `1/1`. It adds no production, CMake, runtime, Metal, pixel, device, or playability claim. [Evidence](evidence/NONIDENTITY-ORTHOGRAPHIC-C7F835F32-2026-08-24.md). |
+| 418 | Active Texture and sink-output chain | Complete locally; source branch published | The linear PC chain `fc6f0d4e0..e431cde18` atomically correlates the matching value-owned Texture/TLUT resource stage, carries the supported TEV/Blend/Alpha/Raster/Fog state and source-faithful GX render modes into typed output, adds canonical texture-replace sink handling, and fixes selected-map upload sizing. The final focused native and combined ASan/UBSan sink/runtime gates each pass `2/2`; independent review task `01a03976-44f8-7ed3-b4c5-5c516c595894` found no P0/P1. Remote branch `c1/metal-sink-invalid-output` contains the chain; no PC PR or merge is claimed. |
+| 419 | Exact-`e431cde18` bounded sink trace | Complete; first sink call, status 3 | r27 report SHA-256 `2d90a920c7d814b1d0f554f84516d2654e0bc6a5a3f5bd8d1dcf310c46b5c3f0` records attempt 1, all fourteen producers at 1, matching Texture/Dynamic/borrow/value-owned resource-stage masks, typed consumer `0/OK`, and exactly one sink call returning `3/INVALID_OUTPUT`. LLDB PID 28109 and inferior PID 28123 were waited and absent; no timeout or owned process remained. This proves a game-owned sink call, not successful Metal submission/completion, pixels, presentation, device behavior, or playability. |
+| 420 | Typed sink-rejection telemetry | Complete local candidate; branch published | User-visible task `01a03986-610e-7ca3-ad8f-b51f493cf7d9` produced exact commit `f4f38b331` on remote branch `c1/metal-sink-reason`, based directly on `e431cde18`. It changes only the sink header/implementation and two focused fixtures, appends value-only first-failure telemetry without weakening admission, and prepares the minimum external v4-r3 sink-reason schema. Focused native and combined ASan/UBSan sink/runtime gates each pass `2/2`; the source worktree is clean. One independent immutable review remains required before one bounded trace. No live reason, sink success, Metal, pixel, present, device, merge, or playability claim follows. |
+| 421 | Secure-downloader coherent candidate | Complete, independently reviewed, branch published | Final candidate `f63872535` on remote branch `c1/lane-download-integrity-c7` closes the demonstrated POSIX quarantine/cleanup and injected/fake-Windows publication races. Independent review task `01a0356e-1b0f-7560-a551-f43f488b18f3` found no actionable P1; 70 downloader-integrity tests had no failure, while the combined archive command remained nonzero only because Git-dependent ignore cases lacked `.git`. No native Windows/NTFS, network acquisition, payload execution, PR, merge, release, or rendering claim follows. The branch remains separate and does not move the rendering gitlink. |
 
 PC PR #20 fixes the LP64 N64 matrix payload at source commit `5a8a686a5`
 and merges it as `2f944f1ae`. Exact-merge native and ASan/UBSan
@@ -3281,15 +3284,24 @@ order follows the updated critical path recorded in the README (Phases A–G):
    `586cf7a61` trace now proves live staging and publication before typed status
    17, with no sink; its in-process metadata passes review while the post-LLDB
    wrapper has a separately retained P1 false-negative.
-21. Audit the exact status-17 typed Texture predicate, transfer the unique
-   evidence to exactly one source owner, and land the smallest source-faithful
-   correction with focused native and ASan/UBSan gates before another bounded
-   serialized trace.
-22. Keep the download-integrity replay held until one Windows-safe
+21. ~~Audit and repair the exact status-17 typed Texture predicate, then advance
+   the supported TEV and canonical render modes to the sink~~ — done locally
+   through PC `e431cde18`; one exact bounded attempt passes the typed consumer
+   and calls the sink once, which returns aggregate status 3.
+22. Finish typed first-failure sink telemetry, obtain one independent review,
+   and run exactly one minimal bounded trace. Implement only the emitted
+   predicate, run one focused gate plus one independent review, and repeat one
+   trace at a time until the sink succeeds. The exact task sequence, ownership,
+   stop conditions, and proof boundaries are in
+   `docs/RENDERING-HANDOFF-2026-08-25.md`.
+23. After first sink success, implement one coherent real-window drawable and
+   present path, review it once, and run one bounded presentation trace. Pixel,
+   physical-device, and playability proof remain separate successors.
+24. Keep the download-integrity replay held until one Windows-safe
    handle-relative design also closes backup cleanup and existing-destination
    rollback. The nested-ROM replay is already integrated at `d472c6bd3`; no
    POSIX-only downloader candidate may be pushed as a Windows-preserving fix.
-23. iOS implementation remains gated behind proven shared macOS core, renderer,
+25. iOS implementation remains gated behind proven shared macOS core, renderer,
    input, audio, persistence, and lifecycle behavior.
 
 No lane may push, publish, deploy, install, sign, submit, or redistribute the
