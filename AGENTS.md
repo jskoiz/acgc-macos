@@ -101,5 +101,40 @@
 - Before editing, verify the umbrella root, active submodule, branch, status, and
   current diff. Never edit a detached submodule HEAD.
 - Use focused branches and reviewable commits in the owning repository, then
-  update the umbrella submodule pointer only after verification.
+ update the umbrella submodule pointer only after verification.
 - Keep generated extraction, build, cache, and log output outside Git.
+
+## Cursor Cloud specific instructions
+
+Cloud Agents run on **Linux x86_64**, but this project's real deliverables
+(`ac_pc` game + the `pc/apple` AppKit/Metal host) are **macOS/Metal-first** and
+**cannot build or run on this Linux VM**. Set expectations accordingly:
+
+- `pc/CMakeLists.txt` hard-fails on 64-bit builds (ILP32 pointer guard) and
+ `pc/apple/CMakeLists.txt` `FATAL_ERROR`s off Apple; the Metal/AppKit host,
+ Metal fixtures, and `script/build_and_run*.sh` are macOS-only. The full macOS
+ story (build, Metal encode/present, launch, save) must be proven on Apple
+ hardware — see `docs/BOOTSTRAP-EVIDENCE.md` and `docs/REMOTE-LANE-SETUP.md`.
+- The **Linux-viable dev/test surface is the portable core**:
+ `./scripts/verify-portable-core.sh` (CMake + Ninja + CTest). On Linux it
+ currently passes ~30/34 tests (GX canonical state, boot-source, DVD ABI, GBI
+ runtime, disc parsing, JSU enums, etc.). The 4 non-runnable targets
+ (`acgc_emu64_seg2k0_tests`, `acgc_pc_libc_memory_probe_cpp`,
+ `acgc_jkr_aram_stream_abi_probe`, `acgc_jkr_exp_heap_probe`) fail to *compile*
+ on glibc because the port's `MSL_C/string.h` redeclares libc functions with
+ non-const returns that clash with glibc's C++ `const`-returning overloads.
+ This is an Apple-vs-glibc header gap, **expected on Linux, not a regression** —
+ do not "fix" it as part of unrelated work.
+- `./scripts/verify-lifecycle.sh` is pure C11 and **passes on Linux** (real
+ monotonic-clock / VI-retrace / focus / worker-shutdown / deterministic
+ termination-trace logic); good quick smoke test.
+- `./scripts/verify-filesystem-save.sh` and `./scripts/verify-save-gci.sh` are
+ **macOS-only** (require `F_FULLFSYNC` / `xcrun`); they will not run on Linux.
+- Toolchain notes: default `cc`/`c++` is **clang 18**, which selects the gcc-14
+ libstdc++, so `libstdc++-14-dev` must be present; `ninja` is required for the
+ `-G Ninja` builds. Both are baked into the environment snapshot.
+- The two upstream submodules under `upstream/` must be initialized before any
+ build; the startup update script runs `git submodule update --init` for them.
+- No ISO is needed to build or run the test suites. An ISO (gitignored under
+ `local/roms/`, SHA-256 pinned) is only needed to actually launch the game/host
+ on macOS. Never commit or redistribute it.
