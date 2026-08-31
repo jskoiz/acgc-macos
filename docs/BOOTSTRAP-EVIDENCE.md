@@ -399,3 +399,25 @@ pointer, while `GXInitTexObj` stores only its low 32 bits and
 
 No commit, push, PR, binary publication, deployment, TestFlight upload, or App
 Store action is implied by this ledger.
+
+## Frontier reconciliation (2026-08-31)
+
+The `pc_gx_texture.c:62` truncated-texture-pointer fault described in the
+"Representative GX/game frame" row and the 2026-08-12 rolling update is a
+superseded, pre-fix frontier. At the current PC pin
+`c7f835f325ea5e061f492213da9ddce5349b269d`, `GXInitTexObj`/`GXGetTexObjData`
+round-trip the native pointer through a texture-owned generational registry
+(`pc/src/pc_gx_texture.c`) instead of truncating it, and the forensic fixture
+`pc/tests/pc_texture_pointer_fault_fixture.c` asserts PASS.
+
+The current authoritative frontier is the typed Apple canonical consumer: an
+active Texture section is rejected with `status 17`
+(`ACGC_METAL_PACKET_CONSUMER_CANONICAL_TEXTURE_UNSUPPORTED`) before any sink is
+entered (`pc/apple/src/metal_packet_consumer.c:1791`). That consumer and its
+proven CPU texture-resource staging half are now verified on the Linux Cloud
+Agent host with `scripts/verify-apple-canonical-consumer.sh`; see
+`docs/LINUX-CANONICAL-CONSUMER-EVIDENCE.md`. The remaining production step (a
+Metal texture/sampler sink plus textured-plan admission) stays macOS/GPU-only.
+
+The historical rows above are retained as dated evidence records and are not
+rewritten.
